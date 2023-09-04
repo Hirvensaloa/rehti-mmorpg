@@ -1,7 +1,7 @@
 services:
   server:
     container_name: server
-    build: ./server
+    build: ./server/docker
     ports:
       - '9999:9999'
     x-develop:

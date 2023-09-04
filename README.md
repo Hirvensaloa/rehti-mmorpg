@@ -12,6 +12,6 @@ To run the server and database, make sure you have `docker-compose` and `docker`
 
 ### Running
 
-- `./run.sh` to start the server and database containers. Use `--watch` flag to automatically rebuild the server everytime changes occur.
+- `./scripts/run-backend.sh` to start the server and database containers. Use `--watch` flag to automatically rebuild the server everytime changes occur. NOTE: Watch is experimental feature.
 
 If the script doesn't work, you can just use `docker-compose up` in the root directory to start up the services.

@@ -18,7 +18,13 @@ if [[ "$1" == "--watch" ]]; then
   docker compose up --build --wait 
 
   # Open a new terminal window and run docker compose alpha watch
-  "$terminal_cmd" -- docker compose alpha watch
+  if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
+    # Windows (Git Bash)
+    start "$terminal_cmd" bash -c "docker compose alpha watch"
+  else
+    # Non-Git Bash on Windows or Linux
+    "$terminal_cmd" -- bash -c "docker compose alpha watch"
+  fi
 
   docker-compose logs -f
 

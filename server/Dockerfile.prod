@@ -1,0 +1,42 @@
+########################################################################################################################
+# Use this file in production
+# Server build stage
+########################################################################################################################
+
+FROM alpine:3.17.0 AS build
+
+RUN apk update && \
+    apk add --no-cache \
+    build-base \
+    cmake \
+    boost1.80-dev=1.80.0-r3
+
+WORKDIR /server
+
+COPY src/ ./src/
+COPY CMakeLists.txt .
+
+WORKDIR /server/build
+
+RUN cmake -DCMAKE_BUILD_TYPE=Release .. && \
+    cmake --build . --parallel 8
+
+########################################################################################################################
+# Server image
+########################################################################################################################
+
+FROM alpine:3.17.0
+
+RUN apk update && \
+    apk add --no-cache \
+    libstdc++ \
+    boost1.80-program_options=1.80.0-r3
+
+RUN addgroup -S shs && adduser -S shs -G shs
+USER shs
+
+COPY --chown=shs:shs --from=build \
+    ./server/build/src/server \
+    ./app/
+
+ENTRYPOINT [ "./app/server" ]

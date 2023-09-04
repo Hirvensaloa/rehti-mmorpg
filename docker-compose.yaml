@@ -1,0 +1,15 @@
+services:
+  server:
+    container_name: server
+    build: ./server
+    ports:
+      - '9999:9999'
+    x-develop:
+      watch:
+        - action: rebuild
+          path: ./server
+  db:
+    container_name: database
+    image: postgres:16rc1-alpine3.17
+    environment:
+      POSTGRES_PASSWORD: example

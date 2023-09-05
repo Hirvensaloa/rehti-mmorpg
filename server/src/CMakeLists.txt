@@ -19,3 +19,9 @@ target_include_directories(${TARGET} PUBLIC
 target_link_libraries(${TARGET} PRIVATE
         ${Boost_LIBRARIES}
         Threads::Threads)
+
+# postgres client
+
+add_subdirectory(../dependencies/libpqxx build-pqxx)
+
+target_link_libraries(${TARGET} PRIVATE pqxx)

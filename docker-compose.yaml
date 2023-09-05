@@ -1,7 +1,9 @@
 services:
   server:
     container_name: server
-    build: ./server/docker
+    build:
+      context: ./
+      dockerfile: ./server/Dockerfile
     ports:
       - '9999:9999'
     x-develop:
@@ -11,5 +13,10 @@ services:
   db:
     container_name: database
     image: postgres:16rc1-alpine3.17
+    restart: unless-stopped
     environment:
+      POSTGRES_DB: mmorpg_database
+      POSTGRES_USER: database_user
       POSTGRES_PASSWORD: example
+    volumes:
+      - ./database/deploy.sql:/docker-entrypoint-initdb.d/deploy.sql

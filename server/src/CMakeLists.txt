@@ -8,7 +8,7 @@ find_package(Threads REQUIRED)
 set(TARGET server)
 
 add_executable(${TARGET}
-        main.cpp)
+        main.cpp database/connect.cpp)
 
 target_compile_features(${TARGET} PUBLIC
         cxx_std_20)
@@ -22,6 +22,13 @@ target_link_libraries(${TARGET} PRIVATE
 
 # postgres client
 
-add_subdirectory(../dependencies/libpqxx build-pqxx)
+include_directories(/usr/local/include/) 
 
-target_link_libraries(${TARGET} PRIVATE pqxx)
+# find pq library
+find_package(libpqxx REQUIRED)
+find_library(PQ_LIB pq REQUIRED)
+
+target_link_libraries(${TARGET} PRIVATE
+        pqxx
+        ${PQ_LIB}
+)

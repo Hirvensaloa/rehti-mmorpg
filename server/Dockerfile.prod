@@ -16,7 +16,9 @@ WORKDIR /server
 
 COPY dependencies/libpqxx ./dependencies/libpqxx
 
-RUN cmake --build ./dependencies/libpqxx --parallel 8 && \
+RUN cd dependencies/libpqxx && \
+    cmake . && \
+    cmake --build . && \
     cmake --install .
 
 COPY src/ ./src/

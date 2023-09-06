@@ -40,3 +40,9 @@
 *.sdf
 *.filters
 *.config
+
+# Cmake
+CMakeCache.txt
+*.cmake
+CMakeFiles
+Makefile

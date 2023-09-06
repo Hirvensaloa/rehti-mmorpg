@@ -1,5 +1,6 @@
 #include <iostream>
 #include <boost/asio.hpp>
+#include "database/connect.hpp"
 
 using namespace boost::asio;
 
@@ -13,6 +14,8 @@ int main() {
 
     while (true) {
         try {
+            createConnection();
+
             ip::tcp::socket socket(ioService);
             acceptor.accept(socket);
 

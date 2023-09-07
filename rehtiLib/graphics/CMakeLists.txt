@@ -1,12 +1,11 @@
-cmake_minimum_required(VERSION 3.10)
-project(Graphicsg)
+add_subdirectory(../../dependencies/glfw ${CMAKE_CURRENT_LIST_DIR}/bin)
+include_directories(../../dependencies/glfw/include)
 
-set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+target_sources(rehtiGraphics
+	PRIVATE src/base.cpp
+		src/base.hpp
+	)
 
-add_subdirectory(../../dependencies/glfw ./bin)
-add_library(Graphics src/base.cpp)
-target_link_libraries(Graphics PUBLIC glfw)
+target_link_libraries(rehtiGraphics glfw ${GLFW_LIBRARIES})
 
-target_include_directories(Graphics PUBLIC "./bin" "../../dependencies/glfw/include")
+target_include_directories(rehtiGraphics INTERFACE ${CMAKE_CURRENT_LIST_DIR}/include)

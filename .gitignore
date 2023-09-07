@@ -41,8 +41,16 @@
 *.filters
 *.config
 
-# Cmake
+# CMAKE
+CMakeLists.txt.user
 CMakeCache.txt
-*.cmake
 CMakeFiles
+CMakeScripts
+*.cmake
+Testing
 Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps

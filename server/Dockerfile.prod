@@ -16,13 +16,14 @@ WORKDIR /server
 
 COPY dependencies/libpqxx ./dependencies/libpqxx
 
-RUN cd dependencies/libpqxx && \
-    cmake . && \
-    cmake --build . && \
-    cmake --install .
+# Make sure the libpqxx branch is in 7.7.5
+RUN	cd dependencies/libpqxx && \
+	cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib -DBUILD_SHARED_LIBS=ON -DBUILD_TEST=OFF -DCMAKE_BUILD_TYPE=RelWithDebInfo && \
+	make && \
+	make install
 
-COPY src/ ./src/
-COPY CMakeLists.txt .
+COPY server/src/ ./src/
+COPY server/CMakeLists.txt .
 
 WORKDIR /server/build
 
@@ -42,6 +43,11 @@ RUN apk update && \
 
 RUN addgroup -S shs && adduser -S shs -G shs
 USER shs
+
+# Copy the libpqxx and libpq libraries from the build stage.
+COPY --chown=shs:shs --from=build \
+    ./usr/lib/libpq* \
+    ./usr/lib/
 
 COPY --chown=shs:shs --from=build \
     ./server/build/src/server \

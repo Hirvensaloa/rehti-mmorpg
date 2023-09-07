@@ -13,8 +13,7 @@ RUN apk update && \
     boost1.80-dev=1.80.0-r3 \
     libstdc++ \
     boost1.80-program_options=1.80.0-r3 \
-    libpq-dev \
-    git
+    libpq-dev
 
 WORKDIR /server
 

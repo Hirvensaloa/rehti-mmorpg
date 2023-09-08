@@ -25,6 +25,8 @@
 *.la
 *.a
 *.lib
+# Vendored libraries should be included
+!dependencies/*
 
 # Executables
 *.exe

@@ -25,8 +25,12 @@
 *.la
 *.a
 *.lib
+
 # Vendored libraries should be included
-!dependencies/*
+# these are commented out until this is sorted
+!dependencies/vulkan/lib/*.lib
+!dependencies/vulkan/lib/*.so
+!dependencies/vulkan/lib/*.a
 
 # Executables
 *.exe

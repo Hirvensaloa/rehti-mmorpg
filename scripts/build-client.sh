@@ -1,5 +1,5 @@
 #!/bin/bash
 cd ./client
-mkdir build
-cmake -S . -B build
-make -C build
+conan install . --output-folder=build --build=missing
+cmake -S . -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -B build
+cmake --build ./build

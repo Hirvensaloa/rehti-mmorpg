@@ -1,9 +1,0 @@
-{
-    "version": 4,
-    "vendor": {
-        "conan": {}
-    },
-    "include": [
-        "C:\\Users\\otsol\\source\\repos\\rehti-mmorpg\\client\\build\\CMakePresets.json"
-    ]
-}

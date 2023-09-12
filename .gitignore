@@ -26,6 +26,9 @@
 *.a
 *.lib
 
+# data files
+*.json
+
 # Vendored libraries should be included
 # these are commented out until this is sorted
 !dependencies/vulkan/lib/*.lib

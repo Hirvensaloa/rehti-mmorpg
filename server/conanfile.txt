@@ -1,5 +1,6 @@
 [requires]
 boost/1.83.0
+libpqxx/7.8.1
 
 [generators]
 CMakeDeps

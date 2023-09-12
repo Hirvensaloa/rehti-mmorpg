@@ -21,10 +21,6 @@ TODO: Lyhyt desc tähän. Ja jos on jotain tärkeetä/poikkeuksellista mitä pit
 
 TODO: Mitä vaaditaan että clienttia voi alkaa pyörittämään.
 
-#### Linux specific
-
-- Make sure you have `libxrandr`, `libxi`, `libxinerama` and `libxcursor` installed. Can be installed with `sudo apt-get update && sudo apt-get install libxrandr-dev libxi-dev libxinerama-dev libxcursor-dev`.
-
 ### Running
 
 - `./scripts/run-client.sh` to start the client
@@ -54,7 +50,5 @@ To run the server and database, make sure you have `docker-compose` and `docker`
 If the script doesn't work, you can just use `docker-compose up` in the root directory to start up the services.
 
 ### Troubleshooting
-
-- If there are problems with the libpqxx make sure that the dependencies/libpqxx exists and that it has been checked out to tag `7.7.5`. As of now the `7.8^` doesn't work properly when installed on the Alpine image.
 
 - You can debug the db contents by running `psql -h 127.0.0.1 -p 6543 -U myuser -d mmorpg-database`

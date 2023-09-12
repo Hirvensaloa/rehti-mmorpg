@@ -10,7 +10,9 @@ add_library(rehtiNetwork)
 
 target_sources(rehtiNetwork
 	PRIVATE src/networkBase.cpp
-		src/networkBase.hpp
+		src/Connection.hpp
+		src/Message.hpp
+		src/MessageQueue.hpp
 	)
 
 target_link_libraries(rehtiNetwork PRIVATE Boost::system)

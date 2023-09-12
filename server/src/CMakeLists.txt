@@ -2,7 +2,7 @@
 ### SERVER LIBRARY
 ########################################################################################################################
 
-find_package(Boost 1.83 COMPONENTS system REQUIRED)
+find_package(Boost 1.83 COMPONENTS system bind REQUIRED)
 find_package(Threads REQUIRED)
 
 set(TARGET server)
@@ -19,6 +19,10 @@ target_include_directories(${TARGET} PUBLIC
 target_link_libraries(${TARGET} PRIVATE
         ${Boost_LIBRARIES}
         Threads::Threads)
+
+add_subdirectory(../network ${CMAKE_CURRENT_LIST_DIR}/network)
+target_link_libraries(${TARGET} PUBLIC rehtiNetwork)
+target_include_directories(${TARGET} PUBLIC ../network/include)
 
 # postgres client
 

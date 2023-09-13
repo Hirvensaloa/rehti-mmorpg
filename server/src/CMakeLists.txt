@@ -2,7 +2,7 @@
 ### SERVER LIBRARY
 ########################################################################################################################
 
-find_package(Boost 1.74 COMPONENTS program_options REQUIRED)
+find_package(Boost 1.83 COMPONENTS system REQUIRED)
 find_package(Threads REQUIRED)
 
 set(TARGET server)
@@ -22,13 +22,5 @@ target_link_libraries(${TARGET} PRIVATE
 
 # postgres client
 
-include_directories(/usr/local/include/) 
-
-# find pq library
-find_package(libpqxx REQUIRED)
-find_library(PQ_LIB pq REQUIRED)
-
-target_link_libraries(${TARGET} PRIVATE
-        pqxx
-        ${PQ_LIB}
-)
+find_package(libpqxx)
+target_link_libraries(${TARGET} PRIVATE libpqxx::pqxx)

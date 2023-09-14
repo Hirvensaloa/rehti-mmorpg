@@ -1,0 +1,10 @@
+^C:\USERS\OTSOL\SOURCE\REPOS\REHTI-MMORPG\REHTILIB\NETWORK\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/otsol/source/repos/rehti-mmorpg/client -BC:/Users/otsol/source/repos/rehti-mmorpg/client/build --check-stamp-file C:/Users/otsol/source/repos/rehti-mmorpg/client/network/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -30,7 +30,6 @@
 *.json
 
 # Vendored libraries should be included
-# these are commented out until this is sorted
 !dependencies/vulkan/lib/*.lib
 !dependencies/vulkan/lib/*.so
 !dependencies/vulkan/lib/*.a

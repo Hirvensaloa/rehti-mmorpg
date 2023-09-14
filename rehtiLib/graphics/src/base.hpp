@@ -8,7 +8,6 @@
 #include <iostream>
 #include <string>
 #include <set>
-#include <fstream>
 
 //Useful structs
 struct QueueFamilyIndices
@@ -32,7 +31,7 @@ struct SwapChainSupportDetails {
 class RehtiGraphics
 {
 public:
-    void run();
+    void testRun();
 
 private:
     //Functions
@@ -54,7 +53,6 @@ private:
 
     void drawFrame();
     void mainLoop();
-    static std::vector<char> readFile(const std::string& filename);
 
     void cleanup();
     void createInstance();
@@ -75,8 +73,6 @@ private:
     VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> availableFormats);
     VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> availableModes);
     VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
-
-    VkShaderModule createShaderModule(const std::vector<char>& code);
 
     //Private members:
     GLFWwindow* window;

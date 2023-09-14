@@ -1,6 +1,7 @@
 #include "base.hpp"
+#include "ShaderManager.hpp"
 
-void RehtiGraphics::run() {
+void RehtiGraphics::testRun() {
     initWindow();
     initVulkan();
     mainLoop();
@@ -273,24 +274,9 @@ void RehtiGraphics::createRenderPass()
 
 void RehtiGraphics::createGraphicsPipeline()
 {
-    auto vertCode = readFile("Shaders/vert.spv");
-    auto fragCode = readFile("Shaders/frag.spv");
 
-    VkShaderModule vertModule = createShaderModule(vertCode);
-    VkShaderModule fragModule = createShaderModule(fragCode);
-
-    VkPipelineShaderStageCreateInfo vertInfo{};
-    vertInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-    vertInfo.stage = VK_SHADER_STAGE_VERTEX_BIT;
-    vertInfo.module = vertModule;
-    vertInfo.pName = "main";  //specifies the entrypoint. You can combine multiple shaders with different entrypoints and pick the one you want. 
-
-
-    VkPipelineShaderStageCreateInfo fragInfo{};
-    fragInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-    fragInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
-    fragInfo.module = fragModule;
-    fragInfo.pName = "main";
+    VkPipelineShaderStageCreateInfo vertInfo = ShaderManager::createVertexShaderInfo(this->logDevice);
+    VkPipelineShaderStageCreateInfo fragInfo = ShaderManager::createFragmentShaderInfo(this->logDevice);
 
     VkPipelineShaderStageCreateInfo stages[2] = { vertInfo, fragInfo };
 
@@ -585,25 +571,6 @@ void RehtiGraphics::mainLoop() {
     vkDeviceWaitIdle(logDevice);
 }
 
-std::vector<char> RehtiGraphics::readFile(const std::string& filename)
-{
-    std::ifstream filu(filename, std::ios::ate | std::ios::binary);
-
-    if (!filu.is_open()) {
-        throw std::runtime_error("Opening a file failed");
-    }
-
-    size_t fileSize = (size_t)filu.tellg(); //magic?
-    std::vector<char> puskuri(fileSize);
-
-    filu.seekg(0);
-    filu.read(puskuri.data(), fileSize);
-
-    filu.close();
-    return puskuri;
-}
-
-
 void RehtiGraphics::cleanup() {
 
     for (size_t i = 0; i < concurrentFrames; i++) {
@@ -758,23 +725,22 @@ bool RehtiGraphics::isDeviceSuitable(VkPhysicalDevice device)
     bool requiredExtensionSupport = checkDeviceExtensionSupport(device);
 
     bool swapChainOk = false;
-    if (requiredExtensionSupport) //swap chain is an extension
+    if (requiredExtensionSupport) // swap chain is an extension
     {
         SwapChainSupportDetails supportDetails = querySwapChainSupport(device);
         swapChainOk = !supportDetails.formats.empty() && !supportDetails.presentModes.empty();
     }
 
-    return props.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU && indice.isComplete() && requiredExtensionSupport; //Suitable, if it is an external gpu and has a graphics queueFamily
+    return props.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU && indice.isComplete() && requiredExtensionSupport; // Suitable, if it is an external gpu and has a graphics queueFamily
 }
 
 
 int RehtiGraphics::rateDevice(VkPhysicalDevice device)
 {
-    VkPhysicalDeviceProperties props; //properties
-    VkPhysicalDeviceFeatures feats; //and features of the gpu
+    VkPhysicalDeviceProperties props; // properties
+    VkPhysicalDeviceFeatures feats; // and features of the gpu
     vkGetPhysicalDeviceProperties(device, &props);
     vkGetPhysicalDeviceFeatures(device, &feats);
-
 
     return 1;
 }
@@ -792,16 +758,16 @@ QueueFamilyIndices RehtiGraphics::findQueueFamilies(VkPhysicalDevice device)
     for (auto i = 0u; i < queueFamilies.size(); i++) {
         VkBool32 presentSupport = false;
         vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
-        if (presentSupport) {
+        if (presentSupport) 
+        {
             indexcase.presentFamily = i;
         }
 
         if (queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)
             indexcase.graphicsFamily = i;
 
-
         if (indexcase.isComplete())
-            break; //Early exit
+            break; // Early exit
 
     }
 
@@ -819,7 +785,7 @@ SwapChainSupportDetails RehtiGraphics::querySwapChainSupport(VkPhysicalDevice de
     vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, nullptr);
 
     if (formatCount != 0) {
-        details.formats.resize(formatCount);    //usually we just created the vector, but now that we have a struct we just resize it
+        details.formats.resize(formatCount);    // Usually we just created the vector, but now that we have a struct we just resize it
         vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, details.formats.data());
     }
 
@@ -904,20 +870,6 @@ VKAPI_ATTR VkBool32 VKAPI_CALL RehtiGraphics::debugCallback(
 
 
     return VK_FALSE;
-}
-
-VkShaderModule RehtiGraphics::createShaderModule(const std::vector<char>& code)
-{
-    VkShaderModuleCreateInfo shaderInfo{};   //here we go again
-    shaderInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-    shaderInfo.codeSize = code.size();
-    shaderInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
-
-    VkShaderModule moduuli;
-    if (vkCreateShaderModule(this->logDevice, &shaderInfo, nullptr, &moduuli) != VK_SUCCESS)
-        throw std::runtime_error("Shadermodule creation failed");
-
-    return moduuli;
 }
 
 

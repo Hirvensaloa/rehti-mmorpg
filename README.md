@@ -57,4 +57,44 @@ If the script doesn't work, you can just use `docker-compose up` in the root dir
 
 ### Troubleshooting
 
-- You can debug the database contents by running `psql -h 127.0.0.1 -p 6543 -U myuser -d mmorpg-database`
+- If there are problems with the libpqxx make sure that the dependencies/libpqxx exists and that it has been checked out to tag `7.7.5`. As of now the `7.8^` doesn't work properly when installed on the Alpine image.
+
+- You can debug the db contents by running `psql -h 127.0.0.1 -p 6543 -U myuser -d mmorpg-database`
+
+## Project practices
+
+### General
+
+- Code needs to be documented. The goal is that by reading the docs, a user can start the program and gain a technical overview of the project.
+
+- Changes are implemented through pull requests
+
+- Change pattern: your own branch -> dev -> main
+
+- TODO: What else?
+
+### C++ specific
+
+- TODO: what?
+
+## Projektin seuranta (Viedään tää osio lopuks jonnekki muualle)
+
+### Viikko 1
+
+Projektin pystytys ja teknologioihin tutustuminen
+
+#### Aleksi
+
+- Palvelimen alustus 20h
+
+- Kehitysympäristön pystytys 10h
+
+- Suunnittelu 5h
+
+- Kirjastoihin tutustuminen 5h
+
+Yhteensä: 40h
+
+#### Samu
+
+#### Otso

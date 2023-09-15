@@ -28,6 +28,9 @@
 
 # data files
 *.json
+*.log
+*.tlog
+*.recipe
 
 # Vendored libraries should be included
 !dependencies/vulkan/lib/*.lib
@@ -53,6 +56,7 @@ rehtiLib/graphics/bin
 *.sdf
 *.filters
 *.config
+*.pdb
 
 # CMAKE
 CMakeLists.txt.user

@@ -15,6 +15,8 @@ VkShaderModule ShaderManager::createShaderModule(VkDevice logDeviceP, ConstantFi
     {
         throw std::runtime_error("Shadermodule creation failed");
     }
+    // add module to createdModules to be able to destroy them later
+    createdModules.push_back(module);
 
     return module;
 }
@@ -25,8 +27,9 @@ VkPipelineShaderStageCreateInfo ShaderManager::createVertexShaderInfo(VkDevice l
     shaderInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
     shaderInfo.stage = VK_SHADER_STAGE_VERTEX_BIT;
     shaderInfo.module = createShaderModule(logDeviceP, kVertexShaderPath);
-    shaderInfo.pName = "main";  //specifies the entrypoint. You can combine multiple shaders with different entrypoints and pick the one you want. 
+    shaderInfo.pName = "main";  // Specifies the entrypoint. You can combine multiple shaders with different entrypoints and pick the one you want. 
 
+    return shaderInfo;
 }
 
 VkPipelineShaderStageCreateInfo ShaderManager::createFragmentShaderInfo(VkDevice logDeviceP)
@@ -35,8 +38,18 @@ VkPipelineShaderStageCreateInfo ShaderManager::createFragmentShaderInfo(VkDevice
     shaderInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
     shaderInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
     shaderInfo.module = createShaderModule(logDeviceP, kFragmentShaderPath);
-    shaderInfo.pName = "main";  //specifies the entrypoint. You can combine multiple shaders with different entrypoints and pick the one you want. 
+    shaderInfo.pName = "main";  // Specifies the entrypoint. You can combine multiple shaders with different entrypoints and pick the one you want. 
 
+    return shaderInfo;
+}
+
+void ShaderManager::destroyShaderModules(VkDevice logDeviceP)
+{
+    for (auto& module : createdModules)
+    {
+		vkDestroyShaderModule(logDeviceP, module, nullptr);
+	}
+    createdModules.clear();
 }
 
 std::vector<char> ShaderManager::readFile(ConstantFilepath pFilenameP)

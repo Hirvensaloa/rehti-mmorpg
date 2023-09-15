@@ -385,9 +385,8 @@ void RehtiGraphics::createGraphicsPipeline()
         throw std::runtime_error("Pipeline layout creation failed");
 
 
-    vkDestroyShaderModule(this->logDevice, fragModule, nullptr);
-    vkDestroyShaderModule(this->logDevice, vertModule, nullptr);
-
+    // cleanup
+    ShaderManager::destroyShaderModules(this->logDevice);
 }
 
 void RehtiGraphics::createFramebuffers()

@@ -3,7 +3,7 @@
 #include <iostream>
 int main() {
 	RehtiGraphics* graphics = new RehtiGraphics();
-	graphics->run();
+	graphics->testRun();
 	testNetwork();
 	std::cout << "Winner winner chicken dinner" << std::endl;
 }

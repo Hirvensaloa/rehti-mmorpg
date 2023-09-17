@@ -4,34 +4,33 @@
 ########################################################################################################################
 
 
-FROM alpine:3.17.0
+FROM ubuntu:22.04
 
-RUN apk update && \
-    apk add \
-    build-base \
-    cmake \
-    boost1.80-dev=1.80.0-r3 \
-    libstdc++ \
-    boost1.80-program_options=1.80.0-r3 \
-    libpq-dev
+RUN apt-get update && apt-get install -y \
+    wget \
+    libssl-dev \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /server
+# Install cmake from the binary as the apt-get version is too old.
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.26.4/cmake-3.26.4-linux-x86_64.sh && \
+    chmod +x cmake-3.26.4-linux-x86_64.sh && \
+    ./cmake-3.26.4-linux-x86_64.sh --skip-license --prefix=/usr/local
 
-COPY dependencies/libpqxx ./dependencies/libpqxx
+RUN pip3 install conan
 
-# Make sure the libpqxx branch is in 7.7.5
-RUN	cd dependencies/libpqxx && \
-	cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib -DBUILD_SHARED_LIBS=ON -DBUILD_TEST=OFF -DCMAKE_BUILD_TYPE=RelWithDebInfo && \
-	make && \
-	make install
+RUN conan profile detect --force
 
-COPY server/src/ ./src/
+WORKDIR /server 
+
+COPY server/conanfile.txt .
+
+RUN conan install . --output-folder=build --build=missing -s build_type=Debug 
+
 COPY server/CMakeLists.txt .
+COPY server/src/ ./src/
 
-RUN cmake -DCMAKE_BUILD_TYPE=Debug && \
-    cmake --build . --parallel 8
+RUN cmake -S . -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -B build -DCMAKE_BUILD_TYPE=Debug && \
+    cmake --build ./build
 
-RUN addgroup -S shs && adduser -S shs -G shs
-USER shs
-
-CMD [ "./src/server"]
+CMD [ "./build/src/server"]

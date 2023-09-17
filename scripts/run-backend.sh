@@ -15,7 +15,7 @@ fi
 # Check if the "--watch" argument is provided
 if [[ "$1" == "--watch" ]]; then
   # Start the Docker Compose project with build and wait, and then display logs
-  docker compose up --build --wait 
+  docker compose up --build --wait --remove-orphans
 
   # Open a new terminal window and run docker compose alpha watch
   if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
@@ -32,5 +32,5 @@ if [[ "$1" == "--watch" ]]; then
   docker-compose stop
 else
   # Start the Docker Compose project
-  docker-compose up
+  docker-compose up --build --remove-orphans
 fi

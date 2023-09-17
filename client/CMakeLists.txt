@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.27.0)
+cmake_minimum_required(VERSION 3.26.0)
 project(Client)
 set(CMAKE_CXX_STANDARD 20)
 
@@ -10,8 +10,8 @@ find_package(Boost 1.83.0 REQUIRED COMPONENTS system)
 
 add_library(rehtiGraphics "")
 
-add_subdirectory(../rehtiLib/graphics ${CMAKE_CURRENT_LIST_DIR}/graphics)
-add_subdirectory(../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/network)
+add_subdirectory(../rehtiLib/graphics ${CMAKE_CURRENT_LIST_DIR}/build/graphics)
+add_subdirectory(../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/build/network)
 
 add_executable(Client src/client.cpp)
 

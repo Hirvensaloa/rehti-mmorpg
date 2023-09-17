@@ -5,6 +5,8 @@
 ### Before running anything
 
 - Make sure to fetch git submodules run `git submodule update --recursive --init`. This needs to be run everytime new submodules are added.
+- Make sure you have Conan installed from (https://docs.conan.io/2/installation.html)[here]. Run `conan profile detect --force` after installation.
+- Make sure you have Cmake version >= 3.26
 
 ### Running
 
@@ -21,10 +23,6 @@ TODO: Lyhyt desc tähän. Ja jos on jotain tärkeetä/poikkeuksellista mitä pit
 
 TODO: Mitä vaaditaan että clienttia voi alkaa pyörittämään.
 
-#### Linux specific
-
-- Make sure you have `libxrandr`, `libxi`, `libxinerama` and `libxcursor` installed. Can be installed with `sudo apt-get update && sudo apt-get install libxrandr-dev libxi-dev libxinerama-dev libxcursor-dev`.
-
 ### Running
 
 - `./scripts/run-client.sh` to start the client
@@ -39,13 +37,17 @@ Server runs on C++ and uses Boost.Asio for networking. Database is made with Pos
 
 ### <a name="server-pre"></a>Prerequisites
 
-To run the server and database, make sure you have `docker-compose` and `docker` installed. Docker-compose installation also instructs or automagically install Docker, depending what do you choose.
+To run the server and database, make sure you have `docker-compose` and `docker` installed. Docker-compose installation also instructs or automagically installs Docker, depending what do you choose.
 
 - Install docker-compose (https://docs.docker.com/compose/install/)[here].
 
 ### Running
 
 - `./scripts/run-backend.sh` to start the server and database containers.
+
+#### Running with Conan
+
+It is possible to run the server without Docker by using `./scripts/run-backend-conan.sh`. NOTE: This does not start the database. Also not guaranteed to work on every platform.
 
 #### Hot reload
 
@@ -55,6 +57,4 @@ If the script doesn't work, you can just use `docker-compose up` in the root dir
 
 ### Troubleshooting
 
-- If there are problems with the libpqxx make sure that the dependencies/libpqxx exists and that it has been checked out to tag `7.7.5`. As of now the `7.8^` doesn't work properly when installed on the Alpine image.
-
-- You can debug the db contents by running `psql -h 127.0.0.1 -p 6543 -U myuser -d mmorpg-database`
+- You can debug the database contents by running `psql -h 127.0.0.1 -p 6543 -U myuser -d mmorpg-database`

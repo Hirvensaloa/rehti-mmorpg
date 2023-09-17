@@ -4,6 +4,13 @@
 #include <vector>
 #include <string>
 
+// Shader sources
+#define CPP_INCLUDE_SHADERS
+
+#include "shader.vert"
+
+#include "shader.frag"
+
 typedef char const * const ConstantFilepath;
 
 namespace ShaderManager

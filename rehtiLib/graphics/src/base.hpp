@@ -1,6 +1,5 @@
 
 #include <vulkan/vulkan.h>
-#include "GLFW/glfw3.h"
 
 #include <optional>
 #include <vector>
@@ -8,6 +7,9 @@
 #include <iostream>
 #include <string>
 #include <set>
+
+// Forward declarations
+struct GLFWwindow;
 
 //Useful structs
 struct QueueFamilyIndices
@@ -34,7 +36,7 @@ public:
     void testRun();
 
 private:
-    //Functions
+    // Functions
     void initWindow();
 
     void initVulkan();
@@ -74,48 +76,48 @@ private:
     VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> availableModes);
     VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
-    //Private members:
+    // Private members:
     GLFWwindow* window;
     VkInstance instance;
     VkDebugUtilsMessengerEXT debugMessenger;
     VkSurfaceKHR surface;
 
-    //gpu
+    // Gpu
     VkPhysicalDevice gpu;
 
-    //logicaldevice
+    // Logicaldevice
     VkDevice logDevice;
 
-    //queues
+    // Queues
     VkQueue graphicsQueue;
     VkQueue presentQueue;
 
-    //Swapchain
+    // Swapchain
     VkSwapchainKHR swapChain;
     std::vector<VkImage> swapChainImages;
     VkFormat swapChainImageFormat;
     VkExtent2D swapChainExtent;
     std::vector<VkImageView> swapChainImageViews;
 
-    //framebuffer
+    // Framebuffer
     std::vector<VkFramebuffer> swapChainFramebuffers;
 
-    //pipeline
+    // Pipeline
     VkRenderPass renderPass;
     VkPipelineLayout pipelineLayout;
     VkPipeline pipeline;
 
-    //commands
+    // Commands
     VkCommandPool commandPool;
     std::vector<VkCommandBuffer> commandBuffers;
 
-    //Semaphores
+    // Semaphores
     std::vector<VkSemaphore> imagesReady;
     std::vector<VkSemaphore> rendersFinished;
-    std::vector<VkFence>    frameFences; //bad wording?
+    std::vector<VkFence>    frameFences; // bad wording?
     std::vector<VkFence>    imageFences;
 
-    //other variables
+    // Other variables
     const uint32_t WIDTH = 800;
     const uint32_t HEIGHT = 600;
 

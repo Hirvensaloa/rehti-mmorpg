@@ -1,6 +1,8 @@
 #include "base.hpp"
 #include "ShaderManager.hpp"
 
+#include "GLFW/glfw3.h"
+
 void RehtiGraphics::testRun() {
     initWindow();
     initVulkan();
@@ -10,9 +12,9 @@ void RehtiGraphics::testRun() {
 
 
 void RehtiGraphics::initWindow() {
-    //Initialize glfw
+    // Initialize glfw
     glfwInit();
-    //Some arguments
+    // Some arguments
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
@@ -22,15 +24,15 @@ void RehtiGraphics::initWindow() {
 
 void RehtiGraphics::initVulkan() {
     createInstance();
-    setupDebugMessenger(); //Setup debugging
-    createSurface();       //Create the surface to draw into. Mostly handled by glfw.
-    pickPhysicalDevice(); //Choose the physical device (gpu)
-    createLogicalDevice(); //Create the interactable logical device
-    createSwapChain();     //Creates the swapchain
-    createImageViews();    //Creates the image view (how to access the image)
+    setupDebugMessenger(); // Setup debugging
+    createSurface();       // Create the surface to draw into. Mostly handled by glfw.
+    pickPhysicalDevice(); // Choose the physical device (gpu)
+    createLogicalDevice(); // Create the interactable logical device
+    createSwapChain();     // Creates the swapchain
+    createImageViews();    // Creates the image view (how to access the image)
     createRenderPass();
-    createGraphicsPipeline(); //Creates a rendering pipeline (immutable stuff in vulkan)
-    createFramebuffers();   //Creates the framebuffers
+    createGraphicsPipeline(); // Creates a rendering pipeline (immutable stuff in vulkan)
+    createFramebuffers();   // Creates the framebuffers
     createCommandPool();
     createCommandBuffers();
     createSynchronization();
@@ -46,7 +48,7 @@ void RehtiGraphics::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreate
 
 void RehtiGraphics::setupDebugMessenger()
 {
-    if (!enableValidationLayers) return; //Validationlayers are not enabled. Go back
+    if (!enableValidationLayers) return; // Validationlayers are not enabled. Go back
     VkDebugUtilsMessengerCreateInfoEXT createInfo;
     populateDebugMessengerCreateInfo(createInfo);
 
@@ -63,22 +65,27 @@ void RehtiGraphics::pickPhysicalDevice()
     uint32_t devcount = 0;
     vkEnumeratePhysicalDevices(this->instance, &devcount, nullptr); //To get how many devices there are
 
-    if (devcount == 0) {
+    if (devcount == 0) 
+    {
         throw std::runtime_error("No suitable devices found.");
     }
 
     std::vector<VkPhysicalDevice> devices(devcount);
     vkEnumeratePhysicalDevices(this->instance, &devcount, devices.data()); //We have to do this twice, as it is how this function works. If the pointer is not null, it will try to fill out devcount devices.
-
-    for (const auto& device : devices) {
-        if (isDeviceSuitable(device)) {
+    
+    // Currently picks the first suitable device
+    for (const auto& device : devices) 
+    {
+        if (isDeviceSuitable(device)) 
+        {
             this->gpu = device;
             break;
         }
 
     }
 
-    if (this->gpu == VK_NULL_HANDLE) {
+    if (this->gpu == VK_NULL_HANDLE) 
+    {
         throw std::runtime_error("No gpu matches the requirements!");
     }
 
@@ -838,11 +845,13 @@ VkPresentModeKHR RehtiGraphics::chooseSwapPresentMode(const std::vector<VkPresen
 
 VkExtent2D RehtiGraphics::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities)
 {
-    if (capabilities.currentExtent.width != UINT32_MAX) { //not the special value so the current window size will do?
+    if (capabilities.currentExtent.width != UINT32_MAX) 
+    { // not the special value so the current window size will do?
         return capabilities.currentExtent;
 
     }
-    else { //ohno special value
+    else 
+    { // ohno special value
         int width, height;
         glfwGetFramebufferSize(window, &width, &height);
 
@@ -853,7 +862,7 @@ VkExtent2D RehtiGraphics::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capab
 
         actual.width = std::clamp(actual.width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width);
         actual.height = std::clamp(actual.height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height);
-
+        return actual;
     }
 }
 

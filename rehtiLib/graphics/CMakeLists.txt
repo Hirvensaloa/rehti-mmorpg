@@ -10,8 +10,10 @@ find_package(glm REQUIRED)
 # Include directories required for declared library Components (Such as glfw3 and glslang)
 
 target_include_directories(rehtiGraphics PUBLIC ${DEPENDENCY_DIR}/vulkan/include)
-target_include_directories(rehtiGraphics PUBLIC ${glfw3_INCLUDE_DIRS})
+target_include_directories(rehtiGraphics PRIVATE ${glfw3_INCLUDE_DIRS})
 target_include_directories(rehtiGraphics PRIVATE ${glslang_INCLUDE_DIRS})
+target_include_directories(rehtiGraphics PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/shaders/)
+
 
 set(GRAPHICS_SOURCES
 	base.cpp
@@ -26,7 +28,7 @@ list(TRANSFORM GRAPHICS_SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)
 target_sources(rehtiGraphics PRIVATE ${GRAPHICS_SOURCES})
 
 target_link_libraries(rehtiGraphics PUBLIC ${DEPENDENCY_DIR}/vulkan/lib/vulkan-1)
-target_link_libraries(rehtiGraphics PUBLIC glfw)
+target_link_libraries(rehtiGraphics PRIVATE glfw)
 target_link_libraries(rehtiGraphics PRIVATE spirv-cross::spirv-cross)
 target_link_libraries(rehtiGraphics PRIVATE glslang::glslang)
 target_link_libraries(rehtiGraphics PRIVATE vulkan-memory-allocator::vulkan-memory-allocator)

@@ -98,3 +98,29 @@ Yhteensä: 40h
 #### Samu
 
 #### Otso
+
+### Viikko 2
+
+Kirjastojen tunkkausta
+
+#### Aleksi
+
+- Palvelimen alustus 10h
+
+- Tietokanta 5h
+
+- Kirjastojen setuppaus 10h
+
+Yhteensä: 25h
+
+#### Samu
+
+#### Otso
+
+### Viikko 3
+
+#### Aleksi
+
+#### Samu
+
+#### Otso

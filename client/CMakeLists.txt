@@ -4,15 +4,15 @@ set(CMAKE_CXX_STANDARD 20)
 
 message("Using CMake version: ${CMAKE_VERSION}")
 
-add_library(rehtiGraphics STATIC "")
+add_library(rehtiGraphics "")
 
 add_subdirectory(../rehtiLib/graphics ${CMAKE_CURRENT_LIST_DIR}/graphics)
 add_subdirectory(../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/network)
 
 add_executable(${PROJECT_NAME} src/client.cpp)
 
-target_link_libraries(${PROJECT_NAME} rehtiGraphics)
-target_link_libraries(${PROJECT_NAME} rehtiNetwork)
+target_link_libraries(${PROJECT_NAME} PRIVATE rehtiGraphics)
+target_link_libraries(${PROJECT_NAME} PRIVATE rehtiNetwork)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ../rehtiLib/graphics/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ../rehtiLib/network/include)

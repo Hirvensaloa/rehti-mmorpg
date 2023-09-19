@@ -1,6 +1,13 @@
+include(FetchContent)
 set(DEPENDENCY_DIR "../../dependencies")
 
-find_package(glfw3 3.3.8 REQUIRED)
+FetchContent_Declare(
+	glfw
+	GIT_REPOSITORY https://github.com/glfw/glfw
+	GIT_TAG 3eaf1255b29fdf5c2895856c7be7d7185ef2b241
+)
+FetchContent_MakeAvailable(glfw)
+
 find_package(spirv-cross REQUIRED)
 find_package(glslang 11.7.0 REQUIRED)
 find_package(vulkan-memory-allocator 3.0.1 REQUIRED)
@@ -23,16 +30,19 @@ set(GRAPHICS_SOURCES
 	shaders/shader.vert
 	shaders/shader.frag
 	)
+
 list(TRANSFORM GRAPHICS_SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)
 
 target_sources(rehtiGraphics PRIVATE ${GRAPHICS_SOURCES})
 
-target_link_libraries(rehtiGraphics PUBLIC ${DEPENDENCY_DIR}/vulkan/lib/vulkan-1)
-target_link_libraries(rehtiGraphics PRIVATE glfw)
-target_link_libraries(rehtiGraphics PRIVATE spirv-cross::spirv-cross)
-target_link_libraries(rehtiGraphics PRIVATE glslang::glslang)
-target_link_libraries(rehtiGraphics PRIVATE vulkan-memory-allocator::vulkan-memory-allocator)
-target_link_libraries(rehtiGraphics PRIVATE stb::stb)
-target_link_libraries(rehtiGraphics PRIVATE glm::glm)
+target_link_libraries(rehtiGraphics PUBLIC
+	${DEPENDENCY_DIR}/vulkan/lib/vulkan-1
+	glfw
+	spirv-cross::spirv-cross
+ 	glslang::glslang
+ 	vulkan-memory-allocator::vulkan-memory-allocator
+	stb::stb
+ 	glm::glm
+	)
 
 target_include_directories(rehtiGraphics INTERFACE ${CMAKE_CURRENT_LIST_DIR}/include)

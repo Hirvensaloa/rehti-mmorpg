@@ -1,5 +1,5 @@
 #ifdef CPP_INCLUDE_SHADERS
-std::string vertexShaderSource = R"(
+std::string fragmentShaderSource = R"(
 #endif
 
 #version 450

@@ -23,8 +23,6 @@ TODO: Mitä vaaditaan että clienttia voi alkaa pyörittämään.
 
 #### Linux specific
 
-- Make sure you have `libxrandr`, `libxi`, `libxinerama` and `libxcursor` installed. Can be installed with `sudo apt-get update && sudo apt-get install libxrandr-dev libxi-dev libxinerama-dev libxcursor-dev`.
-
 ### Running
 
 - `./scripts/run-client.sh` to start the client

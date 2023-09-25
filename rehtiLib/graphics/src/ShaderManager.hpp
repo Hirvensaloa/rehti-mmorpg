@@ -16,8 +16,8 @@ typedef char const * const ConstantFilepath;
 namespace ShaderManager
 {
 	// Constants
-	constexpr ConstantFilepath kVertexShaderPath = "shaders/vertexShader.spv";
-	constexpr ConstantFilepath kFragmentShaderPath = "shaders/fragmentShader.spv";
+	constexpr ConstantFilepath kVertexShaderPath = "C:/Users/otsol/source/repos/rehti-mmorpg/rehtiLib/graphics/src/shaders/vertexShader.spv";
+	constexpr ConstantFilepath kFragmentShaderPath = "C:/Users/otsol/source/repos/rehti-mmorpg/rehtiLib/graphics/src/shaders/fragmentShader.spv";
 	constexpr ConstantFilepath kGLSLVertexShaderPath = "shaders/shader.vert";
 	constexpr ConstantFilepath kGLSLFragmentShaderPath = "shaders/shader.frag";
 

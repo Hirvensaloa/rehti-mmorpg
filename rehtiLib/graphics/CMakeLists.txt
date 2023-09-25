@@ -6,6 +6,7 @@ FetchContent_Declare(
 	GIT_REPOSITORY https://github.com/glfw/glfw
 	GIT_TAG 3eaf1255b29fdf5c2895856c7be7d7185ef2b241
 )
+set(GLFW_VULKAN_STATIC ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(glfw)
 
 find_package(spirv-cross REQUIRED)

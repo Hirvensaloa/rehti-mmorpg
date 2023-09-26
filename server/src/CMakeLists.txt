@@ -20,9 +20,9 @@ target_link_libraries(${TARGET} PRIVATE
         ${Boost_LIBRARIES}
         Threads::Threads)
 
-add_subdirectory(../network ${CMAKE_CURRENT_LIST_DIR}/network)
+add_subdirectory(../../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/../build/network)
 target_link_libraries(${TARGET} PUBLIC rehtiNetwork)
-target_include_directories(${TARGET} PUBLIC ../network/include)
+target_include_directories(${TARGET} PUBLIC ../../rehtiLib/network/include)
 
 # postgres client
 

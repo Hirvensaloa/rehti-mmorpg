@@ -1,10 +1,9 @@
-#include "client.hpp"
+#include "Client.hpp"
 #include "graphics.h"
 #include "network.h"
 #include <chrono>
 #include <iostream>
 #include <thread>
-#include <windows.h>
 
 int main(int argc, char *argv[])
 {

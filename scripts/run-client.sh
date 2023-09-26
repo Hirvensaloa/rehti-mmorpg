@@ -2,4 +2,4 @@
 
 ./scripts/build-client.sh
 
-./client/build/Client
+./client/build/Client 127.0.0.1

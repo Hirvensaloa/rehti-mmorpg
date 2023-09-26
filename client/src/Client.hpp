@@ -2,9 +2,10 @@
 
 #include <network.h>
 
-class Client {
+class Client
+{
 public:
-  Client(std::string ipP, std::string portP);
+  Client(std::string ip, std::string port);
 
   bool connect();
 

@@ -6,14 +6,21 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-find_package(Boost 1.83.0 REQUIRED COMPONENTS system bind)
+find_package(Boost 1.83.0 REQUIRED COMPONENTS system)
 
 add_library(rehtiGraphics "")
 
 add_subdirectory(../rehtiLib/graphics ${CMAKE_CURRENT_LIST_DIR}/build/graphics)
 add_subdirectory(../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/build/network)
 
-add_executable(Client src/Main.cpp src/Client.cpp src/Client.hpp)
+set(SOURCES
+      Main.cpp
+      Client.cpp
+      Client.hpp
+	)
+
+list(TRANSFORM SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)
+add_executable(Client ${SOURCES})
 
 target_link_libraries(Client rehtiGraphics)
 target_link_libraries(Client rehtiNetwork)

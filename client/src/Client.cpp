@@ -9,10 +9,9 @@ Client::Client(std::string ip, std::string port)
     : ioContextM(boost::asio::io_context()),
       resolverM(boost::asio::ip::tcp::resolver(ioContextM)),
       endpointsM(resolverM.resolve(ip, port)),
-      socketM(boost::asio::ip::tcp::socket(ioContextM)),
       messagesM(MessageQueue<Message>()),
       connectionM(std::make_unique<Connection>(
-          Connection::owner::client, ioContextM, socketM, messagesM)){};
+          Connection::owner::client, ioContextM, std::move(boost::asio::ip::tcp::socket(ioContextM)), messagesM)){};
 
 bool Client::connect()
 {

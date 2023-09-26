@@ -15,7 +15,6 @@ private:
   boost::asio::io_context ioContextM;
   boost::asio::ip::tcp::resolver resolverM;
   boost::asio::ip::tcp::resolver::results_type endpointsM;
-  boost::asio::ip::tcp::socket socketM;
 
   MessageQueue<Message> messagesM;
   std::unique_ptr<Connection> connectionM;

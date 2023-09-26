@@ -1,5 +1,6 @@
-#include "database/connect.hpp"
+#include "database/Connect.hpp"
 #include "Server.hpp"
+
 #include <boost/asio.hpp>
 #include <chrono>
 #include <iostream>

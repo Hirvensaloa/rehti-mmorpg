@@ -9,10 +9,10 @@ include_directories(./src)
 add_library(rehtiNetwork)
 
 set(SOURCES
-      networkBase.cpp
+      NetworkBase.cpp
       Connection.hpp
       Message.hpp
-	  MessageQueue.hpp
+	  	MessageQueue.hpp
 	)
 
 list(TRANSFORM SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)

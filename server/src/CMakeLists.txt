@@ -8,7 +8,7 @@ find_package(Threads REQUIRED)
 set(TARGET server)
 
 add_executable(${TARGET}
-        Main.cpp database/connect.cpp Server.cpp Server.hpp)
+        Main.cpp database/Connect.cpp Server.cpp Server.hpp)
 
 target_compile_features(${TARGET} PUBLIC
         cxx_std_20)

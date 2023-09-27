@@ -1,9 +1,10 @@
-#include "Client.hpp"
-#include "graphics.h"
-#include "network.h"
 #include <chrono>
 #include <iostream>
 #include <thread>
+
+#include "Client.hpp"
+#include "graphics.h"
+#include "network.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,14 +20,7 @@ int main(int argc, char *argv[])
     }
 
     Client testiClient = Client(argv[1], "9999");
-    bool res = testiClient.connect();
-    std::cout << res << std::endl;
-    while (true)
-    {
-      testiClient.sayHello();
-      std::cout << "said hello" << std::endl;
-      std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-    }
+    testiClient.test();
   }
   catch (std::exception &e)
   {

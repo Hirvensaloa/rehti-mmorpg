@@ -1,8 +1,15 @@
 #pragma once
 
+#include <iostream>
+
 #include "Message.hpp"
 #include "MessageQueue.hpp"
-#include <iostream>
+
+namespace asio = boost::asio;
+using asio::awaitable;
+using asio::co_spawn;
+using asio::detached;
+using asio::use_awaitable;
 
 class Connection : public std::enable_shared_from_this<Connection>
 {
@@ -25,184 +32,116 @@ public:
 
   uint32_t getID() const { return idM; }
 
-  void connectToServer(const boost::asio::ip::tcp::resolver::results_type
-                           &endpoints)
-  { // Connects to server
-    if (ownertypeM == owner::client)
-    {
-      boost::asio::async_connect(
-          socketM, endpoints,
-          [this](std::error_code errorcode,
-                 boost::asio::ip::tcp::endpoint endpoint)
-          {
-            if (!errorcode)
-              readHeader();
-          });
+  awaitable<void> listenForMessages() 
+  {
+    std::cout << "Listening for messages..." << std::endl;
+    while (isConnected()) {
+      std::cout << "Waiting for message..." << std::endl;
+      co_await readMessage();
     }
   }
 
-  void connectToClient(uint32_t userid = 0)
-  { // Connects to client
-
-    if (ownertypeM == owner::server)
-    {
-      if (socketM.is_open())
-      {
-        idM = userid;
-        readHeader();
-      }
+  awaitable<bool> connectToServer(const asio::ip::tcp::resolver::results_type &endpoints)
+  {
+    if (ownertypeM != owner::client) {
+      co_return false;
     }
+
+    try {
+      boost::system::error_code ec;
+      co_await asio::async_connect(socketM, endpoints, asio::redirect_error(use_awaitable, ec));
+
+      if (ec) {
+        std::cout << "Failed to connect to server: " << ec.message() << std::endl;
+        co_return false;
+      }
+
+      std::cout << "Connected to server: " << socketM.remote_endpoint().address().to_string() << std::endl;
+
+      co_return true;
+    } catch (std::exception &e) {
+      std::cerr << "Client Connection Error: " << e.what() << "\n";
+      co_return false;
+    }
+  }
+
+  bool connectToClient(uint32_t userid = 0)
+  {
+    if (socketM.is_open())
+    {
+      idM = userid;
+      return true;
+    }
+
+    return false;
   }
 
   bool isConnected() const { return socketM.is_open(); }
 
   void disconnect()
   {
-    if (isConnected())
-      boost::asio::post(rAsioContextM, [this]()
-                        { socketM.close(); });
+    socketM.close();
   }
 
-  void send(const Message &msg)
+  awaitable<void> send(const Message &msg)
   {
-    boost::asio::post(rAsioContextM, [this, msg]()
-                      {
-      bool writingMessage = !outgoingMessagesM.empty();
-      outgoingMessagesM.push_back(msg);
-      if (!writingMessage)
-        writeHeader(); });
+    co_await writeMessage(msg);
   }
 
 private:
-  void writeHeader()
+  awaitable<void> writeMessage(const Message &msg)
   {
-    boost::asio::async_write(
+    std::cout << idM << ": Writing message..." << msg.getBody() << msg.getSize() << std::endl;
+    boost::system::error_code ec;
+    // 1. Write header
+    co_await asio::async_write(
         socketM,
-        boost::asio::buffer(&outgoingMessagesM.front().getHeader(),
-                            sizeof(msg_header)),
-        [this](std::error_code errorcode, std::size_t length)
-        {
-          if (!errorcode)
-          {
-            if (outgoingMessagesM.front().getSize() > 0)
-            {
-              std::cout << outgoingMessagesM.front().getBody() << std::endl;
-              writeBody();
-            }
-            else
-            {
-              outgoingMessagesM.pop_front();
-              if (!outgoingMessagesM.empty())
-              {
-                writeHeader();
-              }
-            }
-          }
-          else
-          {
-            std::cout << idM << ": Write Header failed." << std::endl;
-            socketM.close();
-          }
-        });
+        asio::buffer(&msg.getHeader(), sizeof(msg_header)),
+        asio::redirect_error(use_awaitable, ec));
+
+    // 2. Write body, if there is one
+    if (msg.getSize() > 0 && !ec)
+    {
+      co_await asio::async_write(
+          socketM,
+          asio::buffer(msg.getBody().data(), msg.getSize()),
+          asio::redirect_error(use_awaitable, ec));
+    }
+
+    if (ec)
+    {
+      std::cout << idM << ": Write failed" << std::endl;
+      disconnect();
+    } else {
+      std::cout << idM << ": Write successful" << std::endl;  
+    }
+
   }
 
-  void writeBody()
+  awaitable<void> readMessage()
   {
-    boost::asio::async_write(
-        socketM,
-        boost::asio::buffer(outgoingMessagesM.front().getBody().data(),
-                            outgoingMessagesM.front().getSize()),
-        [this](std::error_code errorcode, std::size_t length)
-        {
-          if (!errorcode)
-          {
-            outgoingMessagesM.pop_front();
-            if (!outgoingMessagesM.empty())
-            {
-              writeHeader();
-            }
-          }
-          else
-          {
-            std::cout << idM << ": Write Body failed." << std::endl;
-          }
-        });
-  }
+    // 1. Wait for header to arrive and then read it
+    msg_header tempHeaderM;
+    co_await asio::async_read(socketM, asio::buffer(&tempHeaderM, sizeof(msg_header)), use_awaitable);
 
-  void readHeader()
-  {
-    using namespace boost::placeholders;
-    boost::asio::async_read(
-        socketM, boost::asio::buffer(&tempHeaderM, sizeof(msg_header)),
-        boost::bind(&Connection::handleHeader,
-                    this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred));
-  }
+    // 2. If there is a body, read the body
+    char tempBodyM[128] = {0};
+    if (tempHeaderM.size > 0) {
+      co_await asio::async_read(socketM, asio::buffer(&tempBodyM[0], tempHeaderM.size), use_awaitable);
+    }
 
-  void handleHeader(const boost::system::error_code &error, std::size_t bytes_transferred)
-  {
-    if (!error)
-    {
-      if (tempHeaderM.size > 0)
-      {
-        readBody();
-      }
-      else
-      {
-        addToIncomingMessages();
-      }
-    }
-    else
-    {
-      std::cout << idM << "Reading header failed." << std::endl;
-      socketM.close();
-    }
-  }
+    std::cout << idM << ": Read message: " << tempBodyM << std::endl;
 
-  void readBody()
-  {
-    using namespace boost::placeholders;
-    boost::asio::async_read(
-        socketM, boost::asio::buffer(&tempBodyM[0], tempHeaderM.size), boost::bind(&Connection::handleBody, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred));
-  }
-
-  void handleBody(const boost::system::error_code &error, std::size_t bytes_transferred)
-  {
-    if (!error)
-    {
-      // std::cout << "transferred: " << bytes_transferred << std::endl;
-      // std::cout.write(tempBodyM, strlen(tempBodyM));
-      addToIncomingMessages();
-    }
-    else
-    {
-      std::cout << idM << " Reading body failed." << std::endl;
-      socketM.close();
-    }
-  }
-
-  void addToIncomingMessages()
-  {
-    if (ownertypeM == owner::server)
-    {
-      rIncomingMessagesM.push_back(
-          Message(nullptr, tempHeaderM, std::move(std::string(tempBodyM))));
-    }
-    else
-    {
-      rIncomingMessagesM.push_back(Message(nullptr, tempHeaderM, std::move(std::string(tempBodyM))));
-    }
-    readHeader();
+    // 3. Add message to incoming queue
+    rIncomingMessagesM.push_back(Message(nullptr, tempHeaderM, std::move(std::string(tempBodyM))));
   }
 
 protected:
-  boost::asio::io_context &rAsioContextM;
+  asio::io_context &rAsioContextM;
   boost::asio::ip::tcp::socket socketM;
 
-  MessageQueue outgoingMessagesM;
   MessageQueue &rIncomingMessagesM;
 
-  msg_header tempHeaderM;
-  char tempBodyM[128] = {0};
   owner ownertypeM = owner::server;
 
   uint32_t idM = 0;

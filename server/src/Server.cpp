@@ -15,21 +15,31 @@ Server::Server()
     ioThreadM = std::thread([this]()
                             { ioContextM.run(); });
     acceptThreadM = std::thread([this]()
-                                { acceptConnection(); });
+                                { acceptConnections(); });
+
+    std::cout << "Server started on port " << PORT << std::endl;
 };
 
-void Server::acceptConnection()
+void Server::acceptConnections()
 {
-    ip::tcp::socket socket(ioContextM);
-    acceptorM.accept(socket);
-    std::cout << "Accepted connection from " << socket.remote_endpoint().address().to_string()
-              << ":" << socket.remote_endpoint().port() << std::endl;
+    while (true) {
+        ip::tcp::socket socket(ioContextM);
+        acceptorM.accept(socket);
+        std::cout << "Accepted connection from " << socket.remote_endpoint().address().to_string()
+                  << ":" << socket.remote_endpoint().port() << std::endl;
 
-    std::unique_ptr<Connection> connection = std::make_unique<Connection>(
-        Connection::owner::server, ioContextM, std::move(socket), messagesM);
-    connection->connectToClient();
-    connectionsM.push_back(std::move(connection));
-    acceptConnection();
+        std::unique_ptr<Connection> connection = std::make_unique<Connection>(
+            Connection::owner::server, ioContextM, std::move(socket), messagesM);
+        const bool connectSuccessful = connection->connectToClient();
+
+        if (connectSuccessful) {
+            connectionsM.push_back(std::move(connection));
+
+            co_spawn(ioContextM, connectionsM.back()->listenForMessages(), detached);
+        } else {
+            std::cout << "Failed to connect to client!" << std::endl;
+        }
+    }
 }
 
 void Server::processMessages()

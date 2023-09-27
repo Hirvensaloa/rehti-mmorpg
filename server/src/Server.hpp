@@ -7,7 +7,7 @@ class Server
 public:
     Server();
 
-    void acceptConnection();
+    void acceptConnections();
 
     void processMessages();
 

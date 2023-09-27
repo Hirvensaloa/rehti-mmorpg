@@ -34,11 +34,10 @@ public:
 
   awaitable<void> listenForMessages() 
   {
-    std::cout << "Listening for messages..." << std::endl;
     while (isConnected()) {
-      std::cout << "Waiting for message..." << std::endl;
       co_await readMessage();
     }
+    std::cout << "Client disconnected" << std::endl;
   }
 
   awaitable<bool> connectToServer(const asio::ip::tcp::resolver::results_type &endpoints)

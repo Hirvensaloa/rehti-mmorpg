@@ -15,8 +15,8 @@ public:
   };
 
   Connection(owner parent, boost::asio::io_context &context,
-             boost::asio::ip::tcp::socket &socket, MessageQueue<Message> &inc)
-      : rAsioContextM(context), rSocketM(socket), rIncomingMessagesM(inc)
+             boost::asio::ip::tcp::socket socket, MessageQueue &inc)
+      : rAsioContextM(context), socketM(std::move(socket)), rIncomingMessagesM(inc)
   {
     ownertypeM = parent;
   }
@@ -31,7 +31,7 @@ public:
     if (ownertypeM == owner::client)
     {
       boost::asio::async_connect(
-          rSocketM, endpoints,
+          socketM, endpoints,
           [this](std::error_code errorcode,
                  boost::asio::ip::tcp::endpoint endpoint)
           {
@@ -46,7 +46,7 @@ public:
 
     if (ownertypeM == owner::server)
     {
-      if (rSocketM.is_open())
+      if (socketM.is_open())
       {
         idM = userid;
         readHeader();
@@ -54,13 +54,13 @@ public:
     }
   }
 
-  bool isConnected() const { return rSocketM.is_open(); }
+  bool isConnected() const { return socketM.is_open(); }
 
   void disconnect()
   {
     if (isConnected())
       boost::asio::post(rAsioContextM, [this]()
-                        { rSocketM.close(); });
+                        { socketM.close(); });
   }
 
   void send(const Message &msg)
@@ -77,7 +77,7 @@ private:
   void writeHeader()
   {
     boost::asio::async_write(
-        rSocketM,
+        socketM,
         boost::asio::buffer(&outgoingMessagesM.front().getHeader(),
                             sizeof(msg_header)),
         [this](std::error_code errorcode, std::size_t length)
@@ -101,7 +101,7 @@ private:
           else
           {
             std::cout << idM << ": Write Header failed." << std::endl;
-            rSocketM.close();
+            socketM.close();
           }
         });
   }
@@ -109,7 +109,7 @@ private:
   void writeBody()
   {
     boost::asio::async_write(
-        rSocketM,
+        socketM,
         boost::asio::buffer(outgoingMessagesM.front().getBody().data(),
                             outgoingMessagesM.front().getSize()),
         [this](std::error_code errorcode, std::size_t length)
@@ -133,7 +133,7 @@ private:
   {
     using namespace boost::placeholders;
     boost::asio::async_read(
-        rSocketM, boost::asio::buffer(&tempHeaderM, sizeof(msg_header)),
+        socketM, boost::asio::buffer(&tempHeaderM, sizeof(msg_header)),
         boost::bind(&Connection::handleHeader,
                     this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred));
   }
@@ -154,7 +154,7 @@ private:
     else
     {
       std::cout << idM << "Reading header failed." << std::endl;
-      rSocketM.close();
+      socketM.close();
     }
   }
 
@@ -162,7 +162,7 @@ private:
   {
     using namespace boost::placeholders;
     boost::asio::async_read(
-        rSocketM, boost::asio::buffer(&tempBodyM[0], tempHeaderM.size), boost::bind(&Connection::handleBody, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred));
+        socketM, boost::asio::buffer(&tempBodyM[0], tempHeaderM.size), boost::bind(&Connection::handleBody, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred));
   }
 
   void handleBody(const boost::system::error_code &error, std::size_t bytes_transferred)
@@ -176,7 +176,7 @@ private:
     else
     {
       std::cout << idM << " Reading body failed." << std::endl;
-      rSocketM.close();
+      socketM.close();
     }
   }
 
@@ -196,10 +196,10 @@ private:
 
 protected:
   boost::asio::io_context &rAsioContextM;
-  boost::asio::ip::tcp::socket &rSocketM;
+  boost::asio::ip::tcp::socket socketM;
 
-  MessageQueue<Message> outgoingMessagesM;
-  MessageQueue<Message> &rIncomingMessagesM;
+  MessageQueue outgoingMessagesM;
+  MessageQueue &rIncomingMessagesM;
 
   msg_header tempHeaderM;
   char tempBodyM[128] = {0};

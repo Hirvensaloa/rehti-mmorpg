@@ -1,35 +1,35 @@
 #pragma once
 
+#include "Message.hpp"
 #include <deque>
 
 // Thread safe queue for storing messages which prevents accessing same queue
 // simultaneously.
-template <typename T>
 class MessageQueue
 {
 public:
   MessageQueue() = default;
 
-  MessageQueue(const MessageQueue<T> &) = delete;
+  MessageQueue(const MessageQueue &) = delete;
 
   virtual ~MessageQueue() { clear(); }
 
   // Returns and maintains item at front of Queue
-  const T &front()
+  const Message &front()
   {
     std::scoped_lock lock(muxQueueM);
     return deqQueueM.front();
   }
 
   // Returns and maintains item at back of Queue
-  const T &back()
+  const Message &back()
   {
     std::scoped_lock lock(muxQueueM);
     return deqQueueM.back();
   }
 
   // Removes and returns item from front of Queue
-  T pop_front()
+  Message pop_front()
   {
     std::scoped_lock lock(muxQueueM);
     auto t = std::move(deqQueueM.front());
@@ -38,7 +38,7 @@ public:
   }
 
   // Removes and returns item from back of Queue
-  T pop_back()
+  Message pop_back()
   {
     std::scoped_lock lock(muxQueueM);
     auto t = std::move(deqQueueM.back());
@@ -47,7 +47,7 @@ public:
   }
 
   // Adds an item to back of Queue
-  void push_back(const T &item)
+  void push_back(const Message &item)
   {
     std::scoped_lock lock(muxQueueM);
     deqQueueM.emplace_back(std::move(item));
@@ -57,7 +57,7 @@ public:
   }
 
   // Adds an item to front of Queue
-  void push_front(const T &item)
+  void push_front(const Message &item)
   {
     std::scoped_lock lock(muxQueueM);
     deqQueueM.emplace_front(std::move(item));
@@ -98,7 +98,7 @@ public:
 
 protected:
   std::mutex muxQueueM;
-  std::deque<T> deqQueueM;
+  std::deque<Message> deqQueueM;
   std::condition_variable cvBlockingM;
   std::mutex muxBlockingM;
 };

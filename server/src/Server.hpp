@@ -15,7 +15,7 @@ private:
     boost::asio::io_context ioContextM;
     boost::asio::ip::tcp::acceptor acceptorM;
     std::vector<std::unique_ptr<Connection>> connectionsM;
-    MessageQueue<Message> messagesM;
+    MessageQueue messagesM;
     std::thread ioThreadM;
     std::thread acceptThreadM;
     boost::asio::executor_work_guard<boost::asio::io_context::executor_type> workGuardM;

@@ -15,7 +15,7 @@ public:
   };
 
   Connection(owner parent, boost::asio::io_context &context,
-             boost::asio::ip::tcp::socket socket, MessageQueue<Message> &inc)
+             boost::asio::ip::tcp::socket socket, MessageQueue &inc)
       : rAsioContextM(context), socketM(std::move(socket)), rIncomingMessagesM(inc)
   {
     ownertypeM = parent;
@@ -198,8 +198,8 @@ protected:
   boost::asio::io_context &rAsioContextM;
   boost::asio::ip::tcp::socket socketM;
 
-  MessageQueue<Message> outgoingMessagesM;
-  MessageQueue<Message> &rIncomingMessagesM;
+  MessageQueue outgoingMessagesM;
+  MessageQueue &rIncomingMessagesM;
 
   msg_header tempHeaderM;
   char tempBodyM[128] = {0};

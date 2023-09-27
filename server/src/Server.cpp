@@ -8,7 +8,7 @@ using namespace boost::asio;
 Server::Server()
     : ioContextM(io_context()),
       acceptorM(ip::tcp::acceptor(ioContextM, ip::tcp::endpoint(ip::tcp::v4(), PORT))),
-      messagesM(MessageQueue<Message>()),
+      messagesM(MessageQueue()),
       connectionsM(std::vector<std::unique_ptr<Connection>>()),
       workGuardM(boost::asio::make_work_guard(ioContextM))
 {

@@ -1,7 +1,11 @@
 #pragma once
 
-#include "Message.hpp"
 #include <deque>
+#include <mutex>
+#include <condition_variable>
+
+#include "Message.hpp"
+
 
 // Thread safe queue of incoming messages
 class MessageQueue

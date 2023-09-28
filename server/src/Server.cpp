@@ -1,13 +1,19 @@
-#include "Server.hpp"
+#include <iostream>
 #include <memory>
+
+#include <boost/asio/io_context.hpp>
+#include <boost/asio/co_spawn.hpp>
+#include <boost/asio/detached.hpp>
+#include <boost/asio/awaitable.hpp>
+#include <boost/asio/use_awaitable.hpp>
+
+#include "Server.hpp"
 
 uint16_t PORT = 9999;
 
-using namespace boost::asio;
-
 Server::Server()
-    : ioContextM(io_context()),
-      acceptorM(ip::tcp::acceptor(ioContextM, ip::tcp::endpoint(ip::tcp::v4(), PORT))),
+    : ioContextM(boost::asio::io_context()),
+      acceptorM(boost::asio::ip::tcp::acceptor(ioContextM, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), PORT))),
       messagesM(MessageQueue()),
       connectionsM(std::vector<std::unique_ptr<Connection>>()),
       workGuardM(boost::asio::make_work_guard(ioContextM))
@@ -23,7 +29,7 @@ Server::Server()
 void Server::acceptConnections()
 {
     while (true) {
-        ip::tcp::socket socket(ioContextM);
+        boost::asio::ip::tcp::socket socket(ioContextM);
         acceptorM.accept(socket);
         std::cout << "Accepted connection from " << socket.remote_endpoint().address().to_string()
                   << ":" << socket.remote_endpoint().port() << std::endl;
@@ -35,7 +41,7 @@ void Server::acceptConnections()
         if (connectSuccessful) {
             connectionsM.push_back(std::move(connection));
 
-            co_spawn(ioContextM, connectionsM.back()->listenForMessages(), detached);
+            boost::asio::co_spawn(ioContextM, connectionsM.back()->listenForMessages(), boost::asio::detached);
         } else {
             std::cout << "Failed to connect to client!" << std::endl;
         }

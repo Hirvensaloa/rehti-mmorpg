@@ -9,9 +9,9 @@ class Client
 public:
   Client(std::string ip, std::string port);
 
-  awaitable<bool> connect();
+  boost::asio::awaitable<bool> connect();
 
-  awaitable<void> sayHello();
+  boost::asio::awaitable<void> sayHello();
 
   void test();
 

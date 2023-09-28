@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <memory>
+#include <boost/asio/ip/tcp.hpp>
+#include <boost/asio/co_spawn.hpp>
+#include <boost/asio/detached.hpp>
 
 #include "Client.hpp"
 
@@ -13,13 +16,13 @@ Client::Client(std::string ip, std::string port)
       connectionM(std::make_unique<Connection>(
           Connection::owner::client, ioContextM, std::move(boost::asio::ip::tcp::socket(ioContextM)), messagesM)){};
 
-awaitable<bool> Client::connect()
+boost::asio::awaitable<bool> Client::connect()
 {
   try
   {
     std::cout << "Connecting to server..." << std::endl;
     co_await connectionM->connectToServer(endpointsM);
-    asio::co_spawn(ioContextM, connectionM->listenForMessages(), asio::detached);
+    boost::asio::co_spawn(ioContextM, connectionM->listenForMessages(), boost::asio::detached);
   }
   catch (const std::exception &e)
   {
@@ -29,7 +32,7 @@ awaitable<bool> Client::connect()
   co_return true;
 }
 
-awaitable<void> Client::sayHello()
+boost::asio::awaitable<void> Client::sayHello()
 {
   if (connectionM->isConnected())
   {
@@ -48,7 +51,7 @@ awaitable<void> Client::sayHello()
 
 void Client::test()
 {
-  boost::asio::co_spawn(ioContextM, [this]() -> awaitable<void> {
+  boost::asio::co_spawn(ioContextM, [this]() -> boost::asio::awaitable<void> {
     co_await connect();
     while (true)
     {

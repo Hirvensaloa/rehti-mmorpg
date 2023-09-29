@@ -1,6 +1,6 @@
 
-#cmake_minimum_required(VERSION 3.27.0)
-#project(testi)
+cmake_minimum_required(VERSION 3.27.4)
+project(testi)
 
 find_package(Boost 1.83.0 REQUIRED COMPONENTS system)
 
@@ -9,9 +9,17 @@ include_directories(./src)
 add_library(rehtiNetwork)
 target_include_directories(rehtiNetwork PUBLIC ${Boost_INCLUDE_DIRS})
 
+set(SOURCES
+      Connection.cpp
+      Connection.hpp
+      Message.hpp
+	MessageQueue.hpp
+	)
+
+list(TRANSFORM SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)
+
 target_sources(rehtiNetwork
-	PRIVATE src/networkBase.cpp
-		src/networkBase.hpp
+	PRIVATE ${SOURCES}
 	)
 
 target_link_libraries(rehtiNetwork Boost::system)

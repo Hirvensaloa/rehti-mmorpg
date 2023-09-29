@@ -14,14 +14,22 @@ find_package(glm REQUIRED)
 
 add_library(rehtiGraphics "")
 
-add_subdirectory(../rehtiLib/graphics ${CMAKE_CURRENT_LIST_DIR}/graphics)
-add_subdirectory(../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/network)
+add_subdirectory(../rehtiLib/graphics ${CMAKE_CURRENT_LIST_DIR}/build/graphics)
+add_subdirectory(../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/build/network)
 
-add_executable(${PROJECT_NAME} src/client.cpp)
+set(SOURCES
+      Main.cpp
+      Client.cpp
+      Client.hpp
+	)
+
+list(TRANSFORM SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)
+add_executable(Client ${SOURCES})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE rehtiGraphics)
 target_link_libraries(${PROJECT_NAME} PRIVATE rehtiNetwork)
 target_link_libraries(${PROJECT_NAME} PRIVATE GRAPHICS_LIBRARIES)
 
+target_include_directories(${PROJECT_NAME} PRIVATE ${Boost_INCLUDE_DIRS})
 target_include_directories(${PROJECT_NAME} PRIVATE ../rehtiLib/graphics/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ../rehtiLib/network/include)

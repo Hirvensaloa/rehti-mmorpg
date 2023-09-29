@@ -2,16 +2,16 @@
 
 if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     # Linux
-    EXECUTABLE_PATH="./client/build/Client"
+    EXECUTABLE_PATH="./server/build/src/server"
 elif [[ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" || "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]]; then
     # Windows (MINGW32_NT or MINGW64_NT)
-    EXECUTABLE_PATH="./client/build/Debug/Client"
+    EXECUTABLE_PATH="./server/build/Debug/src/server"
 else
     echo "Unsupported operating system"
     exit 1
 fi
 
-./scripts/build-client.sh
+./scripts/build-backend-conan.sh
 
 if [ -f "$EXECUTABLE_PATH" ]; then
     echo "Executing $EXECUTABLE_PATH"

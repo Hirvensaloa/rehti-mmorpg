@@ -2,13 +2,13 @@
 ### SERVER LIBRARY
 ########################################################################################################################
 
-find_package(Boost 1.74 COMPONENTS program_options REQUIRED)
+find_package(Boost 1.83 COMPONENTS system bind REQUIRED)
 find_package(Threads REQUIRED)
 
 set(TARGET server)
 
 add_executable(${TARGET}
-        main.cpp database/connect.cpp)
+        Main.cpp database/Connect.cpp Server.cpp Server.hpp)
 
 target_compile_features(${TARGET} PUBLIC
         cxx_std_20)
@@ -20,15 +20,11 @@ target_link_libraries(${TARGET} PRIVATE
         ${Boost_LIBRARIES}
         Threads::Threads)
 
+add_subdirectory(../../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/../build/network)
+target_link_libraries(${TARGET} PUBLIC rehtiNetwork)
+target_include_directories(${TARGET} PUBLIC ../../rehtiLib/network/include)
+
 # postgres client
 
-include_directories(/usr/local/include/) 
-
-# find pq library
-find_package(libpqxx REQUIRED)
-find_library(PQ_LIB pq REQUIRED)
-
-target_link_libraries(${TARGET} PRIVATE
-        pqxx
-        ${PQ_LIB}
-)
+find_package(libpqxx)
+target_link_libraries(${TARGET} PRIVATE libpqxx::pqxx)

@@ -1,10 +1,13 @@
 #pragma once
 
-#include "Message.hpp"
 #include <deque>
+#include <mutex>
+#include <condition_variable>
 
-// Thread safe queue for storing messages which prevents accessing same queue
-// simultaneously.
+#include "Message.hpp"
+
+
+// Thread safe queue of incoming messages
 class MessageQueue
 {
 public:
@@ -14,21 +17,18 @@ public:
 
   virtual ~MessageQueue() { clear(); }
 
-  // Returns and maintains item at front of Queue
   const Message &front()
   {
     std::scoped_lock lock(muxQueueM);
     return deqQueueM.front();
   }
 
-  // Returns and maintains item at back of Queue
   const Message &back()
   {
     std::scoped_lock lock(muxQueueM);
     return deqQueueM.back();
   }
 
-  // Removes and returns item from front of Queue
   Message pop_front()
   {
     std::scoped_lock lock(muxQueueM);
@@ -37,7 +37,6 @@ public:
     return t;
   }
 
-  // Removes and returns item from back of Queue
   Message pop_back()
   {
     std::scoped_lock lock(muxQueueM);
@@ -46,7 +45,6 @@ public:
     return t;
   }
 
-  // Adds an item to back of Queue
   void push_back(const Message &item)
   {
     std::scoped_lock lock(muxQueueM);
@@ -56,7 +54,6 @@ public:
     cvBlockingM.notify_one();
   }
 
-  // Adds an item to front of Queue
   void push_front(const Message &item)
   {
     std::scoped_lock lock(muxQueueM);
@@ -66,21 +63,18 @@ public:
     cvBlockingM.notify_one();
   }
 
-  // Returns true if Queue has no items
   bool empty()
   {
     std::scoped_lock lock(muxQueueM);
     return deqQueueM.empty();
   }
 
-  // Returns number of items in Queue
   size_t count()
   {
     std::scoped_lock lock(muxQueueM);
     return deqQueueM.size();
   }
 
-  // Clears Queue
   void clear()
   {
     std::scoped_lock lock(muxQueueM);

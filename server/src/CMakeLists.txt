@@ -8,7 +8,7 @@ find_package(Threads REQUIRED)
 set(TARGET server)
 
 add_executable(${TARGET}
-        Main.cpp database/connect.cpp Server.cpp Server.hpp)
+        Main.cpp database/Connect.cpp Server.cpp Server.hpp)
 
 target_compile_features(${TARGET} PUBLIC
         cxx_std_20)
@@ -20,9 +20,9 @@ target_link_libraries(${TARGET} PRIVATE
         ${Boost_LIBRARIES}
         Threads::Threads)
 
-add_subdirectory(../network ${CMAKE_CURRENT_LIST_DIR}/network)
+add_subdirectory(../../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/../build/network)
 target_link_libraries(${TARGET} PUBLIC rehtiNetwork)
-target_include_directories(${TARGET} PUBLIC ../network/include)
+target_include_directories(${TARGET} PUBLIC ../../rehtiLib/network/include)
 
 # postgres client
 

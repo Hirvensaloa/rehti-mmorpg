@@ -1,9 +1,12 @@
 #pragma once
 
-#include "Client.hpp"
-
 #include <iostream>
 #include <memory>
+#include <boost/asio/ip/tcp.hpp>
+#include <boost/asio/co_spawn.hpp>
+#include <boost/asio/detached.hpp>
+
+#include "Client.hpp"
 
 Client::Client(std::string ip, std::string port)
     : ioContextM(boost::asio::io_context()),
@@ -13,23 +16,23 @@ Client::Client(std::string ip, std::string port)
       connectionM(std::make_unique<Connection>(
           Connection::owner::client, ioContextM, std::move(boost::asio::ip::tcp::socket(ioContextM)), messagesM)){};
 
-bool Client::connect()
+boost::asio::awaitable<bool> Client::connect()
 {
   try
   {
-    connectionM->connectToServer(endpointsM);
-    thrContextM = std::thread([this]()
-                              { ioContextM.run(); });
+    std::cout << "Connecting to server..." << std::endl;
+    co_await connectionM->connectToServer(endpointsM);
+    boost::asio::co_spawn(ioContextM, connectionM->listenForMessages(), boost::asio::detached);
   }
   catch (const std::exception &e)
   {
     std::cerr << e.what() << '\n';
-    return false;
+    co_return false;
   }
-  return true;
+  co_return true;
 }
 
-void Client::sayHello()
+boost::asio::awaitable<void> Client::sayHello()
 {
   if (connectionM->isConnected())
   {
@@ -42,6 +45,20 @@ void Client::sayHello()
     header.id = 111;
     Message msg = Message(nullptr, header, s);
     std::cout << "sending: " << msg.getBody() << ", size " << header.size << std::endl;
-    connectionM->send(msg);
+    co_await connectionM->send(msg);
   }
+}
+
+void Client::test()
+{
+  boost::asio::co_spawn(ioContextM, [this]() -> boost::asio::awaitable<void> {
+    co_await connect();
+    while (true)
+    {
+      co_await sayHello();
+      std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    }
+  }, boost::asio::detached);
+
+  ioContextM.run();
 }

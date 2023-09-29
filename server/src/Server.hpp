@@ -1,5 +1,9 @@
 #pragma once
 
+#include <thread>
+#include <vector>
+#include <boost/asio/ip/tcp.hpp>
+
 #include <network.h>
 
 class Server
@@ -7,7 +11,7 @@ class Server
 public:
     Server();
 
-    void acceptConnection();
+    void acceptConnections();
 
     void processMessages();
 

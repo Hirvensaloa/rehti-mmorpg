@@ -1,5 +1,7 @@
 #pragma once
 
+#include <boost/asio/awaitable.hpp>
+
 #include <network.h>
 
 class Client
@@ -7,9 +9,11 @@ class Client
 public:
   Client(std::string ip, std::string port);
 
-  bool connect();
+  boost::asio::awaitable<bool> connect();
 
-  void sayHello();
+  boost::asio::awaitable<void> sayHello();
+
+  void test();
 
 private:
   boost::asio::io_context ioContextM;

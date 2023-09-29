@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "Connection.hpp"
 
 class Connection;

@@ -13,7 +13,14 @@ add_library(rehtiGraphics "")
 add_subdirectory(../rehtiLib/graphics ${CMAKE_CURRENT_LIST_DIR}/build/graphics)
 add_subdirectory(../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/build/network)
 
-add_executable(Client src/client.cpp)
+set(SOURCES
+      Main.cpp
+      Client.cpp
+      Client.hpp
+	)
+
+list(TRANSFORM SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)
+add_executable(Client ${SOURCES})
 
 target_link_libraries(Client rehtiGraphics)
 target_link_libraries(Client rehtiNetwork)

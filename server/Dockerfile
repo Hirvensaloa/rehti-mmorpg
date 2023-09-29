@@ -25,7 +25,7 @@ WORKDIR /app/server
 
 COPY server/conanfile.txt .
 
-RUN conan install . --output-folder=build --build=missing -s build_type=Debug 
+RUN conan install . --output-folder=build --build=missing -s build_type=Debug -s compiler.cppstd=20
 
 COPY server/CMakeLists.txt .
 COPY server/src/ ./src/

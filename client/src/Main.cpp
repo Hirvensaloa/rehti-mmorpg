@@ -19,8 +19,9 @@ int main(int argc, char *argv[])
       return 1;
     }
 
-    Client testiClient = Client(argv[1], "9999");
-    testiClient.test();
+    Client client = Client(argv[1], "9999");
+    client.test();
+    client.processMessages();
   }
   catch (std::exception &e)
   {

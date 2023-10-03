@@ -1,9 +1,10 @@
 #pragma once
 
+#include <boost/asio/ip/tcp.hpp>
 #include <thread>
 #include <vector>
-#include <boost/asio/ip/tcp.hpp>
 
+#include "GameWorld.hpp"
 #include <network.h>
 
 class Server
@@ -23,4 +24,5 @@ private:
     std::thread ioThreadM;
     std::thread acceptThreadM;
     boost::asio::executor_work_guard<boost::asio::io_context::executor_type> workGuardM;
+    GameWorld gameWorldM;
 };

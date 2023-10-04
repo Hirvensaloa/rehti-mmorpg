@@ -13,6 +13,7 @@ set(SOURCES
       Connection.hpp
       Message.hpp
 	MessageQueue.hpp
+      MessageIds.hpp
 	)
 
 list(TRANSFORM SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)

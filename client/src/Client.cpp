@@ -1,10 +1,10 @@
 #pragma once
 
-#include <iostream>
-#include <memory>
-#include <boost/asio/ip/tcp.hpp>
 #include <boost/asio/co_spawn.hpp>
 #include <boost/asio/detached.hpp>
+#include <boost/asio/ip/tcp.hpp>
+#include <iostream>
+#include <memory>
 
 #include "Client.hpp"
 
@@ -36,29 +36,39 @@ boost::asio::awaitable<void> Client::sayHello()
 {
   if (connectionM->isConnected())
   {
-    msg_header header;
-    std::stringstream ss;
-
-    ss << "Hello from big C!\0";
-    std::string s = ss.str();
-    header.size = sizeof(s) + s.size();
-    header.id = 111;
-    Message msg = Message(nullptr, header, s);
-    std::cout << "sending: " << msg.getBody() << ", size " << header.size << std::endl;
-    co_await connectionM->send(msg);
+    co_await connectionM->send(MessageIds::Test, "Hello from big C!\0");
   }
 }
 
 void Client::test()
 {
-  boost::asio::co_spawn(ioContextM, [this]() -> boost::asio::awaitable<void> {
+  boost::asio::co_spawn(
+      ioContextM, [this]() -> boost::asio::awaitable<void>
+      {
     co_await connect();
     while (true)
     {
       co_await sayHello();
       std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-    }
-  }, boost::asio::detached);
+    } },
+      boost::asio::detached);
 
-  ioContextM.run();
+  thrContextM = std::thread([this]()
+                            { ioContextM.run(); });
+}
+
+void Client::processMessages()
+{
+  while (true)
+  {
+    if (!messagesM.empty())
+    {
+      Message msg = messagesM.pop_front();
+      std::cout << msg.getBody() << std::endl;
+    }
+    else
+    {
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    }
+  }
 }

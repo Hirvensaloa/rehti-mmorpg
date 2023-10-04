@@ -1,7 +1,7 @@
 #pragma once
 
-#include <boost/asio/ip/tcp.hpp>
 #include <boost/asio/awaitable.hpp>
+#include <boost/asio/ip/tcp.hpp>
 
 #include "Message.hpp"
 #include "MessageQueue.hpp"
@@ -31,10 +31,10 @@ public:
   bool isConnected() const;
 
   void disconnect();
-  boost::asio::awaitable<void> send(const Message &msg);
+  boost::asio::awaitable<void> send(const unsigned int headerId, const std::string msgBody);
 
 private:
-  boost::asio::awaitable<void> writeMessage(const Message &msg);
+  boost::asio::awaitable<void> writeMessage(const Message msg);
 
   boost::asio::awaitable<void> readMessage();
 

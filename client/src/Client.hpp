@@ -15,6 +15,8 @@ public:
 
   void test();
 
+  void processMessages();
+
 private:
   boost::asio::io_context ioContextM;
   boost::asio::ip::tcp::resolver resolverM;

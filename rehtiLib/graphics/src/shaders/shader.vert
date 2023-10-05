@@ -1,7 +1,5 @@
 #ifdef CPP_INCLUDE_SHADERS
 std::string vertexShaderSource = R"(
-#endif
-
 #version 450
 
 layout(location = 0) out vec3 fragColor;
@@ -23,6 +21,5 @@ void main() {
     fragColor = colors[gl_VertexIndex];
 }
 
-#ifdef CPP_INCLUDE_SHADERS
 )";
 #endif

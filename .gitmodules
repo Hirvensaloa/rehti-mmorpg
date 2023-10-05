@@ -1,3 +1,6 @@
 [submodule "dependencies/libpqxx"]
 	path = dependencies/libpqxx
 	url = git@github.com:jtv/libpqxx.git
+[submodule "third_party/glslang"]
+	path = third_party/glslang
+	url = https://github.com/KhronosGroup/glslang

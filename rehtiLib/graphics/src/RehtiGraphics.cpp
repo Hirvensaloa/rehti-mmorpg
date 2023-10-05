@@ -1,9 +1,9 @@
-#include "base.hpp"
+#include "RehtiGraphics.hpp"
 #include "ShaderManager.hpp"
 
 #include "GLFW/glfw3.h"
 
-void RehtiGraphics::testRun() {
+void RehtiGraphics::demo() {
     initWindow();
     initVulkan();
     mainLoop();
@@ -632,7 +632,7 @@ void RehtiGraphics::createInstance() {
     info.applicationVersion = VK_MAKE_VERSION(1, 0, 0); // version 1.00?
     info.pEngineName = "No Engine"; //Why tho?
     info.engineVersion = VK_MAKE_VERSION(1, 0, 0);
-    info.apiVersion = VK_API_VERSION_1_0;
+    info.apiVersion = VK_API_VERSION_1_3;
 
     //Create info:
     VkInstanceCreateInfo instanceInfo{};

@@ -11,11 +11,11 @@ else
     exit 1
 fi
 
-./scripts/build-client.sh
+./scripts/build-client.sh 
 
 if [ -f "$EXECUTABLE_PATH" ]; then
     echo "Executing $EXECUTABLE_PATH"
-    "$EXECUTABLE_PATH"
+    "$EXECUTABLE_PATH" 127.0.0.1
 else
     echo "Executable not found at $EXECUTABLE_PATH"
     exit 1

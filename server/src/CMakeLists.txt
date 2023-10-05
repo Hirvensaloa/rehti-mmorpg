@@ -19,6 +19,10 @@ set(SOURCES
         Coordinates.hpp
         PlayerCharacter.hpp
         PlayerCharacter.cpp
+        Action.cpp
+        Action.hpp
+        MoveAction.cpp
+        MoveAction.hpp
 	)
 
 add_executable(${TARGET}

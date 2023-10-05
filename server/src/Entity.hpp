@@ -13,7 +13,7 @@ public:
 
     Coordinates getLocation();
 
-private:
+protected:
     unsigned int idM;
     Coordinates locationM;
 };

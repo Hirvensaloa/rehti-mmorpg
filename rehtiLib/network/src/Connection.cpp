@@ -137,5 +137,12 @@ boost::asio::awaitable<void> Connection::readMessage()
   std::cout << idM << ": Read message: " << tempBodyM << std::endl;
 
   // 3. Add message to incoming queue
-  rIncomingMessagesM.push_back(Message(nullptr, tempHeaderM, std::move(std::string(tempBodyM))));
+  if (ownertypeM == owner::server)
+  {
+    rIncomingMessagesM.push_back(Message(this->shared_from_this(), tempHeaderM, std::move(std::string(tempBodyM))));
+  }
+  else
+  {
+    rIncomingMessagesM.push_back(Message(nullptr, tempHeaderM, std::move(std::string(tempBodyM))));
+  }
 }

@@ -7,8 +7,22 @@ find_package(Threads REQUIRED)
 
 set(TARGET server)
 
+set(SOURCES
+        Main.cpp
+        database/Connect.cpp
+        Server.cpp
+	Server.hpp
+        Entity.hpp
+        Entity.cpp
+        GameWorld.cpp
+        GameWorld.hpp
+        Coordinates.hpp
+        PlayerCharacter.hpp
+        PlayerCharacter.cpp
+	)
+
 add_executable(${TARGET}
-        Main.cpp database/Connect.cpp Server.cpp Server.hpp)
+        ${SOURCES})
 
 target_compile_features(${TARGET} PUBLIC
         cxx_std_20)

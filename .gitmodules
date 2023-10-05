@@ -4,3 +4,4 @@
 [submodule "third_party/glslang"]
 	path = third_party/glslang
 	url = https://github.com/KhronosGroup/glslang
+	ignore = dirty

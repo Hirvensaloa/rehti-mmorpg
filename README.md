@@ -6,7 +6,7 @@
 
 - Make sure to fetch git submodules run `git submodule update --recursive --init`. This needs to be run everytime new submodules are added.
 - Make sure you have Conan installed from (https://docs.conan.io/2/installation.html)[here]. Run `conan profile detect --force` after installation.
-- Make sure you have Cmake version >= 3.26
+- Make sure you have Cmake version >= 3.27
 
 ### Running
 
@@ -58,8 +58,6 @@ It is possible to run the server without Docker by using `./scripts/run-backend-
 - `./scripts/run-backend.sh --watch` to automatically rebuild the server everytime changes occur. NOTE: Watch is experimental docker-compose feature. In our case, this might quickly increase your docker build cache, so make sure to sometimes run `docker system prune` or other clean up commands.
 
 ### Troubleshooting
-
-- If there are problems with the libpqxx make sure that the dependencies/libpqxx exists and that it has been checked out to tag `7.7.5`. As of now the `7.8^` doesn't work properly when installed on the Alpine image.
 
 - You can debug the db contents by running `psql -h 127.0.0.1 -p 6543 -U myuser -d mmorpg-database`
 
@@ -132,6 +130,11 @@ Yhteensä: 20h
 ### Viikko 4
 
 #### Aleksi
+
+- Projektin suunnittelu 10h
+- Nettikoodin toteutus coroutiineilla 15h
+
+Yhteensä: 25h
 
 #### Samu
 

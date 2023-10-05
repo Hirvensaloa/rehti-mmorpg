@@ -18,6 +18,8 @@ public:
 
     std::vector<PlayerCharacter> &getPlayers();
 
+    PlayerCharacter *getPlayer(unsigned int playerId);
+
 private:
     std::vector<PlayerCharacter> playersM;
 };

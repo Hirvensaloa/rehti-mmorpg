@@ -32,11 +32,14 @@ boost::asio::awaitable<bool> Client::connect()
   co_return true;
 }
 
-boost::asio::awaitable<void> Client::sayHello()
+boost::asio::awaitable<void> Client::randomWalk()
 {
   if (connectionM->isConnected())
   {
-    co_await connectionM->send(MessageIds::Test, "Hello from big C!\0");
+    int x = std::rand() % 10;
+    int y = std::rand() % 10;
+    std::string s = std::to_string(x) + "//" + std::to_string(y) + "\0";
+    co_await connectionM->send(MessageIds::Move, s);
   }
 }
 
@@ -48,8 +51,8 @@ void Client::test()
     co_await connect();
     while (true)
     {
-      co_await sayHello();
-      std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+      co_await randomWalk();
+      std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     } },
       boost::asio::detached);
 

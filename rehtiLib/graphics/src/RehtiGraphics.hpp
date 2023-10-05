@@ -186,58 +186,58 @@ private:
     VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
     // Private members:
-    GLFWwindow* window;
-    VkInstance instance;
-    VkDebugUtilsMessengerEXT debugMessenger;
-    VkSurfaceKHR surface;
+    GLFWwindow* pWindowM;
+    VkInstance instanceM;
+    VkDebugUtilsMessengerEXT debugMessengerM;
+    VkSurfaceKHR surfaceM;
 
     // Gpu
-    VkPhysicalDevice gpu;
+    VkPhysicalDevice gpuM;
 
     // Logicaldevice
-    VkDevice logDevice;
+    VkDevice logDeviceM;
 
     // Queues
-    VkQueue graphicsQueue;
-    VkQueue presentQueue;
+    VkQueue graphicsQueueM;
+    VkQueue presentQueueM;
 
     // Swapchain
-    VkSwapchainKHR swapChain;
-    std::vector<VkImage> swapChainImages;
-    VkFormat swapChainImageFormat;
-    VkExtent2D swapChainExtent;
-    std::vector<VkImageView> swapChainImageViews;
+    VkSwapchainKHR swapChainM;
+    std::vector<VkImage> swapChainImagesM;
+    VkFormat swapChainImageFormatM;
+    VkExtent2D swapChainExtentM;
+    std::vector<VkImageView> swapChainImageViewsM;
 
     // Framebuffer
-    std::vector<VkFramebuffer> swapChainFramebuffers;
+    std::vector<VkFramebuffer> swapChainFramebuffersM;
 
     // Pipeline
-    VkRenderPass renderPass;
-    VkPipelineLayout pipelineLayout;
-    VkPipeline pipeline;
+    VkRenderPass renderPassM;
+    VkPipelineLayout pipelineLayoutM;
+    VkPipeline pipelineM;
 
     // Commands
-    VkCommandPool commandPool;
-    std::vector<VkCommandBuffer> commandBuffers;
+    VkCommandPool commandPoolM;
+    std::vector<VkCommandBuffer> commandBuffersM;
 
     // Semaphores
-    std::vector<VkSemaphore> imagesReady;
-    std::vector<VkSemaphore> rendersFinished;
-    std::vector<VkFence>    frameFences; // bad wording?
-    std::vector<VkFence>    imageFences;
+    std::vector<VkSemaphore> imagesReadyM;
+    std::vector<VkSemaphore> rendersFinishedM;
+    std::vector<VkFence>    frameFencesM; // bad wording?
+    std::vector<VkFence>    imageFencesM;
 
     // Other variables
-    const uint32_t WIDTH = 800;
-    const uint32_t HEIGHT = 600;
+    uint32_t widthM = 800;
+    uint32_t heightM = 600;
 
-    const int concurrentFrames = 2;
-    size_t currentFrame = 0;
+    const int kConcurrentFramesM = 2;
+    size_t currentFrameM = 0;
 
-    const std::vector<const char*> validationlayers = {
+    const std::vector<const char*> kValidationlayersM = {
         "VK_LAYER_KHRONOS_validation"
     };
 
-    const std::vector<const char*> deviceExtensions = {
+    const std::vector<const char*> kDeviceExtensionsM = {
         VK_KHR_SWAPCHAIN_EXTENSION_NAME
     };
 

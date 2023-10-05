@@ -18,7 +18,7 @@ void RehtiGraphics::initWindow() {
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-    this->window = glfwCreateWindow(this->WIDTH, this->HEIGHT, "Vulkan", nullptr, nullptr);
+    pWindowM = glfwCreateWindow(widthM, heightM, "REHTI MMORPG", nullptr, nullptr);
 
 }
 
@@ -38,7 +38,8 @@ void RehtiGraphics::initVulkan() {
     createSynchronization();
 }
 
-void RehtiGraphics::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) {
+void RehtiGraphics::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) 
+{
     createInfo = {};
     createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
     createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
@@ -52,7 +53,8 @@ void RehtiGraphics::setupDebugMessenger()
     VkDebugUtilsMessengerCreateInfoEXT createInfo;
     populateDebugMessengerCreateInfo(createInfo);
 
-    if (CreateDebugUtilsMessengerEXT(instance, &createInfo, nullptr, &debugMessenger) != VK_SUCCESS) {
+    if (CreateDebugUtilsMessengerEXT(instanceM, &createInfo, nullptr, &debugMessengerM) != VK_SUCCESS) 
+    {
         throw std::runtime_error("failed to set up debug messenger!");
     }
 
@@ -60,10 +62,10 @@ void RehtiGraphics::setupDebugMessenger()
 
 void RehtiGraphics::pickPhysicalDevice()
 {
-    this->gpu = VK_NULL_HANDLE;
+    gpuM = VK_NULL_HANDLE;
 
     uint32_t devcount = 0;
-    vkEnumeratePhysicalDevices(this->instance, &devcount, nullptr); //To get how many devices there are
+    vkEnumeratePhysicalDevices(instanceM, &devcount, nullptr); //To get how many devices there are
 
     if (devcount == 0) 
     {
@@ -71,20 +73,20 @@ void RehtiGraphics::pickPhysicalDevice()
     }
 
     std::vector<VkPhysicalDevice> devices(devcount);
-    vkEnumeratePhysicalDevices(this->instance, &devcount, devices.data()); //We have to do this twice, as it is how this function works. If the pointer is not null, it will try to fill out devcount devices.
+    vkEnumeratePhysicalDevices(instanceM, &devcount, devices.data()); //We have to do this twice, as it is how this function works. If the pointer is not null, it will try to fill out devcount devices.
     
     // Currently picks the first suitable device
     for (const auto& device : devices) 
     {
         if (isDeviceSuitable(device)) 
         {
-            this->gpu = device;
+            gpuM = device;
             break;
         }
 
     }
 
-    if (this->gpu == VK_NULL_HANDLE) 
+    if (gpuM == VK_NULL_HANDLE) 
     {
         throw std::runtime_error("No gpu matches the requirements!");
     }
@@ -93,7 +95,7 @@ void RehtiGraphics::pickPhysicalDevice()
 
 void RehtiGraphics::createLogicalDevice()
 {
-    QueueFamilyIndices indice = findQueueFamilies(this->gpu);
+    QueueFamilyIndices indice = findQueueFamilies(gpuM);
 
     //
     std::vector<VkDeviceQueueCreateInfo> queueCreateInfos{};
@@ -121,29 +123,32 @@ void RehtiGraphics::createLogicalDevice()
 
     devCreateInfo.pEnabledFeatures = &deviceFeatures;
 
-    devCreateInfo.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size());
-    devCreateInfo.ppEnabledExtensionNames = deviceExtensions.data();
+    devCreateInfo.enabledExtensionCount = static_cast<uint32_t>(kDeviceExtensionsM.size());
+    devCreateInfo.ppEnabledExtensionNames = kDeviceExtensionsM.data();
 
-    if (enableValidationLayers) {
-        devCreateInfo.enabledLayerCount = static_cast<uint32_t>(validationlayers.size());
-        devCreateInfo.ppEnabledLayerNames = validationlayers.data();
+    if (enableValidationLayers) 
+    {
+        devCreateInfo.enabledLayerCount = static_cast<uint32_t>(kValidationlayersM.size());
+        devCreateInfo.ppEnabledLayerNames = kValidationlayersM.data();
     }
-    else {
+    else 
+    {
         devCreateInfo.enabledLayerCount = 0;
     }
 
-    if (vkCreateDevice(this->gpu, &devCreateInfo, nullptr, &this->logDevice) != VK_SUCCESS) {
+    if (vkCreateDevice(gpuM, &devCreateInfo, nullptr, &logDeviceM) != VK_SUCCESS) 
+    {
         throw std::runtime_error("Logical device creation failed");
     }
 
-    vkGetDeviceQueue(this->logDevice, indice.graphicsFamily.value(), 0, &this->graphicsQueue);
-    vkGetDeviceQueue(this->logDevice, indice.presentFamily.value(), 0, &this->presentQueue);
+    vkGetDeviceQueue(logDeviceM, indice.graphicsFamily.value(), 0, &graphicsQueueM);
+    vkGetDeviceQueue(logDeviceM, indice.presentFamily.value(), 0, &presentQueueM);
 
 }
 
 void RehtiGraphics::createSwapChain()
 {
-    SwapChainSupportDetails details = querySwapChainSupport(this->gpu);
+    SwapChainSupportDetails details = querySwapChainSupport(gpuM);
 
     VkSurfaceFormatKHR format = chooseSwapSurfaceFormat(details.formats);
     VkPresentModeKHR mode = chooseSwapPresentMode(details.presentModes);
@@ -157,7 +162,7 @@ void RehtiGraphics::createSwapChain()
     //Info time!!
     VkSwapchainCreateInfoKHR swapInfo{};
     swapInfo.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
-    swapInfo.surface = this->surface;
+    swapInfo.surface = this->surfaceM;
     swapInfo.minImageCount = imageCount;
     swapInfo.imageFormat = format.format;
     swapInfo.imageColorSpace = format.colorSpace;
@@ -166,15 +171,17 @@ void RehtiGraphics::createSwapChain()
     swapInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 
     //Onto conditional members
-    QueueFamilyIndices indices = findQueueFamilies(this->gpu);
+    QueueFamilyIndices indices = findQueueFamilies(gpuM);
     uint32_t queueFamilyIndices[] = { indices.graphicsFamily.value(), indices.presentFamily.value() };
 
-    if (indices.graphicsFamily != indices.presentFamily) {
+    if (indices.graphicsFamily != indices.presentFamily) 
+    {
         swapInfo.imageSharingMode = VK_SHARING_MODE_CONCURRENT;
         swapInfo.queueFamilyIndexCount = 2;
         swapInfo.pQueueFamilyIndices = queueFamilyIndices;
     }
-    else {
+    else 
+    {
         swapInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
         swapInfo.queueFamilyIndexCount = 0; //optionals
         swapInfo.pQueueFamilyIndices = nullptr; //optionals
@@ -189,30 +196,31 @@ void RehtiGraphics::createSwapChain()
 
     swapInfo.oldSwapchain = VK_NULL_HANDLE;
 
-    if (vkCreateSwapchainKHR(this->logDevice, &swapInfo, nullptr, &this->swapChain) != VK_SUCCESS) {
+    if (vkCreateSwapchainKHR(logDeviceM, &swapInfo, nullptr, &swapChainM) != VK_SUCCESS) 
+    {
         throw std::runtime_error("Failed to create a swapchain");
     }
 
     //Get the images??
-    vkGetSwapchainImagesKHR(this->logDevice, this->swapChain, &imageCount, nullptr);
-    this->swapChainImages.resize(imageCount);
-    vkGetSwapchainImagesKHR(this->logDevice, this->swapChain, &imageCount, swapChainImages.data());
+    vkGetSwapchainImagesKHR(logDeviceM, swapChainM, &imageCount, nullptr);
+    swapChainImagesM.resize(imageCount);
+    vkGetSwapchainImagesKHR(logDeviceM, swapChainM, &imageCount, swapChainImagesM.data());
 
-    this->swapChainImageFormat = format.format;
-    this->swapChainExtent = extent;
+    swapChainImageFormatM = format.format;
+    swapChainExtentM = extent;
 
 }
 
 void RehtiGraphics::createImageViews()
 {
-    swapChainImageViews.resize(swapChainImages.size());
+    swapChainImageViewsM.resize(swapChainImagesM.size());
 
-    for (size_t i = 0; i < swapChainImages.size(); i++) {
+    for (size_t i = 0; i < swapChainImagesM.size(); i++) {
         VkImageViewCreateInfo imageInfo{};
         imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
-        imageInfo.image = swapChainImages[i];
+        imageInfo.image = swapChainImagesM[i];
         imageInfo.viewType = VK_IMAGE_VIEW_TYPE_2D; //how image should be interpreted, for example you might use images as 2d textures.
-        imageInfo.format = swapChainImageFormat; //how image should be interpreted
+        imageInfo.format = swapChainImageFormatM; //how image should be interpreted
 
         imageInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
         imageInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
@@ -225,7 +233,7 @@ void RehtiGraphics::createImageViews()
         imageInfo.subresourceRange.baseArrayLayer = 0;
         imageInfo.subresourceRange.layerCount = 1;
 
-        if (vkCreateImageView(this->logDevice, &imageInfo, nullptr, &this->swapChainImageViews[i]) != VK_SUCCESS)
+        if (vkCreateImageView(logDeviceM, &imageInfo, nullptr, &this->swapChainImageViewsM[i]) != VK_SUCCESS)
             throw std::runtime_error("Failed to create an image view");
 
     }
@@ -236,7 +244,7 @@ void RehtiGraphics::createImageViews()
 void RehtiGraphics::createRenderPass()
 {
     VkAttachmentDescription colorattachment{};
-    colorattachment.format = swapChainImageFormat;
+    colorattachment.format = swapChainImageFormatM;
     colorattachment.samples = VK_SAMPLE_COUNT_1_BIT;
     colorattachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
     colorattachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
@@ -272,7 +280,7 @@ void RehtiGraphics::createRenderPass()
     renderpassInfo.dependencyCount = 1;
     renderpassInfo.pDependencies = &depend;
 
-    if (vkCreateRenderPass(logDevice, &renderpassInfo, nullptr, &renderPass) != VK_SUCCESS)
+    if (vkCreateRenderPass(logDeviceM, &renderpassInfo, nullptr, &renderPassM) != VK_SUCCESS)
         throw std::runtime_error("failed to create a renderpass");
 
 
@@ -282,8 +290,8 @@ void RehtiGraphics::createRenderPass()
 void RehtiGraphics::createGraphicsPipeline()
 {
 
-    VkPipelineShaderStageCreateInfo vertInfo = ShaderManager::createVertexShaderInfo(this->logDevice);
-    VkPipelineShaderStageCreateInfo fragInfo = ShaderManager::createFragmentShaderInfo(this->logDevice);
+    VkPipelineShaderStageCreateInfo vertInfo = ShaderManager::createVertexShaderInfo(logDeviceM);
+    VkPipelineShaderStageCreateInfo fragInfo = ShaderManager::createFragmentShaderInfo(logDeviceM);
 
     VkPipelineShaderStageCreateInfo stages[2] = { vertInfo, fragInfo };
 
@@ -303,14 +311,14 @@ void RehtiGraphics::createGraphicsPipeline()
     VkViewport viewPort{};
     viewPort.x = 0.f;
     viewPort.y = 0.f;
-    viewPort.width = swapChainExtent.width;
-    viewPort.height = swapChainExtent.height;
+    viewPort.width = swapChainExtentM.width;
+    viewPort.height = swapChainExtentM.height;
     viewPort.minDepth = 0.f;
     viewPort.maxDepth = 1.f;
 
     VkRect2D scissor{};
     scissor.offset = { 0,0 };
-    scissor.extent = swapChainExtent;
+    scissor.extent = swapChainExtentM;
 
 
     VkPipelineViewportStateCreateInfo viewportInfo{};
@@ -343,32 +351,31 @@ void RehtiGraphics::createGraphicsPipeline()
     multInfo.alphaToCoverageEnable = VK_FALSE;
     multInfo.alphaToOneEnable = VK_FALSE;
 
-    //Vk depth and stencil testing info here
+    // Vk depth and stencil testing info here
 
-
-    //Colorblending
+    // Colorblending
     VkPipelineColorBlendAttachmentState colorBlendState{};
     colorBlendState.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
     colorBlendState.blendEnable = VK_FALSE;
-    //rest is optional. Maybe adding later
+    // Rest is optional. Maybe adding later
 
 
     VkPipelineColorBlendStateCreateInfo colorBlendInfo{};
     colorBlendInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
     colorBlendInfo.logicOpEnable = VK_FALSE;
-    colorBlendInfo.logicOp = VK_LOGIC_OP_COPY; //optional
+    colorBlendInfo.logicOp = VK_LOGIC_OP_COPY; // optional
     colorBlendInfo.attachmentCount = 1;
     colorBlendInfo.pAttachments = &colorBlendState;
-    //constants optional
+    // Constants optional
 
 
-    //Pipelineinfo for pipelinelayout stuff, uniforms
+    // Pipelineinfo for pipelinelayout stuff, uniforms
     VkPipelineLayoutCreateInfo pipelinelayoutInfo{};
     pipelinelayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
     pipelinelayoutInfo.setLayoutCount = 0; //optional, as is the rest for now
 
-    //create pipelinelayout
-    if (vkCreatePipelineLayout(logDevice, &pipelinelayoutInfo, nullptr, &pipelineLayout))
+    // Create pipelinelayout
+    if (vkCreatePipelineLayout(logDeviceM, &pipelinelayoutInfo, nullptr, &pipelineLayoutM))
         throw std::runtime_error("Pipeline layout creation failed");
 
     VkGraphicsPipelineCreateInfo pipelineInfo{};
@@ -381,56 +388,51 @@ void RehtiGraphics::createGraphicsPipeline()
     pipelineInfo.pRasterizationState = &rasterInfo;
     pipelineInfo.pMultisampleState = &multInfo;
     pipelineInfo.pColorBlendState = &colorBlendInfo;
-    pipelineInfo.layout = pipelineLayout;
-    pipelineInfo.renderPass = renderPass;
+    pipelineInfo.layout = pipelineLayoutM;
+    pipelineInfo.renderPass = renderPassM;
     pipelineInfo.subpass = 0;
     pipelineInfo.basePipelineHandle = VK_NULL_HANDLE;
     pipelineInfo.basePipelineIndex = -1;
 
-    //create the actual pipeline
-    if (vkCreateGraphicsPipelines(logDevice, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline) != VK_SUCCESS) //more parameters than usual
+    // Create the actual pipeline
+    if (vkCreateGraphicsPipelines(logDeviceM, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipelineM) != VK_SUCCESS)
         throw std::runtime_error("Pipeline layout creation failed");
 
-
-    // cleanup
-    ShaderManager::destroyShaderModules(this->logDevice);
+    // Cleanup
+    ShaderManager::destroyShaderModules(logDeviceM);
 }
 
 void RehtiGraphics::createFramebuffers()
 {
-    swapChainFramebuffers.resize(swapChainImageViews.size());
+    swapChainFramebuffersM.resize(swapChainImageViewsM.size());
 
-    for (size_t i = 0u; i < swapChainImageViews.size(); i++) {
-        VkImageView attachments[] = { swapChainImageViews[i] };
+    for (size_t i = 0u; i < swapChainImageViewsM.size(); i++) 
+    {
+        VkImageView attachments[] = { swapChainImageViewsM[i] };
 
         VkFramebufferCreateInfo frameInfo{};
         frameInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
-        frameInfo.renderPass = renderPass;
+        frameInfo.renderPass = renderPassM;
         frameInfo.attachmentCount = 1;
         frameInfo.pAttachments = attachments;
-        frameInfo.width = swapChainExtent.width;
-        frameInfo.height = swapChainExtent.height;
+        frameInfo.width = swapChainExtentM.width;
+        frameInfo.height = swapChainExtentM.height;
         frameInfo.layers = 1;
-        if (vkCreateFramebuffer(logDevice, &frameInfo, nullptr, &swapChainFramebuffers[i]) != VK_SUCCESS)
+        if (vkCreateFramebuffer(logDeviceM, &frameInfo, nullptr, &swapChainFramebuffersM[i]) != VK_SUCCESS)
             throw std::runtime_error("failed to create a framebuffer");
-
     }
-
-
-
 }
 
 void RehtiGraphics::createCommandPool()
 {
-
-    auto queuefamilyIndices = findQueueFamilies(gpu);
+    auto queuefamilyIndices = findQueueFamilies(gpuM);
 
     VkCommandPoolCreateInfo poolInfo{};
     poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
     poolInfo.queueFamilyIndex = queuefamilyIndices.graphicsFamily.value();
     poolInfo.flags = 0;
 
-    if (vkCreateCommandPool(logDevice, &poolInfo, nullptr, &commandPool) != VK_SUCCESS)
+    if (vkCreateCommandPool(logDeviceM, &poolInfo, nullptr, &commandPoolM) != VK_SUCCESS)
         throw std::runtime_error("Failed to create a command pool");
 
 
@@ -438,66 +440,57 @@ void RehtiGraphics::createCommandPool()
 
 void RehtiGraphics::createCommandBuffers()
 {
-    commandBuffers.resize(swapChainFramebuffers.size());
+    commandBuffersM.resize(swapChainFramebuffersM.size());
 
     VkCommandBufferAllocateInfo allocInfo{}; //wow, alloc and not create?
     allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-    allocInfo.commandPool = commandPool;
+    allocInfo.commandPool = commandPoolM;
     allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-    allocInfo.commandBufferCount = static_cast<uint32_t>(commandBuffers.size());
+    allocInfo.commandBufferCount = static_cast<uint32_t>(commandBuffersM.size());
 
-    if (vkAllocateCommandBuffers(logDevice, &allocInfo, commandBuffers.data()) != VK_SUCCESS)
+    if (vkAllocateCommandBuffers(logDeviceM, &allocInfo, commandBuffersM.data()) != VK_SUCCESS)
         throw std::runtime_error("Failed to allocate command buffers");
 
-    for (size_t i = 0u; i < commandBuffers.size(); i++) {
+    for (size_t i = 0u; i < commandBuffersM.size(); i++) {
         VkCommandBufferBeginInfo cmdInfo{};
         cmdInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
         cmdInfo.flags = 0; //optional
 
 
         //Let's begin recording
-        if (vkBeginCommandBuffer(commandBuffers[i], &cmdInfo) != VK_SUCCESS)
+        if (vkBeginCommandBuffer(commandBuffersM[i], &cmdInfo) != VK_SUCCESS)
             throw std::runtime_error("failed to begin command buffer recording");
-
 
         VkRenderPassBeginInfo renderInfo{};
         renderInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-        renderInfo.renderPass = renderPass;
-        renderInfo.framebuffer = swapChainFramebuffers[i];
+        renderInfo.renderPass = renderPassM;
+        renderInfo.framebuffer = swapChainFramebuffersM[i];
         renderInfo.renderArea.offset = { 0,0 };
-        renderInfo.renderArea.extent = swapChainExtent;
+        renderInfo.renderArea.extent = swapChainExtentM;
 
         VkClearValue clearCol = { {{0.f, 0.f, 0.f, 1.f}} };
         renderInfo.clearValueCount = 1;
         renderInfo.pClearValues = &clearCol;
 
+        vkCmdBeginRenderPass(commandBuffersM[i], &renderInfo, VK_SUBPASS_CONTENTS_INLINE); // void
+        vkCmdBindPipeline(commandBuffersM[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineM);
+        vkCmdDraw(commandBuffersM[i], 3, 1, 0, 0);
 
-        vkCmdBeginRenderPass(commandBuffers[i], &renderInfo, VK_SUBPASS_CONTENTS_INLINE); //void
+        vkCmdEndRenderPass(commandBuffersM[i]);
 
-        vkCmdBindPipeline(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
-
-        vkCmdDraw(commandBuffers[i], 3, 1, 0, 0);
-
-        vkCmdEndRenderPass(commandBuffers[i]);
-
-        if (vkEndCommandBuffer(commandBuffers[i]) != VK_SUCCESS)
+        if (vkEndCommandBuffer(commandBuffersM[i]) != VK_SUCCESS)
             throw std::runtime_error("Failed to record command buffer");
 
-        //recording has ended
-
-
+        // Recording has ended
     }
-
-
-
 }
 
 void RehtiGraphics::createSynchronization()
 {
-    imagesReady.resize(concurrentFrames);
-    rendersFinished.resize(concurrentFrames);
-    frameFences.resize(concurrentFrames);
-    imageFences.resize(swapChainImages.size(), VK_NULL_HANDLE);
+    imagesReadyM.resize(kConcurrentFramesM);
+    rendersFinishedM.resize(kConcurrentFramesM);
+    frameFencesM.resize(kConcurrentFramesM);
+    imageFencesM.resize(swapChainImagesM.size(), VK_NULL_HANDLE);
 
     VkSemaphoreCreateInfo semaInfo{};
     semaInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
@@ -506,10 +499,10 @@ void RehtiGraphics::createSynchronization()
     fenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
     fenceInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT;
 
-    for (size_t i = 0; i < concurrentFrames; i++) {
-        if (vkCreateSemaphore(logDevice, &semaInfo, nullptr, &imagesReady[i]) != VK_SUCCESS
-            || vkCreateSemaphore(logDevice, &semaInfo, nullptr, &rendersFinished[i]) != VK_SUCCESS
-            || vkCreateFence(logDevice, &fenceInfo, nullptr, &frameFences[i]) != VK_SUCCESS)
+    for (size_t i = 0; i < kConcurrentFramesM; i++) {
+        if (vkCreateSemaphore(logDeviceM, &semaInfo, nullptr, &imagesReadyM[i]) != VK_SUCCESS
+            || vkCreateSemaphore(logDeviceM, &semaInfo, nullptr, &rendersFinishedM[i]) != VK_SUCCESS
+            || vkCreateFence(logDeviceM, &fenceInfo, nullptr, &frameFencesM[i]) != VK_SUCCESS)
             throw std::runtime_error("Creating synchros failed");
     }
 }
@@ -518,25 +511,25 @@ void RehtiGraphics::createSynchronization()
 void RehtiGraphics::drawFrame()
 {
     //wait
-    vkWaitForFences(logDevice, 1, &frameFences[currentFrame], VK_TRUE, UINT64_MAX);
+    vkWaitForFences(logDeviceM, 1, &frameFencesM[currentFrameM], VK_TRUE, UINT64_MAX);
 
     uint32_t imageIndex;
-    vkAcquireNextImageKHR(logDevice, swapChain, UINT64_MAX, imagesReady[currentFrame], VK_NULL_HANDLE, &imageIndex);
+    vkAcquireNextImageKHR(logDeviceM, swapChainM, UINT64_MAX, imagesReadyM[currentFrameM], VK_NULL_HANDLE, &imageIndex);
 
-    if (imageFences[imageIndex] != VK_NULL_HANDLE) {
-        vkWaitForFences(logDevice, 1, &imageFences[imageIndex], VK_TRUE, UINT64_MAX);
+    if (imageFencesM[imageIndex] != VK_NULL_HANDLE) {
+        vkWaitForFences(logDeviceM, 1, &imageFencesM[imageIndex], VK_TRUE, UINT64_MAX);
     }
 
-    imageFences[imageIndex] = frameFences[currentFrame]; //
+    imageFencesM[imageIndex] = frameFencesM[currentFrameM]; //
 
     VkSubmitInfo submitInfo{};
     submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 
 
-    VkSemaphore waitSemaphores[] = { imagesReady[currentFrame] };
-    VkSemaphore signalSemaphores[] = { rendersFinished[currentFrame] };
+    VkSemaphore waitSemaphores[] = { imagesReadyM[currentFrameM] };
+    VkSemaphore signalSemaphores[] = { rendersFinishedM[currentFrameM] };
 
-    VkSwapchainKHR swapChains[] = { swapChain };
+    VkSwapchainKHR swapChains[] = { swapChainM };
 
     VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
 
@@ -544,14 +537,14 @@ void RehtiGraphics::drawFrame()
     submitInfo.pWaitSemaphores = waitSemaphores;
     submitInfo.pWaitDstStageMask = waitStages;
     submitInfo.commandBufferCount = 1;
-    submitInfo.pCommandBuffers = &commandBuffers[imageIndex];
+    submitInfo.pCommandBuffers = &commandBuffersM[imageIndex];
     submitInfo.signalSemaphoreCount = 1;
     submitInfo.pSignalSemaphores = signalSemaphores;
 
 
-    vkResetFences(logDevice, 1, &frameFences[currentFrame]); //resets fence signal for use
+    vkResetFences(logDeviceM, 1, &frameFencesM[currentFrameM]); //resets fence signal for use
 
-    if (vkQueueSubmit(graphicsQueue, 1, &submitInfo, frameFences[currentFrame]) != VK_SUCCESS)
+    if (vkQueueSubmit(graphicsQueueM, 1, &submitInfo, frameFencesM[currentFrameM]) != VK_SUCCESS)
         throw std::runtime_error("Failed to submit draw command buffer");
 
     VkPresentInfoKHR presInfo{};
@@ -563,56 +556,56 @@ void RehtiGraphics::drawFrame()
     presInfo.pSwapchains = swapChains;
     presInfo.pImageIndices = &imageIndex;
 
-    vkQueuePresentKHR(presentQueue, &presInfo);
+    vkQueuePresentKHR(presentQueueM, &presInfo);
 
-    currentFrame = (currentFrame + 1) % concurrentFrames;
+    currentFrameM = (currentFrameM + 1) % kConcurrentFramesM;
 }
 
 void RehtiGraphics::mainLoop() {
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(pWindowM)) {
         glfwPollEvents();
         drawFrame();
     }
 
-    vkDeviceWaitIdle(logDevice);
+    vkDeviceWaitIdle(logDeviceM);
 }
 
 void RehtiGraphics::cleanup() {
 
-    for (size_t i = 0; i < concurrentFrames; i++) {
-        vkDestroySemaphore(logDevice, rendersFinished[i], nullptr);
-        vkDestroySemaphore(logDevice, imagesReady[i], nullptr);
-        vkDestroyFence(logDevice, frameFences[i], nullptr);
+    for (size_t i = 0; i < kConcurrentFramesM; i++) {
+        vkDestroySemaphore(logDeviceM, rendersFinishedM[i], nullptr);
+        vkDestroySemaphore(logDeviceM, imagesReadyM[i], nullptr);
+        vkDestroyFence(logDeviceM, frameFencesM[i], nullptr);
     }
 
-    vkDestroyCommandPool(logDevice, commandPool, nullptr);
+    vkDestroyCommandPool(logDeviceM, commandPoolM, nullptr);
 
-    for (auto framebuffer : swapChainFramebuffers)
-        vkDestroyFramebuffer(logDevice, framebuffer, nullptr);
+    for (auto framebuffer : swapChainFramebuffersM)
+        vkDestroyFramebuffer(logDeviceM, framebuffer, nullptr);
 
 
-    vkDestroyPipeline(logDevice, pipeline, nullptr);
-    vkDestroyPipelineLayout(logDevice, pipelineLayout, nullptr);
-    vkDestroyRenderPass(logDevice, renderPass, nullptr);
+    vkDestroyPipeline(logDeviceM, pipelineM, nullptr);
+    vkDestroyPipelineLayout(logDeviceM, pipelineLayoutM, nullptr);
+    vkDestroyRenderPass(logDeviceM, renderPassM, nullptr);
 
-    for (auto imageView : this->swapChainImageViews)
-        vkDestroyImageView(this->logDevice, imageView, nullptr);
+    for (auto imageView : swapChainImageViewsM)
+        vkDestroyImageView(logDeviceM, imageView, nullptr);
 
-    vkDestroySwapchainKHR(this->logDevice, this->swapChain, nullptr); //destroy swapchain
+    vkDestroySwapchainKHR(logDeviceM, swapChainM, nullptr); // destroy swapchain
 
-    vkDestroyDevice(this->logDevice, nullptr); //queues are destroyed when logicaldevice is destroyed
+    vkDestroyDevice(logDeviceM, nullptr); //queues are destroyed when logicaldevice is destroyed
 
-    if (this->enableValidationLayers) {
-        DestroyDebugUtilsMessengerEXT(this->instance, debugMessenger, nullptr);
-    }
-    //Destroy the surface
-    vkDestroySurfaceKHR(this->instance, this->surface, nullptr);
+    if (enableValidationLayers)
+        DestroyDebugUtilsMessengerEXT(instanceM, debugMessengerM, nullptr);
 
-    //Take out the instance
-    vkDestroyInstance(this->instance, nullptr);
+    // Destroy the surface
+    vkDestroySurfaceKHR(instanceM, surfaceM, nullptr);
 
-    //Then window
-    glfwDestroyWindow(window);
+    // Take out the instance
+    vkDestroyInstance(instanceM, nullptr);
+
+    // Then window
+    glfwDestroyWindow(pWindowM);
 
     glfwTerminate();
 }
@@ -632,7 +625,7 @@ void RehtiGraphics::createInstance() {
     info.applicationVersion = VK_MAKE_VERSION(1, 0, 0); // version 1.00?
     info.pEngineName = "No Engine"; //Why tho?
     info.engineVersion = VK_MAKE_VERSION(1, 0, 0);
-    info.apiVersion = VK_API_VERSION_1_3;
+    info.apiVersion = VK_API_VERSION_1_3; // Vulkan 1.3
 
     //Create info:
     VkInstanceCreateInfo instanceInfo{};
@@ -645,20 +638,22 @@ void RehtiGraphics::createInstance() {
     instanceInfo.ppEnabledExtensionNames = extensions.data();
 
     VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo{};
-    if (enableValidationLayers) {
-        instanceInfo.enabledLayerCount = static_cast<uint32_t>(validationlayers.size()); //Names are null for now
-        instanceInfo.ppEnabledLayerNames = validationlayers.data();
+    if (enableValidationLayers) 
+    {
+        instanceInfo.enabledLayerCount = static_cast<uint32_t>(kValidationlayersM.size()); //Names are null for now
+        instanceInfo.ppEnabledLayerNames = kValidationlayersM.data();
 
         populateDebugMessengerCreateInfo(debugCreateInfo);
         instanceInfo.pNext = (VkDebugUtilsMessengerCreateInfoEXT*)&debugCreateInfo;
     }
-    else {
+    else 
+    {
         instanceInfo.enabledLayerCount = 0;
-
         instanceInfo.pNext = nullptr;
     }
 
-    if (vkCreateInstance(&instanceInfo, nullptr, &this->instance) != VK_SUCCESS) { //Second argument is custom allocator callback which is null for now
+    if (vkCreateInstance(&instanceInfo, nullptr, &instanceM) != VK_SUCCESS) 
+    { 
         throw std::runtime_error("Failed to create an instance.");
     }
 
@@ -667,7 +662,8 @@ void RehtiGraphics::createInstance() {
 
 void RehtiGraphics::createSurface()
 {
-    if (glfwCreateWindowSurface(this->instance, window, nullptr, &this->surface) != VK_SUCCESS) {
+    if (glfwCreateWindowSurface(instanceM, pWindowM, nullptr, &surfaceM) != VK_SUCCESS) 
+    {
         throw std::runtime_error("Failed to create window surface");
     }
 }
@@ -680,9 +676,10 @@ bool RehtiGraphics::checkDeviceExtensionSupport(VkPhysicalDevice device)
     std::vector<VkExtensionProperties> properties(extCount);
     vkEnumerateDeviceExtensionProperties(device, nullptr, &extCount, properties.data());
 
-    std::set<std::string> requiredExtensions(deviceExtensions.begin(), deviceExtensions.end());
+    std::set<std::string> requiredExtensions(kDeviceExtensionsM.begin(), kDeviceExtensionsM.end());
 
-    for (const auto& property : properties) {
+    for (const auto& property : properties) 
+    {
         requiredExtensions.erase(property.extensionName); //tick off the required extensions
     }
 
@@ -698,18 +695,22 @@ bool RehtiGraphics::checkValidationLayerSupport()
     std::vector<VkLayerProperties>availableLayers(layerCount);
     vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
 
-    for (const char* layerName : this->validationlayers) {
+    for (const char* layerName : kValidationlayersM) 
+    {
         bool layerFound = false;
 
-        for (const auto& layerProperties : availableLayers) {
-            if (strcmp(layerName, layerProperties.layerName) == 0) {
+        for (const auto& layerProperties : availableLayers) 
+        {
+            if (strcmp(layerName, layerProperties.layerName) == 0) 
+            {
                 layerFound = true;
                 break;
             }
 
         }
 
-        if (!layerFound) {
+        if (!layerFound) 
+        {
             return false;
         }
 
@@ -761,9 +762,10 @@ QueueFamilyIndices RehtiGraphics::findQueueFamilies(VkPhysicalDevice device)
     std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
     vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
 
-    for (auto i = 0u; i < queueFamilies.size(); i++) {
+    for (auto i = 0u; i < queueFamilies.size(); i++) 
+    {
         VkBool32 presentSupport = false;
-        vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
+        vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surfaceM, &presentSupport);
         if (presentSupport) 
         {
             indexcase.presentFamily = i;
@@ -777,33 +779,33 @@ QueueFamilyIndices RehtiGraphics::findQueueFamilies(VkPhysicalDevice device)
 
     }
 
-
     return indexcase;
 }
 
 SwapChainSupportDetails RehtiGraphics::querySwapChainSupport(VkPhysicalDevice device)
 {
     SwapChainSupportDetails details;
-    vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface, &details.capabilities); //A bit unorthodox for vulkan but I guess it will do
+    vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surfaceM, &details.capabilities); //A bit unorthodox for vulkan but I guess it will do
 
     //now to the formats
     uint32_t formatCount;
-    vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, nullptr);
+    vkGetPhysicalDeviceSurfaceFormatsKHR(device, surfaceM, &formatCount, nullptr);
 
-    if (formatCount != 0) {
+    if (formatCount != 0) 
+    {
         details.formats.resize(formatCount);    // Usually we just created the vector, but now that we have a struct we just resize it
-        vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, details.formats.data());
+        vkGetPhysicalDeviceSurfaceFormatsKHR(device, surfaceM, &formatCount, details.formats.data());
     }
 
     //And the same for presentModes
     uint32_t presentModeCount;
-    vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, nullptr);
+    vkGetPhysicalDeviceSurfacePresentModesKHR(device, surfaceM, &presentModeCount, nullptr);
 
-    if (presentModeCount != 0) {
+    if (presentModeCount != 0) 
+    {
         details.presentModes.resize(presentModeCount);    //usually we just created the vector, but now that we have a struct we just resize it
-        vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, details.presentModes.data());
+        vkGetPhysicalDeviceSurfacePresentModesKHR(device, surfaceM, &presentModeCount, details.presentModes.data());
     }
-
 
     return details;
 }
@@ -816,7 +818,8 @@ std::vector<const char*> RehtiGraphics::getRequiredExtensions()
 
     std::vector<const char*> extensions(glfwExtensions, glfwExtensions + extCount);
 
-    if (this->enableValidationLayers) {
+    if (this->enableValidationLayers) 
+    {
         extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
     }
 
@@ -825,7 +828,8 @@ std::vector<const char*> RehtiGraphics::getRequiredExtensions()
 
 VkSurfaceFormatKHR RehtiGraphics::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> availableFormats)
 {
-    for (const auto& format : availableFormats) {
+    for (const auto& format : availableFormats) 
+    {
         if (format.format == VK_FORMAT_B8G8R8A8_SRGB && format.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
             return format;
     }
@@ -835,7 +839,8 @@ VkSurfaceFormatKHR RehtiGraphics::chooseSwapSurfaceFormat(const std::vector<VkSu
 
 VkPresentModeKHR RehtiGraphics::chooseSwapPresentMode(const std::vector<VkPresentModeKHR> availableModes)
 {
-    for (const auto& presentmode : availableModes) {
+    for (const auto& presentmode : availableModes) 
+    {
         if (presentmode == VK_PRESENT_MODE_MAILBOX_KHR)
             return presentmode;
     }
@@ -853,7 +858,7 @@ VkExtent2D RehtiGraphics::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capab
     else 
     { // ohno special value
         int width, height;
-        glfwGetFramebufferSize(window, &width, &height);
+        glfwGetFramebufferSize(pWindowM, &width, &height);
 
         VkExtent2D actual = {
         static_cast<uint32_t>(width),
@@ -866,8 +871,6 @@ VkExtent2D RehtiGraphics::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capab
     }
 }
 
-
-
 VKAPI_ATTR VkBool32 VKAPI_CALL RehtiGraphics::debugCallback(
     VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
     VkDebugUtilsMessageTypeFlagsEXT messageType,
@@ -875,8 +878,6 @@ VKAPI_ATTR VkBool32 VKAPI_CALL RehtiGraphics::debugCallback(
     void* pUserData)
 {
     std::cerr << "Validation layer: " << pCallbackData->pMessage << std::endl;
-
-
     return VK_FALSE;
 }
 

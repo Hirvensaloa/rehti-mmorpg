@@ -1,40 +1,51 @@
-#include(FetchContent)
-set(DEPENDENCY_DIR "../../dependencies")
+set(DEPENDENCY_DIR "${CMAKE_CURRENT_LIST_DIR}/../../third_party")
+# update and download glslang tools and requirements
+execute_process(COMMAND bash -c "cd ${DEPENDENCY_DIR}/glslang/ && python update_glslang_sources.py || python3 update_glslang_sources.py")
 
-# Include directories required for declared library Components (Such as glfw3 and glslang)
+set(ENABLE_CTEST OFF CACHE BOOL "" FORCE) # possibly enables SPIRV
 
-target_include_directories(rehtiGraphics PRIVATE ${glfw3_INCLUDE_DIRS})
-target_include_directories(rehtiGraphics PRIVATE ${glslang_INCLUDE_DIRS})
-target_include_directories(rehtiGraphics PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/shaders/)
+add_subdirectory(${DEPENDENCY_DIR}/glslang ${DEPENDENCY_DIR}/glslang)
 
+find_package(glfw3 3.3.8 REQUIRED)
+find_package(Vulkan REQUIRED)
+find_package(vulkan-memory-allocator 3.0.1 REQUIRED)
+find_package(stb REQUIRED)
+find_package(glm REQUIRED)
+
+set(GLSLANG_LIBS
+    	glslang
+    	HLSL
+    	OSDependent
+    	OGLCompiler
+    	SPIRV
+	glslang-default-resource-limits
+	)
 
 set(GRAPHICS_SOURCES
-	base.cpp
-	base.hpp
+	RehtiGraphics.cpp
+	RehtiGraphics.hpp
 	ShaderManager.cpp
 	ShaderManager.hpp
 	shaders/shader.vert
 	shaders/shader.frag
 	)
 
-set(GRAPHICS_LIBRARIES
+list(TRANSFORM GRAPHICS_SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)
+
+target_sources(rehtiGraphics PRIVATE ${GRAPHICS_SOURCES})
+
+target_link_libraries(rehtiGraphics
 	Vulkan::Vulkan
 	Vulkan::Headers
 	Vulkan::Registry
 	glfw
-	spirv-cross::spirv-cross
- 	glslang::glslang
+	${GLSLANG_LIBS}
  	vulkan-memory-allocator::vulkan-memory-allocator
 	stb::stb
  	glm::glm
 	)
 
-list(TRANSFORM GRAPHICS_SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)
+target_include_directories(rehtiGraphics PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/shaders/)
 
-target_sources(rehtiGraphics PRIVATE ${GRAPHICS_SOURCES})
-
-target_link_libraries(rehtiGraphics PUBLIC
-	GRAPHICS_LIBRARIES
-	)
-
-target_include_directories(rehtiGraphics INTERFACE ${CMAKE_CURRENT_LIST_DIR}/include)
+target_include_directories(rehtiGraphics INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>"
+                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")

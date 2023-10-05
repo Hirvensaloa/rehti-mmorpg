@@ -11,6 +11,7 @@ add_subdirectory(../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/build/network)
 set(SOURCES
       Main.cpp
       Client.hpp
+      Client.cpp
 	)
 
 list(TRANSFORM SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)

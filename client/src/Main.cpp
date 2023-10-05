@@ -8,7 +8,7 @@
 
 int main(int argc, char *argv[])
 {
-    RehtiGraphics graphLib;
+    RehtiGraphics graphLib = RehtiGraphics();
     graphLib.demo();
   std::cout << "Winner winner chicken dinner" << std::endl;
   try

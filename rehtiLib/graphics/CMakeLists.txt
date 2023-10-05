@@ -1,6 +1,4 @@
 set(DEPENDENCY_DIR "${CMAKE_CURRENT_LIST_DIR}/../../third_party")
-# update and download glslang tools and requirements
-execute_process(COMMAND bash -c "cd ${DEPENDENCY_DIR}/glslang/ && python update_glslang_sources.py || python3 update_glslang_sources.py")
 
 set(ENABLE_CTEST OFF CACHE BOOL "" FORCE) # possibly enables SPIRV
 

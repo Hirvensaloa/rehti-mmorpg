@@ -11,7 +11,7 @@ public:
 
   boost::asio::awaitable<bool> connect();
 
-  boost::asio::awaitable<void> sayHello();
+  boost::asio::awaitable<void> randomWalk();
 
   void test();
 

@@ -32,11 +32,6 @@
 *.tlog
 *.recipe
 
-# Vendored libraries should be included
-!dependencies/vulkan/lib/*.lib
-!dependencies/vulkan/lib/*.so
-!dependencies/vulkan/lib/*.a
-
 # Executables
 *.exe
 *.out

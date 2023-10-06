@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-Action::Action(std::chrono::system_clock::time_point startTime, PlayerCharacter *pPlayer) : startTimeM(startTime), pPlayerM(pPlayer) {}
+Action::Action(std::chrono::system_clock::time_point startTime, Entity *pEntity) : startTimeM(startTime), pEntityM(pEntity) {}
 
 std::chrono::system_clock::time_point Action::getStartTime()
 {

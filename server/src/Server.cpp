@@ -52,7 +52,6 @@ void Server::acceptConnections()
             gameWorldM.addPlayer("keissaaja" + std::to_string(connectionsM.back()->getID()), connectionsM.back()->getID(), Coordinates());
 
             boost::asio::co_spawn(ioContextM, connectionsM.back()->listenForMessages(), boost::asio::detached);
-            boost::asio::co_spawn(ioContextM, connectionsM.back()->send(MessageIds::Test, "Hello gamer, your name is " + gameWorldM.getPlayers().back().getName() + "!\0"), boost::asio::detached);
         }
         else
         {
@@ -68,21 +67,49 @@ void Server::processMessages()
         if (!messagesM.empty())
         {
             Message msg = messagesM.pop_front();
-            std::cout << msg.getBody() << std::endl;
-            if (msg.getHeader().id == MessageIds::Move)
-            {
-                auto id = msg.getConn()->getID();
-                auto gamer = gameWorldM.getPlayer(id);
-                int x, y;
-                sscanf(msg.getBody().c_str(), "%d//%d", &x, &y);
-                Coordinates target = Coordinates(x, y);
-                gamer->setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), target, gamer));
-            }
+            handleMessage(msg);
         }
         else
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
         }
+    }
+}
+
+void Server::handleMessage(const Message &msg)
+{
+    try
+    {
+        const auto body = msg.getBody();
+        const auto msgId = msg.getHeader().id;
+        const auto connId = msg.getConn()->getID();
+
+        switch (msgId)
+        {
+        case MessageId::Move:
+        {
+            std::cout << connId << " | Received move message | " << body << std::endl;
+            const MoveMessage moveMsg = MessageApi::parseMove(body);
+            const auto target = Coordinates(moveMsg.x, moveMsg.y);
+            auto gamer = gameWorldM.getPlayer(connId);
+            gamer->setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), target, gamer));
+            break;
+        }
+        case MessageId::Attack:
+        {
+            std::cout << "Attack message received. TODO: implement" << std::endl;
+            break;
+        }
+        default:
+            // Unknown header id, ignore
+            std::cout << "Unknown header id: " << msgId << std::endl;
+            break;
+        }
+    }
+    catch (const std::exception &e)
+    {
+        // Parsing failed, ignore error and continue
+        std::cout << "Error parsing message: " << e.what() << std::endl;
     }
 }
 

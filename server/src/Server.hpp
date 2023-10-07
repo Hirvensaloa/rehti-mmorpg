@@ -16,6 +16,8 @@ public:
 
     void processMessages();
 
+    void handleMessage(const Message &msg);
+
 private:
     void ticker();
 

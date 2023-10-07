@@ -36,10 +36,11 @@ boost::asio::awaitable<void> Client::randomWalk()
 {
   if (connectionM->isConnected())
   {
-    int x = std::rand() % 10;
-    int y = std::rand() % 10;
-    std::string s = std::to_string(x) + "//" + std::to_string(y) + "\0";
-    co_await connectionM->send(MessageIds::Move, s);
+    MoveMessage msg;
+    msg.x = std::rand() % 10;
+    msg.y = std::rand() % 10;
+    msg.z = std::rand() % 10;
+    co_await connectionM->send(MessageApi::createMove(msg));
   }
 }
 

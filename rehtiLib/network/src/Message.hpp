@@ -8,12 +8,14 @@ class Connection;
 
 // Represents a message sent between client and server.
 
-struct msg_header {
+struct msg_header
+{
   unsigned int id{};
-  uint32_t size = 0;
+  uint32_t size = 0; // Size of the message body
 };
 
-class Message {
+class Message
+{
 public:
   Message(std::shared_ptr<Connection> connection, msg_header header,
           const std::string &body)

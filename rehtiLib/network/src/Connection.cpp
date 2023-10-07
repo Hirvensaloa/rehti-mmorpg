@@ -83,17 +83,17 @@ void Connection::disconnect()
   socketM.close();
 }
 
-boost::asio::awaitable<void> Connection::send(const unsigned int headerId, const std::string msgBody)
+boost::asio::awaitable<void> Connection::send(const MessageStruct &msg)
 {
   msg_header header;
-  header.id = headerId;
-  header.size = sizeof(msgBody) + msgBody.size();
-  co_await writeMessage(Message(nullptr, header, msgBody));
+  header.id = msg.id;
+  header.size = sizeof(msg.body) + msg.body.size();
+  co_await writeMessage(Message(nullptr, header, msg.body));
 }
 
 boost::asio::awaitable<void> Connection::writeMessage(const Message msg)
 {
-  std::cout << idM << ": Writing message..." << msg.getBody() << msg.getSize() << std::endl;
+  std::cout << idM << ": Writing message..." << msg.getBody() << " size: " << msg.getSize() << std::endl;
   boost::system::error_code ec;
   // 1. Write header
   co_await boost::asio::async_write(
@@ -133,8 +133,6 @@ boost::asio::awaitable<void> Connection::readMessage()
   {
     co_await boost::asio::async_read(socketM, boost::asio::buffer(&tempBodyM[0], tempHeaderM.size), boost::asio::use_awaitable);
   }
-
-  std::cout << idM << ": Read message: " << tempBodyM << std::endl;
 
   // 3. Add message to incoming queue
   if (ownertypeM == owner::server)

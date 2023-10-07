@@ -26,6 +26,8 @@ COPY server/conanfile.txt .
 
 RUN conan install . --output-folder=build --build=missing -s build_type=Release -s compiler.cppstd=20
 
+COPY third_party/rapidjson/include/ ../third_party/rapidjson/include/
+COPY rehtiLib/network/ ../rehtiLib/network
 COPY server/CMakeLists.txt .
 COPY server/src/ ./src/
 

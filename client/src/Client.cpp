@@ -14,22 +14,43 @@ Client::Client(std::string ip, std::string port)
       endpointsM(resolverM.resolve(ip, port)),
       messagesM(MessageQueue()),
       connectionM(std::make_unique<Connection>(
-          Connection::owner::client, ioContextM, std::move(boost::asio::ip::tcp::socket(ioContextM)), messagesM)){};
+          Connection::owner::client, ioContextM, std::move(boost::asio::ip::tcp::socket(ioContextM)), messagesM))
+{
+  connectionThreadM = std::thread([this]()
+                                  { boost::asio::co_spawn(ioContextM, connect(), boost::asio::detached);
+                                    ioContextM.run(); });
+};
+
+void Client::start()
+{
+  std::cout << "Client started" << std::endl;
+  std::thread([this]()
+              { test();
+                ioContextM.run(); })
+      .detach();
+  processMessages();
+}
 
 boost::asio::awaitable<bool> Client::connect()
 {
   try
   {
     std::cout << "Connecting to server..." << std::endl;
-    co_await connectionM->connectToServer(endpointsM);
-    boost::asio::co_spawn(ioContextM, connectionM->listenForMessages(), boost::asio::detached);
+    const bool ret = co_await connectionM->connectToServer(endpointsM);
+    std::cout << ret << std::endl;
+
+    if (ret)
+    {
+      boost::asio::co_spawn(ioContextM, connectionM->listenForMessages(), boost::asio::detached);
+    }
+
+    co_return ret;
   }
   catch (const std::exception &e)
   {
     std::cerr << e.what() << '\n';
     co_return false;
   }
-  co_return true;
 }
 
 boost::asio::awaitable<void> Client::randomWalk()
@@ -49,16 +70,12 @@ void Client::test()
   boost::asio::co_spawn(
       ioContextM, [this]() -> boost::asio::awaitable<void>
       {
-    co_await connect();
     while (true)
     {
       co_await randomWalk();
       std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     } },
       boost::asio::detached);
-
-  thrContextM = std::thread([this]()
-                            { ioContextM.run(); });
 }
 
 void Client::processMessages()

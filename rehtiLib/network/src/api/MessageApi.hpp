@@ -90,7 +90,7 @@ public:
       entityObject.AddMember("x", entity.x, allocator);
       entityObject.AddMember("y", entity.y, allocator);
       entityObject.AddMember("z", entity.z, allocator);
-      entityObject.AddMember("currentActionId", entity.currentActionId, allocator);
+      entityObject.AddMember("currentActionType", entity.currentActionType, allocator);
       entityArray.PushBack(entityObject, allocator);
     }
     document.AddMember("entities", entityArray, allocator);
@@ -115,7 +115,7 @@ public:
       gameStateEntity.x = entity["x"].GetInt();
       gameStateEntity.y = entity["y"].GetInt();
       gameStateEntity.z = entity["z"].GetInt();
-      gameStateEntity.currentActionId = entity["currentActionId"].GetInt();
+      gameStateEntity.currentActionType = entity["currentActionType"].GetInt();
 
       gameState.entities.push_back(gameStateEntity);
     }
@@ -160,7 +160,6 @@ private:
     document.Accept(writer);
 
     const std::string str = buffer.GetString();
-
     return str;
   }
 };

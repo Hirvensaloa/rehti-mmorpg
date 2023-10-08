@@ -13,6 +13,8 @@ public:
 
   boost::asio::awaitable<void> randomWalk();
 
+  void start();
+
   void test();
 
   void processMessages();
@@ -25,5 +27,5 @@ private:
   MessageQueue messagesM;
   std::unique_ptr<Connection> connectionM;
 
-  std::thread thrContextM;
+  std::thread connectionThreadM;
 };

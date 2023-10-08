@@ -23,18 +23,18 @@ struct GameStateEntity
     int x;
     int y;
     int z;
-    int currentActionId = -1; // -1 means no action
+    int currentActionType = -1; // -1 means no action
 };
 
 struct GameStateMessage
 {
-    int id = MessageId::GameState;
+    const int id = MessageId::GameState;
     std::vector<GameStateEntity> entities;
 };
 
 struct MoveMessage
 {
-    int id = MessageId::Move;
+    const int id = MessageId::Move;
     int x;
     int y;
     int z;
@@ -42,6 +42,6 @@ struct MoveMessage
 
 struct AttackMessage
 {
-    int id = MessageId::Attack;
+    const int id = MessageId::Attack;
     int targetId;
 };

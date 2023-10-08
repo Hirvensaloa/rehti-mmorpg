@@ -26,13 +26,12 @@ public:
 
   boost::asio::awaitable<void> listenForMessages();
   boost::asio::awaitable<bool> connectToServer(const boost::asio::ip::tcp::resolver::results_type &endpoints);
-
   bool connectToClient(uint32_t userid = 0);
 
   bool isConnected() const;
 
   void disconnect();
-  boost::asio::awaitable<void> send(const MessageStruct &msg);
+  boost::asio::awaitable<void> send(const MessageStruct msg);
 
 private:
   boost::asio::awaitable<void> writeMessage(const Message msg);

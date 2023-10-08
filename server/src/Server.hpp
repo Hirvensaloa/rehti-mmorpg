@@ -23,6 +23,8 @@ private:
 
     void tick();
 
+    void sendGameState();
+
     boost::asio::io_context ioContextM;
 
     boost::asio::ip::tcp::acceptor acceptorM;

@@ -83,11 +83,11 @@ void Connection::disconnect()
   socketM.close();
 }
 
-boost::asio::awaitable<void> Connection::send(const MessageStruct &msg)
+boost::asio::awaitable<void> Connection::send(const MessageStruct msg)
 {
   msg_header header;
   header.id = msg.id;
-  header.size = sizeof(msg.body) + msg.body.size();
+  header.size = msg.body.size();
   co_await writeMessage(Message(nullptr, header, msg.body));
 }
 
@@ -123,6 +123,7 @@ boost::asio::awaitable<void> Connection::writeMessage(const Message msg)
 
 boost::asio::awaitable<void> Connection::readMessage()
 {
+  std::cout << idM << ": Reading message..." << std::endl;
   // 1. Wait for header to arrive and then read it
   msg_header tempHeaderM;
   co_await boost::asio::async_read(socketM, boost::asio::buffer(&tempHeaderM, sizeof(msg_header)), boost::asio::use_awaitable);

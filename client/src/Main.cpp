@@ -10,7 +10,6 @@ int main(int argc, char *argv[])
 {
   testFunc(); // should be available in test.hpp. That in turn includes glfw
               // library
-  std::cout << "Winner winner chicken dinner" << std::endl;
   try
   {
     if (argc != 2)
@@ -20,8 +19,7 @@ int main(int argc, char *argv[])
     }
 
     Client client = Client(argv[1], "9999");
-    client.test();
-    client.processMessages();
+    client.start();
   }
   catch (std::exception &e)
   {

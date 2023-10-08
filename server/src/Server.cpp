@@ -10,7 +10,7 @@
 #include "Server.hpp"
 
 uint16_t PORT = 9999;
-int TICK_RATE = 32;
+int TICK_RATE = 1;
 int TICK_TIME = 1000 / TICK_RATE;
 static uint32_t id = 0;
 
@@ -24,6 +24,7 @@ Server::Server()
 {
     ioThreadM = std::thread([this]()
                             { ioContextM.run(); });
+
     acceptThreadM = std::thread([this]()
                                 { acceptConnections(); });
 
@@ -90,7 +91,7 @@ void Server::handleMessage(const Message &msg)
         {
             std::cout << connId << " | Received move message | " << body << std::endl;
             const MoveMessage moveMsg = MessageApi::parseMove(body);
-            const auto target = Coordinates(moveMsg.x, moveMsg.y);
+            const Coordinates target = Coordinates(moveMsg.x, moveMsg.y);
             auto gamer = gameWorldM.getPlayer(connId);
             gamer->setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), target, gamer));
             break;
@@ -127,5 +128,31 @@ void Server::tick()
     for (PlayerCharacter p : gameWorldM.getPlayers())
     {
         p.update();
+    }
+    std::thread(&Server::sendGameState, this).detach();
+}
+
+void Server::sendGameState()
+{
+    GameStateMessage msg;
+    std::vector<GameStateEntity> entityVector;
+    for (auto &player : gameWorldM.getPlayers())
+    {
+        GameStateEntity entity;
+        const Coordinates location = player.getLocation();
+        entity.entityId = player.getId();
+        entity.x = location.x;
+        entity.y = location.y;
+        entity.z = location.z;
+        entityVector.push_back(entity);
+    }
+    msg.entities = entityVector;
+
+    for (auto &conn : connectionsM)
+    {
+        if (conn->isConnected())
+        {
+            boost::asio::co_spawn(ioContextM, conn->send(MessageApi::createGameState(msg)), boost::asio::detached);
+        }
     }
 }

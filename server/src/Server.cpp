@@ -65,14 +65,13 @@ void Server::processMessages()
 {
     while (true)
     {
-        if (!messagesM.empty())
+        // Wait for messages to arrive
+        messagesM.wait();
+
+        while (!messagesM.empty())
         {
             Message msg = messagesM.pop_front();
             handleMessage(msg);
-        }
-        else
-        {
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
         }
     }
 }

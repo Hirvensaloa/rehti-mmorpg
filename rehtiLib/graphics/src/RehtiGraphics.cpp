@@ -614,9 +614,11 @@ void RehtiGraphics::cleanup() {
 
 void RehtiGraphics::createInstance() {
 
-    if (enableValidationLayers && !checkValidationLayerSupport()) {
+    if (enableValidationLayers && !checkValidationLayerSupport()) 
+    {
         throw std::runtime_error("validation layers requested, but not available!");
     }
+
     //Create info
     VkApplicationInfo info{};
     //And fill in the form, as always
@@ -656,8 +658,6 @@ void RehtiGraphics::createInstance() {
     { 
         throw std::runtime_error("Failed to create an instance.");
     }
-
-
 }
 
 void RehtiGraphics::createSurface()
@@ -680,7 +680,7 @@ bool RehtiGraphics::checkDeviceExtensionSupport(VkPhysicalDevice device)
 
     for (const auto& property : properties) 
     {
-        requiredExtensions.erase(property.extensionName); //tick off the required extensions
+        requiredExtensions.erase(property.extensionName); // tick off the required extensions
     }
 
 
@@ -738,7 +738,7 @@ bool RehtiGraphics::isDeviceSuitable(VkPhysicalDevice device)
         swapChainOk = !supportDetails.formats.empty() && !supportDetails.presentModes.empty();
     }
 
-    return props.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU && indice.isComplete() && requiredExtensionSupport; // Suitable, if it is an external gpu and has a graphics queueFamily
+    return indice.isComplete() && requiredExtensionSupport; // Suitable, if it is has a graphics queueFamily and swapchain support
 }
 
 

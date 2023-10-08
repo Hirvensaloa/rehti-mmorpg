@@ -1,4 +1,3 @@
-
 #include <vulkan/vulkan.h>
 
 #include <optional>

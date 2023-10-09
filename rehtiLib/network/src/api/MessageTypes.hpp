@@ -37,7 +37,6 @@ struct MoveMessage
     const int id = MessageId::Move;
     int x;
     int y;
-    int z;
 };
 
 struct AttackMessage

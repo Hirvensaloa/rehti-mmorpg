@@ -126,11 +126,6 @@ void Server::ticker()
 
 void Server::tick()
 {
-    if (connectionsM.empty())
-    {
-        return;
-    }
-
     gameWorldM.updateGameWorld();
     std::thread(&Server::sendGameState, this).detach();
 }

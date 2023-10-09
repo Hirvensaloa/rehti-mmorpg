@@ -16,6 +16,8 @@
 
 #include "Connection.hpp"
 
+const uint32_t MAX_BUFFER_SIZE = 2048;
+
 Connection::Connection(owner parent, boost::asio::io_context &context,
                        boost::asio::ip::tcp::socket socket, MessageQueue &inc)
     : rAsioContextM(context), socketM(std::move(socket)), rIncomingMessagesM(inc)
@@ -83,17 +85,14 @@ void Connection::disconnect()
   socketM.close();
 }
 
-boost::asio::awaitable<void> Connection::send(const unsigned int headerId, const std::string msgBody)
+boost::asio::awaitable<void> Connection::send(const MessageStruct msg)
 {
-  msg_header header;
-  header.id = headerId;
-  header.size = sizeof(msgBody) + msgBody.size();
-  co_await writeMessage(Message(nullptr, header, msgBody));
+  co_await writeMessage(Message(msg));
 }
 
 boost::asio::awaitable<void> Connection::writeMessage(const Message msg)
 {
-  std::cout << idM << ": Writing message..." << msg.getBody() << msg.getSize() << std::endl;
+  std::cout << idM << ": Writing message..." << msg.getBody() << " size: " << msg.getSize() << std::endl;
   boost::system::error_code ec;
   // 1. Write header
   co_await boost::asio::async_write(
@@ -123,18 +122,17 @@ boost::asio::awaitable<void> Connection::writeMessage(const Message msg)
 
 boost::asio::awaitable<void> Connection::readMessage()
 {
+  std::cout << idM << ": Reading message..." << std::endl;
   // 1. Wait for header to arrive and then read it
   msg_header tempHeaderM;
   co_await boost::asio::async_read(socketM, boost::asio::buffer(&tempHeaderM, sizeof(msg_header)), boost::asio::use_awaitable);
 
   // 2. If there is a body, read the body
-  char tempBodyM[128] = {0};
+  char tempBodyM[MAX_BUFFER_SIZE] = {0};
   if (tempHeaderM.size > 0)
   {
     co_await boost::asio::async_read(socketM, boost::asio::buffer(&tempBodyM[0], tempHeaderM.size), boost::asio::use_awaitable);
   }
-
-  std::cout << idM << ": Read message: " << tempBodyM << std::endl;
 
   // 3. Add message to incoming queue
   if (ownertypeM == owner::server)

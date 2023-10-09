@@ -26,6 +26,8 @@ public:
 
     ActionType getActionType();
 
+    bool isCompleted();
+
     virtual void act() = 0;
 
 protected:

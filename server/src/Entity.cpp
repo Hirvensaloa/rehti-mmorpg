@@ -30,8 +30,4 @@ void Entity::move(Coordinates target)
     int ymov = locationM.y == target.y ? 0 : ((locationM.y - target.y) > 0 ? -1 : 1);
     locationM.x += xmov;
     locationM.y += ymov;
-    std::cout
-        << "location: "
-        << "x: " << locationM.x << ", y: " << locationM.y << ", z: " << locationM.z
-        << std::endl;
 }

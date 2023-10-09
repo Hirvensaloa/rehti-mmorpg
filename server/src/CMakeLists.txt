@@ -19,6 +19,14 @@ set(SOURCES
         Coordinates.hpp
         PlayerCharacter.hpp
         PlayerCharacter.cpp
+        Action.cpp
+        Action.hpp
+        MoveAction.cpp
+        MoveAction.hpp
+        entity/Goblin.cpp
+        entity/Goblin.hpp
+        entity/Npc.cpp
+        entity/Npc.hpp
 	)
 
 add_executable(${TARGET}

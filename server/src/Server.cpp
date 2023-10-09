@@ -31,6 +31,8 @@ Server::Server()
     tickThreadM = std::thread([this]()
                               { ticker(); });
 
+    initGameState();
+
     std::cout
         << "Server started on port " << PORT << std::endl;
 };
@@ -65,14 +67,13 @@ void Server::processMessages()
 {
     while (true)
     {
-        if (!messagesM.empty())
+        // Wait for messages to arrive
+        messagesM.wait();
+
+        while (!messagesM.empty())
         {
             Message msg = messagesM.pop_front();
             handleMessage(msg);
-        }
-        else
-        {
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
         }
     }
 }
@@ -125,10 +126,7 @@ void Server::ticker()
 
 void Server::tick()
 {
-    for (PlayerCharacter p : gameWorldM.getPlayers())
-    {
-        p.update();
-    }
+    gameWorldM.updateGameWorld();
     std::thread(&Server::sendGameState, this).detach();
 }
 
@@ -136,11 +134,24 @@ void Server::sendGameState()
 {
     GameStateMessage msg;
     std::vector<GameStateEntity> entityVector;
+    for (auto &npc : gameWorldM.getNpcs())
+    {
+        GameStateEntity entity;
+        const Coordinates location = npc.getLocation();
+        entity.entityId = npc.getId();
+        entity.name = npc.getName();
+        entity.x = location.x;
+        entity.y = location.y;
+        entity.z = location.z;
+        entityVector.push_back(entity);
+    }
+
     for (auto &player : gameWorldM.getPlayers())
     {
         GameStateEntity entity;
         const Coordinates location = player.getLocation();
         entity.entityId = player.getId();
+        entity.name = player.getName();
         entity.x = location.x;
         entity.y = location.y;
         entity.z = location.z;
@@ -155,4 +166,9 @@ void Server::sendGameState()
             boost::asio::co_spawn(ioContextM, conn->send(MessageApi::createGameState(msg)), boost::asio::detached);
         }
     }
+}
+
+void Server::initGameState()
+{
+    gameWorldM.initWorld();
 }

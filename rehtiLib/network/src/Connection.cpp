@@ -16,6 +16,8 @@
 
 #include "Connection.hpp"
 
+const uint32_t MAX_BUFFER_SIZE = 2048;
+
 Connection::Connection(owner parent, boost::asio::io_context &context,
                        boost::asio::ip::tcp::socket socket, MessageQueue &inc)
     : rAsioContextM(context), socketM(std::move(socket)), rIncomingMessagesM(inc)
@@ -126,7 +128,7 @@ boost::asio::awaitable<void> Connection::readMessage()
   co_await boost::asio::async_read(socketM, boost::asio::buffer(&tempHeaderM, sizeof(msg_header)), boost::asio::use_awaitable);
 
   // 2. If there is a body, read the body
-  char tempBodyM[128] = {0};
+  char tempBodyM[MAX_BUFFER_SIZE] = {0};
   if (tempHeaderM.size > 0)
   {
     co_await boost::asio::async_read(socketM, boost::asio::buffer(&tempBodyM[0], tempHeaderM.size), boost::asio::use_awaitable);

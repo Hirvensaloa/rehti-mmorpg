@@ -83,14 +83,13 @@ void Client::processMessages()
 {
   while (true)
   {
-    if (!messagesM.empty())
+    // Wait for message to arrive
+    messagesM.wait();
+
+    while (!messagesM.empty())
     {
       Message msg = messagesM.pop_front();
       std::cout << msg.getBody() << std::endl;
-    }
-    else
-    {
-      std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
   }
 }

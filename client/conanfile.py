@@ -5,6 +5,7 @@ class ClientConan(ConanFile):
     version = "1.0"
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeDeps", "CMakeToolchain"
+    tool_requires = "cmake/3.27.0"
     def requirements(self):
         self.requires("boost/1.83.0")
         self.requires("vulkan-loader/1.3.239.0")
@@ -15,3 +16,4 @@ class ClientConan(ConanFile):
         self.requires("stb/cci.20220909")
         self.requires("glm/cci.20230113")
         self.requires("vulkan-headers/1.3.239.0", override=True)
+

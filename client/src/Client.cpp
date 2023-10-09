@@ -12,21 +12,23 @@ Client::Client(std::string ip, std::string port)
     : ioContextM(boost::asio::io_context()),
       resolverM(boost::asio::ip::tcp::resolver(ioContextM)),
       endpointsM(resolverM.resolve(ip, port)),
+      workGuardM(boost::asio::make_work_guard(ioContextM)),
       messagesM(MessageQueue()),
       connectionM(std::make_unique<Connection>(
           Connection::owner::client, ioContextM, std::move(boost::asio::ip::tcp::socket(ioContextM)), messagesM))
 {
   connectionThreadM = std::thread([this]()
-                                  { boost::asio::co_spawn(ioContextM, connect(), boost::asio::detached);
-                                    ioContextM.run(); });
+                                  { boost::asio::co_spawn(ioContextM, connect(), boost::asio::detached); });
+
+  ioThreadM = std::thread([this]()
+                          { ioContextM.run(); });
 };
 
 void Client::start()
 {
   std::cout << "Client started" << std::endl;
   std::thread([this]()
-              { test();
-                ioContextM.run(); })
+              { test(); })
       .detach();
   processMessages();
 }

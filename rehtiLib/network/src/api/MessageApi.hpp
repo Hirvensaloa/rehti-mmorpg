@@ -30,6 +30,7 @@ struct MessageStruct
 struct GameStateEntity
 {
     int entityId;
+    std::string name;
     int x;
     int y;
     int z;

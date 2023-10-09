@@ -60,6 +60,7 @@ MessageStruct MessageApi::createGameState(const GameStateMessage &gameState)
   {
     rapidjson::Value entityObject(rapidjson::kObjectType);
     entityObject.AddMember("entityId", entity.entityId, allocator);
+    entityObject.AddMember("name", rapidjson::StringRef(entity.name.c_str()), allocator);
     entityObject.AddMember("x", entity.x, allocator);
     entityObject.AddMember("y", entity.y, allocator);
     entityObject.AddMember("z", entity.z, allocator);
@@ -85,6 +86,7 @@ GameStateMessage MessageApi::parseGameState(std::string msgBody)
   {
     GameStateEntity gameStateEntity;
     gameStateEntity.entityId = entity["entityId"].GetInt();
+    gameStateEntity.name = entity["name"].GetString();
     gameStateEntity.x = entity["x"].GetInt();
     gameStateEntity.y = entity["y"].GetInt();
     gameStateEntity.z = entity["z"].GetInt();

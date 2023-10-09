@@ -12,6 +12,8 @@
 Instructions to launch and run:
 
 - [The client](#client-pre)
+Add an environment variable called VK_LAYER_PATH and point it to vulkan-validationlayers bin/json path. (Conan library directory)
+
 - [The server](#server-pre)
 
 ## Client

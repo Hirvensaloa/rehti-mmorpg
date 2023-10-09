@@ -10,7 +10,6 @@ void RehtiGraphics::demo() {
     cleanup();
 }
 
-
 void RehtiGraphics::initWindow() {
     // Initialize glfw
     glfwInit();
@@ -49,7 +48,7 @@ void RehtiGraphics::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreate
 
 void RehtiGraphics::setupDebugMessenger()
 {
-    if (!enableValidationLayers) return; // Validationlayers are not enabled. Go back
+    if (!validationLayersEnabledM) return; // Validationlayers are not enabled. Go back
     VkDebugUtilsMessengerCreateInfoEXT createInfo;
     populateDebugMessengerCreateInfo(createInfo);
 
@@ -97,7 +96,6 @@ void RehtiGraphics::createLogicalDevice()
 {
     QueueFamilyIndices indice = findQueueFamilies(gpuM);
 
-    //
     std::vector<VkDeviceQueueCreateInfo> queueCreateInfos{};
     std::set<uint32_t> uniqueQueueFamilies = { indice.graphicsFamily.value(), indice.presentFamily.value() };
 
@@ -106,27 +104,27 @@ void RehtiGraphics::createLogicalDevice()
         VkDeviceQueueCreateInfo queueCreateInfo{};
         queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
         queueCreateInfo.queueFamilyIndex = queueFamily;
-        queueCreateInfo.queueCount = 1; //1 for now
+        queueCreateInfo.queueCount = 1; 
 
-        queueCreateInfo.pQueuePriorities = &queuePriority; //hmm they all have a priority of 1 currently?
+        queueCreateInfo.pQueuePriorities = &queuePriority; 
         queueCreateInfos.push_back(queueCreateInfo);
     }
 
-    //Definition enough for now
+    // Definition enough for now
     VkPhysicalDeviceFeatures deviceFeatures{};
 
-    //logical device time
     VkDeviceCreateInfo devCreateInfo{};
     devCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
     devCreateInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
-    devCreateInfo.pQueueCreateInfos = queueCreateInfos.data(); //Info inside info :DDD
+    devCreateInfo.pQueueCreateInfos = queueCreateInfos.data(); 
 
     devCreateInfo.pEnabledFeatures = &deviceFeatures;
 
     devCreateInfo.enabledExtensionCount = static_cast<uint32_t>(kDeviceExtensionsM.size());
     devCreateInfo.ppEnabledExtensionNames = kDeviceExtensionsM.data();
 
-    if (enableValidationLayers) 
+    // TODO: this is not correct, as there can be layers other than validation layers
+    if (validationLayersEnabledM) 
     {
         devCreateInfo.enabledLayerCount = static_cast<uint32_t>(kValidationlayersM.size());
         devCreateInfo.ppEnabledLayerNames = kValidationlayersM.data();
@@ -595,7 +593,7 @@ void RehtiGraphics::cleanup() {
 
     vkDestroyDevice(logDeviceM, nullptr); //queues are destroyed when logicaldevice is destroyed
 
-    if (enableValidationLayers)
+    if (validationLayersEnabledM)
         DestroyDebugUtilsMessengerEXT(instanceM, debugMessengerM, nullptr);
 
     // Destroy the surface
@@ -616,7 +614,7 @@ void RehtiGraphics::createInstance() {
 
     if (enableValidationLayers && !checkValidationLayerSupport()) 
     {
-        throw std::runtime_error("validation layers requested, but not available!");
+        std::cout << "WARNING: Validation layers requested, but not available!\n Continuing without validation." << std::endl;
     }
 
     //Create info
@@ -640,7 +638,7 @@ void RehtiGraphics::createInstance() {
     instanceInfo.ppEnabledExtensionNames = extensions.data();
 
     VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo{};
-    if (enableValidationLayers) 
+    if (validationLayersEnabledM) 
     {
         instanceInfo.enabledLayerCount = static_cast<uint32_t>(kValidationlayersM.size()); //Names are null for now
         instanceInfo.ppEnabledLayerNames = kValidationlayersM.data();
@@ -683,7 +681,6 @@ bool RehtiGraphics::checkDeviceExtensionSupport(VkPhysicalDevice device)
         requiredExtensions.erase(property.extensionName); // tick off the required extensions
     }
 
-
     return requiredExtensions.empty();
 }
 
@@ -698,19 +695,20 @@ bool RehtiGraphics::checkValidationLayerSupport()
     for (const char* layerName : kValidationlayersM) 
     {
         bool layerFound = false;
-
         for (const auto& layerProperties : availableLayers) 
         {
             if (strcmp(layerName, layerProperties.layerName) == 0) 
             {
                 layerFound = true;
+                validationLayersEnabledM = true;
                 break;
             }
 
         }
 
-        if (!layerFound) 
+        if (!layerFound) // if one of the layers is not found, return false
         {
+            validationLayersEnabledM = false;
             return false;
         }
 
@@ -818,7 +816,7 @@ std::vector<const char*> RehtiGraphics::getRequiredExtensions()
 
     std::vector<const char*> extensions(glfwExtensions, glfwExtensions + extCount);
 
-    if (this->enableValidationLayers) 
+    if (validationLayersEnabledM) 
     {
         extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
     }

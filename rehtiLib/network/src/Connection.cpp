@@ -137,5 +137,6 @@ boost::asio::awaitable<void> Connection::readMessage()
   std::cout << idM << ": Read message: " << tempBodyM << std::endl;
 
   // 3. Add message to incoming queue
-  rIncomingMessagesM.push_back(Message(nullptr, tempHeaderM, std::move(std::string(tempBodyM))));
+  std::string body = std::string(tempBodyM);
+  rIncomingMessagesM.push_back(Message(nullptr, tempHeaderM, std::move(body)));
 }

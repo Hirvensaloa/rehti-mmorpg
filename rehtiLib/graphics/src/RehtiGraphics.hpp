@@ -232,6 +232,8 @@ private:
     const int kConcurrentFramesM = 2;
     size_t currentFrameM = 0;
 
+    bool validationLayersEnabledM = false;
+
     const std::vector<const char*> kValidationlayersM = {
         "VK_LAYER_KHRONOS_validation"
     };

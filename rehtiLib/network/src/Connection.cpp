@@ -85,10 +85,7 @@ void Connection::disconnect()
 
 boost::asio::awaitable<void> Connection::send(const MessageStruct msg)
 {
-  msg_header header;
-  header.id = msg.id;
-  header.size = msg.body.size();
-  co_await writeMessage(Message(nullptr, header, msg.body));
+  co_await writeMessage(Message(msg));
 }
 
 boost::asio::awaitable<void> Connection::writeMessage(const Message msg)

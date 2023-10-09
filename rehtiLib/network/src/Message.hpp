@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "Connection.hpp"
+#include "api/MessageApi.hpp"
 
 class Connection;
 
@@ -20,6 +21,13 @@ public:
   Message(std::shared_ptr<Connection> connection, msg_header header,
           const std::string &body)
       : connectionM(connection), headerM(header), bodyM(body) {}
+
+  Message(const MessageStruct msg)
+      : connectionM(nullptr), bodyM(msg.body)
+  {
+    headerM.id = msg.id;
+    headerM.size = msg.body.size();
+  }
 
   const std::string &getBody() const { return bodyM; }
 

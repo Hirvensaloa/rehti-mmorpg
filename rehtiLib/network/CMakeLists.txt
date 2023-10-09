@@ -13,7 +13,7 @@ set(SOURCES
       Connection.hpp
       Message.hpp
 	MessageQueue.hpp
-      api/MessageTypes.hpp
+      api/MessageApi.cpp
       api/MessageApi.hpp
 	)
 

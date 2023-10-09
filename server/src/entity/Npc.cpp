@@ -16,7 +16,7 @@ void Npc::update()
     const int walk = rand() % 100;
     if (walk)
     {
-      setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), Coordinates(rand() % 10, rand() % 10, rand() % 10), this));
+      setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), Coordinates(rand() % 10, rand() % 10), this));
     }
   }
 };

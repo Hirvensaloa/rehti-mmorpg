@@ -68,15 +68,14 @@ boost::asio::awaitable<void> Client::randomWalk()
 
 void Client::test()
 {
-  boost::asio::co_spawn(
-      ioContextM, [this]() -> boost::asio::awaitable<void>
-      {
-    while (true)
-    {
-      co_await randomWalk();
-      std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-    } },
-      boost::asio::detached);
+  while (true)
+  {
+    boost::asio::co_spawn(
+        ioContextM, [this]() -> boost::asio::awaitable<void>
+        { co_await randomWalk(); },
+        boost::asio::detached);
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+  }
 }
 
 void Client::processMessages()

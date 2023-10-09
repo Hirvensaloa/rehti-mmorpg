@@ -1,5 +1,3 @@
-#pragma once
-
 #include "MessageApi.hpp"
 
 const MessageStruct MessageApi::createMove(const MoveMessage &move)

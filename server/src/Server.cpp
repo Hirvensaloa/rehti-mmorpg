@@ -99,6 +99,6 @@ void Server::tick()
 {
     for (PlayerCharacter p : gameWorldM.getPlayers())
     {
-        p.getCurrentAction().act();
+        p.update();
     }
 }

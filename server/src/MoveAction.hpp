@@ -6,7 +6,7 @@
 class MoveAction : public Action
 {
 public:
-    MoveAction(std::chrono::system_clock::time_point startTime, Coordinates target, PlayerCharacter *pPlayer);
+    MoveAction(std::chrono::system_clock::time_point startTime, Coordinates target, Entity *pEntity);
 
     ~MoveAction() = default;
 

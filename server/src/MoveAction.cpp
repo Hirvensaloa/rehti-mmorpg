@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-MoveAction::MoveAction(std::chrono::system_clock::time_point startTime, Coordinates target, PlayerCharacter *pPlayer) : Action(startTime, pPlayer), targetM(target) {}
+MoveAction::MoveAction(std::chrono::system_clock::time_point startTime, Coordinates target, Entity *pEntity) : Action(startTime, pEntity), targetM(target) {}
 
 Coordinates MoveAction::getTarget()
 {
@@ -16,9 +16,9 @@ void MoveAction::act()
     {
         if (std::chrono::system_clock::now() > startTimeM + actionTimeM)
         {
-            pPlayerM->move(targetM);
+            pEntityM->move(targetM);
             startTimeM = std::chrono::system_clock::now();
-            if (pPlayerM->getLocation() == targetM)
+            if (pEntityM->getLocation() == targetM)
             {
                 completedM = true;
             }

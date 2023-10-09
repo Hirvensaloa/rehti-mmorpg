@@ -4,7 +4,7 @@
 #include <ctime>
 #include <memory>
 
-class PlayerCharacter;
+class Entity;
 
 class Action
 {
@@ -16,7 +16,7 @@ public:
         Attack,
     };
 
-    Action(std::chrono::system_clock::time_point startTime, PlayerCharacter *pPlayer);
+    Action(std::chrono::system_clock::time_point startTime, Entity *pEntity);
 
     ~Action() = default;
 
@@ -35,7 +35,7 @@ protected:
 
     ActionType actionTypeM = ActionType::None;
 
-    PlayerCharacter *pPlayerM;
+    Entity *pEntityM;
 
     bool completedM = false;
 };

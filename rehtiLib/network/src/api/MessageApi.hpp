@@ -31,7 +31,6 @@ public:
     rapidjson::Document::AllocatorType &allocator = document.GetAllocator();
     document.AddMember("x", move.x, allocator);
     document.AddMember("y", move.y, allocator);
-    document.AddMember("z", move.z, allocator);
 
     return MessageStruct{move.id, createString(document)};
   };
@@ -40,7 +39,7 @@ public:
   {
     rapidjson::Document document = parseDocument(msgBody);
 
-    if (!document.HasMember("x") || !document.HasMember("y") || !document.HasMember("z") || !document["x"].IsInt() || !document["y"].IsInt() || !document["z"].IsInt())
+    if (!document.HasMember("x") || !document.HasMember("y") || !document.HasMember("z") || !document["y"].IsInt())
     {
       throw std::runtime_error("Invalid move message");
     }
@@ -48,7 +47,6 @@ public:
     MoveMessage move;
     move.x = document["x"].GetInt();
     move.y = document["y"].GetInt();
-    move.z = document["z"].GetInt();
 
     return move;
   };

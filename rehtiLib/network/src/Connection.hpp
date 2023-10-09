@@ -5,6 +5,7 @@
 
 #include "Message.hpp"
 #include "MessageQueue.hpp"
+#include "api/MessageApi.hpp"
 
 class Connection : public std::enable_shared_from_this<Connection>
 {
@@ -25,13 +26,12 @@ public:
 
   boost::asio::awaitable<void> listenForMessages();
   boost::asio::awaitable<bool> connectToServer(const boost::asio::ip::tcp::resolver::results_type &endpoints);
-
   bool connectToClient(uint32_t userid = 0);
 
   bool isConnected() const;
 
   void disconnect();
-  boost::asio::awaitable<void> send(const unsigned int headerId, const std::string msgBody);
+  boost::asio::awaitable<void> send(const MessageStruct msg);
 
 private:
   boost::asio::awaitable<void> writeMessage(const Message msg);

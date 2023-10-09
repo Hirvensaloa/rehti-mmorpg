@@ -10,7 +10,7 @@
 #include "Server.hpp"
 
 uint16_t PORT = 9999;
-int TICK_RATE = 32;
+int TICK_RATE = 1;
 int TICK_TIME = 1000 / TICK_RATE;
 static uint32_t id = 0;
 
@@ -24,11 +24,14 @@ Server::Server()
 {
     ioThreadM = std::thread([this]()
                             { ioContextM.run(); });
+
     acceptThreadM = std::thread([this]()
                                 { acceptConnections(); });
 
     tickThreadM = std::thread([this]()
                               { ticker(); });
+
+    initGameState();
 
     std::cout
         << "Server started on port " << PORT << std::endl;
@@ -52,7 +55,6 @@ void Server::acceptConnections()
             gameWorldM.addPlayer("keissaaja" + std::to_string(connectionsM.back()->getID()), connectionsM.back()->getID(), Coordinates());
 
             boost::asio::co_spawn(ioContextM, connectionsM.back()->listenForMessages(), boost::asio::detached);
-            boost::asio::co_spawn(ioContextM, connectionsM.back()->send(MessageIds::Test, "Hello gamer, your name is " + gameWorldM.getPlayers().back().getName() + "!\0"), boost::asio::detached);
         }
         else
         {
@@ -65,24 +67,51 @@ void Server::processMessages()
 {
     while (true)
     {
-        if (!messagesM.empty())
+        // Wait for messages to arrive
+        messagesM.wait();
+
+        while (!messagesM.empty())
         {
             Message msg = messagesM.pop_front();
-            std::cout << msg.getBody() << std::endl;
-            if (msg.getHeader().id == MessageIds::Move)
-            {
-                auto id = msg.getConn()->getID();
-                auto gamer = gameWorldM.getPlayer(id);
-                int x, y;
-                sscanf(msg.getBody().c_str(), "%d//%d", &x, &y);
-                Coordinates target = Coordinates(x, y);
-                gamer->setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), target, gamer));
-            }
+            handleMessage(msg);
         }
-        else
+    }
+}
+
+void Server::handleMessage(const Message &msg)
+{
+    try
+    {
+        const auto body = msg.getBody();
+        const auto msgId = msg.getHeader().id;
+        const auto connId = msg.getConn()->getID();
+
+        switch (msgId)
         {
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        case MessageId::Move:
+        {
+            std::cout << connId << " | Received move message | " << body << std::endl;
+            const MoveMessage moveMsg = MessageApi::parseMove(body);
+            const Coordinates target = Coordinates(moveMsg.x, moveMsg.y);
+            auto gamer = gameWorldM.getPlayer(connId);
+            gamer->setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), target, gamer));
+            break;
         }
+        case MessageId::Attack:
+        {
+            std::cout << "Attack message received. TODO: implement" << std::endl;
+            break;
+        }
+        default:
+            // Unknown header id, ignore
+            std::cout << "Unknown header id: " << msgId << std::endl;
+            break;
+        }
+    }
+    catch (const std::exception &e)
+    {
+        // Parsing failed, ignore error and continue
+        std::cout << "Error parsing message: " << e.what() << std::endl;
     }
 }
 
@@ -97,8 +126,49 @@ void Server::ticker()
 
 void Server::tick()
 {
-    for (PlayerCharacter p : gameWorldM.getPlayers())
+    gameWorldM.updateGameWorld();
+    std::thread(&Server::sendGameState, this).detach();
+}
+
+void Server::sendGameState()
+{
+    GameStateMessage msg;
+    std::vector<GameStateEntity> entityVector;
+    for (auto &npc : gameWorldM.getNpcs())
     {
-        p.update();
+        GameStateEntity entity;
+        const Coordinates location = npc.getLocation();
+        entity.entityId = npc.getId();
+        entity.name = npc.getName();
+        entity.x = location.x;
+        entity.y = location.y;
+        entity.z = location.z;
+        entityVector.push_back(entity);
     }
+
+    for (auto &player : gameWorldM.getPlayers())
+    {
+        GameStateEntity entity;
+        const Coordinates location = player.getLocation();
+        entity.entityId = player.getId();
+        entity.name = player.getName();
+        entity.x = location.x;
+        entity.y = location.y;
+        entity.z = location.z;
+        entityVector.push_back(entity);
+    }
+    msg.entities = entityVector;
+
+    for (auto &conn : connectionsM)
+    {
+        if (conn->isConnected())
+        {
+            boost::asio::co_spawn(ioContextM, conn->send(MessageApi::createGameState(msg)), boost::asio::detached);
+        }
+    }
+}
+
+void Server::initGameState()
+{
+    gameWorldM.initWorld();
 }

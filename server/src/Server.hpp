@@ -16,10 +16,16 @@ public:
 
     void processMessages();
 
+    void handleMessage(const Message &msg);
+
 private:
     void ticker();
 
     void tick();
+
+    void sendGameState();
+
+    void initGameState();
 
     boost::asio::io_context ioContextM;
 

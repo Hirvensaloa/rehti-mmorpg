@@ -19,3 +19,8 @@ Action::ActionType Action::getActionType()
 {
     return actionTypeM;
 }
+
+bool Action::isCompleted()
+{
+    return completedM;
+}

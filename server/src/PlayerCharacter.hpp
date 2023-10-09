@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Entity.hpp"
 #include <string>
+
+#include "Entity.hpp"
 
 class PlayerCharacter : public Entity
 {
@@ -12,6 +13,8 @@ public:
     ~PlayerCharacter() = default;
 
     std::string getName();
+
+    void update();
 
 private:
     std::string nameM;

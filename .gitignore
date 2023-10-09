@@ -52,6 +52,7 @@ rehtiLib/graphics/bin
 *.filters
 *.config
 *.pdb
+.vscode/
 
 # CMAKE
 CMakeLists.txt.user
@@ -73,3 +74,4 @@ CMakeUserPresets.json
 
 # Build directories
 build
+bin/

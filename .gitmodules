@@ -2,3 +2,6 @@
 	path = third_party/glslang
 	url = https://github.com/KhronosGroup/glslang
 	ignore = dirty
+[submodule "third_party/rapidjson"]
+	path = third_party/rapidjson
+	url = https://github.com/Tencent/rapidjson.git

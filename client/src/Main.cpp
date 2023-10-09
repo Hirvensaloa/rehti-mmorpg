@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     RehtiGraphics graphLib = RehtiGraphics();
     graphLib.demo();
   std::cout << "Winner winner chicken dinner" << std::endl;
+
   try
   {
     if (argc != 2)
@@ -20,8 +21,7 @@ int main(int argc, char *argv[])
     }
 
     Client client = Client(argv[1], "9999");
-    client.test();
-    client.processMessages();
+    client.start();
   }
   catch (std::exception &e)
   {

@@ -1,6 +1,7 @@
-[submodule "dependencies/glfw"]
-	path = dependencies/glfw
-	url = git@github.com:glfw/glfw.git
+[submodule "third_party/glslang"]
+	path = third_party/glslang
+	url = https://github.com/KhronosGroup/glslang
+	ignore = dirty
 [submodule "third_party/rapidjson"]
 	path = third_party/rapidjson
 	url = https://github.com/Tencent/rapidjson.git

@@ -8,8 +8,10 @@
 
 int main(int argc, char *argv[])
 {
-  testFunc(); // should be available in test.hpp. That in turn includes glfw
-              // library
+    RehtiGraphics graphLib = RehtiGraphics();
+    graphLib.demo();
+  std::cout << "Winner winner chicken dinner" << std::endl;
+
   try
   {
     if (argc != 2)

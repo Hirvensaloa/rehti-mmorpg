@@ -26,10 +26,21 @@
 *.a
 *.lib
 
+# data files
+*.json
+*.log
+*.tlog
+*.recipe
+
 # Executables
 *.exe
 *.out
 *.app
+
+build
+client/out
+rehtiLib/graphics/bin
+
 
 # Visual studio files
 *.vs
@@ -40,6 +51,7 @@
 *.sdf
 *.filters
 *.config
+*.pdb
 .vscode/
 
 # CMAKE

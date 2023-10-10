@@ -5,14 +5,17 @@
 ### Before running anything
 
 - Make sure to fetch git submodules run `git submodule update --recursive --init`. This needs to be run everytime new submodules are added.
-- Make sure you have Conan installed from [here](https://docs.conan.io/2/installation.html). Run `conan profile detect --force` after installation.
-- Make sure you have Cmake version >= 3.27
+
+- Make sure you have Conan installed from (https://docs.conan.io/2/installation.html)[here]. Run `conan profile detect --force` after installation.
+
 
 ### Running
 
 Instructions to launch and run:
 
 - [The client](#client-pre)
+Add an environment variable called VK_LAYER_PATH and point it to vulkan-validationlayers bin/json path. (Conan library directory)
+
 - [The server](#server-pre)
 
 ## Client

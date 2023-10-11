@@ -35,6 +35,16 @@ public:
     // Demos the latest changes to the graphics class
     void demo();
 
+    /// <summary>
+    /// Initializes the window and vulkan. Remember to call <see cref="cleanGraphics"/> when done.
+    /// </summary>
+    void initializeGraphics();
+
+    /// <summary>
+    /// Cleans up all the resources used by vulkan.
+    /// </summary>
+    void cleanGraphics();
+
 private:
     // Functions
     void initWindow();

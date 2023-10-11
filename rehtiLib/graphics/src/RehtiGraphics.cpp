@@ -326,7 +326,7 @@ void RehtiGraphics::createGraphicsPipeline()
     rasterInfo.cullMode = VK_CULL_MODE_BACK_BIT;
     rasterInfo.frontFace = VK_FRONT_FACE_CLOCKWISE;
     rasterInfo.depthBiasEnable = VK_FALSE;
-    rasterInfo.depthBiasConstantFactor = 0.f; // No depth bias so optional?
+    rasterInfo.depthBiasConstantFactor = 0.f; 
     rasterInfo.depthBiasClamp = 0.f;
     rasterInfo.depthBiasSlopeFactor = 0.f;
 
@@ -608,9 +608,9 @@ void RehtiGraphics::createInstance()
     VkApplicationInfo info{};
     // And fill in the form, as always
     info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-    info.pApplicationName = "VKrenderer";
-    info.applicationVersion = VK_MAKE_VERSION(1, 0, 0); // version 1.00?
-    info.pEngineName = "No Engine";                     // Why tho?
+    info.pApplicationName = "RehtiMMORPG";
+    info.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
+    info.pEngineName = "RehtiEngine";                     
     info.engineVersion = VK_MAKE_VERSION(1, 0, 0);
     info.apiVersion = VK_API_VERSION_1_3; // Vulkan 1.3
 

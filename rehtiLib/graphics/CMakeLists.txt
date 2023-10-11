@@ -33,6 +33,12 @@ set(GRAPHICS_SOURCES
 	RehtiGraphics.hpp
 	ShaderManager.cpp
 	ShaderManager.hpp
+	BufferManager.cpp
+	BufferManager.hpp
+	Camera.hpp
+	Camera.cpp
+	SimpleMesh.hpp
+	SimpleMesh.cpp
 	shaders/shader.vert
 	shaders/shader.frag
 	)

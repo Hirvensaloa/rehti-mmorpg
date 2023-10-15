@@ -34,6 +34,8 @@ set(SOURCES
         entity/Goblin.hpp
         entity/Npc.cpp
         entity/Npc.hpp
+        entity/Bandit.cpp
+        entity/Bandit.hpp
 	)
 
 add_executable(${TARGET}

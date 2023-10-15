@@ -2,8 +2,8 @@
 
 #include <vector>
 
-#include "../entity/PlayerCharacter.hpp"
 #include "../entity/Npc.hpp"
+#include "../entity/PlayerCharacter.hpp"
 #include "Map.hpp"
 
 class GameWorld
@@ -24,7 +24,7 @@ public:
 
     void addNpc(Npc npc);
 
-    std::vector<Npc> &getNpcs();
+    std::vector<std::shared_ptr<Npc>> &getNpcs();
 
     void updateGameWorld();
 
@@ -32,6 +32,5 @@ public:
 
 private:
     std::vector<PlayerCharacter> playersM;
-    std::vector<Npc> npcsM;
-    Map mapM;
+    std::vector<std::shared_ptr<Npc>> npcsM;
 };

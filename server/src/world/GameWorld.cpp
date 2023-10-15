@@ -1,11 +1,12 @@
 #include "GameWorld.hpp"
+#include "../entity/Bandit.hpp"
 #include "../entity/Goblin.hpp"
 
 GameWorld::GameWorld(){};
 
 void GameWorld::addPlayer(std::string playerName, unsigned int playerId, Coordinates location)
 {
-    PlayerCharacter newPlayer = PlayerCharacter(playerName, playerId, location);
+    PlayerCharacter newPlayer = PlayerCharacter(this, playerName, playerId, location);
     playersM.push_back(newPlayer);
 }
 
@@ -43,19 +44,19 @@ PlayerCharacter *GameWorld::getPlayer(unsigned int playerId)
 
 void GameWorld::addNpc(Npc npc)
 {
-    npcsM.push_back(npc);
+    npcsM.push_back(std::make_shared<Npc>(npc));
 }
 
-std::vector<Npc> &GameWorld::getNpcs()
+std::vector<std::shared_ptr<Npc>> &GameWorld::getNpcs()
 {
     return npcsM;
 }
 
 void GameWorld::updateGameWorld()
 {
-    for (Npc &npc : npcsM)
+    for (auto npc : npcsM)
     {
-        npc.update();
+        npc->update();
     }
     for (PlayerCharacter &p : playersM)
     {
@@ -65,8 +66,6 @@ void GameWorld::updateGameWorld()
 
 void GameWorld::initWorld()
 {
-    Goblin goblin = Goblin("Kimmo-Goblin", 1337, Coordinates(1, 1));
-    npcsM.push_back(goblin);
-
-    std::cout << "Game world initialized" << std::endl;
+    npcsM.push_back(std::make_shared<Goblin>(this, "Kimmo-Goblin", 1337, Coordinates(1, 1)));
+    npcsM.push_back(std::make_shared<Bandit>(this, "Roisto-Pena", 123, Coordinates(5, 5)));
 }

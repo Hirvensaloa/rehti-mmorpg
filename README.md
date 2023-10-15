@@ -6,9 +6,9 @@
 
 - Make sure to fetch git submodules run `git submodule update --recursive --init`. This needs to be run everytime new submodules are added.
 
-- Make sure you have Conan installed from (https://docs.conan.io/2/installation.html)[here]. Run `conan profile detect --force` after installation.
+- Make sure you have Conan installed from [here](https://docs.conan.io/2/installation.html). Run `conan profile detect --force` after installation.
 
-- Run `./scripts/generate_map.sh` to generate the map.
+- Run `./scripts/generate_map.sh` to generate the map assets.
 
 ### Running
 

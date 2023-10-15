@@ -6,7 +6,7 @@ Tiles cannot be divided further. Tiles map 1 to 1 with the coordinate system.
 
 ## Creating an example map
 
-1. Define the areas in to the [map.json](/assets/map/map.json) file
+1. **Define the areas in to the [map.json](/assets/map/map.json) file**
 
 In this example we have four areas, Eldertree Grove (EG) and Crystalpeak Citadel (CC).
 
@@ -29,7 +29,7 @@ Note: Row sizes don't need to match. For example, this is valid:
 ]
 ```
 
-2. Create the area drawings
+2. **Create the area drawings**
 
 The drawings shows where different type of textures are and what is the map height in certain coordinates.
 We use the RGB-channels to store the information.
@@ -44,7 +44,7 @@ The height value is formed by multiplying G with B, where the first bit of G ind
 
 The drawings should be 128x128 and use the PNG-format. They should be under `<root>/assets/map/areas`. Name the drawings `<area name in json>.png`, in our case `EG1.png`, `EG2.png`, `CC1.png` and `CC2.png`.
 
-3. Create the object drawings
+3. **Create the object drawings**
 
 For each area, there needs to be another drawing that shows where all the objects are and what are their rotations. Again we use RGB-channels.
 
@@ -57,7 +57,7 @@ R and G together indicate the object id, R x G, R x G = 65025, means no object (
 
 The drawings should be 128x128 and use the PNG-format. Name the drawings `<area name in json>-obj.png`, in our case `EG1-obj.png`, `EG2-obj.png`, `CC1-obj.png` and `CC2-obj.png`.
 
-4. Map is done
+4. **Map is done**
 
 Now just run the `generate-map.sh` under the scripts folder to generate map assets.
 
@@ -65,7 +65,7 @@ Now just run the `generate-map.sh` under the scripts folder to generate map asse
 
 Each object should have a JSON-file in [object_tile_maps](/object_tile_maps). Object tile map defines which tiles does the object block around itself. For example, a house wants to define all of the tiles which have walls, as blocked. Object's can also block a tile from a certain direction. For example, a fence can block only south direction so that player can still be on the same tile as the fence but the fence will just block southside access.
 
-object tile map is named `<id>-<name>.json`. object tile map is defined as a matrix. Elements have string values.
+Object tile map is named `<id>-<name>.json`. Object tile map is defined as a matrix. Elements have string values.
 
 | String value |                            Meaning                            |
 | :----------: | :-----------------------------------------------------------: |

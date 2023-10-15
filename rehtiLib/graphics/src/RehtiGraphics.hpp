@@ -1,3 +1,4 @@
+#pragma once
 #include <vulkan/vulkan.h>
 
 #include <optional>
@@ -6,7 +7,11 @@
 #include <iostream>
 #include <string>
 #include <set>
+#include <memory>
 
+#include "Camera.hpp"
+#include "BufferManager.hpp"
+#include "SimpleMesh.hpp"
 // Forward declarations
 struct GLFWwindow;
 
@@ -15,11 +20,14 @@ struct QueueFamilyIndices
 {
     std::optional<uint32_t> graphicsFamily;
     std::optional<uint32_t> presentFamily;
+    std::optional<uint32_t> transferFamily;
 
     bool isComplete() {
         return graphicsFamily.has_value() && presentFamily.has_value();
     }
-
+    bool hasTransferOnlyQueue() {
+		return transferFamily.has_value();
+	}
 };
 
 struct SwapChainSupportDetails {
@@ -36,17 +44,21 @@ public:
     void demo();
 
     /// <summary>
-    /// Initializes the window and vulkan. Remember to call <see cref="cleanGraphics"/> when done.
+    /// Initializes the window and vulkan.
     /// </summary>
-    void initializeGraphics();
+    RehtiGraphics();
 
     /// <summary>
     /// Cleans up all the resources used by vulkan.
     /// </summary>
-    void cleanGraphics();
+    ~RehtiGraphics();
 
 private:
     // Functions
+    
+    /// <summary>
+    /// Initializes glfw window.
+    /// </summary>
     void initWindow();
 
     /// <summary>
@@ -73,6 +85,11 @@ private:
     /// Creates the interactable logical device.
     /// </summary>
     void createLogicalDevice();
+
+    /// <summary>
+    /// Creates the allocator.
+    /// </summary>
+    void createBufferManager();
 
     /// <summary>
     /// Creates the swapchain.
@@ -141,6 +158,8 @@ private:
     /// </summary>
     void createSurface();
 
+    void createAndCopyTestBuffer();
+
     /// <summary>
     /// Checks for device extension support.
     /// </summary>
@@ -200,11 +219,17 @@ private:
     VkDebugUtilsMessengerEXT debugMessengerM;
     VkSurfaceKHR surfaceM;
 
+    // Camera
+    Camera cameraM;
+
     // Gpu
     VkPhysicalDevice gpuM;
 
     // Logicaldevice
     VkDevice logDeviceM;
+
+    // Buffer manager
+    std::unique_ptr<BufferManager> pBufferManagerM;
 
     // Queues
     VkQueue graphicsQueueM;
@@ -232,7 +257,7 @@ private:
     // Semaphores
     std::vector<VkSemaphore> imagesReadyM;
     std::vector<VkSemaphore> rendersFinishedM;
-    std::vector<VkFence>    frameFencesM; // bad wording?
+    std::vector<VkFence>    frameFencesM;
     std::vector<VkFence>    imageFencesM;
 
     // Other variables

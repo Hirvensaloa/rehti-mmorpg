@@ -6,10 +6,19 @@
 
 void RehtiGraphics::demo()
 {
+    mainLoop();
+}
+
+RehtiGraphics::RehtiGraphics()
+    :cameraM(Camera(glm::vec3(0.f, 0.f, 0.f), widthM, heightM))
+{
     initWindow();
     initVulkan();
-    mainLoop();
-    cleanup();
+}
+
+RehtiGraphics::~RehtiGraphics()
+{
+	cleanup();
 }
 
 void RehtiGraphics::initWindow() 
@@ -30,6 +39,7 @@ void RehtiGraphics::initVulkan()
     createSurface();       // Create the surface to draw into. Mostly handled by glfw.
     pickPhysicalDevice();  // Choose the physical device (gpu)
     createLogicalDevice(); // Create the interactable logical device
+    createBufferManager(); // Initializes buffer manager member.
     createSwapChain();     // Creates the swapchain
     createImageViews();    // Creates the image view (how to access the image)
     createRenderPass();
@@ -97,7 +107,7 @@ void RehtiGraphics::createLogicalDevice()
     QueueFamilyIndices indice = findQueueFamilies(gpuM);
 
     std::vector<VkDeviceQueueCreateInfo> queueCreateInfos{};
-    std::set<uint32_t> uniqueQueueFamilies = {indice.graphicsFamily.value(), indice.presentFamily.value()};
+    std::set<uint32_t> uniqueQueueFamilies = {indice.graphicsFamily.value(), indice.presentFamily.value(), indice.transferFamily.value()};
 
     float queuePriority = 1.0f;
     for (uint32_t queueFamily : uniqueQueueFamilies)
@@ -139,9 +149,30 @@ void RehtiGraphics::createLogicalDevice()
     {
         throw std::runtime_error("Logical device creation failed");
     }
-
+    // Transfer queue handle is requested later
     vkGetDeviceQueue(logDeviceM, indice.graphicsFamily.value(), 0, &graphicsQueueM);
     vkGetDeviceQueue(logDeviceM, indice.presentFamily.value(), 0, &presentQueueM);
+}
+
+void RehtiGraphics::createBufferManager()
+{
+    QueueFamilyIndices indices = findQueueFamilies(gpuM);
+    VkQueue transferQueue;
+    uint32_t queueFamily;
+    // Todo check if queue exists and set it to the constructor.
+    // Also check a convinient way to pass the queue family indices to the manager. Redo the ctor
+    if (indices.hasTransferOnlyQueue()) // Has dedicated transfer queue
+    {
+        vkGetDeviceQueue(logDeviceM, indices.transferFamily.value(), 0, &transferQueue);
+        queueFamily = indices.transferFamily.value();
+    }
+    else // Use gfx queue
+    {
+        transferQueue = graphicsQueueM; // Copy the handle
+        queueFamily = indices.graphicsFamily.value();
+    }
+
+    pBufferManagerM = std::make_unique<BufferManager>(instanceM, gpuM, logDeviceM, transferQueue, queueFamily);
 }
 
 void RehtiGraphics::createSwapChain()
@@ -286,12 +317,15 @@ void RehtiGraphics::createGraphicsPipeline()
 
     VkPipelineShaderStageCreateInfo stages[2] = {vertInfo, fragInfo};
 
+    auto bindingDesc = SimpleVertex::getBindingDescription();
+    auto attributeDescs = SimpleVertex::getAttributeDescriptions();
+
     VkPipelineVertexInputStateCreateInfo vertInputInfo{};
     vertInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-    vertInputInfo.vertexBindingDescriptionCount = 0;
-    vertInputInfo.pVertexBindingDescriptions = nullptr;
-    vertInputInfo.vertexAttributeDescriptionCount = 0;
-    vertInputInfo.pVertexAttributeDescriptions = nullptr;
+    vertInputInfo.vertexBindingDescriptionCount = 1;
+    vertInputInfo.pVertexBindingDescriptions = &bindingDesc;
+    vertInputInfo.vertexAttributeDescriptionCount = attributeDescs.size();
+    vertInputInfo.pVertexAttributeDescriptions = attributeDescs.data();
 
     VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo{};
     inputAssemblyInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
@@ -426,7 +460,7 @@ void RehtiGraphics::createCommandBuffers()
 {
     commandBuffersM.resize(swapChainFramebuffersM.size());
 
-    VkCommandBufferAllocateInfo allocInfo{}; // wow, alloc and not create?
+    VkCommandBufferAllocateInfo allocInfo{}; 
     allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
     allocInfo.commandPool = commandPoolM;
     allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
@@ -458,7 +492,17 @@ void RehtiGraphics::createCommandBuffers()
 
         vkCmdBeginRenderPass(commandBuffersM[i], &renderInfo, VK_SUBPASS_CONTENTS_INLINE); // void
         vkCmdBindPipeline(commandBuffersM[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineM);
-        vkCmdDraw(commandBuffersM[i], 3, 1, 0, 0);
+
+        // Bind vertex buffer
+        VkBuffer vertexBuffers[] = {pBufferManagerM->getVertexBuffer()};
+        VkBuffer indexBuffers[] = {pBufferManagerM->getIndexBuffer()};
+
+        VkDeviceSize offsets[] = {0};
+        vkCmdBindVertexBuffers(commandBuffersM[i], 0, 1, vertexBuffers, offsets);
+        vkCmdBindIndexBuffer(commandBuffersM[i], indexBuffers[0], 0, VK_INDEX_TYPE_UINT32);
+
+
+        vkCmdDrawIndexed(commandBuffersM[i], static_cast<uint32_t>(pBufferManagerM->getIndicesSize()), 1, 0, 0, 0);
 
         vkCmdEndRenderPass(commandBuffersM[i]);
 
@@ -563,6 +607,9 @@ void RehtiGraphics::cleanup()
         vkDestroyFence(logDeviceM, frameFencesM[i], nullptr);
     }
 
+    // Delete the bufferManager
+    pBufferManagerM.reset();
+
     vkDestroyCommandPool(logDeviceM, commandPoolM, nullptr);
 
     for (auto framebuffer : swapChainFramebuffersM)
@@ -653,6 +700,15 @@ void RehtiGraphics::createSurface()
     }
 }
 
+void RehtiGraphics::createAndCopyTestBuffer()
+{
+    VkDeviceSize vertexBufferSize = sizeof(kSimpleCubeVertices[0]) * kSimpleCubeVertices.size();
+    VkDeviceSize indexBufferSize = sizeof(kSimpleCubeIndices[0]) * kSimpleCubeIndices.size();
+    pBufferManagerM->createBuffer(vertexBufferSize, kSimpleCubeVertices.data(), VK_BUFFER_USAGE_VERTEX_BUFFER_BIT);
+    pBufferManagerM->createBuffer(indexBufferSize, kSimpleCubeIndices.data(), VK_BUFFER_USAGE_INDEX_BUFFER_BIT);
+    pBufferManagerM->copyBuffers(logDeviceM);
+}
+
 bool RehtiGraphics::checkDeviceExtensionSupport(VkPhysicalDevice device)
 {
     uint32_t extCount = 0;
@@ -735,7 +791,7 @@ int RehtiGraphics::rateDevice(VkPhysicalDevice device)
 
 QueueFamilyIndices RehtiGraphics::findQueueFamilies(VkPhysicalDevice device)
 {
-    QueueFamilyIndices indexcase;
+    QueueFamilyIndices indexes;
 
     uint32_t queueFamilyCount = 0;
     vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
@@ -749,17 +805,24 @@ QueueFamilyIndices RehtiGraphics::findQueueFamilies(VkPhysicalDevice device)
         vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surfaceM, &presentSupport);
         if (presentSupport)
         {
-            indexcase.presentFamily = i;
+            indexes.presentFamily = i;
+        }
+        // Find a transfer queue that is not a graphics queue (Otherwise it will be the same.)
+        if ((queueFamilies[i].queueFlags & VK_QUEUE_TRANSFER_BIT) &&
+            !(queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT))
+        {
+            indexes.transferFamily = i;
+        }
+        else if (queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)
+        {
+            indexes.graphicsFamily = i;
         }
 
-        if (queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)
-            indexcase.graphicsFamily = i;
-
-        if (indexcase.isComplete())
-            break; // Early exit
+        if (indexes.isComplete() && indexes.hasTransferOnlyQueue()) // break if we have found all the queues we need
+            break;
     }
 
-    return indexcase;
+    return indexes;
 }
 
 SwapChainSupportDetails RehtiGraphics::querySwapChainSupport(VkPhysicalDevice device)

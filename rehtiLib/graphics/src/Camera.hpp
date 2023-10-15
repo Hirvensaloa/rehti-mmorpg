@@ -1,5 +1,6 @@
 #pragma once
 // Include both standard functionality and the extensions
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 
@@ -34,7 +35,7 @@ public:
 	/// <param name="fovRad">Field of view in radians, defaults to quarter pi = 45 degrees</param>
 	/// <param name="near">Near plane distance</param>
 	/// <param name="far">Far plane distance</param>
-	Camera(const Target& target, float width, float height, float fovRad = glm::quarter_pi<float>(), float near, float far);
+	Camera(glm::vec3 targetPos, float width, float height, float fovRad = glm::quarter_pi<float>(), float near = 0.1f, float far = 100.f);
 
 	/// <summary>
 	/// Returns the view matrix of the camera, which is the inverse of the model matrix of the camera.
@@ -86,6 +87,6 @@ private:
 	// cameraMatrixM wastes currently 4 floats, but it's easier to work with.
 	glm::mat4 cameraMatrixM;
 	glm::mat4 projectionM;
-	const glm::vec3& targetM;
+	glm::vec3 targetM;
 };
 

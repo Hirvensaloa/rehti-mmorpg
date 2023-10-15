@@ -1,11 +1,11 @@
 #include "Camera.hpp"
 
 
-Camera::Camera(const Target& target, float width, float height, float fovRad, float, float)
-	: targetM(target.pos)
+Camera::Camera(glm::vec3 targetPos, float width, float height, float fovRad, float near, float far)
+	: targetM(targetPos)
 	, cameraMatrixM(1.f) // identity
 {
-	projectionM = glm::perspective(fovRad, width / height, 0.1f, 100.f);
+	projectionM = glm::perspective(fovRad, width / height, near, far);
 }
 
 glm::mat4 Camera::getViewMatrix() const

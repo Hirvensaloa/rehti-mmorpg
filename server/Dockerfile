@@ -13,26 +13,32 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install cmake from the binary as the apt-get version is too old.
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.26.4/cmake-3.26.4-linux-x86_64.sh && \
-    chmod +x cmake-3.26.4-linux-x86_64.sh && \
-    ./cmake-3.26.4-linux-x86_64.sh --skip-license --prefix=/usr/local
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.27.0/cmake-3.27.0-linux-x86_64.sh && \
+    chmod +x cmake-3.27.0-linux-x86_64.sh && \
+    ./cmake-3.27.0-linux-x86_64.sh --skip-license --prefix=/usr/local
 
 RUN pip3 install conan
 
 RUN conan profile detect --force
 
-WORKDIR /app/server 
+WORKDIR /app
 
-COPY server/conanfile.txt .
+COPY server/conanfile.txt ./server/conanfile.txt
 
-RUN conan install . --output-folder=build --build=missing -s build_type=Debug -s compiler.cppstd=20
+RUN cd server && conan install . --output-folder=build --build=missing -s build_type=Debug -s compiler.cppstd=20
 
-COPY third_party/rapidjson/include/ ../third_party/rapidjson/include/
-COPY rehtiLib/network/ ../rehtiLib/network
-COPY server/CMakeLists.txt .
-COPY server/src/ ./src/
+# Generate map assets
+COPY rehtiLib/map/ ./rehtiLib/map
+COPY scripts/generate_map.sh ./scripts/generate_map.sh
+COPY assets/ ./assets
+RUN ./scripts/generate_map.sh
 
-RUN cmake -S . -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -B build -DCMAKE_BUILD_TYPE=Debug && \
+COPY third_party/rapidjson/include/ ./third_party/rapidjson/include/
+COPY rehtiLib/network/ ./rehtiLib/network
+COPY server/CMakeLists.txt ./server
+COPY server/src/ ./server/src/
+
+RUN cd server && cmake -S . -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -B build -DCMAKE_BUILD_TYPE=Debug && \
     cmake --build ./build
 
-CMD [ "./build/src/server"]
+CMD [ "./server/build/src/server"]

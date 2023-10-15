@@ -1,6 +1,6 @@
 
 cmake_minimum_required(VERSION 3.27.0)
-project(testi)
+project(rehti_network)
 
 find_package(Boost 1.83.0 REQUIRED COMPONENTS system)
 

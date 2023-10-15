@@ -8,13 +8,13 @@
 
 - Make sure you have Conan installed from (https://docs.conan.io/2/installation.html)[here]. Run `conan profile detect --force` after installation.
 
+- Run `./scripts/generate_map.sh` to generate the map.
 
 ### Running
 
 Instructions to launch and run:
 
 - [The client](#client-pre)
-Add an environment variable called VK_LAYER_PATH and point it to vulkan-validationlayers bin/json path. (Conan library directory)
 
 - [The server](#server-pre)
 
@@ -24,7 +24,7 @@ TODO: Lyhyt desc tähän. Ja jos on jotain tärkeetä/poikkeuksellista mitä pit
 
 ### <a name="client-pre"></a>Prerequisites
 
-TODO: Mitä vaaditaan että clienttia voi alkaa pyörittämään.
+- (Optional) Add an environment variable called VK_LAYER_PATH and point it to vulkan-validationlayers bin/json path. (Conan library directory)
 
 ### Running
 

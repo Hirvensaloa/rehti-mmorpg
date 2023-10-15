@@ -27,7 +27,6 @@
 *.lib
 
 # data files
-*.json
 *.log
 *.tlog
 *.recipe
@@ -75,3 +74,6 @@ CMakeUserPresets.json
 # Build directories
 build
 bin/
+
+# Generated files
+generated

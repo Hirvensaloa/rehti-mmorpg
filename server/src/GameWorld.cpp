@@ -67,4 +67,6 @@ void GameWorld::initWorld()
 {
     Goblin goblin = Goblin("Kimmo-Goblin", 1337, Coordinates(1, 1));
     npcsM.push_back(goblin);
+
+    std::cout << "Game world initialized" << std::endl;
 }

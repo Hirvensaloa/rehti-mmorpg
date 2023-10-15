@@ -4,6 +4,7 @@
 
 #include "PlayerCharacter.hpp"
 #include "entity/Npc.hpp"
+#include "map/Map.hpp"
 
 class GameWorld
 {
@@ -32,4 +33,5 @@ public:
 private:
     std::vector<PlayerCharacter> playersM;
     std::vector<Npc> npcsM;
+    Map mapM;
 };

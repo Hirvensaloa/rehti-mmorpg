@@ -27,6 +27,8 @@ set(SOURCES
         entity/Goblin.hpp
         entity/Npc.cpp
         entity/Npc.hpp
+        map/Map.cpp
+        map/Map.hpp
 	)
 
 add_executable(${TARGET}
@@ -45,6 +47,8 @@ target_link_libraries(${TARGET} PRIVATE
 add_subdirectory(../../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/../build/network)
 target_link_libraries(${TARGET} PUBLIC rehtiNetwork)
 target_include_directories(${TARGET} PUBLIC ../../rehtiLib/network/include)
+
+target_include_directories(${TARGET} PUBLIC ../../rehtiLib/map/reader)
 
 # postgres client
 

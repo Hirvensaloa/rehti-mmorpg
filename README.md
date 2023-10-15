@@ -64,6 +64,22 @@ It is possible to run the server without Docker by using `./scripts/run-backend-
 
 - You can debug the db contents by running `psql -h 127.0.0.1 -p 6543 -U myuser -d mmorpg-database`
 
+## Client-Server Communication (API)
+
+Client-server communication is established over TCP, and all message bodies are in JSON format. RapidJSON library is used for message serialization and deserialization.
+
+### Message Types
+
+Messages exchanged between the client and server are identified by a unique message type and include information about which entity sends the message (server or client). Here's a summary of the available message types:
+
+| Message Type     | Sent by | Description                                                                       |
+| ---------------- | ------- | --------------------------------------------------------------------------------- |
+| GameStateMessage | Server  | Represents the current game state with a collection of `GameStateEntity` objects. |
+| MoveMessage      | Client  | Represents a move command with coordinates (x, y).                                |
+| AttackMessage    | Client  | Represents an attack command targeting a specific entity by its ID.               |
+
+For detailed information on the message structures, check [here](/rehtiLib/network/src/api/MessageApi.hpp)
+
 ## Project practices
 
 ### General
@@ -138,6 +154,32 @@ Yhteensä: 20h
 - Nettikoodin toteutus coroutiineilla 15h
 
 Yhteensä: 25h
+
+#### Samu
+
+#### Otso
+
+### Viikko 5
+
+#### Aleksi
+
+- Projektin suunnittelu 15h
+
+Yhteensä: 15h
+
+#### Samu
+
+#### Otso
+
+### Viikko 6
+
+#### Aleksi
+
+- Projektin suunnittelu 10h
+- Map loader toteutus 15h
+- Dokumentointi 5h
+
+Yhteensä: 30h
 
 #### Samu
 

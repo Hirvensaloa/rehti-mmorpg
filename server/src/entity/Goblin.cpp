@@ -1,3 +1,3 @@
 #include "Goblin.hpp"
 
-Goblin::Goblin(std::string name, unsigned int id, Coordinates location) : Npc(name, id, location){};
+Goblin::Goblin(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : Npc(pGameWorld, name, id, location){};

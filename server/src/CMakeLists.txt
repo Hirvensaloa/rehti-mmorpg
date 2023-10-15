@@ -21,12 +21,16 @@ set(SOURCES
         PlayerCharacter.cpp
         Action.cpp
         Action.hpp
+        AttackAction.cpp
+        AttackAction.hpp
         MoveAction.cpp
         MoveAction.hpp
         entity/Goblin.cpp
         entity/Goblin.hpp
         entity/Npc.cpp
         entity/Npc.hpp
+        entity/Bandit.cpp
+        entity/Bandit.hpp
 	)
 
 add_executable(${TARGET}

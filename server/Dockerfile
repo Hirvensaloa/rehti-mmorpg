@@ -13,9 +13,9 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install cmake from the binary as the apt-get version is too old.
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.26.4/cmake-3.26.4-linux-x86_64.sh && \
-    chmod +x cmake-3.26.4-linux-x86_64.sh && \
-    ./cmake-3.26.4-linux-x86_64.sh --skip-license --prefix=/usr/local
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.27.7/cmake-3.27.7-linux-x86_64.sh && \
+    chmod +x cmake-3.27.7-linux-x86_64.sh && \
+    ./cmake-3.27.7-linux-x86_64.sh --skip-license --prefix=/usr/local
 
 RUN pip3 install conan
 

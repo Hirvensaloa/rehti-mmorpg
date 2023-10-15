@@ -2,12 +2,7 @@
 
 #include <iostream>
 
-PlayerCharacter::PlayerCharacter(std::string name, unsigned int id, Coordinates location) : Entity(id, location), nameM(name){};
-
-std::string PlayerCharacter::getName()
-{
-    return nameM;
-}
+PlayerCharacter::PlayerCharacter(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : Entity(pGameWorld, name, id, location){};
 
 void PlayerCharacter::update()
 {

@@ -137,9 +137,9 @@ void Server::sendGameState()
     for (auto &npc : gameWorldM.getNpcs())
     {
         GameStateEntity entity;
-        const Coordinates location = npc.getLocation();
-        entity.entityId = npc.getId();
-        entity.name = npc.getName();
+        const Coordinates location = npc->getLocation();
+        entity.entityId = npc->getId();
+        entity.name = npc->getName();
         entity.x = location.x;
         entity.y = location.y;
         entity.z = location.z;

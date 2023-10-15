@@ -12,4 +12,9 @@ struct Coordinates
     {
         return (x == other.x && y == other.y && z == other.z);
     }
+
+    unsigned int distance(Coordinates &other)
+    {
+        return std::abs(x - other.x) + std::abs(y - other.y);
+    }
 };

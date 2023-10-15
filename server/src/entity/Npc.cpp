@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Npc::Npc(std::string name, unsigned int id, Coordinates location) : Entity(id, location), nameM(name){};
+Npc::Npc(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : Entity(pGameWorld, name, id, location){};
 
 void Npc::update()
 {
@@ -19,9 +19,4 @@ void Npc::update()
       setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), Coordinates(rand() % 10, rand() % 10), this));
     }
   }
-};
-
-std::string Npc::getName()
-{
-  return nameM;
 };

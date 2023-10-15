@@ -4,7 +4,7 @@
 #include <thread>
 #include <vector>
 
-#include "GameWorld.hpp"
+#include "world/GameWorld.hpp"
 #include <network.h>
 
 class Server

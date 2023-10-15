@@ -2,9 +2,9 @@
 
 #include <vector>
 
-#include "PlayerCharacter.hpp"
-#include "entity/Npc.hpp"
-#include "map/Map.hpp"
+#include "../entity/PlayerCharacter.hpp"
+#include "../entity/Npc.hpp"
+#include "Map.hpp"
 
 class GameWorld
 {

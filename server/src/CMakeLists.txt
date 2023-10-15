@@ -12,23 +12,26 @@ set(SOURCES
         database/Connect.cpp
         Server.cpp
 	Server.hpp
-        Entity.hpp
-        Entity.cpp
-        GameWorld.cpp
-        GameWorld.hpp
-        Coordinates.hpp
-        PlayerCharacter.hpp
-        PlayerCharacter.cpp
-        Action.cpp
-        Action.hpp
-        MoveAction.cpp
-        MoveAction.hpp
+
+        world/GameWorld.cpp
+        world/GameWorld.hpp
+        world/Coordinates.hpp
+        world/Map.cpp
+        world/Map.hpp
+
+        action/Action.cpp
+        action/Action.hpp
+        action/MoveAction.cpp
+        action/MoveAction.hpp
+
+        entity/Entity.hpp
+        entity/Entity.cpp
+        entity/PlayerCharacter.hpp
+        entity/PlayerCharacter.cpp
         entity/Goblin.cpp
         entity/Goblin.hpp
         entity/Npc.cpp
         entity/Npc.hpp
-        map/Map.cpp
-        map/Map.hpp
 	)
 
 add_executable(${TARGET}

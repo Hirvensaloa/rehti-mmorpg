@@ -1,5 +1,5 @@
 #include "GameWorld.hpp"
-#include "entity/Goblin.hpp"
+#include "../entity/Goblin.hpp"
 
 GameWorld::GameWorld(){};
 

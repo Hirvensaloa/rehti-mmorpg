@@ -63,7 +63,7 @@ Now just run the `generate-map.sh` under the scripts folder to generate map asse
 
 ## Object tile maps
 
-Each object should have a JSON-file in [object_tile_maps](/object_tile_maps). Object tile map defines which tiles does the object block around itself. For example, a house wants to define all of the tiles which have walls, as blocked. Object's can also block a tile from a certain direction. For example, a fence can block only south direction so that player can still be on the same tile as the fence but the fence will just block southside access.
+Each object should have a JSON-file in [object_tile_maps](/assets/map/object_tile_maps). Object tile map defines which tiles does the object block around itself. For example, a house wants to define all of the tiles which have walls, as blocked. Object's can also block a tile from a certain direction. For example, a fence can block only south direction so that player can still be on the same tile as the fence but the fence will just block southside access.
 
 Object tile map is named `<id>-<name>.json`. Object tile map is defined as a matrix. Elements have string values.
 

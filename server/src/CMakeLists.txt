@@ -18,6 +18,8 @@ set(SOURCES
         world/Coordinates.hpp
         world/Map.cpp
         world/Map.hpp
+        world/Utils.cpp
+        world/Utils.hpp
 
         action/Action.cpp
         action/Action.hpp

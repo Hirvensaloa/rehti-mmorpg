@@ -6,7 +6,7 @@
 
 #include "Utils.hpp"
 
-bool isValidCell(const std::vector<std::vector<unsigned>> &map, std::pair<unsigned, unsigned> coords, Direction dir)
+bool isValidCell(const std::vector<std::vector<uint8_t>> &map, std::pair<unsigned, unsigned> coords, Direction dir)
 {
   if (coords.first >= map.size() || coords.second >= map[0].size() || coords.first < 0 || coords.second < 0)
   {
@@ -51,8 +51,7 @@ struct nodeCompare
   }
 };
 
-std::vector<std::pair<unsigned, unsigned>>
-astar(const std::vector<std::vector<unsigned>> &map, std::pair<unsigned, unsigned> start, std::pair<unsigned, unsigned> end)
+std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<uint8_t>> &map, std::pair<unsigned, unsigned> start, std::pair<unsigned, unsigned> end)
 {
   std::vector<std::pair<unsigned, unsigned>> path;
   unsigned mapHeight = map.size();
@@ -66,8 +65,8 @@ astar(const std::vector<std::vector<unsigned>> &map, std::pair<unsigned, unsigne
   std::priority_queue<Node *, std::vector<Node *>, nodeCompare> open;
   open.push(&startNode);
 
-  // Create the closed set, which contains all the nodes that have been visited
-  std::vector<std::vector<bool>> closed(mapWidth, std::vector<bool>(mapHeight, false));
+  // Create the closed set, which contains all the nodes that have been visited. ALSO contains a pointer to the open set node, if the node is in the open set (This is because prio queue access is O(n))
+  std::vector<std::vector<std::pair<bool, Node *>>> closed(mapWidth, std::vector<std::pair<bool, Node *>>(mapHeight, {false, nullptr}));
 
   while (!open.empty())
   {
@@ -90,7 +89,7 @@ astar(const std::vector<std::vector<unsigned>> &map, std::pair<unsigned, unsigne
     }
 
     // Add the current node to the closed set
-    closed[current->coords.first][current->coords.second] = true;
+    closed[current->coords.first][current->coords.second].first = true;
 
     // Check all the neighbours
     for (int i = 0; i < 8; i++)
@@ -99,31 +98,31 @@ astar(const std::vector<std::vector<unsigned>> &map, std::pair<unsigned, unsigne
       std::pair<unsigned, unsigned> neighbourCoords = current->coords;
       switch (i)
       {
-      case 0:
+      case NORTH:
         neighbourCoords.first++;
         break;
-      case 1:
+      case NORTH_EAST:
         neighbourCoords.first++;
         neighbourCoords.second++;
         break;
-      case 2:
+      case EAST:
         neighbourCoords.second++;
         break;
-      case 3:
+      case SOUTH_EAST:
         neighbourCoords.first--;
         neighbourCoords.second++;
         break;
-      case 4:
+      case SOUTH:
         neighbourCoords.first--;
         break;
-      case 5:
+      case SOUTH_WEST:
         neighbourCoords.first--;
         neighbourCoords.second--;
         break;
-      case 6:
+      case WEST:
         neighbourCoords.second--;
         break;
-      case 7:
+      case NORTH_WEST:
         neighbourCoords.first++;
         neighbourCoords.second--;
         break;
@@ -136,7 +135,7 @@ astar(const std::vector<std::vector<unsigned>> &map, std::pair<unsigned, unsigne
       }
 
       // Check if the neighbour is in the closed set
-      if (closed[neighbourCoords.first][neighbourCoords.second])
+      if (closed[neighbourCoords.first][neighbourCoords.second].first)
       {
         continue;
       }
@@ -145,35 +144,27 @@ astar(const std::vector<std::vector<unsigned>> &map, std::pair<unsigned, unsigne
       unsigned costFromStart = current->costFromStart + 1;
 
       // Check if the neighbour is in the open set
-      Node *neighbour = nullptr;
-      for (Node *node : open)
+      Node *neighbour = closed[neighbourCoords.first][neighbourCoords.second].second;
+
+      if (neighbour == nullptr)
       {
-        if (node->coords == neighbourCoords)
-        {
-          neighbour = node;
-          break;
-        }
+        // Create the neighbour node
+        neighbour = new Node{neighbourCoords, costFromStart, euclideanDistance(neighbourCoords, endNode.coords), current};
+
+        // Add the neighbour to the open set
+        open.push(neighbour);
+        closed[neighbourCoords.first][neighbourCoords.second].second = neighbour;
+      }
+      // Check if the cost from start is lower than the previous cost from start
+      else if (costFromStart < neighbour->costFromStart)
+      {
+        // Update the neighbour
+        neighbour->parent = current;
+        neighbour->costFromStart = costFromStart;
       }
     }
   }
-}
 
-std::vector<std::pair<unsigned, unsigned>> findPath(const std::vector<std::vector<unsigned>> &map, std::pair<unsigned, unsigned> start, std::pair<unsigned, unsigned> end)
-{
-  // Check that the start and end are within the map
-  if (start.first >= map.size() || start.second >= map[start.first].size() || end.first >= map.size() || end.second >= map[end.first].size())
-  {
-    std::cerr << "Start or end is outside of the map!" << std::endl;
-    return std::vector<std::pair<unsigned, unsigned>>();
-  }
-
-  // Check if the start and end are accessible
-  const unsigned &startCell = map[start.first][start.second];
-  const unsigned &endCell = map[end.first][end.second];
-
-  if (startCell == 0 || endCell == 0)
-  {
-    std::cerr << "Start or end cell is not accessible! " << startCell << " " << endCell << std::endl;
-    return std::vector<std::pair<unsigned, unsigned>>();
-  }
+  // No path found, return an empty vector
+  return path;
 }

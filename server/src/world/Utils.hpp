@@ -28,15 +28,14 @@ struct Node
 };
 
 // Check if cell is valid and accessible from given direction
-bool isValidCell(const std::vector<std::vector<unsigned>> &map, std::pair<unsigned, unsigned> cell, Direction dir);
+bool isValidCell(const std::vector<std::vector<uint8_t>> &map, std::pair<unsigned, unsigned> cell, Direction dir);
 
 // Calculate the euclidean distance between two points
 unsigned euclideanDistance(std::pair<unsigned, unsigned> start, std::pair<unsigned, unsigned> end);
 
-std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<unsigned>> &map, std::pair<unsigned, unsigned> start, std::pair<unsigned, unsigned> end);
-
 /*
- * Finds a path from start to end using A* algorithm. Returns a vector containing the path from start to finish.
- * If no path is found, returns an empty vector.
+ * A-star algorithm made to work with the access map format. Allows diagonal movement and has a heuristic of euclidean distance.
+ *
+ * Returns a vector containing the path from start to finish.
  */
-std::vector<std::pair<unsigned, unsigned>> findPath(const std::vector<std::vector<unsigned>> &map, std::pair<unsigned, unsigned> start, std::pair<unsigned, unsigned> end);
+std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<uint8_t>> &map, std::pair<unsigned, unsigned> start, std::pair<unsigned, unsigned> end);

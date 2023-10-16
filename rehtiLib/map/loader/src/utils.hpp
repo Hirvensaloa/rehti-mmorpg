@@ -62,7 +62,7 @@ void readPng(std::vector<unsigned char> &image, unsigned &width, unsigned &heigh
 
 // Rotates the matrix 90 degrees clockwise. Rotation is done rotation * 90 degrees.
 template <typename T>
-void rotateMatrix(std::vector<std::vector<T>> &matrix, uint rotation)
+void rotateMatrix(std::vector<std::vector<T>> &matrix, uint8_t rotation)
 {
   int maxRotation = 4;
   rotation = rotation % maxRotation;

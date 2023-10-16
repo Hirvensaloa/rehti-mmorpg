@@ -19,7 +19,7 @@ std::vector<std::string> readDirectory(std::string path, std::string extension)
   {
     if (entry.path().extension() == extension)
     {
-      files.push_back(entry.path().filename().toString());
+      files.push_back(entry.path().filename().string());
     }
   }
 

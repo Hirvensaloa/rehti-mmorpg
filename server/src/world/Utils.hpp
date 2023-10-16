@@ -36,6 +36,6 @@ unsigned euclideanDistance(std::pair<unsigned, unsigned> start, std::pair<unsign
 /*
  * A-star algorithm made to work with the access map format. Allows diagonal movement and has a heuristic of euclidean distance.
  *
- * Returns a vector containing the path from start to finish.
+ * Returns a vector containing the path from start to finish. Start is not included in the path, but end is.
  */
 std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<uint8_t>> &map, std::pair<unsigned, unsigned> start, std::pair<unsigned, unsigned> end);

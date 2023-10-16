@@ -82,6 +82,12 @@ For detailed information on the message structures, check [here](/rehtiLib/netwo
 
 ## Project practices
 
+### Testing
+
+Tests are implemented with Gtests. Tests only cover the backend.
+
+Run the tests with `./scripts/test-server.sh`.
+
 ### General
 
 - Code needs to be documented. The goal is that by reading the docs, a user can start the program and gain a technical overview of the project.

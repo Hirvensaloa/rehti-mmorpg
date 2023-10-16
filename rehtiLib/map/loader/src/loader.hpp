@@ -341,7 +341,7 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
 /*
  * Generates access map from height map & object block map. Access map defines which tiles are accessible from which tiles.
  *
- * Each cell contains 4-bit value.
+ * Each cell contains 4-bit value. 1st bit is the rightmost bit
  * 1. bit = north
  * 2. bit = east
  * 3. bit = south
@@ -372,25 +372,29 @@ static const std::vector<std::vector<unsigned>> generateAccessMap(const std::vec
       // Check North
       if (i == 0 || height - heightMap[i - 1][j] > 1 || objectBlockMap[i][j].find("N") != std::string::npos)
       {
-        access = access & 0b0111;
+        // Block the north bit
+        access = access & 0b1110;
       }
 
       // Check East
       if (j == heightMap[i].size() - 1 || height - heightMap[i][j + 1] > 1 || objectBlockMap[i][j].find("E") != std::string::npos)
       {
-        access = access & 0b1011;
+        // Block the east bit
+        access = access & 0b1101;
       }
 
       // Check South
       if (i == heightMap.size() - 1 || height - heightMap[i + 1][j] > 1 || objectBlockMap[i][j].find("S") != std::string::npos)
       {
-        access = access & 0b1101;
+        // Block the south bit
+        access = access & 0b1011;
       }
 
       // Check West
       if (j == 0 || height - heightMap[i][j - 1] > 1 || objectBlockMap[i][j].find("W") != std::string::npos)
       {
-        access = access & 0b1110;
+        // Block the west bit
+        access = access & 0b0111;
       }
     }
   }

@@ -30,6 +30,7 @@ add_executable(
 target_link_libraries(
   ${TARGET}
   GTest::gtest_main
+  gmock
 )
 
 include(GoogleTest)

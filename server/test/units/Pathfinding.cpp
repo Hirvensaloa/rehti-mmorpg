@@ -1,21 +1,37 @@
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
 #include "../../src/world/Utils.hpp"
 
 TEST(AStarTest, SimpleCase)
 {
   std::vector<std::vector<uint8_t>> map = {
-      {0b0001, 0b0001, 0b0001},
-      {0b0000, 0b0001, 0b0001},
-      {0b0001, 0b0000, 0b0001}};
+      {0b0010, 0b1100, 0b0001},
+      {0b0000, 0b0101, 0b0001},
+      {0b0001, 0b0011, 0b1000}};
   std::pair<unsigned, unsigned> start = {0, 0};
   std::pair<unsigned, unsigned> end = {2, 2};
 
   std::vector<std::pair<unsigned, unsigned>> path = astar(map, start, end);
 
-  ASSERT_EQ(path.size(), 5);   // Check if the path has the correct length
-  ASSERT_EQ(path[0], start);   // Check if the start point is the first in the path
-  ASSERT_EQ(path.back(), end); // Check if the end point is the last in the path
+  ASSERT_THAT(path, testing::ElementsAreArray({{0, 1}, {1, 1}, {2, 1}, end})); // Check if the path is correc
+}
+
+TEST(AStartTest, ComplexCase)
+{
+  // Check a map that is not a rectangle
+  std::vector<std::vector<uint8_t>> map = {
+      {0b0010, 0b1100, 0b0001},
+      {0b0000, 0b0101, 0b0001, 0b1000},
+      {0b0001, 0b0101, 0b1000, 0b1010},
+      {0b0001, 0b0011, 0b1001}};
+
+  std::pair<unsigned, unsigned> start = {0, 0};
+  std::pair<unsigned, unsigned> end = {2, 3};
+
+  std::vector<std::pair<unsigned, unsigned>> path = astar(map, start, end);
+
+  ASSERT_THAT(path, testing::ElementsAreArray({{0, 1}, {1, 1}, {2, 1}, {2, 2}, end})); // Check if the path is correct
 }
 
 TEST(AStarTest, NoPath)

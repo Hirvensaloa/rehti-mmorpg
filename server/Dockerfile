@@ -27,13 +27,14 @@ COPY server/conanfile.txt ./server/conanfile.txt
 
 RUN cd server && conan install . --output-folder=build --build=missing -s build_type=Debug -s compiler.cppstd=20
 
+COPY third_party/rapidjson/include/ ./third_party/rapidjson/include/
+
 # Generate map assets
 COPY rehtiLib/map/ ./rehtiLib/map
 COPY scripts/generate_map.sh ./scripts/generate_map.sh
 COPY assets/ ./assets
 RUN ./scripts/generate_map.sh
 
-COPY third_party/rapidjson/include/ ./third_party/rapidjson/include/
 COPY rehtiLib/network/ ./rehtiLib/network
 COPY server/CMakeLists.txt ./server
 COPY server/src/ ./server/src/

@@ -14,7 +14,7 @@ public:
 
   ~Map() = default;
 
-  std::optional<std::vector<uint8_t>> findPath(Coordinates start, Coordinates end);
+  std::optional<std::vector<std::pair<uint8_t, uint8_t>>> findPath(Coordinates start, Coordinates end);
 
 private:
   std::vector<std::vector<uint8_t>> accessMapM;

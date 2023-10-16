@@ -10,7 +10,7 @@ Map::Map()
   std::cout << "Map loaded successfully!" << std::endl;
 }
 
-std::optional<std::vector<uint8_t>> Map::findPath(Coordinates start, Coordinates end)
+std::optional<std::vector<std::pair<uint8_t, uint8_t>>> Map::findPath(Coordinates start, Coordinates end)
 {
   // TODO
   return std::nullopt;

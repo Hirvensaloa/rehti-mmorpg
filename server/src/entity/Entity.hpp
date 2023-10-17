@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Coordinates.hpp"
-#include "MoveAction.hpp"
+#include "../world/Coordinates.hpp"
+#include "../action/MoveAction.hpp"
 
 class Entity
 {

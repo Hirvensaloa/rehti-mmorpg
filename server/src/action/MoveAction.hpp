@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Action.hpp"
-#include "Coordinates.hpp"
+#include "../world/Coordinates.hpp"
 
 class MoveAction : public Action
 {

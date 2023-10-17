@@ -5,7 +5,7 @@
 #include <optional>
 #include <iostream>
 
-#include "../Coordinates.hpp"
+#include "Coordinates.hpp"
 
 class Map
 {

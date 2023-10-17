@@ -1,5 +1,5 @@
 #include "Action.hpp"
-#include "PlayerCharacter.hpp"
+#include "../entity/PlayerCharacter.hpp"
 
 #include <iostream>
 

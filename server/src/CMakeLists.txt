@@ -12,17 +12,22 @@ set(SOURCES
         database/Connect.cpp
         Server.cpp
 	Server.hpp
-        Entity.hpp
-        Entity.cpp
-        GameWorld.cpp
-        GameWorld.hpp
-        Coordinates.hpp
-        PlayerCharacter.hpp
-        PlayerCharacter.cpp
-        Action.cpp
-        Action.hpp
-        MoveAction.cpp
-        MoveAction.hpp
+
+        world/GameWorld.cpp
+        world/GameWorld.hpp
+        world/Coordinates.hpp
+        world/Map.cpp
+        world/Map.hpp
+
+        action/Action.cpp
+        action/Action.hpp
+        action/MoveAction.cpp
+        action/MoveAction.hpp
+
+        entity/Entity.hpp
+        entity/Entity.cpp
+        entity/PlayerCharacter.hpp
+        entity/PlayerCharacter.cpp
         entity/Goblin.cpp
         entity/Goblin.hpp
         entity/Npc.cpp
@@ -45,6 +50,8 @@ target_link_libraries(${TARGET} PRIVATE
 add_subdirectory(../../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/../build/network)
 target_link_libraries(${TARGET} PUBLIC rehtiNetwork)
 target_include_directories(${TARGET} PUBLIC ../../rehtiLib/network/include)
+
+target_include_directories(${TARGET} PUBLIC ../../rehtiLib/map/reader)
 
 # postgres client
 

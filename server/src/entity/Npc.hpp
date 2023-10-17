@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "../Entity.hpp"
+#include "Entity.hpp"
 
 class Npc : public Entity
 {

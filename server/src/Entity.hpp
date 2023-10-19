@@ -1,5 +1,7 @@
 #pragma once
 
+#include "./item/Equipment.hpp"
+#include "./item/Inventory.hpp"
 #include "AttackAction.hpp"
 #include "Coordinates.hpp"
 #include "MoveAction.hpp"
@@ -23,6 +25,10 @@ public:
 
     unsigned int getHp();
 
+    Inventory &getInventory();
+
+    Equipment &getEquipment();
+
     void changeHp(int amount);
 
     void setAction(std::shared_ptr<Action> action);
@@ -45,4 +51,8 @@ protected:
     unsigned int hpM = 10;
 
     GameWorld *pGameWorldM;
+
+    Inventory inventoryM;
+
+    Equipment equipmentM;
 };

@@ -31,6 +31,17 @@ set(SOURCES
         entity/Npc.hpp
         entity/Bandit.cpp
         entity/Bandit.hpp
+        item/Equipment.hpp
+        item/Equipment.cpp
+        item/EquippableItem.hpp
+        item/EquippableItem.cpp
+        item/Item.hpp
+        item/Item.cpp
+        item/Inventory.hpp
+        item/Inventory.cpp
+        item/FoodItem.hpp
+        item/FoodItem.cpp
+        item/ItemStats.hpp
 	)
 
 add_executable(${TARGET}

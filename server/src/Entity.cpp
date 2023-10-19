@@ -3,7 +3,7 @@
 #include "Entity.hpp"
 #include "GameWorld.hpp"
 
-Entity::Entity(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : idM(id), nameM(name), locationM(location), pGameWorldM(pGameWorld){};
+Entity::Entity(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : idM(id), nameM(name), locationM(location), pGameWorldM(pGameWorld), inventoryM(Inventory(this)), equipmentM(Equipment(this)){};
 
 unsigned int Entity::getId()
 {
@@ -28,6 +28,16 @@ Action &Entity::getCurrentAction()
 unsigned int Entity::getHp()
 {
     return hpM;
+}
+
+Inventory &Entity::getInventory()
+{
+    return inventoryM;
+}
+
+Equipment &Entity::getEquipment()
+{
+    return equipmentM;
 }
 
 void Entity::changeHp(int amount)

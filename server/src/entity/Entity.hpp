@@ -2,6 +2,8 @@
 
 #include "../action/AttackAction.hpp"
 #include "../action/MoveAction.hpp"
+#include "../item/Equipment.hpp"
+#include "../item/Inventory.hpp"
 #include "../world/Coordinates.hpp"
 
 class GameWorld;
@@ -22,6 +24,12 @@ public:
     Action &getCurrentAction();
 
     unsigned int getHp();
+
+    Inventory &getInventory();
+
+    Equipment &getEquipment();
+
+    int getRange();
 
     void changeHp(int amount);
 
@@ -45,4 +53,8 @@ protected:
     unsigned int hpM = 10;
 
     GameWorld *pGameWorldM;
+
+    Inventory inventoryM;
+
+    Equipment equipmentM;
 };

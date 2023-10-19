@@ -1,6 +1,8 @@
+#include <iostream>
+
 #include "Map.hpp"
 #include "reader.hpp"
-#include <iostream>
+#include "Utils.hpp"
 
 const std::string accessMapPath = "assets/generated/access_map.txt";
 
@@ -10,8 +12,7 @@ Map::Map()
   std::cout << "Map loaded successfully!" << std::endl;
 }
 
-std::optional<std::vector<uint8_t>> Map::findPath(Coordinates start, Coordinates end)
+std::vector<std::pair<unsigned, unsigned>> Map::findPath(Coordinates start, Coordinates end)
 {
-  // TODO
-  return std::nullopt;
+  return astar(accessMapM, {start.x, start.y}, {end.x, end.y});
 }

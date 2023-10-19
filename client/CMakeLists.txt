@@ -3,7 +3,6 @@ project(Client)
 set(CMAKE_CXX_STANDARD 20)
 
 message("Using CMake version: ${CMAKE_VERSION}")
-add_library(rehtiGraphics STATIC "")
 
 add_subdirectory(../rehtiLib/graphics ${CMAKE_CURRENT_LIST_DIR}/build/graphics)
 add_subdirectory(../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/build/network)

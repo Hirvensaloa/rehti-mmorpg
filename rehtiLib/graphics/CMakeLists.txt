@@ -1,3 +1,5 @@
+add_library(rehtiGraphics)
+
 set(DEPENDENCY_DIR "${CMAKE_CURRENT_LIST_DIR}/../../third_party")
 set(VALIDATION_LAYER_DIR "${vulkan-validationlayers_INCLUDE_DIR}/../${CMAKE_INSTALL_BINDIR}")
 set($ENV{VK_LAYER_PATH} VALIDATION_LAYER_DIR)
@@ -35,6 +37,8 @@ set(GRAPHICS_SOURCES
 	ShaderManager.hpp
 	BufferManager.cpp
 	BufferManager.hpp
+	DescriptorManager.hpp
+	DescriptorManager.cpp
 	Camera.hpp
 	Camera.cpp
 	SimpleMesh.hpp

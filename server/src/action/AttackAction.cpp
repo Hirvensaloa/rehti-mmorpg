@@ -14,7 +14,8 @@ void AttackAction::act()
 {
     if (!completedM)
     {
-        if (pEntityM->getLocation().distance(pTargetM->getLocation()) <= 1)
+        int currentDistance = pEntityM->getLocation().distance(pTargetM->getLocation());
+        if (currentDistance <= pEntityM->getRange() && currentDistance > 0)
         {
             if (std::chrono::system_clock::now() > startTimeM + actionTimeM)
             {

@@ -2,6 +2,7 @@
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <vulkan/vulkan.h>
 #include <glm/vec3.hpp>
+#include <glm/mat4x4.hpp>
 
 #include <vector>
 #include <array>
@@ -14,6 +15,17 @@ struct SimpleVertex
 	// Vulkan binding and attribute descriptions
 	static VkVertexInputBindingDescription getBindingDescription();
 	static std::array<VkVertexInputAttributeDescription, 2> getAttributeDescriptions();
+};
+
+namespace Transformation
+{
+	// Returns info needed to create a descriptor set layout with bindings attached to the first binding point
+	static VkDescriptorSetLayoutBinding getDescriptorSetBinding();
+}
+
+struct SkeletonBufferObject
+{
+	glm::mat4 boneTransforms[100];
 };
 
 // Simple cube mesh

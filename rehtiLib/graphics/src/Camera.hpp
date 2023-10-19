@@ -6,6 +6,9 @@
 
 #include <functional>
 
+// Forward declarations
+struct GLFWwindow;
+
 // TODO figure out how camera should function with the player target.
 struct Target
 {
@@ -35,7 +38,7 @@ public:
 	/// <param name="fovRad">Field of view in radians, defaults to quarter pi = 45 degrees</param>
 	/// <param name="near">Near plane distance</param>
 	/// <param name="far">Far plane distance</param>
-	Camera(glm::vec3 targetPos, float width, float height, float fovRad = glm::quarter_pi<float>(), float near = 0.1f, float far = 100.f);
+	Camera(glm::vec3 targetPos, float width, float height, float fovRad = glm::quarter_pi<float>(), float near = 0.1f, float far = 100.f, float sensitivity = 0.01f);
 
 	/// <summary>
 	/// Returns the view matrix of the camera, which is the inverse of the model matrix of the camera.
@@ -64,6 +67,19 @@ public:
 	void orbitRotate(glm::vec2 rotationVec);
 
 	/// <summary>
+	/// Registers this camera to the given window, so that it can be controlled by the mouse.
+	/// Also sets the callback for updating the camera.
+	/// </summary>
+	/// <param name="window"></param>
+	void registerCameraControls(GLFWwindow* window);
+
+	/// <summary>
+	/// Sets the sensitivity of the camera.
+	/// </summary>
+	/// <param name="newSensitivity"></param>
+	void setSensitivity(float newSensitivity);
+
+	/// <summary>
 	/// Moves the location of the camera by the given vector.
 	/// </summary>
 	/// <param name="movement">Movement to the camera.</param>
@@ -78,7 +94,7 @@ private:
 	glm::mat4 getCameraMatrixOrigon() const;
 
 	/// <summary>
-	/// ´Returns the location of the camera.
+	/// Returns the location of the camera.
 	/// </summary>
 	/// <returns></returns>
 	glm::vec3 getLocation() const;
@@ -88,5 +104,11 @@ private:
 	glm::mat4 cameraMatrixM;
 	glm::mat4 projectionM;
 	glm::vec3 targetM;
+	float sensitivityM;
+
+	static double mouseX;
+	static double mouseY;
+	static void cursorPosCallback(GLFWwindow* window, double xpos, double ypos); // Callback for registering mouse movement
+	static std::function<void(glm::vec2)> cameraUpdateCallback; // Callback for updating the camera
 };
 

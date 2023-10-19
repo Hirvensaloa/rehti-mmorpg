@@ -12,8 +12,6 @@
 #include "Camera.hpp"
 #include "BufferManager.hpp"
 #include "SimpleMesh.hpp"
-// Forward declarations
-struct GLFWwindow;
 
 //Useful structs
 struct QueueFamilyIndices
@@ -105,6 +103,17 @@ private:
     /// Creates the render pass
     /// </summary>
     void createRenderPass();
+
+    /// <summary>
+    /// Creates the descriptor pool.
+    /// </summary>
+    void createDescriptorPool();
+
+    /// <summary>
+    /// Creates the descriptor set layout.
+    /// Should be called before creating the graphics pipeline.
+    /// </summary>
+    void createDescriptorSetLayout();
 
     /// <summary>
     /// Creates the graphics pipeline.
@@ -247,6 +256,8 @@ private:
 
     // Pipeline
     VkRenderPass renderPassM;
+    VkDescriptorSetLayout descriptorSetLayoutM;
+    VkDescriptorPool descriptorPoolM;
     VkPipelineLayout pipelineLayoutM;
     VkPipeline pipelineM;
 

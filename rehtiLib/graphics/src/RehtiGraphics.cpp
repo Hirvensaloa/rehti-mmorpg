@@ -13,6 +13,7 @@ RehtiGraphics::RehtiGraphics()
     :cameraM(Camera(glm::vec3(0.f, 0.f, 0.f), widthM, heightM))
 {
     initWindow();
+    cameraM.registerCameraControls(pWindowM);
     initVulkan();
 }
 
@@ -40,10 +41,12 @@ void RehtiGraphics::initVulkan()
     pickPhysicalDevice();  // Choose the physical device (gpu)
     createLogicalDevice(); // Create the interactable logical device
     createBufferManager(); // Initializes buffer manager member.
+    createDescriptorPool();
     createSwapChain();     // Creates the swapchain
     createImageViews();    // Creates the image view (how to access the image)
     createRenderPass();
-    createGraphicsPipeline(); // Creates a rendering pipeline (immutable stuff in vulkan)
+    createDescriptorSetLayout();
+    createGraphicsPipeline(); // Creates a rendering pipeline
     createFramebuffers();     // Creates the framebuffers
     createCommandPool();
     createCommandBuffers();
@@ -171,8 +174,14 @@ void RehtiGraphics::createBufferManager()
         transferQueue = graphicsQueueM; // Copy the handle
         queueFamily = indices.graphicsFamily.value();
     }
-
     pBufferManagerM = std::make_unique<BufferManager>(instanceM, gpuM, logDeviceM, transferQueue, queueFamily);
+
+    // Add the other queue families to the buffer manager
+    if (indices.hasTransferOnlyQueue())
+    {
+		pBufferManagerM->addQueueFamilyAccess(indices.graphicsFamily.value());
+		pBufferManagerM->addQueueFamilyAccess(indices.presentFamily.value());
+	}
 }
 
 void RehtiGraphics::createSwapChain()
@@ -307,6 +316,38 @@ void RehtiGraphics::createRenderPass()
 
     if (vkCreateRenderPass(logDeviceM, &renderpassInfo, nullptr, &renderPassM) != VK_SUCCESS)
         throw std::runtime_error("failed to create a renderpass");
+}
+
+void RehtiGraphics::createDescriptorPool()
+{
+    VkDescriptorPoolSize poolSize{};
+    poolSize.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    poolSize.descriptorCount = static_cast<uint32_t>(kConcurrentFramesM);
+
+    VkDescriptorPoolCreateInfo descPoolInfo{};
+    descPoolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+    descPoolInfo.poolSizeCount = 1;
+    descPoolInfo.pPoolSizes = &poolSize;
+    descPoolInfo.maxSets = static_cast<uint32_t>(kConcurrentFramesM);
+
+    if (vkCreateDescriptorPool(logDeviceM, &descPoolInfo, nullptr, &descriptorPoolM) != VK_SUCCESS)
+    {
+        throw std::runtime_error("Failed to create descriptor pool");
+    }
+}
+
+void RehtiGraphics::createDescriptorSetLayout()
+{
+    VkDescriptorSetLayoutBinding layoutBinding = Transformation::getDescriptorSetBinding();
+    VkDescriptorSetLayoutCreateInfo descSetCreateInfo{};
+    descSetCreateInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+    descSetCreateInfo.bindingCount = 1; // Todo ask from transformations namespace
+    descSetCreateInfo.pBindings = &layoutBinding;
+
+    if (vkCreateDescriptorSetLayout(logDeviceM, &descSetCreateInfo, nullptr, &descriptorSetLayoutM) != VK_SUCCESS)
+    {
+        throw std::runtime_error("Failed to create descriptor set layout");
+    }
 }
 
 void RehtiGraphics::createGraphicsPipeline()
@@ -493,16 +534,19 @@ void RehtiGraphics::createCommandBuffers()
         vkCmdBeginRenderPass(commandBuffersM[i], &renderInfo, VK_SUBPASS_CONTENTS_INLINE); // void
         vkCmdBindPipeline(commandBuffersM[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineM);
 
-        // Bind vertex buffer
-        VkBuffer vertexBuffers[] = {pBufferManagerM->getVertexBuffer()};
-        VkBuffer indexBuffers[] = {pBufferManagerM->getIndexBuffer()};
+        for(DrawAbleObject obj : pBufferManagerM->getObjectsToDraw()){
+            // Bind vertex buffer
+            VkBuffer vertexBuffers[] = {obj.getVertexBuffer()};
+            VkBuffer indexBuffer = obj.getIndexBuffer();
+            VkDescriptorSet descSets[] = {obj.getDescriptorSet(i)};
 
-        VkDeviceSize offsets[] = {0};
-        vkCmdBindVertexBuffers(commandBuffersM[i], 0, 1, vertexBuffers, offsets);
-        vkCmdBindIndexBuffer(commandBuffersM[i], indexBuffers[0], 0, VK_INDEX_TYPE_UINT32);
+            VkDeviceSize offsets[] = {0};
+            vkCmdBindVertexBuffers(commandBuffersM[i], 0, 1, vertexBuffers, offsets);
+            vkCmdBindIndexBuffer(commandBuffersM[i], indexBuffer, 0, VK_INDEX_TYPE_UINT32);
+            vkCmdBindDescriptorSets(commandBuffersM[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayoutM, 0, 1, descSets, 0, nullptr);
 
-
-        vkCmdDrawIndexed(commandBuffersM[i], static_cast<uint32_t>(pBufferManagerM->getIndicesSize()), 1, 0, 0, 0);
+            vkCmdDrawIndexed(commandBuffersM[i], obj.indexCount, 1, 0, 0, 0);
+		}
 
         vkCmdEndRenderPass(commandBuffersM[i]);
 
@@ -547,7 +591,7 @@ void RehtiGraphics::drawFrame()
         vkWaitForFences(logDeviceM, 1, &imageFencesM[imageIndex], VK_TRUE, UINT64_MAX);
     }
 
-    imageFencesM[imageIndex] = frameFencesM[currentFrameM]; //
+    imageFencesM[imageIndex] = frameFencesM[currentFrameM];
 
     VkSubmitInfo submitInfo{};
     submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
@@ -609,6 +653,9 @@ void RehtiGraphics::cleanup()
 
     // Delete the bufferManager
     pBufferManagerM.reset();
+
+    vkDestroyDescriptorPool(logDeviceM, descriptorPoolM, nullptr);
+    vkDestroyDescriptorSetLayout(logDeviceM, descriptorSetLayoutM, nullptr);
 
     vkDestroyCommandPool(logDeviceM, commandPoolM, nullptr);
 

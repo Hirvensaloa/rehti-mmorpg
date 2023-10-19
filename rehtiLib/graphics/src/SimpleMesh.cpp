@@ -25,3 +25,18 @@ std::array<VkVertexInputAttributeDescription, 2> SimpleVertex::getAttributeDescr
 
 	return std::array<VkVertexInputAttributeDescription, 2>();
 }
+
+VkDescriptorSetLayoutBinding Transformation::getDescriptorSetBinding()
+{
+	// Using single binding for desc set layout to be used in vertex shader
+	// Sort of similar to vertex input binding description
+	VkDescriptorSetLayoutBinding binding{};
+	binding.binding = 0;
+	binding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+	binding.descriptorCount = 1;
+	binding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+
+	binding.pImmutableSamplers = nullptr; // Optional, possibly to be added later
+
+	return binding;
+}

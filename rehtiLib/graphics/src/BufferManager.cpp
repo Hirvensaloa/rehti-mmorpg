@@ -5,6 +5,14 @@
 #include <vector>
 
 
+DrawAbleObject::DrawAbleObject(AllocatedBuffer vBuffer, AllocatedBuffer iBuffer, std::vector<AllocatedBuffer> uBuffers, uint32_t iCount, glm::mat4 initTransform)
+	: vertexBufferM(vBuffer), indexBufferM(iBuffer), uniformBuffersM(uBuffers), indexCountM(iCount), modelToWorldMatrixM(initTransform)
+{}
+
+DrawAbleObject::~DrawAbleObject()
+{
+}
+
 BufferManager::BufferManager(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, VkQueue transferQueue, uint32_t queueFamily)
 	: transferQueueM(transferQueue)
 {
@@ -38,9 +46,19 @@ BufferManager::BufferManager(VkInstance instance, VkPhysicalDevice gpu, VkDevice
 BufferManager::~BufferManager()
 {
 	// Loop over allocated buffers and destroy them
-	for (auto& buffer : allocatedBuffersM)
+	for (auto& obj : drawAbleObjectsM)
 	{
-		vmaDestroyBuffer(allocatorM, buffer.buffer, buffer.allocation);
+		vmaDestroyBuffer(allocatorM, obj.getIndexBuffer(), obj.getIndexBufferAllocation());
+		vmaDestroyBuffer(allocatorM, obj.getVertexBuffer(), obj.getVertexBufferAllocation());
+		
+		// Todo muuta t‰‰ paska systeemi vittu.
+		// Next: Add object from application side. It should be added to drawables. Then add method for returning the vector of drawables.
+		// Then change the shaders, they are all wrong.
+		// writebuffer and descriptor set allocation???
+		/*for (auto& uniformBuffer : )
+		{
+			vmaDestroyBuffer(allocatorM, uniformBuffer.buffer, uniformBuffer.allocation);
+		}*/
 	}
 	// And destroy the allocator
 	vmaDestroyAllocator(allocatorM);
@@ -51,7 +69,27 @@ void BufferManager::addQueueFamilyAccess(const uint32_t queueFamily)
 	queueFamilyIndicesM.push_back(queueFamily);
 }
 
-void BufferManager::createBuffer(VkDeviceSize size, const void* data, VkBufferUsageFlags usage, VmaMemoryUsage memUsage, VkMemoryPropertyFlags requiredFlags, VkMemoryPropertyFlags preferredFlags)
+void BufferManager::createDrawableObject(const uint32_t concurrentFrames, const std::vector<SimpleVertex>& vertices, const std::vector<uint32_t>& indices, glm::mat4 startingTransformation)
+{
+	VkDeviceSize vertexBufferSize = sizeof(SimpleVertex) * vertices.size();
+	VkDeviceSize indexBufferSize = sizeof(uint32_t) * indices.size();
+
+	AllocatedBuffer vertexBuf = createBuffer(vertexBufferSize, (void*)vertices.data(), VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VMA_MEMORY_USAGE_AUTO_PREFER_DEVICE);
+	AllocatedBuffer indexBuf = createBuffer(indexBufferSize, (void*)indices.data(), VK_BUFFER_USAGE_INDEX_BUFFER_BIT, VMA_MEMORY_USAGE_AUTO_PREFER_DEVICE);
+	std::vector<AllocatedBuffer> uniformBuffers;
+	for (uint32_t i = 0; i < concurrentFrames; i++)
+	{
+		AllocatedBuffer uniformBuf = createBuffer(sizeof(glm::mat4), nullptr, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VMA_MEMORY_USAGE_AUTO,
+			VMA_ALLOCATION_CREATE_MAPPED_BIT | VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT,
+			VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT);
+		uniformBuffers.push_back(uniformBuf);
+	}
+	
+	DrawAbleObject newObject(vertexBuf, indexBuf, uniformBuffers, indices.size(), startingTransformation);
+	drawAbleObjects.push_back(newObject);
+}
+
+AllocatedBuffer BufferManager::createBuffer(VkDeviceSize size, void* data, VkBufferUsageFlags usage, VmaMemoryUsage memUsage, VmaAllocationCreateFlags vmaCreationFlags, VkMemoryPropertyFlags requiredFlags, VkMemoryPropertyFlags preferredFlags)
 {
 	AllocatedBuffer newBuffer{};
 
@@ -64,18 +102,19 @@ void BufferManager::createBuffer(VkDeviceSize size, const void* data, VkBufferUs
 	bufferInfo.queueFamilyIndexCount = queueFamilyIndicesM.size();	
 
 	VmaAllocationCreateInfo allocInfo{};
+	allocInfo.flags = vmaCreationFlags;
 	allocInfo.usage = memUsage;
 	allocInfo.requiredFlags = requiredFlags;
-	allocInfo.preferredFlags = preferredFlags;
+	allocInfo.preferredFlags = preferredFlags;	
 
 	if (vmaCreateBuffer(allocatorM, &bufferInfo, &allocInfo, &newBuffer.buffer, &newBuffer.allocation, nullptr) != VK_SUCCESS)
 	{
-		throw std::runtime_error("Failed to create VMA buffer");
+		throw std::runtime_error("Failed to create VMA buffer");		
 	}
 	// Buffer creation succeeded, set the pointer to the data
-	newBuffer.data = data;
+	newBuffer.data = data;	
 	// Store the buffer and the allocation
-	allocatedBuffersM.push_back(newBuffer);
+	return newBuffer;
 }
 
 void BufferManager::copyBuffers(VkDevice logDevice)
@@ -180,4 +219,22 @@ void BufferManager::copyBuffers(VkDevice logDevice)
 			vkDestroyFence(logDevice, fence, nullptr);
 		}
 	}
+}
+
+void DrawAbleObject::applyTransformation(uint32_t index, glm::mat4 transform)
+{
+	modelToWorldMatrixM *= transform;
+	update(index);
+}
+
+void DrawAbleObject::setTransformation(uint32_t index, glm::mat4 newTransform)
+{
+	modelToWorldMatrixM = newTransform;
+	update(index);
+}
+
+void DrawAbleObject::update(uint32_t index)
+{
+	// We assume that the data is already mapped in the uniform buffers
+	memcpy(uniformBuffersM[index].allocation->GetMappedData(), &modelToWorldMatrixM, sizeof(glm::mat4));
 }

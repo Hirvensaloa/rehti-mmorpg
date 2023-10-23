@@ -8,7 +8,7 @@
 
 - Make sure you have Conan installed from [here](https://docs.conan.io/2/installation.html). Run `conan profile detect --force` after installation.
 
-- Run `./scripts/generate_map.sh` to generate the map assets.
+- Run `./scripts/generate_assets.sh` to generate the assets (map, items and objects).
 
 ### Running
 

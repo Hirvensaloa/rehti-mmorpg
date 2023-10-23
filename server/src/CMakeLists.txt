@@ -53,7 +53,9 @@ add_subdirectory(../../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/../build/netwo
 target_link_libraries(${TARGET} PUBLIC rehtiNetwork)
 target_include_directories(${TARGET} PUBLIC ../../rehtiLib/network/include)
 
-target_include_directories(${TARGET} PUBLIC ../../rehtiLib/map/reader)
+add_subdirectory(../../rehtiLib/assets/reader ${CMAKE_CURRENT_LIST_DIR}/../build/assets/reader)
+target_link_libraries(${TARGET} PUBLIC rehtiAssetsReader)
+target_include_directories(${TARGET} PUBLIC ../../rehtiLib/assets/reader/src)
 
 # postgres client
 

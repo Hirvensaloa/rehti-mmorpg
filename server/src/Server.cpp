@@ -10,7 +10,7 @@
 #include "Server.hpp"
 
 uint16_t PORT = 9999;
-int TICK_RATE = 1;
+int TICK_RATE = 32;
 int TICK_TIME = 1000 / TICK_RATE;
 static uint32_t id = 0;
 

@@ -23,6 +23,8 @@ set(SOURCES
 
         action/Action.cpp
         action/Action.hpp
+        action/AttackAction.cpp
+        action/AttackAction.hpp
         action/MoveAction.cpp
         action/MoveAction.hpp
 
@@ -36,6 +38,7 @@ set(SOURCES
         entity/Npc.hpp
         entity/Bandit.cpp
         entity/Bandit.hpp
+
         item/Equipment.hpp
         item/Equipment.cpp
         item/EquippableItem.hpp

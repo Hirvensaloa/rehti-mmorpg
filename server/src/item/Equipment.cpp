@@ -1,6 +1,6 @@
 #include "Equipment.hpp"
 
-#include "../Entity.hpp"
+#include "../entity/Entity.hpp"
 
 Equipment::Equipment(Entity *owner) : ownerM(owner), slotMapM{}
 {

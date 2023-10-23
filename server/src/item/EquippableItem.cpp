@@ -1,6 +1,6 @@
 #include "EquippableItem.hpp"
 
-#include "../Entity.hpp"
+#include "../entity/Entity.hpp"
 
 EquippableItem::EquippableItem(int id, std::string name, Slot equippableToSlot, ItemStats stats, bool isStackable) : Item(id, name, isStackable), equippableToSlotM(equippableToSlot), statsM(stats){};
 

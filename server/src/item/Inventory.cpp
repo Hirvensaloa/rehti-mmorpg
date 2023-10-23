@@ -1,5 +1,5 @@
 #include "Inventory.hpp"
-#include "../Entity.hpp"
+#include "../entity/Entity.hpp"
 
 Inventory::Inventory(Entity *owner, int inventorySize) : ownerM(owner), inventorySizeM(inventorySize){};
 

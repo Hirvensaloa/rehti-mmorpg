@@ -1,7 +1,9 @@
 #pragma once
 
-#include "Action.hpp"
 #include "../world/Coordinates.hpp"
+#include "Action.hpp"
+
+#include <vector>
 
 class MoveAction : public Action
 {
@@ -16,6 +18,8 @@ public:
 
 private:
     Coordinates targetM;
+
+    std::vector<std::pair<unsigned int, unsigned int>> pathM;
 
     std::chrono::milliseconds actionTimeM = std::chrono::milliseconds(200);
 

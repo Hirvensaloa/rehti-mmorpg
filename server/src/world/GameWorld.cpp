@@ -4,7 +4,30 @@
 
 #include <iostream>
 
-GameWorld::GameWorld(){};
+GameWorld::GameWorld() : mapM(Map()){};
+
+std::vector<PlayerCharacter> &GameWorld::getPlayers()
+{
+    return playersM;
+}
+
+PlayerCharacter *GameWorld::getPlayer(unsigned int playerId)
+{
+    for (auto it = playersM.begin(); it != playersM.end(); it++)
+    {
+        if (it->getId() == playerId)
+        {
+
+            return &(*it);
+        }
+    }
+    return nullptr;
+}
+
+Map &GameWorld::getMap()
+{
+    return mapM;
+}
 
 void GameWorld::addPlayer(std::string playerName, unsigned int playerId, Coordinates location)
 {
@@ -24,24 +47,6 @@ bool GameWorld::removePlayer(unsigned int playerId)
         }
     }
     return false;
-}
-
-std::vector<PlayerCharacter> &GameWorld::getPlayers()
-{
-    return playersM;
-}
-
-PlayerCharacter *GameWorld::getPlayer(unsigned int playerId)
-{
-    for (auto it = playersM.begin(); it != playersM.end(); it++)
-    {
-        if (it->getId() == playerId)
-        {
-
-            return &(*it);
-        }
-    }
-    return nullptr;
 }
 
 void GameWorld::addNpc(Npc npc)

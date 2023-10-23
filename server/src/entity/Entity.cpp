@@ -45,6 +45,12 @@ int Entity::getRange()
     return std::max(1, equipmentM.getEquipmentStats().range);
 }
 
+int Entity::getAttackSpeed()
+{
+    int equipmentAttackSpeed = equipmentM.getEquipmentStats().attackSpeed;
+    return equipmentAttackSpeed != 0 ? equipmentAttackSpeed : 2000;
+}
+
 GameWorld *Entity::getGameWorld()
 {
     return pGameWorldM;
@@ -79,7 +85,22 @@ bool Entity::move(Coordinates target)
 
 void Entity::attack(Entity &target)
 {
-    unsigned int damage = 1;
-    target.changeHp(-damage);
-    std::cout << "Entity " << target.getName() << " took " << damage << " damage. Remaining HP: " << target.getHp() << std::endl;
+    int baseDamage = 10;   // Base damage will be calculated based on skills later, placeholder value for now
+    int baseAccuracy = 50; // Same here
+
+    int totalAccuracy = getEquipment().getEquipmentStats().accuracy + baseAccuracy - target.getEquipment().getEquipmentStats().dodge;
+    int totalDamage = getEquipment().getEquipmentStats().damage + baseDamage - target.getEquipment().getEquipmentStats().armor;
+
+    bool hitConnects = totalAccuracy > rand() % 100;
+
+    if (hitConnects)
+    {
+        unsigned int damage = totalDamage;
+        target.changeHp(-damage);
+        std::cout << "Entity " << target.getName() << " took " << damage << " damage from " << getName() << ". Remaining HP: " << target.getHp() << std::endl;
+    }
+    else
+    {
+        std::cout << "Entity " << getName() << " missed an attack on " << target.getName() << "." << std::endl;
+    }
 }

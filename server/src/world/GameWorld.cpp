@@ -75,15 +75,6 @@ void GameWorld::initWorld()
 {
     npcsM.push_back(std::make_shared<Goblin>(this, "Kimmo-Goblin", 1337, Coordinates(1, 1)));
     npcsM.push_back(std::make_shared<Bandit>(this, "Roisto-Pena", 123, Coordinates(5, 5)));
-    Goblin testGoblin = Goblin(this, "Testi-Tero", 333, Coordinates(42, 42));
-    std::cout << testGoblin.getEquipment().getEquipmentStats();
-    std::cout << testGoblin.getInventory();
-    testGoblin.getInventory().addItem(std::make_shared<EquippableItem>(57, "Bronze Scimitar", Slot::MainHand, ItemStats(10, 15, 300, 1)));
-    std::cout << testGoblin.getInventory();
-    testGoblin.getInventory().useItem(57);
-    std::cout << testGoblin.getInventory();
-    std::cout << testGoblin.getEquipment().getEquipmentStats();
-    testGoblin.getEquipment().unequip(Slot::MainHand);
-    std::cout << testGoblin.getEquipment().getEquipmentStats();
-    std::cout << testGoblin.getInventory();
+    npcsM.back()->getInventory().addItem(std::make_shared<EquippableItem>(57, "Bronze Scimitar", Slot::MainHand, ItemStats(30, 20, 500, 1)));
+    npcsM.back()->getInventory().useItem(57);
 }

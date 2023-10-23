@@ -92,7 +92,7 @@ boost::asio::awaitable<void> Connection::send(const MessageStruct msg)
 
 boost::asio::awaitable<void> Connection::writeMessage(const Message msg)
 {
-  std::cout << idM << ": Writing message..." << msg.getBody() << " size: " << msg.getSize() << std::endl;
+  // std::cout << idM << ": Writing message..." << msg.getBody() << " size: " << msg.getSize() << std::endl;
   boost::system::error_code ec;
   // 1. Write header
   co_await boost::asio::async_write(
@@ -116,7 +116,7 @@ boost::asio::awaitable<void> Connection::writeMessage(const Message msg)
   }
   else
   {
-    std::cout << idM << ": Write successful" << std::endl;
+    // std::cout << idM << ": Write successful" << std::endl;
   }
 }
 

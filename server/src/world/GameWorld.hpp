@@ -14,13 +14,15 @@ public:
 
     ~GameWorld() = default;
 
-    void addPlayer(std::string playerName, unsigned int playerId, Coordinates location);
-
-    bool removePlayer(unsigned int playerId);
-
     std::vector<PlayerCharacter> &getPlayers();
 
     PlayerCharacter *getPlayer(unsigned int playerId);
+
+    Map &getMap();
+
+    void addPlayer(std::string playerName, unsigned int playerId, Coordinates location);
+
+    bool removePlayer(unsigned int playerId);
 
     void addNpc(Npc npc);
 
@@ -32,5 +34,8 @@ public:
 
 private:
     std::vector<PlayerCharacter> playersM;
+
     std::vector<std::shared_ptr<Npc>> npcsM;
+
+    Map mapM;
 };

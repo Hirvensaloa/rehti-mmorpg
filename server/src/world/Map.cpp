@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include "Map.hpp"
-#include "reader.hpp"
 #include "Utils.hpp"
+#include "reader.hpp"
 
 const std::string accessMapPath = "assets/generated/access_map.txt";
 

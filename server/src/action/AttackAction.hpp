@@ -14,10 +14,12 @@ public:
 
     void act();
 
+    Coordinates findNextMove();
+
 private:
     Entity *pTargetM;
 
-    std::chrono::milliseconds actionTimeM = std::chrono::milliseconds(300);
+    std::chrono::milliseconds actionTimeM = std::chrono::milliseconds(1000);
 
     std::chrono::milliseconds moveTimeM = std::chrono::milliseconds(200);
 

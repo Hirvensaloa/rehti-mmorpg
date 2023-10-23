@@ -31,11 +31,13 @@ public:
 
     int getRange();
 
+    GameWorld *getGameWorld();
+
     void changeHp(int amount);
 
     void setAction(std::shared_ptr<Action> action);
 
-    void move(Coordinates location);
+    bool move(Coordinates location);
 
     void attack(Entity &target);
 

@@ -1,5 +1,5 @@
 #include "FoodItem.hpp"
-#include "../Entity.hpp"
+#include "../entity/Entity.hpp"
 
 FoodItem::FoodItem(int id, std::string name, int healAmount, bool isStackable) : Item(id, name, isStackable), healAmountM(healAmount){};
 

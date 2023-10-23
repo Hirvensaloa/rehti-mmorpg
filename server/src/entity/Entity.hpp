@@ -31,6 +31,8 @@ public:
 
     int getRange();
 
+    int getAttackSpeed();
+
     GameWorld *getGameWorld();
 
     void changeHp(int amount);
@@ -52,7 +54,7 @@ protected:
 
     std::shared_ptr<Action> currentActionM;
 
-    unsigned int hpM = 10;
+    unsigned int hpM = 1000;
 
     GameWorld *pGameWorldM;
 

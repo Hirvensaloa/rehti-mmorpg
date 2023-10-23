@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-AttackAction::AttackAction(std::chrono::system_clock::time_point startTime, Entity *target, Entity *pEntity) : Action(startTime, pEntity), pTargetM(target) {}
+AttackAction::AttackAction(std::chrono::system_clock::time_point startTime, Entity *target, Entity *pEntity) : Action(startTime, pEntity), pTargetM(target), actionTimeM(pEntityM->getAttackSpeed()) {}
 
 Entity *AttackAction::getTarget()
 {

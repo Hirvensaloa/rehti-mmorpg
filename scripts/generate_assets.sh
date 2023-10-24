@@ -2,16 +2,16 @@
 
 if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     # Linux
-    EXECUTABLE_PATH="./build/maploader"
+    EXECUTABLE_PATH="./build/asset_loader"
 elif [[ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" || "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]]; then
     # Windows (MINGW32_NT or MINGW64_NT)
-    EXECUTABLE_PATH="./build/Debug/maploader"
+    EXECUTABLE_PATH="./build/Debug/asset_loader"
 else
     echo "Unsupported operating system"
     exit 1
 fi
 
-cd ./rehtiLib/map/loader
+cd ./rehtiLib/assets/loader
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
 cmake --build ./build
 

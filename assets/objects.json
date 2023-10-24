@@ -1,0 +1,65 @@
+{
+  "objects": [
+    {
+      "id": 1,
+      "type": "Resource",
+      "name": "Tree",
+      "yieldableItemList": [
+        {
+          "itemId": 0,
+          "yieldPercentage": 100
+        }
+      ],
+      "xpPerYield": 10,
+      "depleteChance": 20,
+      "relatedSkillId": 0,
+      "xpRequirement": 0,
+      "description": "A tree. It is a tree.",
+      "tileMap": [
+        ["XB"]
+      ]
+    },
+    {
+      "id": 30,
+      "type": "General",
+      "name": "Fence",
+      "description": "A sturdy fence.",
+      "tileMap": [
+        ["S", "XS", "S"]
+      ]
+    },
+    {
+      "id": 255,
+      "type": "General",
+      "name": "House",
+      "description": "It is just a house, nothing to see here",
+      "tileMap": [
+        ["B", "B", "B", "B", "B", "B", "B"],
+        ["B", " ", " ", " ", " ", " ", "B"],
+        ["B", " ", " ", "X", " ", " ", "B"],
+        ["B", " ", " ", " ", " ", " ", "B"],
+        ["B", " ", " ", " ", " ", " ", "B"],
+        ["B", " ", "B", "B", "B", "B", "B"]
+      ]
+    },
+    {
+      "id": 500,
+      "type": "Loot",
+      "name": "Treasure Chest",
+      "yieldableItemList": [
+        {
+          "itemId": 1,
+          "yieldPercentage": 30
+        },
+        {
+          "itemId": 2,
+          "yieldPercentage": 70
+        }
+      ],
+      "description": "Contains a treasure (If you consider dirty, rotten shield a treasure)",
+      "tileMap": [
+        ["XB"]
+      ]
+    }
+  ]
+}

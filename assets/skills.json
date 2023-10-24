@@ -1,0 +1,24 @@
+{
+  "skills": [
+    {
+      "id": 0,
+      "name": "Woodcutting",
+      "description": "Useful for cutting wood."
+    },
+    {
+      "id": 1,
+      "name": "Mining",
+      "description": "Useful for mining ore."
+    },
+    {
+      "id": 2,
+      "name": "Fishing",
+      "description": "Useful for fishing."
+    },
+    {
+      "id": 3,
+      "name": "Cooking",
+      "description": "Useful for cooking."
+    }
+  ]
+}

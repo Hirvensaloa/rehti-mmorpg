@@ -35,7 +35,7 @@ Item that the player can equip, giving the player possible stat boosts. Defined 
 - **stats** ItemStats object. The ItemStats object includes the following attributes:
   - **accuracy** Represents the accuracy of the equippable item.
   - **damage** Indicates the damage dealt by the item.
-  - **attackSpeed** Specifies the attack speed of the item.
+  - **attackSpeed** Specifies the attack speed of the item. Defined in ms.
   - **range** Denotes the range of the item's attacks.
   - **armor** Represents the armor provided by the equippable item.
   - **dodge** Indicates the dodge bonus provided by the item.

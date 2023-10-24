@@ -16,8 +16,8 @@
       "stats": {
         "accuracy": 10,
         "damage": 20,
-        "attackSpeed": 2,
-        "range": 5,
+        "attackSpeed": 2000,
+        "range": 1,
         "armor": 15,
         "dodge": 5
       },
@@ -30,10 +30,6 @@
       "type": "Equippable",
       "slot": "OffHand",
       "stats": {
-        "accuracy": 5,
-        "damage": 15,
-        "attackSpeed": 1,
-        "range": 4,
         "armor": 10,
         "dodge": 3
       },

@@ -1,0 +1,134 @@
+{
+  "items": [
+    {
+      "id": 0,
+      "name": "Oak Wood",
+      "description": "A piece of oak wood, yum yum!",
+      "type": "General",
+      "isStackable": true
+    },
+    {
+      "id": 1,
+      "name": "Iron Sword",
+      "description": "A sturdy iron sword for close combat.",
+      "type": "Equippable",
+      "slot": "MainHand",
+      "stats": {
+        "accuracy": 10,
+        "damage": 20,
+        "attackSpeed": 2000,
+        "range": 1,
+        "armor": 15,
+        "dodge": 5
+      },
+      "isStackable": false
+    },
+    {
+      "id": 2,
+      "name": "Wooden Shield",
+      "description": "A wooden shield for defense.",
+      "type": "Equippable",
+      "slot": "OffHand",
+      "stats": {
+        "armor": 10,
+        "dodge": 3
+      },
+      "isStackable": false
+    },
+    {
+      "id": 3,
+      "name": "Steel Helmet",
+      "description": "A protective steel helmet for the head slot.",
+      "type": "Equippable",
+      "slot": "Head",
+      "stats": {
+        "armor": 20
+      },
+      "isStackable": false
+    },
+    {
+      "id": 4,
+      "name": "Leather Vest",
+      "description": "A comfortable leather vest for the top slot.",
+      "type": "Equippable",
+      "slot": "Top",
+      "stats": {
+        "armor": 10
+      },
+      "isStackable": false
+    },
+    {
+      "id": 5,
+      "name": "Iron Leggings",
+      "description": "Sturdy iron leggings for the bottom slot.",
+      "type": "Equippable",
+      "slot": "Bottom",
+      "stats": {
+        "armor": 15
+      },
+      "isStackable": false
+    },
+    {
+      "id": 6,
+      "name": "Steel Boots",
+      "description": "Heavy steel boots for the boots slot.",
+      "type": "Equippable",
+      "slot": "Boots",
+      "stats": {
+        "armor": 15
+      },
+      "isStackable": false
+    },
+    {
+      "id": 7,
+      "name": "Iron Gauntlets",
+      "description": "Iron gauntlets for the gloves slot.",
+      "type": "Equippable",
+      "slot": "Gloves",
+      "stats": {
+        "armor": 10
+      },
+      "isStackable": false
+    },
+    {
+      "id": 8,
+      "name": "Necklace of Wisdom",
+      "description": "A wise necklace for the neck slot.",
+      "type": "Equippable",
+      "slot": "Neck",
+      "stats": {
+        "accuracy": 5,
+        "dodge": 5
+      },
+      "isStackable": false
+    },
+    {
+      "id": 9,
+      "name": "Ring of Power",
+      "description": "A powerful ring for the ring slot.",
+      "type": "Equippable",
+      "slot": "Ring",
+      "stats": {
+        "damage": 10,
+        "armor": 5
+      },
+      "isStackable": false
+    },
+    {
+      "id": 10,
+      "name": "Fish",
+      "description": "A delicious fish that heals wounds.",
+      "type": "Food",
+      "healAmount": 20,
+      "isStackable": false
+    },
+    {
+      "id": 11,
+      "name": "Bread",
+      "description": "Freshly baked bread for a quick snack.",
+      "type": "Food",
+      "healAmount": 30,
+      "isStackable": false
+    }
+  ]
+}

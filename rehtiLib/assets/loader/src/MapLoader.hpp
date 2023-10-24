@@ -2,19 +2,18 @@
 
 #include <exception>
 #include <filesystem>
+#include "rapidjson/prettywriter.h"
 
-#include "utils.hpp"
+#include "Utils.hpp"
+#include "ObjectReader.hpp"
 
 const unsigned AREA_WIDTH = 128;
 const unsigned AREA_HEIGHT = AREA_WIDTH;
 
 // Paths
-const std::string ROOT_PATH = "../../../";
 const std::string ASSET_PATH = ROOT_PATH + "assets/map/";
 const std::string AREA_FILES_PATH = ASSET_PATH + "areas/";
 const std::string AREA_MAP_PATH = ASSET_PATH + "map.json";
-const std::string OBJECT_TILE_MAPS_PATH = ASSET_PATH + "object_tile_maps/";
-const std::string GENERATED_ASSETS_PATH = ROOT_PATH + "assets/generated/";
 
 // Object tile map symbols
 const std::string OBJECT_TILE_MAP_CENTER = "X";
@@ -122,56 +121,6 @@ static const std::vector<std::vector<int>> createHeightMap(const std::vector<std
   return heightMap;
 }
 
-// Reads object tile map from the JSON file. Throws an exception if the file corrupted or not found.
-static const std::vector<std::vector<std::string>> readObjectTileMap(unsigned objectId, const std::vector<std::string> &objectTileMapFilenames)
-{
-  std::string objectTileMapFile;
-  for (const std::string &objectTileMapName : objectTileMapFilenames)
-  {
-    if (objectTileMapName.find(std::to_string(objectId)) != std::string::npos)
-    {
-      objectTileMapFile = objectTileMapName;
-      break;
-    }
-  }
-
-  if (objectTileMapFile.empty())
-  {
-    throw std::domain_error("Object tile map file not found for object id " + std::to_string(objectId));
-  }
-
-  // Read the object tile map for the object.
-  rapidjson::Document doc = readJson(OBJECT_TILE_MAPS_PATH + objectTileMapFile);
-
-  if (!doc.IsArray())
-  {
-    throw std::runtime_error("Object tile map JSON is not an array");
-  }
-
-  std::vector<std::vector<std::string>> objectTileMap;
-  for (rapidjson::SizeType i = 0; i < doc.Size(); ++i)
-  {
-    if (!doc[i].IsArray())
-    {
-      throw std::runtime_error("Object tile map inner structure is not an array");
-    }
-
-    std::vector<std::string> objectTileMapRow;
-    for (rapidjson::SizeType j = 0; j < doc[i].Size(); ++j)
-    {
-      if (!doc[i][j].IsString())
-      {
-        throw std::runtime_error("Object tile map element is not a string");
-      }
-
-      objectTileMapRow.push_back(doc[i][j].GetString());
-    }
-    objectTileMap.push_back(objectTileMapRow);
-  }
-
-  return objectTileMap;
-}
-
 // Inserts the object tile map to the map.
 static void insertObjectTileMap(std::vector<std::vector<std::string>> &objectBlockMap, std::vector<std::vector<std::string>> &objectTileMap, unsigned areaY, unsigned areaX, unsigned currentAreaRowIndex, unsigned currentAreaColumnIndex)
 {
@@ -251,27 +200,24 @@ static void changeBlockDirection(std::vector<std::vector<std::string>> &objectTi
 
 /*
  * Generate the object block map. The map defines how the objects block the tiles around itself.
- * Also, fills in the given object map with object id's (for optimization).
  *
  * 1. Go through the area map and read the corresponding image file for each area. (<area_name>-obj.png).
  *
  * 2. For each area read the image file and check if there are any objects in the tile. Object is defined if R * G is not 255 * 255.
  *
- * 3. If there is an object in the tile, read the object tile map <id>-<object_name>.json. Check the block map definition from the README.
+ * 3. If there is an object in the tile, read the object tile map provided by the gameObjects parameter.
  *
  * 4. Input the object tile map to the object block map. Consider the rotation of the object as well. Rotation is stored in the B-value.
+ *
+ * ALSO, stores objects with their locations to generated/objects.json. This is used by the game server to spawn the objects on start.
  */
-static const std::vector<std::vector<std::string>> createObjectBlockMap(const std::vector<std::vector<std::string>> &areaMap, std::vector<std::vector<unsigned>> &objectIdMap)
+static const std::vector<std::vector<std::string>> createObjectBlockMap(const std::vector<std::vector<std::string>> &areaMap, GameObjects gameObjects)
 {
   // Populate the object block map with non-blocked tiles
   std::vector<std::vector<std::string>> objectBlockMap;
   populateMatrix(objectBlockMap, areaMap, OBJECT_TILE_MAP_NO_BLOCK, AREA_WIDTH, AREA_HEIGHT);
 
-  // Populate the object map with NON_OBJECT_IDs
-  populateMatrix(objectIdMap, areaMap, NON_OBJECT_ID, AREA_WIDTH, AREA_HEIGHT);
-
-  // Read object tile maps
-  const std::vector<std::string> objectTileMapNames = readDirectory(OBJECT_TILE_MAPS_PATH, ".json");
+  std::vector<ObjectLocation> objectsLocations;
 
   for (unsigned currentAreaRowIndex = 0; currentAreaRowIndex < areaMap.size(); currentAreaRowIndex++)
   {
@@ -308,9 +254,14 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
 
           if (objectId)
           {
-            int rotation = b > 3 ? 0 : b; // Rotation is stored in the B-value. If B is 4 or more, the object the object is not rotated from its original position.
+            int rotation = b > 3 ? 0 : b; // Rotation is stored in the B-value. If B is 4 or more, the object is not rotated from its original position.
 
-            std::vector<std::vector<std::string>> objectTileMap = readObjectTileMap(objectId, objectTileMapNames);
+            std::vector<std::vector<std::string>> objectTileMap = gameObjects.getTileMap(objectId);
+
+            if (objectTileMap.empty())
+            {
+              throw std::runtime_error("Object tile map not found for id: " + std::to_string(objectId));
+            }
 
             std::cout << "Object id: " << objectId << " read " << std::endl;
 
@@ -326,14 +277,38 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
               std::cout << "Object id: " << objectId << " not rotated " << std::endl;
             }
 
+            ObjectLocation objLoc = {objectId, currentAreaRowIndex * AREA_HEIGHT + i, currentAreaColumnIndex * AREA_WIDTH + j, rotation};
+            objectsLocations.push_back(objLoc);
+
             insertObjectTileMap(objectBlockMap, objectTileMap, i, j, currentAreaRowIndex, currentAreaColumnIndex);
-            objectIdMap[currentAreaRowIndex * AREA_HEIGHT + i][currentAreaColumnIndex * AREA_WIDTH + j] = objectId;
+            // objectIdMap[currentAreaRowIndex * AREA_HEIGHT + i][currentAreaColumnIndex * AREA_WIDTH + j] = objectId;
             std::cout << "Object id: " << objectId << " inserted " << std::endl;
           }
         }
       }
     }
   }
+
+  // Write the object locations to a file
+  rapidjson::Document doc;
+  doc.SetObject();
+  rapidjson::Value objects(rapidjson::kArrayType);
+  for (const auto &objLoc : objectsLocations)
+  {
+    rapidjson::Value object(rapidjson::kObjectType);
+    object.AddMember("id", objLoc.id, doc.GetAllocator());
+    object.AddMember("x", objLoc.x, doc.GetAllocator());
+    object.AddMember("y", objLoc.y, doc.GetAllocator());
+    object.AddMember("rotation", objLoc.rotation, doc.GetAllocator());
+    objects.PushBack(object, doc.GetAllocator());
+  }
+  doc.AddMember("objects", objects, doc.GetAllocator());
+
+  const std::string str = createString(doc);
+
+  std::ofstream objectsFile(GENERATED_ASSETS_PATH + "objects.json");
+  objectsFile << str;
+  objectsFile.close();
 
   return objectBlockMap;
 }

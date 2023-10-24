@@ -7,7 +7,6 @@
 #include <filesystem>
 #include <exception>
 
-#include "rapidjson/document.h"
 #include "../lodepng/lodepng.h"
 
 // Reads all the files in the directory and returns a vector of the filenames. Only returns files with the given extension.
@@ -24,28 +23,6 @@ std::vector<std::string> readDirectory(std::string path, std::string extension)
   }
 
   return files;
-}
-
-// Reads JSON file to rapidjson document
-rapidjson::Document readJson(std::string path)
-{
-  std::ifstream jsonFile(path);
-  if (!jsonFile.is_open())
-  {
-    throw std::runtime_error("Failed to open JSON file");
-  }
-
-  std::string jsonContent((std::istreambuf_iterator<char>(jsonFile)), std::istreambuf_iterator<char>());
-
-  rapidjson::Document doc;
-  doc.Parse(jsonContent.c_str());
-
-  if (doc.HasParseError())
-  {
-    throw std::runtime_error("Failed to parse JSON file");
-  }
-
-  return doc;
 }
 
 void readPng(std::vector<unsigned char> &image, unsigned &width, unsigned &height, std::string filepath)

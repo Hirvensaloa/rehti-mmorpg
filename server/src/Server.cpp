@@ -10,7 +10,7 @@
 #include "Server.hpp"
 
 uint16_t PORT = 9999;
-int TICK_RATE = 1;
+int TICK_RATE = 32;
 int TICK_TIME = 1000 / TICK_RATE;
 static uint32_t id = 0;
 
@@ -137,9 +137,9 @@ void Server::sendGameState()
     for (auto &npc : gameWorldM.getNpcs())
     {
         GameStateEntity entity;
-        const Coordinates location = npc.getLocation();
-        entity.entityId = npc.getId();
-        entity.name = npc.getName();
+        const Coordinates location = npc->getLocation();
+        entity.entityId = npc->getId();
+        entity.name = npc->getName();
         entity.x = location.x;
         entity.y = location.y;
         entity.z = location.z;

@@ -3,6 +3,7 @@
 
 #include "src/Utils.hpp"
 #include "src/MapLoader.hpp"
+#include "src/MapObjLoader.hpp"
 #include "ItemReader.hpp"
 #include "ObjectReader.hpp"
 #include "SkillReader.hpp"
@@ -21,8 +22,10 @@ int main()
 
   // Generate access map for server
   const std::vector<std::vector<unsigned>> accessMap = generateAccessMap(heightMatrix, objectBlockMap);
-
   writeMatrixToFile(accessMap, GENERATED_ASSETS_PATH + "access_map.txt");
+
+  // Generate obj map for client
+  generateMapObj(heightMatrix);
 
   std::cout << "Map assets generated successfully!" << std::endl;
 

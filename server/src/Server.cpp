@@ -159,8 +159,39 @@ void Server::sendGameState()
     }
     msg.entities = entityVector;
 
+    for (auto &object : gameWorldM.getObjects())
+    {
+        GameStateObject gameStateObject;
+        gameStateObject.id = object.second->getId();
+        gameStateObject.instanceId = object.second->getInstanceId();
+        const Coordinates location = object.second->getLocation();
+        gameStateObject.x = location.x;
+        gameStateObject.y = location.y;
+        gameStateObject.z = location.z;
+        gameStateObject.rotation = object.second->getRotation();
+        msg.objects.push_back(gameStateObject);
+    }
+
     for (auto &conn : connectionsM)
     {
+        // Add the current player to the message e.g. the player that is connected to this connection
+        PlayerCharacter *player = gameWorldM.getPlayer(conn->getID());
+        msg.currentPlayer.entityId = player->getId();
+        msg.currentPlayer.name = player->getName();
+        const Coordinates location = player->getLocation();
+        msg.currentPlayer.x = location.x;
+        msg.currentPlayer.y = location.y;
+        msg.currentPlayer.z = location.z;
+        msg.currentPlayer.currentActionType = player->getCurrentAction().getActionType();
+        const auto skills = player->getSkillSet().getSkills();
+        std::vector<Skill> skillVector;
+        for (auto &skill : skills)
+        {
+            Skill s = {skill.first, skill.second.name, skill.second.xp};
+            skillVector.push_back(s);
+        }
+        msg.currentPlayer.skills = skillVector;
+
         if (conn->isConnected())
         {
             boost::asio::co_spawn(ioContextM, conn->send(MessageApi::createGameState(msg)), boost::asio::detached);

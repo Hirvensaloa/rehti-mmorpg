@@ -1,23 +1,23 @@
 #include "LootObject.hpp"
 
-LootObject::LootObject(int id, std::string type, std::string name, std::vector<YieldableItem> yieldableItemList)
-    : Object(id, type, name), yieldableItemList(yieldableItemList)
+LootObject::LootObject(int id, std::string instanceId, std::string name, Coordinates coords, unsigned int rotation, std::vector<YieldableItem> yieldableItemList)
+    : Object(id, instanceId, name, coords, rotation), yieldableItemListM(yieldableItemList)
 {
 }
 
-std::optional<int> LootObject::open()
+void LootObject::interact(PlayerCharacter *player)
 {
   int rand = std::rand() % 100;
   int cumulativeChance = 0;
 
-  for (YieldableItem item : yieldableItemList)
+  for (YieldableItem item : yieldableItemListM)
   {
-    if (cumulativeChance < rand && rand < cumulativeChance + item.chance)
+    if (cumulativeChance < rand && rand < cumulativeChance + item.yieldPercentage)
     {
-      return item.id;
+      return;
     }
-    cumulativeChance += item.chance;
+    cumulativeChance += item.yieldPercentage;
   }
 
-  return nullopt;
+  return;
 }

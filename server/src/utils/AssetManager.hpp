@@ -1,8 +1,8 @@
+#pragma once
+
 #include <map>
 
-#include "ItemReader.hpp"
-#include "ObjectReader.hpp"
-#include "SkillReader.hpp"
+#include "RehtiReader.hpp"
 
 /*
  * Holds definitions to all the items, objects and skills in the game.
@@ -11,7 +11,15 @@
 class AssetManager
 {
 public:
-  const std::vector<ObjectLocation> getObjectLocations();
+  AssetManager();
+
+  void loadAssets();
+
+  const std::vector<ObjectLocation> &getObjectLocations();
+
+  const std::map<int, GameSkill> &getSkills();
+
+  const GameObjects &getObjects();
 
 private:
   GameItems itemsM;

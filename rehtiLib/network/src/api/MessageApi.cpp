@@ -1,4 +1,5 @@
 #include "MessageApi.hpp"
+#include "RehtiUtils.hpp"
 
 const MessageStruct MessageApi::createMove(const MoveMessage &move)
 {
@@ -14,7 +15,7 @@ MoveMessage MessageApi::parseMove(std::string msgBody)
 {
   rapidjson::Document document = parseDocument(msgBody);
 
-  if (!document.HasMember("x") || !document.HasMember("y") || !document["x"].IsInt() || !document["y"].IsInt())
+  if (!validMember(document, "y", ValueType::INT) || !validMember(document, "x", ValueType::INT))
   {
     throw std::runtime_error("Invalid move message");
   }
@@ -39,7 +40,7 @@ AttackMessage MessageApi::parseAttack(std::string msgBody)
 {
   rapidjson::Document document = parseDocument(msgBody);
 
-  if (!document.HasMember("targetId") || !document["targetId"].IsInt())
+  if (!validMember(document, "targetId", ValueType::INT))
   {
     throw std::runtime_error("Invalid attack message");
   }
@@ -50,12 +51,37 @@ AttackMessage MessageApi::parseAttack(std::string msgBody)
   return attack;
 };
 
+MessageStruct MessageApi::createObjectInteract(const ObjectInteractMessage &objectInteract)
+{
+  rapidjson::Document document = createDocument();
+  rapidjson::Document::AllocatorType &allocator = document.GetAllocator();
+  document.AddMember("objectId", objectInteract.objectId, allocator);
+
+  return MessageStruct{objectInteract.id, createString(document)};
+};
+
+ObjectInteractMessage MessageApi::parseObjectInteract(std::string msgBody)
+{
+  rapidjson::Document document = parseDocument(msgBody);
+
+  if (!validMember(document, "objectId", ValueType::STRING))
+  {
+    throw std::runtime_error("Invalid object interact message");
+  }
+
+  ObjectInteractMessage objectInteract;
+  objectInteract.objectId = document["objectId"].GetString();
+
+  return objectInteract;
+};
+
 MessageStruct MessageApi::createGameState(const GameStateMessage &gameState)
 {
   rapidjson::Document document = createDocument();
   rapidjson::Document::AllocatorType &allocator = document.GetAllocator();
-  rapidjson::Value entityArray(rapidjson::kArrayType);
 
+  // Add entities
+  rapidjson::Value entityArray(rapidjson::kArrayType);
   for (const auto &entity : gameState.entities)
   {
     rapidjson::Value entityObject(rapidjson::kObjectType);
@@ -69,6 +95,41 @@ MessageStruct MessageApi::createGameState(const GameStateMessage &gameState)
   }
   document.AddMember("entities", entityArray, allocator);
 
+  // Add objects
+  rapidjson::Value objectArray(rapidjson::kArrayType);
+  for (const auto &object : gameState.objects)
+  {
+    rapidjson::Value objectObject(rapidjson::kObjectType);
+    objectObject.AddMember("id", object.id, allocator);
+    objectObject.AddMember("instanceId", rapidjson::StringRef(object.instanceId.c_str()), allocator);
+    objectObject.AddMember("x", object.x, allocator);
+    objectObject.AddMember("y", object.y, allocator);
+    objectObject.AddMember("z", object.z, allocator);
+    objectObject.AddMember("rotation", object.rotation, allocator);
+    objectArray.PushBack(objectObject, allocator);
+  }
+  document.AddMember("objects", objectArray, allocator);
+
+  // Add current player
+  rapidjson::Value currentPlayer(rapidjson::kObjectType);
+  currentPlayer.AddMember("entityId", gameState.currentPlayer.entityId, allocator);
+  currentPlayer.AddMember("name", rapidjson::StringRef(gameState.currentPlayer.name.c_str()), allocator);
+  currentPlayer.AddMember("x", gameState.currentPlayer.x, allocator);
+  currentPlayer.AddMember("y", gameState.currentPlayer.y, allocator);
+  currentPlayer.AddMember("z", gameState.currentPlayer.z, allocator);
+  currentPlayer.AddMember("currentActionType", gameState.currentPlayer.currentActionType, allocator);
+  rapidjson::Value skills(rapidjson::kArrayType);
+  for (const auto &skill : gameState.currentPlayer.skills)
+  {
+    rapidjson::Value skillObject(rapidjson::kObjectType);
+    skillObject.AddMember("id", skill.id, allocator);
+    skillObject.AddMember("name", rapidjson::StringRef(skill.name.c_str()), allocator);
+    skillObject.AddMember("xp", skill.xp, allocator);
+    skills.PushBack(skillObject, allocator);
+  }
+  currentPlayer.AddMember("skills", skills, allocator);
+  document.AddMember("currentPlayer", currentPlayer, allocator);
+
   return MessageStruct{gameState.id, createString(document)};
 };
 
@@ -80,8 +141,8 @@ GameStateMessage MessageApi::parseGameState(std::string msgBody)
   // The server is trusted to send valid messages.
 
   GameStateMessage gameState;
-  gameState.entities = std::vector<GameStateEntity>();
 
+  gameState.entities = std::vector<GameStateEntity>();
   for (const auto &entity : document["entities"].GetArray())
   {
     GameStateEntity gameStateEntity;
@@ -93,6 +154,38 @@ GameStateMessage MessageApi::parseGameState(std::string msgBody)
     gameStateEntity.currentActionType = entity["currentActionType"].GetInt();
 
     gameState.entities.push_back(gameStateEntity);
+  }
+
+  gameState.objects = std::vector<GameStateObject>();
+  for (const auto &object : document["objects"].GetArray())
+  {
+    GameStateObject gameStateObject;
+    gameStateObject.id = object["id"].GetInt();
+    gameStateObject.instanceId = object["instanceId"].GetString();
+    gameStateObject.x = object["x"].GetInt();
+    gameStateObject.y = object["y"].GetInt();
+    gameStateObject.z = object["z"].GetInt();
+    gameStateObject.rotation = object["rotation"].GetUint();
+
+    gameState.objects.push_back(gameStateObject);
+  }
+
+  gameState.currentPlayer.entityId = document["currentPlayer"]["entityId"].GetInt();
+  gameState.currentPlayer.name = document["currentPlayer"]["name"].GetString();
+  gameState.currentPlayer.x = document["currentPlayer"]["x"].GetInt();
+  gameState.currentPlayer.y = document["currentPlayer"]["y"].GetInt();
+  gameState.currentPlayer.z = document["currentPlayer"]["z"].GetInt();
+  gameState.currentPlayer.currentActionType = document["currentPlayer"]["currentActionType"].GetInt();
+  gameState.currentPlayer.skills = std::vector<Skill>();
+
+  for (const auto &skill : document["currentPlayer"]["skills"].GetArray())
+  {
+    Skill skillObject;
+    skillObject.id = skill["id"].GetInt();
+    skillObject.name = skill["name"].GetString();
+    skillObject.xp = skill["xp"].GetInt();
+
+    gameState.currentPlayer.skills.push_back(skillObject);
   }
 
   return gameState;

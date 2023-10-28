@@ -2,7 +2,12 @@
 
 #include <iostream>
 
-PlayerCharacter::PlayerCharacter(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : Entity(pGameWorld, name, id, location){};
+PlayerCharacter::PlayerCharacter(std::string name, AssetManager &assetManager, unsigned int id, Coordinates location) : Entity(id, location), nameM(name), skillSetM(SkillSet(assetManager)){};
+
+std::string PlayerCharacter::getName()
+{
+    return nameM;
+}
 
 void PlayerCharacter::update()
 {
@@ -10,4 +15,9 @@ void PlayerCharacter::update()
     {
         currentActionM->act();
     }
+}
+
+SkillSet PlayerCharacter::getSkillSet()
+{
+    return skillSetM;
 }

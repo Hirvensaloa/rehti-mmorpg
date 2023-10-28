@@ -1,9 +1,12 @@
 #pragma once
 
 #include <vector>
+#include <map>
 
-#include "../entity/Npc.hpp"
+#include "../utils/AssetManager.hpp"
 #include "../entity/PlayerCharacter.hpp"
+#include "../entity/Npc.hpp"
+#include "../object/Object.hpp"
 #include "Map.hpp"
 
 class GameWorld
@@ -28,14 +31,16 @@ public:
 
     std::vector<std::shared_ptr<Npc>> &getNpcs();
 
+    std::map<std::string, std::unique_ptr<Object>> &getObjects();
+
     void updateGameWorld();
 
     void initWorld();
 
 private:
     std::vector<PlayerCharacter> playersM;
-
     std::vector<std::shared_ptr<Npc>> npcsM;
-
+    std::map<std::string, std::unique_ptr<Object>> objectsM;
     Map mapM;
+    AssetManager assetManagerM;
 };

@@ -28,12 +28,6 @@ struct SimpleVertex
 	static std::array<VkVertexInputAttributeDescription, 2> getAttributeDescriptions();
 };
 
-namespace Transformation
-{
-	// Returns info needed to create a descriptor set layout with bindings attached to the first binding point
-	static VkDescriptorSetLayoutBinding getDescriptorSetBinding();
-}
-
 // Simple cube mesh
 const std::vector<SimpleVertex> kSimpleCubeVertices
 {
@@ -56,10 +50,6 @@ const std::vector<uint32_t> kSimpleCubeIndices
 	1, 2, 6, 6, 5, 1,
 	7, 3, 0, 7, 0, 4,
 };
-
-std::vector<SimpleVertex> createCubeVertices();
-
-std::vector<uint32_t> createCubeIndices();
 
 class SimpleMesh
 {

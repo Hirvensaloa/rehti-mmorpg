@@ -18,14 +18,6 @@ Camera::Camera(glm::vec3 targetPos, float width, float height, float fovRad, flo
 	projectionM[1][1] *= -1; // flip y axis
 	cameraMatrixM[2][2] = -1.f; // forward is negative zed
 	moveLocation(-getForward() * zoomM);
-	std::cout << "Camera created with following parameters" << std::endl;
-	std::cout << "Target: " << targetPos.x << ", " << targetPos.y << ", " << targetPos.z << std::endl;
-	std::cout << "Sensitivity: " << sensitivity << std::endl;
-	std::cout << "Location:" << getLocation().x << ", " << getLocation().y << ", " << getLocation().z << std::endl;
-	std::cout << "Forward:" << getForward().x << ", " << getForward().y << ", " << getForward().z << std::endl;
-	std::cout << "Right:" << getRight().x << ", " << getRight().y << ", " << getRight().z << std::endl;
-	std::cout << "Up:" << getUp().x << ", " << getUp().y << ", " << getUp().z << std::endl;
-
 }
 
 glm::mat4 Camera::getViewMatrix() const

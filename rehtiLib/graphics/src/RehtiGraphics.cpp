@@ -674,7 +674,6 @@ void RehtiGraphics::mainLoop()
 	double invMicro = 1.0 / 1e6;
 	glm::mat4 smallRotation = glm::rotate(glm::mat4(1.f), glm::radians(0.1f), glm::vec3(0.f, 1.f, 0.f)); // small rotation over y.
 	statsM.ftPerSec = 0;
-	auto appStart = std::chrono::high_resolution_clock::now();
 
     while (!glfwWindowShouldClose(pWindowM))
     {
@@ -682,18 +681,9 @@ void RehtiGraphics::mainLoop()
         glfwPollEvents();
         drawFrame();
 		auto elapsed = std::chrono::high_resolution_clock::now() - start;
-		auto elapsedFromStart = std::chrono::high_resolution_clock::now() - appStart;
 		auto mus = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
 		statsM.frameTime = static_cast<uint64_t>(mus);
 		statsM.ftPerSec = mus * invMicro;
-
-		if (std::chrono::duration_cast<std::chrono::seconds>(elapsedFromStart).count() / 5 > 1)
-		{
-			std::cout << "Scuffed view and glm view: \n" << std::endl;
-			debugMatrix(cameraM.getScuffedViewMatrix());
-			debugMatrix(cameraM.getViewMatrix());
-			appStart = std::chrono::high_resolution_clock::now();
-		}
     }
 
     vkDeviceWaitIdle(logDeviceM);

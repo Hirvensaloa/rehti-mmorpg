@@ -498,7 +498,6 @@ std::vector<DrawableObject> GraphicsObjectManager::getDrawableObjects(ObjectType
 			break;
 	}
 
-
 	return drawables;
 }
 

@@ -6,31 +6,28 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(TARGET rehtiAssetsReader)
 
+add_library(${TARGET} STATIC 
+  src/ItemReader.hpp 
+  src/ItemReader.cpp 
+  src/MapReader.hpp 
+  src/MapReader.cpp
+  src/ObjectReader.hpp 
+  src/ObjectReader.cpp 
+  src/SkillReader.hpp 
+  src/SkillReader.cpp 
+  src/Utils.hpp
+  src/Utils.cpp)
 
-add_library(${TARGET})
-
-set(SOURCES
-      ItemReader.hpp
-      MapReader.hpp
-      ObjectReader.hpp
-      SkillReader.hpp
-      Utils.hpp
-	)
-
-list(TRANSFORM SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)
-
-target_sources(${TARGET}
-	PRIVATE ${SOURCES}
-	)
-  
 set_target_properties(${TARGET} PROPERTIES LINKER_LANGUAGE CXX)
 
-target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/../../utils)
-target_include_directories(${TARGET} INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/src>"
+target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>"
                                                   "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
 # rapidjson
 
-target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/../../../third_party/rapidjson/include)
+target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/build/third_party/rapidjson/include)
 
+# utils
 
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../../utils ${CMAKE_CURRENT_BINARY_DIR}/build/utils)
+target_link_libraries(${TARGET} PUBLIC rehtiUtils)

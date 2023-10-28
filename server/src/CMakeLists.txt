@@ -27,6 +27,8 @@ set(SOURCES
         action/AttackAction.hpp
         action/MoveAction.cpp
         action/MoveAction.hpp
+        action/ObjectInteractAction.cpp
+        action/ObjectInteractAction.hpp
 
         entity/Entity.hpp
         entity/Entity.cpp
@@ -50,15 +52,28 @@ set(SOURCES
         item/FoodItem.hpp
         item/FoodItem.cpp
         item/ItemStats.hpp
+
+        skill/SkillSet.hpp
+        skill/SkillSet.cpp
+
+        utils/AssetManager.hpp
+        utils/AssetManager.cpp
+
+        object/LootObject.hpp
+        object/LootObject.cpp
+        object/Object.hpp
+        object/Object.cpp
+        object/ResourceObject.hpp
+        object/ResourceObject.cpp
 	)
 
 add_executable(${TARGET}
         ${SOURCES})
 
-target_compile_features(${TARGET} PUBLIC
+target_compile_features(${TARGET} PRIVATE
         cxx_std_20)
 
-target_include_directories(${TARGET} PUBLIC
+target_include_directories(${TARGET} PRIVATE
         ${Boost_INCLUDE_DIRS})
 
 target_link_libraries(${TARGET} PRIVATE
@@ -66,12 +81,8 @@ target_link_libraries(${TARGET} PRIVATE
         Threads::Threads)
 
 add_subdirectory(../../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/../build/network)
-target_link_libraries(${TARGET} PUBLIC rehtiNetwork)
-target_include_directories(${TARGET} PUBLIC ../../rehtiLib/network/include)
-
 add_subdirectory(../../rehtiLib/assets/reader ${CMAKE_CURRENT_LIST_DIR}/../build/assets/reader)
-target_link_libraries(${TARGET} PUBLIC rehtiAssetsReader)
-target_include_directories(${TARGET} PUBLIC ../../rehtiLib/assets/reader/src)
+target_link_libraries(${TARGET} PRIVATE rehtiAssetsReader PRIVATE rehtiNetwork)
 
 # postgres client
 

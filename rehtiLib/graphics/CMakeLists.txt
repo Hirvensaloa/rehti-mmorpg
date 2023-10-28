@@ -1,3 +1,5 @@
+add_library(rehtiGraphics "")
+
 set(DEPENDENCY_DIR "${CMAKE_CURRENT_LIST_DIR}/../../third_party")
 set(VALIDATION_LAYER_DIR "${vulkan-validationlayers_INCLUDE_DIR}/../${CMAKE_INSTALL_BINDIR}")
 set($ENV{VK_LAYER_PATH} VALIDATION_LAYER_DIR)
@@ -10,9 +12,6 @@ find_package(vulkan-memory-allocator 3.0.1 REQUIRED)
 find_package(vulkan-validationlayers 1.3.239.0 REQUIRED)
 find_package(stb REQUIRED)
 find_package(glm REQUIRED)
-
-message("Vulkan dirs:${Vulkan_DIR}, ${Vulkan_LIBRARY_DIR}, ${Vulkan_INCLUDE_DIR}")
-message("layer dirs: ${vulkan-validationlayers_DIR}, ${vulkan-validationlayers_LIBRARY_DIR}, ${vulkan-validationlayers_INCLUDE_DIR}")
 
 set(ENABLE_CTEST OFF CACHE BOOL "" FORCE)
 set(ALLOW_EXTERNAL_SPIRV_TOOLS ON CACHE BOOL "" FORCE)
@@ -33,6 +32,14 @@ set(GRAPHICS_SOURCES
 	RehtiGraphics.hpp
 	ShaderManager.cpp
 	ShaderManager.hpp
+	GraphicsObjectManager.cpp
+	GraphicsObjectManager.hpp
+	DescriptorBuilder.hpp
+	DescriptorBuilder.cpp
+	Camera.hpp
+	Camera.cpp
+	Mesh.hpp
+	Mesh.cpp
 	shaders/shader.vert
 	shaders/shader.frag
 	)
@@ -55,6 +62,7 @@ target_link_libraries(rehtiGraphics
 	)
 
 target_include_directories(rehtiGraphics PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/shaders/)
+target_include_directories(rehtiGraphics PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/)
 
 target_include_directories(rehtiGraphics INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>"
                                                   "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")

@@ -8,10 +8,18 @@
 #include <string>
 #include <set>
 #include <memory>
+#include <chrono>
 
+#include "Mesh.hpp"
 #include "Camera.hpp"
-#include "BufferManager.hpp"
-#include "SimpleMesh.hpp"
+#include "GraphicsObjectManager.hpp"
+
+enum EngineFlags
+{
+	NO_FLAGS = 0,
+	FRAME_BUFFER_RESIZED = 1 << 0,
+	UNKNOWN = 1 << 7
+};
 
 //Useful structs
 struct QueueFamilyIndices
@@ -34,6 +42,12 @@ struct SwapChainSupportDetails {
     std::vector<VkPresentModeKHR> presentModes;
 };
 
+struct EngineStatistics
+{
+	uint64_t frameTime; // In microseconds
+	double ftPerSec; // time per second
+};
+
 // The actual application class
 class RehtiGraphics
 {
@@ -50,6 +64,23 @@ public:
     /// Cleans up all the resources used by vulkan.
     /// </summary>
     ~RehtiGraphics();
+
+    /// <summary>
+    /// Adds a test cube to the graphics backend for testing purposes.
+    /// </summary>
+	/// <param name="id">The id of the test cube.</param>
+    void addTestObject(int id);
+
+	/// <summary>
+	/// Transforms object with the given id.
+	/// </summary>
+	void transformTestObject(int id, glm::mat4 transformation);
+
+	/// <summary>
+	/// Sets flags for engine. Flags can only be set by this interface, not unset.
+	/// </summary>
+	/// <param name="flags"> to be set</param>
+	void setEngineFlags(EngineFlags flags);
 
 private:
     // Functions
@@ -85,14 +116,24 @@ private:
     void createLogicalDevice();
 
     /// <summary>
-    /// Creates the allocator.
+    /// Creates the graphics object manager.
     /// </summary>
-    void createBufferManager();
+    void createObjectManager();
 
     /// <summary>
     /// Creates the swapchain.
     /// </summary>
     void createSwapChain();
+
+	/// <summary>
+	/// Recreates the swapchain.
+	/// </summary>
+	void recreateSwapChain();
+
+	/// <summary>
+	/// Cleans up swapchain related resources. This function is used for easier recreation of the swap chain.
+	/// </summary>
+	void cleanupSwapChain();
 
     /// <summary>
     /// Creates the image views.
@@ -103,17 +144,6 @@ private:
     /// Creates the render pass
     /// </summary>
     void createRenderPass();
-
-    /// <summary>
-    /// Creates the descriptor pool.
-    /// </summary>
-    void createDescriptorPool();
-
-    /// <summary>
-    /// Creates the descriptor set layout.
-    /// Should be called before creating the graphics pipeline.
-    /// </summary>
-    void createDescriptorSetLayout();
 
     /// <summary>
     /// Creates the graphics pipeline.
@@ -134,6 +164,13 @@ private:
     /// Creates the command buffers.
     /// </summary>
     void createCommandBuffers();
+
+	/// <summary>
+	/// Records command buffers
+	/// </summary>
+	/// <param name="cmdBuffer">  to record</param>
+	/// <param name="imageIndex"> is the index of the swap chain image to write to</param>
+	void recordCommandBuffer(VkCommandBuffer cmdBuffer, uint32_t imageIndex);
 
     /// <summary>
     /// Creates the appropriate semaphores and fences.
@@ -166,8 +203,6 @@ private:
     /// Creates a surface to draw on.
     /// </summary>
     void createSurface();
-
-    void createAndCopyTestBuffer();
 
     /// <summary>
     /// Checks for device extension support.
@@ -222,6 +257,24 @@ private:
     VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> availableModes);
     VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
+    /// <summary>
+    /// Returns push constant range object for the camera matrix.
+    /// </summary>
+    /// <returns></returns>
+    VkPushConstantRange getCameraRange();
+
+	/// <summary>
+	/// Returns the index of the next frame to be drawn.
+	/// </summary>
+	/// <returns></returns>
+	size_t getNextFrame();
+
+	/// <summary>
+	/// Prints out the given matrix.
+	/// </summary>
+	/// <param name="matrix"></param>
+	void debugMatrix(glm::mat4 matrix);
+
     // Private members:
     GLFWwindow* pWindowM;
     VkInstance instanceM;
@@ -237,8 +290,8 @@ private:
     // Logicaldevice
     VkDevice logDeviceM;
 
-    // Buffer manager
-    std::unique_ptr<BufferManager> pBufferManagerM;
+    // Auxiliary classes
+    std::unique_ptr<GraphicsObjectManager> pObjectManagerM;
 
     // Queues
     VkQueue graphicsQueueM;
@@ -253,11 +306,11 @@ private:
 
     // Framebuffer
     std::vector<VkFramebuffer> swapChainFramebuffersM;
+	// Depth image
+	AllocatedImage depthImageM;
 
     // Pipeline
     VkRenderPass renderPassM;
-    VkDescriptorSetLayout descriptorSetLayoutM;
-    VkDescriptorPool descriptorPoolM;
     VkPipelineLayout pipelineLayoutM;
     VkPipeline pipelineM;
 
@@ -269,11 +322,12 @@ private:
     std::vector<VkSemaphore> imagesReadyM;
     std::vector<VkSemaphore> rendersFinishedM;
     std::vector<VkFence>    frameFencesM;
-    std::vector<VkFence>    imageFencesM;
 
     // Other variables
     uint32_t widthM = 800;
     uint32_t heightM = 600;
+	EngineFlags engineFlagsM = EngineFlags::NO_FLAGS;
+	EngineStatistics statsM;
 
     const int kConcurrentFramesM = 2;
     size_t currentFrameM = 0;
@@ -304,6 +358,7 @@ private:
 
     static void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
 
+	static void frameBufferResizeCallback(GLFWwindow* window, int width, int height);
 
 #ifdef NDEBUG
     const bool enableValidationLayers = false;

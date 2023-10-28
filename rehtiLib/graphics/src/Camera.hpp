@@ -19,7 +19,9 @@ constexpr glm::vec3 POSITIVE_X_AXIS(1.f, 0.f, 0.f);
 constexpr glm::vec3 POSITIVE_Y_AXIS(0.f, 1.f, 0.f); 
 constexpr glm::vec3 POSITIVE_Z_AXIS(0.f, 0.f, 1.f);
 
-constexpr float STANDARD_ZOOM(10.f); // zoom used in the constructor. 10 Units away from the target
+constexpr float STANDARD_ZOOM(7.f); // zoom used in the constructor. 10 Units away from the target
+constexpr float MIN_ZOOM(2.f); // minimum zoom
+constexpr float MAX_ZOOM(15.f); // maximum zoom
 
 /// <summary>
 /// Camera class, that allows for orbiting around a target.
@@ -46,6 +48,13 @@ public:
 	/// </summary>
 	/// <returns>The view matrix</returns>
 	glm::mat4 getViewMatrix() const;
+	glm::mat4 getScuffedViewMatrix() const;
+
+	/// <summary>
+	/// Returns the orientation of the camera.
+	/// </summary>
+	/// <returns></returns>
+	glm::mat4 getOrientation() const;
 
 	/// <summary>
 	/// Returns the projection matrix of the camera.
@@ -61,10 +70,22 @@ public:
 	glm::mat4 getWorldToScreenMatrix() const;
 
 	/// <summary>
+	/// Returns the size of camera push constant range.
+	/// </summary>
+	/// <returns></returns>
+	uint32_t getUboSize();
+
+	/// <summary>
 	/// Rotates/orbits the camera around the target by the given vector.
 	/// </summary>
 	/// <param name="rotationVec">Vector signifying rotations around positive y axis, and around camera right vector.</param>
 	void orbitRotate(glm::vec2 rotationVec);
+
+	/// <summary>
+	/// Zooms the camera by the given amount.
+	/// </summary>
+	/// <param name="zoomAmount"></param>
+	void zoom(float zoomAmount);
 
 	/// <summary>
 	/// Registers this camera to the given window, so that it can be controlled by the mouse.
@@ -77,13 +98,34 @@ public:
 	/// Sets the sensitivity of the camera.
 	/// </summary>
 	/// <param name="newSensitivity"></param>
-	void setSensitivity(float newSensitivity);
+	void setSensitivity(float newSensitivity, float newZoomSens);
 
 	/// <summary>
 	/// Moves the location of the camera by the given vector.
 	/// </summary>
 	/// <param name="movement">Movement to the camera.</param>
 	void moveLocation(glm::vec3 movement);
+
+	/// <summary>
+	/// Returns the location of the camera.
+	/// </summary>
+	/// <returns></returns>
+	glm::vec3 getLocation() const;
+
+	/// <summary>
+	/// The following three functions return the vectors of the camera.
+	/// </summary>
+	/// <returns></returns>
+	glm::vec3 getForward() const;
+	glm::vec3 getRight() const;
+	glm::vec3 getUp() const;
+
+	/// <summary>
+	/// Returns both camera movement sensitivity and zoom sensitivity.
+	/// This function is useful when someone needs to set either of the values to older ones.
+	/// </summary>
+	/// <returns>movement sensitivity as x, and zoom sensitivity as y</returns>
+	glm::vec2 getSensitivities() const;
 
 private:
 
@@ -93,22 +135,20 @@ private:
 	/// <returns></returns>
 	glm::mat4 getCameraMatrixOrigon() const;
 
-	/// <summary>
-	/// Returns the location of the camera.
-	/// </summary>
-	/// <returns></returns>
-	glm::vec3 getLocation() const;
-
 	// These encapsulate most important aspects of the camera.
 	// cameraMatrixM wastes currently 4 floats, but it's easier to work with.
 	glm::mat4 cameraMatrixM;
 	glm::mat4 projectionM;
 	glm::vec3 targetM;
 	float sensitivityM;
+	float zoomSensitivityM;
+	float zoomM;
 
 	static double mouseX;
 	static double mouseY;
-	static void cursorPosCallback(GLFWwindow* window, double xpos, double ypos); // Callback for registering mouse movement
+	static void cursorPosCallback(GLFWwindow* pWindow, double xpos, double ypos); // Callback for registering mouse movement
+	static void scrollCallback(GLFWwindow* pWindow, double xOffSet, double yOffSet); // callback for registering mouse scroll
 	static std::function<void(glm::vec2)> cameraUpdateCallback; // Callback for updating the camera
+	static std::function<void(float)> cameraZoomCallback; // Callback for updating the camera
 };
 

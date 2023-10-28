@@ -3,26 +3,55 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
 
+
+double Camera::mouseX = 0;
+double Camera::mouseY = 0;
+
 Camera::Camera(glm::vec3 targetPos, float width, float height, float fovRad, float near, float far, float sensitivity)
 	: targetM(targetPos)
 	, cameraMatrixM(1.f) // identity
 	, sensitivityM(sensitivity)
+	, zoomM(STANDARD_ZOOM)
+	, zoomSensitivityM(50.f * sensitivity)
 {
 	projectionM = glm::perspective(fovRad, width / height, near, far);
 	projectionM[1][1] *= -1; // flip y axis
+	cameraMatrixM[2][2] = -1.f; // forward is negative zed
+	moveLocation(-getForward() * zoomM);
+	std::cout << "Camera created with following parameters" << std::endl;
+	std::cout << "Target: " << targetPos.x << ", " << targetPos.y << ", " << targetPos.z << std::endl;
+	std::cout << "Sensitivity: " << sensitivity << std::endl;
+	std::cout << "Location:" << getLocation().x << ", " << getLocation().y << ", " << getLocation().z << std::endl;
+	std::cout << "Forward:" << getForward().x << ", " << getForward().y << ", " << getForward().z << std::endl;
+	std::cout << "Right:" << getRight().x << ", " << getRight().y << ", " << getRight().z << std::endl;
+	std::cout << "Up:" << getUp().x << ", " << getUp().y << ", " << getUp().z << std::endl;
+
 }
 
 glm::mat4 Camera::getViewMatrix() const
+{
+	return glm::lookAt(getLocation(), -getForward(), getUp());
+}
+
+glm::mat4 Camera::getScuffedViewMatrix() const
 {
 	// construct inverse of the camera matrix.
 	// Due to orthonormality (of the orientation), the inverse is the transpose of the orientation, with negated translation.
 	glm::mat4 viewMatrix = glm::transpose(cameraMatrixM);
 	glm::vec3 locationInverse = -getLocation();
-	viewMatrix[3][0] = locationInverse.x;
-	viewMatrix[3][1] = locationInverse.y;
-	viewMatrix[3][2] = locationInverse.z;
-
+	viewMatrix[3][0] = 0.f;
+	viewMatrix[3][1] = 0.f;
+	viewMatrix[3][2] = -zoomM;
+	viewMatrix[0][3] = 0.f;
+	viewMatrix[1][3] = 0.f;
+	viewMatrix[2][3] = 0.f;
+	viewMatrix[3][3] = 1.f;
 	return viewMatrix;
+}
+
+glm::mat4 Camera::getOrientation() const
+{
+	return cameraMatrixM;
 }
 
 glm::mat4 Camera::getProjectionMatrix() const
@@ -32,7 +61,12 @@ glm::mat4 Camera::getProjectionMatrix() const
 
 glm::mat4 Camera::getWorldToScreenMatrix() const
 {
-	return projectionM * getViewMatrix();
+	return projectionM * getScuffedViewMatrix();
+}
+
+uint32_t Camera::getUboSize()
+{
+	return sizeof(glm::mat4);
 }
 
 void Camera::orbitRotate(glm::vec2 rotationVec)
@@ -41,21 +75,33 @@ void Camera::orbitRotate(glm::vec2 rotationVec)
 	float horizontalAngle = rotationVec.x * sensitivityM;
 	float verticalAngle = rotationVec.y * sensitivityM;
 
-	glm::mat4 rotatedHorizontal = glm::rotate(cameraMatrixM, horizontalAngle, POSITIVE_Y_AXIS);
+	glm::mat4 rotatedHorizontal = glm::rotate(glm::mat4(1.f), horizontalAngle, POSITIVE_Y_AXIS);
 	glm::vec3 rightVec = glm::vec3(glm::column(cameraMatrixM, 0)); // drops the w component
-	cameraMatrixM = glm::rotate(rotatedHorizontal, verticalAngle, rightVec);
+	glm::mat4 rotatedVertical = glm::rotate(glm::mat4(1.f), verticalAngle, rightVec);
+	cameraMatrixM = rotatedVertical * rotatedHorizontal * cameraMatrixM;
 }
 
-void Camera::registerCameraControls(GLFWwindow* window)
+void Camera::zoom(float zoomAmount)
 {
-	glfwSetCursorPosCallback(window, Camera::cursorPosCallback);
-	cameraUpdateCallback = [&](glm::vec2 rotation) { orbitRotate(rotation); };
+	float newZoom = zoomM + zoomAmount * zoomSensitivityM;
+	// clamp zoom
+	newZoom = glm::min(newZoom, MAX_ZOOM);
+	zoomM = glm::max(newZoom, MIN_ZOOM);
 }
 
-void Camera::setSensitivity(float newSensitivity)
+void Camera::setSensitivity(float newSensitivity, float newZoomSens)
 {
 	sensitivityM = newSensitivity;
+	zoomSensitivityM = newZoomSens;
 }
+
+void Camera::moveLocation(glm::vec3 movement)
+{
+	cameraMatrixM[3][0] += movement.x;
+	cameraMatrixM[3][1] += movement.y;
+	cameraMatrixM[3][2] += movement.z;
+}
+
 
 glm::mat4 Camera::getCameraMatrixOrigon() const
 {
@@ -73,11 +119,43 @@ glm::vec3 Camera::getLocation() const
 	return glm::vec3(glm::column(cameraMatrixM, 3));
 }
 
-void Camera::cursorPosCallback(GLFWwindow* window, double xpos, double ypos)
+glm::vec3 Camera::getForward() const
+{
+	return glm::vec3(glm::column(cameraMatrixM, 2));
+}
+
+glm::vec3 Camera::getRight() const
+{
+	return glm::vec3(glm::column(cameraMatrixM, 0));
+}
+
+glm::vec3 Camera::getUp() const
+{
+	return glm::vec3(glm::column(cameraMatrixM, 1));
+}
+
+glm::vec2 Camera::getSensitivities() const
+{
+	return glm::vec2(sensitivityM, zoomSensitivityM);
+}
+
+#pragma region CameraCallbacks
+
+std::function<void(glm::vec2)> Camera::cameraUpdateCallback = nullptr;
+std::function<void(float)> Camera::cameraZoomCallback = nullptr;
+
+void Camera::registerCameraControls(GLFWwindow* window)
+{
+	glfwSetCursorPosCallback(window, Camera::cursorPosCallback);
+	glfwSetScrollCallback(window, Camera::scrollCallback);
+	cameraUpdateCallback = [&](glm::vec2 rotation) { orbitRotate(rotation); };
+	cameraZoomCallback = [&](float zoomAmount) { zoom(zoomAmount); };
+}
+
+void Camera::cursorPosCallback(GLFWwindow* pWindow, double xpos, double ypos)
 {
 	double deltaX = xpos - mouseX;
 	double deltaY = ypos - mouseY;
-	std::cout << "Mouse movement: " << deltaX << ", " << deltaY << std::endl;
 	mouseX = xpos;
 	mouseY = ypos;
 
@@ -87,9 +165,9 @@ void Camera::cursorPosCallback(GLFWwindow* window, double xpos, double ypos)
 	cameraUpdateCallback(rotationVec);
 }
 
-void Camera::moveLocation(glm::vec3 movement)
+void Camera::scrollCallback(GLFWwindow* pWindow, double xOffSet, double yOffSet)
 {
-	cameraMatrixM[3][0] += movement.x;
-	cameraMatrixM[3][1] += movement.y;
-	cameraMatrixM[3][2] += movement.z;
+	float zoom = -yOffSet; // standard mouse wheels provide only the y offset
+	cameraZoomCallback(zoom);
 }
+#pragma endregion

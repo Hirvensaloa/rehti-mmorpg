@@ -76,8 +76,10 @@ Messages exchanged between the client and server are identified by a unique mess
 
 Represents the current game state. Represents all the relevant information that client needs to be able to react and interact with the world events.
 
+Sent by: Server
+
 <details>
-<summary>Click to expand</summary>
+<summary>Expand to see message attributes</summary>
 
 - **id**: Identifies the message type.
 - **entities**: A collection of `GameStateEntity` objects representing various entities in the game world.
@@ -90,7 +92,7 @@ Represents the current game state. Represents all the relevant information that 
   - **z**: Z-coordinate.
   - **hp**: Health points.
   - **rotation**: Rotation angle. 0-4 (North-South)
-  - **currentActionType**: Current action type (-1 means no action).
+  - **currentActionType**: Current action type. Equals to message id's that represent actions. For example, Attack and Move.
 
 - **objects**: A collection of `GameStateObject` objects representing objects in the game world.
   - **id**: Object ID.
@@ -100,7 +102,7 @@ Represents the current game state. Represents all the relevant information that 
   - **y**: Y-coordinate.
   - **z**: Z-coordinate.
   - **rotation**: Rotation angle. 0-4 (North-South).
-- **currentPlayer**: A `CurrentPlayer` object e.g. the player that this `GameStateMessage` is being sent to. Contains some info that is only exposed to the player itselfs.
+- **currentPlayer**: A `CurrentPlayer` object e.g. the player that this `GameStateMessage` is being sent to. Contains some info that is only exposed to the player itself.
   - **Inherits all the entity fields** (See above)
   - **skills**: A collection of `Skill` objects.
     - **id**: Skill ID.
@@ -113,47 +115,49 @@ Represents the current game state. Represents all the relevant information that 
     - **stackSize**: Stack size (1 for non-stackable items).
 
 </details>
-Sent by: Server
 
 #### MoveMessage
 
 Represents a move command with coordinates (x, y).
 
+Sent by: Client
+
 <details>
-<summary>Click to expand</summary>
+<summary>Expand to see message attributes</summary>
 
 - **id**: Identifies the message type.
 - **x**: X-coordinate for the move.
 - **y**: Y-coordinate for the move.
 
 </details>
-Sent by: Client
 
 #### AttackMessage
 
 Represents an attack command targeting a specific entity by its ID.
 
+Sent by: Client
+
 <details>
-<summary>Click to expand</summary>
+<summary>Expand to see message attributes</summary>
 
 - **id**: Identifies the message type.
 - **targetId**: ID of the entity to be attacked.
 
 </details>
-Sent by: Client
 
 #### ObjectInteractMessage
 
 Represents an interaction command with a specific game object. For example, a player wanting to interact with a tree.
 
+Sent by: Client
+
 <details>
-<summary>Click to expand</summary>
+<summary>Expand to see message attributes</summary>
 
 - **id**: Identifies the message type.
 - **objectId**: ID of the object to interact with.
 
 </details>
-Sent by: Client
 
 To add new messages, check [here](/rehtiLib/network/src/api/MessageApi.hpp)
 

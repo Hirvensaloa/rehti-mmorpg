@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <optional>
 #include <map>
 #include "Utils.hpp"
 #include "SkillReader.hpp"
@@ -68,8 +69,7 @@ enum class ObjectType
 {
   GENERAL,
   RESOURCE,
-  LOOT,
-  NOT_FOUND
+  LOOT
 };
 
 struct GameObjects
@@ -84,7 +84,7 @@ struct GameObjects
   }
 
   // Returns object type for given object id. Call this first and then use the appropriate getter
-  const ObjectType getObjectType(int id)
+  const std::optional<ObjectType> getObjectType(int id)
   {
     if (generalObjects.contains(id))
     {
@@ -100,14 +100,21 @@ struct GameObjects
     }
     else
     {
-      return ObjectType::NOT_FOUND;
+      return std::nullopt;
     }
   }
 
   // Get object tile map for given object id (returns empty vector if not found)
   std::vector<std::vector<std::string>> getTileMap(int id)
   {
-    switch (getObjectType(id))
+    std::optional<ObjectType> type = getObjectType(id);
+
+    if (type == std::nullopt)
+    {
+      return {};
+    }
+
+    switch (type.value())
     {
     case ObjectType::GENERAL:
       return generalObjects[id].tileMap;

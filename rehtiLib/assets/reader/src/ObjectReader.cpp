@@ -173,6 +173,7 @@ GameObjects fetchObjects(GameItems &gameItems, std::map<int, GameSkill> &gameSki
       resourceObject.depleteChance = depleteChance;
       resourceObject.relatedSkillId = relatedSkillId;
       resourceObject.xpRequirement = xpRequirement;
+      resourceObject.yieldableItemList = yieldableItemList;
 
       gameObjects.resourceObjects[objectId] = resourceObject;
     }

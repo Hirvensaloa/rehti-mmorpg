@@ -1,7 +1,10 @@
 #pragma once
 
+#include <optional>
+
 #include "../world/Coordinates.hpp"
 #include "Action.hpp"
+#include "MoveAction.hpp"
 
 class AttackAction : public Action
 {
@@ -14,14 +17,14 @@ public:
 
     void act();
 
-    Coordinates findNextMove();
-
 private:
+    std::optional<Coordinates> findNextMove();
+
     Entity *pTargetM;
 
     std::chrono::milliseconds actionTimeM;
 
-    std::chrono::milliseconds moveTimeM = std::chrono::milliseconds(200);
+    std::chrono::milliseconds moveTimeM = MoveAction::getMoveTime();
 
     ActionType actionTypeM = ActionType::Attack;
 };

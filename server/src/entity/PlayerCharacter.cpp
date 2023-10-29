@@ -2,22 +2,13 @@
 
 #include <iostream>
 
-PlayerCharacter::PlayerCharacter(std::string name, AssetManager &assetManager, unsigned int id, Coordinates location) : Entity(id, location), nameM(name), skillSetM(SkillSet(assetManager)){};
-
-std::string PlayerCharacter::getName()
-{
-    return nameM;
-}
+PlayerCharacter::PlayerCharacter(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : Entity(pGameWorld, name, id, location){};
 
 void PlayerCharacter::update()
 {
+
     if (currentActionM)
     {
         currentActionM->act();
     }
-}
-
-SkillSet PlayerCharacter::getSkillSet()
-{
-    return skillSetM;
 }

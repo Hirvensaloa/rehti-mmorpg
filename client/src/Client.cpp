@@ -57,10 +57,9 @@ boost::asio::awaitable<void> Client::randomWalk()
 {
   if (connectionM->isConnected())
   {
-    MoveMessage msg;
-    msg.x = std::rand() % 10;
-    msg.y = std::rand() % 10;
-    co_await connectionM->send(MessageApi::createMove(msg));
+    AttackMessage msg;
+    msg.targetId = 123;
+    co_await connectionM->send(MessageApi::createAttack(msg));
   }
 }
 
@@ -72,7 +71,7 @@ void Client::test()
         ioContextM, [this]() -> boost::asio::awaitable<void>
         { co_await randomWalk(); },
         boost::asio::detached);
-    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(115000));
   }
 }
 

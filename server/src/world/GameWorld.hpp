@@ -2,8 +2,8 @@
 
 #include <vector>
 #include <map>
+#include <optional>
 
-#include "../utils/AssetManager.hpp"
 #include "../entity/PlayerCharacter.hpp"
 #include "../entity/Npc.hpp"
 #include "../object/Object.hpp"
@@ -31,7 +31,9 @@ public:
 
     std::vector<std::shared_ptr<Npc>> &getNpcs();
 
-    std::map<std::string, std::unique_ptr<Object>> &getObjects();
+    Entity &getEntity(unsigned int entityId);
+
+    std::map<std::string, std::shared_ptr<Object>> &getObjects();
 
     void updateGameWorld();
 
@@ -40,7 +42,6 @@ public:
 private:
     std::vector<PlayerCharacter> playersM;
     std::vector<std::shared_ptr<Npc>> npcsM;
-    std::map<std::string, std::unique_ptr<Object>> objectsM;
+    std::map<std::string, std::shared_ptr<Object>> objectsM;
     Map mapM;
-    AssetManager assetManagerM;
 };

@@ -3,7 +3,7 @@
 #include "../world/GameWorld.hpp"
 #include "Entity.hpp"
 
-Entity::Entity(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : idM(id), nameM(name), locationM(location), pGameWorldM(pGameWorld), inventoryM(Inventory(this)), equipmentM(Equipment(this)){};
+Entity::Entity(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : idM(id), nameM(name), locationM(location), pGameWorldM(pGameWorld), inventoryM(Inventory(this)), equipmentM(Equipment(this)), skillSetM(SkillSet()){};
 
 unsigned int Entity::getId()
 {
@@ -103,4 +103,9 @@ void Entity::attack(Entity &target)
     {
         std::cout << "Entity " << getName() << " missed an attack on " << target.getName() << "." << std::endl;
     }
+}
+
+SkillSet &Entity::getSkillSet()
+{
+    return skillSetM;
 }

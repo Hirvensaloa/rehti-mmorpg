@@ -16,6 +16,8 @@ public:
 
     void act();
 
+    static const std::chrono::milliseconds getMoveTime();
+
 private:
     Coordinates targetM;
 

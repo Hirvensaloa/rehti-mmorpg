@@ -8,6 +8,8 @@
 #include <boost/asio/use_awaitable.hpp>
 
 #include "Server.hpp"
+#include "action/ObjectInteractAction.hpp"
+#include "utils/AssetManager.hpp"
 
 uint16_t PORT = 9999;
 int TICK_RATE = 32;
@@ -99,7 +101,20 @@ void Server::handleMessage(const Message &msg)
         }
         case MessageId::Attack:
         {
-            std::cout << "Attack message received. TODO: implement" << std::endl;
+            std::cout << connId << "Attack message received." << std::endl;
+            const AttackMessage attackMsg = MessageApi::parseAttack(body);
+            PlayerCharacter *gamer = gameWorldM.getPlayer(connId);
+            Entity &target = gameWorldM.getEntity(attackMsg.targetId);
+            gamer->setAction(std::make_shared<AttackAction>(std::chrono::system_clock::now(), &target, gamer));
+            break;
+        }
+        case MessageId::ObjectInteract:
+        {
+            std::cout << connId << " | Object interact message received" << std::endl;
+            const ObjectInteractMessage objectInteractMsg = MessageApi::parseObjectInteract(body);
+            PlayerCharacter *gamer = gameWorldM.getPlayer(connId);
+            std::shared_ptr<Object> object = gameWorldM.getObjects().at(objectInteractMsg.objectId);
+            gamer->setAction(std::make_shared<ObjectInteractAction>(std::chrono::system_clock::now(), object, gamer));
             break;
         }
         default:
@@ -132,6 +147,7 @@ void Server::tick()
 
 void Server::sendGameState()
 {
+
     GameStateMessage msg;
     std::vector<GameStateEntity> entityVector;
     for (auto &npc : gameWorldM.getNpcs())
@@ -143,6 +159,7 @@ void Server::sendGameState()
         entity.x = location.x;
         entity.y = location.y;
         entity.z = location.z;
+        entity.hp = npc->getHp();
         entityVector.push_back(entity);
     }
 
@@ -155,6 +172,7 @@ void Server::sendGameState()
         entity.x = location.x;
         entity.y = location.y;
         entity.z = location.z;
+        entity.hp = player.getHp();
         entityVector.push_back(entity);
     }
     msg.entities = entityVector;
@@ -182,8 +200,10 @@ void Server::sendGameState()
         msg.currentPlayer.x = location.x;
         msg.currentPlayer.y = location.y;
         msg.currentPlayer.z = location.z;
+        msg.currentPlayer.hp = player->getHp();
         msg.currentPlayer.currentActionType = player->getCurrentAction().getActionType();
         const auto skills = player->getSkillSet().getSkills();
+
         std::vector<Skill> skillVector;
         for (auto &skill : skills)
         {
@@ -191,6 +211,15 @@ void Server::sendGameState()
             skillVector.push_back(s);
         }
         msg.currentPlayer.skills = skillVector;
+
+        std::vector<GameItem> inventory;
+
+        for (auto &item : player->getInventory().getItems())
+        {
+            GameItem gameItem = {item->getId(), item->getInstanceId(), item->getName(), item->getStackSize()};
+            inventory.push_back(gameItem);
+        }
+        msg.currentPlayer.inventory = inventory;
 
         if (conn->isConnected())
         {

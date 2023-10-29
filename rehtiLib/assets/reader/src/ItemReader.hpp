@@ -3,18 +3,52 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <optional>
 
 struct ItemStats
 {
-  int accuracy;
-  int damage;
-  int attackSpeed;
-  int range;
-  int armor;
-  int dodge;
+  ItemStats(int acc = 0, int dam = 0, int aspd = 0, int rng = 0, int arm = 0, int dod = 0) : accuracy(acc), damage(dam), attackSpeed(aspd), range(rng), armor(arm), dodge(dod){};
+
+  int accuracy; // accuracy bonus
+
+  int damage; // damage bonus
+
+  int attackSpeed; // attack speed in milliseconds, non-zero only for weapons
+
+  int range; // range in tiles, non-zero only for weapons
+
+  int armor; // armor bonus
+
+  int dodge; // dodge change bonus
+
+  ItemStats operator+(ItemStats other)
+  {
+    return ItemStats(accuracy + other.accuracy, damage + other.damage, std::max(attackSpeed, other.attackSpeed), std::max(range, other.range), armor + other.armor, dodge + other.dodge);
+  }
+
+  friend std::ostream &operator<<(std::ostream &os, const ItemStats &stats);
 };
 
-struct GeneralItem
+inline std::ostream &operator<<(std::ostream &os, const ItemStats &stats)
+{
+  os << "ItemStats: accuracy = " << stats.accuracy << ", damage = " << stats.damage << ", attackSpeed = " << stats.attackSpeed << ", range = " << stats.range << ", armor = " << stats.armor << ", dodge = " << stats.dodge << std::endl;
+  return os;
+};
+
+enum class Slot
+{
+  MAIN_HAND,
+  OFF_HAND,
+  HEAD,
+  TOP,
+  BOTTOM,
+  BOOTS,
+  GLOVES,
+  NECK,
+  RING
+};
+
+struct GeneralItemStruct
 {
   int id;
   std::string name;
@@ -22,17 +56,17 @@ struct GeneralItem
   bool isStackable;
 };
 
-struct EquippableItem
+struct EquippableItemStruct
 {
   int id;
   std::string name;
   std::string description;
-  std::string slot;
+  Slot slot;
   ItemStats stats;
   bool isStackable;
 };
 
-struct FoodItem
+struct FoodItemStruct
 {
   int id;
   std::string name;
@@ -48,22 +82,21 @@ enum class ItemType
 {
   GENERAL,
   EQUIPPABLE,
-  FOOD,
-  NOT_FOUND
+  FOOD
 };
 
 struct GameItems
 {
-  std::map<int, GeneralItem> generalItems;
-  std::map<int, EquippableItem> equippableItems;
-  std::map<int, FoodItem> foodItems;
+  std::map<int, GeneralItemStruct> generalItems;
+  std::map<int, EquippableItemStruct> equippableItems;
+  std::map<int, FoodItemStruct> foodItems;
 
-  bool containsId(int id)
+  const bool containsId(const int id) const
   {
     return generalItems.contains(id) || equippableItems.contains(id) || foodItems.contains(id);
   }
 
-  ItemType findItemType(int id)
+  std::optional<ItemType> getItemType(int id)
   {
     if (generalItems.contains(id))
     {
@@ -79,23 +112,23 @@ struct GameItems
     }
     else
     {
-      return ItemType::NOT_FOUND;
+      return std::nullopt;
     }
   }
 
-  const GeneralItem &getGeneralItem(int id)
+  const GeneralItemStruct &getGeneralItem(int id)
   {
-    return generalItems[id];
+    return generalItems.at(id);
   }
 
-  const EquippableItem &getEquippableItem(int id)
+  const EquippableItemStruct &getEquippableItem(int id)
   {
-    return equippableItems[id];
+    return equippableItems.at(id);
   }
 
-  const FoodItem &getFoodItem(int id)
+  const FoodItemStruct &getFoodItem(int id)
   {
-    return foodItems[id];
+    return foodItems.at(id);
   }
 };
 

@@ -1,6 +1,7 @@
 #include "ResourceObject.hpp"
+#include "../utils/AssetManager.hpp"
 
-ResourceObject::ResourceObject(int id, std::string instanceId, std::string name, Coordinates coords, unsigned int rotation, std::vector<YieldableItem> yieldableItemList, int xpPerYield, int depleteChance, int relatedSkillId, int xpRequirement) : Object(id, instanceId, name, coords, rotation)
+ResourceObject::ResourceObject(int id, std::string instanceId, std::string name, Coordinates coords, unsigned int rotation, std::vector<YieldableItem> yieldableItemList, int xpPerYield, int depleteChance, int relatedSkillId, int xpRequirement, ObjectType type) : Object(id, instanceId, name, coords, rotation, type)
 {
   this->yieldableItemListM = yieldableItemList;
   this->xpPerYieldM = xpPerYield;
@@ -9,7 +10,16 @@ ResourceObject::ResourceObject(int id, std::string instanceId, std::string name,
   this->xpRequirementM = xpRequirement;
 }
 
-void ResourceObject::interact(PlayerCharacter *player)
+ResourceObject::ResourceObject(const ResourceObjectStruct &object, const ObjectLocation &location, ObjectType type) : Object(object.id, location.instanceId, object.name, {location.x, location.y, location.z}, location.rotation, type)
+{
+  this->yieldableItemListM = object.yieldableItemList;
+  this->xpPerYieldM = object.xpPerYield;
+  this->depleteChanceM = object.depleteChance;
+  this->relatedSkillIdM = object.relatedSkillId;
+  this->xpRequirementM = object.xpRequirement;
+}
+
+void ResourceObject::interact(Entity &entity)
 {
   int rand = std::rand() % 100;
   int cumulativeChance = 0;
@@ -18,7 +28,18 @@ void ResourceObject::interact(PlayerCharacter *player)
   {
     if (cumulativeChance < rand && rand < cumulativeChance + item.yieldPercentage)
     {
-      player->getSkillSet().addSkillXp(relatedSkillIdM, xpPerYieldM);
+      const GameItems &items = AssetManager::getItems();
+      if (!items.containsId(item.itemId))
+      {
+        return;
+      }
+
+      Inventory &inventory = entity.getInventory();
+      std::shared_ptr<Item> itemPtr = AssetManager::createItemInstance(item.itemId);
+      inventory.addItem(itemPtr);
+
+      entity.getSkillSet().addSkillXp(relatedSkillIdM, xpPerYieldM);
+      std::cout << "Entity " << entity.getName() << " received " << itemPtr->getName() << " from " << getName() << " and " << xpPerYieldM << " xp" << std::endl;
       return;
     }
     cumulativeChance += item.yieldPercentage;

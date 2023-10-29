@@ -55,7 +55,7 @@ MessageStruct MessageApi::createObjectInteract(const ObjectInteractMessage &obje
 {
   rapidjson::Document document = createDocument();
   rapidjson::Document::AllocatorType &allocator = document.GetAllocator();
-  document.AddMember("objectId", objectInteract.objectId, allocator);
+  document.AddMember("objectId", rapidjson::StringRef(objectInteract.objectId.c_str()), allocator);
 
   return MessageStruct{objectInteract.id, createString(document)};
 };
@@ -90,6 +90,7 @@ MessageStruct MessageApi::createGameState(const GameStateMessage &gameState)
     entityObject.AddMember("x", entity.x, allocator);
     entityObject.AddMember("y", entity.y, allocator);
     entityObject.AddMember("z", entity.z, allocator);
+    entityObject.AddMember("hp", entity.hp, allocator);
     entityObject.AddMember("currentActionType", entity.currentActionType, allocator);
     entityArray.PushBack(entityObject, allocator);
   }
@@ -117,6 +118,7 @@ MessageStruct MessageApi::createGameState(const GameStateMessage &gameState)
   currentPlayer.AddMember("x", gameState.currentPlayer.x, allocator);
   currentPlayer.AddMember("y", gameState.currentPlayer.y, allocator);
   currentPlayer.AddMember("z", gameState.currentPlayer.z, allocator);
+  currentPlayer.AddMember("hp", gameState.currentPlayer.hp, allocator);
   currentPlayer.AddMember("currentActionType", gameState.currentPlayer.currentActionType, allocator);
   rapidjson::Value skills(rapidjson::kArrayType);
   for (const auto &skill : gameState.currentPlayer.skills)
@@ -128,6 +130,18 @@ MessageStruct MessageApi::createGameState(const GameStateMessage &gameState)
     skills.PushBack(skillObject, allocator);
   }
   currentPlayer.AddMember("skills", skills, allocator);
+  rapidjson::Value inventory(rapidjson::kArrayType);
+  for (const auto &item : gameState.currentPlayer.inventory)
+  {
+    rapidjson::Value itemObject(rapidjson::kObjectType);
+    itemObject.AddMember("id", item.id, allocator);
+    itemObject.AddMember("instanceId", item.instanceId, allocator);
+    itemObject.AddMember("name", rapidjson::StringRef(item.name.c_str()), allocator);
+    itemObject.AddMember("stackSize", item.stackSize, allocator);
+    inventory.PushBack(itemObject, allocator);
+  }
+  currentPlayer.AddMember("inventory", inventory, allocator);
+
   document.AddMember("currentPlayer", currentPlayer, allocator);
 
   return MessageStruct{gameState.id, createString(document)};
@@ -151,6 +165,7 @@ GameStateMessage MessageApi::parseGameState(std::string msgBody)
     gameStateEntity.x = entity["x"].GetInt();
     gameStateEntity.y = entity["y"].GetInt();
     gameStateEntity.z = entity["z"].GetInt();
+    gameStateEntity.hp = entity["hp"].GetInt();
     gameStateEntity.currentActionType = entity["currentActionType"].GetInt();
 
     gameState.entities.push_back(gameStateEntity);
@@ -175,6 +190,7 @@ GameStateMessage MessageApi::parseGameState(std::string msgBody)
   gameState.currentPlayer.x = document["currentPlayer"]["x"].GetInt();
   gameState.currentPlayer.y = document["currentPlayer"]["y"].GetInt();
   gameState.currentPlayer.z = document["currentPlayer"]["z"].GetInt();
+  gameState.currentPlayer.hp = document["currentPlayer"]["hp"].GetInt();
   gameState.currentPlayer.currentActionType = document["currentPlayer"]["currentActionType"].GetInt();
   gameState.currentPlayer.skills = std::vector<Skill>();
 
@@ -186,6 +202,18 @@ GameStateMessage MessageApi::parseGameState(std::string msgBody)
     skillObject.xp = skill["xp"].GetInt();
 
     gameState.currentPlayer.skills.push_back(skillObject);
+  }
+
+  gameState.currentPlayer.inventory = std::vector<GameItem>();
+  for (const auto &item : document["currentPlayer"]["inventory"].GetArray())
+  {
+    GameItem itemObject;
+    itemObject.id = item["id"].GetInt();
+    itemObject.instanceId = item["instanceId"].GetInt();
+    itemObject.name = item["name"].GetString();
+    itemObject.stackSize = item["stackSize"].GetInt();
+
+    gameState.currentPlayer.inventory.push_back(itemObject);
   }
 
   return gameState;

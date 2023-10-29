@@ -2,22 +2,26 @@
 
 #include <string>
 
-#include "../entity/PlayerCharacter.hpp"
+#include "../entity/Entity.hpp"
+#include "RehtiReader.hpp"
 
 class Object
 {
 public:
-  Object(int id, std::string instanceId, std::string name, Coordinates coordinates, unsigned int rotation);
+  Object(int id, std::string instanceId, std::string name, Coordinates coordinates, unsigned int rotation, ObjectType objectType);
 
-  virtual ~Object();
+  Object(const GeneralObjectStruct &object, const ObjectLocation &location, ObjectType objectType);
 
-  const int getId();
-  const std::string getInstanceId();
-  const std::string getName();
-  const Coordinates getLocation();
-  const unsigned int getRotation();
+  virtual ~Object() = default;
 
-  virtual void interact(PlayerCharacter *player) { std::cout << "Cannot interact with this object" << std::endl; };
+  const int &getId();
+  const std::string &getInstanceId();
+  const std::string &getName();
+  const Coordinates &getLocation();
+  const unsigned int &getRotation();
+  const ObjectType &getObjectType();
+
+  virtual void interact(Entity &entity) { std::cout << "Cannot interact with this object" << std::endl; };
 
 private:
   int idM;                 // Unique id for object type (For example, tree, rock, etc)
@@ -25,4 +29,5 @@ private:
   std::string nameM;
   Coordinates coordinatesM;
   unsigned int rotationM;
+  ObjectType objectTypeM;
 };

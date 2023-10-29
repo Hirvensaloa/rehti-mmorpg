@@ -47,7 +47,7 @@ GameItems fetchItems()
 
     if (itemType == "General")
     {
-      GeneralItem generalItem;
+      GeneralItemStruct generalItem;
       generalItem.id = itemId;
       generalItem.name = item["name"].GetString();
       generalItem.description = item["description"].GetString();
@@ -62,11 +62,52 @@ GameItems fetchItems()
         throw std::runtime_error("JSON Validation failed for item id: " + std::to_string(itemId));
       }
 
-      EquippableItem equippableItem;
+      EquippableItemStruct equippableItem;
       equippableItem.id = itemId;
       equippableItem.name = item["name"].GetString();
       equippableItem.description = item["description"].GetString();
-      equippableItem.slot = item["slot"].GetString();
+      std::string slot = item["slot"].GetString();
+
+      if (slot == "MainHand")
+      {
+        equippableItem.slot = Slot::MAIN_HAND;
+      }
+      else if (slot == "OffHand")
+      {
+        equippableItem.slot = Slot::OFF_HAND;
+      }
+      else if (slot == "Head")
+      {
+        equippableItem.slot = Slot::HEAD;
+      }
+      else if (slot == "Top")
+      {
+        equippableItem.slot = Slot::TOP;
+      }
+      else if (slot == "Bottom")
+      {
+        equippableItem.slot = Slot::BOTTOM;
+      }
+      else if (slot == "Boots")
+      {
+        equippableItem.slot = Slot::BOOTS;
+      }
+      else if (slot == "Gloves")
+      {
+        equippableItem.slot = Slot::GLOVES;
+      }
+      else if (slot == "Neck")
+      {
+        equippableItem.slot = Slot::NECK;
+      }
+      else if (slot == "Ring")
+      {
+        equippableItem.slot = Slot::RING;
+      }
+      else
+      {
+        throw std::runtime_error("Unknown slot: " + slot);
+      }
 
       const rapidjson::Value &stats = item["stats"];
 
@@ -88,7 +129,7 @@ GameItems fetchItems()
         throw std::runtime_error("JSON Validation failed for item id: " + std::to_string(itemId));
       }
 
-      FoodItem foodItem;
+      FoodItemStruct foodItem;
       foodItem.id = itemId;
       foodItem.name = item["name"].GetString();
       foodItem.description = item["description"].GetString();
@@ -105,19 +146,19 @@ GameItems fetchItems()
 
   for (const auto &pair : gameItems.generalItems)
   {
-    const GeneralItem &item = pair.second;
+    const GeneralItemStruct &item = pair.second;
     std::cout << "General Item ID: " << item.id << ", Name: " << item.name << std::endl;
   }
 
   for (const auto &pair : gameItems.equippableItems)
   {
-    const EquippableItem &item = pair.second;
+    const EquippableItemStruct &item = pair.second;
     std::cout << "Equippable Item ID: " << item.id << ", Name: " << item.name << std::endl;
   }
 
   for (const auto &pair : gameItems.foodItems)
   {
-    const FoodItem &item = pair.second;
+    const FoodItemStruct &item = pair.second;
     std::cout << "Food Item ID: " << item.id << ", Name: " << item.name << std::endl;
   }
 

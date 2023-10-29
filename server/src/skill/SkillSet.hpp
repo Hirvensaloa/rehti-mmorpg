@@ -4,8 +4,6 @@
 #include <string>
 #include <optional>
 
-#include "../utils/AssetManager.hpp"
-
 struct SkillInfo
 {
   const std::string name;
@@ -16,7 +14,7 @@ struct SkillInfo
 class SkillSet
 {
 public:
-  SkillSet(AssetManager &assetManager);
+  SkillSet();
 
   const std::map<int, SkillInfo> &getSkills();
 

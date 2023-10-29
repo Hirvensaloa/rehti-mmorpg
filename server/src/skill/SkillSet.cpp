@@ -1,8 +1,9 @@
 #include "SkillSet.hpp"
+#include "../utils/AssetManager.hpp"
 
-SkillSet::SkillSet(AssetManager &assetManager)
+SkillSet::SkillSet()
 {
-  const auto skills = assetManager.getSkills();
+  const auto skills = AssetManager::getSkills();
 
   for (const auto &skill : skills)
   {

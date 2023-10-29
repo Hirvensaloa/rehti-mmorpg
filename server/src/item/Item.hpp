@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "RehtiReader.hpp"
+
 class Entity;
 
 class Item
@@ -9,18 +11,31 @@ class Item
 public:
     Item(int id, std::string name, bool isStackable = false);
 
-    int getId();
+    Item(const GeneralItemStruct &generalItem);
 
-    std::string getName();
+    // Item type id, for example sword, bread etc.
+    const int &getId();
 
-    bool IsStackable();
+    // Unique instance id for this item
+    const int &getInstanceId();
 
-    virtual bool use(Entity *user) = 0; // If this returns true, item should be deleted.
+    const unsigned int &getStackSize();
+
+    const std::string &getName();
+
+    const bool &IsStackable();
+
+    virtual bool use(Entity *user); // If this returns true, item should be deleted.
 
 protected:
     int idM;
+    int instanceIdM;
+
+    const unsigned int stackSizeM = 1; // TODO: Implement amount functionality for stackable items
 
     std::string nameM;
 
     bool isStackableM;
+
+    inline static int nextInstanceIdM = 0;
 };

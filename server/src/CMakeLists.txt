@@ -51,7 +51,6 @@ set(SOURCES
         item/Inventory.cpp
         item/FoodItem.hpp
         item/FoodItem.cpp
-        item/ItemStats.hpp
 
         skill/SkillSet.hpp
         skill/SkillSet.cpp

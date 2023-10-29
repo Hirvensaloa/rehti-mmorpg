@@ -7,13 +7,13 @@
 #include "Utils.hpp"
 #include "ObjectReader.hpp"
 
-const unsigned AREA_WIDTH = 128;
+const unsigned AREA_WIDTH = 16;
 const unsigned AREA_HEIGHT = AREA_WIDTH;
 
 // Paths
 const std::string ASSET_PATH = ROOT_PATH + "assets/map/";
 const std::string AREA_FILES_PATH = ASSET_PATH + "areas/";
-const std::string AREA_MAP_PATH = ASSET_PATH + "map.json";
+const std::string AREA_MAP_PATH = ASSET_PATH + "test.json";
 
 // Object tile map symbols
 const std::string OBJECT_TILE_MAP_CENTER = "X";

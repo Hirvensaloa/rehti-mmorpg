@@ -72,13 +72,90 @@ Client-server communication is established over TCP, and all message bodies are 
 
 Messages exchanged between the client and server are identified by a unique message type and include information about which entity sends the message (server or client). Here's a summary of the available message types:
 
-| Message Type     | Sent by | Description                                                                       |
-| ---------------- | ------- | --------------------------------------------------------------------------------- |
-| GameStateMessage | Server  | Represents the current game state with a collection of `GameStateEntity` objects. |
-| MoveMessage      | Client  | Represents a move command with coordinates (x, y).                                |
-| AttackMessage    | Client  | Represents an attack command targeting a specific entity by its ID.               |
+#### GameStateMessage
 
-For detailed information on the message structures, check [here](/rehtiLib/network/src/api/MessageApi.hpp)
+Represents the current game state. Represents all the relevant information that client needs to be able to react and interact with the world events.
+
+<details>
+<summary>Click to expand</summary>
+
+- **id**: Identifies the message type.
+- **entities**: A collection of `GameStateEntity` objects representing various entities in the game world.
+
+  - **id**: Entity ID.
+  - **instanceId**: Instance-specific ID.
+  - **name**: Entity name.
+  - **x**: X-coordinate.
+  - **y**: Y-coordinate.
+  - **z**: Z-coordinate.
+  - **hp**: Health points.
+  - **rotation**: Rotation angle. 0-4 (North-South)
+  - **currentActionType**: Current action type (-1 means no action).
+
+- **objects**: A collection of `GameStateObject` objects representing objects in the game world.
+  - **id**: Object ID.
+  - **instanceId**: Instance-specific ID.
+  - **name**: Object name.
+  - **x**: X-coordinate.
+  - **y**: Y-coordinate.
+  - **z**: Z-coordinate.
+  - **rotation**: Rotation angle. 0-4 (North-South).
+- **currentPlayer**: A `CurrentPlayer` object e.g. the player that this `GameStateMessage` is being sent to. Contains some info that is only exposed to the player itselfs.
+  - **Inherits all the entity fields** (See above)
+  - **skills**: A collection of `Skill` objects.
+    - **id**: Skill ID.
+    - **name**: Skill name.
+    - **xp**: Experience points.
+  - **inventory**: A collection of `GameItem` objects.
+    - **id**: Item ID.
+    - **instanceId**: Instance-specific ID.
+    - **name**: Item name.
+    - **stackSize**: Stack size (1 for non-stackable items).
+
+</details>
+Sent by: Server
+
+#### MoveMessage
+
+Represents a move command with coordinates (x, y).
+
+<details>
+<summary>Click to expand</summary>
+
+- **id**: Identifies the message type.
+- **x**: X-coordinate for the move.
+- **y**: Y-coordinate for the move.
+
+</details>
+Sent by: Client
+
+#### AttackMessage
+
+Represents an attack command targeting a specific entity by its ID.
+
+<details>
+<summary>Click to expand</summary>
+
+- **id**: Identifies the message type.
+- **targetId**: ID of the entity to be attacked.
+
+</details>
+Sent by: Client
+
+#### ObjectInteractMessage
+
+Represents an interaction command with a specific game object. For example, a player wanting to interact with a tree.
+
+<details>
+<summary>Click to expand</summary>
+
+- **id**: Identifies the message type.
+- **objectId**: ID of the object to interact with.
+
+</details>
+Sent by: Client
+
+To add new messages, check [here](/rehtiLib/network/src/api/MessageApi.hpp)
 
 ## Project practices
 

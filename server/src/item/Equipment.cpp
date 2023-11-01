@@ -5,15 +5,15 @@
 Equipment::Equipment(Entity *owner) : ownerM(owner), slotMapM{}
 {
     slotMapM = {
-        {Slot::MainHand, mainHandSlotM},
-        {Slot::OffHand, offHandSlotM},
-        {Slot::Head, headSlotM},
-        {Slot::Top, topSlotM},
-        {Slot::Bottom, bottomSlotM},
-        {Slot::Boots, bootsSlotM},
-        {Slot::Gloves, glovesSlotM},
-        {Slot::Neck, neckSlotM},
-        {Slot::Ring, ringSlotM},
+        {Slot::MAIN_HAND, mainHandSlotM},
+        {Slot::OFF_HAND, offHandSlotM},
+        {Slot::HEAD, headSlotM},
+        {Slot::TOP, topSlotM},
+        {Slot::BOTTOM, bottomSlotM},
+        {Slot::BOOTS, bootsSlotM},
+        {Slot::GLOVES, glovesSlotM},
+        {Slot::NECK, neckSlotM},
+        {Slot::RING, ringSlotM},
     };
 };
 

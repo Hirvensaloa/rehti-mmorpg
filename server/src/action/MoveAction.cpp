@@ -40,3 +40,8 @@ void MoveAction::act()
         }
     }
 }
+
+const std::chrono::milliseconds MoveAction::getMoveTime()
+{
+    return std::chrono::milliseconds(200);
+}

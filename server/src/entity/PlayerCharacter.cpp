@@ -6,6 +6,7 @@ PlayerCharacter::PlayerCharacter(GameWorld *pGameWorld, std::string name, unsign
 
 void PlayerCharacter::update()
 {
+
     if (currentActionM)
     {
         currentActionM->act();

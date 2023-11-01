@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "rapidjson/document.h"
 
 // Reads JSON file to rapidjson document

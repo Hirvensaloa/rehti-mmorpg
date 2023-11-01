@@ -173,15 +173,11 @@ Run the tests with `./scripts/test-server.sh`.
 
 - Code needs to be documented. The goal is that by reading the docs, a user can start the program and gain a technical overview of the project.
 
+- Use Doxygen format to document every function, class and struct in hpp files. See Doxygen documentation [here](/docs/html/index.html)
+
 - Changes are implemented through pull requests
 
 - Change pattern: your own branch -> dev -> main
-
-- TODO: What else?
-
-### C++ specific
-
-- TODO: what?
 
 ## Projektin seuranta (Viedään tää osio lopuks jonnekki muualle)
 

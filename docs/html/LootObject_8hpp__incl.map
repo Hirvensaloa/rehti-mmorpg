@@ -1,25 +1,24 @@
-<map id="/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti&#45;mmorpg/server/src/object/LootObject.hpp" name="/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti&#45;mmorpg/server/src/object/LootObject.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="647,5,847,76"/>
-<area shape="rect" id="node2" title=" " alt="" coords="966,423,1029,449"/>
-<area shape="rect" id="node3" title=" " alt="" coords="733,348,808,375"/>
-<area shape="rect" id="node4" href="$Object_8hpp.html" title=" " alt="" coords="273,124,365,151"/>
-<area shape="rect" id="node5" title=" " alt="" coords="208,497,267,524"/>
-<area shape="rect" id="node6" href="$Entity_8hpp.html" title=" " alt="" coords="510,199,650,225"/>
-<area shape="rect" id="node19" title=" " alt="" coords="54,497,183,524"/>
-<area shape="rect" id="node7" href="$AttackAction_8hpp.html" title=" " alt="" coords="784,273,973,300"/>
-<area shape="rect" id="node8" href="$Coordinates_8hpp.html" title=" " alt="" coords="639,423,819,449"/>
-<area shape="rect" id="node15" href="$MoveAction_8hpp.html" title=" " alt="" coords="934,348,1061,375"/>
-<area shape="rect" id="node16" href="$Equipment_8hpp.html" title=" " alt="" coords="145,273,311,300"/>
-<area shape="rect" id="node21" href="$Inventory_8hpp.html" title=" " alt="" coords="502,273,658,300"/>
-<area shape="rect" id="node23" href="$SkillSet_8hpp.html" title=" " alt="" coords="335,273,478,300"/>
-<area shape="rect" id="node10" href="$Action_8hpp.html" title=" " alt="" coords="851,423,941,449"/>
-<area shape="rect" id="node9" title=" " alt="" coords="681,497,743,524"/>
-<area shape="rect" id="node11" title=" " alt="" coords="879,497,945,524"/>
-<area shape="rect" id="node12" title=" " alt="" coords="969,497,1028,524"/>
-<area shape="rect" id="node13" title=" " alt="" coords="489,497,567,524"/>
-<area shape="rect" id="node14" title=" " alt="" coords="767,497,854,524"/>
-<area shape="rect" id="node17" href="$EquippableItem_8hpp.html" title=" " alt="" coords="93,348,245,375"/>
-<area shape="rect" id="node20" title=" " alt="" coords="320,348,371,375"/>
-<area shape="rect" id="node18" href="$Item_8hpp.html" title=" " alt="" coords="187,423,267,449"/>
-<area shape="rect" id="node22" href="$FoodItem_8hpp.html" title=" " alt="" coords="446,348,557,375"/>
+<map id="LootObject.hpp" name="LootObject.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="687,5,807,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="966,379,1029,405"/>
+<area shape="rect" id="node3" title=" " alt="" coords="733,304,808,331"/>
+<area shape="rect" id="node4" href="$Object_8hpp.html" title=" " alt="" coords="275,80,367,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="208,453,267,480"/>
+<area shape="rect" id="node6" href="$Entity_8hpp.html" title=" " alt="" coords="517,155,657,181"/>
+<area shape="rect" id="node18" title=" " alt="" coords="54,453,183,480"/>
+<area shape="rect" id="node7" href="$AttackAction_8hpp.html" title=" " alt="" coords="784,229,973,256"/>
+<area shape="rect" id="node8" href="$Coordinates_8hpp.html" title=" " alt="" coords="646,379,826,405"/>
+<area shape="rect" id="node14" href="$MoveAction_8hpp.html" title=" " alt="" coords="934,304,1061,331"/>
+<area shape="rect" id="node15" href="$Equipment_8hpp.html" title=" " alt="" coords="325,229,491,256"/>
+<area shape="rect" id="node20" href="$Inventory_8hpp.html" title=" " alt="" coords="145,229,301,256"/>
+<area shape="rect" id="node22" href="$SkillSet_8hpp.html" title=" " alt="" coords="515,229,658,256"/>
+<area shape="rect" id="node9" href="$Action_8hpp.html" title=" " alt="" coords="851,379,941,405"/>
+<area shape="rect" id="node10" title=" " alt="" coords="964,453,1031,480"/>
+<area shape="rect" id="node11" title=" " alt="" coords="769,453,828,480"/>
+<area shape="rect" id="node12" title=" " alt="" coords="445,453,523,480"/>
+<area shape="rect" id="node13" title=" " alt="" coords="853,453,939,480"/>
+<area shape="rect" id="node16" href="$EquippableItem_8hpp.html" title=" " alt="" coords="229,304,381,331"/>
+<area shape="rect" id="node19" title=" " alt="" coords="557,304,608,331"/>
+<area shape="rect" id="node17" href="$Item_8hpp.html" title=" " alt="" coords="187,379,267,405"/>
+<area shape="rect" id="node21" href="$FoodItem_8hpp.html" title=" " alt="" coords="94,304,205,331"/>
 </map>

@@ -10,7 +10,7 @@ ResourceObject::ResourceObject(int id, std::string instanceId, std::string name,
   this->xpRequirementM = xpRequirement;
 }
 
-ResourceObject::ResourceObject(const ResourceObjectStruct &object, const ObjectLocation &location, ObjectType type) : Object(object.id, location.instanceId, object.name, {location.x, location.y, location.z}, location.rotation, type)
+ResourceObject::ResourceObject(const ResourceObjectStruct &object, const ObjectLocation &location, ObjectType type) : Object(object.id, location.instanceId, object.name, {location.x, location.y}, location.rotation, type)
 {
   this->yieldableItemListM = object.yieldableItemList;
   this->xpPerYieldM = object.xpPerYield;

@@ -1,13 +1,12 @@
-<map id="/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti&#45;mmorpg/server/src/action/AttackAction.hpp" name="/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti&#45;mmorpg/server/src/action/AttackAction.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="90,5,290,76"/>
-<area shape="rect" id="node2" title=" " alt="" coords="27,124,102,151"/>
-<area shape="rect" id="node3" href="$Coordinates_8hpp.html" title=" " alt="" coords="5,199,185,225"/>
-<area shape="rect" id="node5" href="$Action_8hpp.html" title=" " alt="" coords="297,199,387,225"/>
-<area shape="rect" id="node10" href="$MoveAction_8hpp.html" title=" " alt="" coords="177,124,304,151"/>
-<area shape="rect" id="node4" title=" " alt="" coords="64,273,127,300"/>
-<area shape="rect" id="node6" title=" " alt="" coords="482,273,549,300"/>
-<area shape="rect" id="node7" title=" " alt="" coords="186,273,245,300"/>
-<area shape="rect" id="node8" title=" " alt="" coords="269,273,346,300"/>
-<area shape="rect" id="node9" title=" " alt="" coords="371,273,457,300"/>
-<area shape="rect" id="node11" title=" " alt="" coords="209,199,272,225"/>
+<map id="AttackAction.hpp" name="AttackAction.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="123,5,257,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="27,80,102,107"/>
+<area shape="rect" id="node3" href="$Coordinates_8hpp.html" title=" " alt="" coords="5,155,185,181"/>
+<area shape="rect" id="node4" href="$Action_8hpp.html" title=" " alt="" coords="297,155,387,181"/>
+<area shape="rect" id="node9" href="$MoveAction_8hpp.html" title=" " alt="" coords="177,80,304,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="177,229,243,256"/>
+<area shape="rect" id="node6" title=" " alt="" coords="267,229,326,256"/>
+<area shape="rect" id="node7" title=" " alt="" coords="350,229,427,256"/>
+<area shape="rect" id="node8" title=" " alt="" coords="452,229,539,256"/>
+<area shape="rect" id="node10" title=" " alt="" coords="209,155,272,181"/>
 </map>

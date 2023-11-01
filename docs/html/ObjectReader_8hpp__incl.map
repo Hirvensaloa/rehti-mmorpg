@@ -1,12 +1,12 @@
-<map id="/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti&#45;mmorpg/rehtiLib/assets/reader/src/ObjectReader.hpp" name="/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti&#45;mmorpg/rehtiLib/assets/reader/src/ObjectReader.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="177,5,392,76"/>
-<area shape="rect" id="node2" title=" " alt="" coords="10,199,90,225"/>
-<area shape="rect" id="node3" title=" " alt="" coords="24,124,97,151"/>
-<area shape="rect" id="node4" title=" " alt="" coords="282,199,341,225"/>
-<area shape="rect" id="node5" title=" " alt="" coords="138,199,213,225"/>
-<area shape="rect" id="node6" title=" " alt="" coords="365,199,415,225"/>
-<area shape="rect" id="node7" href="$rehtiLib_2assets_2reader_2src_2Utils_8hpp.html" title=" " alt="" coords="494,199,574,225"/>
-<area shape="rect" id="node9" href="$SkillReader_8hpp.html" title=" " alt="" coords="423,124,546,151"/>
-<area shape="rect" id="node10" href="$ItemReader_8hpp.html" title=" " alt="" coords="173,124,298,151"/>
-<area shape="rect" id="node8" title=" " alt="" coords="503,273,565,300"/>
+<map id="ObjectReader.hpp" name="ObjectReader.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="217,5,354,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="11,155,91,181"/>
+<area shape="rect" id="node3" title=" " alt="" coords="25,80,98,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="283,155,341,181"/>
+<area shape="rect" id="node5" title=" " alt="" coords="139,155,213,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="365,155,416,181"/>
+<area shape="rect" id="node7" href="$rehtiLib_2assets_2reader_2src_2Utils_8hpp.html" title=" " alt="" coords="495,155,575,181"/>
+<area shape="rect" id="node9" href="$SkillReader_8hpp.html" title=" " alt="" coords="424,80,547,107"/>
+<area shape="rect" id="node10" href="$ItemReader_8hpp.html" title=" " alt="" coords="173,80,299,107"/>
+<area shape="rect" id="node8" title=" " alt="" coords="503,229,566,256"/>
 </map>

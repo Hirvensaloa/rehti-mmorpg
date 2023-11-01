@@ -16,27 +16,30 @@
 
 enum EngineFlags
 {
-	NO_FLAGS = 0,
-	FRAME_BUFFER_RESIZED = 1 << 0,
-	UNKNOWN = 1 << 7
+    NO_FLAGS = 0,
+    FRAME_BUFFER_RESIZED = 1 << 0,
+    UNKNOWN = 1 << 7
 };
 
-//Useful structs
+// Useful structs
 struct QueueFamilyIndices
 {
     std::optional<uint32_t> graphicsFamily;
     std::optional<uint32_t> presentFamily;
     std::optional<uint32_t> transferFamily;
 
-    bool isComplete() {
+    bool isComplete()
+    {
         return graphicsFamily.has_value() && presentFamily.has_value();
     }
-    bool hasTransferOnlyQueue() {
-		return transferFamily.has_value();
-	}
+    bool hasTransferOnlyQueue()
+    {
+        return transferFamily.has_value();
+    }
 };
 
-struct SwapChainSupportDetails {
+struct SwapChainSupportDetails
+{
     VkSurfaceCapabilitiesKHR capabilities;
     std::vector<VkSurfaceFormatKHR> formats;
     std::vector<VkPresentModeKHR> presentModes;
@@ -44,8 +47,8 @@ struct SwapChainSupportDetails {
 
 struct EngineStatistics
 {
-	uint64_t frameTime; // In microseconds
-	double ftPerSec; // time per second
+    uint64_t frameTime; // In microseconds
+    double ftPerSec;    // time per second
 };
 
 // The actual application class
@@ -68,23 +71,23 @@ public:
     /// <summary>
     /// Adds a test cube to the graphics backend for testing purposes.
     /// </summary>
-	/// <param name="id">The id of the test cube.</param>
+    /// <param name="id">The id of the test cube.</param>
     void addTestObject(int id);
 
-	/// <summary>
-	/// Transforms object with the given id.
-	/// </summary>
-	void transformTestObject(int id, glm::mat4 transformation);
+    /// <summary>
+    /// Transforms object with the given id.
+    /// </summary>
+    void transformTestObject(int id, glm::mat4 transformation);
 
-	/// <summary>
-	/// Sets flags for engine. Flags can only be set by this interface, not unset.
-	/// </summary>
-	/// <param name="flags"> to be set</param>
-	void setEngineFlags(EngineFlags flags);
+    /// <summary>
+    /// Sets flags for engine. Flags can only be set by this interface, not unset.
+    /// </summary>
+    /// <param name="flags"> to be set</param>
+    void setEngineFlags(EngineFlags flags);
 
 private:
     // Functions
-    
+
     /// <summary>
     /// Initializes glfw window.
     /// </summary>
@@ -98,7 +101,7 @@ private:
     /// <summary>
     /// populates debug messenger info.
     /// </summary>
-    void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
+    void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo);
 
     /// <summary>
     /// Setups the debug messenger.
@@ -125,15 +128,15 @@ private:
     /// </summary>
     void createSwapChain();
 
-	/// <summary>
-	/// Recreates the swapchain.
-	/// </summary>
-	void recreateSwapChain();
+    /// <summary>
+    /// Recreates the swapchain.
+    /// </summary>
+    void recreateSwapChain();
 
-	/// <summary>
-	/// Cleans up swapchain related resources. This function is used for easier recreation of the swap chain.
-	/// </summary>
-	void cleanupSwapChain();
+    /// <summary>
+    /// Cleans up swapchain related resources. This function is used for easier recreation of the swap chain.
+    /// </summary>
+    void cleanupSwapChain();
 
     /// <summary>
     /// Creates the image views.
@@ -165,12 +168,12 @@ private:
     /// </summary>
     void createCommandBuffers();
 
-	/// <summary>
-	/// Records command buffers
-	/// </summary>
-	/// <param name="cmdBuffer">  to record</param>
-	/// <param name="imageIndex"> is the index of the swap chain image to write to</param>
-	void recordCommandBuffer(VkCommandBuffer cmdBuffer, uint32_t imageIndex);
+    /// <summary>
+    /// Records command buffers
+    /// </summary>
+    /// <param name="cmdBuffer">  to record</param>
+    /// <param name="imageIndex"> is the index of the swap chain image to write to</param>
+    void recordCommandBuffer(VkCommandBuffer cmdBuffer, uint32_t imageIndex);
 
     /// <summary>
     /// Creates the appropriate semaphores and fences.
@@ -181,7 +184,7 @@ private:
     /// Draws a frame.
     /// </summary>
     void drawFrame();
-    
+
     /// <summary>
     /// Loops, polls events and draws frames.
     /// </summary>
@@ -240,7 +243,7 @@ private:
     /// Looks for the required extensions set by the GLFW library.
     /// </summary>
     /// <returns>The extensions.</returns>
-    std::vector<const char* > getRequiredExtensions();
+    std::vector<const char *> getRequiredExtensions();
 
     /// <summary>
     /// Chooses a suitable surface format.
@@ -255,7 +258,7 @@ private:
     /// <param name="availableModes">List of available modes.</param>
     /// <returns>The chosen presentation format.</returns>
     VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> availableModes);
-    VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
+    VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities);
 
     /// <summary>
     /// Returns push constant range object for the camera matrix.
@@ -263,20 +266,20 @@ private:
     /// <returns></returns>
     VkPushConstantRange getCameraRange();
 
-	/// <summary>
-	/// Returns the index of the next frame to be drawn.
-	/// </summary>
-	/// <returns></returns>
-	size_t getNextFrame();
+    /// <summary>
+    /// Returns the index of the next frame to be drawn.
+    /// </summary>
+    /// <returns></returns>
+    size_t getNextFrame();
 
-	/// <summary>
-	/// Prints out the given matrix.
-	/// </summary>
-	/// <param name="matrix"></param>
-	void debugMatrix(glm::mat4 matrix);
+    /// <summary>
+    /// Prints out the given matrix.
+    /// </summary>
+    /// <param name="matrix"></param>
+    void debugMatrix(glm::mat4 matrix);
 
     // Private members:
-    GLFWwindow* pWindowM;
+    GLFWwindow *pWindowM;
     VkInstance instanceM;
     VkDebugUtilsMessengerEXT debugMessengerM;
     VkSurfaceKHR surfaceM;
@@ -306,8 +309,8 @@ private:
 
     // Framebuffer
     std::vector<VkFramebuffer> swapChainFramebuffersM;
-	// Depth image
-	AllocatedImage depthImageM;
+    // Depth image
+    AllocatedImage depthImageM;
 
     // Pipeline
     VkRenderPass renderPassM;
@@ -321,49 +324,45 @@ private:
     // Semaphores
     std::vector<VkSemaphore> imagesReadyM;
     std::vector<VkSemaphore> rendersFinishedM;
-    std::vector<VkFence>    frameFencesM;
+    std::vector<VkFence> frameFencesM;
 
     // Other variables
     uint32_t widthM = 800;
     uint32_t heightM = 600;
-	EngineFlags engineFlagsM = EngineFlags::NO_FLAGS;
-	EngineStatistics statsM;
+    EngineFlags engineFlagsM = EngineFlags::NO_FLAGS;
+    EngineStatistics statsM;
 
     const int kConcurrentFramesM = 2;
     size_t currentFrameM = 0;
 
     bool validationLayersEnabledM = false;
 
-    const std::vector<const char*> kValidationlayersM = {
-        "VK_LAYER_KHRONOS_validation"
-    };
+    const std::vector<const char *> kValidationlayersM = {
+        "VK_LAYER_KHRONOS_validation"};
 
-    const std::vector<const char*> kDeviceExtensionsM = {
-        VK_KHR_SWAPCHAIN_EXTENSION_NAME
-    };
+    const std::vector<const char *> kDeviceExtensionsM = {
+        VK_KHR_SWAPCHAIN_EXTENSION_NAME};
 
     // Debugging functions
     static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
         VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
         VkDebugUtilsMessageTypeFlagsEXT messageType,
-        const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
-        void* pUserData
-    );
+        const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
+        void *pUserData);
 
     static VkResult CreateDebugUtilsMessengerEXT(
         VkInstance instance,
-        const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
-        const VkAllocationCallbacks* pAllocator,
-        VkDebugUtilsMessengerEXT* pDebugMessenger);
+        const VkDebugUtilsMessengerCreateInfoEXT *pCreateInfo,
+        const VkAllocationCallbacks *pAllocator,
+        VkDebugUtilsMessengerEXT *pDebugMessenger);
 
-    static void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
+    static void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks *pAllocator);
 
-	static void frameBufferResizeCallback(GLFWwindow* window, int width, int height);
+    static void frameBufferResizeCallback(GLFWwindow *window, int width, int height);
 
 #ifdef NDEBUG
     const bool enableValidationLayers = false;
 #else
     const bool enableValidationLayers = true;
 #endif
-
 };

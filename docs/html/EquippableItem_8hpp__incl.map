@@ -1,7 +1,7 @@
-<map id="/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti&#45;mmorpg/server/src/item/EquippableItem.hpp" name="/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti&#45;mmorpg/server/src/item/EquippableItem.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="53,5,253,76"/>
-<area shape="rect" id="node2" href="$Item_8hpp.html" title=" " alt="" coords="36,124,116,151"/>
-<area shape="rect" id="node4" title=" " alt="" coords="89,199,218,225"/>
-<area shape="rect" id="node5" title=" " alt="" coords="191,124,268,151"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,199,64,225"/>
+<map id="EquippableItem.hpp" name="EquippableItem.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="77,5,229,32"/>
+<area shape="rect" id="node2" href="$Item_8hpp.html" title=" " alt="" coords="36,80,116,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="89,155,218,181"/>
+<area shape="rect" id="node5" title=" " alt="" coords="191,80,268,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,155,64,181"/>
 </map>

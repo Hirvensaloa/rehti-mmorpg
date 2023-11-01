@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Rehti mmorpg: /home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/server/src/world/Map.hpp Source File</title>
+<title>Rehti mmorpg: Map.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,15 +90,15 @@ $(function() {
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">static</span> std::optional&lt;int&gt; <a class="code" href="classMap.html#a3e59ab91ee02868654a3e22a9c8d2d07">getHeight</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keyword">static</span> std::vector&lt;std::vector&lt;uint8_t&gt;&gt; accessMapM;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">static</span> std::vector&lt;std::vector&lt;int&gt;&gt; heightMapM;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keyword">inline</span> <span class="keyword">static</span> std::vector&lt;std::vector&lt;uint8_t&gt;&gt; accessMapM = {};</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">inline</span> <span class="keyword">static</span> std::vector&lt;std::vector&lt;int&gt;&gt; heightMapM = {};</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
 <div class="ttc" id="aCoordinates_8hpp_html"><div class="ttname"><a href="Coordinates_8hpp.html">Coordinates.hpp</a></div></div>
 <div class="ttc" id="aclassMap_html"><div class="ttname"><a href="classMap.html">Map</a></div><div class="ttdoc">Static class representing the map of the game world. Map contains information about which tiles are a...</div><div class="ttdef"><b>Definition:</b> Map.hpp:16</div></div>
 <div class="ttc" id="aclassMap_html_a365d25a9d88fa04491fccc1210c41bf9"><div class="ttname"><a href="classMap.html#a365d25a9d88fa04491fccc1210c41bf9">Map::loadMap</a></div><div class="ttdeci">static void loadMap()</div><div class="ttdoc">Loads the map information from generated assets. Currently loads the access map and height map inform...</div><div class="ttdef"><b>Definition:</b> Map.cpp:10</div></div>
-<div class="ttc" id="aclassMap_html_a3e59ab91ee02868654a3e22a9c8d2d07"><div class="ttname"><a href="classMap.html#a3e59ab91ee02868654a3e22a9c8d2d07">Map::getHeight</a></div><div class="ttdeci">static std::optional&lt; int &gt; getHeight(int x, int y)</div><div class="ttdoc">Gives the height for the given (x, y) coordinates.</div><div class="ttdef"><b>Definition:</b> Map.cpp:21</div></div>
-<div class="ttc" id="aclassMap_html_aa752726413de9b7945490b94df7bedb3"><div class="ttname"><a href="classMap.html#aa752726413de9b7945490b94df7bedb3">Map::findPath</a></div><div class="ttdeci">static std::vector&lt; std::pair&lt; unsigned, unsigned &gt; &gt; findPath(Coordinates start, Coordinates end)</div><div class="ttdoc">Finds a path from start to end.</div><div class="ttdef"><b>Definition:</b> Map.cpp:16</div></div>
-<div class="ttc" id="astructCoordinates_html"><div class="ttname"><a href="structCoordinates.html">Coordinates</a></div><div class="ttdef"><b>Definition:</b> Coordinates.hpp:6</div></div>
+<div class="ttc" id="aclassMap_html_a3e59ab91ee02868654a3e22a9c8d2d07"><div class="ttname"><a href="classMap.html#a3e59ab91ee02868654a3e22a9c8d2d07">Map::getHeight</a></div><div class="ttdeci">static std::optional&lt; int &gt; getHeight(int x, int y)</div><div class="ttdoc">Gives the height for the given (x, y) coordinates.</div><div class="ttdef"><b>Definition:</b> Map.cpp:22</div></div>
+<div class="ttc" id="aclassMap_html_aa752726413de9b7945490b94df7bedb3"><div class="ttname"><a href="classMap.html#aa752726413de9b7945490b94df7bedb3">Map::findPath</a></div><div class="ttdeci">static std::vector&lt; std::pair&lt; unsigned, unsigned &gt; &gt; findPath(Coordinates start, Coordinates end)</div><div class="ttdoc">Finds a path from start to end.</div><div class="ttdef"><b>Definition:</b> Map.cpp:17</div></div>
+<div class="ttc" id="astructCoordinates_html"><div class="ttname"><a href="structCoordinates.html">Coordinates</a></div><div class="ttdef"><b>Definition:</b> Coordinates.hpp:4</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -71,9 +71,9 @@ $(function() {
 <div class="title">Equipment.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="Equipment_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;EquippableItem.hpp&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="EquippableItem_8hpp.html">EquippableItem.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
@@ -84,13 +84,13 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="classEquipment.html">Equipment</a>(<a class="code" href="classEntity.html">Entity</a> *owner);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="classEquipment.html#a5c414093b7bf63b954c67ef071e979aa">Equipment</a>(<a class="code" href="classEntity.html">Entity</a> *owner);</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">bool</span> equip(std::shared_ptr&lt;EquippableItem&gt; item);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classEquipment.html#abcb4a83de923ee879f7dd8d770844d50">equip</a>(std::shared_ptr&lt;EquippableItem&gt; item);</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> unequip(Slot slotToUnequip);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEquipment.html#a387a4ffde7aa0d0cf27612da45182cfe">unequip</a>(<a class="code" href="ItemReader_8hpp.html#ad4a01c7a209d816f94f4864b76f8087f">Slot</a> slotToUnequip);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="structItemStats.html">ItemStats</a> getEquipmentStats();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="structItemStats.html">ItemStats</a> <a class="code" href="classEquipment.html#a3a0856f2c28cc76096b0556faa859eff">getEquipmentStats</a>();</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classEntity.html">Entity</a> *ownerM;</div>
@@ -116,8 +116,14 @@ $(function() {
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    std::shared_ptr&lt;EquippableItem&gt; ringSlotM = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
+<div class="ttc" id="aEquippableItem_8hpp_html"><div class="ttname"><a href="EquippableItem_8hpp.html">EquippableItem.hpp</a></div></div>
+<div class="ttc" id="aItemReader_8hpp_html_ad4a01c7a209d816f94f4864b76f8087f"><div class="ttname"><a href="ItemReader_8hpp.html#ad4a01c7a209d816f94f4864b76f8087f">Slot</a></div><div class="ttdeci">Slot</div><div class="ttdef"><b>Definition:</b> ItemReader.hpp:39</div></div>
 <div class="ttc" id="aclassEntity_html"><div class="ttname"><a href="classEntity.html">Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.hpp:13</div></div>
 <div class="ttc" id="aclassEquipment_html"><div class="ttname"><a href="classEquipment.html">Equipment</a></div><div class="ttdef"><b>Definition:</b> Equipment.hpp:11</div></div>
+<div class="ttc" id="aclassEquipment_html_a387a4ffde7aa0d0cf27612da45182cfe"><div class="ttname"><a href="classEquipment.html#a387a4ffde7aa0d0cf27612da45182cfe">Equipment::unequip</a></div><div class="ttdeci">void unequip(Slot slotToUnequip)</div><div class="ttdef"><b>Definition:</b> Equipment.cpp:50</div></div>
+<div class="ttc" id="aclassEquipment_html_a3a0856f2c28cc76096b0556faa859eff"><div class="ttname"><a href="classEquipment.html#a3a0856f2c28cc76096b0556faa859eff">Equipment::getEquipmentStats</a></div><div class="ttdeci">ItemStats getEquipmentStats()</div><div class="ttdef"><b>Definition:</b> Equipment.cpp:20</div></div>
+<div class="ttc" id="aclassEquipment_html_a5c414093b7bf63b954c67ef071e979aa"><div class="ttname"><a href="classEquipment.html#a5c414093b7bf63b954c67ef071e979aa">Equipment::Equipment</a></div><div class="ttdeci">Equipment(Entity *owner)</div><div class="ttdef"><b>Definition:</b> Equipment.cpp:5</div></div>
+<div class="ttc" id="aclassEquipment_html_abcb4a83de923ee879f7dd8d770844d50"><div class="ttname"><a href="classEquipment.html#abcb4a83de923ee879f7dd8d770844d50">Equipment::equip</a></div><div class="ttdeci">bool equip(std::shared_ptr&lt; EquippableItem &gt; item)</div><div class="ttdef"><b>Definition:</b> Equipment.cpp:34</div></div>
 <div class="ttc" id="astructItemStats_html"><div class="ttname"><a href="structItemStats.html">ItemStats</a></div><div class="ttdef"><b>Definition:</b> ItemReader.hpp:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -71,40 +71,233 @@ $(function() {
 <div class="title">GameObjects Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="ObjectReader_8hpp_source.html">ObjectReader.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa840ff05d3b3a479744c8f83a3908598"><td class="memItemLeft" align="right" valign="top"><a id="aa840ff05d3b3a479744c8f83a3908598"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>containsId</b> (int id)</td></tr>
+<tr class="memitem:aa840ff05d3b3a479744c8f83a3908598"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGameObjects.html#aa840ff05d3b3a479744c8f83a3908598">containsId</a> (int <a class="el" href="Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>)</td></tr>
 <tr class="separator:aa840ff05d3b3a479744c8f83a3908598"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2af78716121cf68bd58ac101323ab0e"><td class="memItemLeft" align="right" valign="top"><a id="ac2af78716121cf68bd58ac101323ab0e"></a>
-const std::optional&lt; ObjectType &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getObjectType</b> (int id)</td></tr>
+<tr class="memitem:ac2af78716121cf68bd58ac101323ab0e"><td class="memItemLeft" align="right" valign="top">const std::optional&lt; <a class="el" href="ObjectReader_8hpp.html#a842c5e2e69277690b064bf363c017980">ObjectType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGameObjects.html#ac2af78716121cf68bd58ac101323ab0e">getObjectType</a> (int <a class="el" href="Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>)</td></tr>
 <tr class="separator:ac2af78716121cf68bd58ac101323ab0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26dd57fd4610aa82d98fc5d10d9ca166"><td class="memItemLeft" align="right" valign="top"><a id="a26dd57fd4610aa82d98fc5d10d9ca166"></a>
-std::vector&lt; std::vector&lt; std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getTileMap</b> (int id)</td></tr>
+<tr class="memitem:a26dd57fd4610aa82d98fc5d10d9ca166"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGameObjects.html#a26dd57fd4610aa82d98fc5d10d9ca166">getTileMap</a> (int <a class="el" href="Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>)</td></tr>
 <tr class="separator:a26dd57fd4610aa82d98fc5d10d9ca166"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c1af3fefffc33719ed5b317fdac33b4"><td class="memItemLeft" align="right" valign="top"><a id="a3c1af3fefffc33719ed5b317fdac33b4"></a>
-const <a class="el" href="structGeneralObjectStruct.html">GeneralObjectStruct</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getGeneralObject</b> (int id)</td></tr>
+<tr class="memitem:a3c1af3fefffc33719ed5b317fdac33b4"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structGeneralObjectStruct.html">GeneralObjectStruct</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGameObjects.html#a3c1af3fefffc33719ed5b317fdac33b4">getGeneralObject</a> (int <a class="el" href="Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>)</td></tr>
 <tr class="separator:a3c1af3fefffc33719ed5b317fdac33b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a621382de573b4bee6a6341435bf0f432"><td class="memItemLeft" align="right" valign="top"><a id="a621382de573b4bee6a6341435bf0f432"></a>
-const <a class="el" href="structResourceObjectStruct.html">ResourceObjectStruct</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getResourceObject</b> (int id)</td></tr>
+<tr class="memitem:a621382de573b4bee6a6341435bf0f432"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structResourceObjectStruct.html">ResourceObjectStruct</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGameObjects.html#a621382de573b4bee6a6341435bf0f432">getResourceObject</a> (int <a class="el" href="Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>)</td></tr>
 <tr class="separator:a621382de573b4bee6a6341435bf0f432"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79355677273cd4db88f8a88e713259e5"><td class="memItemLeft" align="right" valign="top"><a id="a79355677273cd4db88f8a88e713259e5"></a>
-const <a class="el" href="structLootObjectStruct.html">LootObjectStruct</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getLootObject</b> (int id)</td></tr>
+<tr class="memitem:a79355677273cd4db88f8a88e713259e5"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structLootObjectStruct.html">LootObjectStruct</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGameObjects.html#a79355677273cd4db88f8a88e713259e5">getLootObject</a> (int <a class="el" href="Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>)</td></tr>
 <tr class="separator:a79355677273cd4db88f8a88e713259e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a804aea9ab57ec939e824c130a0f6657b"><td class="memItemLeft" align="right" valign="top"><a id="a804aea9ab57ec939e824c130a0f6657b"></a>
-std::map&lt; int, <a class="el" href="structGeneralObjectStruct.html">GeneralObjectStruct</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>generalObjects</b></td></tr>
+<tr class="memitem:a804aea9ab57ec939e824c130a0f6657b"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structGeneralObjectStruct.html">GeneralObjectStruct</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGameObjects.html#a804aea9ab57ec939e824c130a0f6657b">generalObjects</a></td></tr>
 <tr class="separator:a804aea9ab57ec939e824c130a0f6657b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab206f6d715c53f83edc0b6f4d7f37471"><td class="memItemLeft" align="right" valign="top"><a id="ab206f6d715c53f83edc0b6f4d7f37471"></a>
-std::map&lt; int, <a class="el" href="structResourceObjectStruct.html">ResourceObjectStruct</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>resourceObjects</b></td></tr>
+<tr class="memitem:ab206f6d715c53f83edc0b6f4d7f37471"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structResourceObjectStruct.html">ResourceObjectStruct</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGameObjects.html#ab206f6d715c53f83edc0b6f4d7f37471">resourceObjects</a></td></tr>
 <tr class="separator:ab206f6d715c53f83edc0b6f4d7f37471"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af463486af2fe181dcbe428aec16bd121"><td class="memItemLeft" align="right" valign="top"><a id="af463486af2fe181dcbe428aec16bd121"></a>
-std::map&lt; int, <a class="el" href="structLootObjectStruct.html">LootObjectStruct</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>lootObjects</b></td></tr>
+<tr class="memitem:af463486af2fe181dcbe428aec16bd121"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structLootObjectStruct.html">LootObjectStruct</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGameObjects.html#af463486af2fe181dcbe428aec16bd121">lootObjects</a></td></tr>
 <tr class="separator:af463486af2fe181dcbe428aec16bd121"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa840ff05d3b3a479744c8f83a3908598"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa840ff05d3b3a479744c8f83a3908598">&#9670;&nbsp;</a></span>containsId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameObjects::containsId </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3c1af3fefffc33719ed5b317fdac33b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c1af3fefffc33719ed5b317fdac33b4">&#9670;&nbsp;</a></span>getGeneralObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structGeneralObjectStruct.html">GeneralObjectStruct</a>&amp; GameObjects::getGeneralObject </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a79355677273cd4db88f8a88e713259e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79355677273cd4db88f8a88e713259e5">&#9670;&nbsp;</a></span>getLootObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structLootObjectStruct.html">LootObjectStruct</a>&amp; GameObjects::getLootObject </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac2af78716121cf68bd58ac101323ab0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2af78716121cf68bd58ac101323ab0e">&#9670;&nbsp;</a></span>getObjectType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::optional&lt;<a class="el" href="ObjectReader_8hpp.html#a842c5e2e69277690b064bf363c017980">ObjectType</a>&gt; GameObjects::getObjectType </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a621382de573b4bee6a6341435bf0f432"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a621382de573b4bee6a6341435bf0f432">&#9670;&nbsp;</a></span>getResourceObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structResourceObjectStruct.html">ResourceObjectStruct</a>&amp; GameObjects::getResourceObject </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26dd57fd4610aa82d98fc5d10d9ca166"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26dd57fd4610aa82d98fc5d10d9ca166">&#9670;&nbsp;</a></span>getTileMap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::vector&lt;std::string&gt; &gt; GameObjects::getTileMap </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a804aea9ab57ec939e824c130a0f6657b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a804aea9ab57ec939e824c130a0f6657b">&#9670;&nbsp;</a></span>generalObjects</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;int, <a class="el" href="structGeneralObjectStruct.html">GeneralObjectStruct</a>&gt; GameObjects::generalObjects</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af463486af2fe181dcbe428aec16bd121"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af463486af2fe181dcbe428aec16bd121">&#9670;&nbsp;</a></span>lootObjects</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;int, <a class="el" href="structLootObjectStruct.html">LootObjectStruct</a>&gt; GameObjects::lootObjects</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab206f6d715c53f83edc0b6f4d7f37471"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab206f6d715c53f83edc0b6f4d7f37471">&#9670;&nbsp;</a></span>resourceObjects</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;int, <a class="el" href="structResourceObjectStruct.html">ResourceObjectStruct</a>&gt; GameObjects::resourceObjects</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/rehtiLib/assets/reader/src/<a class="el" href="ObjectReader_8hpp_source.html">ObjectReader.hpp</a></li>
 </ul>

@@ -71,7 +71,7 @@ $(function() {
 <div class="title">AssetManager.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="AssetManager_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
@@ -86,18 +86,18 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classAssetManager.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classAssetManager.html">AssetManager</a></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> loadAssets();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classAssetManager.html#a7e4bdea0c4d3ffa0c4142cb108ab1b09">loadAssets</a>();</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> std::vector&lt;ObjectLocation&gt; &amp;getObjectLocations();</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> std::vector&lt;ObjectLocation&gt; &amp;<a class="code" href="classAssetManager.html#aac3a5a1c57681ddd07f20b77516b284f">getObjectLocations</a>();</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> std::map&lt;int, GameSkill&gt; &amp;getSkills();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> std::map&lt;int, GameSkill&gt; &amp;<a class="code" href="classAssetManager.html#aede4ce965adc28d8815ed8e889daaaca">getSkills</a>();</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="structGameObjects.html">GameObjects</a> &amp;getObjects();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="structGameObjects.html">GameObjects</a> &amp;<a class="code" href="classAssetManager.html#a53cdb9e28bd0e0d4b37318116ae1b7c5">getObjects</a>();</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="structGameItems.html">GameItems</a> &amp;getItems();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="structGameItems.html">GameItems</a> &amp;<a class="code" href="classAssetManager.html#a5964947567c6cd30b292b25510830123">getItems</a>();</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="comment">// Nullptr if item id is not found</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keyword">static</span> std::shared_ptr&lt;Item&gt; createItemInstance(<span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keyword">static</span> std::shared_ptr&lt;Item&gt; <a class="code" href="classAssetManager.html#a7112131ee4657d508b2029eebb3975f6">createItemInstance</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keyword">inline</span> <span class="keyword">static</span> <a class="code" href="structGameItems.html">GameItems</a> itemsM = {};</div>
@@ -106,6 +106,12 @@ $(function() {
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keyword">inline</span> <span class="keyword">static</span> std::vector&lt;ObjectLocation&gt; objectLocationsM = {}; <span class="comment">// Tells where objects instances are located on the map (For example, tree at 1,1, tree at 2,2, tree at 4,5 etc)</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
 <div class="ttc" id="aclassAssetManager_html"><div class="ttname"><a href="classAssetManager.html">AssetManager</a></div><div class="ttdef"><b>Definition:</b> AssetManager.hpp:14</div></div>
+<div class="ttc" id="aclassAssetManager_html_a53cdb9e28bd0e0d4b37318116ae1b7c5"><div class="ttname"><a href="classAssetManager.html#a53cdb9e28bd0e0d4b37318116ae1b7c5">AssetManager::getObjects</a></div><div class="ttdeci">static const GameObjects &amp; getObjects()</div><div class="ttdef"><b>Definition:</b> AssetManager.cpp:32</div></div>
+<div class="ttc" id="aclassAssetManager_html_a5964947567c6cd30b292b25510830123"><div class="ttname"><a href="classAssetManager.html#a5964947567c6cd30b292b25510830123">AssetManager::getItems</a></div><div class="ttdeci">static const GameItems &amp; getItems()</div><div class="ttdef"><b>Definition:</b> AssetManager.cpp:37</div></div>
+<div class="ttc" id="aclassAssetManager_html_a7112131ee4657d508b2029eebb3975f6"><div class="ttname"><a href="classAssetManager.html#a7112131ee4657d508b2029eebb3975f6">AssetManager::createItemInstance</a></div><div class="ttdeci">static std::shared_ptr&lt; Item &gt; createItemInstance(int id)</div><div class="ttdef"><b>Definition:</b> AssetManager.cpp:42</div></div>
+<div class="ttc" id="aclassAssetManager_html_a7e4bdea0c4d3ffa0c4142cb108ab1b09"><div class="ttname"><a href="classAssetManager.html#a7e4bdea0c4d3ffa0c4142cb108ab1b09">AssetManager::loadAssets</a></div><div class="ttdeci">static void loadAssets()</div><div class="ttdef"><b>Definition:</b> AssetManager.cpp:8</div></div>
+<div class="ttc" id="aclassAssetManager_html_aac3a5a1c57681ddd07f20b77516b284f"><div class="ttname"><a href="classAssetManager.html#aac3a5a1c57681ddd07f20b77516b284f">AssetManager::getObjectLocations</a></div><div class="ttdeci">static const std::vector&lt; ObjectLocation &gt; &amp; getObjectLocations()</div><div class="ttdef"><b>Definition:</b> AssetManager.cpp:22</div></div>
+<div class="ttc" id="aclassAssetManager_html_aede4ce965adc28d8815ed8e889daaaca"><div class="ttname"><a href="classAssetManager.html#aede4ce965adc28d8815ed8e889daaaca">AssetManager::getSkills</a></div><div class="ttdeci">static const std::map&lt; int, GameSkill &gt; &amp; getSkills()</div><div class="ttdef"><b>Definition:</b> AssetManager.cpp:27</div></div>
 <div class="ttc" id="astructGameItems_html"><div class="ttname"><a href="structGameItems.html">GameItems</a></div><div class="ttdef"><b>Definition:</b> ItemReader.hpp:89</div></div>
 <div class="ttc" id="astructGameObjects_html"><div class="ttname"><a href="structGameObjects.html">GameObjects</a></div><div class="ttdef"><b>Definition:</b> ObjectReader.hpp:76</div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -1,0 +1,32 @@
+<map id="/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti&#45;mmorpg/server/src/action/ObjectInteractAction.cpp" name="/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti&#45;mmorpg/server/src/action/ObjectInteractAction.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="234,5,465,76"/>
+<area shape="rect" id="node2" title=" " alt="" coords="195,273,275,300"/>
+<area shape="rect" id="node3" href="$ObjectInteractAction_8hpp.html" title=" " alt="" coords="66,124,249,151"/>
+<area shape="rect" id="node26" href="$Map_8hpp.html" title=" " alt="" coords="333,199,464,225"/>
+<area shape="rect" id="node28" href="$GameWorld_8hpp.html" title=" " alt="" coords="591,124,769,151"/>
+<area shape="rect" id="node4" href="$Action_8hpp.html" title=" " alt="" coords="320,497,411,524"/>
+<area shape="rect" id="node9" href="$MoveAction_8hpp.html" title=" " alt="" coords="251,423,378,449"/>
+<area shape="rect" id="node10" href="$Coordinates_8hpp.html" title=" " alt="" coords="22,497,202,524"/>
+<area shape="rect" id="node13" href="$Object_8hpp.html" title=" " alt="" coords="662,199,810,225"/>
+<area shape="rect" id="node5" title=" " alt="" coords="433,572,500,599"/>
+<area shape="rect" id="node6" title=" " alt="" coords="239,572,297,599"/>
+<area shape="rect" id="node7" title=" " alt="" coords="981,572,1059,599"/>
+<area shape="rect" id="node8" title=" " alt="" coords="322,572,409,599"/>
+<area shape="rect" id="node12" title=" " alt="" coords="510,497,573,524"/>
+<area shape="rect" id="node11" title=" " alt="" coords="81,572,143,599"/>
+<area shape="rect" id="node14" title=" " alt="" coords="1216,572,1275,599"/>
+<area shape="rect" id="node15" href="$Entity_8hpp.html" title=" " alt="" coords="790,273,930,300"/>
+<area shape="rect" id="node21" title=" " alt="" coords="766,572,895,599"/>
+<area shape="rect" id="node16" href="$AttackAction_8hpp.html" title=" " alt="" coords="245,348,435,375"/>
+<area shape="rect" id="node18" href="$Equipment_8hpp.html" title=" " alt="" coords="962,348,1129,375"/>
+<area shape="rect" id="node23" href="$Inventory_8hpp.html" title=" " alt="" coords="782,348,938,375"/>
+<area shape="rect" id="node25" href="$SkillSet_8hpp.html" title=" " alt="" coords="1205,348,1347,375"/>
+<area shape="rect" id="node17" title=" " alt="" coords="504,423,579,449"/>
+<area shape="rect" id="node19" href="$EquippableItem_8hpp.html" title=" " alt="" coords="755,423,907,449"/>
+<area shape="rect" id="node22" title=" " alt="" coords="1283,423,1333,449"/>
+<area shape="rect" id="node20" href="$Item_8hpp.html" title=" " alt="" coords="933,497,1013,524"/>
+<area shape="rect" id="node24" href="$FoodItem_8hpp.html" title=" " alt="" coords="931,423,1042,449"/>
+<area shape="rect" id="node27" title=" " alt="" coords="365,273,432,300"/>
+<area shape="rect" id="node29" href="$PlayerCharacter_8hpp.html" title=" " alt="" coords="834,199,1041,225"/>
+<area shape="rect" id="node30" href="$Npc_8hpp.html" title=" " alt="" coords="1065,199,1194,225"/>
+</map>

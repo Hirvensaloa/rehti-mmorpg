@@ -71,25 +71,25 @@ $(function() {
 <div class="title">MoveAction.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="MoveAction_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;../world/Coordinates.hpp&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Action.hpp&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Action_8hpp.html">Action.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classMoveAction.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMoveAction.html">MoveAction</a> : <span class="keyword">public</span> <a class="code" href="classAction.html">Action</a></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="classMoveAction.html">MoveAction</a>(std::chrono::system_clock::time_point startTime, <a class="code" href="structCoordinates.html">Coordinates</a> target, <a class="code" href="classEntity.html">Entity</a> *pEntity);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="classMoveAction.html#a73a97c211005db5ee1c5fcd2fdce1a5d">MoveAction</a>(std::chrono::system_clock::time_point startTime, <a class="code" href="structCoordinates.html">Coordinates</a> target, <a class="code" href="classEntity.html">Entity</a> *pEntity);</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    ~<a class="code" href="classMoveAction.html">MoveAction</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classMoveAction.html#ad54c69179b856c4bfdd5f970aa5389e3">   13</a></span>&#160;    <a class="code" href="classMoveAction.html#ad54c69179b856c4bfdd5f970aa5389e3">~MoveAction</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="structCoordinates.html">Coordinates</a> getTarget();</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="structCoordinates.html">Coordinates</a> <a class="code" href="classMoveAction.html#a1ee9bd769f411021d342f30445a38430">getTarget</a>();</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> act();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMoveAction.html#ae6b8ef446b4ecfb3ef452d3a8e35ac29">act</a>();</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> std::chrono::milliseconds getMoveTime();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> std::chrono::milliseconds <a class="code" href="classMoveAction.html#a8f30ecd102663a2c3d3779b7013f2e4f">getMoveTime</a>();</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="structCoordinates.html">Coordinates</a> targetM;</div>
@@ -98,11 +98,18 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    std::chrono::milliseconds actionTimeM = std::chrono::milliseconds(200);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    ActionType actionTypeM = ActionType::Move;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="classAction.html#ab1851cee70a9061c928e69d44e6cba0b">ActionType</a> actionTypeM = ActionType::Move;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
+<div class="ttc" id="aAction_8hpp_html"><div class="ttname"><a href="Action_8hpp.html">Action.hpp</a></div></div>
 <div class="ttc" id="aclassAction_html"><div class="ttname"><a href="classAction.html">Action</a></div><div class="ttdef"><b>Definition:</b> Action.hpp:12</div></div>
+<div class="ttc" id="aclassAction_html_ab1851cee70a9061c928e69d44e6cba0b"><div class="ttname"><a href="classAction.html#ab1851cee70a9061c928e69d44e6cba0b">Action::ActionType</a></div><div class="ttdeci">ActionType</div><div class="ttdef"><b>Definition:</b> Action.hpp:15</div></div>
 <div class="ttc" id="aclassEntity_html"><div class="ttname"><a href="classEntity.html">Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.hpp:13</div></div>
 <div class="ttc" id="aclassMoveAction_html"><div class="ttname"><a href="classMoveAction.html">MoveAction</a></div><div class="ttdef"><b>Definition:</b> MoveAction.hpp:9</div></div>
+<div class="ttc" id="aclassMoveAction_html_a1ee9bd769f411021d342f30445a38430"><div class="ttname"><a href="classMoveAction.html#a1ee9bd769f411021d342f30445a38430">MoveAction::getTarget</a></div><div class="ttdeci">Coordinates getTarget()</div><div class="ttdef"><b>Definition:</b> MoveAction.cpp:9</div></div>
+<div class="ttc" id="aclassMoveAction_html_a73a97c211005db5ee1c5fcd2fdce1a5d"><div class="ttname"><a href="classMoveAction.html#a73a97c211005db5ee1c5fcd2fdce1a5d">MoveAction::MoveAction</a></div><div class="ttdeci">MoveAction(std::chrono::system_clock::time_point startTime, Coordinates target, Entity *pEntity)</div><div class="ttdef"><b>Definition:</b> MoveAction.cpp:7</div></div>
+<div class="ttc" id="aclassMoveAction_html_a8f30ecd102663a2c3d3779b7013f2e4f"><div class="ttname"><a href="classMoveAction.html#a8f30ecd102663a2c3d3779b7013f2e4f">MoveAction::getMoveTime</a></div><div class="ttdeci">static const std::chrono::milliseconds getMoveTime()</div><div class="ttdef"><b>Definition:</b> MoveAction.cpp:44</div></div>
+<div class="ttc" id="aclassMoveAction_html_ad54c69179b856c4bfdd5f970aa5389e3"><div class="ttname"><a href="classMoveAction.html#ad54c69179b856c4bfdd5f970aa5389e3">MoveAction::~MoveAction</a></div><div class="ttdeci">~MoveAction()=default</div></div>
+<div class="ttc" id="aclassMoveAction_html_ae6b8ef446b4ecfb3ef452d3a8e35ac29"><div class="ttname"><a href="classMoveAction.html#ae6b8ef446b4ecfb3ef452d3a8e35ac29">MoveAction::act</a></div><div class="ttdeci">void act()</div><div class="ttdef"><b>Definition:</b> MoveAction.cpp:14</div></div>
 <div class="ttc" id="astructCoordinates_html"><div class="ttname"><a href="structCoordinates.html">Coordinates</a></div><div class="ttdef"><b>Definition:</b> Coordinates.hpp:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

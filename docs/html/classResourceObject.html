@@ -70,6 +70,8 @@ $(function() {
 <div class="title">ResourceObject Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="ResourceObject_8hpp_source.html">ResourceObject.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ResourceObject:</div>
 <div class="dyncontent">
@@ -91,44 +93,181 @@ Collaboration diagram for ResourceObject:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aada73461750976d42fdf0fc2b0f3a106"><td class="memItemLeft" align="right" valign="top"><a id="aada73461750976d42fdf0fc2b0f3a106"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ResourceObject</b> (int id, std::string instanceId, std::string name, <a class="el" href="structCoordinates.html">Coordinates</a> coords, unsigned int rotation, std::vector&lt; <a class="el" href="structYieldableItem.html">YieldableItem</a> &gt; yieldableItemList, int xpPerYield, int depleteChance, int relatedSkillId, int xpRequirement, ObjectType type)</td></tr>
+<tr class="memitem:aada73461750976d42fdf0fc2b0f3a106"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceObject.html#aada73461750976d42fdf0fc2b0f3a106">ResourceObject</a> (int <a class="el" href="Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>, std::string instanceId, std::string name, <a class="el" href="structCoordinates.html">Coordinates</a> coords, unsigned int rotation, std::vector&lt; <a class="el" href="structYieldableItem.html">YieldableItem</a> &gt; yieldableItemList, int xpPerYield, int depleteChance, int relatedSkillId, int xpRequirement, <a class="el" href="ObjectReader_8hpp.html#a842c5e2e69277690b064bf363c017980">ObjectType</a> type)</td></tr>
 <tr class="separator:aada73461750976d42fdf0fc2b0f3a106"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5a4232d382ed0d3db4f6cab6152c973"><td class="memItemLeft" align="right" valign="top"><a id="aa5a4232d382ed0d3db4f6cab6152c973"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ResourceObject</b> (const <a class="el" href="structResourceObjectStruct.html">ResourceObjectStruct</a> &amp;object, const <a class="el" href="structObjectLocation.html">ObjectLocation</a> &amp;location, ObjectType type)</td></tr>
+<tr class="memitem:aa5a4232d382ed0d3db4f6cab6152c973"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceObject.html#aa5a4232d382ed0d3db4f6cab6152c973">ResourceObject</a> (const <a class="el" href="structResourceObjectStruct.html">ResourceObjectStruct</a> &amp;object, const <a class="el" href="structObjectLocation.html">ObjectLocation</a> &amp;location, <a class="el" href="ObjectReader_8hpp.html#a842c5e2e69277690b064bf363c017980">ObjectType</a> type)</td></tr>
 <tr class="separator:aa5a4232d382ed0d3db4f6cab6152c973"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaee08d1b37836242c2ede45abbf7df71"><td class="memItemLeft" align="right" valign="top"><a id="aaee08d1b37836242c2ede45abbf7df71"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>interact</b> (<a class="el" href="classEntity.html">Entity</a> &amp;entity)</td></tr>
+<tr class="memitem:aaee08d1b37836242c2ede45abbf7df71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceObject.html#aaee08d1b37836242c2ede45abbf7df71">interact</a> (<a class="el" href="classEntity.html">Entity</a> &amp;entity)</td></tr>
 <tr class="separator:aaee08d1b37836242c2ede45abbf7df71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classObject.html">Object</a></td></tr>
-<tr class="memitem:afff76923e7a56ba015c543e1424e8b45 inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top"><a id="afff76923e7a56ba015c543e1424e8b45"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Object</b> (int id, std::string instanceId, std::string name, <a class="el" href="structCoordinates.html">Coordinates</a> coordinates, unsigned int rotation, ObjectType objectType)</td></tr>
+<tr class="memitem:afff76923e7a56ba015c543e1424e8b45 inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObject.html#afff76923e7a56ba015c543e1424e8b45">Object</a> (int <a class="el" href="Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>, std::string instanceId, std::string name, <a class="el" href="structCoordinates.html">Coordinates</a> coordinates, unsigned int rotation, <a class="el" href="ObjectReader_8hpp.html#a842c5e2e69277690b064bf363c017980">ObjectType</a> objectType)</td></tr>
 <tr class="separator:afff76923e7a56ba015c543e1424e8b45 inherit pub_methods_classObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99b3f0bbfe492b610cfc22c6457c9e65 inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top"><a id="a99b3f0bbfe492b610cfc22c6457c9e65"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Object</b> (const <a class="el" href="structGeneralObjectStruct.html">GeneralObjectStruct</a> &amp;object, const <a class="el" href="structObjectLocation.html">ObjectLocation</a> &amp;location, ObjectType objectType)</td></tr>
+<tr class="memitem:a99b3f0bbfe492b610cfc22c6457c9e65 inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObject.html#a99b3f0bbfe492b610cfc22c6457c9e65">Object</a> (const <a class="el" href="structGeneralObjectStruct.html">GeneralObjectStruct</a> &amp;object, const <a class="el" href="structObjectLocation.html">ObjectLocation</a> &amp;location, <a class="el" href="ObjectReader_8hpp.html#a842c5e2e69277690b064bf363c017980">ObjectType</a> objectType)</td></tr>
 <tr class="separator:a99b3f0bbfe492b610cfc22c6457c9e65 inherit pub_methods_classObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a880aef510785619f7b36c3aae248bf2c inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top"><a id="a880aef510785619f7b36c3aae248bf2c"></a>
-const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getId</b> ()</td></tr>
+<tr class="memitem:a226f2ae2af766b77d83c09a4d766b725 inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObject.html#a226f2ae2af766b77d83c09a4d766b725">~Object</a> ()=default</td></tr>
+<tr class="separator:a226f2ae2af766b77d83c09a4d766b725 inherit pub_methods_classObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a880aef510785619f7b36c3aae248bf2c inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top">const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObject.html#a880aef510785619f7b36c3aae248bf2c">getId</a> ()</td></tr>
 <tr class="separator:a880aef510785619f7b36c3aae248bf2c inherit pub_methods_classObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a3ffab970dc76a4f0ff474f59051bfa inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top"><a id="a3a3ffab970dc76a4f0ff474f59051bfa"></a>
-const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getInstanceId</b> ()</td></tr>
+<tr class="memitem:a3a3ffab970dc76a4f0ff474f59051bfa inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObject.html#a3a3ffab970dc76a4f0ff474f59051bfa">getInstanceId</a> ()</td></tr>
 <tr class="separator:a3a3ffab970dc76a4f0ff474f59051bfa inherit pub_methods_classObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa957bd6b49bc3034489df9ff0e844e3c inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top"><a id="aa957bd6b49bc3034489df9ff0e844e3c"></a>
-const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getName</b> ()</td></tr>
+<tr class="memitem:aa957bd6b49bc3034489df9ff0e844e3c inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObject.html#aa957bd6b49bc3034489df9ff0e844e3c">getName</a> ()</td></tr>
 <tr class="separator:aa957bd6b49bc3034489df9ff0e844e3c inherit pub_methods_classObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77ccaf9331e7636c5ebefe472666c5b4 inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top"><a id="a77ccaf9331e7636c5ebefe472666c5b4"></a>
-const <a class="el" href="structCoordinates.html">Coordinates</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getLocation</b> ()</td></tr>
+<tr class="memitem:a77ccaf9331e7636c5ebefe472666c5b4 inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structCoordinates.html">Coordinates</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObject.html#a77ccaf9331e7636c5ebefe472666c5b4">getLocation</a> ()</td></tr>
 <tr class="separator:a77ccaf9331e7636c5ebefe472666c5b4 inherit pub_methods_classObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee5231dad333a378593845309e1ad9bf inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top"><a id="aee5231dad333a378593845309e1ad9bf"></a>
-const unsigned int &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getRotation</b> ()</td></tr>
+<tr class="memitem:aee5231dad333a378593845309e1ad9bf inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top">const unsigned int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObject.html#aee5231dad333a378593845309e1ad9bf">getRotation</a> ()</td></tr>
 <tr class="separator:aee5231dad333a378593845309e1ad9bf inherit pub_methods_classObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a256c100bf0cbd44c37340141422274c6 inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top"><a id="a256c100bf0cbd44c37340141422274c6"></a>
-const ObjectType &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getObjectType</b> ()</td></tr>
+<tr class="memitem:a256c100bf0cbd44c37340141422274c6 inherit pub_methods_classObject"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="ObjectReader_8hpp.html#a842c5e2e69277690b064bf363c017980">ObjectType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObject.html#a256c100bf0cbd44c37340141422274c6">getObjectType</a> ()</td></tr>
 <tr class="separator:a256c100bf0cbd44c37340141422274c6 inherit pub_methods_classObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aada73461750976d42fdf0fc2b0f3a106"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aada73461750976d42fdf0fc2b0f3a106">&#9670;&nbsp;</a></span>ResourceObject() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ResourceObject::ResourceObject </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>instanceId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structCoordinates.html">Coordinates</a>&#160;</td>
+          <td class="paramname"><em>coords</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>rotation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structYieldableItem.html">YieldableItem</a> &gt;&#160;</td>
+          <td class="paramname"><em>yieldableItemList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>xpPerYield</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>depleteChance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>relatedSkillId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>xpRequirement</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="ObjectReader_8hpp.html#a842c5e2e69277690b064bf363c017980">ObjectType</a>&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa5a4232d382ed0d3db4f6cab6152c973"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5a4232d382ed0d3db4f6cab6152c973">&#9670;&nbsp;</a></span>ResourceObject() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ResourceObject::ResourceObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structResourceObjectStruct.html">ResourceObjectStruct</a> &amp;&#160;</td>
+          <td class="paramname"><em>object</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structObjectLocation.html">ObjectLocation</a> &amp;&#160;</td>
+          <td class="paramname"><em>location</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="ObjectReader_8hpp.html#a842c5e2e69277690b064bf363c017980">ObjectType</a>&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aaee08d1b37836242c2ede45abbf7df71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaee08d1b37836242c2ede45abbf7df71">&#9670;&nbsp;</a></span>interact()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ResourceObject::interact </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classEntity.html">Entity</a> &amp;&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classObject.html#ae50d9f8a7b4b7bf5910efe4599404a1e">Object</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/server/src/object/<a class="el" href="ResourceObject_8hpp_source.html">ResourceObject.hpp</a></li>
-<li>/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/server/src/object/ResourceObject.cpp</li>
+<li>/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/server/src/object/<a class="el" href="ResourceObject_8cpp.html">ResourceObject.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -71,7 +71,7 @@ $(function() {
 <div class="title">Utils.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
@@ -83,7 +83,7 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;../lodepng/lodepng.h&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// Reads all the files in the directory and returns a vector of the filenames. Only returns files with the given extension.</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;std::vector&lt;std::string&gt; readDirectory(std::string path, std::string extension)</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#aa521dc0a58dc5e153fa751aa2c1b1c12">   13</a></span>&#160;std::vector&lt;std::string&gt; <a class="code" href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#aa521dc0a58dc5e153fa751aa2c1b1c12">readDirectory</a>(std::string path, std::string extension)</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  std::vector&lt;std::string&gt; files;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
@@ -98,7 +98,7 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keywordflow">return</span> files;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">void</span> readPng(std::vector&lt;unsigned char&gt; &amp;image, <span class="keywordtype">unsigned</span> &amp;width, <span class="keywordtype">unsigned</span> &amp;height, std::string filepath)</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#a268e2459aa1a71ba1802287fa45a3124">   28</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#a268e2459aa1a71ba1802287fa45a3124">readPng</a>(std::vector&lt;unsigned char&gt; &amp;image, <span class="keywordtype">unsigned</span> &amp;width, <span class="keywordtype">unsigned</span> &amp;height, std::string filepath)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  std::cout &lt;&lt; <span class="stringliteral">&quot;Reading &quot;</span> &lt;&lt; filepath &lt;&lt; std::endl;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
@@ -112,7 +112,7 @@ $(function() {
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// Rotates the matrix 90 degrees clockwise. Rotation is done rotation * 90 degrees.</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span> rotateMatrix(std::vector&lt;std::vector&lt;T&gt;&gt; &amp;matrix, uint8_t rotation)</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#a228c702e370e400148c0809c2b0710cb">   42</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#a228c702e370e400148c0809c2b0710cb">rotateMatrix</a>(std::vector&lt;std::vector&lt;T&gt;&gt; &amp;matrix, uint8_t rotation)</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordtype">int</span> maxRotation = 4;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  rotation = rotation % maxRotation;</div>
@@ -145,13 +145,13 @@ $(function() {
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"> * The matrix row sizes DO NOT need to match.</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">void</span> populateMatrix(std::vector&lt;std::vector&lt;T&gt;&gt; &amp;matrix, <span class="keyword">const</span> std::vector&lt;std::vector&lt;std::string&gt;&gt; &amp;areaMap, T defaultValue, <span class="keywordtype">unsigned</span> AREA_WIDTH, <span class="keywordtype">unsigned</span> AREA_HEIGHT)</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#ad1be74eedb711007334181940ecab15e">   75</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#ad1be74eedb711007334181940ecab15e">populateMatrix</a>(std::vector&lt;std::vector&lt;T&gt;&gt; &amp;matrix, <span class="keyword">const</span> std::vector&lt;std::vector&lt;std::string&gt;&gt; &amp;areaMap, T defaultValue, <span class="keywordtype">unsigned</span> <a class="code" href="MapLoader_8hpp.html#a6cca7f0749c78d06338008761c6502dc">AREA_WIDTH</a>, <span class="keywordtype">unsigned</span> <a class="code" href="MapLoader_8hpp.html#acb373c586fefdb945544b75abee746ae">AREA_HEIGHT</a>)</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;{</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; areaMap.size(); i++)</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j = 0; j &lt; AREA_HEIGHT; j++)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j = 0; j &lt; <a class="code" href="MapLoader_8hpp.html#acb373c586fefdb945544b75abee746ae">AREA_HEIGHT</a>; j++)</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      std::vector&lt;T&gt; row(AREA_WIDTH * areaMap[i].size(), defaultValue);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      std::vector&lt;T&gt; row(<a class="code" href="MapLoader_8hpp.html#a6cca7f0749c78d06338008761c6502dc">AREA_WIDTH</a> * areaMap[i].size(), defaultValue);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      matrix.push_back(row);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  }</div>
@@ -159,7 +159,7 @@ $(function() {
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">// Populates a matrix from a reference matrix. Uses a default value for empty cells. Reference matrix is given (instead of it&#39;s dimensions) because the row sizes might not match.</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> K&gt;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> populateMatrixFromReference(std::vector&lt;std::vector&lt;T&gt;&gt; &amp;matrix, <span class="keyword">const</span> std::vector&lt;std::vector&lt;K&gt;&gt; &amp;referenceMatrix, T defaultValue)</div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#ab5e54a02f8b57e2456fa6095932329c9">   89</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#ab5e54a02f8b57e2456fa6095932329c9">populateMatrixFromReference</a>(std::vector&lt;std::vector&lt;T&gt;&gt; &amp;matrix, <span class="keyword">const</span> std::vector&lt;std::vector&lt;K&gt;&gt; &amp;referenceMatrix, T defaultValue)</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;{</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; referenceMatrix.size(); i++)</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  {</div>
@@ -174,7 +174,7 @@ $(function() {
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"> * Row sizes do not need to match.</span></div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keywordtype">void</span> writeMatrixToFile(<span class="keyword">const</span> std::vector&lt;std::vector&lt;T&gt;&gt; &amp;matrix, <span class="keyword">const</span> std::string &amp;filepath)</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#af221f3a9b31d8838777aaf05ae709585">  104</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#af221f3a9b31d8838777aaf05ae709585">writeMatrixToFile</a>(<span class="keyword">const</span> std::vector&lt;std::vector&lt;T&gt;&gt; &amp;matrix, <span class="keyword">const</span> std::string &amp;filepath)</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;{</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="comment">// Create the directory structure if it doesn&#39;t exist</span></div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  std::filesystem::create_directories(std::filesystem::path(filepath).parent_path());</div>
@@ -199,6 +199,14 @@ $(function() {
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Unable to open the file for writing.&quot;</span>);</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  }</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
+<div class="ttc" id="aMapLoader_8hpp_html_a6cca7f0749c78d06338008761c6502dc"><div class="ttname"><a href="MapLoader_8hpp.html#a6cca7f0749c78d06338008761c6502dc">AREA_WIDTH</a></div><div class="ttdeci">const unsigned AREA_WIDTH</div><div class="ttdef"><b>Definition:</b> MapLoader.hpp:12</div></div>
+<div class="ttc" id="aMapLoader_8hpp_html_acb373c586fefdb945544b75abee746ae"><div class="ttname"><a href="MapLoader_8hpp.html#acb373c586fefdb945544b75abee746ae">AREA_HEIGHT</a></div><div class="ttdeci">const unsigned AREA_HEIGHT</div><div class="ttdef"><b>Definition:</b> MapLoader.hpp:13</div></div>
+<div class="ttc" id="arehtiLib_2assets_2loader_2src_2Utils_8hpp_html_a228c702e370e400148c0809c2b0710cb"><div class="ttname"><a href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#a228c702e370e400148c0809c2b0710cb">rotateMatrix</a></div><div class="ttdeci">void rotateMatrix(std::vector&lt; std::vector&lt; T &gt;&gt; &amp;matrix, uint8_t rotation)</div><div class="ttdef"><b>Definition:</b> Utils.hpp:42</div></div>
+<div class="ttc" id="arehtiLib_2assets_2loader_2src_2Utils_8hpp_html_a268e2459aa1a71ba1802287fa45a3124"><div class="ttname"><a href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#a268e2459aa1a71ba1802287fa45a3124">readPng</a></div><div class="ttdeci">void readPng(std::vector&lt; unsigned char &gt; &amp;image, unsigned &amp;width, unsigned &amp;height, std::string filepath)</div><div class="ttdef"><b>Definition:</b> Utils.hpp:28</div></div>
+<div class="ttc" id="arehtiLib_2assets_2loader_2src_2Utils_8hpp_html_aa521dc0a58dc5e153fa751aa2c1b1c12"><div class="ttname"><a href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#aa521dc0a58dc5e153fa751aa2c1b1c12">readDirectory</a></div><div class="ttdeci">std::vector&lt; std::string &gt; readDirectory(std::string path, std::string extension)</div><div class="ttdef"><b>Definition:</b> Utils.hpp:13</div></div>
+<div class="ttc" id="arehtiLib_2assets_2loader_2src_2Utils_8hpp_html_ab5e54a02f8b57e2456fa6095932329c9"><div class="ttname"><a href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#ab5e54a02f8b57e2456fa6095932329c9">populateMatrixFromReference</a></div><div class="ttdeci">void populateMatrixFromReference(std::vector&lt; std::vector&lt; T &gt;&gt; &amp;matrix, const std::vector&lt; std::vector&lt; K &gt;&gt; &amp;referenceMatrix, T defaultValue)</div><div class="ttdef"><b>Definition:</b> Utils.hpp:89</div></div>
+<div class="ttc" id="arehtiLib_2assets_2loader_2src_2Utils_8hpp_html_ad1be74eedb711007334181940ecab15e"><div class="ttname"><a href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#ad1be74eedb711007334181940ecab15e">populateMatrix</a></div><div class="ttdeci">void populateMatrix(std::vector&lt; std::vector&lt; T &gt;&gt; &amp;matrix, const std::vector&lt; std::vector&lt; std::string &gt;&gt; &amp;areaMap, T defaultValue, unsigned AREA_WIDTH, unsigned AREA_HEIGHT)</div><div class="ttdef"><b>Definition:</b> Utils.hpp:75</div></div>
+<div class="ttc" id="arehtiLib_2assets_2loader_2src_2Utils_8hpp_html_af221f3a9b31d8838777aaf05ae709585"><div class="ttname"><a href="rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#af221f3a9b31d8838777aaf05ae709585">writeMatrixToFile</a></div><div class="ttdeci">void writeMatrixToFile(const std::vector&lt; std::vector&lt; T &gt;&gt; &amp;matrix, const std::string &amp;filepath)</div><div class="ttdef"><b>Definition:</b> Utils.hpp:104</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

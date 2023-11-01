@@ -71,9 +71,9 @@ $(function() {
 <div class="title">Inventory.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="Inventory_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;FoodItem.hpp&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="FoodItem_8hpp.html">FoodItem.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
@@ -81,17 +81,17 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classInventory.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="classInventory.html">Inventory</a></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="classInventory.html">Inventory</a>(<a class="code" href="classEntity.html">Entity</a> *owner, <span class="keywordtype">int</span> inventorySize = 28);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="classInventory.html#ab65d0121e06488bf14cfb9bfa6cf819f">Inventory</a>(<a class="code" href="classEntity.html">Entity</a> *owner, <span class="keywordtype">int</span> inventorySize = 28);</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::shared_ptr&lt;Item&gt;&gt; &amp;getItems() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::shared_ptr&lt;Item&gt;&gt; &amp;<a class="code" href="classInventory.html#aef99806828639fb74770654b3ccba845">getItems</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">bool</span> addItem(std::shared_ptr&lt;Item&gt; item);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classInventory.html#a9e1fad5a5f8ef1d2aec5ba9d86531d0d">addItem</a>(std::shared_ptr&lt;Item&gt; item);</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">bool</span> removeItem(<span class="keywordtype">int</span> itemId);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classInventory.html#ad8b13c20ee54071dc304b04a453c7d2c">removeItem</a>(<span class="keywordtype">int</span> itemId);</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> useItem(<span class="keywordtype">int</span> itemId);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classInventory.html#a3e0483d7cf95b5529970ba20c71cb501">useItem</a>(<span class="keywordtype">int</span> itemId);</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">friend</span> std::ostream &amp;operator&lt;&lt;(std::ostream &amp;os, <span class="keyword">const</span> <a class="code" href="classInventory.html">Inventory</a> &amp;inv);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">friend</span> std::ostream &amp;<a class="code" href="classInventory.html#a723618e3d14e6f1f2d052e950cd663b5">operator&lt;&lt;</a>(std::ostream &amp;os, <span class="keyword">const</span> <a class="code" href="classInventory.html">Inventory</a> &amp;inv);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classEntity.html">Entity</a> *ownerM;</div>
@@ -100,8 +100,15 @@ $(function() {
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    std::vector&lt;std::shared_ptr&lt;Item&gt;&gt; itemsM = {};</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
+<div class="ttc" id="aFoodItem_8hpp_html"><div class="ttname"><a href="FoodItem_8hpp.html">FoodItem.hpp</a></div></div>
 <div class="ttc" id="aclassEntity_html"><div class="ttname"><a href="classEntity.html">Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.hpp:13</div></div>
 <div class="ttc" id="aclassInventory_html"><div class="ttname"><a href="classInventory.html">Inventory</a></div><div class="ttdef"><b>Definition:</b> Inventory.hpp:9</div></div>
+<div class="ttc" id="aclassInventory_html_a3e0483d7cf95b5529970ba20c71cb501"><div class="ttname"><a href="classInventory.html#a3e0483d7cf95b5529970ba20c71cb501">Inventory::useItem</a></div><div class="ttdeci">void useItem(int itemId)</div><div class="ttdef"><b>Definition:</b> Inventory.cpp:34</div></div>
+<div class="ttc" id="aclassInventory_html_a723618e3d14e6f1f2d052e950cd663b5"><div class="ttname"><a href="classInventory.html#a723618e3d14e6f1f2d052e950cd663b5">Inventory::operator&lt;&lt;</a></div><div class="ttdeci">friend std::ostream &amp; operator&lt;&lt;(std::ostream &amp;os, const Inventory &amp;inv)</div><div class="ttdef"><b>Definition:</b> Inventory.cpp:50</div></div>
+<div class="ttc" id="aclassInventory_html_a9e1fad5a5f8ef1d2aec5ba9d86531d0d"><div class="ttname"><a href="classInventory.html#a9e1fad5a5f8ef1d2aec5ba9d86531d0d">Inventory::addItem</a></div><div class="ttdeci">bool addItem(std::shared_ptr&lt; Item &gt; item)</div><div class="ttdef"><b>Definition:</b> Inventory.cpp:6</div></div>
+<div class="ttc" id="aclassInventory_html_ab65d0121e06488bf14cfb9bfa6cf819f"><div class="ttname"><a href="classInventory.html#ab65d0121e06488bf14cfb9bfa6cf819f">Inventory::Inventory</a></div><div class="ttdeci">Inventory(Entity *owner, int inventorySize=28)</div><div class="ttdef"><b>Definition:</b> Inventory.cpp:4</div></div>
+<div class="ttc" id="aclassInventory_html_ad8b13c20ee54071dc304b04a453c7d2c"><div class="ttname"><a href="classInventory.html#ad8b13c20ee54071dc304b04a453c7d2c">Inventory::removeItem</a></div><div class="ttdeci">bool removeItem(int itemId)</div><div class="ttdef"><b>Definition:</b> Inventory.cpp:16</div></div>
+<div class="ttc" id="aclassInventory_html_aef99806828639fb74770654b3ccba845"><div class="ttname"><a href="classInventory.html#aef99806828639fb74770654b3ccba845">Inventory::getItems</a></div><div class="ttdeci">const std::vector&lt; std::shared_ptr&lt; Item &gt; &gt; &amp; getItems() const</div><div class="ttdef"><b>Definition:</b> Inventory.cpp:29</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

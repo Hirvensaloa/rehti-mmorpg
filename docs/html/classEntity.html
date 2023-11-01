@@ -71,6 +71,8 @@ $(function() {
 <div class="title">Entity Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="Entity_8hpp_source.html">Entity.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Entity:</div>
 <div class="dyncontent">
@@ -99,91 +101,619 @@ Collaboration diagram for Entity:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2400bb4c540fbf503c921daed6acd545"><td class="memItemLeft" align="right" valign="top"><a id="a2400bb4c540fbf503c921daed6acd545"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Entity</b> (<a class="el" href="classGameWorld.html">GameWorld</a> *pGameWorld, std::string name, unsigned int id=0, <a class="el" href="structCoordinates.html">Coordinates</a> location=<a class="el" href="structCoordinates.html">Coordinates</a>())</td></tr>
+<tr class="memitem:a2400bb4c540fbf503c921daed6acd545"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a2400bb4c540fbf503c921daed6acd545">Entity</a> (<a class="el" href="classGameWorld.html">GameWorld</a> *pGameWorld, std::string name, unsigned int <a class="el" href="Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>=0, <a class="el" href="structCoordinates.html">Coordinates</a> location=<a class="el" href="structCoordinates.html">Coordinates</a>())</td></tr>
 <tr class="separator:a2400bb4c540fbf503c921daed6acd545"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5c05093fb29b242eb61887d79de712e"><td class="memItemLeft" align="right" valign="top"><a id="ad5c05093fb29b242eb61887d79de712e"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getId</b> ()</td></tr>
+<tr class="memitem:aa6ecb9c57b29b60cc49fe44ad4088ecf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#aa6ecb9c57b29b60cc49fe44ad4088ecf">~Entity</a> ()=default</td></tr>
+<tr class="separator:aa6ecb9c57b29b60cc49fe44ad4088ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5c05093fb29b242eb61887d79de712e"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#ad5c05093fb29b242eb61887d79de712e">getId</a> ()</td></tr>
 <tr class="separator:ad5c05093fb29b242eb61887d79de712e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab824e4f163924eb4f136d3e2ff759897"><td class="memItemLeft" align="right" valign="top"><a id="ab824e4f163924eb4f136d3e2ff759897"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getName</b> ()</td></tr>
+<tr class="memitem:ab824e4f163924eb4f136d3e2ff759897"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#ab824e4f163924eb4f136d3e2ff759897">getName</a> ()</td></tr>
 <tr class="separator:ab824e4f163924eb4f136d3e2ff759897"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5564e4c637a1e2826e2f4c04aefef265"><td class="memItemLeft" align="right" valign="top"><a id="a5564e4c637a1e2826e2f4c04aefef265"></a>
-<a class="el" href="structCoordinates.html">Coordinates</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getLocation</b> ()</td></tr>
+<tr class="memitem:a5564e4c637a1e2826e2f4c04aefef265"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCoordinates.html">Coordinates</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a5564e4c637a1e2826e2f4c04aefef265">getLocation</a> ()</td></tr>
 <tr class="separator:a5564e4c637a1e2826e2f4c04aefef265"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aadb2e5d76382fa9a02ddf3940a2931d5"><td class="memItemLeft" align="right" valign="top"><a id="aadb2e5d76382fa9a02ddf3940a2931d5"></a>
-<a class="el" href="classAction.html">Action</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCurrentAction</b> ()</td></tr>
+<tr class="memitem:aadb2e5d76382fa9a02ddf3940a2931d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAction.html">Action</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#aadb2e5d76382fa9a02ddf3940a2931d5">getCurrentAction</a> ()</td></tr>
 <tr class="separator:aadb2e5d76382fa9a02ddf3940a2931d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2e1c29d816d24ee7eab3ed1aa2d275b"><td class="memItemLeft" align="right" valign="top"><a id="ae2e1c29d816d24ee7eab3ed1aa2d275b"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getHp</b> ()</td></tr>
+<tr class="memitem:ae2e1c29d816d24ee7eab3ed1aa2d275b"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#ae2e1c29d816d24ee7eab3ed1aa2d275b">getHp</a> ()</td></tr>
 <tr class="separator:ae2e1c29d816d24ee7eab3ed1aa2d275b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f1ef1b13908ffef9f2c4f2f455fdb71"><td class="memItemLeft" align="right" valign="top"><a id="a1f1ef1b13908ffef9f2c4f2f455fdb71"></a>
-<a class="el" href="classInventory.html">Inventory</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getInventory</b> ()</td></tr>
+<tr class="memitem:a1f1ef1b13908ffef9f2c4f2f455fdb71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInventory.html">Inventory</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a1f1ef1b13908ffef9f2c4f2f455fdb71">getInventory</a> ()</td></tr>
 <tr class="separator:a1f1ef1b13908ffef9f2c4f2f455fdb71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac98d1f3267fa19476913d3744efba910"><td class="memItemLeft" align="right" valign="top"><a id="ac98d1f3267fa19476913d3744efba910"></a>
-<a class="el" href="classEquipment.html">Equipment</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getEquipment</b> ()</td></tr>
+<tr class="memitem:ac98d1f3267fa19476913d3744efba910"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEquipment.html">Equipment</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#ac98d1f3267fa19476913d3744efba910">getEquipment</a> ()</td></tr>
 <tr class="separator:ac98d1f3267fa19476913d3744efba910"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ab8d86a7d7e0516fc4659f7513cc934"><td class="memItemLeft" align="right" valign="top"><a id="a3ab8d86a7d7e0516fc4659f7513cc934"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getRange</b> ()</td></tr>
+<tr class="memitem:a3ab8d86a7d7e0516fc4659f7513cc934"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a3ab8d86a7d7e0516fc4659f7513cc934">getRange</a> ()</td></tr>
 <tr class="separator:a3ab8d86a7d7e0516fc4659f7513cc934"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56d902ac081b5bf9ed293aa9d76905d4"><td class="memItemLeft" align="right" valign="top"><a id="a56d902ac081b5bf9ed293aa9d76905d4"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getAttackSpeed</b> ()</td></tr>
+<tr class="memitem:a56d902ac081b5bf9ed293aa9d76905d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a56d902ac081b5bf9ed293aa9d76905d4">getAttackSpeed</a> ()</td></tr>
 <tr class="separator:a56d902ac081b5bf9ed293aa9d76905d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28e87961e8bcd1e47700d7afdde2e482"><td class="memItemLeft" align="right" valign="top"><a id="a28e87961e8bcd1e47700d7afdde2e482"></a>
-<a class="el" href="classGameWorld.html">GameWorld</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getGameWorld</b> ()</td></tr>
+<tr class="memitem:a28e87961e8bcd1e47700d7afdde2e482"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classGameWorld.html">GameWorld</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a28e87961e8bcd1e47700d7afdde2e482">getGameWorld</a> ()</td></tr>
 <tr class="separator:a28e87961e8bcd1e47700d7afdde2e482"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4dcd9a474663f507da7243dbb7c0a5e6"><td class="memItemLeft" align="right" valign="top"><a id="a4dcd9a474663f507da7243dbb7c0a5e6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>changeHp</b> (int amount)</td></tr>
+<tr class="memitem:a4dcd9a474663f507da7243dbb7c0a5e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a4dcd9a474663f507da7243dbb7c0a5e6">changeHp</a> (int amount)</td></tr>
 <tr class="separator:a4dcd9a474663f507da7243dbb7c0a5e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae00ca26a951f822510d3d93e4c42dce3"><td class="memItemLeft" align="right" valign="top"><a id="ae00ca26a951f822510d3d93e4c42dce3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAction</b> (std::shared_ptr&lt; <a class="el" href="classAction.html">Action</a> &gt; action)</td></tr>
+<tr class="memitem:ae00ca26a951f822510d3d93e4c42dce3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#ae00ca26a951f822510d3d93e4c42dce3">setAction</a> (std::shared_ptr&lt; <a class="el" href="classAction.html">Action</a> &gt; action)</td></tr>
 <tr class="separator:ae00ca26a951f822510d3d93e4c42dce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5caa4b296d74f99e2b203677877b8e63"><td class="memItemLeft" align="right" valign="top"><a id="a5caa4b296d74f99e2b203677877b8e63"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>move</b> (<a class="el" href="structCoordinates.html">Coordinates</a> location)</td></tr>
+<tr class="memitem:a5caa4b296d74f99e2b203677877b8e63"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a5caa4b296d74f99e2b203677877b8e63">move</a> (<a class="el" href="structCoordinates.html">Coordinates</a> location)</td></tr>
 <tr class="separator:a5caa4b296d74f99e2b203677877b8e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47790391860583a3c1c41dd5f8e532e6"><td class="memItemLeft" align="right" valign="top"><a id="a47790391860583a3c1c41dd5f8e532e6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>attack</b> (<a class="el" href="classEntity.html">Entity</a> &amp;target)</td></tr>
+<tr class="memitem:a47790391860583a3c1c41dd5f8e532e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a47790391860583a3c1c41dd5f8e532e6">attack</a> (<a class="el" href="classEntity.html">Entity</a> &amp;target)</td></tr>
 <tr class="separator:a47790391860583a3c1c41dd5f8e532e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c09474372581ad190e31725dee0fccf"><td class="memItemLeft" align="right" valign="top"><a id="a0c09474372581ad190e31725dee0fccf"></a>
-<a class="el" href="classSkillSet.html">SkillSet</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getSkillSet</b> ()</td></tr>
+<tr class="memitem:a0c09474372581ad190e31725dee0fccf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSkillSet.html">SkillSet</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a0c09474372581ad190e31725dee0fccf">getSkillSet</a> ()</td></tr>
 <tr class="separator:a0c09474372581ad190e31725dee0fccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59a29d9b7474baf13c9c76859242287d"><td class="memItemLeft" align="right" valign="top"><a id="a59a29d9b7474baf13c9c76859242287d"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()=0</td></tr>
+<tr class="memitem:a59a29d9b7474baf13c9c76859242287d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a59a29d9b7474baf13c9c76859242287d">update</a> ()=0</td></tr>
 <tr class="separator:a59a29d9b7474baf13c9c76859242287d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a962711c2d488e19c3a1e90d06ba6ed40"><td class="memItemLeft" align="right" valign="top"><a id="a962711c2d488e19c3a1e90d06ba6ed40"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>idM</b></td></tr>
+<tr class="memitem:a962711c2d488e19c3a1e90d06ba6ed40"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a962711c2d488e19c3a1e90d06ba6ed40">idM</a></td></tr>
 <tr class="separator:a962711c2d488e19c3a1e90d06ba6ed40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea22b2eb9f57420081f38943342fa83c"><td class="memItemLeft" align="right" valign="top"><a id="aea22b2eb9f57420081f38943342fa83c"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nameM</b></td></tr>
+<tr class="memitem:aea22b2eb9f57420081f38943342fa83c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#aea22b2eb9f57420081f38943342fa83c">nameM</a></td></tr>
 <tr class="separator:aea22b2eb9f57420081f38943342fa83c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4efd2cdec88b079059aaa0cdcb5bf80"><td class="memItemLeft" align="right" valign="top"><a id="ad4efd2cdec88b079059aaa0cdcb5bf80"></a>
-<a class="el" href="structCoordinates.html">Coordinates</a>&#160;</td><td class="memItemRight" valign="bottom"><b>locationM</b></td></tr>
+<tr class="memitem:ad4efd2cdec88b079059aaa0cdcb5bf80"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCoordinates.html">Coordinates</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#ad4efd2cdec88b079059aaa0cdcb5bf80">locationM</a></td></tr>
 <tr class="separator:ad4efd2cdec88b079059aaa0cdcb5bf80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b65adea655d381c2cefb2570aefff8e"><td class="memItemLeft" align="right" valign="top"><a id="a5b65adea655d381c2cefb2570aefff8e"></a>
-std::shared_ptr&lt; <a class="el" href="classAction.html">Action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>currentActionM</b></td></tr>
+<tr class="memitem:a5b65adea655d381c2cefb2570aefff8e"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classAction.html">Action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a5b65adea655d381c2cefb2570aefff8e">currentActionM</a></td></tr>
 <tr class="separator:a5b65adea655d381c2cefb2570aefff8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7bfba177033ca4cac3bcc26b900cd06"><td class="memItemLeft" align="right" valign="top"><a id="ac7bfba177033ca4cac3bcc26b900cd06"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>hpM</b> = 1000</td></tr>
+<tr class="memitem:ac7bfba177033ca4cac3bcc26b900cd06"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#ac7bfba177033ca4cac3bcc26b900cd06">hpM</a> = 1000</td></tr>
 <tr class="separator:ac7bfba177033ca4cac3bcc26b900cd06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab01ca0576ff5f23768d56f9d2ced5bcf"><td class="memItemLeft" align="right" valign="top"><a id="ab01ca0576ff5f23768d56f9d2ced5bcf"></a>
-<a class="el" href="classGameWorld.html">GameWorld</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>pGameWorldM</b></td></tr>
+<tr class="memitem:ab01ca0576ff5f23768d56f9d2ced5bcf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classGameWorld.html">GameWorld</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#ab01ca0576ff5f23768d56f9d2ced5bcf">pGameWorldM</a></td></tr>
 <tr class="separator:ab01ca0576ff5f23768d56f9d2ced5bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59dc9f5ee3fea7f0939dd84990eaadf1"><td class="memItemLeft" align="right" valign="top"><a id="a59dc9f5ee3fea7f0939dd84990eaadf1"></a>
-<a class="el" href="classInventory.html">Inventory</a>&#160;</td><td class="memItemRight" valign="bottom"><b>inventoryM</b></td></tr>
+<tr class="memitem:a59dc9f5ee3fea7f0939dd84990eaadf1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInventory.html">Inventory</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a59dc9f5ee3fea7f0939dd84990eaadf1">inventoryM</a></td></tr>
 <tr class="separator:a59dc9f5ee3fea7f0939dd84990eaadf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af57f7975d3f4739060be7b451885d2c3"><td class="memItemLeft" align="right" valign="top"><a id="af57f7975d3f4739060be7b451885d2c3"></a>
-<a class="el" href="classEquipment.html">Equipment</a>&#160;</td><td class="memItemRight" valign="bottom"><b>equipmentM</b></td></tr>
+<tr class="memitem:af57f7975d3f4739060be7b451885d2c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEquipment.html">Equipment</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#af57f7975d3f4739060be7b451885d2c3">equipmentM</a></td></tr>
 <tr class="separator:af57f7975d3f4739060be7b451885d2c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2915913c4399c9fd901a08aa91eb8af5"><td class="memItemLeft" align="right" valign="top"><a id="a2915913c4399c9fd901a08aa91eb8af5"></a>
-<a class="el" href="classSkillSet.html">SkillSet</a>&#160;</td><td class="memItemRight" valign="bottom"><b>skillSetM</b></td></tr>
+<tr class="memitem:a2915913c4399c9fd901a08aa91eb8af5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSkillSet.html">SkillSet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a2915913c4399c9fd901a08aa91eb8af5">skillSetM</a></td></tr>
 <tr class="separator:a2915913c4399c9fd901a08aa91eb8af5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2400bb4c540fbf503c921daed6acd545"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2400bb4c540fbf503c921daed6acd545">&#9670;&nbsp;</a></span>Entity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Entity::Entity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classGameWorld.html">GameWorld</a> *&#160;</td>
+          <td class="paramname"><em>pGameWorld</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>id</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structCoordinates.html">Coordinates</a>&#160;</td>
+          <td class="paramname"><em>location</em> = <code><a class="el" href="structCoordinates.html">Coordinates</a>()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa6ecb9c57b29b60cc49fe44ad4088ecf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6ecb9c57b29b60cc49fe44ad4088ecf">&#9670;&nbsp;</a></span>~Entity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Entity::~Entity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a47790391860583a3c1c41dd5f8e532e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47790391860583a3c1c41dd5f8e532e6">&#9670;&nbsp;</a></span>attack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Entity::attack </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classEntity.html">Entity</a> &amp;&#160;</td>
+          <td class="paramname"><em>target</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4dcd9a474663f507da7243dbb7c0a5e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dcd9a474663f507da7243dbb7c0a5e6">&#9670;&nbsp;</a></span>changeHp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Entity::changeHp </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>amount</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a56d902ac081b5bf9ed293aa9d76905d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56d902ac081b5bf9ed293aa9d76905d4">&#9670;&nbsp;</a></span>getAttackSpeed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Entity::getAttackSpeed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aadb2e5d76382fa9a02ddf3940a2931d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadb2e5d76382fa9a02ddf3940a2931d5">&#9670;&nbsp;</a></span>getCurrentAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classAction.html">Action</a> &amp; Entity::getCurrentAction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac98d1f3267fa19476913d3744efba910"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac98d1f3267fa19476913d3744efba910">&#9670;&nbsp;</a></span>getEquipment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classEquipment.html">Equipment</a> &amp; Entity::getEquipment </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28e87961e8bcd1e47700d7afdde2e482"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28e87961e8bcd1e47700d7afdde2e482">&#9670;&nbsp;</a></span>getGameWorld()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classGameWorld.html">GameWorld</a> * Entity::getGameWorld </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae2e1c29d816d24ee7eab3ed1aa2d275b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2e1c29d816d24ee7eab3ed1aa2d275b">&#9670;&nbsp;</a></span>getHp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Entity::getHp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad5c05093fb29b242eb61887d79de712e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5c05093fb29b242eb61887d79de712e">&#9670;&nbsp;</a></span>getId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Entity::getId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1f1ef1b13908ffef9f2c4f2f455fdb71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f1ef1b13908ffef9f2c4f2f455fdb71">&#9670;&nbsp;</a></span>getInventory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInventory.html">Inventory</a> &amp; Entity::getInventory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5564e4c637a1e2826e2f4c04aefef265"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5564e4c637a1e2826e2f4c04aefef265">&#9670;&nbsp;</a></span>getLocation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structCoordinates.html">Coordinates</a> &amp; Entity::getLocation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab824e4f163924eb4f136d3e2ff759897"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab824e4f163924eb4f136d3e2ff759897">&#9670;&nbsp;</a></span>getName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Entity::getName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3ab8d86a7d7e0516fc4659f7513cc934"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ab8d86a7d7e0516fc4659f7513cc934">&#9670;&nbsp;</a></span>getRange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Entity::getRange </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0c09474372581ad190e31725dee0fccf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c09474372581ad190e31725dee0fccf">&#9670;&nbsp;</a></span>getSkillSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSkillSet.html">SkillSet</a> &amp; Entity::getSkillSet </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5caa4b296d74f99e2b203677877b8e63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5caa4b296d74f99e2b203677877b8e63">&#9670;&nbsp;</a></span>move()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Entity::move </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structCoordinates.html">Coordinates</a>&#160;</td>
+          <td class="paramname"><em>location</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae00ca26a951f822510d3d93e4c42dce3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae00ca26a951f822510d3d93e4c42dce3">&#9670;&nbsp;</a></span>setAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Entity::setAction </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classAction.html">Action</a> &gt;&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a59a29d9b7474baf13c9c76859242287d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59a29d9b7474baf13c9c76859242287d">&#9670;&nbsp;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Entity::update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classBandit.html#a1261ade2235b166e5aed9c89043ac463">Bandit</a>, <a class="el" href="classPlayerCharacter.html#a6a0338ab611988c7ace3f14d82bad13e">PlayerCharacter</a>, and <a class="el" href="classNpc.html#a02469aac6500ae06782d0f75148d5b50">Npc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5b65adea655d381c2cefb2570aefff8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b65adea655d381c2cefb2570aefff8e">&#9670;&nbsp;</a></span>currentActionM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classAction.html">Action</a>&gt; Entity::currentActionM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af57f7975d3f4739060be7b451885d2c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af57f7975d3f4739060be7b451885d2c3">&#9670;&nbsp;</a></span>equipmentM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classEquipment.html">Equipment</a> Entity::equipmentM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac7bfba177033ca4cac3bcc26b900cd06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7bfba177033ca4cac3bcc26b900cd06">&#9670;&nbsp;</a></span>hpM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Entity::hpM = 1000</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a962711c2d488e19c3a1e90d06ba6ed40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a962711c2d488e19c3a1e90d06ba6ed40">&#9670;&nbsp;</a></span>idM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Entity::idM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a59dc9f5ee3fea7f0939dd84990eaadf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59dc9f5ee3fea7f0939dd84990eaadf1">&#9670;&nbsp;</a></span>inventoryM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInventory.html">Inventory</a> Entity::inventoryM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad4efd2cdec88b079059aaa0cdcb5bf80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4efd2cdec88b079059aaa0cdcb5bf80">&#9670;&nbsp;</a></span>locationM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structCoordinates.html">Coordinates</a> Entity::locationM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aea22b2eb9f57420081f38943342fa83c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea22b2eb9f57420081f38943342fa83c">&#9670;&nbsp;</a></span>nameM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Entity::nameM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab01ca0576ff5f23768d56f9d2ced5bcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab01ca0576ff5f23768d56f9d2ced5bcf">&#9670;&nbsp;</a></span>pGameWorldM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classGameWorld.html">GameWorld</a>* Entity::pGameWorldM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2915913c4399c9fd901a08aa91eb8af5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2915913c4399c9fd901a08aa91eb8af5">&#9670;&nbsp;</a></span>skillSetM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSkillSet.html">SkillSet</a> Entity::skillSetM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/server/src/entity/<a class="el" href="Entity_8hpp_source.html">Entity.hpp</a></li>
-<li>/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/server/src/entity/Entity.cpp</li>
+<li>/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/server/src/entity/<a class="el" href="Entity_8cpp.html">Entity.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

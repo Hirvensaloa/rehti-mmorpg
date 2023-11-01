@@ -71,7 +71,7 @@ $(function() {
 <div class="title">RehtiGraphics.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="RehtiGraphics_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;vulkan/vulkan.h&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;optional&gt;</span></div>
@@ -83,42 +83,42 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;chrono&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;Mesh.hpp&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;Camera.hpp&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;GraphicsObjectManager.hpp&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Mesh_8hpp.html">Mesh.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Camera_8hpp.html">Camera.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="GraphicsObjectManager_8hpp.html">GraphicsObjectManager.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">enum</span> EngineFlags</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fd">   17</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fd">EngineFlags</a></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    NO_FLAGS = 0,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    FRAME_BUFFER_RESIZED = 1 &lt;&lt; 0,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    UNKNOWN = 1 &lt;&lt; 7</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fda37a839897f4586c0f7fbb4aba19014c7">   19</a></span>&#160;    <a class="code" href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fda37a839897f4586c0f7fbb4aba19014c7">NO_FLAGS</a> = 0,</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fdade84385f02e9f21c687332235247c73c">   20</a></span>&#160;    <a class="code" href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fdade84385f02e9f21c687332235247c73c">FRAME_BUFFER_RESIZED</a> = 1 &lt;&lt; 0,</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fda6ce26a62afab55d7606ad4e92428b30c">UNKNOWN</a> = 1 &lt;&lt; 7</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fda6ce26a62afab55d7606ad4e92428b30c">   22</a></span>&#160;};</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//Useful structs</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structQueueFamilyIndices.html">   25</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structQueueFamilyIndices.html">QueueFamilyIndices</a></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    std::optional&lt;uint32_t&gt; graphicsFamily;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    std::optional&lt;uint32_t&gt; presentFamily;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    std::optional&lt;uint32_t&gt; transferFamily;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="structQueueFamilyIndices.html#a1e525a27a080ff5b5a4e545bdbc4da09">   27</a></span>&#160;    std::optional&lt;uint32_t&gt; <a class="code" href="structQueueFamilyIndices.html#a1e525a27a080ff5b5a4e545bdbc4da09">graphicsFamily</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="structQueueFamilyIndices.html#a7229b20d9ad2a8179565812fcf650775">   28</a></span>&#160;    std::optional&lt;uint32_t&gt; <a class="code" href="structQueueFamilyIndices.html#a7229b20d9ad2a8179565812fcf650775">presentFamily</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structQueueFamilyIndices.html#a0d7c1612ebe5ac60201b5bb96c67030b">   29</a></span>&#160;    std::optional&lt;uint32_t&gt; <a class="code" href="structQueueFamilyIndices.html#a0d7c1612ebe5ac60201b5bb96c67030b">transferFamily</a>;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">bool</span> isComplete() {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">return</span> graphicsFamily.has_value() &amp;&amp; presentFamily.has_value();</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structQueueFamilyIndices.html#a652cdfabe4719ae21a701e77d57e7899">   31</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structQueueFamilyIndices.html#a652cdfabe4719ae21a701e77d57e7899">isComplete</a>() {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="structQueueFamilyIndices.html#a1e525a27a080ff5b5a4e545bdbc4da09">graphicsFamily</a>.has_value() &amp;&amp; <a class="code" href="structQueueFamilyIndices.html#a7229b20d9ad2a8179565812fcf650775">presentFamily</a>.has_value();</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">bool</span> hasTransferOnlyQueue() {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">return</span> transferFamily.has_value();</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structQueueFamilyIndices.html#a9ea89d103d736bcfbfde0cb19d973e4a">   34</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structQueueFamilyIndices.html#a9ea89d103d736bcfbfde0cb19d973e4a">hasTransferOnlyQueue</a>() {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="structQueueFamilyIndices.html#a0d7c1612ebe5ac60201b5bb96c67030b">transferFamily</a>.has_value();</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="structSwapChainSupportDetails.html">   39</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structSwapChainSupportDetails.html">SwapChainSupportDetails</a> {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    VkSurfaceCapabilitiesKHR capabilities;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    std::vector&lt;VkSurfaceFormatKHR&gt; formats;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    std::vector&lt;VkPresentModeKHR&gt; presentModes;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structSwapChainSupportDetails.html#a8918f9f5496b29a701e8d094aa455b2a">   40</a></span>&#160;    VkSurfaceCapabilitiesKHR <a class="code" href="structSwapChainSupportDetails.html#a8918f9f5496b29a701e8d094aa455b2a">capabilities</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="structSwapChainSupportDetails.html#a22cda9622ff2cd725ec00311e2007a7f">   41</a></span>&#160;    std::vector&lt;VkSurfaceFormatKHR&gt; <a class="code" href="structSwapChainSupportDetails.html#a22cda9622ff2cd725ec00311e2007a7f">formats</a>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="structSwapChainSupportDetails.html#ae4fff3c89a63ae4cf896b6b385e2dad9">   42</a></span>&#160;    std::vector&lt;VkPresentModeKHR&gt; <a class="code" href="structSwapChainSupportDetails.html#ae4fff3c89a63ae4cf896b6b385e2dad9">presentModes</a>;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structEngineStatistics.html">   45</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structEngineStatistics.html">EngineStatistics</a></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    uint64_t frameTime; <span class="comment">// In microseconds</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">double</span> ftPerSec; <span class="comment">// time per second</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="structEngineStatistics.html#a2b473b68840093b64f6422763e3a40e2">   47</a></span>&#160;    uint64_t <a class="code" href="structEngineStatistics.html#a2b473b68840093b64f6422763e3a40e2">frameTime</a>; <span class="comment">// In microseconds</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="structEngineStatistics.html#ab023e90d8d9a34f0270d61b8841f037f">   48</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="structEngineStatistics.html#ab023e90d8d9a34f0270d61b8841f037f">ftPerSec</a>; <span class="comment">// time per second</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">// The actual application class</span></div>
@@ -126,7 +126,7 @@ $(function() {
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">// Demos the latest changes to the graphics class</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> demo();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRehtiGraphics.html#ab2c9bfc62c440b4d7219f44b5aa69536">demo</a>();</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="classRehtiGraphics.html#a02839f0b23042a31a0a0098d37d88115">RehtiGraphics</a>();</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
@@ -136,7 +136,7 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRehtiGraphics.html#a6e6f31b57e4c114643551d05f412aefc">transformTestObject</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>, glm::mat4 transformation);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRehtiGraphics.html#a60240fd89a5ffd5899ed7b82eb2b9a84">setEngineFlags</a>(EngineFlags flags);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRehtiGraphics.html#a60240fd89a5ffd5899ed7b82eb2b9a84">setEngineFlags</a>(<a class="code" href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fd">EngineFlags</a> flags);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="comment">// Functions</span></div>
@@ -263,7 +263,7 @@ $(function() {
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="comment">// Other variables</span></div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    uint32_t widthM = 800;</div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    uint32_t heightM = 600;</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    EngineFlags engineFlagsM = EngineFlags::NO_FLAGS;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <a class="code" href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fd">EngineFlags</a> engineFlagsM = <a class="code" href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fda37a839897f4586c0f7fbb4aba19014c7">EngineFlags::NO_FLAGS</a>;</div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <a class="code" href="structEngineStatistics.html">EngineStatistics</a> statsM;</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> kConcurrentFramesM = 2;</div>
@@ -304,17 +304,35 @@ $(function() {
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
 <div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;};</div>
+<div class="ttc" id="aCamera_8hpp_html"><div class="ttname"><a href="Camera_8hpp.html">Camera.hpp</a></div></div>
+<div class="ttc" id="aGraphicsObjectManager_8hpp_html"><div class="ttname"><a href="GraphicsObjectManager_8hpp.html">GraphicsObjectManager.hpp</a></div></div>
+<div class="ttc" id="aMesh_8hpp_html"><div class="ttname"><a href="Mesh_8hpp.html">Mesh.hpp</a></div></div>
+<div class="ttc" id="aRehtiGraphics_8hpp_html_a7fb142f23d8183727ec8ccd334ad10fd"><div class="ttname"><a href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fd">EngineFlags</a></div><div class="ttdeci">EngineFlags</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:18</div></div>
+<div class="ttc" id="aRehtiGraphics_8hpp_html_a7fb142f23d8183727ec8ccd334ad10fda37a839897f4586c0f7fbb4aba19014c7"><div class="ttname"><a href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fda37a839897f4586c0f7fbb4aba19014c7">NO_FLAGS</a></div><div class="ttdeci">@ NO_FLAGS</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:19</div></div>
+<div class="ttc" id="aRehtiGraphics_8hpp_html_a7fb142f23d8183727ec8ccd334ad10fda6ce26a62afab55d7606ad4e92428b30c"><div class="ttname"><a href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fda6ce26a62afab55d7606ad4e92428b30c">UNKNOWN</a></div><div class="ttdeci">@ UNKNOWN</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:21</div></div>
+<div class="ttc" id="aRehtiGraphics_8hpp_html_a7fb142f23d8183727ec8ccd334ad10fdade84385f02e9f21c687332235247c73c"><div class="ttname"><a href="RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fdade84385f02e9f21c687332235247c73c">FRAME_BUFFER_RESIZED</a></div><div class="ttdeci">@ FRAME_BUFFER_RESIZED</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:20</div></div>
 <div class="ttc" id="aclassCamera_html"><div class="ttname"><a href="classCamera.html">Camera</a></div><div class="ttdoc">Camera class, that allows for orbiting around a target. Can be queried for view and projection matric...</div><div class="ttdef"><b>Definition:</b> Camera.hpp:32</div></div>
 <div class="ttc" id="aclassRehtiGraphics_html"><div class="ttname"><a href="classRehtiGraphics.html">RehtiGraphics</a></div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:53</div></div>
 <div class="ttc" id="aclassRehtiGraphics_html_a02839f0b23042a31a0a0098d37d88115"><div class="ttname"><a href="classRehtiGraphics.html#a02839f0b23042a31a0a0098d37d88115">RehtiGraphics::RehtiGraphics</a></div><div class="ttdeci">RehtiGraphics()</div><div class="ttdoc">Initializes the window and vulkan.</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.cpp:14</div></div>
 <div class="ttc" id="aclassRehtiGraphics_html_a60240fd89a5ffd5899ed7b82eb2b9a84"><div class="ttname"><a href="classRehtiGraphics.html#a60240fd89a5ffd5899ed7b82eb2b9a84">RehtiGraphics::setEngineFlags</a></div><div class="ttdeci">void setEngineFlags(EngineFlags flags)</div><div class="ttdoc">Sets flags for engine. Flags can only be set by this interface, not unset.</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.cpp:44</div></div>
 <div class="ttc" id="aclassRehtiGraphics_html_a6e6f31b57e4c114643551d05f412aefc"><div class="ttname"><a href="classRehtiGraphics.html#a6e6f31b57e4c114643551d05f412aefc">RehtiGraphics::transformTestObject</a></div><div class="ttdeci">void transformTestObject(int id, glm::mat4 transformation)</div><div class="ttdoc">Transforms object with the given id.</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.cpp:38</div></div>
+<div class="ttc" id="aclassRehtiGraphics_html_ab2c9bfc62c440b4d7219f44b5aa69536"><div class="ttname"><a href="classRehtiGraphics.html#ab2c9bfc62c440b4d7219f44b5aa69536">RehtiGraphics::demo</a></div><div class="ttdeci">void demo()</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.cpp:7</div></div>
 <div class="ttc" id="aclassRehtiGraphics_html_ac5a68f1877be335b148ce98837402530"><div class="ttname"><a href="classRehtiGraphics.html#ac5a68f1877be335b148ce98837402530">RehtiGraphics::~RehtiGraphics</a></div><div class="ttdeci">~RehtiGraphics()</div><div class="ttdoc">Cleans up all the resources used by vulkan.</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.cpp:22</div></div>
 <div class="ttc" id="aclassRehtiGraphics_html_aee9717d7bdb276ed3b0be0775c00e24c"><div class="ttname"><a href="classRehtiGraphics.html#aee9717d7bdb276ed3b0be0775c00e24c">RehtiGraphics::addTestObject</a></div><div class="ttdeci">void addTestObject(int id)</div><div class="ttdoc">Adds a test cube to the graphics backend for testing purposes.</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.cpp:27</div></div>
 <div class="ttc" id="astructAllocatedImage_html"><div class="ttname"><a href="structAllocatedImage.html">AllocatedImage</a></div><div class="ttdef"><b>Definition:</b> GraphicsObjectManager.hpp:26</div></div>
 <div class="ttc" id="astructEngineStatistics_html"><div class="ttname"><a href="structEngineStatistics.html">EngineStatistics</a></div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:46</div></div>
+<div class="ttc" id="astructEngineStatistics_html_a2b473b68840093b64f6422763e3a40e2"><div class="ttname"><a href="structEngineStatistics.html#a2b473b68840093b64f6422763e3a40e2">EngineStatistics::frameTime</a></div><div class="ttdeci">uint64_t frameTime</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:47</div></div>
+<div class="ttc" id="astructEngineStatistics_html_ab023e90d8d9a34f0270d61b8841f037f"><div class="ttname"><a href="structEngineStatistics.html#ab023e90d8d9a34f0270d61b8841f037f">EngineStatistics::ftPerSec</a></div><div class="ttdeci">double ftPerSec</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:48</div></div>
 <div class="ttc" id="astructQueueFamilyIndices_html"><div class="ttname"><a href="structQueueFamilyIndices.html">QueueFamilyIndices</a></div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:26</div></div>
+<div class="ttc" id="astructQueueFamilyIndices_html_a0d7c1612ebe5ac60201b5bb96c67030b"><div class="ttname"><a href="structQueueFamilyIndices.html#a0d7c1612ebe5ac60201b5bb96c67030b">QueueFamilyIndices::transferFamily</a></div><div class="ttdeci">std::optional&lt; uint32_t &gt; transferFamily</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:29</div></div>
+<div class="ttc" id="astructQueueFamilyIndices_html_a1e525a27a080ff5b5a4e545bdbc4da09"><div class="ttname"><a href="structQueueFamilyIndices.html#a1e525a27a080ff5b5a4e545bdbc4da09">QueueFamilyIndices::graphicsFamily</a></div><div class="ttdeci">std::optional&lt; uint32_t &gt; graphicsFamily</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:27</div></div>
+<div class="ttc" id="astructQueueFamilyIndices_html_a652cdfabe4719ae21a701e77d57e7899"><div class="ttname"><a href="structQueueFamilyIndices.html#a652cdfabe4719ae21a701e77d57e7899">QueueFamilyIndices::isComplete</a></div><div class="ttdeci">bool isComplete()</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:31</div></div>
+<div class="ttc" id="astructQueueFamilyIndices_html_a7229b20d9ad2a8179565812fcf650775"><div class="ttname"><a href="structQueueFamilyIndices.html#a7229b20d9ad2a8179565812fcf650775">QueueFamilyIndices::presentFamily</a></div><div class="ttdeci">std::optional&lt; uint32_t &gt; presentFamily</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:28</div></div>
+<div class="ttc" id="astructQueueFamilyIndices_html_a9ea89d103d736bcfbfde0cb19d973e4a"><div class="ttname"><a href="structQueueFamilyIndices.html#a9ea89d103d736bcfbfde0cb19d973e4a">QueueFamilyIndices::hasTransferOnlyQueue</a></div><div class="ttdeci">bool hasTransferOnlyQueue()</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:34</div></div>
 <div class="ttc" id="astructSwapChainSupportDetails_html"><div class="ttname"><a href="structSwapChainSupportDetails.html">SwapChainSupportDetails</a></div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:39</div></div>
+<div class="ttc" id="astructSwapChainSupportDetails_html_a22cda9622ff2cd725ec00311e2007a7f"><div class="ttname"><a href="structSwapChainSupportDetails.html#a22cda9622ff2cd725ec00311e2007a7f">SwapChainSupportDetails::formats</a></div><div class="ttdeci">std::vector&lt; VkSurfaceFormatKHR &gt; formats</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:41</div></div>
+<div class="ttc" id="astructSwapChainSupportDetails_html_a8918f9f5496b29a701e8d094aa455b2a"><div class="ttname"><a href="structSwapChainSupportDetails.html#a8918f9f5496b29a701e8d094aa455b2a">SwapChainSupportDetails::capabilities</a></div><div class="ttdeci">VkSurfaceCapabilitiesKHR capabilities</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:40</div></div>
+<div class="ttc" id="astructSwapChainSupportDetails_html_ae4fff3c89a63ae4cf896b6b385e2dad9"><div class="ttname"><a href="structSwapChainSupportDetails.html#ae4fff3c89a63ae4cf896b6b385e2dad9">SwapChainSupportDetails::presentModes</a></div><div class="ttdeci">std::vector&lt; VkPresentModeKHR &gt; presentModes</div><div class="ttdef"><b>Definition:</b> RehtiGraphics.hpp:42</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

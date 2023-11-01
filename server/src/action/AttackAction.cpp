@@ -24,7 +24,7 @@ void AttackAction::act()
                 startTimeM = std::chrono::system_clock::now();
                 if (pTargetM->getHp() == 0)
                 {
-                    std::cout << "Attack action completed" << std::endl;
+                    std::cout << "Attack action completed. Target eliminated." << std::endl;
                     completedM = true;
                 }
             }
@@ -32,13 +32,19 @@ void AttackAction::act()
 
         else if (std::chrono::system_clock::now() > startTimeM + moveTimeM)
         {
-            pEntityM->move(findNextMove());
-            startTimeM = std::chrono::system_clock::now();
+            std::optional<Coordinates> nextMove = findNextMove();
+
+            // If we cannot find a path to the target, do nothing e.g. stay agressive and wait for the target to potentially come to range.
+            if (nextMove.has_value())
+            {
+                pEntityM->move(nextMove.value());
+                startTimeM = std::chrono::system_clock::now();
+            }
         }
     }
 }
 
-Coordinates AttackAction::findNextMove()
+std::optional<Coordinates> AttackAction::findNextMove()
 {
     Coordinates pLocation = pEntityM->getLocation();
     Coordinates tLocation = pTargetM->getLocation();
@@ -46,6 +52,12 @@ Coordinates AttackAction::findNextMove()
     if (!(pLocation == tLocation)) // Here we can take the path straight to the target location, because we will never actually move onto the target's location as we will be in range to attack
     {
         auto path = map.findPath(pLocation, tLocation);
+
+        if (path.empty())
+        {
+            return std::nullopt;
+        }
+
         return Coordinates(path[0].first, path[0].second);
     }
     else // Find some available tile next to the target to move to, in case the target moved to our location

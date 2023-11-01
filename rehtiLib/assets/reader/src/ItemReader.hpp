@@ -1,25 +1,54 @@
 #pragma once
 
+#include <string>
 #include <iostream>
 #include <map>
-#include <vector>
-#include <string>
-#include <fstream>
-#include "rapidjson/document.h"
-#include "rapidjson/filereadstream.h"
-#include "RapidjsonHelpers.hpp"
+#include <optional>
 
 struct ItemStats
 {
-  int accuracy;
-  int damage;
-  int attackSpeed;
-  int range;
-  int armor;
-  int dodge;
+  ItemStats(int acc = 0, int dam = 0, int aspd = 0, int rng = 0, int arm = 0, int dod = 0) : accuracy(acc), damage(dam), attackSpeed(aspd), range(rng), armor(arm), dodge(dod){};
+
+  int accuracy; // accuracy bonus
+
+  int damage; // damage bonus
+
+  int attackSpeed; // attack speed in milliseconds, non-zero only for weapons
+
+  int range; // range in tiles, non-zero only for weapons
+
+  int armor; // armor bonus
+
+  int dodge; // dodge change bonus
+
+  ItemStats operator+(ItemStats other)
+  {
+    return ItemStats(accuracy + other.accuracy, damage + other.damage, std::max(attackSpeed, other.attackSpeed), std::max(range, other.range), armor + other.armor, dodge + other.dodge);
+  }
+
+  friend std::ostream &operator<<(std::ostream &os, const ItemStats &stats);
 };
 
-struct GeneralItem
+inline std::ostream &operator<<(std::ostream &os, const ItemStats &stats)
+{
+  os << "ItemStats: accuracy = " << stats.accuracy << ", damage = " << stats.damage << ", attackSpeed = " << stats.attackSpeed << ", range = " << stats.range << ", armor = " << stats.armor << ", dodge = " << stats.dodge << std::endl;
+  return os;
+};
+
+enum class Slot
+{
+  MAIN_HAND,
+  OFF_HAND,
+  HEAD,
+  TOP,
+  BOTTOM,
+  BOOTS,
+  GLOVES,
+  NECK,
+  RING
+};
+
+struct GeneralItemStruct
 {
   int id;
   std::string name;
@@ -27,17 +56,17 @@ struct GeneralItem
   bool isStackable;
 };
 
-struct EquippableItem
+struct EquippableItemStruct
 {
   int id;
   std::string name;
   std::string description;
-  std::string slot;
+  Slot slot;
   ItemStats stats;
   bool isStackable;
 };
 
-struct FoodItem
+struct FoodItemStruct
 {
   int id;
   std::string name;
@@ -47,28 +76,27 @@ struct FoodItem
 };
 
 // Path(s)
-const std::string ITEM_JSON_PATH = "../../../assets/items.json";
+const std::string ITEM_JSON_PATH = "./assets/items.json";
 
 enum class ItemType
 {
   GENERAL,
   EQUIPPABLE,
-  FOOD,
-  NOT_FOUND
+  FOOD
 };
 
 struct GameItems
 {
-  std::map<int, GeneralItem> generalItems;
-  std::map<int, EquippableItem> equippableItems;
-  std::map<int, FoodItem> foodItems;
+  std::map<int, GeneralItemStruct> generalItems;
+  std::map<int, EquippableItemStruct> equippableItems;
+  std::map<int, FoodItemStruct> foodItems;
 
-  bool containsId(int id)
+  const bool containsId(const int id) const
   {
     return generalItems.contains(id) || equippableItems.contains(id) || foodItems.contains(id);
   }
 
-  ItemType findItemType(int id)
+  std::optional<ItemType> getItemType(int id)
   {
     if (generalItems.contains(id))
     {
@@ -84,140 +112,25 @@ struct GameItems
     }
     else
     {
-      return ItemType::NOT_FOUND;
+      return std::nullopt;
     }
   }
 
-  const GeneralItem &getGeneralItem(int id)
+  const GeneralItemStruct &getGeneralItem(int id)
   {
-    return generalItems[id];
+    return generalItems.at(id);
   }
 
-  const EquippableItem &getEquippableItem(int id)
+  const EquippableItemStruct &getEquippableItem(int id)
   {
-    return equippableItems[id];
+    return equippableItems.at(id);
   }
 
-  const FoodItem &getFoodItem(int id)
+  const FoodItemStruct &getFoodItem(int id)
   {
-    return foodItems[id];
+    return foodItems.at(id);
   }
 };
 
 // Reads items defined in the items.json file and returns them as a GameItems struct. GameItems can be referred to create item instances to the game (based on the id).
-GameItems fetchItems()
-{
-  rapidjson::Document document = readJson(ITEM_JSON_PATH);
-
-  if (!document.IsObject() || !document.HasMember("items") || !document["items"].IsArray())
-  {
-    throw std::runtime_error("Invalid JSON structure.");
-  }
-
-  const rapidjson::Value &itemsArray = document["items"];
-
-  GameItems gameItems;
-
-  for (rapidjson::SizeType i = 0; i < itemsArray.Size(); i++)
-  {
-    const rapidjson::Value &item = itemsArray[i];
-    if (!item.IsObject() || !validMember(item, "type", ValueType::STRING) || !validMember(item, "id", ValueType::INT))
-    {
-      std::cerr << "JSON Validation failed for item" << std::endl;
-      throw std::runtime_error("JSON Validation failed for item index: " + std::to_string(i));
-    }
-
-    const std::string itemType = item["type"].GetString();
-    int itemId = item["id"].GetInt();
-
-    // Validate common item properties (= validate the general item)
-    if (!validMember(item, "name", ValueType::STRING) || !validMember(item, "description", ValueType::STRING) || !validMember(item, "isStackable", ValueType::BOOL))
-    {
-      throw std::runtime_error("JSON Validation failed for item id: " + std::to_string(itemId));
-    }
-
-    if (gameItems.containsId(itemId))
-    {
-      throw std::runtime_error("Duplicate item id: " + std::to_string(itemId));
-    }
-
-    if (itemType == "General")
-    {
-      GeneralItem generalItem;
-      generalItem.id = itemId;
-      generalItem.name = item["name"].GetString();
-      generalItem.description = item["description"].GetString();
-      generalItem.isStackable = item["isStackable"].GetBool();
-
-      gameItems.generalItems[itemId] = generalItem;
-    }
-    else if (itemType == "Equippable")
-    {
-      if (!validMember(item, "slot", ValueType::STRING) || !validMember(item, "stats", ValueType::OBJECT))
-      {
-        throw std::runtime_error("JSON Validation failed for item id: " + std::to_string(itemId));
-      }
-
-      EquippableItem equippableItem;
-      equippableItem.id = itemId;
-      equippableItem.name = item["name"].GetString();
-      equippableItem.description = item["description"].GetString();
-      equippableItem.slot = item["slot"].GetString();
-
-      const rapidjson::Value &stats = item["stats"];
-
-      // These fields are not required, if they are not found just set the stat to 0
-      equippableItem.stats.accuracy = validMember(stats, "accuracy", ValueType::INT, false) ? stats["accuracy"].GetInt() : 0;
-      equippableItem.stats.damage = validMember(stats, "damage", ValueType::INT, false) ? stats["damage"].GetInt() : 0;
-      equippableItem.stats.attackSpeed = validMember(stats, "attackSpeed", ValueType::INT, false) ? stats["attackSpeed"].GetInt() : 0;
-      equippableItem.stats.range = validMember(stats, "range", ValueType::INT, false) ? stats["range"].GetInt() : 0;
-      equippableItem.stats.armor = validMember(stats, "armor", ValueType::INT, false) ? stats["armor"].GetInt() : 0;
-      equippableItem.stats.dodge = validMember(stats, "dodge", ValueType::INT, false) ? stats["dodge"].GetInt() : 0;
-
-      equippableItem.isStackable = item["isStackable"].GetBool();
-      gameItems.equippableItems[itemId] = equippableItem;
-    }
-    else if (itemType == "Food")
-    {
-      if (!validMember(item, "healAmount", ValueType::INT))
-      {
-        throw std::runtime_error("JSON Validation failed for item id: " + std::to_string(itemId));
-      }
-
-      FoodItem foodItem;
-      foodItem.id = itemId;
-      foodItem.name = item["name"].GetString();
-      foodItem.description = item["description"].GetString();
-      foodItem.healAmount = item["healAmount"].GetInt();
-      foodItem.isStackable = item["isStackable"].GetBool();
-
-      gameItems.foodItems[itemId] = foodItem;
-    }
-    else
-    {
-      throw std::runtime_error("Unknown item type");
-    }
-  }
-
-  for (const auto &pair : gameItems.generalItems)
-  {
-    const GeneralItem &item = pair.second;
-    std::cout << "General Item ID: " << item.id << ", Name: " << item.name << std::endl;
-  }
-
-  for (const auto &pair : gameItems.equippableItems)
-  {
-    const EquippableItem &item = pair.second;
-    std::cout << "Equippable Item ID: " << item.id << ", Name: " << item.name << std::endl;
-  }
-
-  for (const auto &pair : gameItems.foodItems)
-  {
-    const FoodItem &item = pair.second;
-    std::cout << "Food Item ID: " << item.id << ", Name: " << item.name << std::endl;
-  }
-
-  std::cout << "Items fetched successfully!" << std::endl;
-
-  return gameItems;
-}
+GameItems fetchItems();

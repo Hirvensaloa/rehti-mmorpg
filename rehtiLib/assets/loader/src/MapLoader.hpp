@@ -2,10 +2,12 @@
 
 #include <exception>
 #include <filesystem>
+#include "rapidjson/document.h"
 #include "rapidjson/prettywriter.h"
 
 #include "Utils.hpp"
-#include "ObjectReader.hpp"
+#include "RehtiUtils.hpp"
+#include "RehtiReader.hpp"
 
 const unsigned AREA_WIDTH = 16;
 const unsigned AREA_HEIGHT = AREA_WIDTH;
@@ -211,7 +213,7 @@ static void changeBlockDirection(std::vector<std::vector<std::string>> &objectTi
  *
  * ALSO, stores objects with their locations to generated/objects.json. This is used by the game server to spawn the objects on start.
  */
-static const std::vector<std::vector<std::string>> createObjectBlockMap(const std::vector<std::vector<std::string>> &areaMap, GameObjects gameObjects)
+static const std::vector<std::vector<std::string>> createObjectBlockMap(const std::vector<std::vector<std::string>> &areaMap, GameObjects gameObjects, const std::vector<std::vector<int>> &heightMap)
 {
   // Populate the object block map with non-blocked tiles
   std::vector<std::vector<std::string>> objectBlockMap;
@@ -254,7 +256,7 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
 
           if (objectId)
           {
-            int rotation = b > 3 ? 0 : b; // Rotation is stored in the B-value. If B is 4 or more, the object is not rotated from its original position.
+            unsigned rotation = b > 3 ? 0 : b; // Rotation is stored in the B-value. If B is 4 or more, the object is not rotated from its original position.
 
             std::vector<std::vector<std::string>> objectTileMap = gameObjects.getTileMap(objectId);
 
@@ -277,11 +279,14 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
               std::cout << "Object id: " << objectId << " not rotated " << std::endl;
             }
 
-            ObjectLocation objLoc = {objectId, currentAreaRowIndex * AREA_HEIGHT + i, currentAreaColumnIndex * AREA_WIDTH + j, rotation};
+            int x = currentAreaColumnIndex * AREA_WIDTH + j;
+            int y = currentAreaRowIndex * AREA_HEIGHT + i;
+            int z = heightMap[y][x];
+            ObjectLocation objLoc = {objectId, "0", x, y, z, rotation};
+            objLoc.instanceId = generateObjectInstanceId(objLoc);
             objectsLocations.push_back(objLoc);
 
             insertObjectTileMap(objectBlockMap, objectTileMap, i, j, currentAreaRowIndex, currentAreaColumnIndex);
-            // objectIdMap[currentAreaRowIndex * AREA_HEIGHT + i][currentAreaColumnIndex * AREA_WIDTH + j] = objectId;
             std::cout << "Object id: " << objectId << " inserted " << std::endl;
           }
         }
@@ -299,6 +304,7 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
     object.AddMember("id", objLoc.id, doc.GetAllocator());
     object.AddMember("x", objLoc.x, doc.GetAllocator());
     object.AddMember("y", objLoc.y, doc.GetAllocator());
+    object.AddMember("z", objLoc.z, doc.GetAllocator());
     object.AddMember("rotation", objLoc.rotation, doc.GetAllocator());
     objects.PushBack(object, doc.GetAllocator());
   }

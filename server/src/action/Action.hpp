@@ -4,6 +4,8 @@
 #include <ctime>
 #include <memory>
 
+#include "network.h"
+
 class Entity;
 
 class Action
@@ -11,9 +13,10 @@ class Action
 public:
     enum ActionType
     {
-        None,
-        Move,
-        Attack,
+        None = -1,
+        Move = MessageId::Move,
+        Attack = MessageId::Attack,
+        ObjectInteract = MessageId::ObjectInteract,
     };
 
     Action(std::chrono::system_clock::time_point startTime, Entity *pEntity);

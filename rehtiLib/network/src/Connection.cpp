@@ -16,7 +16,7 @@
 
 #include "Connection.hpp"
 
-const uint32_t MAX_BUFFER_SIZE = 2048;
+const uint32_t MAX_BUFFER_SIZE = 8192;
 
 Connection::Connection(owner parent, boost::asio::io_context &context,
                        boost::asio::ip::tcp::socket socket, MessageQueue &inc)
@@ -131,6 +131,12 @@ boost::asio::awaitable<void> Connection::readMessage()
   char tempBodyM[MAX_BUFFER_SIZE] = {0};
   if (tempHeaderM.size > 0)
   {
+    if (tempHeaderM.size > MAX_BUFFER_SIZE)
+    {
+      std::cout << "Message too big. Increate the MAX_BUFFER_SIZE" << std::endl; // TODO: Handle the errors better
+      co_return;
+    }
+
     co_await boost::asio::async_read(socketM, boost::asio::buffer(&tempBodyM[0], tempHeaderM.size), boost::asio::use_awaitable);
   }
 

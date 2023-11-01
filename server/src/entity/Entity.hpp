@@ -5,6 +5,7 @@
 #include "../item/Equipment.hpp"
 #include "../item/Inventory.hpp"
 #include "../world/Coordinates.hpp"
+#include "../skill/SkillSet.hpp"
 
 class GameWorld;
 
@@ -43,6 +44,8 @@ public:
 
     void attack(Entity &target);
 
+    SkillSet &getSkillSet();
+
     virtual void update() = 0;
 
 protected:
@@ -61,4 +64,6 @@ protected:
     Inventory inventoryM;
 
     Equipment equipmentM;
+
+    SkillSet skillSetM;
 };

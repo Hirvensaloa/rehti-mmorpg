@@ -2,18 +2,17 @@
 
 if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     # Linux
-    EXECUTABLE_PATH="./build/asset_loader"
+    EXECUTABLE_PATH="./rehtiLib/assets/loader/build/asset_loader"
 elif [[ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" || "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]]; then
     # Windows (MINGW32_NT or MINGW64_NT)
-    EXECUTABLE_PATH="./build/Debug/asset_loader"
+    EXECUTABLE_PATH="./rehtiLib/assets/loader/build/Debug/asset_loader"
 else
     echo "Unsupported operating system"
     exit 1
 fi
 
-cd ./rehtiLib/assets/loader
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
-cmake --build ./build
+cmake -S ./rehtiLib/assets/loader -B ./rehtiLib/assets/loader/build -DCMAKE_BUILD_TYPE=Debug
+cmake --build ./rehtiLib/assets/loader/build
 
 if [ -f "$EXECUTABLE_PATH" ]; then
     echo "Executing $EXECUTABLE_PATH"

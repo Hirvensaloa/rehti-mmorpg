@@ -17,7 +17,7 @@ bool Inventory::removeItem(int itemId)
 {
     for (auto it = itemsM.begin(); it != itemsM.end(); it++)
     {
-        if ((*it)->getId() == itemId)
+        if ((*it)->getInstanceId() == itemId)
         {
             itemsM.erase(it);
             return true;
@@ -35,7 +35,7 @@ void Inventory::useItem(int itemId)
 {
     for (auto it = itemsM.begin(); it != itemsM.end(); it++)
     {
-        if ((*it)->getId() == itemId)
+        if ((*it)->getInstanceId() == itemId)
         {
             bool remove = (*it)->use(ownerM);
             if (remove)
@@ -52,7 +52,7 @@ std::ostream &operator<<(std::ostream &os, const Inventory &inv)
     os << "Inventory contents:" << std::endl;
     for (auto item : inv.getItems())
     {
-        os << "     Item Id: " << item->getId() << ", Name: " << item->getName() << std::endl;
+        os << "     Item Id: " << item->getInstanceId() << ", Name: " << item->getName() << std::endl;
     }
     return os;
 }

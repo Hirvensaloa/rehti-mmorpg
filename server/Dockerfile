@@ -29,11 +29,13 @@ RUN cd server && conan install . --output-folder=build --build=missing -s build_
 
 COPY third_party/rapidjson/include/ ./third_party/rapidjson/include/
 
+
+COPY rehtiLib/utils/ ./rehtiLib/utils
 # Generate map assets
-COPY rehtiLib/map/ ./rehtiLib/map
-COPY scripts/generate_map.sh ./scripts/generate_map.sh
+COPY rehtiLib/assets/ ./rehtiLib/assets
+COPY scripts/generate_assets.sh ./scripts/generate_assets.sh
 COPY assets/ ./assets
-RUN ./scripts/generate_map.sh
+RUN ./scripts/generate_assets.sh
 
 COPY rehtiLib/network/ ./rehtiLib/network
 COPY server/CMakeLists.txt ./server

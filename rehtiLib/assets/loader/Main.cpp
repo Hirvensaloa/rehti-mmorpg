@@ -4,9 +4,6 @@
 #include "src/Utils.hpp"
 #include "src/MapLoader.hpp"
 #include "src/MapObjLoader.hpp"
-#include "ItemReader.hpp"
-#include "ObjectReader.hpp"
-#include "SkillReader.hpp"
 
 int main()
 {
@@ -18,7 +15,7 @@ int main()
   // Generate map assets
   const std::vector<std::vector<std::string>> areaMap = fetchAreaMap();
   const std::vector<std::vector<int>> heightMatrix = createHeightMap(areaMap);
-  const std::vector<std::vector<std::string>> objectBlockMap = createObjectBlockMap(areaMap, gameObjects);
+  const std::vector<std::vector<std::string>> objectBlockMap = createObjectBlockMap(areaMap, gameObjects, heightMatrix);
 
   // Generate access map for server
   const std::vector<std::vector<unsigned>> accessMap = generateAccessMap(heightMatrix, objectBlockMap);

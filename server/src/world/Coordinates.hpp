@@ -15,7 +15,7 @@ struct Coordinates
         return (x == other.x && y == other.y && z == other.z);
     }
 
-    unsigned int distance(Coordinates &other)
+    unsigned int distance(const Coordinates &other)
     {
         return std::sqrt(std::pow(x - other.x, 2) + std::pow(y - other.y, 2));
     }

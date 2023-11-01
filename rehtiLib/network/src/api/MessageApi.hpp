@@ -7,11 +7,23 @@
 #include <vector>
 #include <iostream>
 
+#include "Types.hpp"
+
+/*
+ * CREATING NEW MESSAGES:
+ *
+ * 1. Add a new enum value to MessageId enum.
+ * 2. Create a new struct for the message type.
+ * 3. Add a new create and parse method to MessageApi class.
+ * 4. Handle the message instance on the server
+ */
+
 enum MessageId
 {
     GameState,
     Move,
     Attack,
+    ObjectInteract,
     Test,
 };
 
@@ -27,20 +39,12 @@ struct MessageStruct
  * The id field corresponds to the messages header id.
  */
 
-struct GameStateEntity
-{
-    int entityId;
-    std::string name;
-    int x;
-    int y;
-    int z;
-    int currentActionType = -1; // -1 means no action
-};
-
 struct GameStateMessage
 {
     const MessageId id = MessageId::GameState;
     std::vector<GameStateEntity> entities;
+    std::vector<GameStateObject> objects;
+    CurrentPlayer currentPlayer;
 };
 
 struct MoveMessage
@@ -54,6 +58,12 @@ struct AttackMessage
 {
     const MessageId id = MessageId::Attack;
     int targetId;
+};
+
+struct ObjectInteractMessage
+{
+    const MessageId id = MessageId::ObjectInteract;
+    std::string objectId;
 };
 
 /*
@@ -74,48 +84,9 @@ public:
     static MessageStruct createAttack(const AttackMessage &attack);
     static AttackMessage parseAttack(std::string msgBody);
 
+    static MessageStruct createObjectInteract(const ObjectInteractMessage &objectInteract);
+    static ObjectInteractMessage parseObjectInteract(std::string msgBody);
+
     static MessageStruct createGameState(const GameStateMessage &gameState);
     static GameStateMessage parseGameState(std::string msgBody);
-
-private:
-    // Helper functions for creating and parsing json documents
-
-    static rapidjson::Document createDocument()
-    {
-        rapidjson::Document document;
-        document.SetObject();
-
-        return document;
-    }
-
-    /*
-     * Parses a string into a rapidjson document.
-     * Throws an exception if parsing fails.
-     */
-    static rapidjson::Document parseDocument(std::string str)
-    {
-        rapidjson::Document document;
-        document.Parse(str.c_str());
-
-        if (document.HasParseError())
-        {
-            std::cout << "Error parsing json: " << document.GetParseError() << std::endl;
-            throw std::runtime_error("Error parsing json");
-        }
-
-        return document;
-    }
-
-    /*
-     * Creates a string from a rapidjson document.
-     */
-    static std::string createString(rapidjson::Document &document)
-    {
-        rapidjson::StringBuffer buffer;
-        rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
-        document.Accept(writer);
-
-        const std::string str = buffer.GetString();
-        return str;
-    }
 };

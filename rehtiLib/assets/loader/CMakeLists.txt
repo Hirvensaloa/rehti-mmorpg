@@ -14,9 +14,8 @@ add_executable(${TARGET}
   lodepng/lodepng.h
 )
 
-target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/../../utils)
-
-target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/../reader/src)
+add_subdirectory(../reader ${CMAKE_CURRENT_LIST_DIR}/build/reader)
+target_link_libraries(${TARGET} rehtiAssetsReader)
 
 # rapidjson
 

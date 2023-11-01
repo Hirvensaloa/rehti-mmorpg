@@ -33,10 +33,10 @@ Item that the player can equip, giving the player possible stat boosts. Defined 
 - **description** Brief description of the item.
 - **slot** Equippable slot (Choose from: MainHand, OffHand, Head, Top, Bottom, Boots, Gloves, Neck, Ring).
 - **stats** ItemStats object. The ItemStats object includes the following attributes:
-  - **accuracy** Represents the accuracy of the equippable item.
+  - **accuracy** Represents the accuracy bonus of the equippable item.
   - **damage** Indicates the damage dealt by the item.
   - **attackSpeed** Specifies the attack speed of the item. Defined in ms.
-  - **range** Denotes the range of the item's attacks.
+  - **range** Denotes the range of the item's attacks in tiles.
   - **armor** Represents the armor provided by the equippable item.
   - **dodge** Indicates the dodge bonus provided by the item.
 - **isStackable** true if the item can be stacked; otherwise, false.
@@ -58,7 +58,7 @@ You can add new items [here](/assets/items.json). Best practice is to add the it
 
 Example:
 
-```json
+```javascript
 {
   "id": 12, // Increment the ID from the last item
   "name": "New Item Name",
@@ -109,7 +109,7 @@ Resource objects represent in-game resources that players can interact with, suc
 - **type:** "Resource" to indicate the object type.
 - **name:** The name or description of the resource.
 - **yieldableItemList:** A list of items that can be yielded from this resource, along with the percentage chance to yield each item.
-- **xpPerYield:** The amount of experience points (XP) gained when yielding from this resource.
+- **xpPerYield:** The amount of experience points (XP) gained when yielding once from this resource.
 - **depleteChance:** The chance of depleting the resource when yielded.
 - **relatedSkillId:** The skill related to this resource (e.g., 0 (Woodcutting) for a tree).
 - **xpRequirement:** The required XP in the related skill to yield from this resource.

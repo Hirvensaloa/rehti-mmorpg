@@ -5,7 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<<<<<<< HEAD
 <title>Rehti mmorpg: AttackAction.hpp Source File</title>
+=======
+<title>Rehti mmorpg: /home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/server/src/action/AttackAction.hpp Source File</title>
+>>>>>>> dev
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,17 +75,27 @@ $(function() {
 <div class="title">AttackAction.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
+<<<<<<< HEAD
 <a href="AttackAction_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+=======
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+>>>>>>> dev
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;optional&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;../world/Coordinates.hpp&quot;</span></div>
+<<<<<<< HEAD
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Action_8hpp.html">Action.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="MoveAction_8hpp.html">MoveAction.hpp</a>&quot;</span></div>
+=======
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Action.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;MoveAction.hpp&quot;</span></div>
+>>>>>>> dev
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classAttackAction.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="classAttackAction.html">AttackAction</a> : <span class="keyword">public</span> <a class="code" href="classAction.html">Action</a></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
+<<<<<<< HEAD
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="classAttackAction.html#a8570901b33c5b86611f8886fc90cf03e">AttackAction</a>(std::chrono::system_clock::time_point startTime, <a class="code" href="classEntity.html">Entity</a> *pTarget, <a class="code" href="classEntity.html">Entity</a> *pEntity);</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classAttackAction.html#a41b7553ff08d2defa93bafcc63cf7a0a">   14</a></span>&#160;    <a class="code" href="classAttackAction.html#a41b7553ff08d2defa93bafcc63cf7a0a">~AttackAction</a>() = <span class="keywordflow">default</span>;</div>
@@ -89,6 +103,15 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classEntity.html">Entity</a> *<a class="code" href="classAttackAction.html#a4ae79ea72bdfd029eb41e95aeb6d7ba9">getTarget</a>();</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classAttackAction.html#ad163cc47f0a282255c89c50d2c39fec6">act</a>();</div>
+=======
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="classAttackAction.html">AttackAction</a>(std::chrono::system_clock::time_point startTime, <a class="code" href="classEntity.html">Entity</a> *pTarget, <a class="code" href="classEntity.html">Entity</a> *pEntity);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    ~<a class="code" href="classAttackAction.html">AttackAction</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classEntity.html">Entity</a> *getTarget();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> act();</div>
+>>>>>>> dev
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    std::optional&lt;Coordinates&gt; findNextMove();</div>
@@ -97,6 +120,7 @@ $(function() {
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    std::chrono::milliseconds actionTimeM;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<<<<<<< HEAD
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    std::chrono::milliseconds moveTimeM = <a class="code" href="classMoveAction.html#a8f30ecd102663a2c3d3779b7013f2e4f">MoveAction::getMoveTime</a>();</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="classAction.html#ab1851cee70a9061c928e69d44e6cba0b">ActionType</a> actionTypeM = ActionType::Attack;</div>
@@ -112,6 +136,15 @@ $(function() {
 <div class="ttc" id="aclassAttackAction_html_ad163cc47f0a282255c89c50d2c39fec6"><div class="ttname"><a href="classAttackAction.html#ad163cc47f0a282255c89c50d2c39fec6">AttackAction::act</a></div><div class="ttdeci">void act()</div><div class="ttdef"><b>Definition:</b> AttackAction.cpp:14</div></div>
 <div class="ttc" id="aclassEntity_html"><div class="ttname"><a href="classEntity.html">Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.hpp:13</div></div>
 <div class="ttc" id="aclassMoveAction_html_a8f30ecd102663a2c3d3779b7013f2e4f"><div class="ttname"><a href="classMoveAction.html#a8f30ecd102663a2c3d3779b7013f2e4f">MoveAction::getMoveTime</a></div><div class="ttdeci">static const std::chrono::milliseconds getMoveTime()</div><div class="ttdef"><b>Definition:</b> MoveAction.cpp:44</div></div>
+=======
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    std::chrono::milliseconds moveTimeM = MoveAction::getMoveTime();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    ActionType actionTypeM = ActionType::Attack;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
+<div class="ttc" id="aclassAction_html"><div class="ttname"><a href="classAction.html">Action</a></div><div class="ttdef"><b>Definition:</b> Action.hpp:12</div></div>
+<div class="ttc" id="aclassAttackAction_html"><div class="ttname"><a href="classAttackAction.html">AttackAction</a></div><div class="ttdef"><b>Definition:</b> AttackAction.hpp:10</div></div>
+<div class="ttc" id="aclassEntity_html"><div class="ttname"><a href="classEntity.html">Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.hpp:13</div></div>
+>>>>>>> dev
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

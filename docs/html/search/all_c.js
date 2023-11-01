@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['main_336',['main',['../CMakeCXXCompilerId_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCXXCompilerId.cpp'],['../CMakeCCompilerId_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCCompilerId.c'],['../server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;Main.cpp'],['../client_2src_2Main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;Main.cpp']]],
   ['main_2ecpp_2eo_2ed_337',['Main.cpp.o.d',['../Main_8cpp_8o_8d.html',1,'']]],
   ['main_5fhand_338',['MAIN_HAND',['../ItemReader_8hpp.html#ad4a01c7a209d816f94f4864b76f8087faa34b3d7401f1ac77b01b3a0799cfaa4d',1,'ItemReader.hpp']]],
@@ -24,4 +25,8 @@ var searchData=
   ['moveaction_2ecpp_357',['MoveAction.cpp',['../MoveAction_8cpp.html',1,'']]],
   ['moveaction_2ehpp_358',['MoveAction.hpp',['../MoveAction_8hpp.html',1,'']]],
   ['movelocation_359',['moveLocation',['../classCamera.html#a9cdd547b79e817e68bf62f2bc256ee02',1,'Camera']]]
+=======
+  ['playercharacter_72',['PlayerCharacter',['../classPlayerCharacter.html',1,'']]],
+  ['poolmanager_73',['PoolManager',['../classPoolManager.html',1,'']]]
+>>>>>>> dev
 ];

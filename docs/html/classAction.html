@@ -72,8 +72,11 @@ $(function() {
 <div class="title">Action Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+<<<<<<< HEAD
 
 <p><code>#include &lt;<a class="el" href="Action_8hpp_source.html">Action.hpp</a>&gt;</code></p>
+=======
+>>>>>>> dev
 <div class="dynheader">
 Inheritance diagram for Action:</div>
 <div class="dyncontent">
@@ -102,15 +105,23 @@ Collaboration diagram for Action:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
+<<<<<<< HEAD
 <tr class="memitem:ab1851cee70a9061c928e69d44e6cba0b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#ab1851cee70a9061c928e69d44e6cba0b">ActionType</a> { <a class="el" href="classAction.html#ab1851cee70a9061c928e69d44e6cba0ba5fa6161f5a601d4fd415ac434eccc552">None</a> = -1
 , <a class="el" href="classAction.html#ab1851cee70a9061c928e69d44e6cba0ba8c76450cef33a4b6cbe6d34969891593">Move</a> = MessageId::Move
 , <a class="el" href="classAction.html#ab1851cee70a9061c928e69d44e6cba0ba94f4c5ca99f83cb719a4640f32db50cd">Attack</a> = MessageId::Attack
 , <a class="el" href="classAction.html#ab1851cee70a9061c928e69d44e6cba0bacee7e2c681ffda00f6ea1c2ffe99bc48">ObjectInteract</a> = MessageId::ObjectInteract
+=======
+<tr class="memitem:ab1851cee70a9061c928e69d44e6cba0b"><td class="memItemLeft" align="right" valign="top"><a id="ab1851cee70a9061c928e69d44e6cba0b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ActionType</b> { <b>None</b> = -1
+, <b>Move</b> = MessageId::Move
+, <b>Attack</b> = MessageId::Attack
+, <b>ObjectInteract</b> = MessageId::ObjectInteract
+>>>>>>> dev
  }</td></tr>
 <tr class="separator:ab1851cee70a9061c928e69d44e6cba0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<<<<<<< HEAD
 <tr class="memitem:ab6c1bb3b7e351c79a847f5a61d34c5f1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#ab6c1bb3b7e351c79a847f5a61d34c5f1">Action</a> (std::chrono::system_clock::time_point startTime, <a class="el" href="classEntity.html">Entity</a> *pEntity)</td></tr>
 <tr class="separator:ab6c1bb3b7e351c79a847f5a61d34c5f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a7e10cf7c59d5dec6498571f26bddbb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#a9a7e10cf7c59d5dec6498571f26bddbb">~Action</a> ()=default</td></tr>
@@ -124,10 +135,30 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad90eea20bc25a93fb59078c8c8c03ace"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#ad90eea20bc25a93fb59078c8c8c03ace">isCompleted</a> ()</td></tr>
 <tr class="separator:ad90eea20bc25a93fb59078c8c8c03ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab863afe2f6a1638f29ceb1e6118cf9aa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#ab863afe2f6a1638f29ceb1e6118cf9aa">act</a> ()=0</td></tr>
+=======
+<tr class="memitem:ab6c1bb3b7e351c79a847f5a61d34c5f1"><td class="memItemLeft" align="right" valign="top"><a id="ab6c1bb3b7e351c79a847f5a61d34c5f1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Action</b> (std::chrono::system_clock::time_point startTime, <a class="el" href="classEntity.html">Entity</a> *pEntity)</td></tr>
+<tr class="separator:ab6c1bb3b7e351c79a847f5a61d34c5f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ad9b900d3163f47f296fdea841b5ac5"><td class="memItemLeft" align="right" valign="top"><a id="a3ad9b900d3163f47f296fdea841b5ac5"></a>
+std::chrono::system_clock::time_point&#160;</td><td class="memItemRight" valign="bottom"><b>getStartTime</b> ()</td></tr>
+<tr class="separator:a3ad9b900d3163f47f296fdea841b5ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af43e806ee7bef967ac55632b97d392ed"><td class="memItemLeft" align="right" valign="top"><a id="af43e806ee7bef967ac55632b97d392ed"></a>
+std::chrono::milliseconds&#160;</td><td class="memItemRight" valign="bottom"><b>getActionTime</b> ()</td></tr>
+<tr class="separator:af43e806ee7bef967ac55632b97d392ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9deb775fdb4f2b7b3f788b30f2c2c45d"><td class="memItemLeft" align="right" valign="top"><a id="a9deb775fdb4f2b7b3f788b30f2c2c45d"></a>
+ActionType&#160;</td><td class="memItemRight" valign="bottom"><b>getActionType</b> ()</td></tr>
+<tr class="separator:a9deb775fdb4f2b7b3f788b30f2c2c45d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad90eea20bc25a93fb59078c8c8c03ace"><td class="memItemLeft" align="right" valign="top"><a id="ad90eea20bc25a93fb59078c8c8c03ace"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isCompleted</b> ()</td></tr>
+<tr class="separator:ad90eea20bc25a93fb59078c8c8c03ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab863afe2f6a1638f29ceb1e6118cf9aa"><td class="memItemLeft" align="right" valign="top"><a id="ab863afe2f6a1638f29ceb1e6118cf9aa"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>act</b> ()=0</td></tr>
+>>>>>>> dev
 <tr class="separator:ab863afe2f6a1638f29ceb1e6118cf9aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<<<<<<< HEAD
 <tr class="memitem:a1d2964e41388a92b30e35272b3f56f64"><td class="memItemLeft" align="right" valign="top">std::chrono::system_clock::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#a1d2964e41388a92b30e35272b3f56f64">startTimeM</a></td></tr>
 <tr class="separator:a1d2964e41388a92b30e35272b3f56f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15c7a9385ffa5134c2fa90c9f49e15d2"><td class="memItemLeft" align="right" valign="top">std::chrono::milliseconds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#a15c7a9385ffa5134c2fa90c9f49e15d2">actionTimeM</a> = std::chrono::milliseconds(0)</td></tr>
@@ -424,6 +455,27 @@ Protected Attributes</h2></td></tr>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="Action_8hpp_source.html">Action.hpp</a></li>
 <li><a class="el" href="Action_8cpp.html">Action.cpp</a></li>
+=======
+<tr class="memitem:a1d2964e41388a92b30e35272b3f56f64"><td class="memItemLeft" align="right" valign="top"><a id="a1d2964e41388a92b30e35272b3f56f64"></a>
+std::chrono::system_clock::time_point&#160;</td><td class="memItemRight" valign="bottom"><b>startTimeM</b></td></tr>
+<tr class="separator:a1d2964e41388a92b30e35272b3f56f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15c7a9385ffa5134c2fa90c9f49e15d2"><td class="memItemLeft" align="right" valign="top"><a id="a15c7a9385ffa5134c2fa90c9f49e15d2"></a>
+std::chrono::milliseconds&#160;</td><td class="memItemRight" valign="bottom"><b>actionTimeM</b> = std::chrono::milliseconds(0)</td></tr>
+<tr class="separator:a15c7a9385ffa5134c2fa90c9f49e15d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0163cb265c2f9c085a77c08d1f8f6cc5"><td class="memItemLeft" align="right" valign="top"><a id="a0163cb265c2f9c085a77c08d1f8f6cc5"></a>
+ActionType&#160;</td><td class="memItemRight" valign="bottom"><b>actionTypeM</b> = ActionType::None</td></tr>
+<tr class="separator:a0163cb265c2f9c085a77c08d1f8f6cc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f7a75691988a314c12f6bce57c31a8e"><td class="memItemLeft" align="right" valign="top"><a id="a4f7a75691988a314c12f6bce57c31a8e"></a>
+<a class="el" href="classEntity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>pEntityM</b></td></tr>
+<tr class="separator:a4f7a75691988a314c12f6bce57c31a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa63df4313bb57688dbf33ad5e0571c36"><td class="memItemLeft" align="right" valign="top"><a id="aa63df4313bb57688dbf33ad5e0571c36"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>completedM</b> = false</td></tr>
+<tr class="separator:aa63df4313bb57688dbf33ad5e0571c36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/server/src/action/<a class="el" href="Action_8hpp_source.html">Action.hpp</a></li>
+<li>/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/server/src/action/Action.cpp</li>
+>>>>>>> dev
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

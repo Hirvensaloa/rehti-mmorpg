@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['randomwalk_434',['randomWalk',['../classClient.html#ace9d50d5193a06bbc66ec8b24c9b1233',1,'Client']]],
   ['range_435',['range',['../structItemStats.html#ab2967b9a9e50d6126321dafc472184ae',1,'ItemStats']]],
   ['rapidjsonhelpers_2ecpp_2eo_2ed_436',['RapidjsonHelpers.cpp.o.d',['../RapidjsonHelpers_8cpp_8o_8d.html',1,'']]],
@@ -29,4 +30,8 @@ var searchData=
   ['rotation_460',['rotation',['../structObjectLocation.html#aa8a45139efbdda9badaf0a54923903d9',1,'ObjectLocation']]],
   ['utils_2ecpp_461',['Utils.cpp',['../rehtiLib_2assets_2reader_2src_2Utils_8cpp.html',1,'']]],
   ['utils_2ehpp_462',['Utils.hpp',['../rehtiLib_2assets_2loader_2src_2Utils_8hpp.html',1,'(Global Namespace)'],['../rehtiLib_2assets_2reader_2src_2Utils_8hpp.html',1,'(Global Namespace)']]]
+=======
+  ['updateobjectdescriptor_94',['updateObjectDescriptor',['../classGraphicsObjectManager.html#a8acb83e2be6ac72bc4a3123dc0111b68',1,'GraphicsObjectManager']]],
+  ['updatetestobject_95',['updateTestObject',['../classGraphicsObjectManager.html#ae66832cb94faab7096807f10df1f0f65',1,'GraphicsObjectManager']]]
+>>>>>>> dev
 ];

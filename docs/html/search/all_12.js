@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['main_2ecpp_463',['Main.cpp',['../server_2src_2Main_8cpp.html',1,'']]],
   ['server_464',['Server',['../classServer.html',1,'Server'],['../classServer.html#ad5ec9462b520e59f7ea831e157ee5e59',1,'Server::Server()']]],
   ['server_2ecpp_465',['Server.cpp',['../Server_8cpp.html',1,'']]],
@@ -39,4 +40,7 @@ var searchData=
   ['swapchainsupportdetails_499',['SwapChainSupportDetails',['../structSwapChainSupportDetails.html',1,'']]],
   ['utils_2ecpp_500',['Utils.cpp',['../server_2src_2world_2Utils_8cpp.html',1,'']]],
   ['utils_2ehpp_501',['Utils.hpp',['../server_2src_2world_2Utils_8hpp.html',1,'']]]
+=======
+  ['vertex_96',['Vertex',['../structVertex.html',1,'']]]
+>>>>>>> dev
 ];

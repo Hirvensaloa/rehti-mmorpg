@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['id_281',['id',['../Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19',1,'id():&#160;Server.cpp'],['../structLootObjectStruct.html#adc95fe5d6744f29436bf799e73ca6157',1,'LootObjectStruct::id()'],['../structResourceObjectStruct.html#a8e3a7bb579989e7b6a676dc0fb812748',1,'ResourceObjectStruct::id()'],['../structGeneralObjectStruct.html#ab988c26a8d2fa5f727386cde175d95aa',1,'GeneralObjectStruct::id()'],['../structObjectLocation.html#a314a5871bdfe51f37212e401a346c88a',1,'ObjectLocation::id()'],['../structFoodItemStruct.html#a3442b41ab80157301299ae29910f8fdf',1,'FoodItemStruct::id()'],['../structGeneralItemStruct.html#a3b4a8f58825e01d2efaa09f2982f0382',1,'GeneralItemStruct::id()'],['../structEquippableItemStruct.html#a11281467d5f7df7bb824a873f269df24',1,'EquippableItemStruct::id()']]],
   ['idm_282',['idM',['../classItem.html#ae86ddbe31e199974673de4f5a3113880',1,'Item::idM()'],['../classEntity.html#a962711c2d488e19c3a1e90d06ba6ed40',1,'Entity::idM()']]],
   ['image_283',['image',['../structAllocatedImage.html#a13e4a58bd70b09a3743df9effc0dc9f6',1,'AllocatedImage']]],
@@ -37,4 +38,9 @@ var searchData=
   ['itemreader_2ehpp_315',['ItemReader.hpp',['../ItemReader_8hpp.html',1,'']]],
   ['itemstats_316',['ItemStats',['../structItemStats.html#a7e3181977d728145d9a224c0059c656d',1,'ItemStats::ItemStats()'],['../structItemStats.html',1,'ItemStats']]],
   ['itemtype_317',['ItemType',['../ItemReader_8hpp.html#a443f647757dde85043b49343f5cbe66b',1,'ItemReader.hpp']]]
+=======
+  ['map_62',['Map',['../classMap.html',1,'']]],
+  ['moveaction_63',['MoveAction',['../classMoveAction.html',1,'']]],
+  ['movelocation_64',['moveLocation',['../classCamera.html#a9cdd547b79e817e68bf62f2bc256ee02',1,'Camera']]]
+>>>>>>> dev
 ];

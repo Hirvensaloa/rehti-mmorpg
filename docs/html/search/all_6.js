@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['fetchareamap_153',['fetchAreaMap',['../MapLoader_8hpp.html#a2bfe845934f8a66c9a950ccb8acb6625',1,'MapLoader.hpp']]],
   ['fetchitems_154',['fetchItems',['../ItemReader_8hpp.html#a286ea81c3d4e57928c83bbdbb69b21ad',1,'fetchItems():&#160;ItemReader.cpp'],['../ItemReader_8cpp.html#a286ea81c3d4e57928c83bbdbb69b21ad',1,'fetchItems():&#160;ItemReader.cpp']]],
   ['fetchobjects_155',['fetchObjects',['../ObjectReader_8hpp.html#ad6b3fd19ac4147a4760304254626b9fb',1,'fetchObjects(GameItems &amp;gameItems, std::map&lt; int, GameSkill &gt; &amp;gameSkills):&#160;ObjectReader.cpp'],['../ObjectReader_8cpp.html#ad6b3fd19ac4147a4760304254626b9fb',1,'fetchObjects(GameItems &amp;gameItems, std::map&lt; int, GameSkill &gt; &amp;gameSkills):&#160;ObjectReader.cpp']]],
@@ -17,4 +18,28 @@ var searchData=
   ['frame_5fbuffer_5fresized_167',['FRAME_BUFFER_RESIZED',['../RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fdade84385f02e9f21c687332235247c73c',1,'RehtiGraphics.hpp']]],
   ['frametime_168',['frameTime',['../structEngineStatistics.html#a2b473b68840093b64f6422763e3a40e2',1,'EngineStatistics']]],
   ['ftpersec_169',['ftPerSec',['../structEngineStatistics.html#ab023e90d8d9a34f0270d61b8841f037f',1,'EngineStatistics']]]
+=======
+  ['gameitems_34',['GameItems',['../structGameItems.html',1,'']]],
+  ['gameobject_35',['GameObject',['../structGameObject.html',1,'']]],
+  ['gameobjects_36',['GameObjects',['../structGameObjects.html',1,'']]],
+  ['gameobjectuniformbuffer_37',['GameObjectUniformBuffer',['../structGameObjectUniformBuffer.html',1,'']]],
+  ['gameskill_38',['GameSkill',['../structGameSkill.html',1,'']]],
+  ['gameworld_39',['GameWorld',['../classGameWorld.html',1,'']]],
+  ['generalitemstruct_40',['GeneralItemStruct',['../structGeneralItemStruct.html',1,'']]],
+  ['generalobjectstruct_41',['GeneralObjectStruct',['../structGeneralObjectStruct.html',1,'']]],
+  ['getdevice_42',['getDevice',['../classPoolManager.html#a86d373e592bd43b19b4b3505cee7049e',1,'PoolManager']]],
+  ['getdrawableobjects_43',['getDrawableObjects',['../classGraphicsObjectManager.html#a151a448875ee3a634f401776ab70ee81',1,'GraphicsObjectManager']]],
+  ['getforward_44',['getForward',['../classCamera.html#ae44d552243a7b430e94ed9e70adcf07b',1,'Camera']]],
+  ['getheight_45',['getHeight',['../classMap.html#a3e59ab91ee02868654a3e22a9c8d2d07',1,'Map']]],
+  ['getlayout_46',['getLayout',['../classGraphicsObjectManager.html#a85359bce561188c1d5e1c4e890636664',1,'GraphicsObjectManager']]],
+  ['getlocation_47',['getLocation',['../classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1',1,'Camera']]],
+  ['getorientation_48',['getOrientation',['../classCamera.html#af9394551d54bd76543bc9dfa0c730de0',1,'Camera']]],
+  ['getprojectionmatrix_49',['getProjectionMatrix',['../classCamera.html#a3bb21fdfb8bd8974c880a33741a549df',1,'Camera']]],
+  ['getsensitivities_50',['getSensitivities',['../classCamera.html#ae3ca149f6cecd54e87d8e22ca2262cdd',1,'Camera']]],
+  ['getubosize_51',['getUboSize',['../classCamera.html#a9f5741607bb6b27d2fb130247cd26b95',1,'Camera']]],
+  ['getviewmatrix_52',['getViewMatrix',['../classCamera.html#a2f90e661a78172675ca06ea69667b531',1,'Camera']]],
+  ['getworldtoscreenmatrix_53',['getWorldToScreenMatrix',['../classCamera.html#a1d263c318c088257b74934d93b9e3a78',1,'Camera']]],
+  ['goblin_54',['Goblin',['../classGoblin.html',1,'']]],
+  ['graphicsobjectmanager_55',['GraphicsObjectManager',['../classGraphicsObjectManager.html',1,'GraphicsObjectManager'],['../classGraphicsObjectManager.html#adfe44ac592e759be571fde443d9e1303',1,'GraphicsObjectManager::GraphicsObjectManager()']]]
+>>>>>>> dev
 ];

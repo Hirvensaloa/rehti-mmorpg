@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['east_132',['EAST',['../server_2src_2world_2Utils_8hpp.html#a224b9163917ac32fc95a60d8c1eec3aaab5b3793b961949c817c7c0d99c05dad7',1,'Utils.hpp']]],
   ['egl_5fcontext_2ec_2eo_2ed_133',['egl_context.c.o.d',['../egl__context_8c_8o_8d.html',1,'']]],
   ['engineflags_134',['EngineFlags',['../RehtiGraphics_8hpp.html#a7fb142f23d8183727ec8ccd334ad10fd',1,'RehtiGraphics.hpp']]],
@@ -21,4 +22,9 @@ var searchData=
   ['equippabletoslotm_150',['equippableToSlotM',['../classEquippableItem.html#a42b66b6d73ec008ef154aa67a2a8ff86',1,'EquippableItem']]],
   ['estimatedcosttogoal_151',['estimatedCostToGoal',['../structNode.html#a51cc1daec5665ba9eaa05409df42c8b8',1,'Node']]],
   ['euclideandistance_152',['euclideanDistance',['../server_2src_2world_2Utils_8cpp.html#a5d0cd837c462f97543648faa010acf0b',1,'euclideanDistance(std::pair&lt; unsigned, unsigned &gt; start, std::pair&lt; unsigned, unsigned &gt; end):&#160;Utils.cpp'],['../server_2src_2world_2Utils_8hpp.html#a5d0cd837c462f97543648faa010acf0b',1,'euclideanDistance(std::pair&lt; unsigned, unsigned &gt; start, std::pair&lt; unsigned, unsigned &gt; end):&#160;Utils.cpp']]]
+=======
+  ['findpath_31',['findPath',['../classMap.html#aa752726413de9b7945490b94df7bedb3',1,'Map']]],
+  ['fooditem_32',['FoodItem',['../classFoodItem.html',1,'']]],
+  ['fooditemstruct_33',['FoodItemStruct',['../structFoodItemStruct.html',1,'']]]
+>>>>>>> dev
 ];

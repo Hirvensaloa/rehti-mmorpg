@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['gameitems_170',['GameItems',['../structGameItems.html',1,'']]],
   ['gameobject_171',['GameObject',['../structGameObject.html',1,'']]],
   ['gameobject_172',['GAMEOBJECT',['../GraphicsObjectManager_8hpp.html#a842c5e2e69277690b064bf363c017980a6b047533015a7fef54211117473756f4',1,'GraphicsObjectManager.hpp']]],
@@ -102,4 +103,9 @@ var searchData=
   ['graphicsobjectmanager_2ehpp_269',['GraphicsObjectManager.hpp',['../GraphicsObjectManager_8hpp.html',1,'']]],
   ['rehtigraphics_2ecpp_2eo_2ed_270',['RehtiGraphics.cpp.o.d',['../graphics_2CMakeFiles_2rehtiGraphics_8dir_2src_2RehtiGraphics_8cpp_8o_8d.html',1,'']]],
   ['shadermanager_2ecpp_2eo_2ed_271',['ShaderManager.cpp.o.d',['../graphics_2CMakeFiles_2rehtiGraphics_8dir_2src_2ShaderManager_8cpp_8o_8d.html',1,'']]]
+=======
+  ['inventory_56',['Inventory',['../classInventory.html',1,'']]],
+  ['item_57',['Item',['../classItem.html',1,'']]],
+  ['itemstats_58',['ItemStats',['../structItemStats.html',1,'']]]
+>>>>>>> dev
 ];

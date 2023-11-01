@@ -5,7 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<<<<<<< HEAD
 <title>Rehti mmorpg: ShaderManager.hpp Source File</title>
+=======
+<title>Rehti mmorpg: /home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/rehtiLib/graphics/src/ShaderManager.hpp Source File</title>
+>>>>>>> dev
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,12 +75,17 @@ $(function() {
 <div class="title">ShaderManager.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
+<<<<<<< HEAD
 <a href="ShaderManager_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+=======
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+>>>>>>> dev
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;vulkan/vulkan.h&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<<<<<<< HEAD
 <div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="ShaderManager_8hpp.html#a568522b253b242cadbe12d56c4d774a9">    7</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">char</span> <span class="keyword">const</span> * <span class="keyword">const</span> <a class="code" href="ShaderManager_8hpp.html#a568522b253b242cadbe12d56c4d774a9">ConstantFilepath</a>;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="namespaceShaderManager.html">    9</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceShaderManager.html">ShaderManager</a></div>
@@ -112,6 +121,31 @@ $(function() {
 <div class="ttc" id="anamespaceShaderManager_html_add2e0f13c42aa75daa2c31df53e694de"><div class="ttname"><a href="namespaceShaderManager.html#add2e0f13c42aa75daa2c31df53e694de">ShaderManager::kGLSLFragmentShaderPath</a></div><div class="ttdeci">constexpr ConstantFilepath kGLSLFragmentShaderPath</div><div class="ttdef"><b>Definition:</b> ShaderManager.hpp:13</div></div>
 <div class="ttc" id="anamespaceShaderManager_html_af7adfad867f725876b1daca26088cdac"><div class="ttname"><a href="namespaceShaderManager.html#af7adfad867f725876b1daca26088cdac">ShaderManager::createVertexShaderInfo</a></div><div class="ttdeci">VkPipelineShaderStageCreateInfo createVertexShaderInfo(VkDevice logDevice)</div><div class="ttdoc">Creates a vertex shader info to be used in pipeline creation.</div><div class="ttdef"><b>Definition:</b> ShaderManager.cpp:36</div></div>
 <div class="ttc" id="anamespaceShaderManager_html_afda4e6bb67fb6a1047f8bf2264097d48"><div class="ttname"><a href="namespaceShaderManager.html#afda4e6bb67fb6a1047f8bf2264097d48">ShaderManager::createdModules</a></div><div class="ttdeci">static std::vector&lt; VkShaderModule &gt; createdModules</div><div class="ttdef"><b>Definition:</b> ShaderManager.hpp:59</div></div>
+=======
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">char</span> <span class="keyword">const</span> * <span class="keyword">const</span> ConstantFilepath;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>ShaderManager</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="comment">// Constants</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    constexpr ConstantFilepath kGLSLVertexShaderPath = <span class="stringliteral">&quot;shaders/shader.vert&quot;</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    constexpr ConstantFilepath kGLSLFragmentShaderPath = <span class="stringliteral">&quot;shaders/shader.frag&quot;</span>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    constexpr <span class="keyword">const</span> <span class="keywordtype">char</span>* kStandardEntryPoint = <span class="stringliteral">&quot;main&quot;</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    VkPipelineShaderStageCreateInfo createVertexShaderInfo(VkDevice logDevice);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    VkPipelineShaderStageCreateInfo createFragmentShaderInfo(VkDevice logDevice);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> destroyShaderModules(VkDevice logDevice);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    std::vector&lt;uint32_t&gt; compileGLSLToSpirv(VkShaderStageFlagBits shaderType);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">static</span> std::vector&lt;char&gt; readFile(ConstantFilepath filepath);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">static</span> VkShaderModule createShaderModule(VkDevice logDevice, VkShaderStageFlagBits stage);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">static</span> std::vector&lt;VkShaderModule&gt; createdModules;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+>>>>>>> dev
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

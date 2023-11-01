@@ -5,7 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<<<<<<< HEAD
 <title>Rehti mmorpg: FoodItem.hpp Source File</title>
+=======
+<title>Rehti mmorpg: /home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/server/src/item/FoodItem.hpp Source File</title>
+>>>>>>> dev
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,14 +75,21 @@ $(function() {
 <div class="title">FoodItem.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
+<<<<<<< HEAD
 <a href="FoodItem_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Item_8hpp.html">Item.hpp</a>&quot;</span></div>
+=======
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;Item.hpp&quot;</span></div>
+>>>>>>> dev
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="classFoodItem.html">    5</a></span>&#160;<span class="keyword">class </span><a class="code" href="classFoodItem.html">FoodItem</a> : <span class="keyword">public</span> <a class="code" href="classItem.html">Item</a></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">public</span>:</div>
+<<<<<<< HEAD
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <a class="code" href="classFoodItem.html#a57594b520367b658883ebc576bc26e62">FoodItem</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>, std::string name, <span class="keywordtype">int</span> healAmount, <span class="keywordtype">bool</span> isStackable = <span class="keyword">false</span>);</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="classFoodItem.html#a57594b520367b658883ebc576bc26e62">FoodItem</a>(<span class="keyword">const</span> <a class="code" href="structFoodItemStruct.html">FoodItemStruct</a> &amp;foodItem);</div>
@@ -86,16 +97,30 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classFoodItem.html#a43ca44c3a0bbdf2db875741fd3b37be7">getHealAmount</a>();</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classFoodItem.html#aa973b99f39c57b819fdbf638aa676e11">use</a>(<a class="code" href="classEntity.html">Entity</a> *user) <span class="keyword">override</span>;</div>
+=======
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <a class="code" href="classFoodItem.html">FoodItem</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>, std::string name, <span class="keywordtype">int</span> healAmount, <span class="keywordtype">bool</span> isStackable = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="classFoodItem.html">FoodItem</a>(<span class="keyword">const</span> <a class="code" href="structFoodItemStruct.html">FoodItemStruct</a> &amp;foodItem);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">int</span> getHealAmount();</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">bool</span> use(<a class="code" href="classEntity.html">Entity</a> *user) <span class="keyword">override</span>;</div>
+>>>>>>> dev
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">int</span> healAmountM;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;};</div>
+<<<<<<< HEAD
 <div class="ttc" id="aItem_8hpp_html"><div class="ttname"><a href="Item_8hpp.html">Item.hpp</a></div></div>
 <div class="ttc" id="aclassEntity_html"><div class="ttname"><a href="classEntity.html">Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.hpp:13</div></div>
 <div class="ttc" id="aclassFoodItem_html"><div class="ttname"><a href="classFoodItem.html">FoodItem</a></div><div class="ttdef"><b>Definition:</b> FoodItem.hpp:6</div></div>
 <div class="ttc" id="aclassFoodItem_html_a43ca44c3a0bbdf2db875741fd3b37be7"><div class="ttname"><a href="classFoodItem.html#a43ca44c3a0bbdf2db875741fd3b37be7">FoodItem::getHealAmount</a></div><div class="ttdeci">int getHealAmount()</div><div class="ttdef"><b>Definition:</b> FoodItem.cpp:8</div></div>
 <div class="ttc" id="aclassFoodItem_html_a57594b520367b658883ebc576bc26e62"><div class="ttname"><a href="classFoodItem.html#a57594b520367b658883ebc576bc26e62">FoodItem::FoodItem</a></div><div class="ttdeci">FoodItem(int id, std::string name, int healAmount, bool isStackable=false)</div><div class="ttdef"><b>Definition:</b> FoodItem.cpp:4</div></div>
 <div class="ttc" id="aclassFoodItem_html_aa973b99f39c57b819fdbf638aa676e11"><div class="ttname"><a href="classFoodItem.html#aa973b99f39c57b819fdbf638aa676e11">FoodItem::use</a></div><div class="ttdeci">bool use(Entity *user) override</div><div class="ttdef"><b>Definition:</b> FoodItem.cpp:13</div></div>
+=======
+<div class="ttc" id="aclassEntity_html"><div class="ttname"><a href="classEntity.html">Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.hpp:13</div></div>
+<div class="ttc" id="aclassFoodItem_html"><div class="ttname"><a href="classFoodItem.html">FoodItem</a></div><div class="ttdef"><b>Definition:</b> FoodItem.hpp:6</div></div>
+>>>>>>> dev
 <div class="ttc" id="aclassItem_html"><div class="ttname"><a href="classItem.html">Item</a></div><div class="ttdef"><b>Definition:</b> Item.hpp:10</div></div>
 <div class="ttc" id="astructFoodItemStruct_html"><div class="ttname"><a href="structFoodItemStruct.html">FoodItemStruct</a></div><div class="ttdef"><b>Definition:</b> ItemReader.hpp:70</div></div>
 </div><!-- fragment --></div><!-- contents -->

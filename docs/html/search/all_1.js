@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['acceptconnections_2',['acceptConnections',['../classServer.html#a881ea1e86b4045e588f8cfafdd2bc441',1,'Server']]],
   ['accessmappath_3',['accessMapPath',['../Map_8cpp.html#a65b16cdf122f4f4d059326dce448270d',1,'Map.cpp']]],
   ['accuracy_4',['accuracy',['../structItemStats.html#aa65f7b3f9d2504fa9a1594c9cb7f712b',1,'ItemStats']]],
@@ -38,4 +39,10 @@ var searchData=
   ['attackaction_2ecpp_37',['AttackAction.cpp',['../AttackAction_8cpp.html',1,'']]],
   ['attackaction_2ehpp_38',['AttackAction.hpp',['../AttackAction_8hpp.html',1,'']]],
   ['attackspeed_39',['attackSpeed',['../structItemStats.html#a5a2d4c5e4a9be9f00eb900fae233dabc',1,'ItemStats']]]
+=======
+  ['bandit_9',['Bandit',['../classBandit.html',1,'']]],
+  ['bindbuffer_10',['bindBuffer',['../classDescriptorBuilder.html#ad32fc1373c19ef295e33ab1c1e34ae4e',1,'DescriptorBuilder']]],
+  ['bindimage_11',['bindImage',['../classDescriptorBuilder.html#a1ae46e06853cbe9f9c6f2f210f5406a3',1,'DescriptorBuilder']]],
+  ['build_12',['build',['../classDescriptorBuilder.html#af411fc345387beeb612c6cb36ee2efe1',1,'DescriptorBuilder::build(VkDescriptorSet &amp;set, VkDescriptorSetLayout &amp;layout)'],['../classDescriptorBuilder.html#a173ffaf62aa33ecbda0b377806aa8ae4',1,'DescriptorBuilder::build(VkDescriptorSet &amp;set)']]]
+>>>>>>> dev
 ];

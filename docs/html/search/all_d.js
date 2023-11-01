@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['connection_2ecpp_2eo_2ed_360',['Connection.cpp.o.d',['../network_2CMakeFiles_2rehtiNetwork_8dir_2src_2Connection_8cpp_8o_8d.html',1,'']]],
   ['messageapi_2ecpp_2eo_2ed_361',['MessageApi.cpp.o.d',['../network_2CMakeFiles_2rehtiNetwork_8dir_2src_2api_2MessageApi_8cpp_8o_8d.html',1,'']]],
   ['name_362',['name',['../structResourceObjectStruct.html#a37577f59524416958aacd3474e22d01f',1,'ResourceObjectStruct::name()'],['../structGeneralObjectStruct.html#a6ec25eb551315da5d8f9b9d5e50cc40f',1,'GeneralObjectStruct::name()'],['../structFoodItemStruct.html#a9636378814bc4f6c4a705c34e7bf8518',1,'FoodItemStruct::name()'],['../structEquippableItemStruct.html#a5df7f7e59879b9086c61743641ae4e95',1,'EquippableItemStruct::name()'],['../structGeneralItemStruct.html#a71dc9f87f3b91c5375290efe242a655d',1,'GeneralItemStruct::name()'],['../structSkillInfo.html#a6666e31f674f0749830a6a6fd653f825',1,'SkillInfo::name()'],['../structGameSkill.html#a5d0f01dce71328897fe490555470d0a6',1,'GameSkill::name()'],['../structLootObjectStruct.html#aa0065d10b34df0a048475bacad70f761',1,'LootObjectStruct::name()']]],
@@ -22,4 +23,7 @@ var searchData=
   ['null_5fjoystick_2ec_2eo_2ed_379',['null_joystick.c.o.d',['../null__joystick_8c_8o_8d.html',1,'']]],
   ['null_5fmonitor_2ec_2eo_2ed_380',['null_monitor.c.o.d',['../null__monitor_8c_8o_8d.html',1,'']]],
   ['null_5fwindow_2ec_2eo_2ed_381',['null_window.c.o.d',['../null__window_8c_8o_8d.html',1,'']]]
+=======
+  ['queuefamilyindices_74',['QueueFamilyIndices',['../structQueueFamilyIndices.html',1,'']]]
+>>>>>>> dev
 ];

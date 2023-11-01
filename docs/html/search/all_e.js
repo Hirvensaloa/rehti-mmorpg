@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['object_382',['Object',['../classObject.html',1,'Object'],['../classObject.html#afff76923e7a56ba015c543e1424e8b45',1,'Object::Object(int id, std::string instanceId, std::string name, Coordinates coordinates, unsigned int rotation, ObjectType objectType)'],['../classObject.html#a99b3f0bbfe492b610cfc22c6457c9e65',1,'Object::Object(const GeneralObjectStruct &amp;object, const ObjectLocation &amp;location, ObjectType objectType)']]],
   ['object_2ecpp_383',['Object.cpp',['../Object_8cpp.html',1,'']]],
   ['object_2ehpp_384',['Object.hpp',['../Object_8hpp.html',1,'']]],
@@ -27,4 +28,11 @@ var searchData=
   ['operator_3d_3d_406',['operator==',['../structDescriptorSetLayoutCache_1_1DescriptorSetLayoutInfo.html#a8f65f53ff644d7600405d4ec1a056a4a',1,'DescriptorSetLayoutCache::DescriptorSetLayoutInfo::operator==()'],['../structCoordinates.html#a9856652b4ed7cc50d4a62c06e204bd7b',1,'Coordinates::operator==()']]],
   ['orbitrotate_407',['orbitRotate',['../classCamera.html#adad2ddd78627a085dfb4f00b0add991f',1,'Camera']]],
   ['osmesa_5fcontext_2ec_2eo_2ed_408',['osmesa_context.c.o.d',['../osmesa__context_8c_8o_8d.html',1,'']]]
+=======
+  ['registercameracontrols_75',['registerCameraControls',['../classCamera.html#a7a11d366f18cc5f2ad7183bb8792e7c9',1,'Camera']]],
+  ['rehtigraphics_76',['RehtiGraphics',['../classRehtiGraphics.html',1,'RehtiGraphics'],['../classRehtiGraphics.html#a02839f0b23042a31a0a0098d37d88115',1,'RehtiGraphics::RehtiGraphics()']]],
+  ['resetpools_77',['resetPools',['../classPoolManager.html#aba2b7d546ac4f4b4e4b99fcc4589505c',1,'PoolManager']]],
+  ['resourceobject_78',['ResourceObject',['../classResourceObject.html',1,'']]],
+  ['resourceobjectstruct_79',['ResourceObjectStruct',['../structResourceObjectStruct.html',1,'']]]
+>>>>>>> dev
 ];

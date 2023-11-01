@@ -5,7 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<<<<<<< HEAD
 <title>Rehti mmorpg: glsl_intrinsic_header.h Source File</title>
+=======
+<title>Rehti mmorpg: /home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/client/build/include/glslang/glsl_intrinsic_header.h Source File</title>
+>>>>>>> dev
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,7 +75,11 @@ $(function() {
 <div class="title">glsl_intrinsic_header.h</div>  </div>
 </div><!--header-->
 <div class="contents">
+<<<<<<< HEAD
 <a href="glsl__intrinsic__header_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/***************************************************************************</span></div>
+=======
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/***************************************************************************</span></div>
+>>>>>>> dev
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Copyright (c) 2015-2021 The Khronos Group Inc.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Copyright (c) 2015-2021 Valve Corporation</span></div>
@@ -83,9 +91,15 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#ifndef _INTRINSIC_EXTENSION_HEADER_H_</span></div>
+<<<<<<< HEAD
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="glsl__intrinsic__header_8h.html#aa6ca5573901e70cb6884506a33f7b6a6">   13</a></span>&#160;<span class="preprocessor">#define _INTRINSIC_EXTENSION_HEADER_H_</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="glsl__intrinsic__header_8h.html#ab39a7f4cbf0adf3e85392e8af793f5f7">   15</a></span>&#160;std::string <a class="code" href="glsl__intrinsic__header_8h.html#ab39a7f4cbf0adf3e85392e8af793f5f7">GL_EXT_shader_realtime_clock_GLSL</a> = R<span class="stringliteral">&quot;(</span></div>
+=======
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define _INTRINSIC_EXTENSION_HEADER_H_</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;std::string GL_EXT_shader_realtime_clock_GLSL = R<span class="stringliteral">&quot;(</span></div>
+>>>>>>> dev
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="stringliteral">//</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="stringliteral">// Copyright (C) 2002-2005  3Dlabs Inc. Ltd.</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="stringliteral">// Copyright (C) 2013-2016 LunarG, Inc.</span></div>
@@ -128,19 +142,30 @@ $(function() {
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="stringliteral">)&quot;;</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="stringliteral"></span> </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="stringliteral"></span> </div>
+<<<<<<< HEAD
 <div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="glsl__intrinsic__header_8h.html#a621794fa6ccceec593fd4ce4f71211cb">   58</a></span>&#160;<span class="stringliteral">std::string <a class="code" href="glsl__intrinsic__header_8h.html#a621794fa6ccceec593fd4ce4f71211cb">getIntrinsic</a>(</span><span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span>* shaders, <span class="keywordtype">int</span> n) {</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::string shaderString = <span class="stringliteral">&quot;&quot;</span>;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++) {</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">if</span> (strstr(shaders[i], <span class="stringliteral">&quot;GL_EXT_shader_realtime_clock&quot;</span>) != <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            shaderString.append(<a class="code" href="glsl__intrinsic__header_8h.html#ab39a7f4cbf0adf3e85392e8af793f5f7">GL_EXT_shader_realtime_clock_GLSL</a>);</div>
+=======
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="stringliteral">std::string getIntrinsic(</span><span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span>* shaders, <span class="keywordtype">int</span> n) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::string shaderString = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">if</span> (strstr(shaders[i], <span class="stringliteral">&quot;GL_EXT_shader_realtime_clock&quot;</span>) != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            shaderString.append(GL_EXT_shader_realtime_clock_GLSL);</div>
+>>>>>>> dev
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> shaderString;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif</span></div>
+<<<<<<< HEAD
 <div class="ttc" id="aglsl__intrinsic__header_8h_html_a621794fa6ccceec593fd4ce4f71211cb"><div class="ttname"><a href="glsl__intrinsic__header_8h.html#a621794fa6ccceec593fd4ce4f71211cb">getIntrinsic</a></div><div class="ttdeci">std::string getIntrinsic(const char *const *shaders, int n)</div><div class="ttdef"><b>Definition:</b> glsl_intrinsic_header.h:58</div></div>
 <div class="ttc" id="aglsl__intrinsic__header_8h_html_ab39a7f4cbf0adf3e85392e8af793f5f7"><div class="ttname"><a href="glsl__intrinsic__header_8h.html#ab39a7f4cbf0adf3e85392e8af793f5f7">GL_EXT_shader_realtime_clock_GLSL</a></div><div class="ttdeci">std::string GL_EXT_shader_realtime_clock_GLSL</div><div class="ttdef"><b>Definition:</b> glsl_intrinsic_header.h:15</div></div>
+=======
+>>>>>>> dev
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

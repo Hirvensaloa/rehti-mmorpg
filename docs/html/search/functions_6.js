@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['gameworld_812',['GameWorld',['../classGameWorld.html#a681994123c12833d43c957d6cfb33765',1,'GameWorld']]],
   ['generateaccessmap_813',['generateAccessMap',['../MapLoader_8hpp.html#a4457b8fda05fb2e534b0fc114254fa98',1,'MapLoader.hpp']]],
   ['generatemapobj_814',['generateMapObj',['../MapObjLoader_8hpp.html#ab82aee20d8d9ef217682b97f3f27109d',1,'MapObjLoader.hpp']]],
@@ -66,4 +67,7 @@ var searchData=
   ['getworldtoscreenmatrix_875',['getWorldToScreenMatrix',['../classCamera.html#a1d263c318c088257b74934d93b9e3a78',1,'Camera']]],
   ['goblin_876',['Goblin',['../classGoblin.html#a3d15e1495ad707bcc590bc77b2705c5d',1,'Goblin']]],
   ['graphicsobjectmanager_877',['GraphicsObjectManager',['../classGraphicsObjectManager.html#adfe44ac592e759be571fde443d9e1303',1,'GraphicsObjectManager']]]
+=======
+  ['movelocation_190',['moveLocation',['../classCamera.html#a9cdd547b79e817e68bf62f2bc256ee02',1,'Camera']]]
+>>>>>>> dev
 ];

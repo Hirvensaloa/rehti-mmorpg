@@ -71,8 +71,11 @@ $(function() {
 <div class="title">EquippableItem Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+<<<<<<< HEAD
 
 <p><code>#include &lt;<a class="el" href="EquippableItem_8hpp_source.html">EquippableItem.hpp</a>&gt;</code></p>
+=======
+>>>>>>> dev
 <div class="dynheader">
 Inheritance diagram for EquippableItem:</div>
 <div class="dyncontent">
@@ -97,6 +100,7 @@ Collaboration diagram for EquippableItem:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<<<<<<< HEAD
 <tr class="memitem:a0d60ed29e55cd3aca37b32279cc35dc3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEquippableItem.html#a0d60ed29e55cd3aca37b32279cc35dc3">EquippableItem</a> (int <a class="el" href="Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>, std::string name, <a class="el" href="ItemReader_8hpp.html#ad4a01c7a209d816f94f4864b76f8087f">Slot</a> equippableToSlot, <a class="el" href="structItemStats.html">ItemStats</a> stats=<a class="el" href="structItemStats.html">ItemStats</a>(), bool isStackable=false)</td></tr>
 <tr class="separator:a0d60ed29e55cd3aca37b32279cc35dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82308d9e30a93204e040691715f92917"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEquippableItem.html#a82308d9e30a93204e040691715f92917">EquippableItem</a> (const <a class="el" href="structEquippableItemStruct.html">EquippableItemStruct</a> &amp;equippableItem)</td></tr>
@@ -121,10 +125,49 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad05ff3cc37118cdd37333f22981b7f9c inherit pub_methods_classItem"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classItem.html#ad05ff3cc37118cdd37333f22981b7f9c">getName</a> ()</td></tr>
 <tr class="separator:ad05ff3cc37118cdd37333f22981b7f9c inherit pub_methods_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c28c13f324bedbd3962352e65ed969a inherit pub_methods_classItem"><td class="memItemLeft" align="right" valign="top">const bool &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classItem.html#a2c28c13f324bedbd3962352e65ed969a">IsStackable</a> ()</td></tr>
+=======
+<tr class="memitem:a0d60ed29e55cd3aca37b32279cc35dc3"><td class="memItemLeft" align="right" valign="top"><a id="a0d60ed29e55cd3aca37b32279cc35dc3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>EquippableItem</b> (int id, std::string name, Slot equippableToSlot, <a class="el" href="structItemStats.html">ItemStats</a> stats=<a class="el" href="structItemStats.html">ItemStats</a>(), bool isStackable=false)</td></tr>
+<tr class="separator:a0d60ed29e55cd3aca37b32279cc35dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82308d9e30a93204e040691715f92917"><td class="memItemLeft" align="right" valign="top"><a id="a82308d9e30a93204e040691715f92917"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>EquippableItem</b> (const <a class="el" href="structEquippableItemStruct.html">EquippableItemStruct</a> &amp;equippableItem)</td></tr>
+<tr class="separator:a82308d9e30a93204e040691715f92917"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac43aeab1c9b82a49525c2e28b484d4c0"><td class="memItemLeft" align="right" valign="top"><a id="ac43aeab1c9b82a49525c2e28b484d4c0"></a>
+Slot&#160;</td><td class="memItemRight" valign="bottom"><b>getEquippableSlot</b> ()</td></tr>
+<tr class="separator:ac43aeab1c9b82a49525c2e28b484d4c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b21686af6ab1078dcfaba2e9dc0bb2d"><td class="memItemLeft" align="right" valign="top"><a id="a8b21686af6ab1078dcfaba2e9dc0bb2d"></a>
+<a class="el" href="structItemStats.html">ItemStats</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getStats</b> ()</td></tr>
+<tr class="separator:a8b21686af6ab1078dcfaba2e9dc0bb2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae31b6510e30e1bf80125e9821f40f7e3"><td class="memItemLeft" align="right" valign="top"><a id="ae31b6510e30e1bf80125e9821f40f7e3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>use</b> (<a class="el" href="classEntity.html">Entity</a> *user) override</td></tr>
+<tr class="separator:ae31b6510e30e1bf80125e9821f40f7e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classItem"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classItem')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classItem.html">Item</a></td></tr>
+<tr class="memitem:aa2b98183f27096ee380d24fa882c96eb inherit pub_methods_classItem"><td class="memItemLeft" align="right" valign="top"><a id="aa2b98183f27096ee380d24fa882c96eb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Item</b> (int id, std::string name, bool isStackable=false)</td></tr>
+<tr class="separator:aa2b98183f27096ee380d24fa882c96eb inherit pub_methods_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d0f9f5ccbcc2572a79fc14ea04cb57c inherit pub_methods_classItem"><td class="memItemLeft" align="right" valign="top"><a id="a3d0f9f5ccbcc2572a79fc14ea04cb57c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Item</b> (const <a class="el" href="structGeneralItemStruct.html">GeneralItemStruct</a> &amp;generalItem)</td></tr>
+<tr class="separator:a3d0f9f5ccbcc2572a79fc14ea04cb57c inherit pub_methods_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6331f2b5409aa1ae5637890cda116712 inherit pub_methods_classItem"><td class="memItemLeft" align="right" valign="top"><a id="a6331f2b5409aa1ae5637890cda116712"></a>
+const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getId</b> ()</td></tr>
+<tr class="separator:a6331f2b5409aa1ae5637890cda116712 inherit pub_methods_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f41a7fe7d48eddca8ba616be643cc1f inherit pub_methods_classItem"><td class="memItemLeft" align="right" valign="top"><a id="a0f41a7fe7d48eddca8ba616be643cc1f"></a>
+const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getInstanceId</b> ()</td></tr>
+<tr class="separator:a0f41a7fe7d48eddca8ba616be643cc1f inherit pub_methods_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bd3b4b784d7607e5a1b7866a8560942 inherit pub_methods_classItem"><td class="memItemLeft" align="right" valign="top"><a id="a0bd3b4b784d7607e5a1b7866a8560942"></a>
+const unsigned int &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getStackSize</b> ()</td></tr>
+<tr class="separator:a0bd3b4b784d7607e5a1b7866a8560942 inherit pub_methods_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad05ff3cc37118cdd37333f22981b7f9c inherit pub_methods_classItem"><td class="memItemLeft" align="right" valign="top"><a id="ad05ff3cc37118cdd37333f22981b7f9c"></a>
+const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getName</b> ()</td></tr>
+<tr class="separator:ad05ff3cc37118cdd37333f22981b7f9c inherit pub_methods_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c28c13f324bedbd3962352e65ed969a inherit pub_methods_classItem"><td class="memItemLeft" align="right" valign="top"><a id="a2c28c13f324bedbd3962352e65ed969a"></a>
+const bool &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>IsStackable</b> ()</td></tr>
+>>>>>>> dev
 <tr class="separator:a2c28c13f324bedbd3962352e65ed969a inherit pub_methods_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<<<<<<< HEAD
 <tr class="memitem:a42b66b6d73ec008ef154aa67a2a8ff86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ItemReader_8hpp.html#ad4a01c7a209d816f94f4864b76f8087f">Slot</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEquippableItem.html#a42b66b6d73ec008ef154aa67a2a8ff86">equippableToSlotM</a></td></tr>
 <tr class="separator:a42b66b6d73ec008ef154aa67a2a8ff86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a819904c524cd477a5937091455c451fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structItemStats.html">ItemStats</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEquippableItem.html#a819904c524cd477a5937091455c451fe">statsM</a></td></tr>
@@ -139,11 +182,35 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a8d8be7ed9783589b779f600a9cc3415a inherit pro_attribs_classItem"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classItem.html#a8d8be7ed9783589b779f600a9cc3415a">nameM</a></td></tr>
 <tr class="separator:a8d8be7ed9783589b779f600a9cc3415a inherit pro_attribs_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3b5556a9399cc37d3d1ba1891c73594 inherit pro_attribs_classItem"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classItem.html#ad3b5556a9399cc37d3d1ba1891c73594">isStackableM</a></td></tr>
+=======
+<tr class="memitem:a42b66b6d73ec008ef154aa67a2a8ff86"><td class="memItemLeft" align="right" valign="top"><a id="a42b66b6d73ec008ef154aa67a2a8ff86"></a>
+Slot&#160;</td><td class="memItemRight" valign="bottom"><b>equippableToSlotM</b></td></tr>
+<tr class="separator:a42b66b6d73ec008ef154aa67a2a8ff86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a819904c524cd477a5937091455c451fe"><td class="memItemLeft" align="right" valign="top"><a id="a819904c524cd477a5937091455c451fe"></a>
+<a class="el" href="structItemStats.html">ItemStats</a>&#160;</td><td class="memItemRight" valign="bottom"><b>statsM</b></td></tr>
+<tr class="separator:a819904c524cd477a5937091455c451fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classItem"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classItem')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classItem.html">Item</a></td></tr>
+<tr class="memitem:ae86ddbe31e199974673de4f5a3113880 inherit pro_attribs_classItem"><td class="memItemLeft" align="right" valign="top"><a id="ae86ddbe31e199974673de4f5a3113880"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>idM</b></td></tr>
+<tr class="separator:ae86ddbe31e199974673de4f5a3113880 inherit pro_attribs_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4696ac2fcb6490c4d8596aacd7e0576 inherit pro_attribs_classItem"><td class="memItemLeft" align="right" valign="top"><a id="ae4696ac2fcb6490c4d8596aacd7e0576"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>instanceIdM</b></td></tr>
+<tr class="separator:ae4696ac2fcb6490c4d8596aacd7e0576 inherit pro_attribs_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcf2589435ae145fae8be037fb641392 inherit pro_attribs_classItem"><td class="memItemLeft" align="right" valign="top"><a id="adcf2589435ae145fae8be037fb641392"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>stackSizeM</b> = 1</td></tr>
+<tr class="separator:adcf2589435ae145fae8be037fb641392 inherit pro_attribs_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d8be7ed9783589b779f600a9cc3415a inherit pro_attribs_classItem"><td class="memItemLeft" align="right" valign="top"><a id="a8d8be7ed9783589b779f600a9cc3415a"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nameM</b></td></tr>
+<tr class="separator:a8d8be7ed9783589b779f600a9cc3415a inherit pro_attribs_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3b5556a9399cc37d3d1ba1891c73594 inherit pro_attribs_classItem"><td class="memItemLeft" align="right" valign="top"><a id="ad3b5556a9399cc37d3d1ba1891c73594"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isStackableM</b></td></tr>
+>>>>>>> dev
 <tr class="separator:ad3b5556a9399cc37d3d1ba1891c73594 inherit pro_attribs_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_static_attribs_classItem"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classItem')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classItem.html">Item</a></td></tr>
+<<<<<<< HEAD
 <tr class="memitem:abd5402413453afa92c4ea69cb6740613 inherit pro_static_attribs_classItem"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classItem.html#abd5402413453afa92c4ea69cb6740613">nextInstanceIdM</a> = 0</td></tr>
 <tr class="separator:abd5402413453afa92c4ea69cb6740613 inherit pro_static_attribs_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -323,6 +390,15 @@ Additional Inherited Members</h2></td></tr>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="EquippableItem_8hpp_source.html">EquippableItem.hpp</a></li>
 <li><a class="el" href="EquippableItem_8cpp.html">EquippableItem.cpp</a></li>
+=======
+<tr class="memitem:abd5402413453afa92c4ea69cb6740613 inherit pro_static_attribs_classItem"><td class="memItemLeft" align="right" valign="top"><a id="abd5402413453afa92c4ea69cb6740613"></a>
+static int&#160;</td><td class="memItemRight" valign="bottom"><b>nextInstanceIdM</b> = 0</td></tr>
+<tr class="separator:abd5402413453afa92c4ea69cb6740613 inherit pro_static_attribs_classItem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/server/src/item/<a class="el" href="EquippableItem_8hpp_source.html">EquippableItem.hpp</a></li>
+<li>/home/aleksi/Kouluhommia/5. Vuosi/REHTI_MMORPG/rehti-mmorpg/server/src/item/EquippableItem.cpp</li>
+>>>>>>> dev
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

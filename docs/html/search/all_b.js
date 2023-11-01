@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['left_323',['left',['../structTileHeight.html#aced7aab06bbaca92d9cfd62d56177018',1,'TileHeight']]],
   ['linux_5fjoystick_2ec_2eo_2ed_324',['linux_joystick.c.o.d',['../linux__joystick_8c_8o_8d.html',1,'']]],
   ['loadaccessmap_325',['loadAccessMap',['../MapReader_8hpp.html#a3aa6afbaa0ea0a4b6416bc9b3b3c4d1e',1,'loadAccessMap(std::vector&lt; std::vector&lt; uint8_t &gt;&gt; &amp;accessMap, std::string path):&#160;MapReader.cpp'],['../MapReader_8cpp.html#a3aa6afbaa0ea0a4b6416bc9b3b3c4d1e',1,'loadAccessMap(std::vector&lt; std::vector&lt; uint8_t &gt;&gt; &amp;accessMap, std::string path):&#160;MapReader.cpp']]],
@@ -13,4 +14,10 @@ var searchData=
   ['lootobject_2ehpp_333',['LootObject.hpp',['../LootObject_8hpp.html',1,'']]],
   ['lootobjects_334',['lootObjects',['../structGameObjects.html#af463486af2fe181dcbe428aec16bd121',1,'GameObjects']]],
   ['lootobjectstruct_335',['LootObjectStruct',['../structLootObjectStruct.html',1,'']]]
+=======
+  ['object_68',['Object',['../classObject.html',1,'']]],
+  ['objectinteractaction_69',['ObjectInteractAction',['../classObjectInteractAction.html',1,'']]],
+  ['objectlocation_70',['ObjectLocation',['../structObjectLocation.html',1,'']]],
+  ['orbitrotate_71',['orbitRotate',['../classCamera.html#adad2ddd78627a085dfb4f00b0add991f',1,'Camera']]]
+>>>>>>> dev
 ];

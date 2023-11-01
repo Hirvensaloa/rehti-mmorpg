@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['damage_111',['damage',['../structItemStats.html#aa27bf4804e6a04714567667dd391e61b',1,'ItemStats']]],
   ['db_5fhost_112',['DB_HOST',['../Connect_8cpp.html#acf5fbf484a608969e9b70092deeb8b46',1,'Connect.cpp']]],
   ['db_5fname_113',['DB_NAME',['../Connect_8cpp.html#aa5300938a896db556ceda58871743f20',1,'Connect.cpp']]],
@@ -21,4 +22,11 @@ var searchData=
   ['distance_129',['distance',['../structCoordinates.html#afd7a34a1bae5f10f5abbde76839a891c',1,'Coordinates']]],
   ['dodge_130',['dodge',['../structItemStats.html#a8a087522973be960e245662b9fb412f0',1,'ItemStats']]],
   ['drawableobject_131',['DrawableObject',['../structDrawableObject.html',1,'']]]
+=======
+  ['enginestatistics_26',['EngineStatistics',['../structEngineStatistics.html',1,'']]],
+  ['entity_27',['Entity',['../classEntity.html',1,'']]],
+  ['equipment_28',['Equipment',['../classEquipment.html',1,'']]],
+  ['equippableitem_29',['EquippableItem',['../classEquippableItem.html',1,'']]],
+  ['equippableitemstruct_30',['EquippableItemStruct',['../structEquippableItemStruct.html',1,'']]]
+>>>>>>> dev
 ];

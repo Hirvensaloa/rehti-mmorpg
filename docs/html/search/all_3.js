@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['c_5fversion_56',['C_VERSION',['../CMakeCCompilerId_8c.html#adaee3ee7c5a7a22451ea25e762e1d7d5',1,'CMakeCCompilerId.c']]],
   ['calculatetileheights_57',['calculateTileHeights',['../MapObjLoader_8hpp.html#af086816b936f3b43277dedaefc4eb915',1,'MapObjLoader.hpp']]],
   ['camera_58',['Camera',['../classCamera.html',1,'Camera'],['../classCamera.html#a1f4afe22efd7c7d274391e4703387f78',1,'Camera::Camera()']]],
@@ -55,4 +56,10 @@ var searchData=
   ['messageapi_2ecpp_2eo_2ed_108',['MessageApi.cpp.o.d',['../CMakeFiles_2Client_8dir_2home_2aleksi_2Kouluhommia_25_8__Vuosi_2REHTI__MMORPG_2rehti-mmorpg_2rehe0630bb99d9c3cb7e4fd5c7f0db3ca63.html',1,'']]],
   ['rehtigraphics_2ecpp_2eo_2ed_109',['RehtiGraphics.cpp.o.d',['../CMakeFiles_2rehtiGraphics_8dir_2home_2aleksi_2Kouluhommia_25_8__Vuosi_2REHTI__MMORPG_2rehti-mmord489bbc9e49d966f155c202090d27fe5.html',1,'']]],
   ['shadermanager_2ecpp_2eo_2ed_110',['ShaderManager.cpp.o.d',['../CMakeFiles_2rehtiGraphics_8dir_2home_2aleksi_2Kouluhommia_25_8__Vuosi_2REHTI__MMORPG_2rehti-mmor8e4aceee13a8fb281da54dfe59b65e4e.html',1,'']]]
+=======
+  ['descriptorbuilder_22',['DescriptorBuilder',['../classDescriptorBuilder.html',1,'']]],
+  ['descriptorsetlayoutcache_23',['DescriptorSetLayoutCache',['../classDescriptorSetLayoutCache.html',1,'']]],
+  ['descriptorsetlayoutinfo_24',['DescriptorSetLayoutInfo',['../structDescriptorSetLayoutCache_1_1DescriptorSetLayoutInfo.html',1,'DescriptorSetLayoutCache']]],
+  ['drawableobject_25',['DrawableObject',['../structDrawableObject.html',1,'']]]
+>>>>>>> dev
 ];

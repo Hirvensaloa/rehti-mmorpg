@@ -1,13 +1,13 @@
 #pragma once
 
-#include <exception>
-#include <filesystem>
 #include "rapidjson/document.h"
 #include "rapidjson/prettywriter.h"
+#include <exception>
+#include <filesystem>
 
-#include "Utils.hpp"
-#include "RehtiUtils.hpp"
 #include "RehtiReader.hpp"
+#include "RehtiUtils.hpp"
+#include "Utils.hpp"
 
 const unsigned AREA_WIDTH = 16;
 const unsigned AREA_HEIGHT = AREA_WIDTH;

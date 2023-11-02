@@ -25,10 +25,33 @@ Client::Client(std::string ip, std::string port)
 void Client::start()
 {
   std::cout << "Client started" << std::endl;
-  std::thread([this]()
-              { test(); })
-      .detach();
   processMessages();
+}
+
+boost::asio::awaitable<bool> Client::login()
+{
+  if (connectionM->isConnected())
+  {
+    std::string usr = "";
+    std::cout << "------------------ Login to Rehti ------------------" << std::endl
+              << "Username: ";
+    std::cin >> usr;
+    if (usr != "")
+    {
+      LoginMessage msg;
+      msg.username = usr;
+      msg.password = "dummyValue";
+      co_await connectionM->send(MessageApi::createLogin(msg));
+      boost::asio::co_spawn(ioContextM, connectionM->listenForMessages(), boost::asio::detached);
+
+      co_return true;
+    }
+    else
+    {
+      std::cout << "Invalid username" << std::endl;
+      co_return false;
+    }
+  }
 }
 
 boost::asio::awaitable<bool> Client::connect()
@@ -41,7 +64,7 @@ boost::asio::awaitable<bool> Client::connect()
 
     if (ret)
     {
-      boost::asio::co_spawn(ioContextM, connectionM->listenForMessages(), boost::asio::detached);
+      co_await login();
     }
 
     co_return ret;
@@ -50,28 +73,6 @@ boost::asio::awaitable<bool> Client::connect()
   {
     std::cerr << e.what() << '\n';
     co_return false;
-  }
-}
-
-boost::asio::awaitable<void> Client::randomWalk()
-{
-  if (connectionM->isConnected())
-  {
-    AttackMessage msg;
-    msg.targetId = 123;
-    co_await connectionM->send(MessageApi::createAttack(msg));
-  }
-}
-
-void Client::test()
-{
-  while (true)
-  {
-    boost::asio::co_spawn(
-        ioContextM, [this]() -> boost::asio::awaitable<void>
-        { co_await randomWalk(); },
-        boost::asio::detached);
-    std::this_thread::sleep_for(std::chrono::milliseconds(115000));
   }
 }
 

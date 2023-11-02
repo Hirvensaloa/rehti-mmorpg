@@ -20,9 +20,9 @@ Coordinates &Entity::getLocation()
     return locationM;
 }
 
-Action &Entity::getCurrentAction()
+std::shared_ptr<Action> &Entity::getCurrentAction()
 {
-    return *currentActionM;
+    return currentActionM;
 }
 
 unsigned int Entity::getHp()
@@ -95,9 +95,9 @@ void Entity::attack(Entity &target)
 
     if (hitConnects)
     {
-        unsigned int damage = totalDamage;
-        target.changeHp(-damage);
-        std::cout << "Entity " << target.getName() << " took " << damage << " damage from " << getName() << ". Remaining HP: " << target.getHp() << std::endl;
+        totalDamage = std::max(0, totalDamage);
+        target.changeHp(-totalDamage);
+        std::cout << "Entity " << target.getName() << " took " << totalDamage << " damage from " << getName() << ". Remaining HP: " << target.getHp() << std::endl;
     }
     else
     {
@@ -108,4 +108,14 @@ void Entity::attack(Entity &target)
 SkillSet &Entity::getSkillSet()
 {
     return skillSetM;
+}
+
+bool Entity::isDisconnected()
+{
+    return isDisconnectedM;
+}
+
+void Entity::setDisconnected()
+{
+    isDisconnectedM = true;
 }

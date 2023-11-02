@@ -159,6 +159,21 @@ Sent by: Client
 
 </details>
 
+#### LoginMessage
+
+Represents data needed by the server to perform identification and authentication of the player
+
+Sent by: Client
+
+<details>
+<summary>Expand to see message attributes</summary>
+
+- **id**: Identifies the message type.
+- **username**: Username that was input by the user
+- **password**: Hash value of the password input by the user
+
+</details>
+
 To add new messages, check [here](/rehtiLib/network/src/api/MessageApi.hpp)
 
 ## Project practices

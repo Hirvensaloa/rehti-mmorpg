@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
 
-#include "src/Utils.hpp"
 #include "src/MapLoader.hpp"
 #include "src/MapObjLoader.hpp"
+#include "src/Utils.hpp"
 
 int main()
 {

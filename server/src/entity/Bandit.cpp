@@ -15,31 +15,31 @@ void Bandit::update()
     }
     else
     {
-        PlayerCharacter *target = findClosestPlayer();
+        std::shared_ptr<PlayerCharacter> target = findClosestPlayer();
         if (target != nullptr)
         {
             std::cout << "closest player: " << target->getName() << std::endl;
-            setAction(std::make_shared<AttackAction>(std::chrono::system_clock::now(), target, this));
+            setAction(std::make_shared<AttackAction>(std::chrono::system_clock::now(), target, this->shared_from_this()));
         }
     }
 };
 
-PlayerCharacter *Bandit::findClosestPlayer()
+std::shared_ptr<PlayerCharacter> Bandit::findClosestPlayer()
 {
     unsigned int smallestDistance = 9999;
-    PlayerCharacter *closestEntity = nullptr;
+    std::shared_ptr<PlayerCharacter> closestPlayer = nullptr;
     for (int i = 0; i < pGameWorldM->getPlayers().size(); i++)
     {
-        PlayerCharacter &player = pGameWorldM->getPlayers()[i];
-        if (player.getHp() != 0)
+        std::shared_ptr<PlayerCharacter> player = pGameWorldM->getPlayers()[i];
+        if (player->getHp() != 0)
         {
-            unsigned int dist = locationM.distance(player.getLocation());
+            unsigned int dist = locationM.distance(player->getLocation());
             if (dist < smallestDistance)
             {
-                closestEntity = &player;
+                closestPlayer = player;
                 smallestDistance = dist;
             }
         }
     }
-    return closestEntity;
+    return closestPlayer;
 };

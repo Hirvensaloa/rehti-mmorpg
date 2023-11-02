@@ -9,18 +9,18 @@
 class AttackAction : public Action
 {
 public:
-    AttackAction(std::chrono::system_clock::time_point startTime, Entity *pTarget, Entity *pEntity);
+    AttackAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Entity> pTarget, std::shared_ptr<Entity> pEntity);
 
     ~AttackAction() = default;
 
-    Entity *getTarget();
+    std::shared_ptr<Entity> &getTarget();
 
     void act();
 
 private:
     std::optional<Coordinates> findNextMove();
 
-    Entity *pTargetM;
+    std::shared_ptr<Entity> pTargetM;
 
     std::chrono::milliseconds actionTimeM;
 

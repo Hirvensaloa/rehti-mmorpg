@@ -8,7 +8,7 @@
 class MoveAction : public Action
 {
 public:
-    MoveAction(std::chrono::system_clock::time_point startTime, Coordinates target, Entity *pEntity);
+    MoveAction(std::chrono::system_clock::time_point startTime, Coordinates target, std::shared_ptr<Entity> pEntity);
 
     ~MoveAction() = default;
 

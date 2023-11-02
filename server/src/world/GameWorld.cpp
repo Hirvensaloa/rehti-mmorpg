@@ -1,12 +1,12 @@
 #include <memory>
 #include <optional>
 
-#include "GameWorld.hpp"
 #include "../entity/Bandit.hpp"
 #include "../entity/Goblin.hpp"
-#include "../object/ResourceObject.hpp"
 #include "../object/LootObject.hpp"
+#include "../object/ResourceObject.hpp"
 #include "../utils/AssetManager.hpp"
+#include "GameWorld.hpp"
 
 #include <iostream>
 
@@ -14,15 +14,14 @@ GameWorld::GameWorld() : mapM(Map()){};
 
 void GameWorld::addPlayer(std::string playerName, unsigned int playerId, Coordinates location)
 {
-    PlayerCharacter newPlayer = PlayerCharacter(this, playerName, playerId, location);
-    playersM.push_back(newPlayer);
+    playersM.push_back(std::make_shared<PlayerCharacter>(this, playerName, playerId, location));
 }
 
 bool GameWorld::removePlayer(unsigned int playerId)
 {
     for (auto it = playersM.begin(); it != playersM.end(); it++)
     {
-        if (it->getId() == playerId)
+        if ((*it)->getId() == playerId)
         {
 
             playersM.erase(it);
@@ -32,22 +31,22 @@ bool GameWorld::removePlayer(unsigned int playerId)
     return false;
 }
 
-std::vector<PlayerCharacter> &GameWorld::getPlayers()
+std::vector<std::shared_ptr<PlayerCharacter>> &GameWorld::getPlayers()
 {
     return playersM;
 }
 
-PlayerCharacter *GameWorld::getPlayer(unsigned int playerId)
+std::shared_ptr<PlayerCharacter> GameWorld::getPlayer(unsigned int playerId)
 {
     for (auto it = playersM.begin(); it != playersM.end(); it++)
     {
-        if (it->getId() == playerId)
+        if ((*it)->getId() == playerId)
         {
 
-            return &(*it);
+            return (*it);
         }
     }
-    return nullptr;
+    throw std::runtime_error("Player not found");
 }
 
 Map &GameWorld::getMap()
@@ -77,9 +76,9 @@ void GameWorld::updateGameWorld()
     {
         npc->update();
     }
-    for (PlayerCharacter &p : playersM)
+    for (auto p : playersM)
     {
-        p.update();
+        p->update();
     }
 }
 
@@ -131,18 +130,18 @@ void GameWorld::initWorld()
     std::cout << "Game world initialized" << std::endl;
 }
 
-Entity &GameWorld::getEntity(unsigned int entityId)
+std::shared_ptr<Entity> GameWorld::getEntity(unsigned int entityId)
 {
-    for (auto &npc : npcsM)
+    for (auto npc : npcsM)
     {
         if (npc->getId() == entityId)
         {
-            return *npc;
+            return npc;
         }
     }
-    for (auto &player : playersM)
+    for (auto player : playersM)
     {
-        if (player.getId() == entityId)
+        if (player->getId() == entityId)
         {
             return player;
         }

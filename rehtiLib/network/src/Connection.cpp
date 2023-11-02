@@ -72,6 +72,7 @@ bool Connection::connectToClient(uint32_t userid)
   if (socketM.is_open())
   {
     idM = userid;
+    isLoggedInM = true;
     return true;
   }
 
@@ -79,6 +80,11 @@ bool Connection::connectToClient(uint32_t userid)
 }
 
 bool Connection::isConnected() const { return socketM.is_open(); }
+
+bool Connection::isLoggedIn() const
+{
+  return isLoggedInM;
+}
 
 void Connection::disconnect()
 {
@@ -122,7 +128,7 @@ boost::asio::awaitable<void> Connection::writeMessage(const Message msg)
 
 boost::asio::awaitable<void> Connection::readMessage()
 {
-  std::cout << idM << ": Reading message..." << std::endl;
+  // std::cout << idM << ": Reading message..." << std::endl;
   // 1. Wait for header to arrive and then read it
   msg_header tempHeaderM;
   co_await boost::asio::async_read(socketM, boost::asio::buffer(&tempHeaderM, sizeof(msg_header)), boost::asio::use_awaitable);
@@ -133,7 +139,7 @@ boost::asio::awaitable<void> Connection::readMessage()
   {
     if (tempHeaderM.size > MAX_BUFFER_SIZE)
     {
-      std::cout << "Message too big. Increate the MAX_BUFFER_SIZE" << std::endl; // TODO: Handle the errors better
+      std::cout << "Message too big. Increase the MAX_BUFFER_SIZE. Message size: " << tempHeaderM.size << std::endl; // TODO: Handle the errors better
       co_return;
     }
 

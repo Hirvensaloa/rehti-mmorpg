@@ -11,11 +11,13 @@ public:
 
   boost::asio::awaitable<bool> connect();
 
-  boost::asio::awaitable<void> randomWalk();
-
   void start();
 
-  void test();
+  /**
+   * @brief Prompts user for login information and sends a LoginMessage with that information. Currently only username used for identification
+   * @return True if user inputs a valid username, false otherwise.
+   */
+  boost::asio::awaitable<bool> login();
 
   void processMessages();
 

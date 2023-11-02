@@ -40,8 +40,14 @@ set(GRAPHICS_SOURCES
 	Camera.cpp
 	Mesh.hpp
 	Mesh.cpp
-	shaders/shader.vert
-	shaders/shader.frag
+	GraphicsTypes.hpp
+	GraphicsTypes.cpp
+	shaders/testShader.vert
+	shaders/testShader.frag
+	shaders/objectShader.vert
+	shaders/objectShader.frag
+	shaders/characterShader.vert
+	shaders/characterShader.frag
 	)
 
 list(TRANSFORM GRAPHICS_SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)

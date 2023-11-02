@@ -1,97 +1,17 @@
 #pragma once
 #include "DescriptorBuilder.hpp"
 #include "Mesh.hpp"
+#include "GraphicsTypes.hpp"
 
-#include <vk_mem_alloc.h>
 #include <vector>
 #include <unordered_map>
 #include <array>
+#include <optional>
+#include <utility>
 
-typedef enum
-{
-	CHARACTER,
-	GAMEOBJECT,
-	TESTOBJECT
-} ObjectType;
-
-struct DrawableObject
-{
-	VkBuffer vertexBuffer;
-	VkBuffer indexBuffer;
-	uint32_t indexCount;
-	VkDescriptorSet descriptorSet;
-};
-
-struct AllocatedImage
-{
-	VkImage image;
-	VmaAllocation allocation;
-	VkDeviceSize size;
-};
-
-struct AllocatedBuffer
-{
-	VkBuffer buffer;
-	VmaAllocation allocation;
-	VkDeviceSize size;
-};
-
-// Game object descriptor data
-struct GameObjectUniformBuffer
-{
-	VkDescriptorSet descriptorSet; // Descriptor set of the data
-	AllocatedBuffer transformBuffer; // Buffer containing the transform data (glm::mat4)
-	AllocatedImage texture; // Texture of the object (perhaps combined imagesampler later)
-	void * mappedTransformData; // Pointer to the mapped data of the transform buffer
-	void * mappedTextureData; // Pointer to the mapped data of the texture
-};
-
-// Test object descriptor data
-struct TestObjectUniformBuffer
-{
-	VkDescriptorSet descriptorSet; // Descriptor set of the data
-	AllocatedBuffer transformBuffer; // Buffer containing the transform data (glm::mat4)
-	void * mappedTransformData; // Pointer to the mapped data of the transform buffer
-};
-
-// Character buffer object
-struct CharacterObjectUniformBuffer
-{
-	VkDescriptorSet descriptorSet; // Descriptor set of the data
-	AllocatedBuffer boneTransformations; // Todo think how the data is going to be stored
-	AllocatedBuffer boneWeights;
-};
-
-// Object that contains everything needed to render a character.
-struct CharacterObject
-{
-	AllocatedBuffer vertexData;
-	AllocatedBuffer indexData;
-	uint32_t indexCount;
-	AllocatedImage texture;
-	std::vector<CharacterObjectUniformBuffer> characterUniformBuffers;
-	inline static std::array<VkDescriptorSetLayoutBinding, 2> getDescriptorSetLayoutBindings();
-};
-
-struct GameObject
-{
-	AllocatedBuffer vertexData;
-	AllocatedBuffer indexData;
-	uint32_t indexCount;
-	AllocatedImage texture;
-	std::vector<GameObjectUniformBuffer> uniformBuffers;
-	inline static std::array<VkDescriptorSetLayoutBinding, 2> getDescriptorSetLayoutBindings();
-};
-
-struct TestObject
-{
-	AllocatedBuffer vertexData;
-	AllocatedBuffer indexData;
-	uint32_t indexCount;
-	std::vector<TestObjectUniformBuffer> uniformBuffers;
-	inline static std::array<VkDescriptorSetLayoutBinding, 1> getDescriptorSetLayoutBindings();
-};
-
+/// <summary>
+/// Graphics object manager manages different types of objects that have memory and can be drawn.
+/// </summary>
 class GraphicsObjectManager
 {
 public:
@@ -103,15 +23,19 @@ public:
 	/// <param name="logDevice"></param>
 	/// <param name="transferQueue"> that can receive transfer operations.</param>
 	/// <param name="queueFamily"> of the queue that was supplied</param>
-	GraphicsObjectManager(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, VkQueue transferQueue, uint32_t queueFamily, const uint32_t frameCount);
+	GraphicsObjectManager(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, VkQueue graphicsQueue, uint32_t graphicsQueueFamily, const uint32_t frameCount);
+
+	/// <summary>
+	/// Destructor
+	/// </summary>
 	~GraphicsObjectManager();
 
 	/// <summary>
-	/// Adds access to the given queue families to the buffer manager.
+	/// Adds the given transfer queue to the manager.
 	/// </summary>
 	/// <param name="families"></param>
 	/// <param name="familyCount"></param>
-	void addQueueFamilyAccess(const uint32_t queueFamily);
+	void addTransferQueueFamilyAccess(const uint32_t transferQueueFamily, VkQueue transferQueue);
 
 	/// <summary>
 	/// Adds a character to the buffer manager.
@@ -119,6 +43,17 @@ public:
 	/// <param name="id"></param>
 	/// <returns></returns>
 	bool addCharacter(int id);
+
+	/// <summary>
+	/// Adds a general game object to the manager.
+	/// </summary>
+	/// <param name="id"></param>
+	/// <param name="vertices"></param>
+	/// <param name="indices"></param>
+	/// <param name="texture"></param>
+	/// <param name="transformation"></param>
+	/// <returns></returns>
+	bool addGameObject(int id, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, VkSampler imgSampler);
 
 	/// <summary>
 	/// Creates a test object with the given parameters.
@@ -139,7 +74,7 @@ public:
 	void updateTestObject(int id, const void* srcData, uint32_t frame);
 
 	/// <summary>
-	/// 
+	/// updates game object transformation
 	/// </summary>
 	/// <param name="id"></param>
 	/// <param name="srcData"></param>
@@ -147,22 +82,49 @@ public:
 	void updateObjectDescriptor(int id, const void* srcData, uint32_t frame);
 
 	/// <summary>
-	/// Copies given buffers to the gpu. Not very useful function currently.
+	/// Creates a depth image
 	/// </summary>
-	/// <param name="logDevice"></param>
-	/// <param name="sources"></param>
-	void copyBuffers(VkDevice logDevice, std::vector<AllocatedBuffer> buffers, std::vector<const void*> sources);
+	/// <returns></returns>
+	AllocatedImage createDepthImage(uint32_t width, uint32_t height, VkFormat depthFormat);
 
-	AllocatedImage createDepthImage();
+	/**
+	 * @brief Interface for destroying an image.
+	 * TODO redo. If the idea is to let this class manage all the resources, then let it do just that.
+	 * @param image
+	*/
+	void destroyImage(AllocatedImage image);
+
+	/**
+	 * @brief Transitions the given image to the given layout using graphics queue.
+	 * @param depthImage
+	 * @param depthFormat
+	 * @param srcLayout
+	 * @param dstLayout
+	*/
+	void transitionDepthImageLayout(AllocatedImage depthImage, VkFormat depthFormat, VkImageLayout srcLayout, VkImageLayout dstLayout);
+
+	/// <summary>
+	/// Creates an image view for the given image and format.
+	/// Todo extend support for more parameters and configurations.
+	/// </summary>
+	/// <param name="image"> to create a view for.</param>
+	/// <param name="format"> of the image view.</param>
+	/// <returns>The created image view. The caller is responsible for the destruction of the allocated resource.</returns>
+	VkImageView createImageView(VkImage image, VkFormat format, VkImageAspectFlags aspectFlags = VK_IMAGE_ASPECT_COLOR_BIT);
 
 	/// <summary>
 	/// Copies the given data to the given buffer.
 	/// </summary>
-	/// <param name="logDevice"> is the logical device</param>
 	/// <param name="allocBuffer"> is the allocated buffer struct</param>
 	/// <param name="srcData"> is the data to cpy</param>
-	void copyBuffer(VkDevice logDevice, AllocatedBuffer allocBuffer, const void* srcData);
+	void copyBuffer(AllocatedBuffer allocBuffer, const void* srcData);
 
+	/// <summary>
+	/// Copies image data to the given image.
+	/// </summary>
+	/// <param name="allocImage"></param> 
+	/// <param name="srcData"></param>
+	void copyImage(AllocatedImage allocImage, const ImageData& srcData);
 
 	/// <summary>
 	/// Returns the layout of the given type.
@@ -179,6 +141,17 @@ public:
 	std::vector<DrawableObject> getDrawableObjects(ObjectType type, uint32_t frame) const;
 
 private:
+	/**
+	 * @brief Command unit represents everything needed to allocate, submit, record and execute commands.
+	*/
+	struct CommandUnit
+	{
+		VkQueue queue;
+		VkCommandPool commandPool;
+		uint32_t queueFamilyIndex;
+		VkCommandBuffer startCommandBuffer(VkDevice logDevice);
+		bool endCommandBuffer(VkDevice logDevice, VkCommandBuffer commandBuffer, VkFence fence = VK_NULL_HANDLE);
+	};
 
 	/// <summary>
 	/// Creates a buffer with the given parameters.
@@ -189,32 +162,104 @@ private:
 	AllocatedBuffer createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VmaMemoryUsage memUsage = VMA_MEMORY_USAGE_AUTO, VmaAllocationCreateFlags vmaCreationFlags = 0, VkMemoryPropertyFlags requiredFlags = 0, VkMemoryPropertyFlags preferredFlags = 0);
 
 	/// <summary>
-	/// Creates image
+	/// Creates an allocated image. The standard parameters make it easy to create a texture image on the gpu.
+	/// More specific use case must be specified through the parameters.
 	/// </summary>
-	/// <param name="size"></param>
-	/// <param name="width"></param>
-	/// <param name="height"></param>
-	/// <param name="format"></param>
-	/// <param name="tiling"></param>
-	/// <param name="usage"></param>
-	/// <param name="memUsage"></param>
-	/// <param name="vmaCreationFlags"></param>
-	/// <param name="requiredFlags"></param>
-	/// <param name="preferredFlags"></param>
-	/// <returns></returns>
-	AllocatedImage createImage(VkDeviceSize size, uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VmaMemoryUsage memUsage = VMA_MEMORY_USAGE_GPU_ONLY, VmaAllocationCreateFlags vmaCreationFlags = 0, VkMemoryPropertyFlags requiredFlags = 0, VkMemoryPropertyFlags preferredFlags = 0);
+	/// <param name="width">of the image</param>
+	/// <param name="height"> of the image</param>
+	/// <param name="format"> of the image</param>
+	/// <param name="tiling"> of the image</param>
+	/// <param name="usage"> of the image</param>
+	/// <param name="memUsage"> is the vma memory usage of the image</param>
+	AllocatedImage createImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling = VK_IMAGE_TILING_OPTIMAL, VkImageUsageFlags usage = VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT, VmaMemoryUsage memUsage = VMA_MEMORY_USAGE_AUTO, VmaAllocationCreateFlags vmaCreationFlags = 0, VkMemoryPropertyFlags requiredFlags = 0, VkMemoryPropertyFlags preferredFlags = 0);
+
+	/// <summary>
+	/// Initiates the descriptor builder.
+	/// </summary>
 	void createDescriptorBuilder();
 
+	/**
+	 * @brief Returns number of queue families
+	 * @return
+	*/
+	uint32_t getQueueFamilyCount();
+
+	/**
+	 * @brief Returns the sharing mode of created resources.
+	 * @param id of the object
+	 * @return VK_SHARING_MODE_CONCURRENT if separate graphics queue is set.
+	 * @return VK_SHARING_MODE_EXCLUSIVE if transfer queue is the graphics queue.
+	*/
+	VkSharingMode getSharingMode();
+
+	/**
+	 * @brief
+	 * @return
+	*/
+	VkCommandBuffer startCommandBuffer(bool preferTransfer);
+
+	/**
+	 * @brief Tries to end the given command buffer.
+	 * @param commandBuffer
+	 * @param fence
+	 * @return
+	*/
+	bool endCommandBuffer(VkCommandBuffer commandBuffer, VkFence fence = VK_NULL_HANDLE);
+
+	/**
+	 * @brief Records image layout transition barrier to the given command buffer.
+	 * @param image
+	 * @param format
+	 * @param oldLayout
+	 * @param newLayout
+	 * @param commandBuffer
+	 * @param srcQueueFamilyIndex & dstQueueFamilyIndex of the source family. Use the default value if you do not want to change queue ownership
+	*/
+	void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout, VkCommandBuffer commandBuffer, std::pair<uint32_t, uint32_t> srcAndDstQueueFamilies = { VK_QUEUE_FAMILY_IGNORED, VK_QUEUE_FAMILY_IGNORED });
+
+	/**
+	 * @brief Queue families should be transferred, if the resources are using multiple queues, and the sharingmode is exclusive, or the desired stage is available only to another queue.
+	 * TODO REWORK TRANSITIONS
+	*/
+	std::pair<uint32_t, uint32_t> getQueueTransitionFamilies();
+
+	/**
+	 * @brief Fills access masks and pipeline stages when given source and destination layouts for an image.
+	 * @param srcLayout of the image
+	 * @param dstLayout of the image
+	 * @param srcAndDstAccessMasks to be filled
+	 * @param srcAndDstStages to be filled
+	 * @return boolean indicating if the given layout pair is valid
+	*/
+	bool getPipelineAndAccessFlags(VkImageLayout srcLayout, VkImageLayout dstLayout, std::pair<VkAccessFlags, VkAccessFlags>& srcAndDstAccessMasks, std::pair<VkPipelineStageFlags, VkPipelineStageFlags>& srcAndDstStages);
+
+	/**
+	 * @brief Helper for creating a staging buffer.
+	 * @param size of the staging buffer
+	 * @param allocInfo to be filled
+	 * @return The allocated buffer
+	*/
+	AllocatedBuffer createStagingBuffer(VkDeviceSize size, VmaAllocationInfo& allocInfo);
+
+	// Required Vulkan handles
 	VkDevice logDeviceM;
 	VmaAllocator allocatorM;
-	VkQueue transferQueueM;
-	VkCommandPool transferCommandPoolM;
+
+	CommandUnit graphicsCommandUnitM;
+	std::optional<CommandUnit> transferCommandUnitM;
+	// Todo make a better system
+	std::optional<CommandUnit> activeCommandUnitM;
+	// Builder
 	std::unique_ptr<DescriptorBuilder> pBuilderM;
+	// Data maps
 	std::unordered_map<int, CharacterObject> characterObjectsM;
 	std::unordered_map<int, GameObject> gameObjectsM;
 	std::unordered_map<int, TestObject> testObjectsM;
-	std::vector<uint32_t> queueFamilyIndicesM;
+
+	// Frame count
 	uint32_t frameCountM;
+	// Descriptor set layouts for common objects
+	// Todo a map?
 	VkDescriptorSetLayout characterSetLayoutM;
 	VkDescriptorSetLayout gameObjectSetLayoutM;
 	VkDescriptorSetLayout testObjectSetLayoutM;

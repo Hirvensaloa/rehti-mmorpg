@@ -16,7 +16,7 @@ struct Target
 };
 // standard cartesian coordinate system
 constexpr glm::vec3 POSITIVE_X_AXIS(1.f, 0.f, 0.f);
-constexpr glm::vec3 POSITIVE_Y_AXIS(0.f, 1.f, 0.f); 
+constexpr glm::vec3 POSITIVE_Y_AXIS(0.f, 1.f, 0.f);
 constexpr glm::vec3 POSITIVE_Z_AXIS(0.f, 0.f, 1.f);
 
 constexpr float STANDARD_ZOOM(7.f); // zoom used in the constructor. 10 Units away from the target
@@ -61,6 +61,12 @@ public:
 	/// </summary>
 	/// <returns>The projection matrix</returns>
 	glm::mat4 getProjectionMatrix() const;
+
+	/**
+	 * @brief Returns the camera ray in world space.
+	 * @return Camera ray in world space.
+	*/
+	glm::vec3 getCameraRay(double x, double y) const;
 
 	/// <summary>
 	/// Returns a matrix that transforms from world space to screen space.
@@ -143,6 +149,8 @@ private:
 	float sensitivityM;
 	float zoomSensitivityM;
 	float zoomM;
+	float widthM;
+	float heightM;
 
 	static double mouseX;
 	static double mouseY;

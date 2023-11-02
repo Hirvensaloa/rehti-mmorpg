@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include "ObjectInteractAction.hpp"
-#include "../world/Map.hpp"
 #include "../world/GameWorld.hpp"
+#include "../world/Map.hpp"
+#include "ObjectInteractAction.hpp"
 
-ObjectInteractAction::ObjectInteractAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Object> pTarget, Entity *pEntity) : Action(startTime, pEntity), pTargetM(pTarget) {}
+ObjectInteractAction::ObjectInteractAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Object> pTarget, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), pTargetM(pTarget) {}
 
 void ObjectInteractAction::act()
 {

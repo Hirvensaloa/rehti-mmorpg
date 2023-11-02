@@ -19,7 +19,7 @@ public:
         ObjectInteract = MessageId::ObjectInteract,
     };
 
-    Action(std::chrono::system_clock::time_point startTime, Entity *pEntity);
+    Action(std::chrono::system_clock::time_point startTime, std::shared_ptr<Entity> pEntity);
 
     ~Action() = default;
 
@@ -40,7 +40,7 @@ protected:
 
     ActionType actionTypeM = ActionType::None;
 
-    Entity *pEntityM;
+    std::shared_ptr<Entity> pEntityM;
 
     bool completedM = false;
 };

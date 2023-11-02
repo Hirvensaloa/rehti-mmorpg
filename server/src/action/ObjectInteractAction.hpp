@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Action.hpp"
-#include "MoveAction.hpp"
 #include "../object/Object.hpp"
 #include "../world/Coordinates.hpp"
+#include "Action.hpp"
+#include "MoveAction.hpp"
 
 class ObjectInteractAction : public Action
 {
 public:
-  ObjectInteractAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Object> pTarget, Entity *pEntity);
+  ObjectInteractAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Object> pTarget, std::shared_ptr<Entity> pEntity);
 
   ~ObjectInteractAction() = default;
 

@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-MoveAction::MoveAction(std::chrono::system_clock::time_point startTime, Coordinates target, Entity *pEntity) : Action(startTime, pEntity), targetM(target), pathM(pEntity->getGameWorld()->getMap().findPath(pEntityM->getLocation(), targetM)) {}
+MoveAction::MoveAction(std::chrono::system_clock::time_point startTime, Coordinates target, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), targetM(target), pathM(pEntity->getGameWorld()->getMap().findPath(pEntityM->getLocation(), targetM)) {}
 
 Coordinates MoveAction::getTarget()
 {

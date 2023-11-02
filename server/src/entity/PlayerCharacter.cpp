@@ -7,7 +7,7 @@ PlayerCharacter::PlayerCharacter(GameWorld *pGameWorld, std::string name, unsign
 void PlayerCharacter::update()
 {
 
-    if (currentActionM)
+    if (currentActionM != nullptr)
     {
         currentActionM->act();
     }

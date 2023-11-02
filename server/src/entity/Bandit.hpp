@@ -14,5 +14,5 @@ public:
 
     void update() override;
 
-    PlayerCharacter *findClosestPlayer();
+    std::shared_ptr<PlayerCharacter> findClosestPlayer();
 };

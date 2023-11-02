@@ -22,7 +22,7 @@ public:
           const std::string &body)
       : connectionM(connection), headerM(header), bodyM(body) {}
 
-  Message(const MessageStruct msg)
+  Message(const MessageStruct &msg)
       : connectionM(nullptr), bodyM(msg.body)
   {
     headerM.id = msg.id;

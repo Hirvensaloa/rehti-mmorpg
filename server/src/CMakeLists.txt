@@ -9,7 +9,8 @@ set(TARGET server)
 
 set(SOURCES
         Main.cpp
-        database/Connect.cpp
+        database/DatabaseManager.cpp
+        database/DatabaseManager.hpp
         Server.cpp
 	Server.hpp
 

@@ -1,11 +1,11 @@
 #include "RapidjsonHelpers.hpp"
 
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <ranges>
-#include <filesystem>
 #include <exception>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <ranges>
+#include <vector>
 
 #include "rapidjson/document.h"
 #include "rapidjson/prettywriter.h"

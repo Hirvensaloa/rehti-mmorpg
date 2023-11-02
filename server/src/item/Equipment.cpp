@@ -31,6 +31,19 @@ ItemStats Equipment::getEquipmentStats()
     return stats;
 }
 
+std::vector<std::shared_ptr<EquippableItem>> Equipment::getAllEquipment()
+{
+    std::vector<std::shared_ptr<EquippableItem>> res;
+    for (auto entry : slotMapM)
+    {
+        if (entry.second != nullptr)
+        {
+            res.push_back(entry.second);
+        }
+    }
+    return res;
+}
+
 bool Equipment::equip(std::shared_ptr<EquippableItem> item)
 {
     if (item == nullptr)

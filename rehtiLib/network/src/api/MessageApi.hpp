@@ -3,9 +3,9 @@
 #include "rapidjson/document.h"
 #include "rapidjson/prettywriter.h"
 #include <cstdio>
+#include <iostream>
 #include <optional>
 #include <vector>
-#include <iostream>
 
 #include "Types.hpp"
 
@@ -21,6 +21,8 @@
 enum MessageId
 {
     GameState,
+    Login,
+    Login,
     Move,
     Attack,
     ObjectInteract,
@@ -45,6 +47,13 @@ struct GameStateMessage
     std::vector<GameStateEntity> entities;
     std::vector<GameStateObject> objects;
     CurrentPlayer currentPlayer;
+};
+
+struct LoginMessage
+{
+    const MessageId id = MessageId::Login;
+    std::string username;
+    std::string password;
 };
 
 struct MoveMessage
@@ -78,6 +87,12 @@ struct ObjectInteractMessage
 class MessageApi
 {
 public:
+    static const MessageStruct createLogin(const LoginMessage &login);
+    static LoginMessage parseLogin(std::string msgBody);
+
+    static const MessageStruct createLogin(const LoginMessage &login);
+    static LoginMessage parseLogin(std::string msgBody);
+
     static const MessageStruct createMove(const MoveMessage &move);
     static MoveMessage parseMove(std::string msgBody);
 

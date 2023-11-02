@@ -1,11 +1,11 @@
 #pragma once
 
-#include <vector>
 #include <map>
 #include <optional>
+#include <vector>
 
-#include "../entity/PlayerCharacter.hpp"
 #include "../entity/Npc.hpp"
+#include "../entity/PlayerCharacter.hpp"
 #include "../object/Object.hpp"
 #include "Map.hpp"
 
@@ -17,9 +17,9 @@ public:
 
     ~GameWorld() = default;
 
-    std::vector<PlayerCharacter> &getPlayers();
+    std::vector<std::shared_ptr<PlayerCharacter>> &getPlayers();
 
-    PlayerCharacter *getPlayer(unsigned int playerId);
+    std::shared_ptr<PlayerCharacter> getPlayer(unsigned int playerId);
 
     Map &getMap();
 
@@ -31,7 +31,7 @@ public:
 
     std::vector<std::shared_ptr<Npc>> &getNpcs();
 
-    Entity &getEntity(unsigned int entityId);
+    std::shared_ptr<Entity> getEntity(unsigned int entityId);
 
     std::map<std::string, std::shared_ptr<Object>> &getObjects();
 
@@ -40,7 +40,7 @@ public:
     void initWorld();
 
 private:
-    std::vector<PlayerCharacter> playersM;
+    std::vector<std::shared_ptr<PlayerCharacter>> playersM;
     std::vector<std::shared_ptr<Npc>> npcsM;
     std::map<std::string, std::shared_ptr<Object>> objectsM;
     Map mapM;

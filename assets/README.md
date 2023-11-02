@@ -269,7 +269,7 @@ Note: Row sizes don't need to match. For example, this is valid:
 
 2. **Create the area drawings**
 
-The drawings shows where different type of textures are and what is the map height in certain coordinates.
+The drawings show where different types of textures are and what is the map height in certain coordinates.
 We use the RGB-channels to store the information.
 
 |   Field    | Value |          Notes           |
@@ -284,7 +284,7 @@ The drawings should be 128x128 and use the PNG-format. They should be under `<ro
 
 3. **Create the object drawings**
 
-For each area, there needs to be another drawing that shows where all the objects are and what are their rotations. Again we use RGB-channels.
+For each area, there needs to be another drawing that shows where all the objects are and what their rotations are. Again we use RGB-channels.
 
 |   Field   | Value |         Notes         |
 | :-------: | :---: | :-------------------: |

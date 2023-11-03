@@ -88,6 +88,12 @@ public:
 	*/
 	void addAreaBoundingBox(std::vector<Vertex> areaVertices, glm::ivec2 areaCoordinates);
 
+	/**
+	 * @brief Traces a ray against all bounding boxes, starting with objects, then characters and lastly the map.
+	 * @return Hit object containing information about the hit.
+	*/
+	Hit traceClick();
+
 	/// <summary>
 	/// Sets flags for engine. Flags can only be set by this interface, not unset.
 	/// </summary>
@@ -239,6 +245,27 @@ private:
 	bool checkValidationLayerSupport();
 	bool isDeviceSuitable(VkPhysicalDevice device);
 
+	/**
+	 * @brief Checks whether the given bounding box is hit by the given ray.
+	 * @param min is the smaller coordinate of the bounding box.
+	 * @param max is the larger coordinate of the bounding box.
+	 * @param rayOrig is the origin of the ray.
+	 * @param dirInv is the inverse of the direction of the ray.
+	 * @param t is the distance to the hit point.
+	 * @return true if hit, false otherwise.
+	*/
+	bool bbHit(const glm::vec3 min, const glm::vec3 max, const glm::vec3 rayOrig, const glm::vec3 dirInv, float& t);
+
+	/**
+	 * @brief Traces a given ray against a given bounding box.
+	 * @param orig is the origin of the ray.
+	 * @param dirInv is the inverse of the direction of the ray.
+	 * @param boxNode is the bounding box to trace against.
+	 * @param boxHit is the bounding box that was hit.
+	 * @return the distance to the hit point.
+	*/
+	float trace(const glm::vec3 orig, const glm::vec3 dirInv, const AABB* pBoxNode, AABB& boxHit);
+
 	/// <summary>
 	/// Rates a given GPU
 	/// </summary>
@@ -374,9 +401,7 @@ private:
 	EngineFlags engineFlagsM = EngineFlags::NO_FLAGS;
 	EngineStatistics statsM;
 	// Bounding box lists in an array. Each index corresponds to an object type.
-	std::array<std::vector<AABB>, OBJECT_TYPE_COUNT> boundingBoxesM;
-	// todo map should not be different
-	std::vector<AABB> mapBoundingBoxesM;
+	std::array<std::vector<std::pair<AABB, int>>, OBJECT_TYPE_COUNT> boundingBoxesM;
 
 	const int kConcurrentFramesM = 2;
 	size_t currentFrameM = 0;

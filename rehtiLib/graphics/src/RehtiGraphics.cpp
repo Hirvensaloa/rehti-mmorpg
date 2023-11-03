@@ -64,6 +64,66 @@ void RehtiGraphics::addAreaBoundingBox(std::vector<Vertex> areaVertices, glm::iv
 	// If it does, don't continue. Leave left and right as nullptr
 }
 
+Hit RehtiGraphics::traceClick()
+{
+	Hit hit{};
+	hit.objectType = ObjectType::UNDEFINED;
+	double x, y;
+	glfwGetCursorPos(pWindowM, &x, &y);
+	glm::vec3 rayDir = cameraM.getCameraRay(x, y);
+	glm::vec3 rayOrigin = cameraM.getLocation();
+	glm::vec3 inverseDir = glm::vec3(1.f / rayDir.x, 1.f / rayDir.y, 1.f / rayDir.z);
+	float earliest = FLT_MAX;
+	for (const auto& boxPair : boundingBoxesM[ObjectType::CHARACTER])
+	{
+		const auto& box = boxPair.first;
+		AABB boxHit{};
+		float newT = trace(rayOrigin, inverseDir, &box, boxHit);
+
+		if (newT < earliest)
+		{
+			earliest = newT;
+			hit.hitPoint = rayOrigin + rayDir * newT;
+			hit.id = boxPair.second;
+			hit.objectType = ObjectType::CHARACTER;
+		}
+	}
+	for (const auto& boxPair : boundingBoxesM[ObjectType::GAMEOBJECT])
+	{
+		const auto& box = boxPair.first;
+		AABB boxHit{};
+		float newT = trace(rayOrigin, inverseDir, &box, boxHit);
+
+		if (newT < earliest)
+		{
+			earliest = newT;
+			hit.hitPoint = rayOrigin + rayDir * newT;
+			hit.id = boxPair.second;
+			hit.objectType = ObjectType::GAMEOBJECT;
+		}
+	}
+	// Exit if we have a hit already
+	if (earliest < FLT_MAX)
+		return hit;
+	// map gets traced if no other hits were made
+	for (const auto& boxPair : boundingBoxesM[ObjectType::MAP])
+	{
+		const auto& box = boxPair.first;
+		AABB boxHit{};
+		float newT = trace(rayOrigin, inverseDir, &box, boxHit);
+
+		if (newT < earliest)
+		{
+			earliest = newT;
+			hit.hitPoint = 0.5f * (boxHit.min + boxHit.max);
+			hit.id = boxPair.second;
+			hit.objectType = ObjectType::MAP;
+		}
+	}
+
+	return hit;
+}
+
 void RehtiGraphics::setEngineFlags(EngineFlags flags)
 {
 	engineFlagsM = EngineFlags(engineFlagsM | flags);
@@ -978,6 +1038,57 @@ bool RehtiGraphics::isDeviceSuitable(VkPhysicalDevice device)
 		requiredExtensionSupport &&
 		swapChainOk
 		&& feats.samplerAnisotropy; // Suitable, if it is has a graphics queueFamily, extensions, swapchain support, and anisotropic filtering
+}
+
+bool RehtiGraphics::bbHit(const glm::vec3 min, const glm::vec3 max, const glm::vec3 rayOrig, const glm::vec3 dirInv, float& t)
+{
+	float tmin = 0.f;
+	float tmax = FLT_MAX;
+
+	glm::vec3 t1v = (min - rayOrig) * dirInv;
+	glm::vec3 t2v = (max - rayOrig) * dirInv;
+
+	glm::vec3 tminv = glm::min(t1v, t2v);
+	glm::vec3 tmaxv = glm::max(t1v, t2v);
+
+	tmin = glm::max(tminv.x, tminv.y, tminv.z);
+	tmax = glm::min(tminv.x, tminv.y, tminv.z);
+	t = tmin;
+	return tmin <= tmax;
+}
+
+float RehtiGraphics::trace(const glm::vec3 orig, const glm::vec3 dirInv, const AABB* pBoxNode, AABB& boxHit)
+{
+	float hitT = FLT_MAX;
+	if (bbHit(pBoxNode->min, pBoxNode->max, orig, dirInv, hitT))
+	{
+		if (pBoxNode->isLeaf())
+		{
+			boxHit.max = pBoxNode->max;
+			boxHit.min = pBoxNode->min;
+			return hitT;
+		}
+		else
+		{
+			AABB box1{};
+			AABB box2{};
+			float t1 = trace(orig, dirInv, pBoxNode->pLeft.get(), box1);
+			float t2 = trace(orig, dirInv, pBoxNode->pRight.get(), box2);
+			if (t1 < 2)
+			{
+				boxHit.max = box1.max;
+				boxHit.min = box1.min;
+			}
+			else
+			{
+				boxHit.max = box2.max;
+				boxHit.min = box2.min;
+			}
+			return glm::min(t1, t2);
+		}
+	}
+
+	return FLT_MAX;
 }
 
 int RehtiGraphics::rateDevice(VkPhysicalDevice device)

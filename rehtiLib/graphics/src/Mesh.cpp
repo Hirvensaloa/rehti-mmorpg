@@ -1,56 +1,58 @@
 #include "Mesh.hpp"
 
-VkVertexInputBindingDescription SimpleVertex::getBindingDescription()
-{
-	VkVertexInputBindingDescription bindingDesc{};
-	bindingDesc.binding = 0;
-	bindingDesc.stride = sizeof(SimpleVertex);
-	bindingDesc.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
 
-	return bindingDesc;
+
+const std::vector<Vertex> TestValues::GetTestVertices()
+{
+	std::vector<Vertex> vertices{
+	{ glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec3(0.f, 0.f, 0.f), glm::vec2(1.f, 1.f) },
+	{ glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec3(0.f, 1.f, 0.f), glm::vec2(1.f, 0.f) },
+	{ glm::vec3(0.5f, 0.5f, -0.5f), glm::vec3(1.f, 1.f, 0.f), glm::vec2(0.f, 0.f) },
+	{ glm::vec3(0.5f, -0.5f, -0.5f), glm::vec3(1.f, 0.f, 0.f), glm::vec2(0.f, 1.f) },
+	{ glm::vec3(-0.5f, -0.5f, 0.5f), glm::vec3(0.f, 0.f, 1.f), glm::vec2(0.f, 1.f) },
+	{ glm::vec3(-0.5f, 0.5f, 0.5f), glm::vec3(0.f, 1.f, 1.f), glm::vec2(0.f, 0.f) },
+	{ glm::vec3(0.5f, 0.5f, 0.5f), glm::vec3(1.f, 1.f, 1.f), glm::vec2(1.f, 0.f) },
+	{ glm::vec3(0.5f, -0.5f, 0.5f), glm::vec3(1.f, 0.f, 1.f), glm::vec2(1.f, 1.f) }
+	};
+	return vertices;
 }
 
-std::array<VkVertexInputAttributeDescription, 2> SimpleVertex::getAttributeDescriptions()
+const std::vector<uint32_t> TestValues::GetTestIndices()
 {
-	std::array<VkVertexInputAttributeDescription, 2> attributeDescs{};
-	attributeDescs[0].binding = 0;
-	attributeDescs[0].location = 0;
-	attributeDescs[0].format = VK_FORMAT_R32G32B32_SFLOAT; // 3 floats
-	attributeDescs[0].offset = offsetof(SimpleVertex, pos);
-
-	attributeDescs[1].binding = 0; // one binding desc for all attributes
-	attributeDescs[1].location = 1;
-	attributeDescs[1].format = VK_FORMAT_R32G32B32_SFLOAT; // 3 floats
-	attributeDescs[1].offset = offsetof(SimpleVertex, color);
-
-	return attributeDescs;
+	return { // clockwise winding order
+		2, 1, 0, 0, 3, 2,
+			5, 6, 4, 6, 7, 4,
+			0, 1, 5, 5, 4, 0,
+			2, 3, 7, 2, 7, 6,
+			1, 2, 6, 6, 5, 1,
+			7, 3, 0, 7, 0, 4,
+	};
 }
 
-VkVertexInputBindingDescription Vertex::getBindingDescription()
+
+
+const ImageData TestValues::GetTestTexture()
 {
-	VkVertexInputBindingDescription bindingDesc{};
-	bindingDesc.binding = 0;
-	bindingDesc.stride = sizeof(Vertex);
-	bindingDesc.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
-	return bindingDesc;
-}
+	unsigned char textureData[16 * 16] = {
+	255, 0, 0, 255, 0, 255, 0, 255,
+	0, 255, 0, 255, 0, 0, 255, 255,
+	0, 0, 255, 255, 255, 0, 255, 255,
+	255, 255, 0, 255, 255, 255, 0, 255,
+	255, 0, 255, 255, 0, 255, 255, 255,
+	0, 255, 255, 255, 255, 0, 255, 255,
+	255, 255, 0, 255, 255, 255, 0, 255,
+	255, 0, 255, 255, 0, 255, 255, 255,
+	0, 255, 255, 255, 255, 0, 255, 255,
+	255, 255, 0, 255, 255, 255, 0, 255,
+	255, 0, 255, 255, 0, 255, 255, 255,
+	0, 255, 255, 255, 255, 0, 255, 255,
+	255, 255, 0, 255, 255, 255, 0, 255
+	};
 
-std::array<VkVertexInputAttributeDescription, 3> Vertex::getAttributeDescriptions()
-{
-	std::array<VkVertexInputAttributeDescription, 3> attributeDescs{};
-	attributeDescs[0].binding = 0;
-	attributeDescs[0].location = 0;
-	attributeDescs[0].format = VK_FORMAT_R32G32B32_SFLOAT; // 3 floats
-	attributeDescs[0].offset = offsetof(Vertex, pos);
-
-	attributeDescs[1].binding = 0; // one binding desc for all attributes
-	attributeDescs[1].location = 1;
-	attributeDescs[1].format = VK_FORMAT_R32G32B32_SFLOAT; // 3 floats
-	attributeDescs[1].offset = offsetof(Vertex, normal);
-
-	attributeDescs[2].binding = 0;
-	attributeDescs[2].location = 2;
-	attributeDescs[2].format = VK_FORMAT_R32G32_SFLOAT; // 2 floats
-	attributeDescs[2].offset = offsetof(Vertex, texCoord);	
-	return attributeDescs;
+	ImageData img = {
+		textureData,
+		16,
+		16,
+	};
+	return img;
 }

@@ -1,16 +1,17 @@
 #pragma once
-#include <vulkan/vulkan.h>
+#include "GraphicsTypes.hpp"
 
-#include <vector>
 #include <string>
 
-typedef char const * const ConstantFilepath;
+typedef char const* const ConstantFilepath;
 
 namespace ShaderManager
 {
 	// Constants
-	constexpr ConstantFilepath kGLSLVertexShaderPath = "shaders/shader.vert";
-	constexpr ConstantFilepath kGLSLFragmentShaderPath = "shaders/shader.frag";
+	constexpr ConstantFilepath kGLSLTestVertexShaderPath = "shaders/testShader.vert";
+	constexpr ConstantFilepath kGLSLTestFragmentShaderPath = "shaders/testShader.frag";
+	constexpr ConstantFilepath kGLSLObjectVertexShaderPath = "shaders/objectShader.vert";
+	constexpr ConstantFilepath kGLSLObjectFragmentShaderPath = "shaders/objectShader.frag";
 	constexpr const char* kStandardEntryPoint = "main";
 
 	/// <summary>
@@ -18,14 +19,14 @@ namespace ShaderManager
 	/// </summary>
 	/// <param name="logDevice">Logical device.</param>
 	/// <returns>Creation info.</returns>
-	VkPipelineShaderStageCreateInfo createVertexShaderInfo(VkDevice logDevice);
+	VkPipelineShaderStageCreateInfo createVertexShaderInfo(VkDevice logDevice, ObjectType objectType);
 
 	/// <summary>
 	/// Creates a fragment shader info to be used in pipeline creation.
 	/// </summary>
 	/// <param name="logDevice">Logical device.</param>
 	/// <returns>Creation info.</returns>
-	VkPipelineShaderStageCreateInfo createFragmentShaderInfo(VkDevice logDevice);
+	VkPipelineShaderStageCreateInfo createFragmentShaderInfo(VkDevice logDevice, ObjectType objectType);
 
 	/// <summary>
 	/// Destroys created shader modules. This function can be called after pipeline creation.
@@ -39,7 +40,15 @@ namespace ShaderManager
 	/// <param name="glslCode">GLSL code as a string</param>
 	/// <param name="shaderType">Shader type enum</param>
 	/// <returns>Compiled SPIRV aligned to 4 bytes.</returns>
-	std::vector<uint32_t> compileGLSLToSpirv(VkShaderStageFlagBits shaderType);
+	std::vector<uint32_t> compileGLSLToSpirv(VkShaderStageFlagBits shaderType, ObjectType object);
+
+	/**
+	 * @brief Returns the shader code as a string corresponding to the given stage and object type.
+	 * @param stage of the shader
+	 * @param object type
+	 * @return shader code as a string
+	*/
+	std::string getShaderCode(VkShaderStageFlags stage, ObjectType object);
 
 	/// <summary>
 	/// Reads a file and returns a vector of chars.
@@ -54,7 +63,7 @@ namespace ShaderManager
 	/// <param name="logDevice">The logical device.</param>
 	/// <param name="stage">Shader stage</param>
 	/// <returns>Created shader module.</returns>
-	static VkShaderModule createShaderModule(VkDevice logDevice, VkShaderStageFlagBits stage);
+	static VkShaderModule createShaderModule(VkDevice logDevice, VkShaderStageFlagBits stage, ObjectType objectType);
 
 	static std::vector<VkShaderModule> createdModules;
 }

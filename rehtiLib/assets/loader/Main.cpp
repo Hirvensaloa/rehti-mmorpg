@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <filesystem>
 
 #include "src/Utils.hpp"
 #include "src/MapLoader.hpp"
@@ -7,6 +8,12 @@
 
 int main()
 {
+  // Create generated folder if it does not exist
+  if (!std::filesystem::exists(GENERATED_ASSETS_PATH))
+  {
+    std::filesystem::create_directory(GENERATED_ASSETS_PATH);
+  }
+
   // Fetch game assets
   std::map<int, GameSkill> gameSkills = fetchSkills();
   GameItems gameItems = fetchItems();

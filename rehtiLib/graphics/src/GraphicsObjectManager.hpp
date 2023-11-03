@@ -37,22 +37,22 @@ public:
 	/// <param name="familyCount"></param>
 	void addTransferQueueFamilyAccess(const uint32_t transferQueueFamily, VkQueue transferQueue);
 
-	/// <summary>
-	/// Adds a character to the buffer manager.
-	/// </summary>
-	/// <param name="id"></param>
-	/// <returns></returns>
+	/**
+	 * @brief Todo create interface for characters as well.
+	 * @param id
+	 * @return
+	*/
 	bool addCharacter(int id);
 
 	/**
 	 * @brief Adds a game object to the buffer manager
 	 * @param objectId
 	 * @param vertices of the object
-	 * @param indices into the vertex buffer
+	 * @param indices of the points making up triangles
 	 * @param texture of the object
 	 * @param transformation to be applied to the object
 	 * @param imgSampler is the sampler for the texture of the gameobject
-	 * @return boolean indicating success
+	 * @return boolean indicating success of the operation
 	*/
 	bool addGameObject(int objectId, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, VkSampler imgSampler);
 

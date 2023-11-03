@@ -13,13 +13,14 @@
 constexpr uint32_t BONES_PER_VERTEX = 4;
 constexpr uint32_t MAX_BONES = 50;
 
-#define OBJECT_TYPE_COUNT 3
+#define OBJECT_TYPE_COUNT 4
 
 enum ObjectType : uint32_t
 {
 	CHARACTER,
 	GAMEOBJECT,
 	TESTOBJECT,
+	MAP,
 	UNDEFINED
 };
 
@@ -28,6 +29,13 @@ std::array <ObjectType, OBJECT_TYPE_COUNT> getObjectTypes();
 #pragma endregion
 
 #pragma region GraphicsObjectTypes
+
+struct Hit
+{
+	int id;
+	ObjectType objectType;
+	glm::vec3 hitPoint;
+};
 
 /**
  * @brief Axis Aligned Bounding Box data structure
@@ -38,8 +46,8 @@ struct AABB
 	glm::vec3 max;
 	std::unique_ptr<AABB> pLeft;
 	std::unique_ptr<AABB> pRight;
-	bool isLeaf();
-	glm::vec3 getCenter();
+	bool isLeaf() const;
+	glm::vec3 getCenter() const;
 };
 
 struct ImageData

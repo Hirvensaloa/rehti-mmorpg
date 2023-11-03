@@ -66,6 +66,12 @@ public:
 	*/
 	bool addTestObject(int id, const std::vector<SimpleVertex>& vertices, const std::vector<uint32_t>& indices, glm::mat4 transformation);
 
+	/**
+	 * @brief Adds a map to the buffer manager
+	*/
+	bool addMap();
+
+
 	/// <summary>
 	/// Updates test object data
 	/// </summary>

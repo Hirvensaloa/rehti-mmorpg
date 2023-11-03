@@ -199,12 +199,12 @@ VkVertexInputBindingDescription getBindingDescription(ObjectType objectType)
 	return desc;
 }
 
-bool AABB::isLeaf()
+bool AABB::isLeaf() const
 {
 	return pLeft == nullptr && pRight == nullptr;
 }
 
-glm::vec3 AABB::getCenter()
+glm::vec3 AABB::getCenter() const
 {
 	return 0.5f * min + 0.5f * max;
 }

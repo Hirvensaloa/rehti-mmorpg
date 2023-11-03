@@ -44,25 +44,26 @@ public:
 	/// <returns></returns>
 	bool addCharacter(int id);
 
-	/// <summary>
-	/// Adds a general game object to the manager.
-	/// </summary>
-	/// <param name="id"></param>
-	/// <param name="vertices"></param>
-	/// <param name="indices"></param>
-	/// <param name="texture"></param>
-	/// <param name="transformation"></param>
-	/// <returns></returns>
-	bool addGameObject(int id, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, VkSampler imgSampler);
+	/**
+	 * @brief Adds a game object to the buffer manager
+	 * @param objectId
+	 * @param vertices of the object
+	 * @param indices into the vertex buffer
+	 * @param texture of the object
+	 * @param transformation to be applied to the object
+	 * @param imgSampler is the sampler for the texture of the gameobject
+	 * @return boolean indicating success
+	*/
+	bool addGameObject(int objectId, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, VkSampler imgSampler);
 
-	/// <summary>
-	/// Creates a test object with the given parameters.
-	/// </summary>
-	/// <param name="id"></param>
-	/// <param name="vertices"></param>
-	/// <param name="indices"></param>
-	/// <param name="transformation"></param>
-	/// <returns></returns>
+	/**
+	 * @brief Adds a test object to the buffer manager
+	 * @param id of the object
+	 * @param vertices
+	 * @param indices
+	 * @param transformation
+	 * @return boolean indicating success
+	*/
 	bool addTestObject(int id, const std::vector<SimpleVertex>& vertices, const std::vector<uint32_t>& indices, glm::mat4 transformation);
 
 	/// <summary>

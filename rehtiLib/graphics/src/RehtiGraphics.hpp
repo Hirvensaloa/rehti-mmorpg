@@ -373,6 +373,10 @@ private:
 	float anisotropyM = 1.f; // default val. Changed in <cref=isDeviceSuitable> 
 	EngineFlags engineFlagsM = EngineFlags::NO_FLAGS;
 	EngineStatistics statsM;
+	// Bounding box lists in an array. Each index corresponds to an object type.
+	std::array<std::vector<AABB>, OBJECT_TYPE_COUNT> boundingBoxesM;
+	// todo map should not be different
+	std::vector<AABB> mapBoundingBoxesM;
 
 	const int kConcurrentFramesM = 2;
 	size_t currentFrameM = 0;

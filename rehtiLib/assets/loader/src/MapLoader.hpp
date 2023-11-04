@@ -9,14 +9,6 @@
 #include "RehtiUtils.hpp"
 #include "RehtiReader.hpp"
 
-const unsigned AREA_WIDTH = 16;
-const unsigned AREA_HEIGHT = AREA_WIDTH;
-
-// Paths
-const std::string ASSET_PATH = ROOT_PATH + "assets/map/";
-const std::string AREA_FILES_PATH = ASSET_PATH + "areas/";
-const std::string AREA_MAP_PATH = ASSET_PATH + "test.json";
-
 // Object tile map symbols
 const std::string OBJECT_TILE_MAP_CENTER = "X";
 const std::string OBJECT_TILE_MAP_NORTH_BLOCK = "N";
@@ -35,7 +27,7 @@ const unsigned NON_OBJECT_ID = 255 * 255;
 // Fetches the area map from the JSON file. Throws an exception if the file corrupted.
 static const std::vector<std::vector<std::string>> fetchAreaMap()
 {
-  rapidjson::Document doc = readJson(AREA_MAP_PATH);
+  rapidjson::Document doc = readJson(Config.AREA_MAP_PATH);
 
   if (!doc.IsArray())
   {
@@ -82,7 +74,7 @@ static const std::vector<std::vector<int>> createHeightMap(const std::vector<std
   std::vector<std::vector<int>> heightMap;
 
   // Populate the height map with 0s.
-  populateMatrix(heightMap, areaMap, 0, AREA_WIDTH, AREA_HEIGHT);
+  populateMatrix(heightMap, areaMap, 0, Config.AREA_WIDTH, Config.AREA_HEIGHT);
 
   // Loop through the area map
   for (unsigned currentAreaRowIndex = 0; currentAreaRowIndex < areaMap.size(); currentAreaRowIndex++)
@@ -93,18 +85,18 @@ static const std::vector<std::vector<int>> createHeightMap(const std::vector<std
     for (unsigned currentAreaColumnIndex = 0; currentAreaColumnIndex < areaRow.size(); currentAreaColumnIndex++)
     {
       const std::string &area = areaRow[currentAreaColumnIndex];
-      std::string areaFile = AREA_FILES_PATH + area + ".png";
+      std::string areaFile = Config.AREA_FILES_PATH + area + ".png";
       std::vector<unsigned char> image; // Represents image pixel map. "RGBARGBARGBA..."
       unsigned width, height;
       readPng(image, width, height, areaFile);
-      if (width != AREA_WIDTH || height != AREA_HEIGHT)
+      if (width != Config.AREA_WIDTH || height != Config.AREA_HEIGHT)
       {
-        throw std::invalid_argument("Image size is not " + std::to_string(AREA_WIDTH) + "x" + std::to_string(AREA_HEIGHT));
+        throw std::invalid_argument("Image size is not " + std::to_string(Config.AREA_WIDTH) + "x" + std::to_string(Config.AREA_HEIGHT));
       }
 
       for (unsigned i = 0; i < height; ++i)
       {
-        const unsigned indexY = currentAreaRowIndex * AREA_HEIGHT + i;
+        const unsigned indexY = currentAreaRowIndex * Config.AREA_HEIGHT + i;
         for (unsigned j = 0; j < width; ++j)
         {
           unsigned pixelIndex = (i * width + j) * 4;
@@ -119,7 +111,7 @@ static const std::vector<std::vector<int>> createHeightMap(const std::vector<std
             height *= -1;
           }
 
-          const unsigned indexX = currentAreaColumnIndex * AREA_WIDTH + j;
+          const unsigned indexX = currentAreaColumnIndex * Config.AREA_WIDTH + j;
           heightMap[indexY][indexX] = height;
         }
       }
@@ -146,8 +138,8 @@ static void insertObjectTileMap(std::vector<std::vector<std::string>> &objectBlo
         centerX = j;
         centerY = i;
         // Calculate the center tile's position in the object block map
-        centerXMap = currentAreaColumnIndex * AREA_WIDTH + areaX + j;
-        centerYMap = currentAreaRowIndex * AREA_HEIGHT + areaY + i;
+        centerXMap = currentAreaColumnIndex * Config.AREA_WIDTH + areaX + j;
+        centerYMap = currentAreaRowIndex * Config.AREA_HEIGHT + areaY + i;
         shouldBreak = true;
         break;
       }
@@ -234,7 +226,7 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
 {
   // Populate the object block map with non-blocked tiles
   std::vector<std::vector<std::string>> objectBlockMap;
-  populateMatrix(objectBlockMap, areaMap, OBJECT_TILE_MAP_NO_BLOCK, AREA_WIDTH, AREA_HEIGHT);
+  populateMatrix(objectBlockMap, areaMap, OBJECT_TILE_MAP_NO_BLOCK, Config.AREA_WIDTH, Config.AREA_HEIGHT);
 
   std::vector<ObjectLocation> objectsLocations;
 
@@ -247,11 +239,11 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
       // Read the object tile map for the area.
       std::vector<unsigned char> image; // Represents image pixel map. "RGBARGBARGBA..."
       unsigned width, height;
-      std::string filepath = AREA_FILES_PATH + area + "-obj.png";
+      std::string filepath = Config.AREA_FILES_PATH + area + "-obj.png";
       readPng(image, width, height, filepath);
-      if (width != AREA_WIDTH || height != AREA_HEIGHT)
+      if (width != Config.AREA_WIDTH || height != Config.AREA_HEIGHT)
       {
-        throw std::invalid_argument("Image size is not " + std::to_string(AREA_WIDTH) + "x" + std::to_string(AREA_HEIGHT));
+        throw std::invalid_argument("Image size is not " + std::to_string(Config.AREA_WIDTH) + "x" + std::to_string(Config.AREA_HEIGHT));
       }
 
       // Loop through the image and find all objects
@@ -296,8 +288,8 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
               std::cout << "Object id: " << objectId << " not rotated " << std::endl;
             }
 
-            int x = currentAreaColumnIndex * AREA_WIDTH + j;
-            int y = currentAreaRowIndex * AREA_HEIGHT + i;
+            int x = currentAreaColumnIndex * Config.AREA_WIDTH + j;
+            int y = currentAreaRowIndex * Config.AREA_HEIGHT + i;
             int z = heightMap[y][x];
             ObjectLocation objLoc = {objectId, "0", x, y, z, rotation};
             objLoc.instanceId = generateObjectInstanceId(objLoc);
@@ -329,7 +321,7 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
 
   const std::string str = createString(doc);
 
-  std::ofstream objectsFile(GENERATED_ASSETS_PATH + "objects.json");
+  std::ofstream objectsFile(Config.GENERATED_OBJECT_JSON_PATH);
   objectsFile << str;
   objectsFile.close();
 

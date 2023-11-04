@@ -36,3 +36,8 @@ void loadHeightMap(std::vector<std::vector<int>> &heightMap, std::string path)
     heightMap.push_back(rowInt);
   }
 }
+
+void loadAreaMap(std::vector<std::vector<std::string>> &areaMap, std::string path)
+{
+  readMatrixFromFile(areaMap, path);
+}

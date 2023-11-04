@@ -16,7 +16,8 @@ add_library(${TARGET} STATIC
   src/SkillReader.hpp 
   src/SkillReader.cpp 
   src/Utils.hpp
-  src/Utils.cpp)
+  src/Utils.cpp
+  ../Config.hpp)
 
 set_target_properties(${TARGET} PROPERTIES LINKER_LANGUAGE CXX)
 

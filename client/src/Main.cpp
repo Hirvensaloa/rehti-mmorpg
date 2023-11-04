@@ -10,6 +10,11 @@
 int main(int argc, char *argv[])
 {
   RehtiGraphics graphLib = RehtiGraphics();
+  std::vector<std::vector<int>> heightMatrix;
+  std::vector<std::vector<std::string>> areaMatrix;
+  loadHeightMap(heightMatrix, Config.GENERATED_HEIGHT_MAP_PATH);
+  loadAreaMap(areaMatrix, Config.GENERATED_AREA_MAP_PATH);
+  graphLib.addMapBoundingBox(MapAABBData{heightMatrix, areaMatrix, Config.AREA_WIDTH, Config.HEIGHT_MAP_SCALE, Config.TILE_SIDE_SCALE, Config.TILE_SIDE_UNIT});
   graphLib.demo();
   std::cout << "Winner winner chicken dinner" << std::endl;
 

@@ -9,10 +9,6 @@
 #include "SkillReader.hpp"
 #include "ItemReader.hpp"
 
-// Path(s)
-const std::string OBJECT_JSON_PATH = ROOT_PATH + "assets/objects.json";
-const std::string OBJECTS_JSON_PATH = GENERATED_ASSETS_PATH + "objects.json";
-
 struct ObjectLocation
 {
   unsigned id;

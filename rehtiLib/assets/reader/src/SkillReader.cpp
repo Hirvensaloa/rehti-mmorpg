@@ -5,10 +5,11 @@
 #include "rapidjson/document.h"
 #include "RehtiUtils.hpp"
 #include "SkillReader.hpp"
+#include "../../Config.hpp"
 
 std::map<int, GameSkill> fetchSkills()
 {
-  rapidjson::Document document = readJson(SKILL_JSON_PATH);
+  rapidjson::Document document = readJson(Config.SKILL_JSON_PATH);
 
   // Ensure the root is an object
   if (!document.IsObject())

@@ -9,6 +9,7 @@
 #include "ItemReader.hpp"
 #include "RehtiUtils.hpp"
 #include "Utils.hpp"
+#include "../../Config.hpp"
 
 std::string generateObjectInstanceId(ObjectLocation objectLocation)
 {
@@ -24,7 +25,7 @@ std::string generateObjectInstanceId(ObjectLocation objectLocation)
 
 const std::vector<ObjectLocation> readObjectLocations()
 {
-  rapidjson::Document objectsJson = readJson(OBJECTS_JSON_PATH);
+  rapidjson::Document objectsJson = readJson(Config.GENERATED_OBJECT_JSON_PATH);
 
   if (!objectsJson.IsObject() || !validMember(objectsJson, "objects", ValueType::ARRAY))
   {
@@ -89,7 +90,7 @@ std::vector<YieldableItem> fetchYieldableItemList(GameItems &gameItems, const ra
 GameObjects fetchObjects(GameItems &gameItems, std::map<int, GameSkill> &gameSkills)
 {
 
-  rapidjson::Document document = readJson(OBJECT_JSON_PATH);
+  rapidjson::Document document = readJson(Config.OBJECT_JSON_PATH);
 
   if (!document.IsObject() || !document.HasMember("objects") || !document["objects"].IsArray())
   {

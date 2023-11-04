@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "Client.hpp"
+#include "RehtiReader.hpp"
 
 Client::Client(std::string ip, std::string port)
     : ioContextM(boost::asio::io_context()),
@@ -63,6 +64,37 @@ boost::asio::awaitable<void> Client::randomWalk()
   }
 }
 
+boost::asio::awaitable<void> Client::attack(const int &targetId)
+{
+  if (connectionM->isConnected())
+  {
+    AttackMessage msg;
+    msg.targetId = targetId;
+    co_await connectionM->send(MessageApi::createAttack(msg));
+  }
+}
+
+boost::asio::awaitable<void> Client::move(const int &x, const int &y)
+{
+  if (connectionM->isConnected())
+  {
+    MoveMessage msg;
+    msg.x = x;
+    msg.y = y;
+    co_await connectionM->send(MessageApi::createMove(msg));
+  }
+}
+
+boost::asio::awaitable<void> Client::interactWithObject(const int &objectId)
+{
+  if (connectionM->isConnected())
+  {
+    ObjectInteractMessage msg;
+    msg.objectId = objectId;
+    co_await connectionM->send(MessageApi::createObjectInteract(msg));
+  }
+}
+
 void Client::test()
 {
   while (true)
@@ -88,4 +120,57 @@ void Client::processMessages()
       std::cout << msg.getBody() << std::endl;
     }
   }
+}
+
+void Client::handleMouseClick(const Hit &hit)
+{
+  lastHitM = hit;
+  std::cout << "Mouse click hit" << std::endl;
+  boost::asio::co_spawn(
+      ioContextM, [this]() -> boost::asio::awaitable<void>
+      {   
+        const Hit &hit = this->lastHitM;
+        switch (hit.objectType)
+        {
+        case ObjectType::MAP:
+          std::cout << "Hit tile on " << hit.hitPoint.x << " " << hit.hitPoint.z << std::endl;
+          co_await move(hit.hitPoint.x, hit.hitPoint.z);
+          break;
+        case ObjectType::CHARACTER:
+          std::cout << "Character" << std::endl;
+          co_await attack(hit.id);
+          break;
+        case ObjectType::GAMEOBJECT:
+          co_await interactWithObject(hit.id);
+          std::cout << "Game object" << std::endl;
+          break;
+        case ObjectType::UNDEFINED:
+          std::cout << "Miss" << std::endl;
+          break;
+        default:
+          std::cout << "Unknown ObjectType" << std::endl;
+          break;
+        } },
+      boost::asio::detached);
+}
+
+void Client::startGraphics()
+{
+  std::thread(
+      [this]()
+      {
+        // Create map bounding box
+        std::vector<std::vector<int>> heightMatrix;
+        std::vector<std::vector<std::string>> areaMatrix;
+        loadHeightMap(heightMatrix, Config.GENERATED_HEIGHT_MAP_PATH);
+        loadAreaMap(areaMatrix, Config.GENERATED_AREA_MAP_PATH);
+        graphLib.addMapBoundingBox(MapAABBData{heightMatrix, areaMatrix, Config.AREA_WIDTH, Config.HEIGHT_MAP_SCALE, Config.TILE_SIDE_SCALE, Config.TILE_SIDE_UNIT});
+
+        // Add action callbacks
+        graphLib.addMouseClickCallback([this](const Hit &hit)
+                                       { handleMouseClick(hit); });
+
+        graphLib.demo();
+      })
+      .detach();
 }

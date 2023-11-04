@@ -102,6 +102,12 @@ public:
     /// <param name="flags"> to be set</param>
     void setEngineFlags(EngineFlags flags);
 
+    /**
+     * @brief Adds a mouse click callback
+     * @param callback function after a mouse click has happened
+     */
+    void addMouseClickCallback(std::function<void(const Hit &)> callback);
+
 private:
     // Functions
 
@@ -395,6 +401,9 @@ private:
     std::vector<VkSemaphore> imagesReadyM;
     std::vector<VkSemaphore> rendersFinishedM;
     std::vector<VkFence> frameFencesM;
+
+    // Callbacks
+    std::function<void(const Hit &)> mouseClickCallbackM;
 
     // Other variables
     uint32_t widthM = 800;

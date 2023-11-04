@@ -1305,3 +1305,17 @@ void RehtiGraphics::DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUt
         func(instance, debugMessenger, pAllocator);
     }
 }
+
+void RehtiGraphics::addMouseClickCallback(std::function<void(const Hit &)> callback)
+{
+    this->mouseClickCallbackM = callback;
+    glfwSetWindowUserPointer(this->pWindowM, this);
+    glfwSetMouseButtonCallback(this->pWindowM, [](GLFWwindow *window, int button, int action, int mods)
+                               {
+        if ((button == GLFW_MOUSE_BUTTON_LEFT || button == GLFW_MOUSE_BUTTON_RIGHT) && action == GLFW_PRESS)
+        {
+            RehtiGraphics *pGraphics = reinterpret_cast<RehtiGraphics *>(glfwGetWindowUserPointer(window));
+            const Hit hit = pGraphics->traceClick();
+            pGraphics->mouseClickCallbackM(hit);
+        } });
+}

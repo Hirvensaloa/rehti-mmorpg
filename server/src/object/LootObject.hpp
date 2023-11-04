@@ -8,9 +8,9 @@
 class LootObject : public Object
 {
 public:
-  LootObject(int id, std::string instanceId, std::string name, Coordinates coords, unsigned int rotation, std::vector<YieldableItem> yieldableItemList, ObjectType type);
+  LootObject(int id, std::string instanceId, std::string name, Coordinates coords, unsigned int rotation, std::vector<YieldableItem> yieldableItemList, reader::ObjectType type);
 
-  LootObject(const LootObjectStruct &object, const ObjectLocation &location, ObjectType objectType);
+  LootObject(const LootObjectStruct &object, const ObjectLocation &location, reader::ObjectType objectType);
 
   void interact(Entity &entity);
 

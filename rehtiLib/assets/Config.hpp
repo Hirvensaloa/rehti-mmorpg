@@ -6,8 +6,8 @@ const std::string ROOT_PATH = "./";
 
 struct
 {
-  const unsigned AREA_WIDTH = 16;
-  const unsigned AREA_HEIGHT = AREA_WIDTH;
+  const unsigned AREA_WIDTH = 16;          ///< Width of the area in tiles
+  const unsigned AREA_HEIGHT = AREA_WIDTH; ///< The height is the same as the width
 
   // Paths
   const std::string ASSET_PATH = ROOT_PATH + "assets/map/";
@@ -25,7 +25,7 @@ struct
   const std::string GENERATED_OBJECT_JSON_PATH = GENERATED_ASSETS_PATH + "objects.json";
   const std::string GENERATED_MAP_PATH = GENERATED_ASSETS_PATH + "map.obj";
 
-  const float HEIGHT_MAP_SCALE = 0.1;
-  const float TILE_SIDE_SCALE = 1.0;
-  const float TILE_SIDE_UNIT = 1.0;
+  const float HEIGHT_MAP_SCALE = 0.1; ///< Percentage value of how much the height is scaled from the original unit.
+  const float TILE_SIDE_SCALE = 1.0;  ///< Percentage value of how much the side is scaled from the original unit.
+  const float TILE_SIDE_UNIT = 1.0;   ///< The size of the side of a tile in the original unit.
 } Config;

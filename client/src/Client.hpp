@@ -72,5 +72,5 @@ private:
 
   RehtiGraphics graphLib;
 
-  Hit lastHitM; // Last detected hit from a mouse click
+  Hit lastHitM; ///< Last detected hit from a mouse click
 };

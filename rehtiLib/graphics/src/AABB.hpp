@@ -43,12 +43,12 @@ glm::vec3 maxVector(const glm::vec3 &a, const glm::vec3 &b);
  */
 struct MapAABBData
 {
-  const std::vector<std::vector<int>> heightMatrix;       // Matrix cell contains the height of the tile for the given column (x) and row (y). This matrix contains all the areas e.g. the map.
-  const std::vector<std::vector<std::string>> areaMatrix; // Matrix cell contains the name of the area for the given column (x) and row (y). This gives important information about how the areas are connected.
-  const unsigned int areaSize;                            // The size of the area in tiles. Width and height of the area are the same.
-  const float heightScale;                                // Percentage value of how much the height is scaled from the original unit.
-  const float sideUnit;                                   // The size of the side of a tile in the original unit.
-  const float sideScale;                                  // Percentage value of how much the side is scaled from the original unit.
+  const std::vector<std::vector<int>> heightMatrix;       ///< Matrix cell contains the height of the tile for the given column (x) and row (y). This matrix contains all the areas e.g. the map.
+  const std::vector<std::vector<std::string>> areaMatrix; ///< Matrix cell contains the name of the area for the given column (x) and row (y). This gives important information about how the areas are connected.
+  const unsigned int areaSize;                            ///< The size of the area in tiles. Width and height of the area are the same.
+  const float heightScale;                                ///< Percentage value of how much the height is scaled from the original unit.
+  const float sideUnit;                                   ///< The size of the side of a tile in the original unit.
+  const float sideScale;                                  ///< Percentage value of how much the side is scaled from the original unit.
 };
 
 /**

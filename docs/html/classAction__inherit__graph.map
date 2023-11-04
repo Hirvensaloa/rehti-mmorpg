@@ -1,6 +1,0 @@
-<map id="Action" name="Action">
-<area shape="rect" id="node1" title=" " alt="" coords="153,5,216,32"/>
-<area shape="rect" id="node2" href="$classAttackAction.html" title=" " alt="" coords="5,80,111,107"/>
-<area shape="rect" id="node3" href="$classMoveAction.html" title=" " alt="" coords="135,80,234,107"/>
-<area shape="rect" id="node4" href="$classObjectInteractAction.html" title=" " alt="" coords="258,80,413,107"/>
-</map>

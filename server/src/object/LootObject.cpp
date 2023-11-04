@@ -7,7 +7,7 @@ LootObject::LootObject(int id, std::string instanceId, std::string name, Coordin
 }
 
 LootObject::LootObject(const LootObjectStruct &object, const ObjectLocation &location, ObjectType type)
-    : Object(object.id, location.instanceId, object.name, {location.x, location.y, location.z}, location.rotation, type), yieldableItemListM(object.yieldableItemList)
+    : Object(object.id, location.instanceId, object.name, {location.x, location.y}, location.rotation, type), yieldableItemListM(object.yieldableItemList)
 {
 }
 

@@ -4,6 +4,7 @@
 #include "Mesh.hpp"
 #include "Camera.hpp"
 #include "GraphicsObjectManager.hpp"
+#include "AABB.hpp"
 
 #include <algorithm>
 #include <iostream>
@@ -32,6 +33,7 @@ struct QueueFamilyIndices
     }
     bool hasTransferOnlyQueue()
     {
+        return transferFamily.has_value();
     }
 };
 
@@ -83,11 +85,10 @@ public:
     void transformTestObject(int id, glm::mat4 transformation);
 
     /**
-     * @brief Adds an area bounding box to the graphics backend.
-     * @param areaVertices
-     * @param areaCoordinates
+     * @brief Adds a bounding box for the world map
+     * @param mapAABBData see mapAABBData
      */
-    void addAreaBoundingBox(std::vector<Vertex> areaVertices, glm::ivec2 areaCoordinates);
+    void addMapBoundingBox(const MapAABBData &mapAABBData);
 
     /**
      * @brief Traces a ray against all bounding boxes, starting with objects, then characters and lastly the map.
@@ -421,6 +422,7 @@ private:
         VkDebugUtilsMessageTypeFlagsEXT messageType,
         const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
         void *pUserData);
+
     static VkResult CreateDebugUtilsMessengerEXT(
         VkInstance instance,
         const VkDebugUtilsMessengerCreateInfoEXT *pCreateInfo,

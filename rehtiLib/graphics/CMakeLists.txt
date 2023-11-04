@@ -42,6 +42,8 @@ set(GRAPHICS_SOURCES
 	Mesh.cpp
 	GraphicsTypes.hpp
 	GraphicsTypes.cpp
+	AABB.hpp
+	AABB.cpp
 	shaders/testShader.vert
 	shaders/testShader.frag
 	shaders/objectShader.vert

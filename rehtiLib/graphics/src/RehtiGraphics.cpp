@@ -52,16 +52,15 @@ void RehtiGraphics::transformTestObject(int id, glm::mat4 transformation)
     pObjectManagerM->updateTestObject(id, &transformation, getNextFrame());
 }
 
-void RehtiGraphics::addAreaBoundingBox(std::vector<Vertex> areaVertices, glm::ivec2 areaCoordinates)
+void RehtiGraphics::addMapBoundingBox(const MapAABBData &mapAABBData)
 {
-    // pos = areaVertices.pos + areaCoordinates * AREA_SIZE
-    // call fillAABB helper to create a bounding box
-    // Determine if the current vertice size matches the amount required for a tile.
-    // if it's too much, descend into child nodes by splitting vertices.
-    // Remember to include vertices in the border to both sides.
-    // The inner vertices should never be in the border, but that may be dependent on the defined order of the boxes.
-    // This is important, because otherwise the boxes will not be "connected" and instead may be all over the place.
-    // If it does, don't continue. Leave left and right as nullptr
+
+    std::vector<std::unique_ptr<AABB>> aabbList = createMapAABB(mapAABBData);
+
+    for (int i = 0; i < aabbList.size(); i++)
+    {
+        boundingBoxesM[ObjectType::MAP].push_back(std::make_pair(std::move(*aabbList[i]), i));
+    }
 }
 
 Hit RehtiGraphics::traceClick()

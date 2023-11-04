@@ -5,11 +5,12 @@
 #include "Client.hpp"
 #include "graphics.h"
 #include "network.h"
+#include "RehtiReader.hpp"
 
 int main(int argc, char *argv[])
 {
-    RehtiGraphics graphLib = RehtiGraphics();
-    graphLib.demo();
+  RehtiGraphics graphLib = RehtiGraphics();
+  graphLib.demo();
   std::cout << "Winner winner chicken dinner" << std::endl;
 
   try

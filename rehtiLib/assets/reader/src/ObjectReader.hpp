@@ -65,12 +65,15 @@ struct LootObjectStruct
   std::vector<std::vector<std::string>> tileMap;
 };
 
-enum class ObjectType
+namespace reader
 {
-  GENERAL,
-  RESOURCE,
-  LOOT
-};
+  enum class ObjectType
+  {
+    GENERAL,
+    RESOURCE,
+    LOOT
+  };
+}
 
 struct GameObjects
 {
@@ -84,19 +87,19 @@ struct GameObjects
   }
 
   // Returns object type for given object id. Call this first and then use the appropriate getter
-  const std::optional<ObjectType> getObjectType(int id)
+  const std::optional<reader::ObjectType> getObjectType(int id)
   {
     if (generalObjects.contains(id))
     {
-      return ObjectType::GENERAL;
+      return reader::ObjectType::GENERAL;
     }
     else if (resourceObjects.contains(id))
     {
-      return ObjectType::RESOURCE;
+      return reader::ObjectType::RESOURCE;
     }
     else if (lootObjects.contains(id))
     {
-      return ObjectType::LOOT;
+      return reader::ObjectType::LOOT;
     }
     else
     {
@@ -107,7 +110,7 @@ struct GameObjects
   // Get object tile map for given object id (returns empty vector if not found)
   std::vector<std::vector<std::string>> getTileMap(int id)
   {
-    std::optional<ObjectType> type = getObjectType(id);
+    std::optional<reader::ObjectType> type = getObjectType(id);
 
     if (type == std::nullopt)
     {
@@ -116,11 +119,11 @@ struct GameObjects
 
     switch (type.value())
     {
-    case ObjectType::GENERAL:
+    case reader::ObjectType::GENERAL:
       return generalObjects[id].tileMap;
-    case ObjectType::RESOURCE:
+    case reader::ObjectType::RESOURCE:
       return resourceObjects[id].tileMap;
-    case ObjectType::LOOT:
+    case reader::ObjectType::LOOT:
       return lootObjects[id].tileMap;
     default:
       return {};

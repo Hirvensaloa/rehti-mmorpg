@@ -96,7 +96,6 @@ std::array<VkVertexInputAttributeDescription, 5> CharacterVertex::getAttributeDe
 	return attributeDescs;
 }
 
-
 std::array<VkDescriptorSetLayoutBinding, 1> TestObject::getDescriptorSetLayoutBindings()
 {
 	std::array<VkDescriptorSetLayoutBinding, 1> bindings = {};
@@ -146,34 +145,34 @@ std::array<VkDescriptorSetLayoutBinding, 2> GameObject::getDescriptorSetLayoutBi
 
 std::array<ObjectType, OBJECT_TYPE_COUNT> getObjectTypes()
 {
-	return { CHARACTER, GAMEOBJECT, TESTOBJECT };
+	return {CHARACTER, GAMEOBJECT, TESTOBJECT};
 }
 
-std::vector< VkVertexInputAttributeDescription> getAttributeDescription(ObjectType objectType)
+std::vector<VkVertexInputAttributeDescription> getAttributeDescription(ObjectType objectType)
 {
-	std::vector< VkVertexInputAttributeDescription> attributeDescs{};
+	std::vector<VkVertexInputAttributeDescription> attributeDescs{};
 	switch (objectType)
 	{
-		case ObjectType::CHARACTER:
-			for (auto desc : CharacterVertex::getAttributeDescriptions())
-			{
-				attributeDescs.push_back(desc);
-			}
-			break;
-		case ObjectType::GAMEOBJECT:
-			for (auto desc : Vertex::getAttributeDescriptions())
-			{
-				attributeDescs.push_back(desc);
-			}
-			break;
-		case ObjectType::TESTOBJECT:
-			for (auto desc : SimpleVertex::getAttributeDescriptions())
-			{
-				attributeDescs.push_back(desc);
-			}
-			break;
-		default:
-			break;
+	case ObjectType::CHARACTER:
+		for (auto desc : CharacterVertex::getAttributeDescriptions())
+		{
+			attributeDescs.push_back(desc);
+		}
+		break;
+	case ObjectType::GAMEOBJECT:
+		for (auto desc : Vertex::getAttributeDescriptions())
+		{
+			attributeDescs.push_back(desc);
+		}
+		break;
+	case ObjectType::TESTOBJECT:
+		for (auto desc : SimpleVertex::getAttributeDescriptions())
+		{
+			attributeDescs.push_back(desc);
+		}
+		break;
+	default:
+		break;
 	}
 
 	return attributeDescs;
@@ -184,27 +183,17 @@ VkVertexInputBindingDescription getBindingDescription(ObjectType objectType)
 	VkVertexInputBindingDescription desc{};
 	switch (objectType)
 	{
-		case ObjectType::CHARACTER:
-			desc = CharacterVertex::getBindingDescription();
-			break;
-		case ObjectType::GAMEOBJECT:
-			desc = Vertex::getBindingDescription();
-			break;
-		case ObjectType::TESTOBJECT:
-			desc = SimpleVertex::getBindingDescription();
-			break;
-		default:
-			break;
+	case ObjectType::CHARACTER:
+		desc = CharacterVertex::getBindingDescription();
+		break;
+	case ObjectType::GAMEOBJECT:
+		desc = Vertex::getBindingDescription();
+		break;
+	case ObjectType::TESTOBJECT:
+		desc = SimpleVertex::getBindingDescription();
+		break;
+	default:
+		break;
 	}
 	return desc;
-}
-
-bool AABB::isLeaf() const
-{
-	return pLeft == nullptr && pRight == nullptr;
-}
-
-glm::vec3 AABB::getCenter() const
-{
-	return 0.5f * min + 0.5f * max;
 }

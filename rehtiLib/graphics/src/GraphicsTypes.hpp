@@ -24,7 +24,7 @@ enum ObjectType : uint32_t
 	UNDEFINED
 };
 
-std::array <ObjectType, OBJECT_TYPE_COUNT> getObjectTypes();
+std::array<ObjectType, OBJECT_TYPE_COUNT> getObjectTypes();
 
 #pragma endregion
 
@@ -37,22 +37,9 @@ struct Hit
 	glm::vec3 hitPoint;
 };
 
-/**
- * @brief Axis Aligned Bounding Box data structure
-*/
-struct AABB
-{
-	glm::vec3 min;
-	glm::vec3 max;
-	std::unique_ptr<AABB> pLeft;
-	std::unique_ptr<AABB> pRight;
-	bool isLeaf() const;
-	glm::vec3 getCenter() const;
-};
-
 struct ImageData
 {
-	unsigned char* pixels;
+	unsigned char *pixels;
 	int width;
 	int height;
 };
@@ -82,23 +69,23 @@ struct AllocatedBuffer
 // Game object descriptor data
 struct GameObjectUniformBuffer
 {
-	VkDescriptorSet descriptorSet; // Descriptor set of the data
+	VkDescriptorSet descriptorSet;	 // Descriptor set of the data
 	AllocatedBuffer transformBuffer; // Buffer containing the transform data (glm::mat4)
-	void* mappedTransformData; // Pointer to the mapped data of the transform buffer
+	void *mappedTransformData;			 // Pointer to the mapped data of the transform buffer
 };
 
 // Test object descriptor data
 struct TestObjectUniformBuffer
 {
-	VkDescriptorSet descriptorSet; // Descriptor set of the data
+	VkDescriptorSet descriptorSet;	 // Descriptor set of the data
 	AllocatedBuffer transformBuffer; // Buffer containing the transform data (glm::mat4)
-	void* mappedTransformData; // Pointer to the mapped data of the transform buffer
+	void *mappedTransformData;			 // Pointer to the mapped data of the transform buffer
 };
 
 // Character buffer object
 struct CharacterObjectUniformBuffer
 {
-	VkDescriptorSet descriptorSet; // Descriptor set of the data
+	VkDescriptorSet descriptorSet;			 // Descriptor set of the data
 	AllocatedBuffer boneTransformations; // Todo think how the data is going to be stored
 	AllocatedBuffer boneWeights;
 };
@@ -142,14 +129,14 @@ struct TestObject
 /**
  * @brief Returns a vector of VkVertexInputAttributeDescription for the given object type.
  * @param objectType to query the attribute descriptions for.
-*/
-std::vector< VkVertexInputAttributeDescription> getAttributeDescription(ObjectType objectType);
+ */
+std::vector<VkVertexInputAttributeDescription> getAttributeDescription(ObjectType objectType);
 
 /**
  * @brief Returns the vertex binding description for the given object type.
  * @param objectType to query the binding description for.
  * @return
-*/
+ */
 VkVertexInputBindingDescription getBindingDescription(ObjectType objectType);
 
 struct CharacterVertex

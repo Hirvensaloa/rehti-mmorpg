@@ -17,6 +17,7 @@ set(SOURCES
         world/GameWorld.cpp
         world/GameWorld.hpp
         world/Coordinates.hpp
+        world/Coordinates.cpp
         world/Map.cpp
         world/Map.hpp
         world/Utils.cpp

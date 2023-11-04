@@ -1,9 +1,0 @@
-<map id="Action" name="Action">
-<area shape="rect" id="node1" title=" " alt="" coords="267,184,330,211"/>
-<area shape="rect" id="node2" href="$classEntity.html" title=" " alt="" coords="269,95,329,121"/>
-<area shape="rect" id="node3" href="$classGameWorld.html" title=" " alt="" coords="5,5,104,32"/>
-<area shape="rect" id="node4" href="$classInventory.html" title=" " alt="" coords="141,5,225,32"/>
-<area shape="rect" id="node5" href="$structCoordinates.html" title=" " alt="" coords="249,5,349,32"/>
-<area shape="rect" id="node6" href="$classEquipment.html" title=" " alt="" coords="373,5,465,32"/>
-<area shape="rect" id="node7" href="$classSkillSet.html" title=" " alt="" coords="494,5,565,32"/>
-</map>

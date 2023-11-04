@@ -6,7 +6,7 @@ Object::Object(int id, std::string instanceId, std::string name, Coordinates loc
 }
 
 Object::Object(const GeneralObjectStruct &object, const ObjectLocation &location, ObjectType objectType)
-    : idM(object.id), instanceIdM(location.instanceId), nameM(object.name), coordinatesM({location.x, location.y, location.z}), rotationM(location.rotation), objectTypeM(objectType)
+    : idM(object.id), instanceIdM(location.instanceId), nameM(object.name), coordinatesM({location.x, location.y}), rotationM(location.rotation), objectTypeM(objectType)
 {
 }
 

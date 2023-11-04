@@ -75,7 +75,7 @@ void Entity::setAction(std::shared_ptr<Action> action)
 
 bool Entity::move(Coordinates target)
 {
-    if (locationM.distance(target) < 2)
+    if (locationM.distance(target) <= 1)
     {
         locationM = target;
         return true;

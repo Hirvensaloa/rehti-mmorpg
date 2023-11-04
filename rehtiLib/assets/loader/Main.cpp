@@ -17,9 +17,10 @@ int main()
   const std::vector<std::vector<int>> heightMatrix = createHeightMap(areaMap);
   const std::vector<std::vector<std::string>> objectBlockMap = createObjectBlockMap(areaMap, gameObjects, heightMatrix);
 
-  // Generate access map for server
+  // Generate access map and height map for server
   const std::vector<std::vector<unsigned>> accessMap = generateAccessMap(heightMatrix, objectBlockMap);
   writeMatrixToFile(accessMap, GENERATED_ASSETS_PATH + "access_map.txt");
+  writeMatrixToFile(heightMatrix, GENERATED_ASSETS_PATH + "height_map.txt");
 
   // Generate obj map for client
   generateMapObj(heightMatrix);

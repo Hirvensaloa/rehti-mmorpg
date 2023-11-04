@@ -5,35 +5,20 @@
 #include <vector>
 #include <algorithm>
 
-#pragma region objects
-
-std::array<VkDescriptorSetLayoutBinding, 1> TestObject::getDescriptorSetLayoutBindings()
-{
-	std::array<VkDescriptorSetLayoutBinding, 1> bindings = {};
-	bindings[0].binding = 0;
-	bindings[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	bindings[0].descriptorCount = 1;
-	bindings[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-	bindings[0].pImmutableSamplers = nullptr;
-	return bindings;
-}
-
-#pragma endregion
-
 #pragma region Manager 
 
-GraphicsObjectManager::GraphicsObjectManager(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, VkQueue transferQueue, uint32_t queueFamily, const uint32_t frameCount)
-	: transferQueueM(transferQueue), logDeviceM(logDevice), frameCountM(frameCount)
+GraphicsObjectManager::GraphicsObjectManager(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, VkQueue graphicsQueue, uint32_t graphicsQueueFamily, const uint32_t frameCount)
+	: graphicsCommandUnitM({ graphicsQueue,VK_NULL_HANDLE , graphicsQueueFamily }), logDeviceM(logDevice), frameCountM(frameCount)
 {
-	// Create a command pool for the transfer queue
+	// Create a new command pool for the graphics queue
 	VkCommandPoolCreateInfo cmdPoolCreateInfo{};
 	cmdPoolCreateInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
 	cmdPoolCreateInfo.flags = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT | VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
-	cmdPoolCreateInfo.queueFamilyIndex = queueFamily;
+	cmdPoolCreateInfo.queueFamilyIndex = graphicsQueueFamily;
 	// Create the command pool and store it to the member variable
-	if (vkCreateCommandPool(logDevice, &cmdPoolCreateInfo, nullptr, &transferCommandPoolM) != VK_SUCCESS)
+	if (vkCreateCommandPool(logDevice, &cmdPoolCreateInfo, nullptr, &graphicsCommandUnitM.commandPool) != VK_SUCCESS)
 	{
-		throw std::runtime_error("Failed to create command pool for transfer queue");
+		throw std::runtime_error("Failed to create command pool for graphics queue");
 	}
 
 	// Create the allocator
@@ -48,14 +33,14 @@ GraphicsObjectManager::GraphicsObjectManager(VkInstance instance, VkPhysicalDevi
 		throw std::runtime_error("Failed to create VMA allocator");
 	}
 
-	// Add the queue family index
-	queueFamilyIndicesM.push_back(queueFamily);
-
 	// Create layouts for all object types
 	createDescriptorBuilder();
-	auto bindings = TestObject::getDescriptorSetLayoutBindings();
-	pBuilderM->setDescriptorSetLayout(bindings.data(), bindings.size(), testObjectSetLayoutM);
-	// Todo add other objects
+	auto characterBindings = CharacterObject::getDescriptorSetLayoutBindings();
+	auto gameObjectBindings = GameObject::getDescriptorSetLayoutBindings();
+	auto testBindings = TestObject::getDescriptorSetLayoutBindings();
+	pBuilderM->setDescriptorSetLayout(characterBindings.data(), characterBindings.size(), characterSetLayoutM);
+	pBuilderM->setDescriptorSetLayout(gameObjectBindings.data(), gameObjectBindings.size(), gameObjectSetLayoutM);
+	pBuilderM->setDescriptorSetLayout(testBindings.data(), testBindings.size(), testObjectSetLayoutM);
 }
 
 
@@ -69,7 +54,12 @@ GraphicsObjectManager::~GraphicsObjectManager()
 		vmaDestroyBuffer(allocatorM, character.vertexData.buffer, character.vertexData.allocation);
 		vmaDestroyBuffer(allocatorM, character.indexData.buffer, character.indexData.allocation);
 		vmaDestroyImage(allocatorM, character.texture.image, character.texture.allocation);
-		// Todo destroy skeleton data
+		vkDestroyImageView(logDeviceM, character.textureView, nullptr);
+		for (auto& bufObject : character.characterUniformBuffers)
+		{
+			vmaDestroyBuffer(allocatorM, bufObject.boneTransformations.buffer, bufObject.boneTransformations.allocation);
+			vmaDestroyBuffer(allocatorM, bufObject.boneWeights.buffer, bufObject.boneWeights.allocation);
+		}
 	}
 	// Loop over objects
 	for (auto& objectPair : gameObjectsM)
@@ -78,6 +68,11 @@ GraphicsObjectManager::~GraphicsObjectManager()
 		vmaDestroyBuffer(allocatorM, object.vertexData.buffer, object.vertexData.allocation);
 		vmaDestroyBuffer(allocatorM, object.indexData.buffer, object.indexData.allocation);
 		vmaDestroyImage(allocatorM, object.texture.image, object.texture.allocation);
+		vkDestroyImageView(logDeviceM, object.textureView, nullptr);
+		for (auto& bufObject : object.uniformBuffers)
+		{
+			vmaDestroyBuffer(allocatorM, bufObject.transformBuffer.buffer, bufObject.transformBuffer.allocation);
+		}
 	}
 	// test objects
 	for (auto& testPair : testObjectsM)
@@ -90,18 +85,93 @@ GraphicsObjectManager::~GraphicsObjectManager()
 			vmaDestroyBuffer(allocatorM, bufObject.transformBuffer.buffer, bufObject.transformBuffer.allocation);
 		}
 	}
-
-	vkDestroyCommandPool(logDeviceM, transferCommandPoolM, nullptr);
+	// Destroy command pools
+	vkDestroyCommandPool(logDeviceM, graphicsCommandUnitM.commandPool, nullptr);
+	if (transferCommandUnitM.has_value())
+		vkDestroyCommandPool(logDeviceM, transferCommandUnitM.value().commandPool, nullptr);
 	// And destroy the allocator
 	vmaDestroyAllocator(allocatorM);
 }
 
-void GraphicsObjectManager::addQueueFamilyAccess(const uint32_t queueFamily)
+void GraphicsObjectManager::addTransferQueueFamilyAccess(const uint32_t transferQueueFamily, VkQueue transferQueue)
 {
-	if (std::find(queueFamilyIndicesM.begin(), queueFamilyIndicesM.end(), queueFamily) == queueFamilyIndicesM.end())
+	// Check that it is not already set
+	if (!transferCommandUnitM.has_value())
 	{
-		queueFamilyIndicesM.push_back(queueFamily);
+		CommandUnit unit{};
+		unit.queueFamilyIndex = transferQueueFamily;
+		unit.queue = transferQueue;
+		// Create a new command pool for the graphics queue
+		VkCommandPoolCreateInfo cmdPoolCreateInfo{};
+		cmdPoolCreateInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+		cmdPoolCreateInfo.flags = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT | VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+		cmdPoolCreateInfo.queueFamilyIndex = transferQueueFamily;
+		// Create the command pool and store it to the member variable
+		if (vkCreateCommandPool(logDeviceM, &cmdPoolCreateInfo, nullptr, &unit.commandPool) != VK_SUCCESS)
+		{
+			throw std::runtime_error("Failed to create command pool for transfer queue");
+		}
+		transferCommandUnitM = unit;
 	}
+}
+
+bool GraphicsObjectManager::addGameObject(int id, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, VkSampler imgSampler)
+{
+	if (gameObjectsM.contains(id))
+	{
+		return false;
+	}
+	GameObject gameObject{};
+	VkDeviceSize vSize = vertices.size() * sizeof(Vertex);
+	VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
+	VkDeviceSize tSize = sizeof(glm::mat4);
+	VkDeviceSize imgSize = texture.width * texture.height * 4;
+	gameObject.indexCount = indices.size();
+	// Create buffers
+	gameObject.vertexData = createBuffer(vSize, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+	gameObject.indexData = createBuffer(iSize, VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+	// image data
+	gameObject.texture = createImage(texture.width, texture.height, VK_FORMAT_R8G8B8A8_SRGB);
+	gameObject.textureView = createImageView(gameObject.texture.image, VK_FORMAT_R8G8B8A8_SRGB);
+	// Create descriptor set data
+	for (uint32_t i = 0; i < frameCountM; i++)
+	{
+		GameObjectUniformBuffer uBuffer{};
+		// We want uniform memory to be host coherent, and persistently mapped
+		uBuffer.transformBuffer = createBuffer(tSize, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VMA_MEMORY_USAGE_AUTO,
+			VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT | VMA_ALLOCATION_CREATE_MAPPED_BIT); // These two flags set memory to be persistently mapped.
+		VkDescriptorBufferInfo descBufferInfo{};
+		descBufferInfo.buffer = uBuffer.transformBuffer.buffer;
+		descBufferInfo.offset = 0;
+		descBufferInfo.range = tSize;
+		// Texture info
+		VkDescriptorImageInfo descImageInfo{};
+		descImageInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+		descImageInfo.imageView = gameObject.textureView;
+		descImageInfo.sampler = imgSampler;
+		// Try creating descriptor set
+		if (pBuilderM->bindBuffer(descBufferInfo, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT) // Buffer
+			.bindImage(descImageInfo, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT) // Texture
+			.build(uBuffer.descriptorSet))
+		{
+			gameObject.uniformBuffers.push_back(uBuffer);
+			// Uniforms are persistently mapped, so we can just memcpy to them
+			memcpy(uBuffer.transformBuffer.allocation->GetMappedData(), &transformation, tSize);
+		}
+		else
+		{
+			throw std::runtime_error("Failed to create descriptor set for a game object");
+		}
+	}
+
+	// Copy the data to the buffers
+	copyBuffer(gameObject.vertexData, vertices.data());
+	copyBuffer(gameObject.indexData, indices.data());
+	copyImage(gameObject.texture, texture);
+	// Now the game object data should be available for the gpu.
+	gameObjectsM[id] = gameObject;
+
+	return true;
 }
 
 AllocatedBuffer GraphicsObjectManager::createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VmaAllocationInfo& info, VmaMemoryUsage memUsage, VmaAllocationCreateFlags vmaCreationFlags, VkMemoryPropertyFlags requiredFlags, VkMemoryPropertyFlags preferredFlags)
@@ -112,9 +182,18 @@ AllocatedBuffer GraphicsObjectManager::createBuffer(VkDeviceSize size, VkBufferU
 	bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
 	bufferInfo.size = size;
 	bufferInfo.usage = usage;
-	bufferInfo.sharingMode = VK_SHARING_MODE_CONCURRENT; // available to multiple queues
-	bufferInfo.pQueueFamilyIndices = queueFamilyIndicesM.data();
-	bufferInfo.queueFamilyIndexCount = queueFamilyIndicesM.size();
+	bufferInfo.sharingMode = getSharingMode(); // returns concurrent if multiple queues are available
+	// TODO Move all sharingmode stuff into a single functiom with configuration options
+	if (transferCommandUnitM.has_value())
+	{
+		uint32_t queueFamilies[] = { graphicsCommandUnitM.queueFamilyIndex, transferCommandUnitM.value().queueFamilyIndex };
+		bufferInfo.pQueueFamilyIndices = queueFamilies;
+	}
+	else
+	{
+		bufferInfo.pQueueFamilyIndices = &graphicsCommandUnitM.queueFamilyIndex;
+	}
+	bufferInfo.queueFamilyIndexCount = getQueueFamilyCount();
 	VmaAllocationCreateInfo allocInfo{};
 	allocInfo.flags = vmaCreationFlags;
 	allocInfo.usage = memUsage;
@@ -139,18 +218,27 @@ AllocatedBuffer GraphicsObjectManager::createBuffer(VkDeviceSize size, VkBufferU
 	bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
 	bufferInfo.size = size;
 	bufferInfo.usage = usage;
-	bufferInfo.sharingMode = VK_SHARING_MODE_CONCURRENT; // available to multiple queues
-	bufferInfo.pQueueFamilyIndices = queueFamilyIndicesM.data();
-	bufferInfo.queueFamilyIndexCount = queueFamilyIndicesM.size();
+	bufferInfo.sharingMode = getSharingMode();
+	// TODO Move all sharingmode stuff into a single functiom with configuration options
+	if (transferCommandUnitM.has_value())
+	{
+		uint32_t queueFamilies[] = { graphicsCommandUnitM.queueFamilyIndex, transferCommandUnitM.value().queueFamilyIndex };
+		bufferInfo.pQueueFamilyIndices = queueFamilies;
+	}
+	else
+	{
+		bufferInfo.pQueueFamilyIndices = &graphicsCommandUnitM.queueFamilyIndex;
+	}
+	bufferInfo.queueFamilyIndexCount = getQueueFamilyCount();
 	VmaAllocationCreateInfo allocInfo{};
 	allocInfo.flags = vmaCreationFlags;
 	allocInfo.usage = memUsage;
 	allocInfo.requiredFlags = requiredFlags;
-	allocInfo.preferredFlags = preferredFlags;	
+	allocInfo.preferredFlags = preferredFlags;
 
 	if (vmaCreateBuffer(allocatorM, &bufferInfo, &allocInfo, &newBuffer.buffer, &newBuffer.allocation, nullptr) != VK_SUCCESS)
 	{
-		throw std::runtime_error("Failed to create VMA buffer");		
+		throw std::runtime_error("Failed to create VMA buffer");
 	}
 	newBuffer.size = size;
 
@@ -158,15 +246,45 @@ AllocatedBuffer GraphicsObjectManager::createBuffer(VkDeviceSize size, VkBufferU
 	return newBuffer;
 }
 
-AllocatedImage GraphicsObjectManager::createImage(VkDeviceSize size, uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VmaMemoryUsage memUsage, VmaAllocationCreateFlags vmaCreationFlags, VkMemoryPropertyFlags requiredFlags, VkMemoryPropertyFlags preferredFlags)
+AllocatedImage GraphicsObjectManager::createImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VmaMemoryUsage memUsage, VmaAllocationCreateFlags vmaCreationFlags, VkMemoryPropertyFlags requiredFlags, VkMemoryPropertyFlags preferredFlags)
 {
 	AllocatedImage newImage{};
-
+	// Always assume rgba texture. We can force an alpha channel without one existing
+	VkDeviceSize size = width * height * 4;
 	VkImageCreateInfo imageInfo{};
 	imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+	imageInfo.flags = 0;
+	imageInfo.imageType = VK_IMAGE_TYPE_2D;
+	imageInfo.extent.width = width;
+	imageInfo.extent.height = height;
+	imageInfo.extent.depth = 1; // 2D image
+	imageInfo.mipLevels = 1; // No mip mapping
+	imageInfo.arrayLayers = 1; // No array layers
+	imageInfo.format = format;
+	imageInfo.tiling = tiling;
+	imageInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED; // We will be using pipeline barriers to transition the layout
+	imageInfo.usage = usage;
 
+	// TODO FIX THE SHARING MODES
+	imageInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE; // Concurrent does not allow for transfer queue to be used	
+	// Images are only to be sent in the graphics queue
+	imageInfo.pQueueFamilyIndices = &graphicsCommandUnitM.queueFamilyIndex;
+	imageInfo.queueFamilyIndexCount = 1;
 
-	return AllocatedImage();
+	imageInfo.samples = VK_SAMPLE_COUNT_1_BIT; // No multisampling
+
+	VmaAllocationCreateInfo allocInfo{};
+	allocInfo.flags = vmaCreationFlags;
+	allocInfo.usage = memUsage;
+	allocInfo.requiredFlags = requiredFlags;
+	allocInfo.preferredFlags = preferredFlags;
+
+	if (vmaCreateImage(allocatorM, &imageInfo, &allocInfo, &newImage.image, &newImage.allocation, nullptr) != VK_SUCCESS)
+	{
+		throw std::runtime_error("Failed to create a VMA image");
+	}
+	newImage.size = size;
+	return newImage;
 }
 
 void GraphicsObjectManager::createDescriptorBuilder()
@@ -176,12 +294,170 @@ void GraphicsObjectManager::createDescriptorBuilder()
 	pBuilderM = std::make_unique<DescriptorBuilder>(manager, cache);
 }
 
+uint32_t GraphicsObjectManager::getQueueFamilyCount()
+{
+	uint32_t count = 1;
+	if (transferCommandUnitM.has_value())
+	{
+		count = 2;
+	}
+	return count;
+}
+
+VkSharingMode GraphicsObjectManager::getSharingMode() // TODO ADD FUNCTIONALITY TO DEFINE FAMILY PREFERENCE
+{
+	VkSharingMode mode;
+	if (transferCommandUnitM.has_value()) // If we have separate transfer queue
+	{
+		mode = VK_SHARING_MODE_CONCURRENT;
+	}
+	else // if we only have graphics queue
+	{
+		mode = VK_SHARING_MODE_EXCLUSIVE;
+	}
+	return mode;
+}
+
+VkCommandBuffer GraphicsObjectManager::startCommandBuffer(bool preferTransfer)
+{
+	VkCommandBuffer cmdBuffer;
+	if (preferTransfer && transferCommandUnitM.has_value())
+	{
+		cmdBuffer = transferCommandUnitM.value().startCommandBuffer(logDeviceM);
+		activeCommandUnitM = transferCommandUnitM.value();
+	}
+	else
+	{
+		cmdBuffer = graphicsCommandUnitM.startCommandBuffer(logDeviceM);
+		activeCommandUnitM = graphicsCommandUnitM;
+	}
+
+	return cmdBuffer;
+}
+
+bool GraphicsObjectManager::endCommandBuffer(VkCommandBuffer commandBuffer, VkFence fence)
+{
+	bool val = false;
+	if (activeCommandUnitM.has_value()) // We can only end if we have an active unit.
+	{
+		val = activeCommandUnitM.value().endCommandBuffer(logDeviceM, commandBuffer, fence);
+		activeCommandUnitM.reset();
+	}
+	return val;
+}
+
+void GraphicsObjectManager::transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout, VkCommandBuffer commandBuffer, std::pair<uint32_t, uint32_t> srcAndDstQueueFamilies)
+{
+
+	std::pair<VkAccessFlags, VkAccessFlags> srcAndDstAccessMasks{};
+	std::pair<VkPipelineStageFlags, VkPipelineStageFlags> srcAndDstStages{};
+	bool res = getPipelineAndAccessFlags(oldLayout, newLayout, srcAndDstAccessMasks, srcAndDstStages);
+	if (!res)
+	{
+		throw std::runtime_error("Failed to get pipeline and access flags for image layout transition");
+	}
+
+	VkImageMemoryBarrier barrier{};
+	barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+	barrier.oldLayout = oldLayout;
+	barrier.newLayout = newLayout;
+	barrier.srcQueueFamilyIndex = srcAndDstQueueFamilies.first;
+	barrier.dstQueueFamilyIndex = srcAndDstQueueFamilies.second;
+	// data
+	barrier.image = image;
+	barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	barrier.subresourceRange.baseMipLevel = 0; // No mip mapping
+	barrier.subresourceRange.levelCount = 1;
+	barrier.subresourceRange.baseArrayLayer = 0; // No array layers
+	barrier.subresourceRange.layerCount = 1;
+
+	barrier.srcAccessMask = srcAndDstAccessMasks.first;
+	barrier.dstAccessMask = srcAndDstAccessMasks.second;
+
+
+	vkCmdPipelineBarrier(commandBuffer,
+		srcAndDstStages.first, srcAndDstStages.second,
+		0, 0, nullptr, 0, nullptr,
+		1, &barrier);
+
+}
+
+std::pair<uint32_t, uint32_t> GraphicsObjectManager::getQueueTransitionFamilies()
+{
+	if (transferCommandUnitM.has_value())
+	{ // Match previous transition
+		return std::make_pair(transferCommandUnitM.value().queueFamilyIndex, graphicsCommandUnitM.queueFamilyIndex);
+	}
+	return std::make_pair(VK_QUEUE_FAMILY_IGNORED, VK_QUEUE_FAMILY_IGNORED);
+}
+
+bool GraphicsObjectManager::getPipelineAndAccessFlags(VkImageLayout srcLayout, VkImageLayout dstLayout, std::pair<VkAccessFlags, VkAccessFlags>& srcAndDstAccessMasks, std::pair<VkPipelineStageFlags, VkPipelineStageFlags>& srcAndDstStages)
+{
+	// transfer image
+	if (srcLayout == VK_IMAGE_LAYOUT_UNDEFINED &&
+		dstLayout == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL)
+	{
+		srcAndDstAccessMasks.first = 0;
+		srcAndDstAccessMasks.second = VK_ACCESS_TRANSFER_WRITE_BIT;
+
+		srcAndDstStages.first = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;
+		srcAndDstStages.second = VK_PIPELINE_STAGE_TRANSFER_BIT;
+	}
+	else if (srcLayout == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL &&
+		dstLayout == VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL)
+	{
+		srcAndDstAccessMasks.first = VK_ACCESS_TRANSFER_WRITE_BIT;
+		srcAndDstAccessMasks.second = VK_ACCESS_SHADER_READ_BIT;
+
+		srcAndDstStages.first = VK_PIPELINE_STAGE_TRANSFER_BIT;
+		srcAndDstStages.second = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+	}
+	else if (srcLayout == VK_IMAGE_LAYOUT_UNDEFINED &&
+		dstLayout == VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL)
+	{
+		srcAndDstAccessMasks.first = 0;
+		srcAndDstAccessMasks.second = VK_ACCESS_SHADER_READ_BIT;
+
+		srcAndDstStages.first = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;
+		srcAndDstStages.second = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+	}
+	else if (srcLayout == VK_IMAGE_LAYOUT_UNDEFINED &&
+		dstLayout == VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL)
+	{
+		srcAndDstAccessMasks.first = 0;
+		srcAndDstAccessMasks.second = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT | VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+
+		srcAndDstStages.first = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;
+		srcAndDstStages.second = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT;
+	}
+	else
+	{
+		return false;
+	}
+
+	return true;
+}
+
+AllocatedBuffer GraphicsObjectManager::createStagingBuffer(VkDeviceSize size, VmaAllocationInfo& allocInfo)
+{
+	AllocatedBuffer stagingBuffer{};
+	stagingBuffer = createBuffer(size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, allocInfo, VMA_MEMORY_USAGE_AUTO,
+		VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT
+		| VMA_ALLOCATION_CREATE_MAPPED_BIT); // Also automatically map
+
+	if (allocInfo.pMappedData == nullptr)
+	{
+		throw std::runtime_error("Failed to map staging buffer");
+	}
+	return stagingBuffer;
+}
+
 bool GraphicsObjectManager::addTestObject(int id, const std::vector<SimpleVertex>& vertices, const std::vector<uint32_t>& indices, glm::mat4 transformation)
 {
 	if (testObjectsM.contains(id))
 	{
 		return false;
-	}	
+	}
 
 	// Create the vertex buffer
 	TestObject newObject{};
@@ -198,7 +474,7 @@ bool GraphicsObjectManager::addTestObject(int id, const std::vector<SimpleVertex
 	{
 		TestObjectUniformBuffer uBuffer{};
 		// We want uniform memory to be host coherent, and persistently mapped
-		uBuffer.transformBuffer = createBuffer(transformBufferSize, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VMA_MEMORY_USAGE_AUTO, 
+		uBuffer.transformBuffer = createBuffer(transformBufferSize, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VMA_MEMORY_USAGE_AUTO,
 			VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT | VMA_ALLOCATION_CREATE_MAPPED_BIT); // These two flags set memory to be persistently mapped.
 		VkDescriptorBufferInfo descBufferInfo{};
 		descBufferInfo.buffer = uBuffer.transformBuffer.buffer;
@@ -215,12 +491,12 @@ bool GraphicsObjectManager::addTestObject(int id, const std::vector<SimpleVertex
 		{
 			throw std::runtime_error("Failed to create descriptor set for test object");
 		}
-		
+
 	}
 
 	// Copy the data to the buffers
-	copyBuffer(logDeviceM, newObject.vertexData, vertices.data());
-	copyBuffer(logDeviceM, newObject.indexData, indices.data());
+	copyBuffer(newObject.vertexData, vertices.data());
+	copyBuffer(newObject.indexData, indices.data());
 	// Now test object data should be available for the gpu.
 	testObjectsM[id] = newObject;
 
@@ -241,121 +517,47 @@ void GraphicsObjectManager::updateObjectDescriptor(int id, const void* srcData, 
 	memcpy(buffer.allocation->GetMappedData(), srcData, buffer.size);
 }
 
-void GraphicsObjectManager::copyBuffers(VkDevice logDevice, std::vector<AllocatedBuffer> buffers, std::vector<const void*> sources)
+AllocatedImage GraphicsObjectManager::createDepthImage(uint32_t width, uint32_t height, VkFormat depthFormat)
 {
-	std::vector<VkFence> fences;
-	std::vector<AllocatedBuffer> allocatedStagingBuffers;
-	
-	int i = 0;
-	for (auto allocObject : buffers)
-	{
-		VkMemoryPropertyFlags memProps;
-		vmaGetAllocationMemoryProperties(allocatorM, allocObject.allocation, &memProps);
-		VkDeviceSize bufferSize = allocObject.allocation->GetSize();
-
-		if (memProps & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) // mappable memory
-		{
-			void* pDataMap;
-			vmaMapMemory(allocatorM, allocObject.allocation, &pDataMap);
-			memcpy(pDataMap, sources[i], bufferSize);
-			// If the memory is not host coherent, we need to flush it
-			if(! (memProps & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT) )
-				vmaFlushAllocation(allocatorM, allocObject.allocation, 0, bufferSize);
-
-			vmaUnmapMemory(allocatorM, allocObject.allocation);
-		}
-		else // non-mappable memory, needs to be staged and copied using cmd buffers
-		{
-			VkBuffer stagingBuffer;
-			VmaAllocation stagingBufferAllocation;
-			VmaAllocationInfo allocInfo;			
-
-			VkBufferCreateInfo stagingBufferInfo{};
-			stagingBufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-			stagingBufferInfo.size = bufferSize;
-			stagingBufferInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
-
-			VmaAllocationCreateInfo stagingAllocInfo{};
-			stagingAllocInfo.usage = VMA_MEMORY_USAGE_AUTO;
-			stagingAllocInfo.requiredFlags = VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT 
-				| VMA_ALLOCATION_CREATE_MAPPED_BIT; // Also automatically map
-
-			if (vmaCreateBuffer(allocatorM, &stagingBufferInfo, &stagingAllocInfo, &stagingBuffer, &stagingBufferAllocation, &allocInfo) != VK_SUCCESS)
-			{
-				throw std::runtime_error("Failed to create a staging buffer for a non-mappable buffer");
-			}
-			AllocatedBuffer allocatedStagingBuffer{};
-			allocatedStagingBuffer.buffer = stagingBuffer;
-			allocatedStagingBuffer.allocation = stagingBufferAllocation;
-			allocatedStagingBuffer.size = bufferSize;
-			allocatedStagingBuffers.push_back(allocatedStagingBuffer);
-			// Copy the data to the staging buffer
-			memcpy(allocInfo.pMappedData, sources[i], bufferSize);
-			vmaFlushAllocation(allocatorM, stagingBufferAllocation, 0, bufferSize);
-			// Perhaps the following section should be separated into its own function
-			// Allocate a command buffer
-			VkCommandBufferAllocateInfo cmdAllocInfo{};
-			cmdAllocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-			cmdAllocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-			cmdAllocInfo.commandBufferCount = 1;
-			cmdAllocInfo.commandPool = transferCommandPoolM; // TODO SET This, currently nullptr
-
-			VkCommandBuffer cmdBuffer;
-			if (vkAllocateCommandBuffers(logDevice, &cmdAllocInfo, &cmdBuffer) != VK_SUCCESS)
-			{
-				throw std::runtime_error("Failed to allocate a command buffer for copying a non-mappable buffer");
-			}
-
-			// Begin recording
-			VkCommandBufferBeginInfo cmdBeginInfo{};
-			cmdBeginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-			cmdBeginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-
-			vkBeginCommandBuffer(cmdBuffer, &cmdBeginInfo);
-
-			VkBufferCopy copyRegion{};
-			copyRegion.srcOffset = 0;
-			copyRegion.dstOffset = 0;
-			copyRegion.size = bufferSize;
-			vkCmdCopyBuffer(cmdBuffer, stagingBuffer, allocObject.buffer, 1, &copyRegion);
-
-			vkEndCommandBuffer(cmdBuffer);
-
-
-			VkFenceCreateInfo fenceInfo{};
-			fenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
-			VkFence fence;
-			if (vkCreateFence(logDevice, &fenceInfo, nullptr, &fence) != VK_SUCCESS)
-			{
-				throw std::runtime_error("Failed to create a fence for copying a non-mappable buffer");
-			}
-			fences.push_back(fence);
-
-			VkSubmitInfo submitInfo{};
-			submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-			submitInfo.commandBufferCount = 1;
-			submitInfo.pCommandBuffers = &cmdBuffer;
-
-			vkQueueSubmit(transferQueueM, 1, &submitInfo, fence);
-		} // end of else
-		i++;
-	} // end of for
-
-	if (!fences.empty()) // If we added fences, wait for them to finish
-	{ 
-		vkWaitForFences(logDevice, fences.size(), fences.data(), VK_TRUE, UINT64_MAX);
-		for (auto fence : fences)
-		{
-			vkDestroyFence(logDevice, fence, nullptr);
-		}
-		for(auto buf : allocatedStagingBuffers)
-		{
-			vmaDestroyBuffer(allocatorM, buf.buffer, buf.allocation);
-		}
-	}
+	AllocatedImage newImage{};
+	newImage = createImage(width, height, depthFormat, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
+	return newImage;
 }
 
-void GraphicsObjectManager::copyBuffer(VkDevice logDevice, AllocatedBuffer allocBuffer, const void* srcData)
+void GraphicsObjectManager::destroyImage(AllocatedImage image)
+{
+	vmaDestroyImage(allocatorM, image.image, image.allocation);
+}
+
+void GraphicsObjectManager::transitionDepthImageLayout(AllocatedImage depthImage, VkFormat depthFormat, VkImageLayout srcLayout, VkImageLayout dstLayout)
+{
+	VkCommandBuffer cmdBuffer = startCommandBuffer(false);
+	transitionImageLayout(depthImage.image, depthFormat, srcLayout, dstLayout, cmdBuffer);
+	endCommandBuffer(cmdBuffer);
+}
+
+VkImageView GraphicsObjectManager::createImageView(VkImage image, VkFormat format, VkImageAspectFlags aspectFlags)
+{
+	VkImageViewCreateInfo info{};
+	info.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+	info.image = image;
+	info.viewType = VK_IMAGE_VIEW_TYPE_2D;
+	info.format = format;
+	info.subresourceRange.aspectMask = aspectFlags;
+	info.subresourceRange.baseMipLevel = 0;
+	info.subresourceRange.levelCount = 1;
+	info.subresourceRange.baseArrayLayer = 0;
+	info.subresourceRange.layerCount = 1;
+
+	VkImageView view;
+	if (vkCreateImageView(logDeviceM, &info, nullptr, &view))
+	{
+		throw std::runtime_error("Failed to create an image view");
+	}
+	return view;
+}
+
+void GraphicsObjectManager::copyBuffer(AllocatedBuffer allocBuffer, const void* srcData)
 {
 	VkMemoryPropertyFlags memProps;
 	vmaGetAllocationMemoryProperties(allocatorM, allocBuffer.allocation, &memProps);
@@ -374,39 +576,15 @@ void GraphicsObjectManager::copyBuffer(VkDevice logDevice, AllocatedBuffer alloc
 	}
 	else // non-mappable memory, needs to be staged and copied using cmd buffers
 	{
-		AllocatedBuffer stagingBuffer{};
-		VmaAllocationInfo allocInfo{};
-		stagingBuffer = createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, allocInfo, VMA_MEMORY_USAGE_AUTO,
-						VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT
-					| VMA_ALLOCATION_CREATE_MAPPED_BIT); // Also automatically map
-		
-		if (allocInfo.pMappedData == nullptr)
-		{
-			throw std::runtime_error("Failed to map staging buffer");
-		}
+		VmaAllocationInfo allocInfo;
+		AllocatedBuffer stagingBuffer = createStagingBuffer(bufferSize, allocInfo);
 		// Copy the data to the staging buffer
 		memcpy(allocInfo.pMappedData, srcData, bufferSize); // intellisense complains about pMappedData being nullptr, but it can not be.
 		vmaFlushAllocation(allocatorM, stagingBuffer.allocation, 0, bufferSize);
 		// Perhaps the following section should be separated into its own function
-		// Allocate a command buffer
-		VkCommandBufferAllocateInfo cmdAllocInfo{};
-		cmdAllocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-		cmdAllocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-		cmdAllocInfo.commandBufferCount = 1;
-		cmdAllocInfo.commandPool = transferCommandPoolM; // TODO SET This, currently nullptr
 
-		VkCommandBuffer cmdBuffer;
-		if (vkAllocateCommandBuffers(logDevice, &cmdAllocInfo, &cmdBuffer) != VK_SUCCESS)
-		{
-			throw std::runtime_error("Failed to allocate a command buffer for copying a non-mappable buffer");
-		}
-
-		// Begin recording
-		VkCommandBufferBeginInfo cmdBeginInfo{};
-		cmdBeginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-		cmdBeginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-
-		vkBeginCommandBuffer(cmdBuffer, &cmdBeginInfo);
+		// Start recording
+		VkCommandBuffer cmdBuffer = startCommandBuffer(true); // prefer transfer
 
 		VkBufferCopy copyRegion{};
 		copyRegion.srcOffset = 0;
@@ -414,33 +592,95 @@ void GraphicsObjectManager::copyBuffer(VkDevice logDevice, AllocatedBuffer alloc
 		copyRegion.size = bufferSize;
 
 		vkCmdCopyBuffer(cmdBuffer, stagingBuffer.buffer, allocBuffer.buffer, 1, &copyRegion);
-
-		vkEndCommandBuffer(cmdBuffer);
-
-		VkSubmitInfo submitInfo{};
-		submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-		submitInfo.commandBufferCount = 1;
-		submitInfo.pCommandBuffers = &cmdBuffer;
-
-		vkQueueSubmit(transferQueueM, 1, &submitInfo, nullptr);
-		// Todo add a way to define and wait for fence before destorying the staging buffer
-		vkQueueWaitIdle(transferQueueM);
-		// cleanup
+		// End, submit and destroy
+		endCommandBuffer(cmdBuffer);
+		// cleanup staging buffer
 		vmaDestroyBuffer(allocatorM, stagingBuffer.buffer, stagingBuffer.allocation);
-		vkFreeCommandBuffers(logDeviceM, transferCommandPoolM, 1, &cmdBuffer);
 	}
+}
+
+void GraphicsObjectManager::copyImage(AllocatedImage allocImage, const ImageData& srcData)
+{
+	uint32_t width, height;
+	width = srcData.width;
+	height = srcData.height;
+
+	VkMemoryPropertyFlags memProps;
+	vmaGetAllocationMemoryProperties(allocatorM, allocImage.allocation, &memProps);
+	VkDeviceSize imageSize = allocImage.size;
+
+	if (memProps & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT)
+	{
+		// The real question is how to get the image to be correctly formatted if this is the case.
+		void* data;
+		vmaMapMemory(allocatorM, allocImage.allocation, &data);
+		memcpy(data, srcData.pixels, imageSize);
+		if (!(memProps & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT))
+			vmaFlushAllocation(allocatorM, allocImage.allocation, 0, imageSize);
+		vmaUnmapMemory(allocatorM, allocImage.allocation);
+		// Make a transition layout
+		VkCommandBuffer cmdBuffer = startCommandBuffer(false);
+		// TODO If sharing mode is exclusive, and we have multiple queues, we need to transfer ownership.
+		transitionImageLayout(allocImage.image, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, cmdBuffer);
+		endCommandBuffer(cmdBuffer);
+	}
+	else
+	{
+		VmaAllocationInfo allocInfo{};
+		AllocatedBuffer stagingBuffer = createStagingBuffer(imageSize, allocInfo);
+		// Copy the data to the staging buffer.
+		memcpy(allocInfo.pMappedData, srcData.pixels, imageSize);
+		vmaFlushAllocation(allocatorM, stagingBuffer.allocation, 0, imageSize);
+		// Start command buffer
+		VkCommandBuffer cmdBuffer = startCommandBuffer(false);
+		// Transfer image layout from undefined to transfer dst optimal. (and transfer ownership if needed)
+		transitionImageLayout(allocImage.image, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, cmdBuffer);
+
+		VkBufferImageCopy imgCopy{};
+		imgCopy.bufferOffset = 0;
+		imgCopy.bufferRowLength = 0;
+		imgCopy.bufferImageHeight = 0;
+		imgCopy.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+		imgCopy.imageSubresource.mipLevel = 0;
+		imgCopy.imageSubresource.baseArrayLayer = 0;
+		imgCopy.imageSubresource.layerCount = 1;
+
+		imgCopy.imageOffset = { 0, 0, 0 };
+		imgCopy.imageExtent = {
+			width,
+			height,
+			1
+		};
+		vkCmdCopyBufferToImage(
+			cmdBuffer,
+			stagingBuffer.buffer,
+			allocImage.image,
+			VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+			1,
+			&imgCopy
+		);
+		endCommandBuffer(cmdBuffer);
+		// Make it available for the shader
+		VkCommandBuffer cmdBuffer2 = startCommandBuffer(false);
+		transitionImageLayout(allocImage.image, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, cmdBuffer);
+		//End recording
+		endCommandBuffer(cmdBuffer2);
+		// clean up staging buffer
+		vmaDestroyBuffer(allocatorM, stagingBuffer.buffer, stagingBuffer.allocation);
+	}
+
 }
 
 VkDescriptorSetLayout GraphicsObjectManager::getLayout(ObjectType type) const
 {
 	switch (type)
 	{
-		case ObjectType::TESTOBJECT:
-			return testObjectSetLayoutM;
 		case ObjectType::CHARACTER:
 			return characterSetLayoutM;
 		case ObjectType::GAMEOBJECT:
 			return gameObjectSetLayoutM;
+		case ObjectType::TESTOBJECT:
+			return testObjectSetLayoutM;
 		default:
 			return VK_NULL_HANDLE;
 	}
@@ -503,38 +743,51 @@ std::vector<DrawableObject> GraphicsObjectManager::getDrawableObjects(ObjectType
 
 #pragma endregion
 
-inline std::array<VkDescriptorSetLayoutBinding, 2> CharacterObject::getDescriptorSetLayoutBindings()
+VkCommandBuffer GraphicsObjectManager::CommandUnit::startCommandBuffer(VkDevice logDevice)
 {
-	std::array<VkDescriptorSetLayoutBinding, 2> array;
-	array[0].binding = 0;
-	array[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	array[0].descriptorCount = 1;
-	array[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-	array[0].pImmutableSamplers = nullptr;
+	// Allocate a command buffer
+	VkCommandBufferAllocateInfo cmdAllocInfo{};
+	cmdAllocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+	cmdAllocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+	cmdAllocInfo.commandBufferCount = 1;
+	cmdAllocInfo.commandPool = commandPool;
 
-	array[1].binding = 1;
-	array[1].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	array[1].descriptorCount = 1;
-	array[1].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-	array[1].pImmutableSamplers = nullptr;
+	VkCommandBuffer cmdBuffer;
+	if (vkAllocateCommandBuffers(logDevice, &cmdAllocInfo, &cmdBuffer) != VK_SUCCESS)
+	{
+		throw std::runtime_error("Failed to allocate a command buffer.");
+	}
 
-	return array;
+	VkCommandBufferBeginInfo beginInfo{};
+	beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+	beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+
+	if (VK_SUCCESS != vkBeginCommandBuffer(cmdBuffer, &beginInfo))
+	{
+		throw std::runtime_error("Failed to begin command buffer");
+	}
+	return cmdBuffer;
 }
 
-inline std::array<VkDescriptorSetLayoutBinding, 2> GameObject::getDescriptorSetLayoutBindings()
+bool GraphicsObjectManager::CommandUnit::endCommandBuffer(VkDevice logDevice, VkCommandBuffer commandBuffer, VkFence fence)
 {
-	std::array<VkDescriptorSetLayoutBinding, 2> array;
-	array[0].binding = 0;
-	array[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	array[0].descriptorCount = 1;
-	array[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-	array[0].pImmutableSamplers = nullptr;
+	if (VK_SUCCESS != vkEndCommandBuffer(commandBuffer))
+	{
+		return false;
+	}
 
-	array[1].binding = 1;
-	array[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-	array[1].descriptorCount = 1;
-	array[1].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-	array[1].pImmutableSamplers = nullptr;
+	VkSubmitInfo submitInfo{};
+	submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+	submitInfo.commandBufferCount = 1;
+	submitInfo.pCommandBuffers = &commandBuffer;
 
-	return array;
+	vkQueueSubmit(queue, 1, &submitInfo, fence);
+
+	if (fence == VK_NULL_HANDLE) // No fence, idle
+	{
+		vkQueueWaitIdle(queue);
+	}
+
+	vkFreeCommandBuffers(logDevice, commandPool, 1, &commandBuffer);
+	return true;
 }

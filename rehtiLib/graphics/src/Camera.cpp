@@ -13,6 +13,8 @@ Camera::Camera(glm::vec3 targetPos, float width, float height, float fovRad, flo
 	, sensitivityM(sensitivity)
 	, zoomM(STANDARD_ZOOM)
 	, zoomSensitivityM(50.f * sensitivity)
+	, widthM(width)
+	, heightM(height)
 {
 	projectionM = glm::perspective(fovRad, width / height, near, far);
 	projectionM[1][1] *= -1; // flip y axis
@@ -49,6 +51,20 @@ glm::mat4 Camera::getOrientation() const
 glm::mat4 Camera::getProjectionMatrix() const
 {
 	return projectionM;
+}
+
+glm::vec3 Camera::getCameraRay(double x, double y) const
+{
+	std::cout << "Asked screen coordinates: " << x << ", " << y << "\n" << std::endl;
+	// Create a ray in world space from the camera to the given screen coordinates.
+	// The ray is normalized.
+	float normx = (2.f * x) / widthM - 1.f;
+	float normy = 1.f - (2.f * y) / heightM;
+	glm::vec3 normDir = glm::vec3(normx, normy, -1.f);
+	glm::mat3 cameraOrientation = glm::mat3(getOrientation());
+	glm::vec3 ray = glm::normalize(cameraOrientation * normDir);
+	std::cout << "Generated ray: " << ray.x << ", " << ray.y << ", " << ray.z << "\n" << std::endl;
+	return ray;
 }
 
 glm::mat4 Camera::getWorldToScreenMatrix() const

@@ -1,18 +1,16 @@
 #pragma once
 #include <vulkan/vulkan.h>
 
-#include <optional>
-#include <vector>
+#include "Mesh.hpp"
+#include "Camera.hpp"
+#include "GraphicsObjectManager.hpp"
+
 #include <algorithm>
 #include <iostream>
 #include <string>
 #include <set>
 #include <memory>
 #include <chrono>
-
-#include "Mesh.hpp"
-#include "Camera.hpp"
-#include "GraphicsObjectManager.hpp"
 
 enum EngineFlags
 {
@@ -34,7 +32,6 @@ struct QueueFamilyIndices
     }
     bool hasTransferOnlyQueue()
     {
-        return transferFamily.has_value();
     }
 };
 
@@ -74,10 +71,29 @@ public:
     /// <param name="id">The id of the test cube.</param>
     void addTestObject(int id);
 
+    /**
+     * @brief Adds a test game object with a test texture for testing purposes.
+     * @param id of the test game object.
+     */
+    void addTestGameObject(int id);
+
     /// <summary>
     /// Transforms object with the given id.
     /// </summary>
     void transformTestObject(int id, glm::mat4 transformation);
+
+    /**
+     * @brief Adds an area bounding box to the graphics backend.
+     * @param areaVertices
+     * @param areaCoordinates
+     */
+    void addAreaBoundingBox(std::vector<Vertex> areaVertices, glm::ivec2 areaCoordinates);
+
+    /**
+     * @brief Traces a ray against all bounding boxes, starting with objects, then characters and lastly the map.
+     * @return Hit object containing information about the hit.
+     */
+    Hit traceClick();
 
     /// <summary>
     /// Sets flags for engine. Flags can only be set by this interface, not unset.
@@ -208,15 +224,48 @@ private:
     void createSurface();
 
     /// <summary>
+    /// Creates a texture sampler.
+    /// Note: Sampler is completely separate from the actual textures.
+    /// Those are created in the GraphicsObjectManager as part of some graphics object.
+    /// </summary>
+    void createTextureSampler();
+
+    /**
+     * @brief Creates resources required for a depth buffer.
+     */
+    void createDepthResources();
+
+    /// <summary>
     /// Checks for device extension support.
     /// </summary>
-    /// <param name="device">Gpu to check extensions for.</param>
+    /// <param name="device"> to check extensions for.</param>
     /// <returns>
     /// boolean indicating whether required extensions set by <paramref name="deviceExtensions"/> are met.
     /// </returns>
     bool checkDeviceExtensionSupport(VkPhysicalDevice device);
     bool checkValidationLayerSupport();
     bool isDeviceSuitable(VkPhysicalDevice device);
+
+    /**
+     * @brief Checks whether the given bounding box is hit by the given ray.
+     * @param min is the smaller coordinate of the bounding box.
+     * @param max is the larger coordinate of the bounding box.
+     * @param rayOrig is the origin of the ray.
+     * @param dirInv is the inverse of the direction of the ray.
+     * @param t is the distance to the hit point.
+     * @return true if hit, false otherwise.
+     */
+    bool bbHit(const glm::vec3 min, const glm::vec3 max, const glm::vec3 rayOrig, const glm::vec3 dirInv, float &t);
+
+    /**
+     * @brief Traces a given ray against a given bounding box.
+     * @param orig is the origin of the ray.
+     * @param dirInv is the inverse of the direction of the ray.
+     * @param boxNode is the bounding box to trace against.
+     * @param boxHit is the bounding box that was hit.
+     * @return the distance to the hit point.
+     */
+    float trace(const glm::vec3 orig, const glm::vec3 dirInv, const AABB *pBoxNode, AABB &boxHit);
 
     /// <summary>
     /// Rates a given GPU
@@ -266,6 +315,15 @@ private:
     /// <returns></returns>
     VkPushConstantRange getCameraRange();
 
+    /**
+     * @brief Looks for a suitable format from given candidates.
+     * @param candidates
+     * @param tiling
+     * @param features
+     * @return
+     */
+    VkFormat findSupportedFormat(const std::vector<VkFormat> &candidates, VkImageTiling tiling, VkFormatFeatureFlags features);
+
     /// <summary>
     /// Returns the index of the next frame to be drawn.
     /// </summary>
@@ -277,6 +335,13 @@ private:
     /// </summary>
     /// <param name="matrix"></param>
     void debugMatrix(glm::mat4 matrix);
+
+    /**
+     * @brief Fills the min and max of the given bounding box.
+     * @param vertices to create a bounding box for.
+     * @param box to fill.
+     */
+    void fillAABB(std::vector<Vertex> vertices, AABB &box);
 
     // Private members:
     GLFWwindow *pWindowM;
@@ -311,11 +376,15 @@ private:
     std::vector<VkFramebuffer> swapChainFramebuffersM;
     // Depth image
     AllocatedImage depthImageM;
+    VkImageView depthImageViewM;
+    VkFormat depthFormatM;
+    // Sampler
+    VkSampler textureSamplerM;
 
     // Pipeline
     VkRenderPass renderPassM;
-    VkPipelineLayout pipelineLayoutM;
-    VkPipeline pipelineM;
+    std::array<VkPipelineLayout, OBJECT_TYPE_COUNT> pipelineLayoutsM;
+    std::array<VkPipeline, OBJECT_TYPE_COUNT> pipelinesM;
 
     // Commands
     VkCommandPool commandPoolM;
@@ -329,8 +398,11 @@ private:
     // Other variables
     uint32_t widthM = 800;
     uint32_t heightM = 600;
+    float anisotropyM = 1.f; // default val. Changed in <cref=isDeviceSuitable>
     EngineFlags engineFlagsM = EngineFlags::NO_FLAGS;
     EngineStatistics statsM;
+    // Bounding box lists in an array. Each index corresponds to an object type.
+    std::array<std::vector<std::pair<AABB, int>>, OBJECT_TYPE_COUNT> boundingBoxesM;
 
     const int kConcurrentFramesM = 2;
     size_t currentFrameM = 0;
@@ -349,7 +421,6 @@ private:
         VkDebugUtilsMessageTypeFlagsEXT messageType,
         const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
         void *pUserData);
-
     static VkResult CreateDebugUtilsMessengerEXT(
         VkInstance instance,
         const VkDebugUtilsMessengerCreateInfoEXT *pCreateInfo,

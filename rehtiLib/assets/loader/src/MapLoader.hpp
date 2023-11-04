@@ -28,6 +28,10 @@ const std::string OBJECT_TILE_MAP_NO_BLOCK = " ";
 
 const unsigned NON_OBJECT_ID = 255 * 255;
 
+/**
+ * @file Contains functions for loading the map assets from images and other definitions.
+ */
+
 // Fetches the area map from the JSON file. Throws an exception if the file corrupted.
 static const std::vector<std::vector<std::string>> fetchAreaMap()
 {
@@ -63,13 +67,15 @@ static const std::vector<std::vector<std::string>> fetchAreaMap()
   return areaMap;
 }
 
-/*
- * Create a height map from the area map. The height map tells the height of each tile.
+/**
+ * @brief Create a height map from the area map. The height map tells the height of each tile.
+ *
  * It is formed by:
+ * @brief 1. Going through the area map and reading the corresponding image file for each area.
+ * @brief 2. Going through the image file and reading the height of each pixel. Pixels height is calculated by G * B. But the Green values first bit is a sign bit.
  *
- * 1. Going through the area map and reading the corresponding image file for each area.
- *
- * 2. Going through the image file and reading the height of each pixel. Pixels height is calculated by G * B. But the Green values first bit is a sign bit.
+ * @param areaMap Matrix of all the area names.
+ * @return Returns a matrix representing the height map.
  */
 static const std::vector<std::vector<int>> createHeightMap(const std::vector<std::vector<std::string>> &areaMap)
 {
@@ -174,9 +180,15 @@ static void insertObjectTileMap(std::vector<std::vector<std::string>> &objectBlo
   }
 }
 
-/*
- * When object tile map is rotated, it block direction needs to be rotated as well.
+/**
+ * @brief When object tile map is rotated, its direction needs to be rotated as well.
+ *
  * For example, if the object is rotated 90 degrees clockwise, the south block becomes west block and so on.
+ *
+ * @param objectTileMap The object tile map to be rotated.
+ * @param rotation The rotation of the object. 0-4 (North, East, South, West)
+ *
+ * @return void, but modifies the objectTileMap.
  */
 static void changeBlockDirection(std::vector<std::vector<std::string>> &objectTileMap, unsigned rotation)
 {
@@ -200,8 +212,8 @@ static void changeBlockDirection(std::vector<std::vector<std::string>> &objectTi
   }
 }
 
-/*
- * Generate the object block map. The map defines how the objects block the tiles around itself.
+/**
+ * @brief Generate the object block map. The map defines how the objects block the tiles around itself.
  *
  * 1. Go through the area map and read the corresponding image file for each area. (<area_name>-obj.png).
  *
@@ -212,6 +224,11 @@ static void changeBlockDirection(std::vector<std::vector<std::string>> &objectTi
  * 4. Input the object tile map to the object block map. Consider the rotation of the object as well. Rotation is stored in the B-value.
  *
  * ALSO, stores objects with their locations to generated/objects.json. This is used by the game server to spawn the objects on start.
+ *
+ * @param areaMap Matrix of all the area names.
+ * @param gameObjects A GameObjects object containing all the object definitions.
+ * @param heightMap A matrix representing the height of the map.
+ * @returns const std::vector<std::vector<std::string>>
  */
 static const std::vector<std::vector<std::string>> createObjectBlockMap(const std::vector<std::vector<std::string>> &areaMap, GameObjects gameObjects, const std::vector<std::vector<int>> &heightMap)
 {
@@ -319,10 +336,10 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
   return objectBlockMap;
 }
 
-/*
- * Generates access map from height map & object block map. Access map defines which tiles are accessible from which tiles.
+/**
+ * @brief Generates access map from height map & object block map. Access map defines how tiles can or cannot be accessed from it's neighbours.
  *
- * Each cell contains 4-bit value. 1st bit is the rightmost bit
+ * Access map is defined as a matrix where each cell contains 4-bit value. 1st bit is the rightmost bit
  * 1. bit = north
  * 2. bit = east
  * 3. bit = south
@@ -330,10 +347,16 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
  *
  * If bit = 1, the tile is accessible from that direction. Otherwise not.
  *
+ * Access map is constructed from the object block map and the height map as follows:
+ *
  * North is blocked if, the tile is on the top row, height difference with the north tile is > 1 or the tile has a north block (N).
  * East is blocked if, the tile is on the rightmost column, height difference with the east tile is > 1 or the tile has a east block (E).
  * South is blocked if, the tile is on the bottom row, height difference with the south tile is > 1 or the tile has a south block (S).
  * West is blocked if, the tile is on the leftmost column, height difference with the west tile is > 1 or the tile has a west block (W).
+ *
+ * @param heightMap A matrix representing the height map.
+ * @param objectBlockMap A matrix representing the object block map.
+ * @returns A matrix representing the access map.
  */
 static const std::vector<std::vector<unsigned>> generateAccessMap(const std::vector<std::vector<int>> &heightMap, const std::vector<std::vector<std::string>> &objectBlockMap)
 {

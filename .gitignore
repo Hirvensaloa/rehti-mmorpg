@@ -77,3 +77,6 @@ bin/
 
 # Generated files
 generated
+
+# Generated doxygen files
+docs/html

@@ -48,6 +48,8 @@ set(GRAPHICS_SOURCES
 	shaders/objectShader.frag
 	shaders/characterShader.vert
 	shaders/characterShader.frag
+	shaders/mapShader.vert
+	shaders/mapShader.frag
 	)
 
 list(TRANSFORM GRAPHICS_SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)

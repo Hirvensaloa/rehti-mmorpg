@@ -262,6 +262,7 @@ private:
 	std::unordered_map<int, CharacterObject> characterObjectsM;
 	std::unordered_map<int, GameObject> gameObjectsM;
 	std::unordered_map<int, TestObject> testObjectsM;
+	std::vector<AreaObject> areaObjectsM;
 
 	// Frame count
 	uint32_t frameCountM;

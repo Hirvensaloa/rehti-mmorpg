@@ -103,6 +103,13 @@ struct CharacterObjectUniformBuffer
 	AllocatedBuffer boneWeights;
 };
 
+struct AreaObjectUniformBuffer
+{
+	VkDescriptorSet descriptorSet;
+	AllocatedBuffer areaOffset;
+	void* mappedAreaOffset;
+};
+
 // Object that contains everything needed to render a character.
 struct CharacterObject
 {
@@ -123,6 +130,17 @@ struct GameObject
 	AllocatedImage texture;
 	VkImageView textureView;
 	std::vector<GameObjectUniformBuffer> uniformBuffers;
+	static std::array<VkDescriptorSetLayoutBinding, 2> getDescriptorSetLayoutBindings();
+};
+
+struct AreaObject
+{
+	AllocatedBuffer vertexData;
+	AllocatedBuffer indexData;
+	uint32_t indexCount;
+	std::array<AllocatedImage, 6> textures; // 6: blendMap, base and r, g, b, a
+	std::array<VkImageView, 6> textureViews;
+	std::vector<AreaObjectUniformBuffer> uniformBuffers;
 	static std::array<VkDescriptorSetLayoutBinding, 2> getDescriptorSetLayoutBindings();
 };
 

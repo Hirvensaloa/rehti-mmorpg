@@ -132,7 +132,7 @@ void Client::handleMouseClick(const Hit &hit)
         const Hit &hit = this->lastHitM;
         switch (hit.objectType)
         {
-        case ObjectType::MAP:
+        case ObjectType::AREA:
           std::cout << "Hit tile on " << hit.hitPoint.x << " " << hit.hitPoint.z << std::endl;
           co_await move(hit.hitPoint.x, hit.hitPoint.z);
           break;

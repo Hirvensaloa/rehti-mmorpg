@@ -13,13 +13,15 @@
 #include "characterShader.vert"
 #include "testShader.vert"
 #include "objectShader.vert"
+#include "mapShader.vert"
 
 #include "characterShader.frag"
 #include "objectShader.frag"
 #include "testShader.frag"
+#include "mapShader.frag"
 
-std::array<std::string, 3> vertexShaderCodes{ characterVertexShaderSource, objectVertexShaderSource, testVertexShaderSource };
-std::array<std::string, 3> fragmentShaderCodes{ characterFragmentShaderSource, objectFragmentShaderSource, testFragmentShaderSource };
+std::array<std::string, OBJECT_TYPE_COUNT> vertexShaderCodes{ characterVertexShaderSource, objectVertexShaderSource, testVertexShaderSource, mapVertexShaderSource };
+std::array<std::string, OBJECT_TYPE_COUNT> fragmentShaderCodes{ characterFragmentShaderSource, objectFragmentShaderSource, testFragmentShaderSource, mapFragmentShaderSource };
 
 VkShaderModule ShaderManager::createShaderModule(VkDevice logDevice, VkShaderStageFlagBits stage, ObjectType objectType)
 {

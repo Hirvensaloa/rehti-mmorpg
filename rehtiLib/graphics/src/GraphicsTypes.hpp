@@ -20,7 +20,7 @@ enum ObjectType : uint32_t
 	CHARACTER,
 	GAMEOBJECT,
 	TESTOBJECT,
-	MAP,
+	AREA,
 	UNDEFINED
 };
 

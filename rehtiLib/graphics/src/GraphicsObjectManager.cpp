@@ -38,9 +38,11 @@ GraphicsObjectManager::GraphicsObjectManager(VkInstance instance, VkPhysicalDevi
 	auto characterBindings = CharacterObject::getDescriptorSetLayoutBindings();
 	auto gameObjectBindings = GameObject::getDescriptorSetLayoutBindings();
 	auto testBindings = TestObject::getDescriptorSetLayoutBindings();
-	pBuilderM->setDescriptorSetLayout(characterBindings.data(), characterBindings.size(), characterSetLayoutM);
-	pBuilderM->setDescriptorSetLayout(gameObjectBindings.data(), gameObjectBindings.size(), gameObjectSetLayoutM);
-	pBuilderM->setDescriptorSetLayout(testBindings.data(), testBindings.size(), testObjectSetLayoutM);
+	auto areaBindings = AreaObject::getDescriptorSetLayoutBindings();
+	pBuilderM->setDescriptorSetLayout(characterBindings.data(), characterBindings.size(), descriptorSetLayoutsM[ObjectType::CHARACTER]);
+	pBuilderM->setDescriptorSetLayout(gameObjectBindings.data(), gameObjectBindings.size(), descriptorSetLayoutsM[ObjectType::GAMEOBJECT]);
+	pBuilderM->setDescriptorSetLayout(testBindings.data(), testBindings.size(), descriptorSetLayoutsM[ObjectType::TESTOBJECT]);
+	pBuilderM->setDescriptorSetLayout(areaBindings.data(), areaBindings.size(), descriptorSetLayoutsM[ObjectType::AREA]);
 }
 
 
@@ -346,7 +348,7 @@ bool GraphicsObjectManager::endCommandBuffer(VkCommandBuffer commandBuffer, VkFe
 	return val;
 }
 
-void GraphicsObjectManager::transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout, VkCommandBuffer commandBuffer, std::pair<uint32_t, uint32_t> srcAndDstQueueFamilies)
+void GraphicsObjectManager::transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout, VkCommandBuffer commandBuffer, VkImageAspectFlags aspectFlags, std::pair<uint32_t, uint32_t> srcAndDstQueueFamilies)
 {
 
 	std::pair<VkAccessFlags, VkAccessFlags> srcAndDstAccessMasks{};
@@ -365,7 +367,7 @@ void GraphicsObjectManager::transitionImageLayout(VkImage image, VkFormat format
 	barrier.dstQueueFamilyIndex = srcAndDstQueueFamilies.second;
 	// data
 	barrier.image = image;
-	barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	barrier.subresourceRange.aspectMask = aspectFlags;
 	barrier.subresourceRange.baseMipLevel = 0; // No mip mapping
 	barrier.subresourceRange.levelCount = 1;
 	barrier.subresourceRange.baseArrayLayer = 0; // No array layers
@@ -532,7 +534,7 @@ void GraphicsObjectManager::destroyImage(AllocatedImage image)
 void GraphicsObjectManager::transitionDepthImageLayout(AllocatedImage depthImage, VkFormat depthFormat, VkImageLayout srcLayout, VkImageLayout dstLayout)
 {
 	VkCommandBuffer cmdBuffer = startCommandBuffer(false);
-	transitionImageLayout(depthImage.image, depthFormat, srcLayout, dstLayout, cmdBuffer);
+	transitionImageLayout(depthImage.image, depthFormat, srcLayout, dstLayout, cmdBuffer, VK_IMAGE_ASPECT_DEPTH_BIT);
 	endCommandBuffer(cmdBuffer);
 }
 
@@ -673,16 +675,25 @@ void GraphicsObjectManager::copyImage(AllocatedImage allocImage, const ImageData
 
 VkDescriptorSetLayout GraphicsObjectManager::getLayout(ObjectType type) const
 {
-	switch (type)
+	if (type != ObjectType::UNDEFINED)
 	{
-		case ObjectType::CHARACTER:
-			return characterSetLayoutM;
-		case ObjectType::GAMEOBJECT:
-			return gameObjectSetLayoutM;
-		case ObjectType::TESTOBJECT:
-			return testObjectSetLayoutM;
-		default:
-			return VK_NULL_HANDLE;
+		return descriptorSetLayoutsM[type];
+	}
+	else
+	{
+		return VK_NULL_HANDLE;
+	}
+}
+
+uint32_t GraphicsObjectManager::getLayoutCount(ObjectType type) const
+{
+	if (type != ObjectType::UNDEFINED)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
 	}
 }
 

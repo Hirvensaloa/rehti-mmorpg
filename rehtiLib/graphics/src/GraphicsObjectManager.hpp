@@ -140,6 +140,13 @@ public:
 	/// <returns>Descriptor set layout</returns>
 	VkDescriptorSetLayout getLayout(ObjectType type) const;
 
+	/**
+	 * @brief Returns the number of descriptor layouts of the given type. Currently not a very useful function. However, it might be useful in the future.
+	 * @param type of object to be queried for.
+	 * @return number of layouts
+	*/
+	uint32_t getLayoutCount(ObjectType type) const;
+
 	/// <summary>
 	/// Returns drawable objects of the given type.
 	/// </summary>
@@ -222,7 +229,7 @@ private:
 	 * @param commandBuffer
 	 * @param srcQueueFamilyIndex & dstQueueFamilyIndex of the source family. Use the default value if you do not want to change queue ownership
 	*/
-	void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout, VkCommandBuffer commandBuffer, std::pair<uint32_t, uint32_t> srcAndDstQueueFamilies = { VK_QUEUE_FAMILY_IGNORED, VK_QUEUE_FAMILY_IGNORED });
+	void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout, VkCommandBuffer commandBuffer, VkImageAspectFlags aspectFlags = VK_IMAGE_ASPECT_COLOR_BIT, std::pair<uint32_t, uint32_t> srcAndDstQueueFamilies = { VK_QUEUE_FAMILY_IGNORED, VK_QUEUE_FAMILY_IGNORED });
 
 	/**
 	 * @brief Queue families should be transferred, if the resources are using multiple queues, and the sharingmode is exclusive, or the desired stage is available only to another queue.
@@ -267,8 +274,5 @@ private:
 	// Frame count
 	uint32_t frameCountM;
 	// Descriptor set layouts for common objects
-	// Todo a map?
-	VkDescriptorSetLayout characterSetLayoutM;
-	VkDescriptorSetLayout gameObjectSetLayoutM;
-	VkDescriptorSetLayout testObjectSetLayoutM;
+	std::array<VkDescriptorSetLayout, OBJECT_TYPE_COUNT> descriptorSetLayoutsM;
 };

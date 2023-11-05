@@ -198,20 +198,15 @@ VkVertexInputBindingDescription getBindingDescription(ObjectType objectType)
 	return desc;
 }
 
-std::array<VkDescriptorSetLayoutBinding, 2> AreaObject::getDescriptorSetLayoutBindings()
+std::array<VkDescriptorSetLayoutBinding, 1> AreaObject::getDescriptorSetLayoutBindings()
 {
-	std::array<VkDescriptorSetLayoutBinding, 2> array;
-	array[0].binding = 0;
-	array[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	array[0].descriptorCount = 1;
-	array[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-	array[0].pImmutableSamplers = nullptr;
+	std::array<VkDescriptorSetLayoutBinding, 1> array;
 
-	array[1].binding = 1;
-	array[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-	array[1].descriptorCount = 6; // 6 textures
-	array[1].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-	array[1].pImmutableSamplers = nullptr;
+	array[0].binding = 1;
+	array[0].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+	array[0].descriptorCount = 6; // 6 textures
+	array[0].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+	array[0].pImmutableSamplers = nullptr;
 
 	return array;
 }

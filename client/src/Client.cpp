@@ -6,6 +6,7 @@
 
 #include "Client.hpp"
 #include "RehtiReader.hpp"
+#include "Utils.hpp"
 
 Client::Client(std::string ip, std::string port)
     : ioContextM(boost::asio::io_context()),
@@ -189,7 +190,10 @@ void Client::startGraphics()
         std::vector<std::vector<aiVector3D>> areaVertexList;
         std::vector<std::vector<aiFace>> areaFaceList;
         loadAreaMapObjs(areaMatrix, areaVertexList, areaFaceList);
-        for (int i = 0; i < areaVertexList.size(); i++)
+
+        std::vector<std::vector<Vertex>> areaVertices = aiVector3DMatrixToVertexVector(areaVertexList);
+        std::vector<std::vector<uint32_t>> areaIndices = aiFaceMatrixToVector(areaFaceList);
+        for (int i = 0; i < areaVertices.size(); i++)
         {
           // TODO: load area objs using RehtiGraphics interface. @Otso voit käyttää tätä
         }

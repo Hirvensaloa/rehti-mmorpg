@@ -34,8 +34,8 @@ int main()
   std::cout << "here 3" << std::endl;
   writeMatrixToFile(areaMap, Config.GENERATED_AREA_MAP_PATH);
 
-  // Generate obj map for client
-  generateMapObj(heightMatrix);
+  // Generate obj files of the areas for client
+  generateAreaObjs(heightMatrix, areaMap);
 
   std::cout << "Map assets generated successfully!" << std::endl;
 

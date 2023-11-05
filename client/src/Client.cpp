@@ -16,6 +16,7 @@ Client::Client(std::string ip, std::string port)
       connectionM(std::make_unique<Connection>(
           Connection::owner::client, ioContextM, std::move(boost::asio::ip::tcp::socket(ioContextM)), messagesM))
 {
+  this->startGraphics();
   connectionThreadM = std::thread([this]()
                                   { boost::asio::co_spawn(ioContextM, connect(), boost::asio::detached); });
 
@@ -117,7 +118,25 @@ void Client::processMessages()
     while (!messagesM.empty())
     {
       Message msg = messagesM.pop_front();
-      std::cout << msg.getBody() << std::endl;
+
+      const int msgId = msg.getHeader().id;
+
+      if (msgId == MessageId::GameState)
+      {
+        const GameStateMessage &gameStateMsg = MessageApi::parseGameState(msg.getBody());
+        for (const auto &entity : gameStateMsg.entities)
+        {
+          // TODO: Draw each entity here
+        }
+        for (const auto &object : gameStateMsg.objects)
+        {
+          // TODO: Draw each object here
+        }
+      }
+      else
+      {
+        std::cout << "Unknown message id: " << msgId << std::endl;
+      }
     }
   }
 }
@@ -165,6 +184,15 @@ void Client::startGraphics()
         loadHeightMap(heightMatrix, Config.GENERATED_HEIGHT_MAP_PATH);
         loadAreaMap(areaMatrix, Config.GENERATED_AREA_MAP_PATH);
         graphLib.addMapBoundingBox(MapAABBData{heightMatrix, areaMatrix, Config.AREA_WIDTH, Config.HEIGHT_MAP_SCALE, Config.TILE_SIDE_SCALE, Config.TILE_SIDE_UNIT});
+
+        // Load map area obj files into memory
+        std::vector<std::vector<aiVector3D>> areaVertexList;
+        std::vector<std::vector<aiFace>> areaFaceList;
+        loadAreaMapObjs(areaMatrix, areaVertexList, areaFaceList);
+        for (int i = 0; i < areaVertexList.size(); i++)
+        {
+          // TODO: load area objs using RehtiGraphics interface. @Otso voit käyttää tätä
+        }
 
         // Add action callbacks
         graphLib.addMouseClickCallback([this](const Hit &hit)

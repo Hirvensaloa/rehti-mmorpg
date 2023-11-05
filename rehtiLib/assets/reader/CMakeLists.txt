@@ -15,6 +15,8 @@ add_library(${TARGET} STATIC
   src/ObjectReader.cpp 
   src/SkillReader.hpp 
   src/SkillReader.cpp 
+  src/AssimpObjectReader.hpp
+  src/AssimpObjectReader.cpp
   src/Utils.hpp
   src/Utils.cpp
   ../Config.hpp)
@@ -31,7 +33,7 @@ target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/build/th
 # assimp
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../../../third_party/assimp ${CMAKE_CURRENT_BINARY_DIR}/build/assimp)
-target_link_libraries(${TARGET} PUBLIC ${ASSIMP_LIBRARY})
+target_link_libraries(${TARGET} PUBLIC assimp::assimp)
 
 # utils
 

@@ -5,6 +5,9 @@
  */
 
 #include <vector>
+#include <string>
+
+#include "AssimpObjectReader.hpp"
 
 /**
  * @brief Loads the access map from the given path.
@@ -26,3 +29,11 @@ void loadHeightMap(std::vector<std::vector<int>> &heightMap, std::string path);
  * @param path to the area map file.
  */
 void loadAreaMap(std::vector<std::vector<std::string>> &areaMap, std::string path);
+
+/**
+ * @brief Reads the area map obj files
+ * @param areaMap Contains all the area names and their corresponding positions
+ * @param areaVertexList Empty list where the area vertices are loaded
+ * @param areaFaceList Empty list where the area faces are loaded
+ */
+void loadAreaMapObjs(std::vector<std::vector<std::string>> &areaMap, std::vector<std::vector<aiVector3D>> &areaVertexList, std::vector<std::vector<aiFace>> &areaFaceList);

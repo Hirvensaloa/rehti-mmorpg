@@ -79,18 +79,19 @@ void generateAreaObjs(const std::vector<std::vector<int>> &heightMap, const std:
     for (int j = 0; j < areaMap[i].size(); j++)
     {
       const std::string area = areaMap[i][j];
-      std::cout << "Generating area " << area << i++ << std::endl;
+      std::cout << "Generating area " << area << i << j << std::endl;
       // Create an OBJ file for writing
-      std::ofstream objFile(Config.GENERATED_AREA_OBJ_PATH + area + std::to_string(i) + std::to_string(j) + ".obj");
+      std::ofstream objFile(Config.GENERATED_AREA_OBJ_PATH + area + ".obj");
 
       if (!objFile.is_open())
       {
-        throw std::runtime_error("Could not open " << area << i << j << ".obj for writing");
+        throw std::runtime_error("Could not open " + area + ".obj for writing");
       }
 
-      for (int row = i * Config.AREA_WIDTH; row < i * Config.AREA_WIDTH + config.AREA_WIDTH; row++)
+      int vertexCount = 0;
+      for (int row = i * Config.AREA_WIDTH; row < i * Config.AREA_WIDTH + Config.AREA_WIDTH; row++)
       {
-        for (int col = j * Config.AREA_HEIGHT; col < j * Config.AREA_HEIGHT + AREA_HEIGHT; col++)
+        for (int col = j * Config.AREA_HEIGHT; col < j * Config.AREA_HEIGHT + Config.AREA_HEIGHT; col++)
         {
           // A cell is divided into inner square which is at the height of the cell and surrounding the inner square are 4 trapezoids which are at the middle of the cell's and it's neighbours height.
           // The trapezoids are further broken down into two corners and a center rectancle. The trapezoids are used to create a "SSSmooth" transition between the cells.
@@ -143,8 +144,6 @@ void generateAreaObjs(const std::vector<std::vector<int>> &heightMap, const std:
           int rightCenterBottom = 16;
 
           // Define and write the triangles
-          int vertexCount = 16 * (row * heightMap[row].size() + col);
-
           // The inner square
           writeFace(objFile, vertexCount + 1, vertexCount + 2, vertexCount + 3);
           writeFace(objFile, vertexCount + 3, vertexCount + 4, vertexCount + 1);
@@ -172,6 +171,9 @@ void generateAreaObjs(const std::vector<std::vector<int>> &heightMap, const std:
           writeFace(objFile, vertexCount + innerTopRight, vertexCount + topRight, vertexCount + rightCenterTop);
           writeFace(objFile, vertexCount + rightCenterBottom, vertexCount + innerBottomRight, vertexCount + rightCenterTop);
           writeFace(objFile, vertexCount + innerBottomRight, vertexCount + rightCenterBottom, vertexCount + bottomRight);
+
+          // Keep track of the vertex index
+          vertexCount += 16;
         }
       }
 

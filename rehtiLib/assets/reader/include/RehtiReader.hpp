@@ -2,3 +2,4 @@
 #include "../src/MapReader.hpp"
 #include "../src/ObjectReader.hpp"
 #include "../src/SkillReader.hpp"
+#include "../../Config.hpp"

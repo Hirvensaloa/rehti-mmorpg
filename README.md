@@ -2,13 +2,27 @@
 
 ## Get started
 
-### Before running anything
+### Before running the programs
 
-- Make sure to fetch git submodules run `git submodule update --recursive --init`. This needs to be run everytime new submodules are added.
+1. Make sure to fetch git submodules. This needs to be run everytime new submodules are added.
 
-- Make sure you have Conan installed from [here](https://docs.conan.io/2/installation.html). Run `conan profile detect --force` after installation.
+```sh
+git submodule update --recursive --init
+```
 
-- Run `./scripts/generate_assets.sh` to generate the assets (map, items and objects).
+2. Make sure you have Conan installed from, for example, [here](https://docs.conan.io/2/installation.html). Run the below after installation
+
+```sh
+conan profile detect --force
+```
+
+3. Make sure you have Cmake >3.27 installed
+
+4. Generate the assets (map, items and objects).
+
+```sh
+./scripts/generate_assets.sh
+```
 
 ### Running
 
@@ -28,7 +42,11 @@ TODO: Lyhyt desc tähän. Ja jos on jotain tärkeetä/poikkeuksellista mitä pit
 
 ### Running
 
-- `./scripts/run-client.sh` to start the client
+Start the client
+
+```sh
+./scripts/run-client.sh
+```
 
 ### Troubleshooting
 
@@ -46,7 +64,11 @@ To run the server and database, make sure you have `docker-compose` and `docker`
 
 ### Running
 
-- `./scripts/run-backend.sh` to start the server and database containers.
+Start the server and database containers
+
+```sh
+./scripts/run-backend.sh
+```
 
 If the script doesn't work, you can just use `docker-compose up` in the root directory to start up the services.
 

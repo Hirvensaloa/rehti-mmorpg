@@ -9,14 +9,6 @@
 #include "RehtiUtils.hpp"
 #include "RehtiReader.hpp"
 
-const unsigned AREA_WIDTH = 16;
-const unsigned AREA_HEIGHT = AREA_WIDTH;
-
-// Paths
-const std::string ASSET_PATH = ROOT_PATH + "assets/map/";
-const std::string AREA_FILES_PATH = ASSET_PATH + "areas/";
-const std::string AREA_MAP_PATH = ASSET_PATH + "test.json";
-
 // Object tile map symbols
 const std::string OBJECT_TILE_MAP_CENTER = "X";
 const std::string OBJECT_TILE_MAP_NORTH_BLOCK = "N";
@@ -28,10 +20,14 @@ const std::string OBJECT_TILE_MAP_NO_BLOCK = " ";
 
 const unsigned NON_OBJECT_ID = 255 * 255;
 
+/**
+ * @file Contains functions for loading the map assets from images and other definitions.
+ */
+
 // Fetches the area map from the JSON file. Throws an exception if the file corrupted.
 static const std::vector<std::vector<std::string>> fetchAreaMap()
 {
-  rapidjson::Document doc = readJson(AREA_MAP_PATH);
+  rapidjson::Document doc = readJson(Config.AREA_MAP_PATH);
 
   if (!doc.IsArray())
   {
@@ -63,20 +59,22 @@ static const std::vector<std::vector<std::string>> fetchAreaMap()
   return areaMap;
 }
 
-/*
- * Create a height map from the area map. The height map tells the height of each tile.
+/**
+ * @brief Create a height map from the area map. The height map tells the height of each tile.
+ *
  * It is formed by:
+ * @brief 1. Going through the area map and reading the corresponding image file for each area.
+ * @brief 2. Going through the image file and reading the height of each pixel. Pixels height is calculated by G * B. But the Green values first bit is a sign bit.
  *
- * 1. Going through the area map and reading the corresponding image file for each area.
- *
- * 2. Going through the image file and reading the height of each pixel. Pixels height is calculated by G * B. But the Green values first bit is a sign bit.
+ * @param areaMap Matrix of all the area names.
+ * @return Returns a matrix representing the height map.
  */
 static const std::vector<std::vector<int>> createHeightMap(const std::vector<std::vector<std::string>> &areaMap)
 {
   std::vector<std::vector<int>> heightMap;
 
   // Populate the height map with 0s.
-  populateMatrix(heightMap, areaMap, 0, AREA_WIDTH, AREA_HEIGHT);
+  populateMatrix(heightMap, areaMap, 0, Config.AREA_WIDTH, Config.AREA_HEIGHT);
 
   // Loop through the area map
   for (unsigned currentAreaRowIndex = 0; currentAreaRowIndex < areaMap.size(); currentAreaRowIndex++)
@@ -87,18 +85,18 @@ static const std::vector<std::vector<int>> createHeightMap(const std::vector<std
     for (unsigned currentAreaColumnIndex = 0; currentAreaColumnIndex < areaRow.size(); currentAreaColumnIndex++)
     {
       const std::string &area = areaRow[currentAreaColumnIndex];
-      std::string areaFile = AREA_FILES_PATH + area + ".png";
+      std::string areaFile = Config.AREA_FILES_PATH + area + ".png";
       std::vector<unsigned char> image; // Represents image pixel map. "RGBARGBARGBA..."
       unsigned width, height;
       readPng(image, width, height, areaFile);
-      if (width != AREA_WIDTH || height != AREA_HEIGHT)
+      if (width != Config.AREA_WIDTH || height != Config.AREA_HEIGHT)
       {
-        throw std::invalid_argument("Image size is not " + std::to_string(AREA_WIDTH) + "x" + std::to_string(AREA_HEIGHT));
+        throw std::invalid_argument("Image size is not " + std::to_string(Config.AREA_WIDTH) + "x" + std::to_string(Config.AREA_HEIGHT));
       }
 
       for (unsigned i = 0; i < height; ++i)
       {
-        const unsigned indexY = currentAreaRowIndex * AREA_HEIGHT + i;
+        const unsigned indexY = currentAreaRowIndex * Config.AREA_HEIGHT + i;
         for (unsigned j = 0; j < width; ++j)
         {
           unsigned pixelIndex = (i * width + j) * 4;
@@ -113,7 +111,7 @@ static const std::vector<std::vector<int>> createHeightMap(const std::vector<std
             height *= -1;
           }
 
-          const unsigned indexX = currentAreaColumnIndex * AREA_WIDTH + j;
+          const unsigned indexX = currentAreaColumnIndex * Config.AREA_WIDTH + j;
           heightMap[indexY][indexX] = height;
         }
       }
@@ -140,8 +138,8 @@ static void insertObjectTileMap(std::vector<std::vector<std::string>> &objectBlo
         centerX = j;
         centerY = i;
         // Calculate the center tile's position in the object block map
-        centerXMap = currentAreaColumnIndex * AREA_WIDTH + areaX + j;
-        centerYMap = currentAreaRowIndex * AREA_HEIGHT + areaY + i;
+        centerXMap = currentAreaColumnIndex * Config.AREA_WIDTH + areaX + j;
+        centerYMap = currentAreaRowIndex * Config.AREA_HEIGHT + areaY + i;
         shouldBreak = true;
         break;
       }
@@ -174,9 +172,15 @@ static void insertObjectTileMap(std::vector<std::vector<std::string>> &objectBlo
   }
 }
 
-/*
- * When object tile map is rotated, it block direction needs to be rotated as well.
+/**
+ * @brief When object tile map is rotated, its direction needs to be rotated as well.
+ *
  * For example, if the object is rotated 90 degrees clockwise, the south block becomes west block and so on.
+ *
+ * @param objectTileMap The object tile map to be rotated.
+ * @param rotation The rotation of the object. 0-4 (North, East, South, West)
+ *
+ * @return void, but modifies the objectTileMap.
  */
 static void changeBlockDirection(std::vector<std::vector<std::string>> &objectTileMap, unsigned rotation)
 {
@@ -200,8 +204,8 @@ static void changeBlockDirection(std::vector<std::vector<std::string>> &objectTi
   }
 }
 
-/*
- * Generate the object block map. The map defines how the objects block the tiles around itself.
+/**
+ * @brief Generate the object block map. The map defines how the objects block the tiles around itself.
  *
  * 1. Go through the area map and read the corresponding image file for each area. (<area_name>-obj.png).
  *
@@ -212,12 +216,17 @@ static void changeBlockDirection(std::vector<std::vector<std::string>> &objectTi
  * 4. Input the object tile map to the object block map. Consider the rotation of the object as well. Rotation is stored in the B-value.
  *
  * ALSO, stores objects with their locations to generated/objects.json. This is used by the game server to spawn the objects on start.
+ *
+ * @param areaMap Matrix of all the area names.
+ * @param gameObjects A GameObjects object containing all the object definitions.
+ * @param heightMap A matrix representing the height of the map.
+ * @returns const std::vector<std::vector<std::string>>
  */
 static const std::vector<std::vector<std::string>> createObjectBlockMap(const std::vector<std::vector<std::string>> &areaMap, GameObjects gameObjects, const std::vector<std::vector<int>> &heightMap)
 {
   // Populate the object block map with non-blocked tiles
   std::vector<std::vector<std::string>> objectBlockMap;
-  populateMatrix(objectBlockMap, areaMap, OBJECT_TILE_MAP_NO_BLOCK, AREA_WIDTH, AREA_HEIGHT);
+  populateMatrix(objectBlockMap, areaMap, OBJECT_TILE_MAP_NO_BLOCK, Config.AREA_WIDTH, Config.AREA_HEIGHT);
 
   std::vector<ObjectLocation> objectsLocations;
 
@@ -230,11 +239,11 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
       // Read the object tile map for the area.
       std::vector<unsigned char> image; // Represents image pixel map. "RGBARGBARGBA..."
       unsigned width, height;
-      std::string filepath = AREA_FILES_PATH + area + "-obj.png";
+      std::string filepath = Config.AREA_FILES_PATH + area + "-obj.png";
       readPng(image, width, height, filepath);
-      if (width != AREA_WIDTH || height != AREA_HEIGHT)
+      if (width != Config.AREA_WIDTH || height != Config.AREA_HEIGHT)
       {
-        throw std::invalid_argument("Image size is not " + std::to_string(AREA_WIDTH) + "x" + std::to_string(AREA_HEIGHT));
+        throw std::invalid_argument("Image size is not " + std::to_string(Config.AREA_WIDTH) + "x" + std::to_string(Config.AREA_HEIGHT));
       }
 
       // Loop through the image and find all objects
@@ -279,8 +288,8 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
               std::cout << "Object id: " << objectId << " not rotated " << std::endl;
             }
 
-            int x = currentAreaColumnIndex * AREA_WIDTH + j;
-            int y = currentAreaRowIndex * AREA_HEIGHT + i;
+            int x = currentAreaColumnIndex * Config.AREA_WIDTH + j;
+            int y = currentAreaRowIndex * Config.AREA_HEIGHT + i;
             int z = heightMap[y][x];
             ObjectLocation objLoc = {objectId, "0", x, y, z, rotation};
             objLoc.instanceId = generateObjectInstanceId(objLoc);
@@ -312,17 +321,17 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
 
   const std::string str = createString(doc);
 
-  std::ofstream objectsFile(GENERATED_ASSETS_PATH + "objects.json");
+  std::ofstream objectsFile(Config.GENERATED_OBJECT_JSON_PATH);
   objectsFile << str;
   objectsFile.close();
 
   return objectBlockMap;
 }
 
-/*
- * Generates access map from height map & object block map. Access map defines which tiles are accessible from which tiles.
+/**
+ * @brief Generates access map from height map & object block map. Access map defines how tiles can or cannot be accessed from it's neighbours.
  *
- * Each cell contains 4-bit value. 1st bit is the rightmost bit
+ * Access map is defined as a matrix where each cell contains 4-bit value. 1st bit is the rightmost bit
  * 1. bit = north
  * 2. bit = east
  * 3. bit = south
@@ -330,10 +339,16 @@ static const std::vector<std::vector<std::string>> createObjectBlockMap(const st
  *
  * If bit = 1, the tile is accessible from that direction. Otherwise not.
  *
+ * Access map is constructed from the object block map and the height map as follows:
+ *
  * North is blocked if, the tile is on the top row, height difference with the north tile is > 1 or the tile has a north block (N).
  * East is blocked if, the tile is on the rightmost column, height difference with the east tile is > 1 or the tile has a east block (E).
  * South is blocked if, the tile is on the bottom row, height difference with the south tile is > 1 or the tile has a south block (S).
  * West is blocked if, the tile is on the leftmost column, height difference with the west tile is > 1 or the tile has a west block (W).
+ *
+ * @param heightMap A matrix representing the height map.
+ * @param objectBlockMap A matrix representing the object block map.
+ * @returns A matrix representing the access map.
  */
 static const std::vector<std::vector<unsigned>> generateAccessMap(const std::vector<std::vector<int>> &heightMap, const std::vector<std::vector<std::string>> &objectBlockMap)
 {
@@ -351,28 +366,28 @@ static const std::vector<std::vector<unsigned>> generateAccessMap(const std::vec
       unsigned &access = accessMap[i][j];
 
       // Check North
-      if (i == 0 || height - heightMap[i - 1][j] > 1 || objectBlockMap[i][j].find("N") != std::string::npos)
+      if (i <= 0 || heightMap[i - 1].size() <= j || height - heightMap[i - 1][j] > 1 || objectBlockMap[i][j].find("N") != std::string::npos)
       {
         // Block the north bit
         access = access & 0b1110;
       }
 
       // Check East
-      if (j == heightMap[i].size() - 1 || height - heightMap[i][j + 1] > 1 || objectBlockMap[i][j].find("E") != std::string::npos)
+      if (heightMap[i].size() <= j + 1 || height - heightMap[i][j + 1] > 1 || objectBlockMap[i][j].find("E") != std::string::npos)
       {
         // Block the east bit
         access = access & 0b1101;
       }
 
       // Check South
-      if (i == heightMap.size() - 1 || height - heightMap[i + 1][j] > 1 || objectBlockMap[i][j].find("S") != std::string::npos)
+      if (heightMap.size() <= i + 1 || heightMap[i + 1].size() <= j || height - heightMap[i + 1][j] > 1 || objectBlockMap[i][j].find("S") != std::string::npos)
       {
         // Block the south bit
         access = access & 0b1011;
       }
 
       // Check West
-      if (j == 0 || height - heightMap[i][j - 1] > 1 || objectBlockMap[i][j].find("W") != std::string::npos)
+      if (j <= 0 || height - heightMap[i][j - 1] > 1 || objectBlockMap[i][j].find("W") != std::string::npos)
       {
         // Block the west bit
         access = access & 0b0111;

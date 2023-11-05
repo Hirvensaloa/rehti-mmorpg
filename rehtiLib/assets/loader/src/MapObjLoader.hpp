@@ -1,7 +1,5 @@
 #include "MapLoader.hpp"
 
-const float HEIGHT_MAP_SCALE = 0.1;
-
 struct Vertex
 {
   float x, y, z;
@@ -12,7 +10,7 @@ struct Vertex
 // Function to write a vertex to an OBJ file
 void writeVertex(std::ofstream &objFile, const Vertex &vertex)
 {
-  objFile << "v " << vertex.x << " " << vertex.y * HEIGHT_MAP_SCALE << " " << vertex.z << std::endl;
+  objFile << "v " << vertex.x * Config.TILE_SIDE_SCALE << " " << vertex.y * Config.HEIGHT_MAP_SCALE << " " << vertex.z * Config.TILE_SIDE_SCALE << std::endl;
 };
 
 // Function to write a face to an OBJ file. ADD THE CORNERS IN CLOCKWISE DIRECTION.
@@ -54,7 +52,7 @@ TileHeight calculateTileHeights(const std::vector<std::vector<int>> &heightMap, 
 void generateMapObj(const std::vector<std::vector<int>> &heightMap)
 {
   // Create an OBJ file for writing
-  std::ofstream objFile(GENERATED_ASSETS_PATH + "map.obj");
+  std::ofstream objFile(Config.GENERATED_MAP_PATH);
 
   if (!objFile.is_open())
   {

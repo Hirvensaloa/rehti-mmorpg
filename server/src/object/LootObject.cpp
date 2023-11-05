@@ -1,13 +1,13 @@
 #include "LootObject.hpp"
 #include "../utils/AssetManager.hpp"
 
-LootObject::LootObject(int id, std::string instanceId, std::string name, Coordinates coords, unsigned int rotation, std::vector<YieldableItem> yieldableItemList, ObjectType type)
+LootObject::LootObject(int id, std::string instanceId, std::string name, Coordinates coords, unsigned int rotation, std::vector<YieldableItem> yieldableItemList, reader::ObjectType type)
     : Object(id, instanceId, name, coords, rotation, type), yieldableItemListM(yieldableItemList)
 {
 }
 
-LootObject::LootObject(const LootObjectStruct &object, const ObjectLocation &location, ObjectType type)
-    : Object(object.id, location.instanceId, object.name, {location.x, location.y, location.z}, location.rotation, type), yieldableItemListM(object.yieldableItemList)
+LootObject::LootObject(const LootObjectStruct &object, const ObjectLocation &location, reader::ObjectType type)
+    : Object(object.id, location.instanceId, object.name, {location.x, location.y}, location.rotation, type), yieldableItemListM(object.yieldableItemList)
 {
 }
 

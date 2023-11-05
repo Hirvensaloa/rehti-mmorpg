@@ -20,3 +20,24 @@ void loadAccessMap(std::vector<std::vector<uint8_t>> &accessMap, std::string pat
     accessMap.push_back(rowUint8);
   }
 }
+
+void loadHeightMap(std::vector<std::vector<int>> &heightMap, std::string path)
+{
+  std::vector<std::vector<std::string>> heightMapString;
+  readMatrixFromFile(heightMapString, path);
+
+  for (auto &row : heightMapString)
+  {
+    std::vector<int> rowInt;
+    for (auto &col : row)
+    {
+      rowInt.push_back(std::stoi(col));
+    }
+    heightMap.push_back(rowInt);
+  }
+}
+
+void loadAreaMap(std::vector<std::vector<std::string>> &areaMap, std::string path)
+{
+  readMatrixFromFile(areaMap, path);
+}

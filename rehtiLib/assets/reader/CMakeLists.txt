@@ -28,6 +28,11 @@ target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_L
 
 target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/build/third_party/rapidjson/include)
 
+# assimp
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../../../third_party/assimp ${CMAKE_CURRENT_BINARY_DIR}/build/assimp)
+target_link_libraries(${TARGET} PUBLIC ${ASSIMP_LIBRARY})
+
 # utils
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../../utils ${CMAKE_CURRENT_BINARY_DIR}/build/utils)

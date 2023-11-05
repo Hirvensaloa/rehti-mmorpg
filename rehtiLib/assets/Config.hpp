@@ -23,7 +23,7 @@ static struct
   const std::string GENERATED_ACCESS_MAP_PATH = GENERATED_ASSETS_PATH + "access_map.txt";
   const std::string GENERATED_HEIGHT_MAP_PATH = GENERATED_ASSETS_PATH + "height_map.txt";
   const std::string GENERATED_OBJECT_JSON_PATH = GENERATED_ASSETS_PATH + "objects.json";
-  const std::string GENERATED_MAP_PATH = GENERATED_ASSETS_PATH + "map.obj";
+  const std::string GENERATED_AREA_OBJ_PATH = GENERATED_ASSETS_PATH + "areas/";
 
   const float HEIGHT_MAP_SCALE = 0.1; ///< Percentage value of how much the height is scaled from the original unit.
   const float TILE_SIDE_SCALE = 1.0;  ///< Percentage value of how much the side is scaled from the original unit.

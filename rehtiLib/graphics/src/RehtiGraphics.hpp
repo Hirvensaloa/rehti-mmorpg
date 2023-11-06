@@ -91,6 +91,13 @@ public:
 	*/
 	bool addGameObject(int objectID, std::vector<Vertex> vertices, std::vector<uint32_t> indices, ImageData texture, glm::vec3 location = glm::vec3(0.f));
 
+
+
+	void moveGameObject(int objectID, glm::vec3 location, int timeInSeconds);
+	void rotateGameObject(int objectID, float radians, int timeInSeconds);
+	void forceGameObjectMove(int objectID, glm::vec3 location);
+	void forceGameObjectRotate(int objectID, float radians);
+
 	/**
 	 * @brief Adds an area to the game.
 	 * @param mapAABBData is the bounding box data of the area.
@@ -428,9 +435,9 @@ private:
 	std::function<void(const Hit&)> mouseClickCallbackM;
 
 	// Other variables
-	uint32_t widthM = 800;
-	uint32_t heightM = 600;
-	float anisotropyM = 1.f; // default val. Changed in <cref=isDeviceSuitable>
+	uint32_t widthM;
+	uint32_t heightM;
+	float anisotropyM; // default val. Changed in <cref=isDeviceSuitable>
 	EngineFlags engineFlagsM = EngineFlags::NO_FLAGS;
 	EngineStatistics statsM;
 	// Bounding box lists in an array. Each index corresponds to an object type.

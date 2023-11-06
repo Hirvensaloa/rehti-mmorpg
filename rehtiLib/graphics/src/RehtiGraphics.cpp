@@ -14,7 +14,7 @@ void RehtiGraphics::demo()
 }
 
 RehtiGraphics::RehtiGraphics()
-	: cameraM(Camera(glm::vec3(0.f, 0.f, 0.f), static_cast<float>(widthM), static_cast<float>(heightM)))
+	:widthM(800), heightM(600), anisotropyM(1.f), cameraM(Camera(glm::vec3(0.f, 0.f, 0.f), static_cast<float>(widthM), static_cast<float>(heightM)))
 {
 	initWindow();
 	cameraM.registerCameraControls(pWindowM);
@@ -76,7 +76,7 @@ bool RehtiGraphics::addArea(std::vector<Vertex> vertices, std::vector<uint32_t> 
 void RehtiGraphics::transformTestObject(int id, glm::mat4 transformation)
 {
 	glm::mat4 trans = transformation;
-	pObjectManagerM->updateTestObject(id, &transformation, getNextFrame());
+	pObjectManagerM->updateTestObject(id, &transformation, currentFrameM);
 }
 
 void RehtiGraphics::addMapBoundingBox(const MapAABBData& mapAABBData)
@@ -815,6 +815,7 @@ void RehtiGraphics::mainLoop()
 	double invMicro = 1.0 / 1e6;
 	glm::mat4 smallRotation = glm::rotate(glm::mat4(1.f), glm::radians(0.1f), glm::vec3(0.f, 1.f, 0.f)); // small rotation over y.
 	statsM.ftPerSec = 0;
+	float rotation = glm::radians(0.1f);
 
 	while (!glfwWindowShouldClose(pWindowM))
 	{

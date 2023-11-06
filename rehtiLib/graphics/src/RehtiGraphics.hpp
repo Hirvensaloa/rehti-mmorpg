@@ -48,7 +48,7 @@ struct SwapChainSupportDetails
 struct EngineStatistics
 {
 	uint64_t frameTime; // In microseconds
-	double ftPerSec;    // time per second
+	double ftPerSec;		// time per second
 };
 
 // The actual application class
@@ -61,7 +61,7 @@ public:
 	/// <summary>
 	/// Initializes the window and vulkan.
 	/// </summary>
-	RehtiGraphics(uint32_t width = 800, uint32_t height = 600);
+	RehtiGraphics(uint32_t width = 1200, uint32_t height = 900);
 
 	/// <summary>
 	/// Cleans up all the resources used by vulkan.
@@ -119,7 +119,7 @@ public:
 	 * @brief Adds a bounding box for the world map
 	 * @param mapAABBData see mapAABBData
 	 */
-	void addMapBoundingBox(const MapAABBData& mapAABBData);
+	void addMapBoundingBox(const MapAABBData &mapAABBData);
 
 	/**
 	 * @brief Traces a ray against all bounding boxes, starting with objects, then characters and lastly the map.
@@ -137,7 +137,7 @@ public:
 	 * @brief Adds a mouse click callback
 	 * @param callback function after a mouse click has happened
 	 */
-	void addMouseClickCallback(std::function<void(const Hit&)> callback);
+	void addMouseClickCallback(std::function<void(const Hit &)> callback);
 
 private:
 	// Functions
@@ -155,7 +155,7 @@ private:
 	/// <summary>
 	/// populates debug messenger info.
 	/// </summary>
-	void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
+	void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo);
 
 	/// <summary>
 	/// Setups the debug messenger.
@@ -293,7 +293,7 @@ private:
 	 * @param t is the distance to the hit point.
 	 * @return true if hit, false otherwise.
 	 */
-	bool bbHit(const glm::vec3 min, const glm::vec3 max, const glm::vec3 rayOrig, const glm::vec3 dirInv, float& t);
+	bool bbHit(const glm::vec3 min, const glm::vec3 max, const glm::vec3 rayOrig, const glm::vec3 dirInv, float &t);
 
 	/**
 	 * @brief Traces a given ray against a given bounding box.
@@ -303,7 +303,7 @@ private:
 	 * @param boxHit is the bounding box that was hit.
 	 * @return the distance to the hit point.
 	 */
-	bool trace(const glm::vec3 orig, const glm::vec3 dirInv, const AABB* pBoxNode, AABB& boxHit, float& t);
+	bool trace(const glm::vec3 orig, const glm::vec3 dirInv, const AABB *pBoxNode, AABB &boxHit, float &t);
 
 	/// <summary>
 	/// Rates a given GPU
@@ -330,7 +330,7 @@ private:
 	/// Looks for the required extensions set by the GLFW library.
 	/// </summary>
 	/// <returns>The extensions.</returns>
-	std::vector<const char*> getRequiredExtensions();
+	std::vector<const char *> getRequiredExtensions();
 
 	/// <summary>
 	/// Chooses a suitable surface format.
@@ -345,7 +345,7 @@ private:
 	/// <param name="availableModes">List of available modes.</param>
 	/// <returns>The chosen presentation format.</returns>
 	VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> availableModes);
-	VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
+	VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities);
 
 	/// <summary>
 	/// Returns push constant range object for the camera matrix.
@@ -360,7 +360,7 @@ private:
 	 * @param features
 	 * @return
 	 */
-	VkFormat findSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features);
+	VkFormat findSupportedFormat(const std::vector<VkFormat> &candidates, VkImageTiling tiling, VkFormatFeatureFlags features);
 
 	/// <summary>
 	/// Returns the index of the next frame to be drawn.
@@ -377,18 +377,18 @@ private:
 	/**
 	 * @brief Prints out the given aabb
 	 * @param aabb
-	*/
-	void debugAABB(const AABB& aabb, int level);
+	 */
+	void debugAABB(const AABB &aabb, int level);
 
 	/**
 	 * @brief Fills the min and max of the given bounding box.
 	 * @param vertices to create a bounding box for.
 	 * @param box to fill.
 	 */
-	void fillAABB(std::vector<Vertex> vertices, AABB& box);
+	void fillAABB(std::vector<Vertex> vertices, AABB &box);
 
 	// Private members:
-	GLFWwindow* pWindowM;
+	GLFWwindow *pWindowM;
 	VkInstance instanceM;
 	VkDebugUtilsMessengerEXT debugMessengerM;
 	VkSurfaceKHR surfaceM;
@@ -440,7 +440,7 @@ private:
 	std::vector<VkFence> frameFencesM;
 
 	// Callbacks
-	std::function<void(const Hit&)> mouseClickCallbackM;
+	std::function<void(const Hit &)> mouseClickCallbackM;
 
 	// Other variables
 	uint32_t widthM;
@@ -456,28 +456,28 @@ private:
 
 	bool validationLayersEnabledM = false;
 
-	const std::vector<const char*> kValidationlayersM = {
-		"VK_LAYER_KHRONOS_validation" };
+	const std::vector<const char *> kValidationlayersM = {
+			"VK_LAYER_KHRONOS_validation"};
 
-	const std::vector<const char*> kDeviceExtensionsM = {
-		VK_KHR_SWAPCHAIN_EXTENSION_NAME };
+	const std::vector<const char *> kDeviceExtensionsM = {
+			VK_KHR_SWAPCHAIN_EXTENSION_NAME};
 
 	// Debugging functions
 	static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
-		VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
-		VkDebugUtilsMessageTypeFlagsEXT messageType,
-		const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
-		void* pUserData);
+			VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
+			VkDebugUtilsMessageTypeFlagsEXT messageType,
+			const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
+			void *pUserData);
 
 	static VkResult CreateDebugUtilsMessengerEXT(
-		VkInstance instance,
-		const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
-		const VkAllocationCallbacks* pAllocator,
-		VkDebugUtilsMessengerEXT* pDebugMessenger);
+			VkInstance instance,
+			const VkDebugUtilsMessengerCreateInfoEXT *pCreateInfo,
+			const VkAllocationCallbacks *pAllocator,
+			VkDebugUtilsMessengerEXT *pDebugMessenger);
 
-	static void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
+	static void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks *pAllocator);
 
-	static void frameBufferResizeCallback(GLFWwindow* window, int width, int height);
+	static void frameBufferResizeCallback(GLFWwindow *window, int width, int height);
 
 #ifdef NDEBUG
 	const bool enableValidationLayers = false;

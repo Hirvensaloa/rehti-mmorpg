@@ -154,9 +154,17 @@ void Client::processMessages()
           const std::string idStr = std::to_string(object.id);
           if (gameObjectsObjDataM.contains(idStr))
           {
+            std::cout << "object"
+                      << " " << object.id << " " << object.x << " " << object.y << " " << object.z << std::endl;
             const auto obj = gameObjectsObjDataM[idStr];
-            std::cout << obj.indices.size() << " " << obj.vertices.size() << std::endl;
-            graphLib->addGameObject(object.id, obj.vertices, obj.indices, textureDataM["treetexture.png"], {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
+            if (object.id == 1)
+            {
+              graphLib->addGameObject(std::stoi(object.instanceId), obj.vertices, obj.indices, textureDataM["treetexture.png"], {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
+            }
+            else
+            {
+              graphLib->addGameObject(std::stoi(object.instanceId), obj.vertices, obj.indices, textureDataM["housetexture.png"], {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
+            }
           }
         }
       }

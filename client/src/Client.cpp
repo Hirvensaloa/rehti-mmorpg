@@ -137,9 +137,9 @@ void Client::processMessages()
         {
           if (gameObjectsObjDataM.contains(object.id))
           {
-            std::cout << "Adding game object to graphics" << object.id << std::endl;
-            const auto obj = gameObjectsObjDataM[object.id];
-            graphLib->addGameObject(object.id, obj.vertices, obj.indices, obj.texture);
+            // std::cout << "Adding game object to graphics" << object.id << std::endl;
+            // const auto obj = gameObjectsObjDataM[object.id];
+            // graphLib->addGameObject(object.id, obj.vertices, obj.indices, obj.texture);
           }
         }
       }

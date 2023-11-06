@@ -80,8 +80,9 @@ void generateAreaObjs(const std::vector<std::vector<int>> &heightMap, const std:
     {
       const std::string area = areaMap[i][j];
       std::cout << "Generating area " << area << i << j << std::endl;
+      const std::string filename = area + std::to_string(i) + std::to_string(j) + ".obj";
       // Create an OBJ file for writing
-      std::ofstream objFile(Config.GENERATED_AREA_OBJ_PATH + area + ".obj");
+      std::ofstream objFile(Config.GENERATED_AREA_OBJ_PATH + filename);
 
       if (!objFile.is_open())
       {

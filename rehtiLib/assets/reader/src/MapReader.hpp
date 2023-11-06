@@ -7,33 +7,23 @@
 #include <vector>
 #include <string>
 
-#include "AssimpObjectReader.hpp"
-
-/**
- * @brief Loads the access map from the given path.
- * @param accessMap Empty matrix of uint8_t that will be filled with the access map information.
- * @param path to the access map file.
- */
-void loadAccessMap(std::vector<std::vector<uint8_t>> &accessMap, std::string path);
+ /**
+  * @brief Loads the access map from the given path.
+  * @param accessMap Empty matrix of uint8_t that will be filled with the access map information.
+  * @param path to the access map file.
+  */
+void loadAccessMap(std::vector<std::vector<uint8_t>>& accessMap, std::string path);
 
 /**
  * @brief Loads the height map from the given path.
  * @param heightMap Empty matrix of int that will be filled with the height map information.
  * @param path to the height map file.
  */
-void loadHeightMap(std::vector<std::vector<int>> &heightMap, std::string path);
+void loadHeightMap(std::vector<std::vector<int>>& heightMap, std::string path);
 
 /**
  * @brief Loads the area map from the given path.
  * @param areaMap Empty matrix of string that will be filled with the area map information.
  * @param path to the area map file.
  */
-void loadAreaMap(std::vector<std::vector<std::string>> &areaMap, std::string path);
-
-/**
- * @brief Reads the area map obj files
- * @param areaMap Contains all the area names and their corresponding positions
- * @param areaVertexList Empty list where the area vertices are loaded
- * @param areaFaceList Empty list where the area faces are loaded
- */
-void loadAreaMapObjs(std::vector<std::vector<std::string>> &areaMap, std::vector<std::vector<aiVector3D>> &areaVertexList, std::vector<std::vector<aiFace>> &areaFaceList);
+void loadAreaMap(std::vector<std::vector<std::string>>& areaMap, std::string path);

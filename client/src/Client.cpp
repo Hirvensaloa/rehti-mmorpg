@@ -131,6 +131,7 @@ void Client::processMessages()
 
         const auto obj = gameObjectsObjDataM["ukko"];
         graphLib->addGameObject(gameStateMsg.currentPlayer.entityId, obj.vertices, obj.indices, textureDataM["ukkotextuuri1.png"], {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
+        graphLib->forcePlayerMove(gameStateMsg.currentPlayer.entityId, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
         std::cout << "player"
                   << " " << gameStateMsg.currentPlayer.entityId << " " << gameStateMsg.currentPlayer.x << " " << gameStateMsg.currentPlayer.y << " " << gameStateMsg.currentPlayer.z << std::endl;
 
@@ -146,6 +147,7 @@ void Client::processMessages()
                     << " " << entity.entityId << " " << entity.x << " " << entity.y << " " << entity.z << std::endl;
           const auto obj = gameObjectsObjDataM["orc1"];
           graphLib->addGameObject(entity.entityId, obj.vertices, obj.indices, textureDataM["sand.png"], {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
+          graphLib->forceGameObjectMove(entity.entityId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
         }
         for (const auto &object : gameStateMsg.objects)
         {

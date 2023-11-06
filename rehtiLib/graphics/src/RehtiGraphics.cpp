@@ -861,10 +861,6 @@ void RehtiGraphics::mainLoop()
 		statsM.frameTime = static_cast<uint64_t>(mus);
 		statsM.ftPerSec = mus * invMicro;
 		frameCount += static_cast<float>(statsM.ftPerSec);
-		glm::mat4 smallRotation = glm::rotate(glm::mat4(1.f), glm::radians(10.f * frameCount), glm::vec3(0.f, 1.f, 0.f)); // small rotation over y.
-		glm::vec4 location = smallRotation * translation * glm::vec4(POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS, 1.f);
-
-		forcePlayerMove(0, location);
 	}
 
 	vkDeviceWaitIdle(logDeviceM);

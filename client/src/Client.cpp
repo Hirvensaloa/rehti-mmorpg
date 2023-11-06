@@ -18,7 +18,7 @@ Client::Client(std::string ip, std::string port)
 		Connection::owner::client, ioContextM, std::move(boost::asio::ip::tcp::socket(ioContextM)), messagesM))
 {
 	this->startGraphics();
-	connectionThreadM = std::thread([this]()
+	/*connectionThreadM = std::thread([this]()
 		{
 			boost::asio::co_spawn(ioContextM, connect(), boost::asio::detached);
 		});
@@ -26,7 +26,7 @@ Client::Client(std::string ip, std::string port)
 	ioThreadM = std::thread([this]()
 		{
 			ioContextM.run();
-		});
+		});*/
 };
 
 void Client::start()
@@ -185,35 +185,36 @@ void Client::handleMouseClick(const Hit& hit)
 
 void Client::startGraphics()
 {
-	std::thread(
-		[this]()
+
+	// Create map bounding box
+	std::vector<std::vector<int>> heightMatrix;
+	std::vector<std::vector<std::string>> areaMatrix;
+	loadHeightMap(heightMatrix, Config.GENERATED_HEIGHT_MAP_PATH);
+	loadAreaMap(areaMatrix, Config.GENERATED_AREA_MAP_PATH);
+	graphLib.addMapBoundingBox(MapAABBData{ heightMatrix, areaMatrix, Config.AREA_WIDTH, Config.HEIGHT_MAP_SCALE, Config.TILE_SIDE_SCALE, Config.TILE_SIDE_UNIT });
+
+	// Load map area obj files into memory
+	std::vector<std::vector<aiVector3D>> areaVertexList;
+	std::vector<std::vector<aiFace>> areaFaceList;
+	loadAreaMapObjs(areaMatrix, areaVertexList, areaFaceList);
+	std::array<ImageData, 6> areaTextures;;
+	for (size_t i = 0; i < areaTextures.size(); i++)
+	{
+		areaTextures[i] = TestValues::GetTestTexture();
+	}
+	std::vector<std::vector<Vertex>> areaVertices = aiVector3DMatrixToVertexVector(areaVertexList);
+	std::vector<std::vector<uint32_t>> areaIndices = aiFaceMatrixToVector(areaFaceList);
+	for (int i = 0; i < areaVertices.size(); i++)
+	{
+		graphLib.addArea(areaVertices[i], areaIndices[i], areaTextures);
+	}
+
+	// Add action callbacks
+	graphLib.addMouseClickCallback([this](const Hit& hit)
 		{
-			// Create map bounding box
-			std::vector<std::vector<int>> heightMatrix;
-			std::vector<std::vector<std::string>> areaMatrix;
-			loadHeightMap(heightMatrix, Config.GENERATED_HEIGHT_MAP_PATH);
-			loadAreaMap(areaMatrix, Config.GENERATED_AREA_MAP_PATH);
-			graphLib.addMapBoundingBox(MapAABBData{ heightMatrix, areaMatrix, Config.AREA_WIDTH, Config.HEIGHT_MAP_SCALE, Config.TILE_SIDE_SCALE, Config.TILE_SIDE_UNIT });
+			handleMouseClick(hit);
+		});
 
-			// Load map area obj files into memory
-			std::vector<std::vector<aiVector3D>> areaVertexList;
-			std::vector<std::vector<aiFace>> areaFaceList;
-			loadAreaMapObjs(areaMatrix, areaVertexList, areaFaceList);
+	graphLib.demo();
 
-			std::vector<std::vector<Vertex>> areaVertices = aiVector3DMatrixToVertexVector(areaVertexList);
-			std::vector<std::vector<uint32_t>> areaIndices = aiFaceMatrixToVector(areaFaceList);
-			for (int i = 0; i < areaVertices.size(); i++)
-			{
-				// TODO: load area objs using RehtiGraphics interface. @Otso voit käyttää tätä
-			}
-
-			// Add action callbacks
-			graphLib.addMouseClickCallback([this](const Hit& hit)
-				{
-					handleMouseClick(hit);
-				});
-
-			graphLib.demo();
-		})
-		.detach();
 }

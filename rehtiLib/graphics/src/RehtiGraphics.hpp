@@ -371,6 +371,12 @@ private:
 	void debugMatrix(glm::mat4 matrix);
 
 	/**
+	 * @brief Prints out the given aabb
+	 * @param aabb
+	*/
+	void debugAABB(const AABB& aabb, int level);
+
+	/**
 	 * @brief Fills the min and max of the given bounding box.
 	 * @param vertices to create a bounding box for.
 	 * @param box to fill.

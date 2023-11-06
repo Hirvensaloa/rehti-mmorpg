@@ -49,10 +49,7 @@ void RehtiGraphics::addTestGameObject(int id)
 
 bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, std::vector<uint32_t> indices, ImageData img, glm::vec3 location)
 {
-	glm::mat4 transformation = glm::mat4(1.f);
-	transformation[3][0] = location.x;
-	transformation[3][1] = location.y;
-	transformation[3][2] = location.z;
+	glm::mat4 transformation = glm::translate(glm::mat4(1.f), location);
 	bool res = pObjectManagerM->addGameObject(objectID, vertices, indices, img, transformation, textureSamplerM);
 	if (!res)
 		return false;
@@ -134,6 +131,7 @@ Hit RehtiGraphics::traceClick()
 		const auto& box = boxPair.second;
 		AABB boxHit{};
 		float newT;
+
 		bool res = trace(rayOrigin, inverseDir, &box, boxHit, newT);
 
 		if (res && newT < earliest)
@@ -153,6 +151,7 @@ Hit RehtiGraphics::traceClick()
 		const auto& box = boxPair.second;
 		AABB boxHit{};
 		float newT;
+		// debugAABB(box, 0);
 		bool res = trace(rayOrigin, inverseDir, &box, boxHit, newT);
 
 		if (res && newT < earliest)
@@ -1332,6 +1331,31 @@ void RehtiGraphics::debugMatrix(glm::mat4 matrix)
 		std::cout << matrix[0][j] << " " << matrix[1][j] << " " << matrix[2][j] << " " << matrix[3][j] << std::endl;
 
 	}
+}
+
+void RehtiGraphics::debugAABB(const AABB& aabb, int level)
+{
+	for (int i = 0; i < level; i++)
+	{ // indent
+		std::cout << "  ";
+	}
+	if (aabb.isLeaf())
+	{
+		std::cout << "Leaf AABB values are \n"
+			<< "Level: " << level << "\n"
+			<< "Min: " << aabb.min.x << " " << aabb.min.y << " " << aabb.min.z << "\n"
+			<< "Max: " << aabb.max.x << " " << aabb.max.y << " " << aabb.max.z << std::endl;
+		return;
+	}
+	else
+	{
+		std::cout << "AABB values are \n"
+			<< "Level: " << level << "\n"
+			<< "Min: " << aabb.min.x << " " << aabb.min.y << " " << aabb.min.z << "\n"
+			<< "Max: " << aabb.max.x << " " << aabb.max.y << " " << aabb.max.z << std::endl;
+	}
+	debugAABB(*aabb.pLeft.get(), level + 1);
+	debugAABB(*aabb.pRight.get(), level + 1);
 }
 
 void RehtiGraphics::fillAABB(std::vector<Vertex> vertices, AABB& box)

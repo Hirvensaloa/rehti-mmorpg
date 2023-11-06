@@ -66,4 +66,4 @@ std::vector<std::unique_ptr<AABB>> createMapAABB(const MapAABBData& data);
  * @param y The min y coordinate of the area.
  * @param size The size of the area in tiles. Width and height of the area are the same.
  */
-std::unique_ptr<AABB> createAreaAABB(AABB* aabb, const int x, const int y, const int size, const MapAABBData& input);
+std::unique_ptr<AABB> createAreaAABB(AABB* aabb, const int x, const int y, const int xsize, const int ysize, const MapAABBData& input, bool burgerFlip);

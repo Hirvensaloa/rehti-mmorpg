@@ -18,15 +18,15 @@ Camera::Camera(glm::vec3 targetPos, float width, float height, float fovRad, flo
 	, heightM(height)
 {
 	projectionM = glm::perspective(fovRad, width / height, near, far);
-	//projectionM[1][1] *= -1; // flip y axis
-	// cameraMatrixM[2][2] = -1.f; // forward is negative zed
+	projectionM[1][1] *= -1; // flip y axis
+	// cameraMatrixM[0] = glm::vec4(-1.f, 0.f, 0.f, 0.f);
 	moveLocation(-getForward() * zoomM);
 }
 
 glm::mat4 Camera::getViewMatrix() const
 {
-	glm::mat4 view = glm::lookAt(getLocation(), getForward(), getUp());
-
+	// TODO change to target
+	glm::mat4 view = glm::lookAt(getLocation(), glm::vec3(0.f, 0.f, 0.f), POSITIVE_Y_AXIS);
 	return view;
 }
 
@@ -34,14 +34,10 @@ glm::mat4 Camera::getScuffedViewMatrix() const
 {
 	// construct inverse of the camera matrix.
 	// Due to orthonormality (of the orientation), the inverse is the transpose of the orientation, with negated translation.
-	glm::mat4 viewMatrix = glm::transpose(cameraMatrixM);
-	glm::vec3 locationInverse = -getLocation();
-	viewMatrix[3][0] = 0.f;
-	viewMatrix[3][1] = 0.f;
-	viewMatrix[3][2] = -zoomM;
-	viewMatrix[0][3] = 0.f;
-	viewMatrix[1][3] = 0.f;
-	viewMatrix[2][3] = 0.f;
+	glm::mat4 viewMatrix = glm::transpose(glm::mat3(cameraMatrixM));
+	viewMatrix[3][0] = -glm::dot(getLocation(), getRight());
+	viewMatrix[3][1] = -glm::dot(getLocation(), getUp());
+	viewMatrix[3][2] = -glm::dot(getLocation(), getForward());
 	viewMatrix[3][3] = 1.f;
 	return viewMatrix;
 }
@@ -56,6 +52,11 @@ glm::mat4 Camera::getProjectionMatrix() const
 	return projectionM;
 }
 
+glm::mat4 Camera::getWorldToScreenMatrix() const
+{
+	return projectionM * getViewMatrix();
+}
+
 glm::vec3 Camera::getCameraRay(double x, double y) const
 {
 	std::cout << "Asked screen coordinates: " << x << ", " << y << "\n" << std::endl;
@@ -63,16 +64,14 @@ glm::vec3 Camera::getCameraRay(double x, double y) const
 	// The ray is normalized.
 	float normx = (2.f * x) / widthM - 1.f;
 	float normy = 1.f - (2.f * y) / heightM;
-	glm::vec3 normDir = glm::vec3(normx, normy, -1.f);
-	glm::mat3 cameraOrientation = glm::mat3(getOrientation());
-	glm::vec3 ray = glm::normalize(cameraOrientation * normDir);
-	std::cout << "Generated ray: " << ray.x << ", " << ray.y << ", " << ray.z << "\n" << std::endl;
-	return ray;
-}
+	glm::vec4 rayClip = glm::vec4(normx, normy, -1.f, 1.f);
+	glm::vec4 rayEye = glm::inverse(projectionM) * rayClip;
+	rayEye = glm::vec4(rayEye.x, rayEye.y, -1.f, 0.f);
+	glm::vec3 ray = -glm::normalize(glm::vec3(cameraMatrixM * rayEye));
 
-glm::mat4 Camera::getWorldToScreenMatrix() const
-{
-	return projectionM * getViewMatrix();
+	std::cout << "Generated ray: " << ray.x << ", " << ray.y << ", " << ray.z << "\n" << std::endl;
+	std::cout << "Ray origin: " << getLocation().x << ", " << getLocation().y << ", " << getLocation().z << "\n" << std::endl;
+	return ray;
 }
 
 uint32_t Camera::getUboSize()
@@ -98,6 +97,7 @@ void Camera::zoom(float zoomAmount)
 	// clamp zoom
 	newZoom = glm::min(newZoom, MAX_ZOOM);
 	zoomM = glm::max(newZoom, MIN_ZOOM);
+	moveLocation(getForward() * zoomAmount * zoomSensitivityM);
 }
 
 void Camera::setSensitivity(float newSensitivity, float newZoomSens)
@@ -173,7 +173,7 @@ void Camera::cursorPosCallback(GLFWwindow* pWindow, double xpos, double ypos)
 	if (canMove)
 	{
 		float rotationHorizontal = deltaX;
-		float rotationVertical = -deltaY;
+		float rotationVertical = deltaY;
 		glm::vec2 rotationVec = glm::vec2(rotationHorizontal, rotationVertical);
 		cameraUpdateCallback(rotationVec);
 	}

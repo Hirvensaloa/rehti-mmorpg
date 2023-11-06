@@ -30,9 +30,10 @@ void RehtiGraphics::addTestObject(int id)
 {
 	std::vector<SimpleVertex> vertices = TestValues::kSimpleCubeVertices;
 	std::vector<uint32_t> indices = TestValues::kSimpleCubeIndices;
-	glm::mat4 transformation = glm::translate(glm::mat4(1.f), POSITIVE_Z_AXIS * 2.f);
+	glm::mat4 transformation = glm::translate(glm::mat4(1.f), 1.5f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS));
 	pObjectManagerM->addTestObject(id, vertices, indices, transformation);
-	std::cout << "Camera view and projection matrices:" << std::endl;
+	std::cout << "Camera orientation, view and projection matrices:" << std::endl;
+	debugMatrix(cameraM.getOrientation());
 	debugMatrix(cameraM.getViewMatrix());
 	debugMatrix(cameraM.getProjectionMatrix());
 }
@@ -117,9 +118,10 @@ Hit RehtiGraphics::traceClick()
 	{
 		const auto& box = boxPair.second;
 		AABB boxHit{};
-		float newT = trace(rayOrigin, inverseDir, &box, boxHit);
+		float newT;
+		bool res = trace(rayOrigin, inverseDir, &box, boxHit, newT);
 
-		if (newT < earliest)
+		if (res && newT < earliest)
 		{
 			earliest = newT;
 			hit.hitPoint = rayOrigin + rayDir * newT;
@@ -131,9 +133,10 @@ Hit RehtiGraphics::traceClick()
 	{
 		const auto& box = boxPair.second;
 		AABB boxHit{};
-		float newT = trace(rayOrigin, inverseDir, &box, boxHit);
+		float newT;
+		bool res = trace(rayOrigin, inverseDir, &box, boxHit, newT);
 
-		if (newT < earliest)
+		if (res && newT < earliest)
 		{
 			earliest = newT;
 			hit.hitPoint = rayOrigin + rayDir * newT;
@@ -149,9 +152,10 @@ Hit RehtiGraphics::traceClick()
 	{
 		const auto& box = boxPair.second;
 		AABB boxHit{};
-		float newT = trace(rayOrigin, inverseDir, &box, boxHit);
+		float newT;
+		bool res = trace(rayOrigin, inverseDir, &box, boxHit, newT);
 
-		if (newT < earliest)
+		if (res && newT < earliest)
 		{
 			earliest = newT;
 			hit.hitPoint = 0.5f * (boxHit.min + boxHit.max);
@@ -547,7 +551,7 @@ void RehtiGraphics::createGraphicsPipeline()
 		rasterInfo.polygonMode = VK_POLYGON_MODE_FILL;
 		rasterInfo.lineWidth = 1.0f;
 		rasterInfo.cullMode = VK_CULL_MODE_BACK_BIT;
-		rasterInfo.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE; // This is because y is flipped in perspective matrix
+		rasterInfo.frontFace = VK_FRONT_FACE_CLOCKWISE; // This is because y is flipped in perspective matrix
 		rasterInfo.depthBiasEnable = VK_FALSE;
 		rasterInfo.depthBiasConstantFactor = 0.f;
 		rasterInfo.depthBiasClamp = 0.f;
@@ -843,7 +847,7 @@ void RehtiGraphics::mainLoop()
 		if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - applicationStart).count() / 5)
 		{
 			applicationStart = std::chrono::high_resolution_clock::now();
-			debugMatrix(cameraM.getOrientation());
+			// debugMatrix(cameraM.getOrientation());
 		}
 	}
 
@@ -1085,22 +1089,33 @@ bool RehtiGraphics::isDeviceSuitable(VkPhysicalDevice device)
 
 bool RehtiGraphics::bbHit(const glm::vec3 min, const glm::vec3 max, const glm::vec3 rayOrig, const glm::vec3 dirInv, float& t)
 {
-	float tmin = 0.f;
-	float tmax = FLT_MAX;
+	float original = t;
+	float tx1 = (min.x - rayOrig.x) * dirInv.x;
+	float tx2 = (max.x - rayOrig.x) * dirInv.x;
 
-	glm::vec3 t1v = (min - rayOrig) * dirInv;
-	glm::vec3 t2v = (max - rayOrig) * dirInv;
+	float tmin = std::min(tx1, tx2);
+	float tmax = std::max(tx1, tx2);
 
-	glm::vec3 tminv = glm::min(t1v, t2v);
-	glm::vec3 tmaxv = glm::max(t1v, t2v);
+	float ty1 = (min.y - rayOrig.y) * dirInv.y;
+	float ty2 = (max.y - rayOrig.y) * dirInv.y;
 
-	tmin = glm::max(tminv.x, tminv.y, tminv.z);
-	tmax = glm::min(tminv.x, tminv.y, tminv.z);
-	t = tmin;
+	tmin = std::max(tmin, std::min(ty1, ty2));
+	tmax = std::min(tmax, std::max(ty1, ty2));
+
+	float tz1 = (min.z - rayOrig.z) * dirInv.z;
+	float tz2 = (max.z - rayOrig.z) * dirInv.z;
+
+	tmin = std::max(tmin, std::min(tz1, tz2));
+	tmax = std::min(tmax, std::max(tz1, tz2));
+
+	t = std::max(0.0f, tmin);
+	if (tmax < tmin)
+		t = original;
+
 	return tmin <= tmax;
 }
 
-float RehtiGraphics::trace(const glm::vec3 orig, const glm::vec3 dirInv, const AABB* pBoxNode, AABB& boxHit)
+bool RehtiGraphics::trace(const glm::vec3 orig, const glm::vec3 dirInv, const AABB* pBoxNode, AABB& boxHit, float& t)
 {
 	float hitT = FLT_MAX;
 	if (bbHit(pBoxNode->min, pBoxNode->max, orig, dirInv, hitT))
@@ -1109,29 +1124,40 @@ float RehtiGraphics::trace(const glm::vec3 orig, const glm::vec3 dirInv, const A
 		{
 			boxHit.max = pBoxNode->max;
 			boxHit.min = pBoxNode->min;
-			return hitT;
+			t = hitT;
+			return true;
 		}
 		else
 		{
 			AABB box1{};
 			AABB box2{};
-			float t1 = trace(orig, dirInv, pBoxNode->pLeft.get(), box1);
-			float t2 = trace(orig, dirInv, pBoxNode->pRight.get(), box2);
-			if (t1 < 2)
+			float t1 = FLT_MAX;
+			float t2 = FLT_MAX;
+			bool hit1 = trace(orig, dirInv, pBoxNode->pLeft.get(), box1, t1);
+			bool hit2 = trace(orig, dirInv, pBoxNode->pRight.get(), box2, t2);
+
+			if (!hit1 && !hit2)
+			{
+				t = FLT_MAX;
+				return false;
+			}
+
+			if (t1 < t2)
 			{
 				boxHit.max = box1.max;
 				boxHit.min = box1.min;
+				t = t1;
 			}
 			else
 			{
 				boxHit.max = box2.max;
 				boxHit.min = box2.min;
+				t = t2;
 			}
-			return glm::min(t1, t2);
+			return true;
 		}
 	}
-
-	return FLT_MAX;
+	return false;
 }
 
 int RehtiGraphics::rateDevice(VkPhysicalDevice device)
@@ -1301,9 +1327,10 @@ size_t RehtiGraphics::getNextFrame()
 void RehtiGraphics::debugMatrix(glm::mat4 matrix)
 {
 	std::cout << "Matrix values are " << std::endl;
-	for (int i = 0; i < 4; i++)
-	{
-		std::cout << matrix[i][0] << " " << matrix[i][1] << " " << matrix[i][2] << " " << matrix[i][3] << std::endl;
+	for (int j = 0; j < 4; j++)
+	{ // column major
+		std::cout << matrix[0][j] << " " << matrix[1][j] << " " << matrix[2][j] << " " << matrix[3][j] << std::endl;
+
 	}
 }
 

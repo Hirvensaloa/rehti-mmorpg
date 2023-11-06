@@ -4,6 +4,7 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include <vector>
+#include <map>
 
 /**
  * @brief Loads the object from the given path.
@@ -11,7 +12,7 @@
  * @param vertices Empty vector of float that will be filled with the vertices.
  * @param indices Empty vector of unsigned int that will be filled with the indices.
  */
-bool loadOBJFile(const std::string& path, std::vector<aiVector3D>& vertices, std::vector<aiFace>& faces);
+bool loadOBJFile(const std::string &path, std::vector<aiVector3D> &vertices, std::vector<aiFace> &faces);
 
 /**
  * @brief Reads the area map obj files
@@ -19,4 +20,16 @@ bool loadOBJFile(const std::string& path, std::vector<aiVector3D>& vertices, std
  * @param areaVertexList Empty list where the area vertices are loaded
  * @param areaFaceList Empty list where the area faces are loaded
  */
-void loadAreaMapObjs(std::vector<std::vector<std::string>>& areaMap, std::vector<std::vector<aiVector3D>>& areaVertexList, std::vector<std::vector<aiFace>>& areaFaceList);
+void loadAreaMapObjs(std::vector<std::vector<std::string>> &areaMap, std::vector<std::vector<aiVector3D>> &areaVertexList, std::vector<std::vector<aiFace>> &areaFaceList);
+
+struct GameObjectObjData
+{
+  std::vector<aiVector3D> vertices;
+  std::vector<aiFace> faces;
+};
+
+/**
+ * @brief Loads the game object obj files
+ * @return Map of game object id and its corresponding vertices and faces (GameObjectObjData)
+ */
+std::map<int, GameObjectObjData> loadGameObjectObjs();

@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "AssimpObjectReader.hpp"
+#include "ObjectReader.hpp"
 #include "../../Config.hpp"
 
 bool loadOBJFile(const std::string &path, std::vector<aiVector3D> &vertices, std::vector<aiFace> &faces)
@@ -46,4 +47,22 @@ void loadAreaMapObjs(std::vector<std::vector<std::string>> &areaMap, std::vector
       areaFaceList.push_back(faces);
     }
   }
+}
+
+std::map<int, GameObjectObjData> loadGameObjectObjs()
+{
+  auto items = fetchItems();
+  auto skills = fetchSkills();
+  const GameObjects gameObjects = fetchObjects(items, skills);
+  std::map<int, GameObjectObjData> gameObjectObjDataMap;
+  for (const auto &objectId : gameObjects.getObjectIds())
+  {
+    const std::string &filename = std::to_string(objectId) + ".obj";
+    const std::string filepath = Config.OBJECT_OBJ_PATH + filename;
+    std::vector<aiVector3D> vertices;
+    std::vector<aiFace> faces;
+    loadOBJFile(filepath, vertices, faces);
+    gameObjectObjDataMap[objectId] = {vertices, faces};
+  }
+  return gameObjectObjDataMap;
 }

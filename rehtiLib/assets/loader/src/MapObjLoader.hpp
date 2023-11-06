@@ -146,8 +146,8 @@ void generateAreaObjs(const std::vector<std::vector<int>> &heightMap, const std:
 
           // Define and write the triangles
           // The inner square
-          writeFace(objFile, vertexCount + 1, vertexCount + 2, vertexCount + 3);
-          writeFace(objFile, vertexCount + 3, vertexCount + 4, vertexCount + 1);
+          writeFace(objFile, vertexCount + 3, vertexCount + 2, vertexCount + 1);
+          writeFace(objFile, vertexCount + 1, vertexCount + 4, vertexCount + 3);
 
           // The bottom trapezoid
           writeFace(objFile, vertexCount + innerBottomRight, vertexCount + bottomCenterRight, vertexCount + bottomRight);

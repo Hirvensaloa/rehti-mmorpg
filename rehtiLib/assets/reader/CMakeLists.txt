@@ -38,7 +38,7 @@ if (ENABLE_ASSIMP)
   target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/includeWithAssimp>"
   "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
-  add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../../../third_party/assimp ${CMAKE_CURRENT_BINARY_DIR}/build/assimp)
+  add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../../../third_party/assimp ${CMAKE_CURRENT_LIST_DIR}/build/assimp)
   target_link_libraries(${TARGET} PUBLIC assimp::assimp)
 else ()
   # Print message

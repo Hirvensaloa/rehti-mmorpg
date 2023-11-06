@@ -14,14 +14,13 @@ Camera::Camera(glm::vec3 targetPos, float width, float height, float fovRad, flo
 {
 	projectionM = glm::perspective(fovRad, width / height, near, far);
 	projectionM[1][1] *= -1; // flip y axis
-	// cameraMatrixM[0] = glm::vec4(-1.f, 0.f, 0.f, 0.f);
 	moveLocation(-getForward() * zoomM);
 }
 
 glm::mat4 Camera::getViewMatrix() const
 {
 	// TODO change to target
-	glm::mat4 view = glm::lookAt(getLocation(), glm::vec3(0.f, 0.f, 0.f), POSITIVE_Y_AXIS);
+	glm::mat4 view = glm::lookAt(getLocation(), targetM, POSITIVE_Y_AXIS);
 	return view;
 }
 
@@ -93,7 +92,7 @@ void Camera::zoom(float zoomAmount)
 	// clamp zoom
 	newZoom = glm::min(newZoom, MAX_ZOOM);
 	zoomM = glm::max(newZoom, MIN_ZOOM);
-	moveLocation(getForward() * zoomAmount * zoomSensitivityM);
+	setLocation(targetM - getForward() * zoomM);
 }
 
 void Camera::setSensitivity(float newSensitivity, float newZoomSens)
@@ -178,6 +177,26 @@ void Camera::cursorPosCallback(GLFWwindow* pWindow, double xpos, double ypos)
 		glm::vec2 rotationVec = glm::vec2(rotationHorizontal, rotationVertical);
 		cameraUpdateCallback(rotationVec);
 	}
+}
+
+void Camera::move(glm::vec3 movement)
+{
+	moveLocation(movement);
+	targetM += movement;
+}
+
+void Camera::setLocation(glm::vec3 location)
+{
+	cameraMatrixM[3][0] = location.x;
+	cameraMatrixM[3][1] = location.y;
+	cameraMatrixM[3][2] = location.z;
+}
+
+void Camera::setTargetAndCamera(glm::vec3 location)
+{
+	glm::vec3 diff = getLocation() - targetM;
+	targetM = location;
+	setLocation(location + diff);
 }
 
 void Camera::scrollCallback(GLFWwindow* pWindow, double xOffSet, double yOffSet)

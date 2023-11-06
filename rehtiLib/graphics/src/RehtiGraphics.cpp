@@ -7,9 +7,7 @@
 void RehtiGraphics::demo()
 {
 	int testId = 0;
-	int testId2 = 1;
 	addTestGameObject(testId);
-	addTestObject(testId2);
 	mainLoop();
 }
 
@@ -43,8 +41,8 @@ void RehtiGraphics::addTestGameObject(int id)
 	std::vector<Vertex> vertices = TestValues::GetTestVertices();
 	std::vector<uint32_t> indices = TestValues::GetTestIndices();
 	ImageData texture = TestValues::GetTestTexture();
-	glm::mat4 transformation = glm::mat4(1.f);
-	pObjectManagerM->addGameObject(id, vertices, indices, texture, transformation, textureSamplerM);
+	glm::mat4 transformation = glm::translate(glm::mat4(1.f), 1.5f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS));
+	addGameObject(id, vertices, indices, texture, glm::vec3(transformation[3]));
 }
 
 bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, std::vector<uint32_t> indices, ImageData img, glm::vec3 location)
@@ -65,9 +63,26 @@ bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, st
 
 void RehtiGraphics::forceGameObjectMove(int objectID, glm::vec3 location)
 {
+	if (!boundingBoxesM[ObjectType::GAMEOBJECT].contains(objectID))
+		return;
 	glm::mat4 locationTransform = glm::translate(glm::mat4(1.f), location);
 	// Assume changes are made after draw call. hence why currentFrameM is used
 	pObjectManagerM->updateObjectDescriptor(objectID, &locationTransform, currentFrameM);
+	// move the bounding box as well
+	boundingBoxesM[ObjectType::GAMEOBJECT][objectID].min = location + GAMEOBJECT_MIN;
+	boundingBoxesM[ObjectType::GAMEOBJECT][objectID].max = location + GAMEOBJECT_MAX;
+}
+
+void RehtiGraphics::forcePlayerMove(int playerID, glm::vec3 location)
+{
+	glm::mat4 locationTransform = glm::translate(glm::mat4(1.f), location);
+	// Assume changes are made after draw call. hence why currentFrameM is used
+	pObjectManagerM->updateObjectDescriptor(playerID, &locationTransform, currentFrameM);
+	// move the bounding box as well
+	boundingBoxesM[ObjectType::CHARACTER][playerID].min = location + GAMEOBJECT_MIN;
+	boundingBoxesM[ObjectType::CHARACTER][playerID].max = location + GAMEOBJECT_MAX;
+
+	cameraM.setTargetAndCamera(location);
 }
 
 void RehtiGraphics::forceGameObjectRotate(int objectID, float radians)
@@ -829,11 +844,13 @@ void RehtiGraphics::drawFrame()
 void RehtiGraphics::mainLoop()
 {
 	double invMicro = 1.0 / 1e6;
-	glm::mat4 smallRotation = glm::rotate(glm::mat4(1.f), glm::radians(0.1f), glm::vec3(0.f, 1.f, 0.f)); // small rotation over y.
+	glm::mat4 smallRotation = glm::rotate(glm::mat4(1.f), glm::radians(45.f), glm::vec3(0.f, 1.f, 0.f)); // small rotation over y.
 	statsM.ftPerSec = 0;
 	statsM.frameTime = 0;
+	float frameCount = 0.f;
 	auto applicationStart = std::chrono::high_resolution_clock::now();
-
+	glm::vec3 movement = glm::vec3(1.f, 1.f, 1.f);
+	glm::vec4 location = glm::vec4(1.f, 1.f, 2.f, 1.f);
 	while (!glfwWindowShouldClose(pWindowM))
 	{
 		auto start = std::chrono::high_resolution_clock::now();
@@ -843,11 +860,8 @@ void RehtiGraphics::mainLoop()
 		auto mus = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
 		statsM.frameTime = static_cast<uint64_t>(mus);
 		statsM.ftPerSec = mus * invMicro;
-		if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - applicationStart).count() / 5)
-		{
-			applicationStart = std::chrono::high_resolution_clock::now();
-			// debugMatrix(cameraM.getOrientation());
-		}
+		frameCount += static_cast<float>(statsM.ftPerSec);
+
 	}
 
 	vkDeviceWaitIdle(logDeviceM);

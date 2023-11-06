@@ -91,9 +91,13 @@ public:
 	 */
 	bool addGameObject(int objectID, std::vector<Vertex> vertices, std::vector<uint32_t> indices, ImageData texture, glm::vec3 location = glm::vec3(0.f));
 
-	void moveGameObject(int objectID, glm::vec3 location, int timeInSeconds);
-	void rotateGameObject(int objectID, float radians, int timeInSeconds);
+	void moveGameObject(int objectID, glm::vec3 location, float timeInSeconds);
+	void movePlayer(int playerID, glm::vec3 location, float timeInSeconds);
+	void rotateGameObject(int objectID, float radians, float timeInSeconds);
+
 	void forceGameObjectMove(int objectID, glm::vec3 location);
+	void forcePlayerMove(int playerID, glm::vec3 location);
+
 	void forceGameObjectRotate(int objectID, float radians);
 
 	/**

@@ -112,6 +112,23 @@ public:
 	/// <param name="movement">Movement to the camera.</param>
 	void moveLocation(glm::vec3 movement);
 
+	/**
+	 * @brief Moves both the camera and the camera target by the given vector.
+	*/
+	void move(glm::vec3 movement);
+
+	/**
+	 * @brief Sets the camera location to the given location.
+	 * @param location
+	*/
+	void setLocation(glm::vec3 location);
+
+	/**
+	* @brief Sets the camera target to the given location and moves camera by the same amount.
+	* @param location
+	*/
+	void setTargetAndCamera(glm::vec3 location);
+
 	/// <summary>
 	/// Returns the location of the camera.
 	/// </summary>

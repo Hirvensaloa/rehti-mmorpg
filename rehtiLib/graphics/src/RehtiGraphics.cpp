@@ -13,8 +13,8 @@ void RehtiGraphics::demo()
 	mainLoop();
 }
 
-RehtiGraphics::RehtiGraphics()
-	:widthM(800), heightM(600), anisotropyM(1.f), cameraM(Camera(glm::vec3(0.f, 0.f, 0.f), static_cast<float>(widthM), static_cast<float>(heightM)))
+RehtiGraphics::RehtiGraphics(uint32_t width, uint32_t height)
+	: widthM(width), heightM(height), anisotropyM(1.f), cameraM(Camera(glm::vec3(0.f, 0.f, 0.f), static_cast<float>(width), static_cast<float>(height)))
 {
 	initWindow();
 	cameraM.registerCameraControls(pWindowM);

@@ -32,7 +32,6 @@ void Client::start()
               { test(); })
       .detach();
   processMessages();
-
   graphicsThreadM.join();
   connectionThreadM.join();
   ioThreadM.join();

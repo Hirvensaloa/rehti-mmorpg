@@ -31,42 +31,6 @@ void writeFace(std::ofstream &objFile, const int corner1, const int corner2, con
   objFile << "f " << corner1 << " " << corner2 << " " << corner3 << std::endl;
 };
 
-struct TileHeight
-{
-  float bottomRight, bottomLeft, topLeft, topRight, bottom, left, top, right;
-};
-
-/**
- * @brief Calculate the height of the tile's corners and sides, based on it's neighbours heights.
- *
- * @param heightMap contains height of each tile
- * @param row index of the tile
- * @param col index of the tile
- * @return TileHeight
- */
-TileHeight calculateTileHeights(const std::vector<std::vector<int>> &heightMap, const int row, const int col)
-{
-  int bottomNeighHeight = row + 1 < heightMap.size() && col < heightMap[row + 1].size() ? heightMap[row + 1][col] : heightMap[row][col];
-  int rightNeighHeight = col + 1 < heightMap[row].size() ? heightMap[row][col + 1] : heightMap[row][col];
-  int leftNeighHeight = col - 1 >= 0 ? heightMap[row][col - 1] : heightMap[row][col];
-  int topNeighHeight = row - 1 >= 0 && col < heightMap[row - 1].size() ? heightMap[row - 1][col] : heightMap[row][col];
-  int bottomRightNeighHeight = row + 1 < heightMap.size() && col + 1 < heightMap[row + 1].size() ? heightMap[row + 1][col + 1] : heightMap[row][col];
-  int bottomLeftNeighHeight = row + 1 < heightMap.size() && col - 1 >= 0 && col - 1 < heightMap[row + 1].size() ? heightMap[row + 1][col - 1] : heightMap[row][col];
-  int topRightNeighHeight = row - 1 >= 0 && col + 1 < heightMap[row - 1].size() ? heightMap[row - 1][col + 1] : heightMap[row][col];
-  int topLeftNeighHeight = row - 1 >= 0 && col - 1 >= 0 ? heightMap[row - 1][col - 1] : heightMap[row][col];
-
-  float bottomRightHeight = (heightMap[row][col] + bottomNeighHeight + rightNeighHeight + bottomRightNeighHeight) / 4.0;
-  float bottomLeftHeight = (heightMap[row][col] + bottomNeighHeight + leftNeighHeight + bottomLeftNeighHeight) / 4.0;
-  float topLeftHeight = (heightMap[row][col] + topNeighHeight + leftNeighHeight + topLeftNeighHeight) / 4.0;
-  float topRightHeight = (heightMap[row][col] + topNeighHeight + rightNeighHeight + topRightNeighHeight) / 4.0;
-  float bottomHeight = (heightMap[row][col] + bottomNeighHeight) / 2.0;
-  float leftHeight = (heightMap[row][col] + leftNeighHeight) / 2.0;
-  float topHeight = (heightMap[row][col] + topNeighHeight) / 2.0;
-  float rightHeight = (heightMap[row][col] + rightNeighHeight) / 2.0;
-
-  return {bottomRightHeight, bottomLeftHeight, topLeftHeight, topRightHeight, bottomHeight, leftHeight, topHeight, rightHeight};
-};
-
 /**
  * @brief Generates obj map for each area of the map.
  * @param heightMap The height matrix of the map.
@@ -146,32 +110,32 @@ void generateAreaObjs(const std::vector<std::vector<int>> &heightMap, const std:
 
           // Define and write the triangles
           // The inner square
-          writeFace(objFile, vertexCount + 3, vertexCount + 2, vertexCount + 1);
-          writeFace(objFile, vertexCount + 1, vertexCount + 4, vertexCount + 3);
+          writeFace(objFile, vertexCount + 1, vertexCount + 2, vertexCount + 3);
+          writeFace(objFile, vertexCount + 3, vertexCount + 4, vertexCount + 1);
 
           // The bottom trapezoid
-          writeFace(objFile, vertexCount + innerBottomRight, vertexCount + bottomCenterRight, vertexCount + bottomRight);
-          writeFace(objFile, vertexCount + innerBottomLeft, vertexCount + bottomCenterLeft, vertexCount + bottomCenterRight);
-          writeFace(objFile, vertexCount + bottomCenterRight, vertexCount + innerBottomRight, vertexCount + innerBottomLeft);
-          writeFace(objFile, vertexCount + innerBottomLeft, vertexCount + bottomLeft, vertexCount + bottomCenterLeft);
+          writeFace(objFile, vertexCount + bottomRight, vertexCount + bottomCenterRight, vertexCount + innerBottomRight);
+          writeFace(objFile, vertexCount + bottomCenterRight, vertexCount + bottomCenterLeft, vertexCount + innerBottomLeft);
+          writeFace(objFile, vertexCount + innerBottomLeft, vertexCount + innerBottomRight, vertexCount + bottomCenterRight);
+          writeFace(objFile, vertexCount + bottomCenterLeft, vertexCount + bottomLeft, vertexCount + innerBottomLeft);
 
           // The left trapezoid
-          writeFace(objFile, vertexCount + leftCenterTop, vertexCount + innerTopLeft, vertexCount + leftTop);
-          writeFace(objFile, vertexCount + leftCenterBottom, vertexCount + innerTopLeft, vertexCount + leftCenterTop);
-          writeFace(objFile, vertexCount + innerBottomLeft, vertexCount + innerTopLeft, vertexCount + leftCenterBottom);
-          writeFace(objFile, vertexCount + leftCenterBottom, vertexCount + bottomLeft, vertexCount + innerBottomLeft);
+          writeFace(objFile, vertexCount + leftTop, vertexCount + innerTopLeft, vertexCount + leftCenterTop);
+          writeFace(objFile, vertexCount + leftCenterTop, vertexCount + innerTopLeft, vertexCount + leftCenterBottom);
+          writeFace(objFile, vertexCount + leftCenterBottom, vertexCount + innerTopLeft, vertexCount + innerBottomLeft);
+          writeFace(objFile, vertexCount + innerBottomLeft, vertexCount + bottomLeft, vertexCount + leftCenterBottom);
 
           // The top trapezoid
-          writeFace(objFile, vertexCount + topCenterRight, vertexCount + innerTopRight, vertexCount + topRight);
-          writeFace(objFile, vertexCount + topCenterLeft, vertexCount + innerTopRight, vertexCount + topCenterRight);
-          writeFace(objFile, vertexCount + innerTopLeft, vertexCount + innerTopRight, vertexCount + topCenterLeft);
-          writeFace(objFile, vertexCount + topCenterLeft, vertexCount + leftTop, vertexCount + innerTopLeft);
+          writeFace(objFile, vertexCount + topRight, vertexCount + innerTopRight, vertexCount + topCenterRight);
+          writeFace(objFile, vertexCount + topCenterRight, vertexCount + innerTopRight, vertexCount + topCenterLeft);
+          writeFace(objFile, vertexCount + topCenterLeft, vertexCount + innerTopRight, vertexCount + innerTopLeft);
+          writeFace(objFile, vertexCount + innerTopLeft, vertexCount + leftTop, vertexCount + topCenterLeft);
 
           // The right trapezoid
-          writeFace(objFile, vertexCount + innerTopRight, vertexCount + innerBottomRight, vertexCount + rightCenterTop);
-          writeFace(objFile, vertexCount + rightCenterTop, vertexCount + topRight, vertexCount + innerTopRight);
-          writeFace(objFile, vertexCount + rightCenterTop, vertexCount + innerBottomRight, vertexCount + rightCenterBottom);
-          writeFace(objFile, vertexCount + bottomRight, vertexCount + rightCenterBottom, vertexCount + innerBottomRight);
+          writeFace(objFile, vertexCount + rightCenterTop, vertexCount + innerBottomRight, vertexCount + innerTopRight);
+          writeFace(objFile, vertexCount + innerTopRight, vertexCount + topRight, vertexCount + rightCenterTop);
+          writeFace(objFile, vertexCount + rightCenterBottom, vertexCount + innerBottomRight, vertexCount + rightCenterTop);
+          writeFace(objFile, vertexCount + innerBottomRight, vertexCount + rightCenterBottom, vertexCount + bottomRight);
 
           // Keep track of the vertex index
           vertexCount += 16;

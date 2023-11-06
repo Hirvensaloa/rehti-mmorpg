@@ -65,6 +65,19 @@ bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, st
 	return true;
 }
 
+void RehtiGraphics::forceGameObjectMove(int objectID, glm::vec3 location)
+{
+	glm::mat4 locationTransform = glm::translate(glm::mat4(1.f), location);
+	// Assume changes are made after draw call. hence why currentFrameM is used
+	pObjectManagerM->updateObjectDescriptor(objectID, &locationTransform, currentFrameM);
+}
+
+void RehtiGraphics::forceGameObjectRotate(int objectID, float radians)
+{
+	glm::mat4 rotation = glm::rotate(glm::mat4(1.f), radians, POSITIVE_Y_AXIS);
+	pObjectManagerM->updateObjectDescriptor(objectID, &rotation, currentFrameM);
+}
+
 bool RehtiGraphics::addArea(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::array<ImageData, 6> textures)
 {
 	bool res = pObjectManagerM->addArea(vertices, indices, textures, textureSamplerM);
@@ -815,7 +828,8 @@ void RehtiGraphics::mainLoop()
 	double invMicro = 1.0 / 1e6;
 	glm::mat4 smallRotation = glm::rotate(glm::mat4(1.f), glm::radians(0.1f), glm::vec3(0.f, 1.f, 0.f)); // small rotation over y.
 	statsM.ftPerSec = 0;
-	float rotation = glm::radians(0.1f);
+	statsM.frameTime = 0;
+	auto applicationStart = std::chrono::high_resolution_clock::now();
 
 	while (!glfwWindowShouldClose(pWindowM))
 	{
@@ -826,6 +840,11 @@ void RehtiGraphics::mainLoop()
 		auto mus = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
 		statsM.frameTime = static_cast<uint64_t>(mus);
 		statsM.ftPerSec = mus * invMicro;
+		if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - applicationStart).count() / 5)
+		{
+			applicationStart = std::chrono::high_resolution_clock::now();
+			debugMatrix(cameraM.getOrientation());
+		}
 	}
 
 	vkDeviceWaitIdle(logDeviceM);
@@ -1345,6 +1364,14 @@ void RehtiGraphics::addMouseClickCallback(std::function<void(const Hit&)> callba
 				RehtiGraphics* pGraphics = reinterpret_cast<RehtiGraphics*>(glfwGetWindowUserPointer(window));
 				const Hit hit = pGraphics->traceClick();
 				pGraphics->mouseClickCallbackM(hit);
+			}
+			else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_PRESS)
+			{
+				Camera::canMove = true;
+			}
+			else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_RELEASE)
+			{
+				Camera::canMove = false;
 			}
 		});
 }

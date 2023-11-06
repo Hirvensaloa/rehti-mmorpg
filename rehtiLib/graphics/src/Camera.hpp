@@ -133,6 +133,7 @@ public:
 	/// <returns>movement sensitivity as x, and zoom sensitivity as y</returns>
 	glm::vec2 getSensitivities() const;
 
+	static bool canMove;
 private:
 
 	/// <summary>

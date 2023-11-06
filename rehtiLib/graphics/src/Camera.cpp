@@ -6,6 +6,7 @@
 
 double Camera::mouseX = 0;
 double Camera::mouseY = 0;
+bool Camera::canMove = false;
 
 Camera::Camera(glm::vec3 targetPos, float width, float height, float fovRad, float near, float far, float sensitivity)
 	: targetM(targetPos)
@@ -17,14 +18,16 @@ Camera::Camera(glm::vec3 targetPos, float width, float height, float fovRad, flo
 	, heightM(height)
 {
 	projectionM = glm::perspective(fovRad, width / height, near, far);
-	projectionM[1][1] *= -1; // flip y axis
-	cameraMatrixM[2][2] = -1.f; // forward is negative zed
+	//projectionM[1][1] *= -1; // flip y axis
+	// cameraMatrixM[2][2] = -1.f; // forward is negative zed
 	moveLocation(-getForward() * zoomM);
 }
 
 glm::mat4 Camera::getViewMatrix() const
 {
-	return glm::lookAt(getLocation(), -getForward(), getUp());
+	glm::mat4 view = glm::lookAt(getLocation(), getForward(), getUp());
+
+	return view;
 }
 
 glm::mat4 Camera::getScuffedViewMatrix() const
@@ -69,7 +72,7 @@ glm::vec3 Camera::getCameraRay(double x, double y) const
 
 glm::mat4 Camera::getWorldToScreenMatrix() const
 {
-	return projectionM * getScuffedViewMatrix();
+	return projectionM * getViewMatrix();
 }
 
 uint32_t Camera::getUboSize()
@@ -84,7 +87,7 @@ void Camera::orbitRotate(glm::vec2 rotationVec)
 	float verticalAngle = rotationVec.y * sensitivityM;
 
 	glm::mat4 rotatedHorizontal = glm::rotate(glm::mat4(1.f), horizontalAngle, POSITIVE_Y_AXIS);
-	glm::vec3 rightVec = glm::vec3(glm::column(cameraMatrixM, 0)); // drops the w component
+	glm::vec3 rightVec = getRight();
 	glm::mat4 rotatedVertical = glm::rotate(glm::mat4(1.f), verticalAngle, rightVec);
 	cameraMatrixM = rotatedVertical * rotatedHorizontal * cameraMatrixM;
 }
@@ -167,10 +170,13 @@ void Camera::cursorPosCallback(GLFWwindow* pWindow, double xpos, double ypos)
 	mouseX = xpos;
 	mouseY = ypos;
 
-	float rotationHorizotal = deltaX;
-	float rotationVertical = deltaY;
-	glm::vec2 rotationVec = glm::vec2(rotationHorizotal, rotationVertical);
-	cameraUpdateCallback(rotationVec);
+	if (canMove)
+	{
+		float rotationHorizontal = deltaX;
+		float rotationVertical = -deltaY;
+		glm::vec2 rotationVec = glm::vec2(rotationHorizontal, rotationVertical);
+		cameraUpdateCallback(rotationVec);
+	}
 }
 
 void Camera::scrollCallback(GLFWwindow* pWindow, double xOffSet, double yOffSet)

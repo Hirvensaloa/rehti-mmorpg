@@ -87,6 +87,17 @@ GraphicsObjectManager::~GraphicsObjectManager()
 			vmaDestroyBuffer(allocatorM, bufObject.transformBuffer.buffer, bufObject.transformBuffer.allocation);
 		}
 	}
+	// area objects
+	for (auto& area : areaObjectsM)
+	{
+		vmaDestroyBuffer(allocatorM, area.vertexData.buffer, area.vertexData.allocation);
+		vmaDestroyBuffer(allocatorM, area.indexData.buffer, area.indexData.allocation);
+		for (size_t i = 0; i < area.textures.size(); i++)
+		{
+			vmaDestroyImage(allocatorM, area.textures[i].image, area.textures[i].allocation);
+			vkDestroyImageView(logDeviceM, area.textureViews[i], nullptr);
+		}
+	}
 	// Destroy command pools
 	vkDestroyCommandPool(logDeviceM, graphicsCommandUnitM.commandPool, nullptr);
 	if (transferCommandUnitM.has_value())
@@ -523,7 +534,8 @@ bool GraphicsObjectManager::addArea(const std::vector<Vertex>& vertices, const s
 		imageInfos[i].sampler = texSampler;
 	}
 
-	pBuilderM->bindImages(imageInfos.data(), VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT, imageInfos.size());
+	pBuilderM->bindImages(imageInfos.data(), VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT, imageInfos.size())
+		.build(area.descriptorSet);
 	// Copy the data to the buffers
 	copyBuffer(area.vertexData, vertices.data());
 	copyBuffer(area.indexData, indices.data());

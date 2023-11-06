@@ -99,7 +99,7 @@ public:
 	 * @param textures of the area. Areas support 5 textures with a blendmap: Order is: blendmap (0), black (1), red (2), green (3), blue (4), alpha (5).
 	 * @return boolean indicating whether the area was added successfully.
 	*/
-	bool addArea(const MapAABBData& mapAABBData, std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::array<ImageData, 6> textures);
+	bool addArea(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::array<ImageData, 6> textures);
 
 	/// <summary>
 	/// Transforms object with the given id.

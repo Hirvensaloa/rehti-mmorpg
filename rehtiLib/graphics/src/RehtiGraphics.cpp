@@ -65,13 +65,12 @@ bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, st
 	return true;
 }
 
-bool RehtiGraphics::addArea(const MapAABBData& mapAABBData, std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::array<ImageData, 6> textures)
+bool RehtiGraphics::addArea(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::array<ImageData, 6> textures)
 {
 	bool res = pObjectManagerM->addArea(vertices, indices, textures, textureSamplerM);
 	if (!res)
 		return false;
-	createMapAABB(mapAABBData);
-	return false;
+	return true;
 }
 
 void RehtiGraphics::transformTestObject(int id, glm::mat4 transformation)

@@ -83,7 +83,8 @@ void Camera::orbitRotate(glm::vec2 rotationVec)
 	glm::mat4 rotatedHorizontal = glm::rotate(glm::mat4(1.f), horizontalAngle, POSITIVE_Y_AXIS);
 	glm::vec3 rightVec = getRight();
 	glm::mat4 rotatedVertical = glm::rotate(glm::mat4(1.f), verticalAngle, rightVec);
-	cameraMatrixM = rotatedVertical * rotatedHorizontal * cameraMatrixM;
+	glm::mat4 rotated = rotatedVertical * rotatedHorizontal * getCameraMatrixOrigon();
+	cameraMatrixM = glm::translate(glm::mat4(1.f), targetM) * rotated;
 }
 
 void Camera::zoom(float zoomAmount)

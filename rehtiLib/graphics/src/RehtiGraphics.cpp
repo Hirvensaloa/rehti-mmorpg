@@ -75,12 +75,14 @@ void RehtiGraphics::forceGameObjectMove(int objectID, glm::vec3 location)
 
 void RehtiGraphics::forcePlayerMove(int playerID, glm::vec3 location)
 {
+	if (!boundingBoxesM[ObjectType::GAMEOBJECT].contains(playerID))
+		return;
 	glm::mat4 locationTransform = glm::translate(glm::mat4(1.f), location);
 	// Assume changes are made after draw call. hence why currentFrameM is used
 	pObjectManagerM->updateObjectDescriptor(playerID, &locationTransform, currentFrameM);
 	// move the bounding box as well
-	boundingBoxesM[ObjectType::CHARACTER][playerID].min = location + GAMEOBJECT_MIN;
-	boundingBoxesM[ObjectType::CHARACTER][playerID].max = location + GAMEOBJECT_MAX;
+	boundingBoxesM[ObjectType::GAMEOBJECT][playerID].min = location + GAMEOBJECT_MIN;
+	boundingBoxesM[ObjectType::GAMEOBJECT][playerID].max = location + GAMEOBJECT_MAX;
 
 	cameraM.setTargetAndCamera(location);
 }
@@ -844,13 +846,13 @@ void RehtiGraphics::drawFrame()
 void RehtiGraphics::mainLoop()
 {
 	double invMicro = 1.0 / 1e6;
-	glm::mat4 smallRotation = glm::rotate(glm::mat4(1.f), glm::radians(45.f), glm::vec3(0.f, 1.f, 0.f)); // small rotation over y.
+
 	statsM.ftPerSec = 0;
 	statsM.frameTime = 0;
 	float frameCount = 0.f;
 	auto applicationStart = std::chrono::high_resolution_clock::now();
-	glm::vec3 movement = glm::vec3(1.f, 1.f, 1.f);
-	glm::vec4 location = glm::vec4(1.f, 1.f, 2.f, 1.f);
+	glm::mat4 translation = glm::translate(glm::mat4(1.f), 1.5f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS));
+
 	while (!glfwWindowShouldClose(pWindowM))
 	{
 		auto start = std::chrono::high_resolution_clock::now();
@@ -861,7 +863,10 @@ void RehtiGraphics::mainLoop()
 		statsM.frameTime = static_cast<uint64_t>(mus);
 		statsM.ftPerSec = mus * invMicro;
 		frameCount += static_cast<float>(statsM.ftPerSec);
+		glm::mat4 smallRotation = glm::rotate(glm::mat4(1.f), glm::radians(10.f * frameCount), glm::vec3(0.f, 1.f, 0.f)); // small rotation over y.
+		glm::vec4 location = smallRotation * translation * glm::vec4(POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS, 1.f);
 
+		forcePlayerMove(0, location);
 	}
 
 	vkDeviceWaitIdle(logDeviceM);

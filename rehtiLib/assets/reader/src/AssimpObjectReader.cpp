@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "AssimpObjectReader.hpp"
+#include "../../Config.hpp"
 
 bool loadOBJFile(const std::string &path, std::vector<aiVector3D> &vertices, std::vector<aiFace> &faces)
 {
@@ -27,4 +28,21 @@ bool loadOBJFile(const std::string &path, std::vector<aiVector3D> &vertices, std
   }
 
   return true;
+}
+
+void loadAreaMapObjs(std::vector<std::vector<std::string>> &areaMap, std::vector<std::vector<aiVector3D>> &areaVertexList, std::vector<std::vector<aiFace>> &areaFaceList)
+{
+  for (int i = 0; i < areaMap.size(); i++)
+  {
+    for (int j = 0; j < areaMap[i].size(); j++)
+    {
+      const std::string &area = areaMap[i][j];
+      const std::string filepath = Config.GENERATED_AREA_OBJ_PATH + area + ".obj";
+      std::vector<aiVector3D> vertices;
+      std::vector<aiFace> faces;
+      loadOBJFile(filepath, vertices, faces);
+      areaVertexList.push_back(vertices);
+      areaFaceList.push_back(faces);
+    }
+  }
 }

@@ -12,3 +12,11 @@
  * @param indices Empty vector of unsigned int that will be filled with the indices.
  */
 bool loadOBJFile(const std::string &path, std::vector<aiVector3D> &vertices, std::vector<aiFace> &faces);
+
+/**
+ * @brief Reads the area map obj files
+ * @param areaMap Contains all the area names and their corresponding positions
+ * @param areaVertexList Empty list where the area vertices are loaded
+ * @param areaFaceList Empty list where the area faces are loaded
+ */
+void loadAreaMapObjs(std::vector<std::vector<std::string>> &areaMap, std::vector<std::vector<aiVector3D>> &areaVertexList, std::vector<std::vector<aiFace>> &areaFaceList);

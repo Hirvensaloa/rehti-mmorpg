@@ -61,8 +61,11 @@ std::map<int, GameObjectObjData> loadGameObjectObjs()
     const std::string filepath = Config.OBJECT_OBJ_PATH + filename;
     std::vector<aiVector3D> vertices;
     std::vector<aiFace> faces;
-    loadOBJFile(filepath, vertices, faces);
-    gameObjectObjDataMap[objectId] = {vertices, faces};
+    bool success = loadOBJFile(filepath, vertices, faces);
+    if (success)
+    {
+      gameObjectObjDataMap[objectId] = {vertices, faces};
+    }
   }
   return gameObjectObjDataMap;
 }

@@ -5,6 +5,7 @@
 #include <network.h>
 #include "graphics.h"
 #include "RehtiReader.hpp"
+#include "Utils.hpp"
 
 class Client
 {
@@ -72,8 +73,8 @@ private:
   std::thread connectionThreadM;
   std::thread ioThreadM;
 
-  RehtiGraphics graphLib;
-  std::map<int, GameObjectObjData> gameObjectsObjDataM; ///< Contains all the game object types and their corresponding vertices and faces
+  RehtiGraphics *graphLib;
+  std::map<int, GameObjectGraphicData> gameObjectsObjDataM; ///< Contains all the game object types and their corresponding vertices and faces
 
   Hit lastHitM; ///< Last detected hit from a mouse click
 };

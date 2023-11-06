@@ -3,23 +3,18 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
 
-
 double Camera::mouseX = 0;
 double Camera::mouseY = 0;
 bool Camera::canMove = false;
 
 Camera::Camera(glm::vec3 targetPos, float width, float height, float fovRad, float near, float far, float sensitivity)
-	: targetM(targetPos)
-	, cameraMatrixM(1.f) // identity
-	, sensitivityM(sensitivity)
-	, zoomM(STANDARD_ZOOM)
-	, zoomSensitivityM(50.f * sensitivity)
-	, widthM(width)
-	, heightM(height)
+		: targetM(targetPos), cameraMatrixM(1.f) // identity
+			,
+			sensitivityM(sensitivity), zoomM(STANDARD_ZOOM), zoomSensitivityM(50.f * sensitivity), widthM(width), heightM(height)
 {
 	projectionM = glm::perspective(fovRad, width / height, near, far);
-	//projectionM[1][1] *= -1; // flip y axis
-	// cameraMatrixM[2][2] = -1.f; // forward is negative zed
+	// projectionM[1][1] *= -1; // flip y axis
+	//  cameraMatrixM[2][2] = -1.f; // forward is negative zed
 	moveLocation(-getForward() * zoomM);
 }
 
@@ -58,7 +53,8 @@ glm::mat4 Camera::getProjectionMatrix() const
 
 glm::vec3 Camera::getCameraRay(double x, double y) const
 {
-	std::cout << "Asked screen coordinates: " << x << ", " << y << "\n" << std::endl;
+	std::cout << "Asked screen coordinates: " << x << ", " << y << "\n"
+						<< std::endl;
 	// Create a ray in world space from the camera to the given screen coordinates.
 	// The ray is normalized.
 	float normx = (2.f * x) / widthM - 1.f;
@@ -66,7 +62,8 @@ glm::vec3 Camera::getCameraRay(double x, double y) const
 	glm::vec3 normDir = glm::vec3(normx, normy, -1.f);
 	glm::mat3 cameraOrientation = glm::mat3(getOrientation());
 	glm::vec3 ray = glm::normalize(cameraOrientation * normDir);
-	std::cout << "Generated ray: " << ray.x << ", " << ray.y << ", " << ray.z << "\n" << std::endl;
+	std::cout << "Generated ray: " << ray.x << ", " << ray.y << ", " << ray.z << "\n"
+						<< std::endl;
 	return ray;
 }
 
@@ -113,7 +110,6 @@ void Camera::moveLocation(glm::vec3 movement)
 	cameraMatrixM[3][2] += movement.z;
 }
 
-
 glm::mat4 Camera::getCameraMatrixOrigon() const
 {
 	glm::mat4 cameraMatrix = cameraMatrixM;
@@ -155,15 +151,17 @@ glm::vec2 Camera::getSensitivities() const
 std::function<void(glm::vec2)> Camera::cameraUpdateCallback = nullptr;
 std::function<void(float)> Camera::cameraZoomCallback = nullptr;
 
-void Camera::registerCameraControls(GLFWwindow* window)
+void Camera::registerCameraControls(GLFWwindow *window)
 {
 	glfwSetCursorPosCallback(window, Camera::cursorPosCallback);
 	glfwSetScrollCallback(window, Camera::scrollCallback);
-	cameraUpdateCallback = [&](glm::vec2 rotation) { orbitRotate(rotation); };
-	cameraZoomCallback = [&](float zoomAmount) { zoom(zoomAmount); };
+	cameraUpdateCallback = [&](glm::vec2 rotation)
+	{ orbitRotate(rotation); };
+	cameraZoomCallback = [&](float zoomAmount)
+	{ zoom(zoomAmount); };
 }
 
-void Camera::cursorPosCallback(GLFWwindow* pWindow, double xpos, double ypos)
+void Camera::cursorPosCallback(GLFWwindow *pWindow, double xpos, double ypos)
 {
 	double deltaX = xpos - mouseX;
 	double deltaY = ypos - mouseY;
@@ -179,7 +177,7 @@ void Camera::cursorPosCallback(GLFWwindow* pWindow, double xpos, double ypos)
 	}
 }
 
-void Camera::scrollCallback(GLFWwindow* pWindow, double xOffSet, double yOffSet)
+void Camera::scrollCallback(GLFWwindow *pWindow, double xOffSet, double yOffSet)
 {
 	float zoom = -yOffSet; // standard mouse wheels provide only the y offset
 	cameraZoomCallback(zoom);

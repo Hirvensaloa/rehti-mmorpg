@@ -18,6 +18,7 @@ static struct
   const std::string OBJECT_JSON_PATH = ROOT_PATH + "assets/objects.json";
   const std::string SKILL_JSON_PATH = ROOT_PATH + "assets/skills.json";
   const std::string OBJECT_OBJ_PATH = ROOT_PATH + "assets/objects/";
+  const std::string TEXTURE_PATH = ROOT_PATH + "assets/textures/";
 
   // Paths to generated files
   const std::string GENERATED_AREA_MAP_PATH = GENERATED_ASSETS_PATH + "area_map.txt";

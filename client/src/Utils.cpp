@@ -67,3 +67,12 @@ GameObjectGraphicData createGameObjectGraphicData(const std::vector<aiVector3D> 
 
   return gameObjectGraphicData;
 }
+
+ImageData stbImageDataToImageData(const StbImageData &stbImageData)
+{
+  ImageData imageData;
+  imageData.width = stbImageData.width;
+  imageData.height = stbImageData.height;
+  imageData.pixels = stbImageData.data;
+  return imageData;
+}

@@ -4,7 +4,7 @@
 #include "ObjectReader.hpp"
 #include "../../Config.hpp"
 
-bool loadOBJFile(const std::string &path, std::vector<aiVector3D> &vertices, std::vector<aiFace> &faces)
+bool loadOBJFile(const std::string &path, std::vector<aiVector3D> &vertices, std::vector<aiFace> &faces, const float scalingFactor)
 {
   Assimp::Importer importer;
   const aiScene *scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
@@ -20,6 +20,9 @@ bool loadOBJFile(const std::string &path, std::vector<aiVector3D> &vertices, std
     aiMesh *mesh = scene->mMeshes[i];
     for (unsigned int j = 0; j < mesh->mNumVertices; j++)
     {
+      mesh->mVertices[j].x *= scalingFactor;
+      mesh->mVertices[j].y *= scalingFactor;
+      mesh->mVertices[j].z *= scalingFactor;
       vertices.push_back(mesh->mVertices[j]);
     }
     for (unsigned int j = 0; j < mesh->mNumFaces; j++)
@@ -49,23 +52,43 @@ void loadAreaMapObjs(std::vector<std::vector<std::string>> &areaMap, std::vector
   }
 }
 
-std::map<int, GameObjectObjData> loadGameObjectObjs()
+std::map<std::string, GameObjectObjData> loadGameObjectObjs()
 {
   auto items = fetchItems();
   auto skills = fetchSkills();
   const GameObjects gameObjects = fetchObjects(items, skills);
-  std::map<int, GameObjectObjData> gameObjectObjDataMap;
+  std::map<std::string, GameObjectObjData> gameObjectObjDataMap;
   for (const auto &objectId : gameObjects.getObjectIds())
   {
-    const std::string &filename = std::to_string(objectId) + ".obj";
+    const std::string idStr = std::to_string(objectId);
+    const std::string &filename = idStr + ".obj";
     const std::string filepath = Config.OBJECT_OBJ_PATH + filename;
     std::vector<aiVector3D> vertices;
     std::vector<aiFace> faces;
     bool success = loadOBJFile(filepath, vertices, faces);
     if (success)
     {
-      gameObjectObjDataMap[objectId] = {vertices, faces};
+      gameObjectObjDataMap[idStr] = {vertices, faces};
     }
   }
+
+  // Load ukko.obj
+  std::vector<aiVector3D> vertices;
+  std::vector<aiFace> faces;
+  bool ukkoSuccess = loadOBJFile(Config.OBJECT_OBJ_PATH + "ukko.obj", vertices, faces, 0.05f);
+  if (ukkoSuccess)
+  {
+    gameObjectObjDataMap["ukko"] = {vertices, faces};
+  }
+
+  // Load goblin.obj
+  std::vector<aiVector3D> verticesGoblin;
+  std::vector<aiFace> facesGoblin;
+  bool goblinSuccess = loadOBJFile(Config.OBJECT_OBJ_PATH + "orc1.obj", verticesGoblin, facesGoblin, 0.01f);
+  if (goblinSuccess)
+  {
+    gameObjectObjDataMap["orc1"] = {verticesGoblin, facesGoblin};
+  }
+
   return gameObjectObjDataMap;
 }

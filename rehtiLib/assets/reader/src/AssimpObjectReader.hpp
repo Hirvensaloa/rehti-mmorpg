@@ -11,8 +11,9 @@
  * @param path to the object file.
  * @param vertices Empty vector of float that will be filled with the vertices.
  * @param indices Empty vector of unsigned int that will be filled with the indices.
+ * @param scalingFactor The scaling factor for the vertices
  */
-bool loadOBJFile(const std::string &path, std::vector<aiVector3D> &vertices, std::vector<aiFace> &faces);
+bool loadOBJFile(const std::string &path, std::vector<aiVector3D> &vertices, std::vector<aiFace> &faces, const float scalingFactor = 1.0f);
 
 /**
  * @brief Reads the area map obj files
@@ -32,4 +33,4 @@ struct GameObjectObjData
  * @brief Loads the game object obj files
  * @return Map of game object id and its corresponding vertices and faces (GameObjectObjData)
  */
-std::map<int, GameObjectObjData> loadGameObjectObjs();
+std::map<std::string, GameObjectObjData> loadGameObjectObjs();

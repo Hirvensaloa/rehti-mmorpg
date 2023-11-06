@@ -31,13 +31,13 @@ std::vector<std::vector<Vertex>> aiVector3DMatrixToVertexVector(const std::vecto
 std::vector<std::vector<uint32_t>> aiFaceMatrixToVector(const std::vector<std::vector<aiFace>> &aiFaceMatrix);
 
 /**
- * @brief Contains GameObject data from which it can be drawn by the graphics lib
+ * @brief Contains data from which it can be drawn by the graphics lib
  */
 struct GameObjectGraphicData
 {
   std::vector<Vertex> vertices;
   std::vector<uint32_t> indices;
-  ImageData texture;
+  ImageData texture = TestValues::GetTestTexture();
 };
 
 /**
@@ -47,3 +47,9 @@ struct GameObjectGraphicData
  * @return GameObjectGraphicData
  */
 GameObjectGraphicData createGameObjectGraphicData(const std::vector<aiVector3D> &aiVector3DList, const std::vector<aiFace> &aiFaceList);
+
+/**
+ * @brief Convert StbImageData to ImageData
+ * @return ImageData
+ */
+ImageData stbImageDataToImageData(const StbImageData &stbImageData);

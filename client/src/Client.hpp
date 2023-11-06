@@ -74,7 +74,8 @@ private:
   std::thread ioThreadM;
 
   RehtiGraphics *graphLib;
-  std::map<int, GameObjectGraphicData> gameObjectsObjDataM; ///< Contains all the game object types and their corresponding vertices and faces
+  std::map<std::string, GameObjectGraphicData> gameObjectsObjDataM; ///< Contains all the game object types and their corresponding vertices and faces
+  std::map<std::string, ImageData> textureDataM;         ///< Contains all the texture data 
 
   Hit lastHitM; ///< Last detected hit from a mouse click
 };

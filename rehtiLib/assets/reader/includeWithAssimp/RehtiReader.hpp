@@ -5,4 +5,5 @@
 #include "../src/ObjectReader.hpp"
 #include "../src/SkillReader.hpp"
 #include "../src/AssimpObjectReader.hpp"
+#include "../src/TextureReader.hpp"
 #include "../../Config.hpp"

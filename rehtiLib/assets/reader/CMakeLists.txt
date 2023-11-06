@@ -33,6 +33,9 @@ if (ENABLE_ASSIMP)
     target_sources(${TARGET} PRIVATE
     src/AssimpObjectReader.hpp
     src/AssimpObjectReader.cpp
+    src/TextureReader.hpp
+    src/TextureReader.cpp
+    stb/stb_image.h
   )
 
   target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/includeWithAssimp>"

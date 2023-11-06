@@ -128,17 +128,33 @@ void Client::processMessages()
       if (msgId == MessageId::GameState)
       {
         const GameStateMessage &gameStateMsg = MessageApi::parseGameState(msg.getBody());
+
+        const auto obj = gameObjectsObjDataM["ukko"];
+        graphLib->addGameObject(gameStateMsg.currentPlayer.entityId, obj.vertices, obj.indices, textureDataM["ukkotextuuri1.png"], {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
+        std::cout << "player"
+                  << " " << gameStateMsg.currentPlayer.entityId << " " << gameStateMsg.currentPlayer.x << " " << gameStateMsg.currentPlayer.y << " " << gameStateMsg.currentPlayer.z << std::endl;
+
         for (const auto &entity : gameStateMsg.entities)
         {
-          // TODO: Draw each entity here
+          // Ignore the player itself
+          if (entity.entityId == gameStateMsg.currentPlayer.entityId)
+          {
+            continue;
+          }
+
+          std::cout << "entity"
+                    << " " << entity.entityId << " " << entity.x << " " << entity.y << " " << entity.z << std::endl;
+          const auto obj = gameObjectsObjDataM["orc1"];
+          graphLib->addGameObject(entity.entityId, obj.vertices, obj.indices, textureDataM["sand.png"], {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
         }
         for (const auto &object : gameStateMsg.objects)
         {
-          if (gameObjectsObjDataM.contains(object.id))
+          const std::string idStr = std::to_string(object.id);
+          if (gameObjectsObjDataM.contains(idStr))
           {
-            // std::cout << "Adding game object to graphics" << object.id << std::endl;
-            // const auto obj = gameObjectsObjDataM[object.id];
-            // graphLib->addGameObject(object.id, obj.vertices, obj.indices, obj.texture);
+            const auto obj = gameObjectsObjDataM[idStr];
+            std::cout << obj.indices.size() << " " << obj.vertices.size() << std::endl;
+            graphLib->addGameObject(object.id, obj.vertices, obj.indices, textureDataM["treetexture.png"], {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
           }
         }
       }
@@ -198,6 +214,14 @@ void Client::startGraphics()
   for (const auto &obj : gameObjectsData)
   {
     gameObjectsObjDataM[obj.first] = createGameObjectGraphicData(obj.second.vertices, obj.second.faces);
+  }
+
+  // Load texture files into memory
+  const auto textures = loadTextures();
+  for (const auto &texture : textures)
+  {
+    textureDataM[texture.first] = stbImageDataToImageData(texture.second);
+    std::cout << "Loaded texture " << texture.first << std::endl;
   }
 
   // Load map area obj files into memory

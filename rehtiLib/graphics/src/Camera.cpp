@@ -3,19 +3,14 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
 
-
 double Camera::mouseX = 0;
 double Camera::mouseY = 0;
 bool Camera::canMove = false;
 
 Camera::Camera(glm::vec3 targetPos, float width, float height, float fovRad, float near, float far, float sensitivity)
-	: targetM(targetPos)
-	, cameraMatrixM(1.f) // identity
-	, sensitivityM(sensitivity)
-	, zoomM(STANDARD_ZOOM)
-	, zoomSensitivityM(50.f * sensitivity)
-	, widthM(width)
-	, heightM(height)
+	: targetM(targetPos), cameraMatrixM(1.f) // identity
+	,
+	sensitivityM(sensitivity), zoomM(STANDARD_ZOOM), zoomSensitivityM(50.f * sensitivity), widthM(width), heightM(height)
 {
 	projectionM = glm::perspective(fovRad, width / height, near, far);
 	projectionM[1][1] *= -1; // flip y axis
@@ -59,7 +54,8 @@ glm::mat4 Camera::getWorldToScreenMatrix() const
 
 glm::vec3 Camera::getCameraRay(double x, double y) const
 {
-	std::cout << "Asked screen coordinates: " << x << ", " << y << "\n" << std::endl;
+	std::cout << "Asked screen coordinates: " << x << ", " << y << "\n"
+		<< std::endl;
 	// Create a ray in world space from the camera to the given screen coordinates.
 	// The ray is normalized.
 	float normx = (2.f * x) / widthM - 1.f;
@@ -113,7 +109,6 @@ void Camera::moveLocation(glm::vec3 movement)
 	cameraMatrixM[3][2] += movement.z;
 }
 
-
 glm::mat4 Camera::getCameraMatrixOrigon() const
 {
 	glm::mat4 cameraMatrix = cameraMatrixM;
@@ -159,8 +154,14 @@ void Camera::registerCameraControls(GLFWwindow* window)
 {
 	glfwSetCursorPosCallback(window, Camera::cursorPosCallback);
 	glfwSetScrollCallback(window, Camera::scrollCallback);
-	cameraUpdateCallback = [&](glm::vec2 rotation) { orbitRotate(rotation); };
-	cameraZoomCallback = [&](float zoomAmount) { zoom(zoomAmount); };
+	cameraUpdateCallback = [&](glm::vec2 rotation)
+		{
+			orbitRotate(rotation);
+		};
+	cameraZoomCallback = [&](float zoomAmount)
+		{
+			zoom(zoomAmount);
+		};
 }
 
 void Camera::cursorPosCallback(GLFWwindow* pWindow, double xpos, double ypos)

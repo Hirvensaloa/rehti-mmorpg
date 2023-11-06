@@ -6,7 +6,6 @@
 
 #include "Client.hpp"
 #include "RehtiReader.hpp"
-#include "Utils.hpp"
 
 Client::Client(std::string ip, std::string port)
     : ioContextM(boost::asio::io_context()),
@@ -33,7 +32,6 @@ void Client::start()
               { test(); })
       .detach();
   processMessages();
-
   graphicsThreadM.join();
   connectionThreadM.join();
   ioThreadM.join();
@@ -136,6 +134,12 @@ void Client::processMessages()
         }
         for (const auto &object : gameStateMsg.objects)
         {
+          if (gameObjectsObjDataM.contains(object.id))
+          {
+            // std::cout << "Adding game object to graphics" << object.id << std::endl;
+            // const auto obj = gameObjectsObjDataM[object.id];
+            // graphLib->addGameObject(object.id, obj.vertices, obj.indices, obj.texture);
+          }
         }
       }
       else
@@ -180,23 +184,28 @@ void Client::handleMouseClick(const Hit &hit)
 
 void Client::startGraphics()
 {
+  graphLib = new RehtiGraphics();
 
   // Create map bounding box
   std::vector<std::vector<int>> heightMatrix;
   std::vector<std::vector<std::string>> areaMatrix;
   loadHeightMap(heightMatrix, Config.GENERATED_HEIGHT_MAP_PATH);
   loadAreaMap(areaMatrix, Config.GENERATED_AREA_MAP_PATH);
-  graphLib.addMapBoundingBox(MapAABBData{heightMatrix, areaMatrix, Config.AREA_WIDTH, Config.HEIGHT_MAP_SCALE, Config.TILE_SIDE_SCALE, Config.TILE_SIDE_UNIT});
+  graphLib->addMapBoundingBox(MapAABBData{heightMatrix, areaMatrix, Config.AREA_WIDTH, Config.HEIGHT_MAP_SCALE, Config.TILE_SIDE_SCALE, Config.TILE_SIDE_UNIT});
 
   // Load object obj files into memory
-  gameObjectsObjDataM = loadGameObjectObjs();
+  const auto gameObjectsData = loadGameObjectObjs();
+  for (const auto &obj : gameObjectsData)
+  {
+    gameObjectsObjDataM[obj.first] = createGameObjectGraphicData(obj.second.vertices, obj.second.faces);
+  }
 
   // Load map area obj files into memory
   std::vector<std::vector<aiVector3D>> areaVertexList;
   std::vector<std::vector<aiFace>> areaFaceList;
   loadAreaMapObjs(areaMatrix, areaVertexList, areaFaceList);
   std::array<ImageData, 6> areaTextures;
-  ;
+
   for (size_t i = 0; i < areaTextures.size(); i++)
   {
     areaTextures[i] = TestValues::GetTestTexture();
@@ -205,12 +214,12 @@ void Client::startGraphics()
   std::vector<std::vector<uint32_t>> areaIndices = aiFaceMatrixToVector(areaFaceList);
   for (int i = 0; i < areaVertices.size(); i++)
   {
-    graphLib.addArea(areaVertices[i], areaIndices[i], areaTextures);
+    graphLib->addArea(areaVertices[i], areaIndices[i], areaTextures);
   }
 
   // Add action callbacks
-  graphLib.addMouseClickCallback([this](const Hit &hit)
-                                 { handleMouseClick(hit); });
+  graphLib->addMouseClickCallback([this](const Hit &hit)
+                                  { handleMouseClick(hit); });
 
-  graphLib.demo();
+  graphLib->demo();
 }

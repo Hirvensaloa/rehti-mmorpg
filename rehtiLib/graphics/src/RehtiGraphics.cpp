@@ -46,6 +46,34 @@ void RehtiGraphics::addTestGameObject(int id)
 	pObjectManagerM->addGameObject(id, vertices, indices, texture, transformation, textureSamplerM);
 }
 
+bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, std::vector<uint32_t> indices, ImageData img, glm::vec3 location)
+{
+	glm::mat4 transformation = glm::mat4(1.f);
+	transformation[3][0] = location.x;
+	transformation[3][1] = location.y;
+	transformation[3][2] = location.z;
+	bool res = pObjectManagerM->addGameObject(objectID, vertices, indices, img, transformation, textureSamplerM);
+	if (!res)
+		return false;
+	AABB bb;
+	bb.max = location + glm::vec3(0.5f, 0.5f, 0.5f); // Game objects have 1 unit bounding boxes
+	bb.min = location - glm::vec3(0.5f, 0.5f, 0.5f);
+	bb.pLeft = nullptr;
+	bb.pRight = nullptr;
+	boundingBoxesM[ObjectType::GAMEOBJECT][objectID] = bb;
+
+	return true;
+}
+
+bool RehtiGraphics::addArea(const MapAABBData& mapAABBData, std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::array<ImageData, 6> textures)
+{
+	bool res = pObjectManagerM->addArea(vertices, indices, textures, textureSamplerM);
+	if (!res)
+		return false;
+	createMapAABB(mapAABBData);
+	return false;
+}
+
 void RehtiGraphics::transformTestObject(int id, glm::mat4 transformation)
 {
 	glm::mat4 trans = transformation;
@@ -59,7 +87,7 @@ void RehtiGraphics::addMapBoundingBox(const MapAABBData& mapAABBData)
 
 	for (int i = 0; i < aabbList.size(); i++)
 	{
-		boundingBoxesM[ObjectType::AREA].push_back(std::make_pair(std::move(*aabbList[i]), i));
+		boundingBoxesM[ObjectType::AREA][i] = *aabbList[i];
 	}
 }
 
@@ -75,7 +103,7 @@ Hit RehtiGraphics::traceClick()
 	float earliest = FLT_MAX;
 	for (const auto& boxPair : boundingBoxesM[ObjectType::CHARACTER])
 	{
-		const auto& box = boxPair.first;
+		const auto& box = boxPair.second;
 		AABB boxHit{};
 		float newT = trace(rayOrigin, inverseDir, &box, boxHit);
 
@@ -83,13 +111,13 @@ Hit RehtiGraphics::traceClick()
 		{
 			earliest = newT;
 			hit.hitPoint = rayOrigin + rayDir * newT;
-			hit.id = boxPair.second;
+			hit.id = boxPair.first;
 			hit.objectType = ObjectType::CHARACTER;
 		}
 	}
 	for (const auto& boxPair : boundingBoxesM[ObjectType::GAMEOBJECT])
 	{
-		const auto& box = boxPair.first;
+		const auto& box = boxPair.second;
 		AABB boxHit{};
 		float newT = trace(rayOrigin, inverseDir, &box, boxHit);
 
@@ -97,7 +125,7 @@ Hit RehtiGraphics::traceClick()
 		{
 			earliest = newT;
 			hit.hitPoint = rayOrigin + rayDir * newT;
-			hit.id = boxPair.second;
+			hit.id = boxPair.first;
 			hit.objectType = ObjectType::GAMEOBJECT;
 		}
 	}
@@ -107,7 +135,7 @@ Hit RehtiGraphics::traceClick()
 	// map gets traced if no other hits were made
 	for (const auto& boxPair : boundingBoxesM[ObjectType::AREA])
 	{
-		const auto& box = boxPair.first;
+		const auto& box = boxPair.second;
 		AABB boxHit{};
 		float newT = trace(rayOrigin, inverseDir, &box, boxHit);
 
@@ -115,7 +143,7 @@ Hit RehtiGraphics::traceClick()
 		{
 			earliest = newT;
 			hit.hitPoint = 0.5f * (boxHit.min + boxHit.max);
-			hit.id = boxPair.second;
+			hit.id = boxPair.first;
 			hit.objectType = ObjectType::AREA;
 		}
 	}

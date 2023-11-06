@@ -120,6 +120,7 @@ struct AreaObject
 	uint32_t indexCount;
 	std::array<AllocatedImage, 6> textures; // 6: blendMap, base and r, g, b, a
 	std::array<VkImageView, 6> textureViews;
+	VkDescriptorSet descriptorSet;
 	static std::array<VkDescriptorSetLayoutBinding, 1> getDescriptorSetLayoutBindings();
 };
 

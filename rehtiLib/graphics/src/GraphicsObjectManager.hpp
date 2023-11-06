@@ -67,9 +67,13 @@ public:
 	bool addTestObject(int id, const std::vector<SimpleVertex>& vertices, const std::vector<uint32_t>& indices, glm::mat4 transformation);
 
 	/**
-	 * @brief Adds a map to the buffer manager
+	 * @brief Adds an area object to the buffer manager
+	 * @param vertices of the area
+	 * @param indices of the area
+	 * @param textures of the area
+	 * @return boolean indicating success
 	*/
-	bool addMap();
+	bool addArea(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, std::array<ImageData, 6> textures, VkSampler texSampler);
 
 
 	/// <summary>

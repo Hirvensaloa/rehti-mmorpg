@@ -505,6 +505,37 @@ bool GraphicsObjectManager::addTestObject(int id, const std::vector<SimpleVertex
 	return true;
 }
 
+bool GraphicsObjectManager::addArea(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, std::array<ImageData, 6> textures, VkSampler texSampler)
+{
+	VkDeviceSize vSize = vertices.size() * sizeof(Vertex);
+	VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
+	AreaObject area{};
+	area.indexCount = indices.size();
+	area.vertexData = createBuffer(vSize, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+	area.indexData = createBuffer(iSize, VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+	std::array< VkDescriptorImageInfo, 6> imageInfos{};
+	for (size_t i = 0u; i < textures.size(); i++)
+	{
+		area.textures[i] = createImage(textures[i].width, textures[i].height, VK_FORMAT_R8G8B8A8_SRGB);
+		area.textureViews[i] = createImageView(area.textures[i].image, VK_FORMAT_R8G8B8A8_SRGB);
+		imageInfos[i].imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+		imageInfos[i].imageView = area.textureViews[i];
+		imageInfos[i].sampler = texSampler;
+	}
+
+	pBuilderM->bindImages(imageInfos.data(), VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT, imageInfos.size());
+	// Copy the data to the buffers
+	copyBuffer(area.vertexData, vertices.data());
+	copyBuffer(area.indexData, indices.data());
+	for (size_t i = 0u; i < textures.size(); i++)
+	{
+		copyImage(area.textures[i], textures[i]);
+	}
+	areaObjectsM.push_back(area);
+
+	return true;
+}
+
 void GraphicsObjectManager::updateTestObject(int id, const void* srcData, uint32_t frame)
 {
 	auto& object = testObjectsM[id];
@@ -741,6 +772,19 @@ std::vector<DrawableObject> GraphicsObjectManager::getDrawableObjects(ObjectType
 				drawable.indexBuffer = object.indexData.buffer;
 				drawable.indexCount = object.indexCount;
 				drawable.descriptorSet = object.uniformBuffers[frame].descriptorSet;
+				drawables.push_back(drawable);
+			}
+			break;
+		}
+		case ObjectType::AREA:
+		{
+			for (auto& areaObj : areaObjectsM)
+			{
+				DrawableObject drawable{};
+				drawable.vertexBuffer = areaObj.vertexData.buffer;
+				drawable.indexBuffer = areaObj.indexData.buffer;
+				drawable.indexCount = areaObj.indexCount;
+				drawable.descriptorSet = areaObj.descriptorSet;
 				drawables.push_back(drawable);
 			}
 			break;

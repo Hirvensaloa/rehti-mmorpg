@@ -95,6 +95,8 @@ VkDescriptorPool PoolManager::createPool(VkDevice device, VkDescriptorPoolCreate
 	{
 		throw std::runtime_error("Failed to create descriptor pool");
 	}
+	freePoolsM.push_back(pool);
+
 	return pool;
 }
 

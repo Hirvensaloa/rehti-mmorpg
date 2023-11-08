@@ -342,3 +342,8 @@ void DescriptorBuilder::setDescriptorSetLayout(const VkDescriptorSetLayoutBindin
 {
 	layout = pLayoutCacheM->createDescriptorSetLayout(bindings, bindingCount);
 }
+
+const PoolManager& DescriptorBuilder::getPoolManager() const
+{
+	return *pPoolManagerM;
+}

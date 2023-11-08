@@ -45,6 +45,8 @@ set(GRAPHICS_SOURCES
 	GraphicsTypes.cpp
 	AABB.hpp
 	AABB.cpp
+	RehtiGui.hpp
+	RehtiGui.cpp
 	shaders/testShader.vert
 	shaders/testShader.frag
 	shaders/objectShader.vert

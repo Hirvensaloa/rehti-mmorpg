@@ -6,9 +6,6 @@
 #include "GraphicsObjectManager.hpp"
 #include "Mesh.hpp"
 
-#include "../bindings/imgui_impl_glfw.h"
-#include "../bindings/imgui_impl_vulkan.h"
-
 #include <algorithm>
 #include <chrono>
 #include <iostream>
@@ -16,6 +13,9 @@
 #include <memory>
 #include <set>
 #include <string>
+
+// Forward declarations
+class RehtiGui;
 
 enum EngineFlags
 {
@@ -279,6 +279,11 @@ class RehtiGraphics
      */
     void createDepthResources();
 
+    /**
+     * @brief Creates RehtiGui member and initializes it.
+     */
+    void createGui();
+
     /// <summary>
     /// Checks for device extension support.
     /// </summary>
@@ -411,6 +416,7 @@ class RehtiGraphics
 
     // Auxiliary classes
     std::unique_ptr<GraphicsObjectManager> pObjectManagerM;
+    std::unique_ptr<RehtiGui> pGuiM;
 
     // Queues
     VkQueue graphicsQueueM;
@@ -472,7 +478,6 @@ class RehtiGraphics
                                                         VkDebugUtilsMessageTypeFlagsEXT messageType,
                                                         const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
                                                         void* pUserData);
-
     static VkResult CreateDebugUtilsMessengerEXT(VkInstance instance,
                                                  const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
                                                  const VkAllocationCallbacks* pAllocator,

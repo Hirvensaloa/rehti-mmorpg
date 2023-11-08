@@ -12,6 +12,7 @@ find_package(vulkan-memory-allocator 3.0.1 REQUIRED)
 find_package(vulkan-validationlayers 1.3.239.0 REQUIRED)
 find_package(stb REQUIRED)
 find_package(glm REQUIRED)
+find_package(imgui REQUIRED)
 
 set(ENABLE_CTEST OFF CACHE BOOL "" FORCE)
 set(ALLOW_EXTERNAL_SPIRV_TOOLS ON CACHE BOOL "" FORCE)
@@ -72,6 +73,7 @@ target_link_libraries(rehtiGraphics
 	stb::stb
  	glm::glm
 	rehtiUtils
+	imgui::imgui
 	)
 
 target_include_directories(rehtiGraphics PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/shaders/)

@@ -13,4 +13,6 @@ public:
   ~Npc() = default;
 
   void update();
+
+  void respawn();
 };

@@ -16,6 +16,8 @@ public:
 
     bool removeItem(int itemId);
 
+    void removeAllItems();
+
     void useItem(int itemId);
 
     friend std::ostream &operator<<(std::ostream &os, const Inventory &inv);

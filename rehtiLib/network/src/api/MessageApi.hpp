@@ -22,7 +22,6 @@ enum MessageId
 {
     GameState,
     Login,
-    Login,
     Move,
     Attack,
     ObjectInteract,
@@ -87,9 +86,6 @@ struct ObjectInteractMessage
 class MessageApi
 {
 public:
-    static const MessageStruct createLogin(const LoginMessage &login);
-    static LoginMessage parseLogin(std::string msgBody);
-
     static const MessageStruct createLogin(const LoginMessage &login);
     static LoginMessage parseLogin(std::string msgBody);
 

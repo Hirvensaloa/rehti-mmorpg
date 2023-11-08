@@ -2,8 +2,8 @@
 
 #include <string>
 
-#include "Entity.hpp"
 #include "../skill/SkillSet.hpp"
+#include "Entity.hpp"
 
 class PlayerCharacter : public Entity
 {
@@ -13,4 +13,6 @@ public:
     ~PlayerCharacter() = default;
 
     void update();
+
+    void respawn();
 };

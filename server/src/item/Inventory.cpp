@@ -26,6 +26,11 @@ bool Inventory::removeItem(int itemId)
     return false;
 }
 
+void Inventory::removeAllItems()
+{
+    itemsM.clear();
+}
+
 const std::vector<std::shared_ptr<Item>> &Inventory::getItems() const
 {
     return itemsM;

@@ -2,6 +2,7 @@
 
 #include "../action/AttackAction.hpp"
 #include "../action/MoveAction.hpp"
+#include "../action/RespawnAction.hpp"
 #include "../item/Equipment.hpp"
 #include "../item/Inventory.hpp"
 #include "../skill/SkillSet.hpp"
@@ -22,9 +23,15 @@ public:
 
     Coordinates &getLocation();
 
+    void setLocation(Coordinates &location);
+
+    Coordinates &getRespawnLocation();
+
     std::shared_ptr<Action> &getCurrentAction();
 
-    unsigned int getHp();
+    int getHp();
+
+    int getMaxHp();
 
     Inventory &getInventory();
 
@@ -48,6 +55,8 @@ public:
 
     virtual void update() = 0;
 
+    virtual void respawn() = 0;
+
     bool isDisconnected();
 
     void setDisconnected();
@@ -59,9 +68,13 @@ protected:
 
     Coordinates locationM;
 
+    Coordinates respawnLocationM;
+
     std::shared_ptr<Action> currentActionM = nullptr;
 
-    unsigned int hpM = 1000;
+    int maxHpM = 1000;
+
+    int hpM = maxHpM;
 
     GameWorld *pGameWorldM;
 
@@ -72,4 +85,6 @@ protected:
     SkillSet skillSetM;
 
     bool isDisconnectedM = false; // for players only, but defined for entity for polymorphism reaons
+
+    std::chrono::milliseconds respawnTimeM{10000};
 };

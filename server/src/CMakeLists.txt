@@ -31,6 +31,8 @@ set(SOURCES
         action/MoveAction.hpp
         action/ObjectInteractAction.cpp
         action/ObjectInteractAction.hpp
+        action/RespawnAction.cpp
+        action/RespawnAction.hpp
 
         entity/Entity.hpp
         entity/Entity.cpp

@@ -53,6 +53,10 @@ set(GRAPHICS_SOURCES
 	shaders/characterShader.frag
 	shaders/mapShader.vert
 	shaders/mapShader.frag
+	../bindings/imgui_impl_glfw.cpp
+	../bindings/imgui_impl_glfw.h
+	../bindings/imgui_impl_vulkan.cpp
+	../bindings/imgui_impl_vulkan.h
 	)
 
 list(TRANSFORM GRAPHICS_SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)

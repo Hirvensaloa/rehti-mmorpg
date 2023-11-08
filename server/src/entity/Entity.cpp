@@ -3,7 +3,7 @@
 #include "../world/GameWorld.hpp"
 #include "Entity.hpp"
 
-Entity::Entity(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : idM(id), nameM(name), locationM(location), pGameWorldM(pGameWorld), inventoryM(Inventory(this)), equipmentM(Equipment(this)), skillSetM(SkillSet()){};
+Entity::Entity(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : idM(id), nameM(name), locationM(location), respawnLocationM(locationM), pGameWorldM(pGameWorld), inventoryM(Inventory(this)), equipmentM(Equipment(this)), skillSetM(SkillSet()){};
 
 unsigned int Entity::getId()
 {
@@ -20,14 +20,29 @@ Coordinates &Entity::getLocation()
     return locationM;
 }
 
+void Entity::setLocation(Coordinates &location)
+{
+    locationM = location;
+}
+
+Coordinates &Entity::getRespawnLocation()
+{
+    return respawnLocationM;
+}
+
 std::shared_ptr<Action> &Entity::getCurrentAction()
 {
     return currentActionM;
 }
 
-unsigned int Entity::getHp()
+int Entity::getHp()
 {
     return hpM;
+}
+
+int Entity::getMaxHp()
+{
+    return maxHpM;
 }
 
 Inventory &Entity::getInventory()
@@ -65,6 +80,7 @@ void Entity::changeHp(int amount)
     else
     {
         hpM = 0;
+        respawn();
     }
 }
 

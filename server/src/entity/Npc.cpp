@@ -19,4 +19,10 @@ void Npc::update()
       setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), Coordinates(rand() % 10, rand() % 10), this->shared_from_this()));
     }
   }
-};
+}
+
+void Npc::respawn()
+{
+  getInventory().removeAllItems(); // TODO: drop them on the ground
+  setAction(std::make_shared<RespawnAction>(std::chrono::system_clock::now(), respawnTimeM, this->shared_from_this()));
+}

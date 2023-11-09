@@ -4,6 +4,8 @@
 
 #include <network.h>
 #include "graphics.h"
+#include "RehtiReader.hpp"
+#include "Utils.hpp"
 
 class Client
 {
@@ -16,8 +18,6 @@ public:
    * @return true if connection was successful. False otherwise.
    */
   boost::asio::awaitable<bool> connect();
-
-  boost::asio::awaitable<void> randomWalk();
 
   /**
    * @brief Sends an attack message to the server
@@ -41,10 +41,14 @@ public:
    */
   boost::asio::awaitable<void> interactWithObject(const int &objectId);
 
+  /**
+   * @brief Starts the client
+   */
   void start();
 
-  void test();
-
+  /**
+   * @brief Processes messages from the server
+   */
   void processMessages();
 
   /**
@@ -67,10 +71,16 @@ private:
   MessageQueue messagesM;
   std::unique_ptr<Connection> connectionM;
 
+  std::thread graphicsThreadM;
   std::thread connectionThreadM;
   std::thread ioThreadM;
 
-  RehtiGraphics graphLib;
+  RehtiGraphics *pGraphLibM;
+  std::condition_variable graphLibReadyM; ///< GraphLib ready lock
+  bool graphLibReadyFlagM = false;        ///< GraphLib ready flag
+  std::mutex graphLibMutexM;
+  std::map<std::string, GameObjectGraphicData> gameObjectsObjDataM; ///< Contains all the game object types and their corresponding vertices and faces
+  std::map<std::string, ImageData> textureDataM;                    ///< Contains all the texture data
 
   Hit lastHitM; ///< Last detected hit from a mouse click
 };

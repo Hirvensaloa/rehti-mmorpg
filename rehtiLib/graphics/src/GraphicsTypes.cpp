@@ -143,9 +143,24 @@ std::array<VkDescriptorSetLayoutBinding, 2> GameObject::getDescriptorSetLayoutBi
 	return array;
 }
 
+
+std::array<VkDescriptorSetLayoutBinding, 1> AreaObject::getDescriptorSetLayoutBindings()
+{
+	std::array<VkDescriptorSetLayoutBinding, 1> array;
+
+	array[0].binding = 0;
+	array[0].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+	array[0].descriptorCount = 6; // 6 textures
+	array[0].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+	array[0].pImmutableSamplers = nullptr;
+
+	return array;
+}
+
+
 std::array<ObjectType, OBJECT_TYPE_COUNT> getObjectTypes()
 {
-	return {CHARACTER, GAMEOBJECT, TESTOBJECT};
+	return { CHARACTER, GAMEOBJECT, TESTOBJECT, AREA };
 }
 
 std::vector<VkVertexInputAttributeDescription> getAttributeDescription(ObjectType objectType)
@@ -153,26 +168,32 @@ std::vector<VkVertexInputAttributeDescription> getAttributeDescription(ObjectTyp
 	std::vector<VkVertexInputAttributeDescription> attributeDescs{};
 	switch (objectType)
 	{
-	case ObjectType::CHARACTER:
-		for (auto desc : CharacterVertex::getAttributeDescriptions())
-		{
-			attributeDescs.push_back(desc);
-		}
-		break;
-	case ObjectType::GAMEOBJECT:
-		for (auto desc : Vertex::getAttributeDescriptions())
-		{
-			attributeDescs.push_back(desc);
-		}
-		break;
-	case ObjectType::TESTOBJECT:
-		for (auto desc : SimpleVertex::getAttributeDescriptions())
-		{
-			attributeDescs.push_back(desc);
-		}
-		break;
-	default:
-		break;
+		case ObjectType::CHARACTER:
+			for (auto desc : CharacterVertex::getAttributeDescriptions())
+			{
+				attributeDescs.push_back(desc);
+			}
+			break;
+		case ObjectType::GAMEOBJECT:
+			for (auto desc : Vertex::getAttributeDescriptions())
+			{
+				attributeDescs.push_back(desc);
+			}
+			break;
+		case ObjectType::TESTOBJECT:
+			for (auto desc : SimpleVertex::getAttributeDescriptions())
+			{
+				attributeDescs.push_back(desc);
+			}
+			break;
+		case ObjectType::AREA:
+			for (auto desc : Vertex::getAttributeDescriptions())
+			{
+				attributeDescs.push_back(desc);
+			}
+			break;
+		default:
+			break;
 	}
 
 	return attributeDescs;
@@ -183,17 +204,20 @@ VkVertexInputBindingDescription getBindingDescription(ObjectType objectType)
 	VkVertexInputBindingDescription desc{};
 	switch (objectType)
 	{
-	case ObjectType::CHARACTER:
-		desc = CharacterVertex::getBindingDescription();
-		break;
-	case ObjectType::GAMEOBJECT:
-		desc = Vertex::getBindingDescription();
-		break;
-	case ObjectType::TESTOBJECT:
-		desc = SimpleVertex::getBindingDescription();
-		break;
-	default:
-		break;
+		case ObjectType::CHARACTER:
+			desc = CharacterVertex::getBindingDescription();
+			break;
+		case ObjectType::GAMEOBJECT:
+			desc = Vertex::getBindingDescription();
+			break;
+		case ObjectType::TESTOBJECT:
+			desc = SimpleVertex::getBindingDescription();
+			break;
+		case ObjectType::AREA:
+			desc = Vertex::getBindingDescription();
+			break;
+		default:
+			break;
 	}
 	return desc;
 }

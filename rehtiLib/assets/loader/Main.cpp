@@ -13,6 +13,11 @@ int main()
   {
     std::filesystem::create_directory(Config.GENERATED_ASSETS_PATH);
   }
+  // Create generated area obj folder if it does not exist
+  if (!std::filesystem::exists(Config.GENERATED_AREA_OBJ_PATH))
+  {
+    std::filesystem::create_directory(Config.GENERATED_AREA_OBJ_PATH);
+  }
 
   // Fetch game assets
   std::map<int, GameSkill> gameSkills = fetchSkills();
@@ -30,8 +35,8 @@ int main()
   writeMatrixToFile(heightMatrix, Config.GENERATED_HEIGHT_MAP_PATH);
   writeMatrixToFile(areaMap, Config.GENERATED_AREA_MAP_PATH);
 
-  // Generate obj map for client
-  generateMapObj(heightMatrix);
+  // Generate obj files of the areas for client
+  generateAreaObjs(heightMatrix, areaMap);
 
   std::cout << "Map assets generated successfully!" << std::endl;
 

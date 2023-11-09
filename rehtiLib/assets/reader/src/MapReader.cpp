@@ -4,6 +4,7 @@
 
 #include "Utils.hpp"
 #include "MapReader.hpp"
+#include "../../Config.hpp"
 
 void loadAccessMap(std::vector<std::vector<uint8_t>> &accessMap, std::string path)
 {

@@ -9,6 +9,8 @@ set(SOURCES
 Main.cpp
       Client.hpp
       Client.cpp
+      Utils.hpp
+      Utils.cpp
 	)
 
 list(TRANSFORM SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)

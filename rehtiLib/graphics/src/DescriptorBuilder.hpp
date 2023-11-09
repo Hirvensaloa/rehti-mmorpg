@@ -98,7 +98,7 @@ public:
 	/// <param name="bindingCount"> of the bindings.</param>
 	/// <returns>Created layout.</returns>
 	VkDescriptorSetLayout createDescriptorSetLayout(const VkDescriptorSetLayoutBinding* bindings, uint32_t bindingCount);
-	
+
 	struct DescriptorSetLayoutInfo
 	{
 		std::vector<VkDescriptorSetLayoutBinding> bindings;
@@ -135,7 +135,7 @@ public:
 	/// <param name="type">of descriptor</param>
 	/// <param name="stageFlags">Descriptor stage</param>
 	/// <returns>The builder itself.</returns>
-	DescriptorBuilder& bindBuffer(VkDescriptorBufferInfo & bufferInfo, VkDescriptorType type, VkShaderStageFlags stageFlags);
+	DescriptorBuilder& bindBuffer(VkDescriptorBufferInfo& bufferInfo, VkDescriptorType type, VkShaderStageFlags stageFlags);
 
 	/// <summary>
 	/// Creates a descriptor set layout binding and a write descriptor set for an image.
@@ -144,7 +144,17 @@ public:
 	/// <param name="type">of descriptor.</param>
 	/// <param name="stageFlags">Descriptor stage.</param>
 	/// <returns>The builder itself.</returns>
-	DescriptorBuilder& bindImage(VkDescriptorImageInfo & imageInfo, VkDescriptorType type, VkShaderStageFlags stageFlags);
+	DescriptorBuilder& bindImage(VkDescriptorImageInfo& imageInfo, VkDescriptorType type, VkShaderStageFlags stageFlags);
+
+	/**
+	 * @brief Binds multiple images to the descriptor set as an array.
+	 * @param imageInfos is an array of image info structs.
+	 * @param type of resource.
+	 * @param stageFlags is the shader stage.
+	 * @param count is the number of images to bind. Must match what is in the imageInfos array.
+	 * @return the builder itself.
+	*/
+	DescriptorBuilder& bindImages(const VkDescriptorImageInfo* imageInfos, VkDescriptorType type, VkShaderStageFlags stageFlags, uint32_t count);
 
 	/// <summary>
 	/// Builds a descriptor set and sets a created layout to the supplied parameter.

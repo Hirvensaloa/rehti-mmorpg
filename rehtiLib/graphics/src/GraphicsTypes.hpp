@@ -13,6 +13,9 @@
 constexpr uint32_t BONES_PER_VERTEX = 4;
 constexpr uint32_t MAX_BONES = 50;
 
+constexpr glm::vec3 GAMEOBJECT_MIN = glm::vec3(-0.5f, -0.5f, -0.5f);
+constexpr glm::vec3 GAMEOBJECT_MAX = glm::vec3(0.5f, 0.5f, 0.5f);
+
 #define OBJECT_TYPE_COUNT 4
 
 enum ObjectType : uint32_t
@@ -20,11 +23,11 @@ enum ObjectType : uint32_t
 	CHARACTER,
 	GAMEOBJECT,
 	TESTOBJECT,
-	MAP,
+	AREA,
 	UNDEFINED
 };
 
-std::array <ObjectType, OBJECT_TYPE_COUNT> getObjectTypes();
+std::array<ObjectType, OBJECT_TYPE_COUNT> getObjectTypes();
 
 #pragma endregion
 
@@ -35,19 +38,6 @@ struct Hit
 	int id;
 	ObjectType objectType;
 	glm::vec3 hitPoint;
-};
-
-/**
- * @brief Axis Aligned Bounding Box data structure
-*/
-struct AABB
-{
-	glm::vec3 min;
-	glm::vec3 max;
-	std::unique_ptr<AABB> pLeft;
-	std::unique_ptr<AABB> pRight;
-	bool isLeaf() const;
-	glm::vec3 getCenter() const;
 };
 
 struct ImageData
@@ -82,23 +72,23 @@ struct AllocatedBuffer
 // Game object descriptor data
 struct GameObjectUniformBuffer
 {
-	VkDescriptorSet descriptorSet; // Descriptor set of the data
+	VkDescriptorSet descriptorSet;	 // Descriptor set of the data
 	AllocatedBuffer transformBuffer; // Buffer containing the transform data (glm::mat4)
-	void* mappedTransformData; // Pointer to the mapped data of the transform buffer
+	void* mappedTransformData;			 // Pointer to the mapped data of the transform buffer
 };
 
 // Test object descriptor data
 struct TestObjectUniformBuffer
 {
-	VkDescriptorSet descriptorSet; // Descriptor set of the data
+	VkDescriptorSet descriptorSet;	 // Descriptor set of the data
 	AllocatedBuffer transformBuffer; // Buffer containing the transform data (glm::mat4)
-	void* mappedTransformData; // Pointer to the mapped data of the transform buffer
+	void* mappedTransformData;			 // Pointer to the mapped data of the transform buffer
 };
 
 // Character buffer object
 struct CharacterObjectUniformBuffer
 {
-	VkDescriptorSet descriptorSet; // Descriptor set of the data
+	VkDescriptorSet descriptorSet;			 // Descriptor set of the data
 	AllocatedBuffer boneTransformations; // Todo think how the data is going to be stored
 	AllocatedBuffer boneWeights;
 };
@@ -126,6 +116,17 @@ struct GameObject
 	static std::array<VkDescriptorSetLayoutBinding, 2> getDescriptorSetLayoutBindings();
 };
 
+struct AreaObject
+{
+	AllocatedBuffer vertexData;
+	AllocatedBuffer indexData;
+	uint32_t indexCount;
+	std::array<AllocatedImage, 6> textures; // 6: blendMap, base and r, g, b, a
+	std::array<VkImageView, 6> textureViews;
+	VkDescriptorSet descriptorSet;
+	static std::array<VkDescriptorSetLayoutBinding, 1> getDescriptorSetLayoutBindings();
+};
+
 struct TestObject
 {
 	AllocatedBuffer vertexData;
@@ -142,14 +143,14 @@ struct TestObject
 /**
  * @brief Returns a vector of VkVertexInputAttributeDescription for the given object type.
  * @param objectType to query the attribute descriptions for.
-*/
-std::vector< VkVertexInputAttributeDescription> getAttributeDescription(ObjectType objectType);
+ */
+std::vector<VkVertexInputAttributeDescription> getAttributeDescription(ObjectType objectType);
 
 /**
  * @brief Returns the vertex binding description for the given object type.
  * @param objectType to query the binding description for.
  * @return
-*/
+ */
 VkVertexInputBindingDescription getBindingDescription(ObjectType objectType);
 
 struct CharacterVertex

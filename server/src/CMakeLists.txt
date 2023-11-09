@@ -81,6 +81,8 @@ target_link_libraries(${TARGET} PRIVATE
         Threads::Threads)
 
 add_subdirectory(../../rehtiLib/network ${CMAKE_CURRENT_LIST_DIR}/../build/network)
+
+option(ENABLE_ASSIMP "Enable Assimp integration" OFF)
 add_subdirectory(../../rehtiLib/assets/reader ${CMAKE_CURRENT_LIST_DIR}/../build/assets/reader)
 target_link_libraries(${TARGET} PRIVATE rehtiAssetsReader PRIVATE rehtiNetwork)
 

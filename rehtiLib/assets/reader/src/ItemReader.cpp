@@ -6,12 +6,14 @@
 #include <filesystem>
 #include "rapidjson/document.h"
 #include "rapidjson/filereadstream.h"
+
 #include "ItemReader.hpp"
 #include "RehtiUtils.hpp"
+#include "../../Config.hpp"
 
 GameItems fetchItems()
 {
-  rapidjson::Document document = readJson(ITEM_JSON_PATH);
+  rapidjson::Document document = readJson(Config.ITEM_JSON_PATH);
 
   if (!document.IsObject() || !validMember(document, "items", ValueType::ARRAY))
   {

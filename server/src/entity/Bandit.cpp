@@ -18,7 +18,6 @@ void Bandit::update()
         PlayerCharacter *target = findClosestPlayer();
         if (target != nullptr)
         {
-            std::cout << "closest player: " << target->getName() << std::endl;
             setAction(std::make_shared<AttackAction>(std::chrono::system_clock::now(), target, this));
         }
     }

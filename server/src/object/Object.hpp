@@ -8,9 +8,9 @@
 class Object
 {
 public:
-  Object(int id, std::string instanceId, std::string name, Coordinates coordinates, unsigned int rotation, ObjectType objectType);
+  Object(int id, std::string instanceId, std::string name, Coordinates coordinates, unsigned int rotation, reader::ObjectType objectType);
 
-  Object(const GeneralObjectStruct &object, const ObjectLocation &location, ObjectType objectType);
+  Object(const GeneralObjectStruct &object, const ObjectLocation &location, reader::ObjectType objectType);
 
   virtual ~Object() = default;
 
@@ -19,7 +19,7 @@ public:
   const std::string &getName();
   const Coordinates &getLocation();
   const unsigned int &getRotation();
-  const ObjectType &getObjectType();
+  const reader::ObjectType &getObjectType();
 
   virtual void interact(Entity &entity) { std::cout << "Cannot interact with this object" << std::endl; };
 
@@ -29,5 +29,5 @@ private:
   std::string nameM;
   Coordinates coordinatesM;
   unsigned int rotationM;
-  ObjectType objectTypeM;
+  reader::ObjectType objectTypeM;
 };

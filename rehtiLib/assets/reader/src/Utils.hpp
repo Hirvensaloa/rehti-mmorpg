@@ -2,9 +2,6 @@
 
 #include <vector>
 
-const std::string ROOT_PATH = "./";
-const std::string GENERATED_ASSETS_PATH = ROOT_PATH + "assets/generated/";
-
 /**
  * @brief Reads a matrix from a text file. Values should be separated by commas and rows by newlines.
  *

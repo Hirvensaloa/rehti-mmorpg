@@ -4,6 +4,7 @@
 
 #include "Utils.hpp"
 #include "MapReader.hpp"
+#include "../../Config.hpp"
 
 void loadAccessMap(std::vector<std::vector<uint8_t>> &accessMap, std::string path)
 {
@@ -35,4 +36,9 @@ void loadHeightMap(std::vector<std::vector<int>> &heightMap, std::string path)
     }
     heightMap.push_back(rowInt);
   }
+}
+
+void loadAreaMap(std::vector<std::vector<std::string>> &areaMap, std::string path)
+{
+  readMatrixFromFile(areaMap, path);
 }

@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 SET(TARGET rehtiUtils)
 
-add_library(${TARGET} STATIC src/RapidjsonHelpers.hpp src/RapidjsonHelpers.cpp)
+add_library(${TARGET} STATIC src/RapidjsonHelpers.hpp src/RapidjsonHelpers.cpp src/TileUtils.hpp src/TileUtils.cpp)
 
 target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 

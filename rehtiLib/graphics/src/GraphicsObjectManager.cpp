@@ -38,9 +38,11 @@ GraphicsObjectManager::GraphicsObjectManager(VkInstance instance, VkPhysicalDevi
 	auto characterBindings = CharacterObject::getDescriptorSetLayoutBindings();
 	auto gameObjectBindings = GameObject::getDescriptorSetLayoutBindings();
 	auto testBindings = TestObject::getDescriptorSetLayoutBindings();
-	pBuilderM->setDescriptorSetLayout(characterBindings.data(), characterBindings.size(), characterSetLayoutM);
-	pBuilderM->setDescriptorSetLayout(gameObjectBindings.data(), gameObjectBindings.size(), gameObjectSetLayoutM);
-	pBuilderM->setDescriptorSetLayout(testBindings.data(), testBindings.size(), testObjectSetLayoutM);
+	auto areaBindings = AreaObject::getDescriptorSetLayoutBindings();
+	pBuilderM->setDescriptorSetLayout(characterBindings.data(), characterBindings.size(), descriptorSetLayoutsM[ObjectType::CHARACTER]);
+	pBuilderM->setDescriptorSetLayout(gameObjectBindings.data(), gameObjectBindings.size(), descriptorSetLayoutsM[ObjectType::GAMEOBJECT]);
+	pBuilderM->setDescriptorSetLayout(testBindings.data(), testBindings.size(), descriptorSetLayoutsM[ObjectType::TESTOBJECT]);
+	pBuilderM->setDescriptorSetLayout(areaBindings.data(), areaBindings.size(), descriptorSetLayoutsM[ObjectType::AREA]);
 }
 
 
@@ -83,6 +85,17 @@ GraphicsObjectManager::~GraphicsObjectManager()
 		for (auto& bufObject : test.uniformBuffers)
 		{
 			vmaDestroyBuffer(allocatorM, bufObject.transformBuffer.buffer, bufObject.transformBuffer.allocation);
+		}
+	}
+	// area objects
+	for (auto& area : areaObjectsM)
+	{
+		vmaDestroyBuffer(allocatorM, area.vertexData.buffer, area.vertexData.allocation);
+		vmaDestroyBuffer(allocatorM, area.indexData.buffer, area.indexData.allocation);
+		for (size_t i = 0; i < area.textures.size(); i++)
+		{
+			vmaDestroyImage(allocatorM, area.textures[i].image, area.textures[i].allocation);
+			vkDestroyImageView(logDeviceM, area.textureViews[i], nullptr);
 		}
 	}
 	// Destroy command pools
@@ -346,7 +359,7 @@ bool GraphicsObjectManager::endCommandBuffer(VkCommandBuffer commandBuffer, VkFe
 	return val;
 }
 
-void GraphicsObjectManager::transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout, VkCommandBuffer commandBuffer, std::pair<uint32_t, uint32_t> srcAndDstQueueFamilies)
+void GraphicsObjectManager::transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout, VkCommandBuffer commandBuffer, VkImageAspectFlags aspectFlags, std::pair<uint32_t, uint32_t> srcAndDstQueueFamilies)
 {
 
 	std::pair<VkAccessFlags, VkAccessFlags> srcAndDstAccessMasks{};
@@ -365,7 +378,7 @@ void GraphicsObjectManager::transitionImageLayout(VkImage image, VkFormat format
 	barrier.dstQueueFamilyIndex = srcAndDstQueueFamilies.second;
 	// data
 	barrier.image = image;
-	barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	barrier.subresourceRange.aspectMask = aspectFlags;
 	barrier.subresourceRange.baseMipLevel = 0; // No mip mapping
 	barrier.subresourceRange.levelCount = 1;
 	barrier.subresourceRange.baseArrayLayer = 0; // No array layers
@@ -503,6 +516,38 @@ bool GraphicsObjectManager::addTestObject(int id, const std::vector<SimpleVertex
 	return true;
 }
 
+bool GraphicsObjectManager::addArea(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, std::array<ImageData, 6> textures, VkSampler texSampler)
+{
+	VkDeviceSize vSize = vertices.size() * sizeof(Vertex);
+	VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
+	AreaObject area{};
+	area.indexCount = indices.size();
+	area.vertexData = createBuffer(vSize, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+	area.indexData = createBuffer(iSize, VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+	std::array< VkDescriptorImageInfo, 6> imageInfos{};
+	for (size_t i = 0u; i < textures.size(); i++)
+	{
+		area.textures[i] = createImage(textures[i].width, textures[i].height, VK_FORMAT_R8G8B8A8_SRGB);
+		area.textureViews[i] = createImageView(area.textures[i].image, VK_FORMAT_R8G8B8A8_SRGB);
+		imageInfos[i].imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+		imageInfos[i].imageView = area.textureViews[i];
+		imageInfos[i].sampler = texSampler;
+	}
+
+	pBuilderM->bindImages(imageInfos.data(), VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT, imageInfos.size())
+		.build(area.descriptorSet);
+	// Copy the data to the buffers
+	copyBuffer(area.vertexData, vertices.data());
+	copyBuffer(area.indexData, indices.data());
+	for (size_t i = 0u; i < textures.size(); i++)
+	{
+		copyImage(area.textures[i], textures[i]);
+	}
+	areaObjectsM.push_back(area);
+
+	return true;
+}
+
 void GraphicsObjectManager::updateTestObject(int id, const void* srcData, uint32_t frame)
 {
 	auto& object = testObjectsM[id];
@@ -532,7 +577,7 @@ void GraphicsObjectManager::destroyImage(AllocatedImage image)
 void GraphicsObjectManager::transitionDepthImageLayout(AllocatedImage depthImage, VkFormat depthFormat, VkImageLayout srcLayout, VkImageLayout dstLayout)
 {
 	VkCommandBuffer cmdBuffer = startCommandBuffer(false);
-	transitionImageLayout(depthImage.image, depthFormat, srcLayout, dstLayout, cmdBuffer);
+	transitionImageLayout(depthImage.image, depthFormat, srcLayout, dstLayout, cmdBuffer, VK_IMAGE_ASPECT_DEPTH_BIT);
 	endCommandBuffer(cmdBuffer);
 }
 
@@ -673,16 +718,25 @@ void GraphicsObjectManager::copyImage(AllocatedImage allocImage, const ImageData
 
 VkDescriptorSetLayout GraphicsObjectManager::getLayout(ObjectType type) const
 {
-	switch (type)
+	if (type != ObjectType::UNDEFINED)
 	{
-		case ObjectType::CHARACTER:
-			return characterSetLayoutM;
-		case ObjectType::GAMEOBJECT:
-			return gameObjectSetLayoutM;
-		case ObjectType::TESTOBJECT:
-			return testObjectSetLayoutM;
-		default:
-			return VK_NULL_HANDLE;
+		return descriptorSetLayoutsM[type];
+	}
+	else
+	{
+		return VK_NULL_HANDLE;
+	}
+}
+
+uint32_t GraphicsObjectManager::getLayoutCount(ObjectType type) const
+{
+	if (type != ObjectType::UNDEFINED)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
 	}
 }
 
@@ -730,6 +784,19 @@ std::vector<DrawableObject> GraphicsObjectManager::getDrawableObjects(ObjectType
 				drawable.indexBuffer = object.indexData.buffer;
 				drawable.indexCount = object.indexCount;
 				drawable.descriptorSet = object.uniformBuffers[frame].descriptorSet;
+				drawables.push_back(drawable);
+			}
+			break;
+		}
+		case ObjectType::AREA:
+		{
+			for (auto& areaObj : areaObjectsM)
+			{
+				DrawableObject drawable{};
+				drawable.vertexBuffer = areaObj.vertexData.buffer;
+				drawable.indexBuffer = areaObj.indexData.buffer;
+				drawable.indexCount = areaObj.indexCount;
+				drawable.descriptorSet = areaObj.descriptorSet;
 				drawables.push_back(drawable);
 			}
 			break;

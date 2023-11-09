@@ -140,6 +140,30 @@ struct GameObjects
   {
     return lootObjects.at(id);
   }
+
+  /**
+   * @brief Returns all the object ids that exist
+   * @return Vector of object ids
+   */
+  const std::vector<int> getObjectIds() const
+  {
+    std::vector<int> objectIds;
+
+    for (const auto object : generalObjects)
+    {
+      objectIds.push_back(object.second.id);
+    }
+    for (const auto object : resourceObjects)
+    {
+      objectIds.push_back(object.second.id);
+    }
+    for (const auto object : lootObjects)
+    {
+      objectIds.push_back(object.second.id);
+    }
+
+    return objectIds;
+  }
 };
 
 // Reads objects defined in the objects.json file and returns them as a GameObjects struct

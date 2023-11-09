@@ -13,6 +13,9 @@
 constexpr uint32_t BONES_PER_VERTEX = 4;
 constexpr uint32_t MAX_BONES = 50;
 
+constexpr glm::vec3 GAMEOBJECT_MIN = glm::vec3(-0.5f, -0.5f, -0.5f);
+constexpr glm::vec3 GAMEOBJECT_MAX = glm::vec3(0.5f, 0.5f, 0.5f);
+
 #define OBJECT_TYPE_COUNT 4
 
 enum ObjectType : uint32_t
@@ -20,7 +23,7 @@ enum ObjectType : uint32_t
 	CHARACTER,
 	GAMEOBJECT,
 	TESTOBJECT,
-	MAP,
+	AREA,
 	UNDEFINED
 };
 
@@ -39,7 +42,7 @@ struct Hit
 
 struct ImageData
 {
-	unsigned char *pixels;
+	unsigned char* pixels;
 	int width;
 	int height;
 };
@@ -71,7 +74,7 @@ struct GameObjectUniformBuffer
 {
 	VkDescriptorSet descriptorSet;	 // Descriptor set of the data
 	AllocatedBuffer transformBuffer; // Buffer containing the transform data (glm::mat4)
-	void *mappedTransformData;			 // Pointer to the mapped data of the transform buffer
+	void* mappedTransformData;			 // Pointer to the mapped data of the transform buffer
 };
 
 // Test object descriptor data
@@ -79,7 +82,7 @@ struct TestObjectUniformBuffer
 {
 	VkDescriptorSet descriptorSet;	 // Descriptor set of the data
 	AllocatedBuffer transformBuffer; // Buffer containing the transform data (glm::mat4)
-	void *mappedTransformData;			 // Pointer to the mapped data of the transform buffer
+	void* mappedTransformData;			 // Pointer to the mapped data of the transform buffer
 };
 
 // Character buffer object
@@ -111,6 +114,17 @@ struct GameObject
 	VkImageView textureView;
 	std::vector<GameObjectUniformBuffer> uniformBuffers;
 	static std::array<VkDescriptorSetLayoutBinding, 2> getDescriptorSetLayoutBindings();
+};
+
+struct AreaObject
+{
+	AllocatedBuffer vertexData;
+	AllocatedBuffer indexData;
+	uint32_t indexCount;
+	std::array<AllocatedImage, 6> textures; // 6: blendMap, base and r, g, b, a
+	std::array<VkImageView, 6> textureViews;
+	VkDescriptorSet descriptorSet;
+	static std::array<VkDescriptorSetLayoutBinding, 1> getDescriptorSetLayoutBindings();
 };
 
 struct TestObject

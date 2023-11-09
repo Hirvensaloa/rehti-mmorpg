@@ -117,7 +117,6 @@ boost::asio::awaitable<void> Connection::writeMessage(const Message msg)
 
 boost::asio::awaitable<void> Connection::readMessage()
 {
-  std::cout << idM << ": Reading message..." << std::endl;
   // 1. Wait for header to arrive and then read it
   msg_header tempHeaderM;
   co_await boost::asio::async_read(socketM, boost::asio::buffer(&tempHeaderM, sizeof(msg_header)), boost::asio::use_awaitable);
@@ -136,12 +135,11 @@ boost::asio::awaitable<void> Connection::readMessage()
   }
 
   // 3. Add message to incoming queue
+  std::shared_ptr<Connection> connection = nullptr;
   if (ownertypeM == owner::server)
   {
-    rIncomingMessagesM.push_back(Message(this->shared_from_this(), tempHeaderM, std::move(std::string(tempBodyM))));
+    connection = shared_from_this();
   }
-  else
-  {
-    rIncomingMessagesM.push_back(Message(nullptr, tempHeaderM, std::move(std::string(tempBodyM))));
-  }
+  std::string body = std::string(tempBodyM);
+  rIncomingMessagesM.push_back(Message(connection, tempHeaderM, std::move(body)));
 }

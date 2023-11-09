@@ -7,6 +7,9 @@
 *.o
 *.obj
 
+# Assets objects need to be included
+!assets/objects/*.obj
+
 # Precompiled Headers
 *.gch
 *.pch

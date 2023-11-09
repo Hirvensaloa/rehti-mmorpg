@@ -28,7 +28,7 @@ void PoolManager::resetPools()
 	for (auto pool : usedPoolsM)
 	{
 		// Fun fact: this function signature has flags, but the spec states that they are for future use.
-		vkResetDescriptorPool(logDeviceM, pool, 0); 
+		vkResetDescriptorPool(logDeviceM, pool, 0);
 		freePoolsM.push_back(pool);
 	}
 	usedPoolsM.clear();
@@ -49,7 +49,7 @@ bool PoolManager::allocateDescriptorSet(VkDescriptorSetLayout layout, VkDescript
 	allocInfo.descriptorPool = currentPoolM;
 	allocInfo.descriptorSetCount = 1;
 	allocInfo.pSetLayouts = &layout;
-	
+
 	// Try alloc
 	VkResult allocResult = vkAllocateDescriptorSets(logDeviceM, &allocInfo, &descSet);
 	bool realloc = false;
@@ -64,7 +64,7 @@ bool PoolManager::allocateDescriptorSet(VkDescriptorSetLayout layout, VkDescript
 		default:
 			return false;
 	}
-	
+
 	if (realloc)
 	{
 		// Grab new pool and retry
@@ -131,7 +131,7 @@ VkDescriptorSetLayout DescriptorSetLayoutCache::createDescriptorSetLayout(VkDesc
 {
 	DescriptorSetLayoutInfo info{};
 	info.bindings.reserve(layoutInfo.bindingCount);
-	
+
 	bool sorted = true;
 	int lastBinding = -1;
 
@@ -147,7 +147,7 @@ VkDescriptorSetLayout DescriptorSetLayoutCache::createDescriptorSetLayout(VkDesc
 		lastBinding = static_cast<int>(binding.binding);
 	}
 
-	if(!sorted)
+	if (!sorted)
 		std::sort(info.bindings.begin(), info.bindings.end(), [](const VkDescriptorSetLayoutBinding& a, const VkDescriptorSetLayoutBinding& b) { return a.binding < b.binding; });
 	// Info is now sanitized and sorted
 	VkDescriptorSetLayout layout;
@@ -228,7 +228,7 @@ DescriptorBuilder::~DescriptorBuilder()
 DescriptorBuilder& DescriptorBuilder::bindBuffer(VkDescriptorBufferInfo& bufferInfo, VkDescriptorType type, VkShaderStageFlags stageFlags)
 {
 	VkDescriptorSetLayoutBinding newLayoutBinding = {};
-	
+
 	newLayoutBinding.descriptorCount = 1;
 	newLayoutBinding.descriptorType = type;
 	newLayoutBinding.stageFlags = stageFlags;
@@ -269,6 +269,32 @@ DescriptorBuilder& DescriptorBuilder::bindImage(VkDescriptorImageInfo& imageInfo
 	newWriteSet.descriptorType = type;
 	newWriteSet.dstBinding = currentBindingM;
 	newWriteSet.pImageInfo = &imageInfo;
+	// Dst set is not set yet, but will be at build time
+
+	writeSetsM.push_back(newWriteSet);
+	currentBindingM++; // Set the next binding to be used
+	return *this;
+}
+
+DescriptorBuilder& DescriptorBuilder::bindImages(const VkDescriptorImageInfo* imageInfos, VkDescriptorType type, VkShaderStageFlags stageFlags, uint32_t count)
+{
+	VkDescriptorSetLayoutBinding newLayoutBinding = {};
+
+	newLayoutBinding.descriptorCount = count;
+	newLayoutBinding.descriptorType = type;
+	newLayoutBinding.stageFlags = stageFlags;
+	newLayoutBinding.pImmutableSamplers = nullptr;
+	newLayoutBinding.binding = currentBindingM;
+
+	layoutBindingsM.push_back(newLayoutBinding);
+
+	VkWriteDescriptorSet newWriteSet = {};
+	newWriteSet.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+	newWriteSet.pNext = nullptr;
+	newWriteSet.descriptorCount = count;
+	newWriteSet.descriptorType = type;
+	newWriteSet.dstBinding = currentBindingM;
+	newWriteSet.pImageInfo = imageInfos;
 	// Dst set is not set yet, but will be at build time
 
 	writeSetsM.push_back(newWriteSet);

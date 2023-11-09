@@ -1,7 +1,7 @@
 #include "ResourceObject.hpp"
 #include "../utils/AssetManager.hpp"
 
-ResourceObject::ResourceObject(int id, std::string instanceId, std::string name, Coordinates coords, unsigned int rotation, std::vector<YieldableItem> yieldableItemList, int xpPerYield, int depleteChance, int relatedSkillId, int xpRequirement, ObjectType type) : Object(id, instanceId, name, coords, rotation, type)
+ResourceObject::ResourceObject(int id, std::string instanceId, std::string name, Coordinates coords, unsigned int rotation, std::vector<YieldableItem> yieldableItemList, int xpPerYield, int depleteChance, int relatedSkillId, int xpRequirement, reader::ObjectType type) : Object(id, instanceId, name, coords, rotation, type)
 {
   this->yieldableItemListM = yieldableItemList;
   this->xpPerYieldM = xpPerYield;
@@ -10,7 +10,7 @@ ResourceObject::ResourceObject(int id, std::string instanceId, std::string name,
   this->xpRequirementM = xpRequirement;
 }
 
-ResourceObject::ResourceObject(const ResourceObjectStruct &object, const ObjectLocation &location, ObjectType type) : Object(object.id, location.instanceId, object.name, {location.x, location.y}, location.rotation, type)
+ResourceObject::ResourceObject(const ResourceObjectStruct &object, const ObjectLocation &location, reader::ObjectType type) : Object(object.id, location.instanceId, object.name, {location.x, location.y}, location.rotation, type)
 {
   this->yieldableItemListM = object.yieldableItemList;
   this->xpPerYieldM = object.xpPerYield;

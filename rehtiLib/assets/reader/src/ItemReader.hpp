@@ -75,9 +75,6 @@ struct FoodItemStruct
   bool isStackable;
 };
 
-// Path(s)
-const std::string ITEM_JSON_PATH = "./assets/items.json";
-
 enum class ItemType
 {
   GENERAL,

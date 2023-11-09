@@ -3,15 +3,10 @@
 #include <thread>
 
 #include "Client.hpp"
-#include "graphics.h"
 #include "network.h"
 
 int main(int argc, char *argv[])
 {
-    RehtiGraphics graphLib = RehtiGraphics();
-    graphLib.demo();
-  std::cout << "Winner winner chicken dinner" << std::endl;
-
   try
   {
     if (argc != 2)

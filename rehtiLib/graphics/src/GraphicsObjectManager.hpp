@@ -66,6 +66,16 @@ public:
 	*/
 	bool addTestObject(int id, const std::vector<SimpleVertex>& vertices, const std::vector<uint32_t>& indices, glm::mat4 transformation);
 
+	/**
+	 * @brief Adds an area object to the buffer manager
+	 * @param vertices of the area
+	 * @param indices of the area
+	 * @param textures of the area
+	 * @return boolean indicating success
+	*/
+	bool addArea(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, std::array<ImageData, 6> textures, VkSampler texSampler);
+
+
 	/// <summary>
 	/// Updates test object data
 	/// </summary>
@@ -133,6 +143,13 @@ public:
 	/// <param name="type"> of object for which a layout is desired</param>
 	/// <returns>Descriptor set layout</returns>
 	VkDescriptorSetLayout getLayout(ObjectType type) const;
+
+	/**
+	 * @brief Returns the number of descriptor layouts of the given type. Currently not a very useful function. However, it might be useful in the future.
+	 * @param type of object to be queried for.
+	 * @return number of layouts
+	*/
+	uint32_t getLayoutCount(ObjectType type) const;
 
 	/// <summary>
 	/// Returns drawable objects of the given type.
@@ -216,7 +233,7 @@ private:
 	 * @param commandBuffer
 	 * @param srcQueueFamilyIndex & dstQueueFamilyIndex of the source family. Use the default value if you do not want to change queue ownership
 	*/
-	void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout, VkCommandBuffer commandBuffer, std::pair<uint32_t, uint32_t> srcAndDstQueueFamilies = { VK_QUEUE_FAMILY_IGNORED, VK_QUEUE_FAMILY_IGNORED });
+	void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout, VkCommandBuffer commandBuffer, VkImageAspectFlags aspectFlags = VK_IMAGE_ASPECT_COLOR_BIT, std::pair<uint32_t, uint32_t> srcAndDstQueueFamilies = { VK_QUEUE_FAMILY_IGNORED, VK_QUEUE_FAMILY_IGNORED });
 
 	/**
 	 * @brief Queue families should be transferred, if the resources are using multiple queues, and the sharingmode is exclusive, or the desired stage is available only to another queue.
@@ -256,12 +273,10 @@ private:
 	std::unordered_map<int, CharacterObject> characterObjectsM;
 	std::unordered_map<int, GameObject> gameObjectsM;
 	std::unordered_map<int, TestObject> testObjectsM;
+	std::vector<AreaObject> areaObjectsM;
 
 	// Frame count
 	uint32_t frameCountM;
 	// Descriptor set layouts for common objects
-	// Todo a map?
-	VkDescriptorSetLayout characterSetLayoutM;
-	VkDescriptorSetLayout gameObjectSetLayoutM;
-	VkDescriptorSetLayout testObjectSetLayoutM;
+	std::array<VkDescriptorSetLayout, OBJECT_TYPE_COUNT> descriptorSetLayoutsM;
 };

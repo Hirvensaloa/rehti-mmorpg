@@ -15,9 +15,9 @@ void ObjectInteractAction::act()
     {
       if (std::chrono::system_clock::now() > startTimeM + actionTimeM)
       {
-        ObjectType type = pTargetM->getObjectType();
+        reader::ObjectType type = pTargetM->getObjectType();
         // If item type is resource then we will continue the action forever, until stopped by the player
-        if (type == ObjectType::RESOURCE)
+        if (type == reader::ObjectType::RESOURCE)
         {
           pTargetM->interact(*pEntityM);
           startTimeM = std::chrono::system_clock::now();

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <filesystem>
 
 #include "src/Utils.hpp"
 #include "src/MapLoader.hpp"
@@ -7,6 +8,17 @@
 
 int main()
 {
+  // Create generated folder if it does not exist
+  if (!std::filesystem::exists(Config.GENERATED_ASSETS_PATH))
+  {
+    std::filesystem::create_directory(Config.GENERATED_ASSETS_PATH);
+  }
+  // Create generated area obj folder if it does not exist
+  if (!std::filesystem::exists(Config.GENERATED_AREA_OBJ_PATH))
+  {
+    std::filesystem::create_directory(Config.GENERATED_AREA_OBJ_PATH);
+  }
+
   // Fetch game assets
   std::map<int, GameSkill> gameSkills = fetchSkills();
   GameItems gameItems = fetchItems();
@@ -19,11 +31,12 @@ int main()
 
   // Generate access map and height map for server
   const std::vector<std::vector<unsigned>> accessMap = generateAccessMap(heightMatrix, objectBlockMap);
-  writeMatrixToFile(accessMap, GENERATED_ASSETS_PATH + "access_map.txt");
-  writeMatrixToFile(heightMatrix, GENERATED_ASSETS_PATH + "height_map.txt");
+  writeMatrixToFile(accessMap, Config.GENERATED_ACCESS_MAP_PATH);
+  writeMatrixToFile(heightMatrix, Config.GENERATED_HEIGHT_MAP_PATH);
+  writeMatrixToFile(areaMap, Config.GENERATED_AREA_MAP_PATH);
 
-  // Generate obj map for client
-  generateMapObj(heightMatrix);
+  // Generate obj files of the areas for client
+  generateAreaObjs(heightMatrix, areaMap);
 
   std::cout << "Map assets generated successfully!" << std::endl;
 

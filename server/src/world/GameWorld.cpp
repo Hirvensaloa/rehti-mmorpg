@@ -93,29 +93,29 @@ void GameWorld::initWorld()
     const std::vector<ObjectLocation> &objectLocations = AssetManager::getObjectLocations();
     for (const ObjectLocation &objectLocation : objectLocations)
     {
-        const std::optional<ObjectType> optionalType = objects.getObjectType(objectLocation.id);
+        const std::optional<reader::ObjectType> optionalType = objects.getObjectType(objectLocation.id);
 
         if (optionalType == std::nullopt)
         {
             continue;
         }
 
-        const ObjectType type = optionalType.value();
-        if (type == ObjectType::GENERAL)
+        const reader::ObjectType type = optionalType.value();
+        if (type == reader::ObjectType::GENERAL)
         {
             const GeneralObjectStruct &generalObject = objects.getGeneralObject(objectLocation.id);
             Coordinates coords{objectLocation.x, objectLocation.y};
             Object genObj(generalObject.id, objectLocation.instanceId, generalObject.name, coords, objectLocation.rotation, type);
             objectsM[objectLocation.instanceId] = std::make_shared<Object>(genObj);
         }
-        else if (type == ObjectType::LOOT)
+        else if (type == reader::ObjectType::LOOT)
         {
             const LootObjectStruct &lootObject = objects.getLootObject(objectLocation.id);
             Coordinates coords{objectLocation.x, objectLocation.y};
             LootObject lootObj(lootObject.id, objectLocation.instanceId, lootObject.name, coords, objectLocation.rotation, lootObject.yieldableItemList, type);
             objectsM[objectLocation.instanceId] = std::make_shared<LootObject>(lootObj);
         }
-        else if (type == ObjectType::RESOURCE)
+        else if (type == reader::ObjectType::RESOURCE)
         {
             const ResourceObjectStruct &resourceObject = objects.getResourceObject(objectLocation.id);
             Coordinates coords{objectLocation.x, objectLocation.y};

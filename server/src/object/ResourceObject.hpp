@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <vector>
 #include <optional>
@@ -8,9 +10,9 @@
 class ResourceObject : public Object
 {
 public:
-  ResourceObject(int id, std::string instanceId, std::string name, Coordinates coords, unsigned int rotation, std::vector<YieldableItem> yieldableItemList, int xpPerYield, int depleteChance, int relatedSkillId, int xpRequirement, ObjectType type);
+  ResourceObject(int id, std::string instanceId, std::string name, Coordinates coords, unsigned int rotation, std::vector<YieldableItem> yieldableItemList, int xpPerYield, int depleteChance, int relatedSkillId, int xpRequirement, reader::ObjectType type);
 
-  ResourceObject(const ResourceObjectStruct &object, const ObjectLocation &location, ObjectType type);
+  ResourceObject(const ResourceObjectStruct &object, const ObjectLocation &location, reader::ObjectType type);
 
   void interact(Entity &entity);
 

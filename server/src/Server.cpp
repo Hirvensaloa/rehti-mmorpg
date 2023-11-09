@@ -147,7 +147,6 @@ void Server::tick()
 
 void Server::sendGameState()
 {
-
     GameStateMessage msg;
     std::vector<GameStateEntity> entityVector;
     for (auto &npc : gameWorldM.getNpcs())
@@ -201,9 +200,8 @@ void Server::sendGameState()
         msg.currentPlayer.y = location.y;
         msg.currentPlayer.z = location.z;
         msg.currentPlayer.hp = player->getHp();
-        msg.currentPlayer.currentActionType = player->getCurrentAction().getActionType();
+        // msg.currentPlayer.currentActionType = player->getCurrentAction().getActionType(); TODO: FIX this is broke
         const auto skills = player->getSkillSet().getSkills();
-
         std::vector<Skill> skillVector;
         for (auto &skill : skills)
         {
@@ -213,7 +211,6 @@ void Server::sendGameState()
         msg.currentPlayer.skills = skillVector;
 
         std::vector<GameItem> inventory;
-
         for (auto &item : player->getInventory().getItems())
         {
             GameItem gameItem = {item->getId(), item->getInstanceId(), item->getName(), item->getStackSize()};

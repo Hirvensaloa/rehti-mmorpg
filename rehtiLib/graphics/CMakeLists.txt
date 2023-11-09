@@ -42,17 +42,23 @@ set(GRAPHICS_SOURCES
 	Mesh.cpp
 	GraphicsTypes.hpp
 	GraphicsTypes.cpp
+	AABB.hpp
+	AABB.cpp
 	shaders/testShader.vert
 	shaders/testShader.frag
 	shaders/objectShader.vert
 	shaders/objectShader.frag
 	shaders/characterShader.vert
 	shaders/characterShader.frag
+	shaders/mapShader.vert
+	shaders/mapShader.frag
 	)
 
 list(TRANSFORM GRAPHICS_SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)
 
 target_sources(rehtiGraphics PRIVATE ${GRAPHICS_SOURCES})
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../utils ${CMAKE_CURRENT_BINARY_DIR}/build/rehtiutils)
 
 target_link_libraries(rehtiGraphics
 	Vulkan::Vulkan
@@ -65,6 +71,7 @@ target_link_libraries(rehtiGraphics
 	vulkan-validationlayers::vulkan-validationlayers
 	stb::stb
  	glm::glm
+	rehtiUtils
 	)
 
 target_include_directories(rehtiGraphics PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/shaders/)

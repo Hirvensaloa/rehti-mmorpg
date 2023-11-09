@@ -16,8 +16,6 @@ int main(int argc, char *argv[])
     }
 
     Client client = Client(argv[1], "9999");
-    // Wait
-    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     client.start();
   }
   catch (std::exception &e)

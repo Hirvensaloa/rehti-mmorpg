@@ -27,14 +27,15 @@ Client::Client(std::string ip, std::string port)
 
 void Client::start()
 {
-  std::cout << "Client started" << std::endl;
-  std::thread([this]()
-              { test(); })
-      .detach();
+  // Wait for graphics library to be ready
+  if (!graphLibReadyFlagM)
+  {
+    std::unique_lock ul(graphLibMutexM);
+    graphLibReadyM.wait(ul);
+  }
+
+  std::cout << "Starting to process messages..." << std::endl;
   processMessages();
-  graphicsThreadM.join();
-  connectionThreadM.join();
-  ioThreadM.join();
 }
 
 boost::asio::awaitable<bool> Client::connect()
@@ -56,16 +57,6 @@ boost::asio::awaitable<bool> Client::connect()
   {
     std::cerr << e.what() << '\n';
     co_return false;
-  }
-}
-
-boost::asio::awaitable<void> Client::randomWalk()
-{
-  if (connectionM->isConnected())
-  {
-    AttackMessage msg;
-    msg.targetId = 123;
-    co_await connectionM->send(MessageApi::createAttack(msg));
   }
 }
 
@@ -100,18 +91,6 @@ boost::asio::awaitable<void> Client::interactWithObject(const int &objectId)
   }
 }
 
-void Client::test()
-{
-  while (true)
-  {
-    boost::asio::co_spawn(
-        ioContextM, [this]() -> boost::asio::awaitable<void>
-        { co_await randomWalk(); },
-        boost::asio::detached);
-    std::this_thread::sleep_for(std::chrono::milliseconds(115000));
-  }
-}
-
 void Client::processMessages()
 {
   while (true)
@@ -130,8 +109,8 @@ void Client::processMessages()
         const GameStateMessage &gameStateMsg = MessageApi::parseGameState(msg.getBody());
 
         const auto obj = gameObjectsObjDataM["ukko"];
-        graphLib->addGameObject(gameStateMsg.currentPlayer.entityId, obj.vertices, obj.indices, textureDataM["ukkotextuuri1.png"], {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
-        graphLib->forcePlayerMove(gameStateMsg.currentPlayer.entityId, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
+        pGraphLibM->addGameObject(gameStateMsg.currentPlayer.entityId, obj.vertices, obj.indices, textureDataM["ukkotextuuri1.png"], {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
+        pGraphLibM->forcePlayerMove(gameStateMsg.currentPlayer.entityId, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
         std::cout << "player"
                   << " " << gameStateMsg.currentPlayer.entityId << " " << gameStateMsg.currentPlayer.x << " " << gameStateMsg.currentPlayer.y << " " << gameStateMsg.currentPlayer.z << std::endl;
 
@@ -146,8 +125,8 @@ void Client::processMessages()
           std::cout << "entity"
                     << " " << entity.entityId << " " << entity.x << " " << entity.y << " " << entity.z << std::endl;
           const auto obj = gameObjectsObjDataM["orc1"];
-          graphLib->addGameObject(entity.entityId, obj.vertices, obj.indices, textureDataM["sand.png"], {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
-          graphLib->forceGameObjectMove(entity.entityId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
+          pGraphLibM->addGameObject(entity.entityId, obj.vertices, obj.indices, textureDataM["sand.png"], {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
+          pGraphLibM->forceGameObjectMove(entity.entityId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
         }
         for (const auto &object : gameStateMsg.objects)
         {
@@ -159,11 +138,11 @@ void Client::processMessages()
             const auto obj = gameObjectsObjDataM[idStr];
             if (object.id == 1)
             {
-              graphLib->addGameObject(std::stoi(object.instanceId), obj.vertices, obj.indices, textureDataM["treetexture.png"], {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
+              pGraphLibM->addGameObject(std::stoi(object.instanceId), obj.vertices, obj.indices, textureDataM["treetexture.png"], {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
             }
             else
             {
-              graphLib->addGameObject(std::stoi(object.instanceId), obj.vertices, obj.indices, textureDataM["housetexture.png"], {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
+              pGraphLibM->addGameObject(std::stoi(object.instanceId), obj.vertices, obj.indices, textureDataM["housetexture.png"], {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
             }
           }
         }
@@ -210,14 +189,14 @@ void Client::handleMouseClick(const Hit &hit)
 
 void Client::startGraphics()
 {
-  graphLib = new RehtiGraphics();
+  pGraphLibM = new RehtiGraphics();
 
   // Create map bounding box
   std::vector<std::vector<int>> heightMatrix;
   std::vector<std::vector<std::string>> areaMatrix;
   loadHeightMap(heightMatrix, Config.GENERATED_HEIGHT_MAP_PATH);
   loadAreaMap(areaMatrix, Config.GENERATED_AREA_MAP_PATH);
-  graphLib->addMapBoundingBox(MapAABBData{heightMatrix, areaMatrix, Config.AREA_WIDTH, Config.HEIGHT_MAP_SCALE, Config.TILE_SIDE_SCALE, Config.TILE_SIDE_UNIT});
+  pGraphLibM->addMapBoundingBox(MapAABBData{heightMatrix, areaMatrix, Config.AREA_WIDTH, Config.HEIGHT_MAP_SCALE, Config.TILE_SIDE_SCALE, Config.TILE_SIDE_UNIT});
 
   // Load object obj files into memory
   const auto gameObjectsData = loadGameObjectObjs();
@@ -248,12 +227,16 @@ void Client::startGraphics()
   std::vector<std::vector<uint32_t>> areaIndices = aiFaceMatrixToVector(areaFaceList);
   for (int i = 0; i < areaVertices.size(); i++)
   {
-    graphLib->addArea(areaVertices[i], areaIndices[i], areaTextures);
+    pGraphLibM->addArea(areaVertices[i], areaIndices[i], areaTextures);
   }
 
   // Add action callbacks
-  graphLib->addMouseClickCallback([this](const Hit &hit)
-                                  { handleMouseClick(hit); });
+  pGraphLibM->addMouseClickCallback([this](const Hit &hit)
+                                    { handleMouseClick(hit); });
 
-  graphLib->demo();
+  std::cout << "Graphics library ready" << std::endl;
+
+  graphLibReadyFlagM = true;
+  graphLibReadyM.notify_one();
+  pGraphLibM->demo();
 }

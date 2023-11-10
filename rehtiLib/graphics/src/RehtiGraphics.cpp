@@ -1067,7 +1067,7 @@ void RehtiGraphics::createGui()
     }
 
     pGuiM = std::make_unique<RehtiGui>(instanceM, logDeviceM, gpuM, pWindowM, graphicsQueueM, guiPool,
-                                       static_cast<uint32_t>(swapChainImagesM.size()), renderPassM);
+                                       static_cast<uint32_t>(swapChainImagesM.size()), renderPassM, commandBuffersM);
 
     vkResetCommandPool(logDeviceM, commandPoolM, 0);
     VkCommandBufferBeginInfo info{};

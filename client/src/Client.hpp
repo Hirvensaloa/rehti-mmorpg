@@ -41,6 +41,8 @@ public:
      */
     boost::asio::awaitable<void> interactWithObject(const int& objectId);
 
+    boost::asio::awaitable<void> useItem(const int itemInstanceId);
+
     /**
      * @brief Starts the client
      */

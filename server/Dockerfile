@@ -29,7 +29,7 @@ RUN cd server && conan install . --output-folder=build --build=missing -s build_
 
 COPY third_party/rapidjson/include/ ./third_party/rapidjson/include/
 
-COPY third_party/assimp ./third_party/assimp
+COPY third_party/assimp/ ./third_party/assimp/
 
 
 COPY rehtiLib/utils/ ./rehtiLib/utils

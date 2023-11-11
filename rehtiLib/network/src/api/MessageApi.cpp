@@ -101,6 +101,30 @@ ObjectInteractMessage MessageApi::parseObjectInteract(std::string msgBody)
   return objectInteract;
 };
 
+MessageStruct MessageApi::createUseItem(const UseItemMessage &useItemMsg)
+{
+  rapidjson::Document document = createDocument();
+  rapidjson::Document::AllocatorType &allocator = document.GetAllocator();
+  document.AddMember("itemId", useItemMsg.itemId, allocator);
+
+  return MessageStruct{useItemMsg.id, createString(document)};
+};
+
+UseItemMessage MessageApi::parseUseItem(std::string msgBody)
+{
+  rapidjson::Document document = parseDocument(msgBody);
+
+  if (!validMember(document, "itemId", ValueType::INT))
+  {
+    throw std::runtime_error("Invalid attack message");
+  }
+
+  UseItemMessage useItemMsg;
+  useItemMsg.itemId = document["itemId"].GetInt();
+
+  return useItemMsg;
+};
+
 MessageStruct MessageApi::createGameState(const GameStateMessage &gameState)
 {
   rapidjson::Document document = createDocument();

@@ -1,5 +1,4 @@
 from conan import ConanFile
-from conan.tools.cmake import cmake_layout
 from conan.tools.files import copy
 
 import os
@@ -27,6 +26,3 @@ class ClientConan(ConanFile):
             "res", "bindings"), os.path.join(self.source_folder, "../rehtiLib/graphics/bindings"))
         copy(self, "*vulkan*", os.path.join(self.dependencies["imgui"].package_folder,
             "res", "bindings"), os.path.join(self.source_folder, "../rehtiLib/graphics/bindings"))
-
-    def layout(self):
-        cmake_layout(self)

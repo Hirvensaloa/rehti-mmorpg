@@ -1,7 +1,9 @@
 #pragma once
+#include "../../network/src/api/Types.hpp"
 #include "../bindings/imgui_impl_glfw.h"
 #include "../bindings/imgui_impl_vulkan.h"
 
+#include <functional>
 #include <vector>
 
 class RehtiGui
@@ -40,6 +42,10 @@ public:
 	// starts rendering ui primitives. Must be called at the top of draw function.
 	void startRender();
 
+	void addInventoryItemClickCallback(std::function<void(const int id)> callback);
+
+	void setInventory(std::vector<GameItem> inventory);
+
 	uint32_t findMemoryType(uint32_t type_filter, VkMemoryPropertyFlags properties);
 	bool LoadTextureFromFile(const char *filename, MyTextureData *tex_data);
 	void RemoveTexture(MyTextureData *tex_data);
@@ -55,4 +61,14 @@ private:
 	VkQueue graphicsQueueM;
 
 	MyTextureData testTextureM;
+
+	bool inventoryOpenM = true;
+
+	bool equipmentOpenM = false;
+
+	bool skillsOpenM = false;
+
+	std::function<void(const int id)> inventoryItemClickCallbackM;
+
+	std::vector<GameItem> inventoryM;
 };

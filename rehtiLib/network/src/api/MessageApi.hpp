@@ -25,6 +25,7 @@ enum MessageId
     Move,
     Attack,
     ObjectInteract,
+    UseItem,
     Test,
 };
 
@@ -74,6 +75,12 @@ struct ObjectInteractMessage
     std::string objectId;
 };
 
+struct UseItemMessage
+{
+    const MessageId id = MessageId::UseItem;
+    int itemId;
+};
+
 /*
  * Helper class for constructing and parsing messages.
  * Each message type above needs to have create and parse methods.
@@ -97,6 +104,9 @@ public:
 
     static MessageStruct createObjectInteract(const ObjectInteractMessage &objectInteract);
     static ObjectInteractMessage parseObjectInteract(std::string msgBody);
+
+    static MessageStruct createUseItem(const UseItemMessage &useItemMsg);
+    static UseItemMessage parseUseItem(std::string msgBody);
 
     static MessageStruct createGameState(const GameStateMessage &gameState);
     static GameStateMessage parseGameState(std::string msgBody);

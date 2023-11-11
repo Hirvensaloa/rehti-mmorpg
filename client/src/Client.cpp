@@ -117,6 +117,18 @@ boost::asio::awaitable<void> Client::interactWithObject(const int& objectId)
     }
 }
 
+boost::asio::awaitable<void> Client::useItem(const int itemInstanceId)
+{
+    std::cout << "useItem called, id: " << itemInstanceId << std::endl;
+    if (connectionM->isConnected())
+    {
+        UseItemMessage msg;
+        msg.itemId = itemInstanceId;
+        co_await connectionM->send(MessageApi::createUseItem(msg));
+    }
+    co_return;
+}
+
 void Client::processMessages()
 {
     while (true)
@@ -134,11 +146,13 @@ void Client::processMessages()
             {
                 const GameStateMessage& gameStateMsg = MessageApi::parseGameState(msg.getBody());
 
+                pGraphLibM->getGui()->setInventory(gameStateMsg.currentPlayer.inventory);
+
                 const auto obj = gameObjectsObjDataM["ukko"];
                 pGraphLibM->addGameObject(gameStateMsg.currentPlayer.entityId, obj.vertices, obj.indices, textureDataM["ukkotextuuri1.png"], {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
                 pGraphLibM->forcePlayerMove(gameStateMsg.currentPlayer.entityId, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
-                std::cout << "player"
-                          << " " << gameStateMsg.currentPlayer.entityId << " " << gameStateMsg.currentPlayer.x << " " << gameStateMsg.currentPlayer.y << " " << gameStateMsg.currentPlayer.z << std::endl;
+                // std::cout << "player"
+                //           << " " << gameStateMsg.currentPlayer.entityId << " " << gameStateMsg.currentPlayer.x << " " << gameStateMsg.currentPlayer.y << " " << gameStateMsg.currentPlayer.z << std::endl;
 
                 for (const auto& entity : gameStateMsg.entities)
                 {
@@ -148,8 +162,8 @@ void Client::processMessages()
                         continue;
                     }
 
-                    std::cout << "entity"
-                              << " " << entity.entityId << " " << entity.x << " " << entity.y << " " << entity.z << std::endl;
+                    // std::cout << "entity"
+                    //           << " " << entity.entityId << " " << entity.x << " " << entity.y << " " << entity.z << std::endl;
                     const auto obj = gameObjectsObjDataM["orc1"];
                     pGraphLibM->addGameObject(entity.entityId, obj.vertices, obj.indices, textureDataM["sand.png"], {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
                     pGraphLibM->forceGameObjectMove(entity.entityId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
@@ -159,8 +173,8 @@ void Client::processMessages()
                     const std::string idStr = std::to_string(object.id);
                     if (gameObjectsObjDataM.contains(idStr))
                     {
-                        std::cout << "object"
-                                  << " " << object.id << " " << object.x << " " << object.y << " " << object.z << std::endl;
+                        // std::cout << "object"
+                        //           << " " << object.id << " " << object.x << " " << object.y << " " << object.z << std::endl;
                         const auto obj = gameObjectsObjDataM[idStr];
                         if (object.id == 1)
                         {
@@ -259,6 +273,9 @@ void Client::startGraphics()
     // Add action callbacks
     pGraphLibM->addMouseClickCallback([this](const Hit& hit)
                                       { handleMouseClick(hit); });
+
+    pGraphLibM->getGui()->addInventoryItemClickCallback([this](const int itemInstanceId)
+                                                        { boost::asio::co_spawn(ioContextM, useItem(itemInstanceId), boost::asio::detached); });
 
     std::cout << "Graphics library ready" << std::endl;
 

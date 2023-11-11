@@ -137,6 +137,14 @@ void Server::handleMessage(const Message& msg)
                 gamer->setAction(std::make_shared<ObjectInteractAction>(std::chrono::system_clock::now(), object, gamer));
                 break;
             }
+            case MessageId::UseItem:
+            {
+                std::cout << connId << "UseItem message received." << std::endl;
+                const UseItemMessage useItemMsg = MessageApi::parseUseItem(body);
+                PlayerCharacter* gamer = gameWorldM.getPlayer(connId);
+                gamer->getInventory().useItem(useItemMsg.itemId);
+                break;
+            }
             default:
                 // Unknown header id, ignore
                 std::cout << "Unknown header id: " << msgId << std::endl;

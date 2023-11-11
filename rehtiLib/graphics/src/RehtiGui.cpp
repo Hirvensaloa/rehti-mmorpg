@@ -1,6 +1,7 @@
 #include "RehtiGui.hpp"
 
 #include "stb_image.h"
+#include <iostream>
 
 // Helper function to find Vulkan memory type bits. See ImGui_ImplVulkan_MemoryType() in imgui_impl_vulkan.cpp
 uint32_t RehtiGui::findMemoryType(uint32_t type_filter, VkMemoryPropertyFlags properties)
@@ -17,11 +18,11 @@ uint32_t RehtiGui::findMemoryType(uint32_t type_filter, VkMemoryPropertyFlags pr
 
 // Helper function to load an image with common settings and return a MyTextureData with a VkDescriptorSet as a sort of
 // Vulkan pointer
-bool RehtiGui::LoadTextureFromFile(const char* filename, MyTextureData* tex_data)
+bool RehtiGui::LoadTextureFromFile(const char *filename, MyTextureData *tex_data)
 {
     // Specifying 4 channels forces stb to load the image in RGBA which is an easy format for Vulkan
     tex_data->Channels = 4;
-    unsigned char* image_data = stbi_load(filename, &tex_data->Width, &tex_data->Height, 0, tex_data->Channels);
+    unsigned char *image_data = stbi_load(filename, &tex_data->Width, &tex_data->Height, 0, tex_data->Channels);
 
     if (image_data == NULL)
         return false;
@@ -119,7 +120,7 @@ bool RehtiGui::LoadTextureFromFile(const char* filename, MyTextureData* tex_data
 
     // Upload to Buffer:
     {
-        void* map = NULL;
+        void *map = NULL;
         err = vkMapMemory(logDeviceM, tex_data->UploadBufferMemory, 0, image_size, 0, &map);
         // check_vk_result(err);
         memcpy(map, image_data, image_size);
@@ -215,7 +216,7 @@ bool RehtiGui::LoadTextureFromFile(const char* filename, MyTextureData* tex_data
 }
 
 // Helper function to cleanup an image loaded with LoadTextureFromFile
-void RehtiGui::RemoveTexture(MyTextureData* tex_data)
+void RehtiGui::RemoveTexture(MyTextureData *tex_data)
 {
     vkFreeMemory(logDeviceM, tex_data->UploadBufferMemory, nullptr);
     vkDestroyBuffer(logDeviceM, tex_data->UploadBuffer, nullptr);
@@ -226,7 +227,7 @@ void RehtiGui::RemoveTexture(MyTextureData* tex_data)
     ImGui_ImplVulkan_RemoveTexture(tex_data->DS);
 }
 
-RehtiGui::RehtiGui(VkInstance instance, VkDevice logDevice, VkPhysicalDevice gpu, GLFWwindow* pWindow,
+RehtiGui::RehtiGui(VkInstance instance, VkDevice logDevice, VkPhysicalDevice gpu, GLFWwindow *pWindow,
                    VkQueue graphicsQueue, VkDescriptorPool descPool, uint32_t imageCount, VkRenderPass renderPass,
                    std::vector<VkCommandBuffer> commandBuffers)
     : logDeviceM(logDevice), descPoolM(descPool), physDeviceM(gpu), commandBuffersM(commandBuffers),
@@ -275,28 +276,117 @@ void RehtiGui::newFrame()
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    ImGui::Begin("Rehti Inventory");
-    // ImGui::Text("pointer = %p", testTextureM.DS);
-    // ImGui::Text("size = %d x %d", testTextureM.Width, testTextureM.Height);
-    for (int i = 0; i < 7; i++)
+    ImGui::ShowDemoWindow();
+
+    ImGui::Begin("Rehti GUI");
+
+    // if (ImGui::BeginMenuBar())
+    // {
+    //     if (ImGui::BeginMenu("Inventory"))
+    //     {
+    //         inventoryOpenM = true;
+    //         equipmentOpenM = false;
+    //         skillsOpenM = false;
+    //         ImGui::EndMenu();
+    //     }
+    //     ImGui::EndMenuBar();
+    // }
+
+    if (ImGui::BeginTabBar("GUITabBar", 0))
     {
-        for (int j = 0; j < 4; j++)
+        if (ImGui::BeginTabItem("Inventory"))
         {
-            ImGui::ImageButton((ImTextureID)testTextureM.DS, ImVec2(32, 32));
-            if (j != 3)
+            inventoryOpenM = true;
+            equipmentOpenM = false;
+            skillsOpenM = false;
+            ImGui::EndTabItem();
+        }
+        if (ImGui::BeginTabItem("Equipment"))
+        {
+            inventoryOpenM = false;
+            equipmentOpenM = true;
+            skillsOpenM = false;
+            ImGui::EndTabItem();
+        }
+        if (ImGui::BeginTabItem("Skills"))
+        {
+            inventoryOpenM = false;
+            equipmentOpenM = false;
+            skillsOpenM = true;
+            ImGui::EndTabItem();
+        }
+        ImGui::EndTabBar();
+    }
+
+    if (inventoryOpenM)
+    {
+
+        for (int i = 0; i < inventoryM.size(); i++)
+        {
+            ImGui::PushID(i);
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.f, 0.f, 0.f, 0.f));
+            // ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.f, 0.f, 0.f, 0.f));
+            // ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.f, 0.f, 0.f, 0.f));
+            if (ImGui::ImageButton((ImTextureID)testTextureM.DS, ImVec2(32, 32)))
+            {
+                std::cout << inventoryM[i].name << std::endl;
+                inventoryItemClickCallbackM(inventoryM[i].instanceId);
+            }
+            ImGui::PopStyleColor(1);
+
+            if (ImGui::BeginPopupContextItem())
+            {
+                if (ImGui::BeginListBox("##listbox1", ImVec2(90, 60)))
+                {
+                    if (ImGui::Selectable(("Use " + inventoryM[i].name).c_str()))
+                    {
+                        std::cout << inventoryM[i].name << std::endl;
+                        inventoryItemClickCallbackM(inventoryM[i].instanceId);
+                        ImGui::CloseCurrentPopup();
+                    }
+                    if (ImGui::Selectable(("Drop " + inventoryM[i].name).c_str()))
+                    {
+                        ImGui::CloseCurrentPopup(); // TODO: Send drop item request
+                    }
+                    if (ImGui::Selectable("Cancel"))
+                    {
+                        ImGui::CloseCurrentPopup();
+                    }
+                    ImGui::EndListBox();
+                }
+                // if (ImGui::Button(("Use " + inventoryM[i].name).c_str()))
+                // {
+                //     std::cout << inventoryM[i].name << std::endl;
+                //     inventoryItemClickCallbackM(inventoryM[i].instanceId);
+                //     ImGui::CloseCurrentPopup();
+                // }
+                // if (ImGui::Button(("Drop " + inventoryM[i].name).c_str()))
+                // {
+                //     ImGui::CloseCurrentPopup(); // TODO: Send drop item request
+                // }
+                // if (ImGui::Button("Cancel"))
+                // {
+                //     ImGui::CloseCurrentPopup();
+                // }
+                ImGui::EndPopup();
+            }
+
+            if (ImGui::IsItemHovered())
+            {
+                ImGui::BeginTooltip();
+                ImGui::Text(("Use " + inventoryM[i].name).c_str());
+                ImGui::EndTooltip();
+            }
+
+            ImGui::PopID();
+
+            if ((i + 1) % 4 != 0)
             {
                 ImGui::SameLine();
             }
         }
     }
     ImGui::End();
-
-    // ImGui::Begin("testiwindow");
-    // ImGui::Text("testitext");
-    // ImGui::Button("testiButton");
-    // ImGui::ImageButton();
-    // ImGui::End();
-    // ImGui::ShowDemoWindow();
 }
 
 void RehtiGui::recordGuiData(VkCommandBuffer cmdBuff)
@@ -307,4 +397,14 @@ void RehtiGui::recordGuiData(VkCommandBuffer cmdBuff)
 void RehtiGui::startRender()
 {
     ImGui::Render();
+}
+
+void RehtiGui::addInventoryItemClickCallback(std::function<void(const int id)> callback)
+{
+    inventoryItemClickCallbackM = callback;
+}
+
+void RehtiGui::setInventory(std::vector<GameItem> inventory)
+{
+    inventoryM = inventory;
 }

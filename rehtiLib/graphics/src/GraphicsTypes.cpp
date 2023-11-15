@@ -160,7 +160,22 @@ std::array<VkDescriptorSetLayoutBinding, 1> AreaObject::getDescriptorSetLayoutBi
 
 std::array<ObjectType, OBJECT_TYPE_COUNT> getObjectTypes()
 {
-	return { CHARACTER, GAMEOBJECT, TESTOBJECT, AREA };
+	std::array<ObjectType, OBJECT_TYPE_COUNT> array;
+	for (uint32_t type = 0; type < OBJECT_TYPE_COUNT; type++)
+	{
+		array[type] = static_cast<ObjectType>(type);
+	}
+	return array;
+}
+
+std::array<CharacterAnimation, ANIMATION_TYPE_COUNT> getAnimationTypes()
+{
+	std::array<CharacterAnimation, ANIMATION_TYPE_COUNT> array;
+	for (uint32_t anim = 0; anim < ANIMATION_TYPE_COUNT; anim++)
+	{
+		array[anim] = static_cast<CharacterAnimation>(anim);
+	}
+	return array;
 }
 
 std::vector<VkVertexInputAttributeDescription> getAttributeDescription(ObjectType objectType)

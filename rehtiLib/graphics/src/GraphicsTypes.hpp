@@ -16,7 +16,8 @@ constexpr uint32_t MAX_BONES = 50;
 constexpr glm::vec3 GAMEOBJECT_MIN = glm::vec3(-0.5f, -0.5f, -0.5f);
 constexpr glm::vec3 GAMEOBJECT_MAX = glm::vec3(0.5f, 0.5f, 0.5f);
 
-#define OBJECT_TYPE_COUNT 4
+constexpr size_t OBJECT_TYPE_COUNT = 4;
+constexpr size_t ANIMATION_TYPE_COUNT = 5;
 
 enum ObjectType : uint32_t
 {
@@ -27,7 +28,18 @@ enum ObjectType : uint32_t
 	UNDEFINED
 };
 
+enum CharacterAnimation : uint32_t
+{
+	IDLE,
+	WALK,
+	RUN,
+	ATTACK,
+	DEATH,
+};
+
 std::array<ObjectType, OBJECT_TYPE_COUNT> getObjectTypes();
+
+std::array <CharacterAnimation, ANIMATION_TYPE_COUNT> getAnimationTypes();
 
 #pragma endregion
 

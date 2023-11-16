@@ -1,35 +1,20 @@
 #pragma once
+#include "GraphicsTypes.hpp"
 #include "../../network/src/api/Types.hpp"
 #include "../bindings/imgui_impl_glfw.h"
 #include "../bindings/imgui_impl_vulkan.h"
 
 #include <functional>
 #include <vector>
+#include <unordered_map>
+// fwd decl
+class GraphicsObjectManager;
 
 class RehtiGui
 {
 
-	// A struct to manage data related to one image in vulkan
-	struct MyTextureData
-	{
-		VkDescriptorSet DS; // Descriptor set: this is what you'll pass to Image()
-		int Width;
-		int Height;
-		int Channels;
-
-		// Need to keep track of these to properly cleanup
-		VkImageView ImageView;
-		VkImage Image;
-		VkDeviceMemory ImageMemory;
-		VkSampler Sampler;
-		VkBuffer UploadBuffer;
-		VkDeviceMemory UploadBufferMemory;
-
-		MyTextureData() { memset(this, 0, sizeof(*this)); }
-	};
-
 public:
-	RehtiGui(VkInstance instance, VkDevice logDevice, VkPhysicalDevice gpu, GLFWwindow *pWindow, VkQueue graphicsQueue, VkDescriptorPool descPool, uint32_t imageCount, VkRenderPass renderPass, std::vector<VkCommandBuffer> commandBuffers);
+	RehtiGui(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, GLFWwindow* pWindow, VkQueue graphicsQueue, VkDescriptorPool descPool, uint32_t imageCount, VkRenderPass renderPass, std::shared_ptr<GraphicsObjectManager> pGfxManager);
 	~RehtiGui();
 
 	void uploadFonts(VkCommandBuffer cmdBuffer);
@@ -46,21 +31,16 @@ public:
 
 	void setInventory(std::vector<GameItem> inventory);
 
-	uint32_t findMemoryType(uint32_t type_filter, VkMemoryPropertyFlags properties);
-	bool LoadTextureFromFile(const char *filename, MyTextureData *tex_data);
-	void RemoveTexture(MyTextureData *tex_data);
+	bool LoadTextureFromFile(const char* filename, const int id);
 
 private:
 	VkDevice logDeviceM;
 	VkDescriptorPool descPoolM;
 
-	VkPhysicalDevice physDeviceM;
-
-	std::vector<VkCommandBuffer> commandBuffersM;
-
 	VkQueue graphicsQueueM;
+	VkSampler samplerM;
 
-	MyTextureData testTextureM;
+	std::shared_ptr<GraphicsObjectManager> pGraphicsObjectManagerM;
 
 	bool inventoryOpenM = true;
 
@@ -71,4 +51,7 @@ private:
 	std::function<void(const int id)> inventoryItemClickCallbackM;
 
 	std::vector<GameItem> inventoryM;
+	// map from id to descriptor set required for drawing.
+	// GraphicsObjectManager will clean up the resources created.
+	std::unordered_map<int, VkDescriptorSet> guiIconsM;
 };

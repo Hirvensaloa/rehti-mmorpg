@@ -98,6 +98,11 @@ GraphicsObjectManager::~GraphicsObjectManager()
 			vkDestroyImageView(logDeviceM, area.textureViews[i], nullptr);
 		}
 	}
+	for (auto& img : allocatedImagesM)
+	{
+		vmaDestroyImage(allocatorM, img.imageAllocation.image, img.imageAllocation.allocation);
+		vkDestroyImageView(logDeviceM, img.imageView, nullptr);
+	}
 	// Destroy command pools
 	vkDestroyCommandPool(logDeviceM, graphicsCommandUnitM.commandPool, nullptr);
 	if (transferCommandUnitM.has_value())
@@ -600,6 +605,15 @@ VkImageView GraphicsObjectManager::createImageView(VkImage image, VkFormat forma
 		throw std::runtime_error("Failed to create an image view");
 	}
 	return view;
+}
+
+CombinedImage GraphicsObjectManager::createCombinedImage(uint32_t width, uint32_t height, VkFormat format)
+{
+	CombinedImage cImg{};
+	cImg.imageAllocation = createImage(width, height, format, VK_IMAGE_TILING_OPTIMAL);
+	cImg.imageView = createImageView(cImg.imageAllocation.image, format, VK_IMAGE_ASPECT_COLOR_BIT);
+	allocatedImagesM.push_back(cImg);
+	return cImg;
 }
 
 void GraphicsObjectManager::copyBuffer(AllocatedBuffer allocBuffer, const void* srcData)

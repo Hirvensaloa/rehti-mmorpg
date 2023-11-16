@@ -54,12 +54,18 @@ struct DrawableObject
 	uint32_t indexCount;
 	VkDescriptorSet descriptorSet;
 };
-
+// Image handle and allocation (and size)
 struct AllocatedImage
 {
 	VkImage image;
 	VmaAllocation allocation;
 	VkDeviceSize size;
+};
+// Has image view in addition to AllocatedImage struct
+struct CombinedImage
+{
+	AllocatedImage imageAllocation;
+	VkImageView imageView;
 };
 
 struct AllocatedBuffer

@@ -1,5 +1,169 @@
 #include "GraphicsTypes.hpp"
 
+#include <glm/ext.hpp>
+#include <glm/ext/quaternion_common.hpp>
+
+#ifdef ALLOCATED_TYPES
+std::array<VkDescriptorSetLayoutBinding, 1> TestObject::getDescriptorSetLayoutBindings()
+{
+	std::array<VkDescriptorSetLayoutBinding, 1> bindings = {};
+	bindings[0].binding = 0;
+	bindings[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+	bindings[0].descriptorCount = 1;
+	bindings[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+	bindings[0].pImmutableSamplers = nullptr;
+	return bindings;
+}
+
+std::array<VkDescriptorSetLayoutBinding, 3> CharacterObject::getDescriptorSetLayoutBindings()
+{
+	std::array<VkDescriptorSetLayoutBinding, 3> array;
+	// basic transformation
+	array[0].binding = 0;
+	array[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+	array[0].descriptorCount = 1;
+	array[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+	array[0].pImmutableSamplers = nullptr;
+
+	// transformations
+	array[1].binding = 1;
+	array[1].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+	array[1].descriptorCount = MAX_BONES;
+	array[1].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+	array[1].pImmutableSamplers = nullptr;
+
+	array[2].binding = 2;
+	array[2].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+	array[2].descriptorCount = 1;
+	array[2].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+	array[2].pImmutableSamplers = nullptr;
+
+	return array;
+}
+
+std::array<VkDescriptorSetLayoutBinding, 2> GameObject::getDescriptorSetLayoutBindings()
+{
+	std::array<VkDescriptorSetLayoutBinding, 2> array;
+	array[0].binding = 0;
+	array[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+	array[0].descriptorCount = 1;
+	array[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+	array[0].pImmutableSamplers = nullptr;
+
+	array[1].binding = 1;
+	array[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+	array[1].descriptorCount = 1;
+	array[1].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+	array[1].pImmutableSamplers = nullptr;
+
+	return array;
+}
+
+
+std::array<VkDescriptorSetLayoutBinding, 1> AreaObject::getDescriptorSetLayoutBindings()
+{
+	std::array<VkDescriptorSetLayoutBinding, 1> array;
+
+	array[0].binding = 0;
+	array[0].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+	array[0].descriptorCount = 6; // 6 textures
+	array[0].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+	array[0].pImmutableSamplers = nullptr;
+
+	return array;
+}
+#endif
+
+
+std::array<ObjectType, OBJECT_TYPE_COUNT> getObjectTypes()
+{
+	std::array<ObjectType, OBJECT_TYPE_COUNT> array;
+	for (uint32_t type = 0; type < OBJECT_TYPE_COUNT; type++)
+	{
+		array[type] = static_cast<ObjectType>(type);
+	}
+	return array;
+}
+
+std::array<AnimationType, ANIMATION_TYPE_COUNT> getAnimationTypes()
+{
+	std::array<AnimationType, ANIMATION_TYPE_COUNT> array;
+	for (uint32_t anim = 0; anim < ANIMATION_TYPE_COUNT; anim++)
+	{
+		array[anim] = static_cast<AnimationType>(anim);
+	}
+	return array;
+}
+
+glm::mat4 GfxOrientation::getTransformationMatrix() const
+{
+	glm::mat4 transformation = glm::mat4(1.0f);
+
+	transformation = glm::scale(transformation, scale);
+	transformation = glm::mat4(rotation) * transformation;
+	transformation = glm::translate(transformation, position);
+	return transformation;
+}
+
+GfxOrientation GfxOrientation::interpolate(GfxOrientation first, GfxOrientation second, float factor)
+{
+	GfxOrientation interpolatedNode{};
+	float normalizedTimeClamped = glm::clamp(factor, 0.0f, 1.0f);
+	float inverseWeight = 1.f - normalizedTimeClamped;
+	interpolatedNode.position = first.position * inverseWeight + second.position * normalizedTimeClamped;
+	interpolatedNode.scale = first.scale * inverseWeight + second.scale * normalizedTimeClamped;
+	interpolatedNode.rotation = glm::slerp(first.rotation, second.rotation, normalizedTimeClamped);
+	return interpolatedNode;
+}
+
+
+void CharacterData::advanceAnimation(float dt)
+{
+	Animation currentAnimation = animationData.animations[animationData.currentAnimation];
+	// If no animation is set, do nothing.
+	if (currentAnimation.animationNodes.empty())
+		return;
+
+	animationData.currentTicks += dt * currentAnimation.ticksPerSecond;
+	double trueAnimationtime = fmod(animationData.currentTicks, currentAnimation.totalTicks); // loops over the animation
+	animationData.currentTicks = trueAnimationtime;
+	size_t animationNodeIndex = 0;
+	while (animationNodeIndex < currentAnimation.animationNodes.size() - 1
+		&& currentAnimation.animationNodes[animationNodeIndex + 1].time < trueAnimationtime)
+	{
+		animationNodeIndex++;
+	}
+
+	AnimationNode firstNode = currentAnimation.animationNodes[animationNodeIndex];
+	AnimationNode secondNode = currentAnimation.animationNodes[(animationNodeIndex + 1) % currentAnimation.animationNodes.size()];
+
+	double timeDiff = secondNode.time - firstNode.time;
+	if (timeDiff < 0.0) // looping
+		timeDiff += currentAnimation.totalTicks;
+
+	double factor = (trueAnimationtime - firstNode.time) / timeDiff;
+
+	size_t bonesToUpdate = bones.size();
+	uint32_t boneIndex = 0; // The root bone is always the first bone in the array.
+	while (0 < bonesToUpdate)
+	{
+		BoneNode bone = bones[boneIndex];
+		glm::mat4 parentTransformation = glm::mat4(1.0f);
+		if (-1 < bone.parent) // we assume parents are always updated before children
+			parentTransformation = boneTransformations[bone.parent];
+
+		glm::mat4 interPolatedTransformation = GfxOrientation::interpolate(firstNode.bones[boneIndex], secondNode.bones[boneIndex], factor).getTransformationMatrix();
+		boneTransformations[boneIndex] = parentTransformation * interPolatedTransformation;
+
+		boneIndex++;
+		bonesToUpdate--;
+	}
+
+}
+
+
+#ifdef VK_FUNCTIONS
+
 VkVertexInputBindingDescription SimpleVertex::getBindingDescription()
 {
 	VkVertexInputBindingDescription bindingDesc{};
@@ -96,88 +260,6 @@ std::array<VkVertexInputAttributeDescription, 5> CharacterVertex::getAttributeDe
 	return attributeDescs;
 }
 
-std::array<VkDescriptorSetLayoutBinding, 1> TestObject::getDescriptorSetLayoutBindings()
-{
-	std::array<VkDescriptorSetLayoutBinding, 1> bindings = {};
-	bindings[0].binding = 0;
-	bindings[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	bindings[0].descriptorCount = 1;
-	bindings[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-	bindings[0].pImmutableSamplers = nullptr;
-	return bindings;
-}
-
-std::array<VkDescriptorSetLayoutBinding, 2> CharacterObject::getDescriptorSetLayoutBindings()
-{
-	std::array<VkDescriptorSetLayoutBinding, 2> array;
-	array[0].binding = 0;
-	array[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	array[0].descriptorCount = 1;
-	array[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-	array[0].pImmutableSamplers = nullptr;
-
-	array[1].binding = 1;
-	array[1].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	array[1].descriptorCount = 1;
-	array[1].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-	array[1].pImmutableSamplers = nullptr;
-
-	return array;
-}
-
-std::array<VkDescriptorSetLayoutBinding, 2> GameObject::getDescriptorSetLayoutBindings()
-{
-	std::array<VkDescriptorSetLayoutBinding, 2> array;
-	array[0].binding = 0;
-	array[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	array[0].descriptorCount = 1;
-	array[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-	array[0].pImmutableSamplers = nullptr;
-
-	array[1].binding = 1;
-	array[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-	array[1].descriptorCount = 1;
-	array[1].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-	array[1].pImmutableSamplers = nullptr;
-
-	return array;
-}
-
-
-std::array<VkDescriptorSetLayoutBinding, 1> AreaObject::getDescriptorSetLayoutBindings()
-{
-	std::array<VkDescriptorSetLayoutBinding, 1> array;
-
-	array[0].binding = 0;
-	array[0].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-	array[0].descriptorCount = 6; // 6 textures
-	array[0].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-	array[0].pImmutableSamplers = nullptr;
-
-	return array;
-}
-
-
-std::array<ObjectType, OBJECT_TYPE_COUNT> getObjectTypes()
-{
-	std::array<ObjectType, OBJECT_TYPE_COUNT> array;
-	for (uint32_t type = 0; type < OBJECT_TYPE_COUNT; type++)
-	{
-		array[type] = static_cast<ObjectType>(type);
-	}
-	return array;
-}
-
-std::array<CharacterAnimation, ANIMATION_TYPE_COUNT> getAnimationTypes()
-{
-	std::array<CharacterAnimation, ANIMATION_TYPE_COUNT> array;
-	for (uint32_t anim = 0; anim < ANIMATION_TYPE_COUNT; anim++)
-	{
-		array[anim] = static_cast<CharacterAnimation>(anim);
-	}
-	return array;
-}
-
 std::vector<VkVertexInputAttributeDescription> getAttributeDescription(ObjectType objectType)
 {
 	std::vector<VkVertexInputAttributeDescription> attributeDescs{};
@@ -236,3 +318,4 @@ VkVertexInputBindingDescription getBindingDescription(ObjectType objectType)
 	}
 	return desc;
 }
+#endif

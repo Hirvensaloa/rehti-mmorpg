@@ -6,6 +6,7 @@
 
 void RehtiGraphics::demo()
 {
+	// addTestGameObject(0);
 	mainLoop();
 }
 
@@ -56,26 +57,70 @@ bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, st
 	bb.pRight = nullptr;
 	boundingBoxesM[ObjectType::GAMEOBJECT][objectID] = bb;
 
+	gameObjectOrientationsM[objectID] = GfxOrientation{ location, glm::quat(), glm::vec3(1.f, 1.f, 1.f) };
+
 	return true;
 }
 
 void RehtiGraphics::moveGameObject(int objectID, glm::vec3 location, float timeInSeconds)
 {
-	glm::mat4 translation = glm::translate(glm::mat4(1.f), location);
 	float timeInv = 1.f / timeInSeconds;
-	std::function<void(float)> callback = [=](float dt)
+	glm::vec3 currentLocation = gameObjectOrientationsM[objectID].position;
+	glm::vec3 delta = (location - currentLocation) * timeInv;
+	std::function<void(float)> callback = [objectID, delta, this](float dt)
 		{
-			// timeInv*=dt;
+			gameObjectOrientationsM[objectID].position += delta * dt;
+			// smooth bounding box interpolation?
+			moveBoundingBox(objectID, ObjectType::GAMEOBJECT, gameObjectOrientationsM[objectID].position);
+			glm::mat4 currentMatrix = gameObjectOrientationsM[objectID].getTransformationMatrix();
+			pObjectManagerM->updateObjectDescriptor(objectID, &currentMatrix, currentFrameM);
 		};
+	timersM.addTimerCallback(objectID, timeInSeconds, callback);
+}
+
+void RehtiGraphics::rotateGameObject(int objectID, float radians, float timeInSeconds)
+{
+	float timeInv = 1.f / timeInSeconds;
+	glm::quat currentRotation = gameObjectOrientationsM[objectID].rotation;
+	glm::quat targetRotation = glm::rotate(currentRotation, radians, POSITIVE_Y_AXIS);
+	std::function<void(float)> callback = [objectID, currentRotation, targetRotation, timeInv, this](float dt)
+		{
+			gameObjectOrientationsM[objectID].rotation = glm::slerp(currentRotation, targetRotation, dt * timeInv);
+			glm::mat4 currentMatrix = gameObjectOrientationsM[objectID].getTransformationMatrix();
+			pObjectManagerM->updateObjectDescriptor(objectID, &currentMatrix, currentFrameM);
+		};
+	timersM.addTimerCallback(objectID, timeInSeconds, callback);
 }
 
 void RehtiGraphics::forceGameObjectMove(int objectID, glm::vec3 location)
 {
+	// Force quit any ongoing timer events
+	timersM.forceQuitCallback(objectID);
 	moveBoundingBox(objectID, ObjectType::GAMEOBJECT, location);
-
+	gameObjectOrientationsM[objectID].position = location;
 	glm::mat4 locationTransform = glm::translate(glm::mat4(1.f), location);
 	// Assume changes are made after draw call. hence why currentFrameM is used
 	pObjectManagerM->updateObjectDescriptor(objectID, &locationTransform, currentFrameM);
+}
+
+void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSeconds)
+{
+	float timeInv = 1.f / timeInSeconds;
+	glm::vec3 currentLocation = characterOrientationsM[playerID].characterOrientation.position;
+	glm::vec3 diff = (location - currentLocation);
+	glm::vec3 delta = diff * timeInv;
+	glm::vec3 dir = glm::normalize(diff);
+	characterOrientationsM[playerID].characterOrientation.rotation = glm::quatLookAt(dir, POSITIVE_Y_AXIS);
+	std::function<void(float)> callback = [playerID, delta, dir, this](float dt)
+		{
+			characterOrientationsM[playerID].characterOrientation.position += delta * dt;
+			moveBoundingBox(playerID, ObjectType::CHARACTER, characterOrientationsM[playerID].characterOrientation.position);
+			characterOrientationsM[playerID].advanceAnimation(dt);
+			glm::mat4 currentMatrix = characterOrientationsM[playerID].characterOrientation.getTransformationMatrix();
+			pObjectManagerM->updateCharacterDescriptor(playerID, &currentMatrix, characterOrientationsM[playerID].boneTransformations.data(), currentFrameM);
+			cameraM.setTargetAndCamera(characterOrientationsM[playerID].characterOrientation.position);
+		};
+	timersM.addTimerCallback(playerID, timeInSeconds, callback);
 }
 
 void RehtiGraphics::forcePlayerMove(int playerID, glm::vec3 location)
@@ -90,6 +135,25 @@ void RehtiGraphics::forcePlayerMove(int playerID, glm::vec3 location)
 	boundingBoxesM[ObjectType::GAMEOBJECT][playerID].max = location + GAMEOBJECT_MAX;
 
 	cameraM.setTargetAndCamera(location);
+}
+
+void RehtiGraphics::moveCharacter(int characterID, glm::vec3 location, float timeInSeconds)
+{
+	float timeInv = 1.f / timeInSeconds;
+	glm::vec3 currentLocation = characterOrientationsM[characterID].characterOrientation.position;
+	glm::vec3 diff = (location - currentLocation);
+	glm::vec3 delta = diff * timeInv;
+	glm::vec3 dir = glm::normalize(diff);
+	characterOrientationsM[characterID].characterOrientation.rotation = glm::quatLookAt(dir, POSITIVE_Y_AXIS);
+	std::function<void(float)> callback = [characterID, delta, dir, this](float dt)
+		{
+			characterOrientationsM[characterID].characterOrientation.position += delta * dt;
+			moveBoundingBox(characterID, ObjectType::CHARACTER, characterOrientationsM[characterID].characterOrientation.position);
+			characterOrientationsM[characterID].advanceAnimation(dt);
+			glm::mat4 currentMatrix = characterOrientationsM[characterID].characterOrientation.getTransformationMatrix();
+			pObjectManagerM->updateCharacterDescriptor(characterID, &currentMatrix, characterOrientationsM[characterID].boneTransformations.data(), currentFrameM);
+		};
+	timersM.addTimerCallback(characterID, timeInSeconds, callback);
 }
 
 void RehtiGraphics::forceGameObjectRotate(int objectID, float radians)
@@ -857,7 +921,7 @@ void RehtiGraphics::mainLoop()
 	float frameCount = 0.f;
 	auto applicationStart = std::chrono::high_resolution_clock::now();
 	glm::mat4 translation = glm::translate(glm::mat4(1.f), 1.5f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS));
-
+	// moveGameObject(0, 5.f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS), 5);
 	while (!glfwWindowShouldClose(pWindowM))
 	{
 		auto start = std::chrono::high_resolution_clock::now();
@@ -867,7 +931,7 @@ void RehtiGraphics::mainLoop()
 		auto mus = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
 		statsM.frameTime = static_cast<uint64_t>(mus);
 		statsM.ftPerSec = mus * invMicro;
-		frameCount += static_cast<float>(statsM.ftPerSec);
+		timersM.elapseTime(static_cast<float>(statsM.ftPerSec));
 	}
 
 	vkDeviceWaitIdle(logDeviceM);

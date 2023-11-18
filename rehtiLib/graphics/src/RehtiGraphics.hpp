@@ -101,13 +101,49 @@ public:
 	 * @param timeInSeconds that it takes to move the object.
 	*/
 	void moveGameObject(int objectID, glm::vec3 location, float timeInSeconds);
-	void movePlayer(int playerID, glm::vec3 location, float timeInSeconds);
+
+	/**
+	 * @brief Rotates a game object by given radian angle in the given time frame.
+	 * @param objectID of the object to rotate.
+	 * @param radians to rotate the object by.
+	 * @param timeInSeconds that it takes to rotate the object.
+	*/
 	void rotateGameObject(int objectID, float radians, float timeInSeconds);
 
+	/**
+	 * @brief Forces the game object to move to the given location, quitting any remaining movement callbacks.
+	 * @param objectID of the object to move.
+	 * @param location to move the object to.
+	*/
 	void forceGameObjectMove(int objectID, glm::vec3 location);
+
+	/**
+	 * @brief Forces game object rotation to the given angle, quitting any remaining rotation callbacks.
+	 * @param objectID of the object to rotate.
+	 * @param radians to rotate the object by.
+	*/
+	void forceGameObjectRotate(int objectID, float radians);
+
+
+	/**
+	 * @brief Moves the player to the given location in the given time.
+		Also automatically rotates the player to face the given location and sets the animation.
+		Player movement differs from character movement in a sense that the camera is moved as well.
+	 * @param playerID of the player to move.
+	 * @param location to move the player to.
+	 * @param timeInSeconds it takes for the player to move to that location.
+	*/
+	void movePlayer(int playerID, glm::vec3 location, float timeInSeconds);
+
+	/**
+	 * @brief Forces player to move to the location given, cancelling any remaining movement callbacks and animations.
+	 * @param playerID of the player to move.
+	 * @param location to move the player to.
+	*/
 	void forcePlayerMove(int playerID, glm::vec3 location);
 
-	void forceGameObjectRotate(int objectID, float radians);
+	void moveCharacter(int characterID, glm::vec3 location, float timeInSeconds);
+
 
 	/**
 	 * @brief Adds an area to the game.
@@ -467,6 +503,10 @@ private:
 	EngineStatistics statsM;
 	// Bounding box lists in an array. Each index corresponds to an object type.
 	std::array<std::map<int, AABB>, OBJECT_TYPE_COUNT> boundingBoxesM;
+	// Location and animation storage
+	std::map<int, GfxOrientation> gameObjectOrientationsM;
+	std::map<int, CharacterData> characterOrientationsM;
+
 	// timer callback system
 	TimerCallbackSystem timersM;
 

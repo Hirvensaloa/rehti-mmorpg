@@ -3,7 +3,7 @@
 #include "../world/GameWorld.hpp"
 #include "Entity.hpp"
 
-Entity::Entity(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : idM(id), nameM(name), locationM(location), pGameWorldM(pGameWorld), inventoryM(Inventory(this)), equipmentM(Equipment(this)), skillSetM(SkillSet()){};
+Entity::Entity(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : idM(id), nameM(name), locationM(location), respawnLocationM(locationM), pGameWorldM(pGameWorld), inventoryM(Inventory(this)), equipmentM(Equipment(this)), skillSetM(SkillSet()){};
 
 unsigned int Entity::getId()
 {
@@ -20,14 +20,29 @@ Coordinates &Entity::getLocation()
     return locationM;
 }
 
-Action &Entity::getCurrentAction()
+void Entity::setLocation(Coordinates &location)
 {
-    return *currentActionM;
+    locationM = location;
 }
 
-unsigned int Entity::getHp()
+Coordinates &Entity::getRespawnLocation()
+{
+    return respawnLocationM;
+}
+
+std::shared_ptr<Action> &Entity::getCurrentAction()
+{
+    return currentActionM;
+}
+
+int Entity::getHp()
 {
     return hpM;
+}
+
+int Entity::getMaxHp()
+{
+    return maxHpM;
 }
 
 Inventory &Entity::getInventory()
@@ -65,6 +80,7 @@ void Entity::changeHp(int amount)
     else
     {
         hpM = 0;
+        respawn();
     }
 }
 
@@ -95,9 +111,9 @@ void Entity::attack(Entity &target)
 
     if (hitConnects)
     {
-        unsigned int damage = totalDamage;
-        target.changeHp(-damage);
-        std::cout << "Entity " << target.getName() << " took " << damage << " damage from " << getName() << ". Remaining HP: " << target.getHp() << std::endl;
+        totalDamage = std::max(0, totalDamage);
+        target.changeHp(-totalDamage);
+        std::cout << "Entity " << target.getName() << " took " << totalDamage << " damage from " << getName() << ". Remaining HP: " << target.getHp() << std::endl;
     }
     else
     {
@@ -108,4 +124,14 @@ void Entity::attack(Entity &target)
 SkillSet &Entity::getSkillSet()
 {
     return skillSetM;
+}
+
+bool Entity::isDisconnected()
+{
+    return isDisconnectedM;
+}
+
+void Entity::setDisconnected()
+{
+    isDisconnectedM = true;
 }

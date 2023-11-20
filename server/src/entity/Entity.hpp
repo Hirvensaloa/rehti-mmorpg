@@ -2,14 +2,15 @@
 
 #include "../action/AttackAction.hpp"
 #include "../action/MoveAction.hpp"
+#include "../action/RespawnAction.hpp"
 #include "../item/Equipment.hpp"
 #include "../item/Inventory.hpp"
-#include "../world/Coordinates.hpp"
 #include "../skill/SkillSet.hpp"
+#include "../world/Coordinates.hpp"
 
 class GameWorld;
 
-class Entity
+class Entity : public std::enable_shared_from_this<Entity>
 {
 public:
     Entity(GameWorld *pGameWorld, std::string name, unsigned int id = 0, Coordinates location = Coordinates());
@@ -22,9 +23,15 @@ public:
 
     Coordinates &getLocation();
 
-    Action &getCurrentAction();
+    void setLocation(Coordinates &location);
 
-    unsigned int getHp();
+    Coordinates &getRespawnLocation();
+
+    std::shared_ptr<Action> &getCurrentAction();
+
+    int getHp();
+
+    int getMaxHp();
 
     Inventory &getInventory();
 
@@ -48,6 +55,12 @@ public:
 
     virtual void update() = 0;
 
+    virtual void respawn() = 0;
+
+    bool isDisconnected();
+
+    void setDisconnected();
+
 protected:
     unsigned int idM;
 
@@ -55,9 +68,13 @@ protected:
 
     Coordinates locationM;
 
-    std::shared_ptr<Action> currentActionM;
+    Coordinates respawnLocationM;
 
-    unsigned int hpM = 1000;
+    std::shared_ptr<Action> currentActionM = nullptr;
+
+    int maxHpM = 1000;
+
+    int hpM = maxHpM;
 
     GameWorld *pGameWorldM;
 
@@ -66,4 +83,8 @@ protected:
     Equipment equipmentM;
 
     SkillSet skillSetM;
+
+    bool isDisconnectedM = false; // for players only, but defined for entity for polymorphism reaons
+
+    std::chrono::milliseconds respawnTimeM{10000};
 };

@@ -1,13 +1,13 @@
 #pragma once
 
-#include <exception>
-#include <filesystem>
 #include "rapidjson/document.h"
 #include "rapidjson/prettywriter.h"
+#include <exception>
+#include <filesystem>
 
-#include "Utils.hpp"
-#include "RehtiUtils.hpp"
 #include "RehtiReader.hpp"
+#include "RehtiUtils.hpp"
+#include "Utils.hpp"
 
 // Object tile map symbols
 const std::string OBJECT_TILE_MAP_CENTER = "X";

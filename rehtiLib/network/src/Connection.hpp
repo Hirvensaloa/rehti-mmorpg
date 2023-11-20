@@ -30,6 +30,8 @@ public:
 
   bool isConnected() const;
 
+  bool isLoggedIn() const;
+
   void disconnect();
   boost::asio::awaitable<void> send(const MessageStruct msg);
 
@@ -47,4 +49,6 @@ protected:
   owner ownertypeM = owner::server;
 
   uint32_t idM = 0;
+
+  bool isLoggedInM = false;
 };

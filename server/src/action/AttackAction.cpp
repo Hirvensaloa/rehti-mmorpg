@@ -4,15 +4,20 @@
 
 #include <iostream>
 
-AttackAction::AttackAction(std::chrono::system_clock::time_point startTime, Entity *target, Entity *pEntity) : Action(startTime, pEntity), pTargetM(target), actionTimeM(pEntityM->getAttackSpeed()) {}
+AttackAction::AttackAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Entity> target, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), pTargetM(target), actionTimeM(pEntityM->getAttackSpeed()) {}
 
-Entity *AttackAction::getTarget()
+std::shared_ptr<Entity> &AttackAction::getTarget()
 {
     return pTargetM;
 }
 
 void AttackAction::act()
 {
+    if (pTargetM->isDisconnected())
+    {
+        completedM = true;
+    }
+
     if (!completedM)
     {
         int currentDistance = pEntityM->getLocation().distance(pTargetM->getLocation());

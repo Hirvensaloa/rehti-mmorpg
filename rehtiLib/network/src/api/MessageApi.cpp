@@ -1,6 +1,32 @@
 #include "MessageApi.hpp"
 #include "RehtiUtils.hpp"
 
+const MessageStruct MessageApi::createLogin(const LoginMessage &login)
+{
+  rapidjson::Document document = createDocument();
+  rapidjson::Document::AllocatorType &allocator = document.GetAllocator();
+  document.AddMember("username", rapidjson::StringRef(login.username.c_str()), allocator);
+  document.AddMember("password", rapidjson::StringRef(login.password.c_str()), allocator);
+
+  return MessageStruct{login.id, createString(document)};
+};
+
+LoginMessage MessageApi::parseLogin(std::string msgBody)
+{
+  rapidjson::Document document = parseDocument(msgBody);
+
+  if (!validMember(document, "username", ValueType::STRING) || !validMember(document, "password", ValueType::STRING))
+  {
+    throw std::runtime_error("Invalid login message");
+  }
+
+  LoginMessage login;
+  login.username = document["username"].GetString();
+  login.password = document["password"].GetString();
+
+  return login;
+};
+
 const MessageStruct MessageApi::createMove(const MoveMessage &move)
 {
   rapidjson::Document document = createDocument();

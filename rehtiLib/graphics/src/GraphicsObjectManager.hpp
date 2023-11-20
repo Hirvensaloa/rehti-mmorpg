@@ -38,13 +38,13 @@ public:
 	void addTransferQueueFamilyAccess(const uint32_t transferQueueFamily, VkQueue transferQueue);
 
 	/**
-	 * @brief Todo create interface for characters as well.
+	 * @brief Adds a character to the buffer manager with the given parameters.
 	 * @param characterID is the id of the character
 	 * @param vertices of the character
 	 * @param indices of the character
 	 * @param texture of the character
 	 * @param transformation to be applied to the character
-	 * @param bindPose is the bind pose of the character
+	 * @param bindPose is the bind pose bone data of the character
 	 * @param imgSampler is the sampler for the texture of the character
 	 * @return boolean indicating success of the operation
 	*/

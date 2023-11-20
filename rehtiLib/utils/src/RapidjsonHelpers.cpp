@@ -16,7 +16,7 @@ rapidjson::Document readJson(std::string path)
   std::ifstream jsonFile(path);
   if (!jsonFile.is_open())
   {
-    throw std::runtime_error("Failed to open JSON file");
+    throw std::runtime_error("Failed to open JSON file: " + path);
   }
 
   std::string jsonContent((std::istreambuf_iterator<char>(jsonFile)), std::istreambuf_iterator<char>());
@@ -26,7 +26,7 @@ rapidjson::Document readJson(std::string path)
 
   if (doc.HasParseError())
   {
-    throw std::runtime_error("Failed to parse JSON file");
+    throw std::runtime_error("Failed to parse JSON file: " + path);
   }
 
   return doc;

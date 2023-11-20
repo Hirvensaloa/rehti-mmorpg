@@ -26,13 +26,16 @@ int main()
 
   // Generate map assets
   const std::vector<std::vector<std::string>> areaMap = fetchAreaMap();
-  const std::vector<std::vector<int>> heightMatrix = createHeightMap(areaMap);
+  std::vector<std::vector<int>> heightMatrix;
+  std::vector<std::vector<int>> mapTextureMatrix;
+  loadHeightAndTextureMap(areaMap, heightMatrix, mapTextureMatrix);
   const std::vector<std::vector<std::string>> objectBlockMap = createObjectBlockMap(areaMap, gameObjects, heightMatrix);
 
   // Generate access map and height map for server
   const std::vector<std::vector<unsigned>> accessMap = generateAccessMap(heightMatrix, objectBlockMap);
   writeMatrixToFile(accessMap, Config.GENERATED_ACCESS_MAP_PATH);
   writeMatrixToFile(heightMatrix, Config.GENERATED_HEIGHT_MAP_PATH);
+  writeMatrixToFile(mapTextureMatrix, Config.GENERATED_MAP_TEXTURE_MAP_PATH);
   writeMatrixToFile(areaMap, Config.GENERATED_AREA_MAP_PATH);
 
   // Generate obj files of the areas for client

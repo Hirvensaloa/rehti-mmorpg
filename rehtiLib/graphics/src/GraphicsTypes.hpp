@@ -1,22 +1,29 @@
 #pragma once
-#include <vk_mem_alloc.h>
 
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 #include <vector>
 #include <array>
 #include <memory>
 
+#ifndef DEFINE_EXPLICIT_TYPES
+#define ALLOCATED_TYPES
+#define VK_FUNCTIONS
+#endif
+
 #pragma region Constants
+
 constexpr uint32_t BONES_PER_VERTEX = 4;
 constexpr uint32_t MAX_BONES = 50;
 
 constexpr glm::vec3 GAMEOBJECT_MIN = glm::vec3(-0.5f, -0.5f, -0.5f);
 constexpr glm::vec3 GAMEOBJECT_MAX = glm::vec3(0.5f, 0.5f, 0.5f);
 
-#define OBJECT_TYPE_COUNT 4
+constexpr size_t OBJECT_TYPE_COUNT = 4;
+constexpr size_t ANIMATION_TYPE_COUNT = 5;
 
 enum ObjectType : uint32_t
 {
@@ -27,11 +34,67 @@ enum ObjectType : uint32_t
 	UNDEFINED
 };
 
+enum AnimationType : uint32_t
+{
+	IDLE,
+	WALK,
+	RUN,
+	ATTACK,
+	DEATH,
+};
+
 std::array<ObjectType, OBJECT_TYPE_COUNT> getObjectTypes();
+
+std::array<AnimationType, ANIMATION_TYPE_COUNT> getAnimationTypes();
+
+#pragma endregion
+
+#pragma region AnimationTypes
+// Animation node. The data stored can also represent any kind of transformation.
+struct AnimationNode
+{
+	glm::vec3 position;
+	glm::quat rotation;
+	glm::vec3 scale;
+	glm::mat4 getTransformationMatrix() const;
+	static AnimationNode interpolate(AnimationNode first, AnimationNode second, float normalizedTime);
+};
+
+// Immutable data. Animations should be stored somewhere and requested when needed to be stored for a character.
+struct Animation
+{
+	double totalTicks;																								///< total ticks in the animation
+	double ticksPerSecond;																						///< ticks per second
+	float duration;																										///< duration of the animation in seconds
+	std::array<std::vector<AnimationNode>, MAX_BONES> animationNodes; ///< animation nodes for each bone
+};
+
+struct CharacterAnimationData
+{
+	AnimationType currentAnimation;
+	double currentTicks;
+	std::array<Animation, ANIMATION_TYPE_COUNT> animations;
+};
+
+struct BoneNode
+{
+	uint32_t parent;								// index of the parent in bone array.
+	std::vector<uint32_t> children; // indices of the children in bone array.
+};
+
+struct CharacterData
+{
+	AnimationNode characterOrientation;										// orientation of the character
+	std::array<glm::mat4, MAX_BONES> boneTransformations; // bone transformation storage data
+	std::vector<BoneNode> bones;
+	CharacterAnimationData animationData;
+};
 
 #pragma endregion
 
 #pragma region GraphicsObjectTypes
+
+typedef AnimationNode ObjOrientation;
 
 struct Hit
 {
@@ -42,10 +105,13 @@ struct Hit
 
 struct ImageData
 {
-	unsigned char* pixels;
+	unsigned char *pixels;
 	int width;
 	int height;
 };
+
+#ifdef ALLOCATED_TYPES
+#include <vk_mem_alloc.h>
 
 struct DrawableObject
 {
@@ -74,7 +140,7 @@ struct GameObjectUniformBuffer
 {
 	VkDescriptorSet descriptorSet;	 // Descriptor set of the data
 	AllocatedBuffer transformBuffer; // Buffer containing the transform data (glm::mat4)
-	void* mappedTransformData;			 // Pointer to the mapped data of the transform buffer
+	void *mappedTransformData;			 // Pointer to the mapped data of the transform buffer
 };
 
 // Test object descriptor data
@@ -82,15 +148,15 @@ struct TestObjectUniformBuffer
 {
 	VkDescriptorSet descriptorSet;	 // Descriptor set of the data
 	AllocatedBuffer transformBuffer; // Buffer containing the transform data (glm::mat4)
-	void* mappedTransformData;			 // Pointer to the mapped data of the transform buffer
+	void *mappedTransformData;			 // Pointer to the mapped data of the transform buffer
 };
 
 // Character buffer object
 struct CharacterObjectUniformBuffer
 {
 	VkDescriptorSet descriptorSet;			 // Descriptor set of the data
-	AllocatedBuffer boneTransformations; // Todo think how the data is going to be stored
-	AllocatedBuffer boneWeights;
+	AllocatedBuffer transformBuffer;		 // Buffer containing model to world matrix
+	AllocatedBuffer boneTransformations; // Buffer containing bone transformations
 };
 
 // Object that contains everything needed to render a character.
@@ -102,7 +168,7 @@ struct CharacterObject
 	AllocatedImage texture;
 	VkImageView textureView;
 	std::vector<CharacterObjectUniformBuffer> characterUniformBuffers;
-	static std::array<VkDescriptorSetLayoutBinding, 2> getDescriptorSetLayoutBindings();
+	static std::array<VkDescriptorSetLayoutBinding, 3> getDescriptorSetLayoutBindings();
 };
 
 struct GameObject
@@ -136,10 +202,53 @@ struct TestObject
 	static std::array<VkDescriptorSetLayoutBinding, 1> getDescriptorSetLayoutBindings();
 };
 
+#endif
+
 #pragma endregion
 
 #pragma region VertexTypes
 
+struct CharacterVertex
+{
+	glm::vec3 pos;
+	glm::vec3 normal;
+	glm::uvec4 boneIDs;
+	glm::vec4 boneWeights;
+	glm::vec2 texCoord;
+
+#ifdef VK_FUNCTIONS
+#include <vulkan/vulkan.h>
+	static VkVertexInputBindingDescription getBindingDescription();
+	static std::array<VkVertexInputAttributeDescription, 5> getAttributeDescriptions();
+#endif
+};
+
+struct Vertex
+{
+	glm::vec3 pos;
+	glm::vec3 normal;
+	glm::vec2 texCoord;
+#ifdef VK_FUNCTIONS
+	// Vulkan binding and attribute descriptions
+	static VkVertexInputBindingDescription getBindingDescription();
+	static std::array<VkVertexInputAttributeDescription, 3> getAttributeDescriptions();
+#endif
+};
+
+// TODO Use assimp and checkout the library.
+struct SimpleVertex
+{
+	glm::vec3 pos;
+	glm::vec3 color;
+#ifdef VK_FUNCTIONS
+
+	// Vulkan binding and attribute descriptions
+	static VkVertexInputBindingDescription getBindingDescription();
+	static std::array<VkVertexInputAttributeDescription, 2> getAttributeDescriptions();
+#endif
+};
+
+#ifdef VK_FUNCTIONS
 /**
  * @brief Returns a vector of VkVertexInputAttributeDescription for the given object type.
  * @param objectType to query the attribute descriptions for.
@@ -153,37 +262,6 @@ std::vector<VkVertexInputAttributeDescription> getAttributeDescription(ObjectTyp
  */
 VkVertexInputBindingDescription getBindingDescription(ObjectType objectType);
 
-struct CharacterVertex
-{
-	glm::vec3 pos;
-	glm::vec3 normal;
-	glm::uvec4 boneIDs;
-	glm::vec4 boneWeights;
-	glm::vec2 texCoord;
-	// Vulkan binding and attribute descriptions
-	static VkVertexInputBindingDescription getBindingDescription();
-	static std::array<VkVertexInputAttributeDescription, 5> getAttributeDescriptions();
-};
-
-struct Vertex
-{
-	glm::vec3 pos;
-	glm::vec3 normal;
-	glm::vec2 texCoord;
-
-	// Vulkan binding and attribute descriptions
-	static VkVertexInputBindingDescription getBindingDescription();
-	static std::array<VkVertexInputAttributeDescription, 3> getAttributeDescriptions();
-};
-
-// TODO Use assimp and checkout the library.
-struct SimpleVertex
-{
-	glm::vec3 pos;
-	glm::vec3 color;
-	// Vulkan binding and attribute descriptions
-	static VkVertexInputBindingDescription getBindingDescription();
-	static std::array<VkVertexInputAttributeDescription, 2> getAttributeDescriptions();
-};
+#endif
 
 #pragma endregion

@@ -4,13 +4,10 @@
 #include "RehtiReader.hpp"
 #include "Utils.hpp"
 
-const std::string accessMapPath = "assets/generated/access_map.txt";
-const std::string heightMapPath = "assets/generated/height_map.txt";
-
 void Map::loadMap()
 {
-  loadAccessMap(accessMapM, accessMapPath);
-  loadHeightMap(heightMapM, heightMapPath);
+  accessMapM = fetchAccessMatrix();
+  heightMapM = fetchHeightMatrix();
   std::cout << "Map loaded successfully!" << std::endl;
 }
 

@@ -88,6 +88,8 @@ General objects are basic objects with minimal attributes. They have the followi
 - **name:** The name or description of the object.
 - **description:** A brief description of the object.
 - **tileMap:** A tile map representing the object's visual representation.
+- **textureFilename** filename of the corresponding texture file under the [textures](/assets/textures/)-folder.
+- **objFilename** filename to the `.obj` under the [objects](/assets/objects/)-folder.
 
 Example general object:
 
@@ -97,7 +99,9 @@ Example general object:
   "type": "General",
   "name": "Fence",
   "description": "A sturdy fence.",
-  "tileMap": [["S", "XS", "S"]]
+  "tileMap": [["S", "XS", "S"]],
+  "textureFilename": "fence.jpeg",
+  "objFilename": "fence.obj"
 }
 ```
 
@@ -115,6 +119,8 @@ Resource objects represent in-game resources that players can interact with, suc
 - **xpRequirement:** The required XP in the related skill to yield from this resource.
 - **description:** A brief description of the resource.
 - **tileMap:** A tile map representing the resource's visual representation.
+- **textureFilename** filename of the corresponding texture file under the [textures](/assets/textures/)-folder.
+- **objFilename** filename to the `.obj` under the [objects](/assets/objects/)-folder.
 
 Example resource object:
 
@@ -134,7 +140,9 @@ Example resource object:
   "relatedSkillId": 0,
   "xpRequirement": 0,
   "description": "A tree. It is a tree.",
-  "tileMap": [["XB"]]
+  "tileMap": [["XB"]],
+  "textureFilename": "tree.png",
+  "objFilename": "tree.obj"
 }
 ```
 
@@ -148,6 +156,8 @@ Loot objects represent items that can be looted, such as treasure chests or hidd
 - **yieldableItemList:** A list of items that can be looted from this object, along with the percentage chance to loot each item.
 - **description:** A brief description of the loot.
 - **tileMap:** A tile map representing the loot's visual representation.
+- **textureFilename** filename of the corresponding texture file under the [textures](/assets/textures/)-folder.
+- **objFilename** filename to the `.obj` under the [objects](/assets/objects/)-folder.
 
 Example loot object:
 
@@ -167,7 +177,9 @@ Example loot object:
     }
   ],
   "description": "Contains a treasure (If you consider a dirty, rotten shield a treasure)",
-  "tileMap": [["XB"]]
+  "tileMap": [["XB"]],
+  "textureFilename": "chest.png",
+  "objFilename": "lootchest.obj"
 }
 ```
 
@@ -282,7 +294,12 @@ The height value is formed by multiplying G with B, where the first bit of G ind
 
 The drawings should be 128x128 and use the PNG-format. They should be under `<root>/assets/map/areas`. Name the drawings `<area name in json>.png`, in our case `EG1.png`, `EG2.png`, `CC1.png` and `CC2.png`.
 
-3. **Create the object drawings**
+3. **Add map textures**
+
+- Add texture files for each texture id [here](/assets/textures/)
+- Map the id to the texture filename here [here](/assets/textures/map_textures.json).
+
+4. **Create the object drawings**
 
 For each area, there needs to be another drawing that shows where all the objects are and what their rotations are. Again we use RGB-channels.
 
@@ -295,6 +312,6 @@ R and G together indicate the object id, R x G, R x G = 65025, means no object (
 
 The drawings should be 128x128 and use the PNG-format. Name the drawings `<area name in json>-obj.png`, in our case `EG1-obj.png`, `EG2-obj.png`, `CC1-obj.png` and `CC2-obj.png`.
 
-4. **Map is done**
+5. **Map is done**
 
 Now just run the `generate-assets.sh` under the scripts folder to generate map assets.

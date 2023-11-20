@@ -14,6 +14,7 @@ add_executable(${TARGET}
   lodepng/lodepng.h
 )
 
+option(ENABLE_ASSET_EXTENSION "Enable asset extension" OFF)
 add_subdirectory(../reader ${CMAKE_CURRENT_LIST_DIR}/build/reader)
 target_link_libraries(${TARGET} rehtiAssetsReader)
 

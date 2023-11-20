@@ -3,7 +3,6 @@
 #include <boost/asio/awaitable.hpp>
 
 #include "RehtiReader.hpp"
-#include "Utils.hpp"
 #include "graphics.h"
 #include <network.h>
 
@@ -85,8 +84,8 @@ private:
     std::condition_variable graphLibReadyM; ///< GraphLib ready lock
     bool graphLibReadyFlagM = false;        ///< GraphLib ready flag
     std::mutex graphLibMutexM;
-    std::map<std::string, GameObjectGraphicData> gameObjectsObjDataM; ///< Contains all the game object types and their corresponding vertices and faces
-    std::map<std::string, ImageData> textureDataM;                    ///< Contains all the texture data
 
     Hit lastHitM; ///< Last detected hit from a mouse click
+
+    AssetCache& assetCacheM = AssetCache::getInstance();
 };

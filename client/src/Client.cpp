@@ -43,14 +43,17 @@ boost::asio::awaitable<bool> Client::login()
     if (connectionM->isConnected())
     {
         std::string usr = "";
-        std::cout << "------------------ Login to Rehti ------------------" << std::endl
+        std::string pwd = "";
+        std::cout << "------------------ Login (or signup) to Rehti ------------------" << std::endl
                   << "Username: ";
         std::cin >> usr;
-        if (usr != "")
+        std::cout << "Password: ";
+        std::cin >> pwd;
+        if (usr != "" && pwd != "")
         {
             LoginMessage msg;
             msg.username = usr;
-            msg.password = "dummyValue";
+            msg.password = pwd;
             co_await connectionM->send(MessageApi::createLogin(msg));
             boost::asio::co_spawn(ioContextM, connectionM->listenForMessages(), boost::asio::detached);
 
@@ -70,12 +73,15 @@ boost::asio::awaitable<bool> Client::connect()
     {
         std::cout << "Connecting to server..." << std::endl;
         const bool ret = co_await connectionM->connectToServer(endpointsM);
-        std::cout << ret << std::endl;
 
         if (ret)
         {
             co_await login();
         }
+
+        // Set the logged in flag to true anyway so that the graphics backend can be started regardless of server being online or not. TODO: Remove when the login happens on UI, not on console.
+        loggedInFlagM = true;
+        loggedInM.notify_one();
 
         co_return ret;
     }
@@ -142,7 +148,11 @@ void Client::processMessages()
 
                 for (const auto& entity : gameStateMsg.entities)
                 {
-                    Message msg = messagesM.pop_front();
+                    // Do not draw the current player twice
+                    if (entity.entityId == gameStateMsg.currentPlayer.entityId)
+                    {
+                        continue;
+                    }
 
                     std::cout << "entity"
                               << " " << entity.entityId << " " << entity.x << " " << entity.y << " " << entity.z << std::endl;
@@ -161,6 +171,11 @@ void Client::processMessages()
                         pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
                     }
                 }
+            }
+            else if (msgId == MessageId::Informative)
+            {
+                const InformativeMessage& informativeMsg = MessageApi::parseInformative(msg.getBody());
+                std::cout << "Message from server: " << informativeMsg.message << std::endl;
             }
         }
     }
@@ -200,6 +215,13 @@ void Client::handleMouseClick(const Hit& hit)
 
 void Client::startGraphics()
 {
+    // Wait for login to be successful
+    if (!loggedInFlagM)
+    {
+        std::unique_lock ul(loginMutexM);
+        loggedInM.wait(ul);
+    }
+
     pGraphLibM = new RehtiGraphics();
 
     // Create map bounding box

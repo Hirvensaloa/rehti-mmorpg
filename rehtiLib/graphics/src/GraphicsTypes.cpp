@@ -112,7 +112,7 @@ AnimationNode AnimationNode::interpolate(AnimationNode first, AnimationNode seco
     return interpolatedNode;
 }
 
-VkVertexInputBindingDescription SimpleVertex::getBindingDescription()
+VkVertexInputBindingDescription getSimpleVertexBindingDescription()
 {
     VkVertexInputBindingDescription bindingDesc{};
     bindingDesc.binding = 0;
@@ -122,7 +122,7 @@ VkVertexInputBindingDescription SimpleVertex::getBindingDescription()
     return bindingDesc;
 }
 
-std::array<VkVertexInputAttributeDescription, 2> SimpleVertex::getAttributeDescriptions()
+std::array<VkVertexInputAttributeDescription, 2> getSimpleVertexAttributeDescriptions()
 {
     std::array<VkVertexInputAttributeDescription, 2> attributeDescs{};
     attributeDescs[0].binding = 0;
@@ -138,7 +138,7 @@ std::array<VkVertexInputAttributeDescription, 2> SimpleVertex::getAttributeDescr
     return attributeDescs;
 }
 
-VkVertexInputBindingDescription Vertex::getBindingDescription()
+VkVertexInputBindingDescription getVertexBindingDescription()
 {
     VkVertexInputBindingDescription bindingDesc{};
     bindingDesc.binding = 0;
@@ -147,7 +147,7 @@ VkVertexInputBindingDescription Vertex::getBindingDescription()
     return bindingDesc;
 }
 
-std::array<VkVertexInputAttributeDescription, 3> Vertex::getAttributeDescriptions()
+std::array<VkVertexInputAttributeDescription, 3> getVertexAttributeDescriptions()
 {
     std::array<VkVertexInputAttributeDescription, 3> attributeDescs{};
     attributeDescs[0].binding = 0;
@@ -167,7 +167,7 @@ std::array<VkVertexInputAttributeDescription, 3> Vertex::getAttributeDescription
     return attributeDescs;
 }
 
-VkVertexInputBindingDescription CharacterVertex::getBindingDescription()
+VkVertexInputBindingDescription getCharacterVertexBindingDescription()
 {
     VkVertexInputBindingDescription bindingDesc{};
     bindingDesc.binding = 0;
@@ -176,7 +176,7 @@ VkVertexInputBindingDescription CharacterVertex::getBindingDescription()
     return bindingDesc;
 }
 
-std::array<VkVertexInputAttributeDescription, 5> CharacterVertex::getAttributeDescriptions()
+std::array<VkVertexInputAttributeDescription, 5> getCharacterVertexAttributeDescriptions()
 {
     std::array<VkVertexInputAttributeDescription, 5> attributeDescs{};
 
@@ -214,25 +214,25 @@ std::vector<VkVertexInputAttributeDescription> getAttributeDescription(ObjectTyp
     switch (objectType)
     {
     case ObjectType::CHARACTER:
-        for (auto desc : CharacterVertex::getAttributeDescriptions())
+        for (auto desc : getCharacterVertexAttributeDescriptions())
         {
             attributeDescs.push_back(desc);
         }
         break;
     case ObjectType::GAMEOBJECT:
-        for (auto desc : Vertex::getAttributeDescriptions())
+        for (auto desc : getVertexAttributeDescriptions())
         {
             attributeDescs.push_back(desc);
         }
         break;
     case ObjectType::TESTOBJECT:
-        for (auto desc : SimpleVertex::getAttributeDescriptions())
+        for (auto desc : getSimpleVertexAttributeDescriptions())
         {
             attributeDescs.push_back(desc);
         }
         break;
     case ObjectType::AREA:
-        for (auto desc : Vertex::getAttributeDescriptions())
+        for (auto desc : getVertexAttributeDescriptions())
         {
             attributeDescs.push_back(desc);
         }
@@ -250,16 +250,16 @@ VkVertexInputBindingDescription getBindingDescription(ObjectType objectType)
     switch (objectType)
     {
     case ObjectType::CHARACTER:
-        desc = CharacterVertex::getBindingDescription();
+        desc = getCharacterVertexBindingDescription();
         break;
     case ObjectType::GAMEOBJECT:
-        desc = Vertex::getBindingDescription();
+        desc = getVertexBindingDescription();
         break;
     case ObjectType::TESTOBJECT:
-        desc = SimpleVertex::getBindingDescription();
+        desc = getSimpleVertexBindingDescription();
         break;
     case ObjectType::AREA:
-        desc = Vertex::getBindingDescription();
+        desc = getVertexBindingDescription();
         break;
     default:
         break;

@@ -85,6 +85,10 @@ private:
     bool graphLibReadyFlagM = false;        ///< GraphLib ready flag
     std::mutex graphLibMutexM;
 
+    std::condition_variable loggedInM; ///< Login lock
+    bool loggedInFlagM = false;        ///< Login flag
+    std::mutex loginMutexM;
+
     Hit lastHitM; ///< Last detected hit from a mouse click
 
     AssetCache& assetCacheM = AssetCache::getInstance();

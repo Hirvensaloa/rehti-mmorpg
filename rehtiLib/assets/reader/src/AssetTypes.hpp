@@ -1,12 +1,11 @@
 #pragma once
 
-#include <vector>
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
+#include <vector>
 
-#define DEFINE_EXPLICIT_TYPES
-#include "../../../graphics/src/GraphicsTypes.hpp"
+#include "../../../graphics/src/BasicTypes.hpp"
 #include "../../Config.hpp"
 
 /**
@@ -18,10 +17,10 @@
  */
 struct MapAreaAssetData
 {
-  std::vector<Vertex> vertices;
-  std::vector<uint32_t> indices;
-  std::vector<ImageData> textures;
-  ImageData blendMap;
+    std::vector<Vertex> vertices;
+    std::vector<uint32_t> indices;
+    std::vector<ImageData> textures;
+    ImageData blendMap;
 };
 
 /**
@@ -29,9 +28,9 @@ struct MapAreaAssetData
  */
 struct ObjectAssetData
 {
-  std::vector<Vertex> vertices;
-  std::vector<uint32_t> indices;
-  ImageData texture;
+    std::vector<Vertex> vertices;
+    std::vector<uint32_t> indices;
+    ImageData texture;
 };
 
 /**
@@ -39,9 +38,9 @@ struct ObjectAssetData
  */
 struct CharacterAssetData
 {
-  std::vector<Vertex> vertices;
-  std::vector<uint32_t> indices;
-  ImageData texture;
+    std::vector<Vertex> vertices;
+    std::vector<uint32_t> indices;
+    ImageData texture;
 };
 
 /**
@@ -49,9 +48,9 @@ struct CharacterAssetData
  */
 struct ItemAssetData
 {
-  // TODO: Add when items have icons defined
-  // StbImageData icon;
-  // TODO: Add when items have object files defined
-  // std::vector<aiVector3D> vertices;
-  // std::vector<aiFace> faces;
+    // TODO: Add when items have icons defined
+    // StbImageData icon;
+    // TODO: Add when items have object files defined
+    // std::vector<aiVector3D> vertices;
+    // std::vector<aiFace> faces;
 };

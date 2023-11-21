@@ -2,17 +2,17 @@
 
 #include "../entity/Entity.hpp"
 
-Equipment::Equipment(Entity *owner) : ownerM(owner), slotMapM{}
+Equipment::Equipment(Entity* owner) : ownerM(owner), slotMapM{}
 {
     slotMapM = {
+        {Slot::HEAD, headSlotM},
+        {Slot::NECK, neckSlotM},
+        {Slot::TOP, topSlotM},
         {Slot::MAIN_HAND, mainHandSlotM},
         {Slot::OFF_HAND, offHandSlotM},
-        {Slot::HEAD, headSlotM},
-        {Slot::TOP, topSlotM},
         {Slot::BOTTOM, bottomSlotM},
         {Slot::BOOTS, bootsSlotM},
         {Slot::GLOVES, glovesSlotM},
-        {Slot::NECK, neckSlotM},
         {Slot::RING, ringSlotM},
     };
 };
@@ -51,7 +51,7 @@ bool Equipment::equip(std::shared_ptr<EquippableItem> item)
         return false;
     }
 
-    auto &currentItem = slotMapM[item->getEquippableSlot()];
+    auto& currentItem = slotMapM[item->getEquippableSlot()];
     if (currentItem != nullptr)
     {
         ownerM->getInventory().addItem(currentItem);
@@ -62,7 +62,7 @@ bool Equipment::equip(std::shared_ptr<EquippableItem> item)
 
 void Equipment::unequip(Slot slotToUnequip)
 {
-    auto &currentItem = slotMapM[slotToUnequip];
+    auto& currentItem = slotMapM[slotToUnequip];
     if (ownerM->getInventory().addItem(currentItem))
     {
         currentItem = nullptr;

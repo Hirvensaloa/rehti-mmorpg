@@ -159,6 +159,10 @@ void Client::processMessages()
                     // Ignore the player itself
                     if (entity.entityId == gameStateMsg.currentPlayer.entityId)
                     {
+                        for (auto item : entity.equipment)
+                        {
+                            std::cout << "Equipped item name: " << item.name << std::endl;
+                        }
                         continue;
                     }
 

@@ -6,11 +6,11 @@
 
 // Helper function to load an image with common settings and return a MyTextureData with a VkDescriptorSet as a sort of
 // Vulkan pointer
-bool RehtiGui::LoadTextureFromFile(const char* filename, const int id)
+bool RehtiGui::LoadTextureFromFile(const char *filename, const int id)
 {
 	int width = 0, height = 0;
 	// Specifying 4 channels forces stb to load the image in RGBA which is an easy format for Vulkan
-	unsigned char* image_data = stbi_load(filename, &width, &height, 0, 4);
+	unsigned char *image_data = stbi_load(filename, &width, &height, 0, 4);
 	ImageData imgData{};
 	imgData.pixels = image_data;
 	imgData.width = width;
@@ -29,11 +29,10 @@ bool RehtiGui::LoadTextureFromFile(const char* filename, const int id)
 	// Release image memory using stb
 	stbi_image_free(image_data);
 
-
 	return true;
 }
 
-RehtiGui::RehtiGui(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, GLFWwindow* pWindow, VkQueue graphicsQueue, VkDescriptorPool descPool, uint32_t imageCount, VkRenderPass renderPass, std::shared_ptr<GraphicsObjectManager> pGfxManager)
+RehtiGui::RehtiGui(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, GLFWwindow *pWindow, VkQueue graphicsQueue, VkDescriptorPool descPool, uint32_t imageCount, VkRenderPass renderPass, std::shared_ptr<GraphicsObjectManager> pGfxManager)
 	: logDeviceM(logDevice), descPoolM(descPool), pGraphicsObjectManagerM(pGfxManager)
 {
 	ImGui::CreateContext();
@@ -118,94 +117,25 @@ void RehtiGui::newFrame()
 	{
 		if (ImGui::BeginTabItem("Inventory"))
 		{
-			inventoryOpenM = true;
-			equipmentOpenM = false;
-			skillsOpenM = false;
+			openTabM = UiTab::Inventory;
 			ImGui::EndTabItem();
 		}
 		if (ImGui::BeginTabItem("Equipment"))
 		{
-			inventoryOpenM = false;
-			equipmentOpenM = true;
-			skillsOpenM = false;
+			openTabM = UiTab::Equipment;
 			ImGui::EndTabItem();
 		}
 		if (ImGui::BeginTabItem("Skills"))
 		{
-			inventoryOpenM = false;
-			equipmentOpenM = false;
-			skillsOpenM = true;
+			openTabM = UiTab::Skills;
 			ImGui::EndTabItem();
 		}
 		ImGui::EndTabBar();
 	}
 
-	if (inventoryOpenM)
+	if (openTabM == UiTab::Inventory)
 	{
-
-		for (int i = 0; i < inventoryM.size(); i++)
-		{
-			ImGui::PushID(i);
-			ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.f, 0.f, 0.f, 0.f));
-			// TODO USE REAL ID's
-			if (ImGui::ImageButton((ImTextureID)guiIconsM[0], ImVec2(32, 32)))
-			{
-				std::cout << inventoryM[i].name << std::endl;
-				inventoryItemClickCallbackM(inventoryM[i].instanceId);
-			}
-			ImGui::PopStyleColor(1);
-
-			if (ImGui::BeginPopupContextItem())
-			{
-				if (ImGui::BeginListBox("##listbox1", ImVec2(90, 60)))
-				{
-					if (ImGui::Selectable(("Use " + inventoryM[i].name).c_str()))
-					{
-						std::cout << inventoryM[i].name << std::endl;
-						inventoryItemClickCallbackM(inventoryM[i].instanceId);
-						ImGui::CloseCurrentPopup();
-					}
-					if (ImGui::Selectable(("Drop " + inventoryM[i].name).c_str()))
-					{
-						ImGui::CloseCurrentPopup(); // TODO: Send drop item request
-					}
-					if (ImGui::Selectable("Cancel"))
-					{
-						ImGui::CloseCurrentPopup();
-					}
-					ImGui::EndListBox();
-				}
-				// if (ImGui::Button(("Use " + inventoryM[i].name).c_str()))
-				// {
-				//     std::cout << inventoryM[i].name << std::endl;
-				//     inventoryItemClickCallbackM(inventoryM[i].instanceId);
-				//     ImGui::CloseCurrentPopup();
-				// }
-				// if (ImGui::Button(("Drop " + inventoryM[i].name).c_str()))
-				// {
-				//     ImGui::CloseCurrentPopup(); // TODO: Send drop item request
-				// }
-				// if (ImGui::Button("Cancel"))
-				// {
-				//     ImGui::CloseCurrentPopup();
-				// }
-				ImGui::EndPopup();
-			}
-
-			if (ImGui::IsItemHovered())
-			{
-				ImGui::BeginTooltip();
-				ImGui::Text(("Use " + inventoryM[i].name).c_str());
-				ImGui::EndTooltip();
-			}
-
-			ImGui::PopID();
-
-			if ((i + 1) % 4 != 0)
-			{
-				ImGui::SameLine();
-			}
-		}
+		drawInventory();
 	}
 	ImGui::End();
 }
@@ -228,4 +158,76 @@ void RehtiGui::addInventoryItemClickCallback(std::function<void(const int id)> c
 void RehtiGui::setInventory(std::vector<GameItem> inventory)
 {
 	inventoryM = inventory;
+}
+
+void RehtiGui::drawInventory()
+{
+	for (int i = 0; i < inventoryM.size(); i++)
+	{
+		ImGui::PushID(i);
+		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.f, 0.f, 0.f, 0.f));
+		// TODO USE REAL ID's
+		if (ImGui::ImageButton((ImTextureID)guiIconsM[0], ImVec2(32, 32)))
+		{
+			std::cout << inventoryM[i].name << std::endl;
+			inventoryItemClickCallbackM(inventoryM[i].instanceId);
+		}
+		ImGui::PopStyleColor(1);
+
+		if (ImGui::BeginPopupContextItem())
+		{
+			if (ImGui::BeginListBox("##listbox1", ImVec2(90, 60)))
+			{
+				if (ImGui::Selectable(("Use " + inventoryM[i].name).c_str()))
+				{
+					std::cout << inventoryM[i].name << std::endl;
+					inventoryItemClickCallbackM(inventoryM[i].instanceId);
+					ImGui::CloseCurrentPopup();
+				}
+				if (ImGui::Selectable(("Drop " + inventoryM[i].name).c_str()))
+				{
+					ImGui::CloseCurrentPopup(); // TODO: Send drop item request
+				}
+				if (ImGui::Selectable("Cancel"))
+				{
+					ImGui::CloseCurrentPopup();
+				}
+				ImGui::EndListBox();
+			}
+			// if (ImGui::Button(("Use " + inventoryM[i].name).c_str()))
+			// {
+			//     std::cout << inventoryM[i].name << std::endl;
+			//     inventoryItemClickCallbackM(inventoryM[i].instanceId);
+			//     ImGui::CloseCurrentPopup();
+			// }
+			// if (ImGui::Button(("Drop " + inventoryM[i].name).c_str()))
+			// {
+			//     ImGui::CloseCurrentPopup(); // TODO: Send drop item request
+			// }
+			// if (ImGui::Button("Cancel"))
+			// {
+			//     ImGui::CloseCurrentPopup();
+			// }
+			ImGui::EndPopup();
+		}
+
+		if (ImGui::IsItemHovered())
+		{
+			ImGui::BeginTooltip();
+			ImGui::Text(("Use " + inventoryM[i].name).c_str());
+			ImGui::EndTooltip();
+		}
+
+		ImGui::PopID();
+
+		if ((i + 1) % 4 != 0)
+		{
+			ImGui::SameLine();
+		}
+	}
+}
+
+void RehtiGui::drawEquipment()
+{
+	return;
 }

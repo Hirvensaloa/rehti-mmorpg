@@ -1,20 +1,28 @@
 #pragma once
-#include "GraphicsTypes.hpp"
 #include "../../network/src/api/Types.hpp"
 #include "../bindings/imgui_impl_glfw.h"
 #include "../bindings/imgui_impl_vulkan.h"
+#include "GraphicsTypes.hpp"
 
 #include <functional>
-#include <vector>
 #include <unordered_map>
+#include <vector>
+
 // fwd decl
 class GraphicsObjectManager;
+
+enum UiTab
+{
+	Inventory,
+	Equipment,
+	Skills
+};
 
 class RehtiGui
 {
 
 public:
-	RehtiGui(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, GLFWwindow* pWindow, VkQueue graphicsQueue, VkDescriptorPool descPool, uint32_t imageCount, VkRenderPass renderPass, std::shared_ptr<GraphicsObjectManager> pGfxManager);
+	RehtiGui(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, GLFWwindow *pWindow, VkQueue graphicsQueue, VkDescriptorPool descPool, uint32_t imageCount, VkRenderPass renderPass, std::shared_ptr<GraphicsObjectManager> pGfxManager);
 	~RehtiGui();
 
 	void uploadFonts(VkCommandBuffer cmdBuffer);
@@ -31,9 +39,21 @@ public:
 
 	void setInventory(std::vector<GameItem> inventory);
 
-	bool LoadTextureFromFile(const char* filename, const int id);
+	void setEquipment(std::vector<GameItem> equipment);
+
+	bool LoadTextureFromFile(const char *filename, const int id);
 
 private:
+	/**
+	 * @brief Draws inventory tab to GUI window
+	 */
+	void drawInventory();
+
+	/**
+	 * @brief Draws equipment tab to GUI window
+	 */
+	void drawEquipment();
+
 	VkDevice logDeviceM;
 	VkDescriptorPool descPoolM;
 
@@ -42,15 +62,13 @@ private:
 
 	std::shared_ptr<GraphicsObjectManager> pGraphicsObjectManagerM;
 
-	bool inventoryOpenM = true;
-
-	bool equipmentOpenM = false;
-
-	bool skillsOpenM = false;
+	UiTab openTabM;
 
 	std::function<void(const int id)> inventoryItemClickCallbackM;
 
 	std::vector<GameItem> inventoryM;
+	std::vector<GameItem> equipmentM;
+
 	// map from id to descriptor set required for drawing.
 	// GraphicsObjectManager will clean up the resources created.
 	std::unordered_map<int, VkDescriptorSet> guiIconsM;

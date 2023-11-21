@@ -141,7 +141,7 @@ void Server::handleMessage(const Message& msg)
             {
                 std::cout << connId << "UseItem message received." << std::endl;
                 const UseItemMessage useItemMsg = MessageApi::parseUseItem(body);
-                PlayerCharacter* gamer = gameWorldM.getPlayer(connId);
+                std::shared_ptr<PlayerCharacter> gamer = gameWorldM.getPlayer(connId);
                 gamer->getInventory().useItem(useItemMsg.itemId);
                 break;
             }
@@ -204,6 +204,13 @@ void Server::sendGameState()
         entity.y = location.y;
         entity.z = location.z;
         entity.hp = npc->getHp();
+        std::vector<GameItem> equipmentVector;
+        for (auto const& item : npc->getEquipment().getAllEquipment())
+        {
+            GameItem gameItem = {item->getId(), item->getInstanceId(), item->getName(), item->getStackSize()};
+            equipmentVector.push_back(gameItem);
+        }
+        entity.equipment = equipmentVector;
         entityVector.push_back(entity);
     }
 
@@ -217,6 +224,13 @@ void Server::sendGameState()
         entity.y = location.y;
         entity.z = location.z;
         entity.hp = player->getHp();
+        std::vector<GameItem> equipmentVector;
+        for (auto const& item : player->getEquipment().getAllEquipment())
+        {
+            GameItem gameItem = {item->getId(), item->getInstanceId(), item->getName(), item->getStackSize()};
+            equipmentVector.push_back(gameItem);
+        }
+        entity.equipment = equipmentVector;
         entityVector.push_back(entity);
     }
     msg.entities = entityVector;
@@ -267,7 +281,6 @@ void Server::sendGameState()
             msg.currentPlayer.skills = skillVector;
 
             std::vector<GameItem> inventory;
-
             for (auto& item : player->getInventory().getItems())
             {
                 GameItem gameItem = {item->getId(), item->getInstanceId(), item->getName(), item->getStackSize()};

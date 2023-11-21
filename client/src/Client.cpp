@@ -124,49 +124,55 @@ void Client::processMessages()
         // Wait for message to arrive
         messagesM.wait();
 
-        const int msgId = msg.getHeader().id;
-
-        if (msgId == MessageId::GameState)
+        while (!messageM.empty())
         {
-            const GameStateMessage& gameStateMsg = MessageApi::parseGameState(msg.getBody());
+            Message msg = messagesM.pop_front();
 
-            const auto objAsset = assetCacheM.getCharacterAssetData()["ukko"];
-            pGraphLibM->addGameObject(gameStateMsg.currentPlayer.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
-            pGraphLibM->forcePlayerMove(gameStateMsg.currentPlayer.entityId, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
-            std::cout << "player"
-                      << " " << gameStateMsg.currentPlayer.entityId << " " << gameStateMsg.currentPlayer.x << " " << gameStateMsg.currentPlayer.y << " " << gameStateMsg.currentPlayer.z << std::endl;
+            const int msgId = msg.getHeader().id;
 
-            for (const auto& entity : gameStateMsg.entities)
+            if (msgId == MessageId::GameState)
             {
-                Message msg = messagesM.pop_front();
+                const GameStateMessage& gameStateMsg = MessageApi::parseGameState(msg.getBody());
 
-                std::cout << "entity"
-                          << " " << entity.entityId << " " << entity.x << " " << entity.y << " " << entity.z << std::endl;
-                const auto objAsset = assetCacheM.getCharacterAssetData()["goblin"];
-                pGraphLibM->addGameObject(entity.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
-                pGraphLibM->forceGameObjectMove(entity.entityId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
-            }
-            for (const auto& object : gameStateMsg.objects)
-            {
-                const std::string idStr = std::to_string(object.id);
-                if (assetCacheM.getObjectAssetData().contains(idStr))
+                const auto objAsset = assetCacheM.getCharacterAssetData()["ukko"];
+                pGraphLibM->addGameObject(gameStateMsg.currentPlayer.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
+                pGraphLibM->forcePlayerMove(gameStateMsg.currentPlayer.entityId, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
+                std::cout << "player"
+                          << " " << gameStateMsg.currentPlayer.entityId << " " << gameStateMsg.currentPlayer.x << " " << gameStateMsg.currentPlayer.y << " " << gameStateMsg.currentPlayer.z << std::endl;
+
+                for (const auto& entity : gameStateMsg.entities)
                 {
-                    std::cout << "object"
-                              << " " << object.id << " " << object.x << " " << object.y << " " << object.z << std::endl;
-                    const auto objAsset = assetCacheM.getObjectAssetData()[idStr];
-                    pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
+                    Message msg = messagesM.pop_front();
+
+                    std::cout << "entity"
+                              << " " << entity.entityId << " " << entity.x << " " << entity.y << " " << entity.z << std::endl;
+                    const auto objAsset = assetCacheM.getCharacterAssetData()["goblin"];
+                    pGraphLibM->addGameObject(entity.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
+                    pGraphLibM->forceGameObjectMove(entity.entityId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
+                }
+                for (const auto& object : gameStateMsg.objects)
+                {
+                    const std::string idStr = std::to_string(object.id);
+                    if (assetCacheM.getObjectAssetData().contains(idStr))
+                    {
+                        std::cout << "object"
+                                  << " " << object.id << " " << object.x << " " << object.y << " " << object.z << std::endl;
+                        const auto objAsset = assetCacheM.getObjectAssetData()[idStr];
+                        pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
+                    }
                 }
             }
         }
     }
+}
 
-    void Client::handleMouseClick(const Hit& hit)
-    {
-        lastHitM = hit;
-        std::cout << "Mouse click hit" << std::endl;
-        boost::asio::co_spawn(
-            ioContextM, [this]() -> boost::asio::awaitable<void>
-            {
+void Client::handleMouseClick(const Hit& hit)
+{
+    lastHitM = hit;
+    std::cout << "Mouse click hit" << std::endl;
+    boost::asio::co_spawn(
+        ioContextM, [this]() -> boost::asio::awaitable<void>
+        {
 			const Hit& hit = this->lastHitM;
 			switch (hit.objectType)
 			{
@@ -189,55 +195,55 @@ void Client::processMessages()
 					std::cout << "Unknown ObjectType" << std::endl;
 					break;
 			} },
-            boost::asio::detached);
-    }
+        boost::asio::detached);
+}
 
-    void Client::startGraphics()
+void Client::startGraphics()
+{
+    pGraphLibM = new RehtiGraphics();
+
+    // Create map bounding box
+    std::vector<std::vector<int>> heightMatrix = fetchHeightMatrix();
+    std::vector<std::vector<std::string>> areaMatrix = fetchAreaMatrix();
+
+    // Load assets to memory
+    assetCacheM.loadAssets();
+
+    // Add areas to the graphics backend
+    pGraphLibM->addMapBoundingBox(MapAABBData{heightMatrix, areaMatrix, Config.AREA_WIDTH, Config.HEIGHT_MAP_SCALE, Config.TILE_SIDE_SCALE, Config.TILE_SIDE_UNIT});
+    for (int i = 0; i < areaMatrix.size(); i++)
     {
-        pGraphLibM = new RehtiGraphics();
-
-        // Create map bounding box
-        std::vector<std::vector<int>> heightMatrix = fetchHeightMatrix();
-        std::vector<std::vector<std::string>> areaMatrix = fetchAreaMatrix();
-
-        // Load assets to memory
-        assetCacheM.loadAssets();
-
-        // Add areas to the graphics backend
-        pGraphLibM->addMapBoundingBox(MapAABBData{heightMatrix, areaMatrix, Config.AREA_WIDTH, Config.HEIGHT_MAP_SCALE, Config.TILE_SIDE_SCALE, Config.TILE_SIDE_UNIT});
-        for (int i = 0; i < areaMatrix.size(); i++)
+        for (int j = 0; j < areaMatrix[i].size(); j++)
         {
-            for (int j = 0; j < areaMatrix[i].size(); j++)
+            const auto& areaAssetData = assetCacheM.getAreaAssetData()[areaMatrix[i][j] + std::to_string(i) + std::to_string(j)];
+            std::array<ImageData, 6> textures = {areaAssetData.blendMap, ImageData(), ImageData(), ImageData(), ImageData(), ImageData()};
+
+            // Loop through the area textures and use default texture for leftovers
+            int k = 0;
+            while (k <= Config.MAX_MAP_TEXTURES)
             {
-                const auto& areaAssetData = assetCacheM.getAreaAssetData()[areaMatrix[i][j] + std::to_string(i) + std::to_string(j)];
-                std::array<ImageData, 6> textures = {areaAssetData.blendMap, ImageData(), ImageData(), ImageData(), ImageData(), ImageData()};
-
-                // Loop through the area textures and use default texture for leftovers
-                int k = 0;
-                while (k <= Config.MAX_MAP_TEXTURES)
+                if (areaAssetData.textures.size() > k && areaAssetData.textures[k].width != 0 && areaAssetData.textures[k].height != 0)
                 {
-                    if (areaAssetData.textures.size() > k && areaAssetData.textures[k].width != 0 && areaAssetData.textures[k].height != 0)
-                    {
-                        textures[k + 1] = areaAssetData.textures[k];
-                    }
-                    else
-                    {
-                        textures[k + 1] = assetCacheM.getDefaultTexture();
-                    }
-                    k++;
-                };
+                    textures[k + 1] = areaAssetData.textures[k];
+                }
+                else
+                {
+                    textures[k + 1] = assetCacheM.getDefaultTexture();
+                }
+                k++;
+            };
 
-                pGraphLibM->addArea(areaAssetData.vertices, areaAssetData.indices, textures);
-            }
+            pGraphLibM->addArea(areaAssetData.vertices, areaAssetData.indices, textures);
         }
-
-        // Add action callbacks
-        pGraphLibM->addMouseClickCallback([this](const Hit& hit)
-                                          { handleMouseClick(hit); });
-
-        std::cout << "Graphics library ready" << std::endl;
-
-        graphLibReadyFlagM = true;
-        graphLibReadyM.notify_one();
-        pGraphLibM->demo();
     }
+
+    // Add action callbacks
+    pGraphLibM->addMouseClickCallback([this](const Hit& hit)
+                                      { handleMouseClick(hit); });
+
+    std::cout << "Graphics library ready" << std::endl;
+
+    graphLibReadyFlagM = true;
+    graphLibReadyM.notify_one();
+    pGraphLibM->demo();
+}

@@ -124,7 +124,7 @@ void Client::processMessages()
         // Wait for message to arrive
         messagesM.wait();
 
-        while (!messageM.empty())
+        while (!messagesM.empty())
         {
             Message msg = messagesM.pop_front();
 

@@ -60,7 +60,7 @@ GraphicsObjectManager::~GraphicsObjectManager()
 		for (auto& bufObject : character.characterUniformBuffers)
 		{
 			vmaDestroyBuffer(allocatorM, bufObject.boneTransformations.buffer, bufObject.boneTransformations.allocation);
-			vmaDestroyBuffer(allocatorM, bufObject.boneWeights.buffer, bufObject.boneWeights.allocation);
+			vmaDestroyBuffer(allocatorM, bufObject.transformBuffer.buffer, bufObject.transformBuffer.allocation);
 		}
 	}
 	// Loop over objects
@@ -126,6 +126,74 @@ void GraphicsObjectManager::addTransferQueueFamilyAccess(const uint32_t transfer
 		}
 		transferCommandUnitM = unit;
 	}
+}
+
+bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, glm::mat4 bindPose[MAX_BONES], VkSampler imgSampler)
+{
+	if (characterObjectsM.contains(characterID))
+	{
+		return false;
+	}
+	CharacterObject character{};
+	VkDeviceSize vSize = vertices.size() * sizeof(Vertex);
+	VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
+	VkDeviceSize tSize = sizeof(glm::mat4);
+	VkDeviceSize imgSize = texture.width * texture.height * 4;
+	VkDeviceSize boneSize = sizeof(glm::mat4) * MAX_BONES;
+	character.indexCount = indices.size();
+
+	// Create buffers
+	character.vertexData = createBuffer(vSize, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+	character.indexData = createBuffer(iSize, VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+	// image data
+	character.texture = createImage(texture.width, texture.height, VK_FORMAT_R8G8B8A8_SRGB);
+	character.textureView = createImageView(character.texture.image, VK_FORMAT_R8G8B8A8_SRGB);
+	// Create descriptor set data
+	for (uint32_t i = 0; i < frameCountM; i++)
+	{
+		// Go in binding order: transform, bones, texture
+		CharacterObjectUniformBuffer cBuffer{};
+		cBuffer.transformBuffer = createBuffer(tSize, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VMA_MEMORY_USAGE_AUTO,
+			VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT | VMA_ALLOCATION_CREATE_MAPPED_BIT); // These two flags set memory to be persistently mapped.
+		cBuffer.boneTransformations = createBuffer(boneSize, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VMA_MEMORY_USAGE_AUTO,
+			VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT | VMA_ALLOCATION_CREATE_MAPPED_BIT);
+		VkDescriptorBufferInfo transformBufferInfo{};
+		transformBufferInfo.buffer = cBuffer.transformBuffer.buffer;
+		transformBufferInfo.offset = 0;
+		transformBufferInfo.range = tSize;
+		VkDescriptorBufferInfo boneBufferInfo{};
+		boneBufferInfo.buffer = cBuffer.boneTransformations.buffer;
+		boneBufferInfo.offset = 0;
+		boneBufferInfo.range = boneSize;
+		VkDescriptorImageInfo descImageInfo{};
+		descImageInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+		descImageInfo.imageView = character.textureView;
+		descImageInfo.sampler = imgSampler;
+		// Try creating descriptor set
+		if (pBuilderM->bindBuffer(transformBufferInfo, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT) // Transform
+			.bindBuffer(boneBufferInfo, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT) // Bones
+			.bindImage(descImageInfo, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT) // Texture
+			.build(cBuffer.descriptorSet))
+		{
+			character.characterUniformBuffers.push_back(cBuffer);
+			// Uniforms are persistently mapped, so we can just memcpy to them
+			memcpy(cBuffer.transformBuffer.allocation->GetMappedData(), &transformation, tSize);
+			memcpy(cBuffer.boneTransformations.allocation->GetMappedData(), bindPose, boneSize);
+		}
+		else
+		{
+			throw std::runtime_error("Failed to create descriptor set for a character object");
+		}
+	}
+
+	// Copy the data to the buffers
+	copyBuffer(character.vertexData, vertices.data());
+	copyBuffer(character.indexData, indices.data());
+	copyImage(character.texture, texture);
+
+	characterObjectsM[characterID] = character;
+
+	return true;
 }
 
 bool GraphicsObjectManager::addGameObject(int id, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, VkSampler imgSampler)
@@ -557,9 +625,18 @@ void GraphicsObjectManager::updateTestObject(int id, const void* srcData, uint32
 
 void GraphicsObjectManager::updateObjectDescriptor(int id, const void* srcData, uint32_t frame)
 {
-	auto& object = gameObjectsM[id]; // TODO update also the images or rework them.
+	GameObject& object = gameObjectsM[id]; // TODO update also the images or rework them.
 	auto& buffer = object.uniformBuffers[frame].transformBuffer;
 	memcpy(buffer.allocation->GetMappedData(), srcData, buffer.size);
+}
+
+void GraphicsObjectManager::updateCharacterDescriptor(int id, const void* transformSrcData, const void* boneSrcData, uint32_t frame)
+{
+	CharacterObject& character = characterObjectsM[id];
+	auto& transformBuffer = character.characterUniformBuffers[frame].transformBuffer;
+	auto& boneBuffer = character.characterUniformBuffers[frame].boneTransformations;
+	memcpy(transformBuffer.allocation->GetMappedData(), transformSrcData, transformBuffer.size);
+	memcpy(boneBuffer.allocation->GetMappedData(), boneSrcData, boneBuffer.size);
 }
 
 AllocatedImage GraphicsObjectManager::createDepthImage(uint32_t width, uint32_t height, VkFormat depthFormat)

@@ -6,11 +6,12 @@
 
 void RehtiGraphics::demo()
 {
+	// addTestGameObject(0);
 	mainLoop();
 }
 
 RehtiGraphics::RehtiGraphics(uint32_t width, uint32_t height)
-		: widthM(width), heightM(height), anisotropyM(1.f), cameraM(Camera(glm::vec3(0.f, 0.f, 0.f), static_cast<float>(width), static_cast<float>(height)))
+	: widthM(width), heightM(height), anisotropyM(1.f), cameraM(Camera(glm::vec3(0.f, 0.f, 0.f), static_cast<float>(width), static_cast<float>(height)))
 {
 	initWindow();
 	cameraM.registerCameraControls(pWindowM);
@@ -56,19 +57,70 @@ bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, st
 	bb.pRight = nullptr;
 	boundingBoxesM[ObjectType::GAMEOBJECT][objectID] = bb;
 
+	gameObjectOrientationsM[objectID] = GfxOrientation{ location, glm::quat(), glm::vec3(1.f, 1.f, 1.f) };
+
 	return true;
+}
+
+void RehtiGraphics::moveGameObject(int objectID, glm::vec3 location, float timeInSeconds)
+{
+	float timeInv = 1.f / timeInSeconds;
+	glm::vec3 currentLocation = gameObjectOrientationsM[objectID].position;
+	glm::vec3 delta = (location - currentLocation) * timeInv;
+	std::function<void(float)> callback = [objectID, delta, this](float dt)
+		{
+			gameObjectOrientationsM[objectID].position += delta * dt;
+			// smooth bounding box interpolation?
+			moveBoundingBox(objectID, ObjectType::GAMEOBJECT, gameObjectOrientationsM[objectID].position);
+			glm::mat4 currentMatrix = gameObjectOrientationsM[objectID].getTransformationMatrix();
+			pObjectManagerM->updateObjectDescriptor(objectID, &currentMatrix, currentFrameM);
+		};
+	timersM.addTimerCallback(objectID, timeInSeconds, callback);
+}
+
+void RehtiGraphics::rotateGameObject(int objectID, float radians, float timeInSeconds)
+{
+	float timeInv = 1.f / timeInSeconds;
+	glm::quat currentRotation = gameObjectOrientationsM[objectID].rotation;
+	glm::quat targetRotation = glm::rotate(currentRotation, radians, POSITIVE_Y_AXIS);
+	std::function<void(float)> callback = [objectID, currentRotation, targetRotation, timeInv, this](float dt)
+		{
+			gameObjectOrientationsM[objectID].rotation = glm::slerp(currentRotation, targetRotation, dt * timeInv);
+			glm::mat4 currentMatrix = gameObjectOrientationsM[objectID].getTransformationMatrix();
+			pObjectManagerM->updateObjectDescriptor(objectID, &currentMatrix, currentFrameM);
+		};
+	timersM.addTimerCallback(objectID, timeInSeconds, callback);
 }
 
 void RehtiGraphics::forceGameObjectMove(int objectID, glm::vec3 location)
 {
-	if (!boundingBoxesM[ObjectType::GAMEOBJECT].contains(objectID))
-		return;
+	// Force quit any ongoing timer events
+	timersM.forceQuitCallback(objectID);
+	moveBoundingBox(objectID, ObjectType::GAMEOBJECT, location);
+	gameObjectOrientationsM[objectID].position = location;
 	glm::mat4 locationTransform = glm::translate(glm::mat4(1.f), location);
 	// Assume changes are made after draw call. hence why currentFrameM is used
 	pObjectManagerM->updateObjectDescriptor(objectID, &locationTransform, currentFrameM);
-	// move the bounding box as well
-	boundingBoxesM[ObjectType::GAMEOBJECT][objectID].min = location + GAMEOBJECT_MIN;
-	boundingBoxesM[ObjectType::GAMEOBJECT][objectID].max = location + GAMEOBJECT_MAX;
+}
+
+void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSeconds)
+{
+	float timeInv = 1.f / timeInSeconds;
+	glm::vec3 currentLocation = characterOrientationsM[playerID].characterOrientation.position;
+	glm::vec3 diff = (location - currentLocation);
+	glm::vec3 delta = diff * timeInv;
+	glm::vec3 dir = glm::normalize(diff);
+	characterOrientationsM[playerID].characterOrientation.rotation = glm::quatLookAt(dir, POSITIVE_Y_AXIS);
+	std::function<void(float)> callback = [playerID, delta, dir, this](float dt)
+		{
+			characterOrientationsM[playerID].characterOrientation.position += delta * dt;
+			moveBoundingBox(playerID, ObjectType::CHARACTER, characterOrientationsM[playerID].characterOrientation.position);
+			characterOrientationsM[playerID].advanceAnimation(dt);
+			glm::mat4 currentMatrix = characterOrientationsM[playerID].characterOrientation.getTransformationMatrix();
+			pObjectManagerM->updateCharacterDescriptor(playerID, &currentMatrix, characterOrientationsM[playerID].boneTransformations.data(), currentFrameM);
+			cameraM.setTargetAndCamera(characterOrientationsM[playerID].characterOrientation.position);
+		};
+	timersM.addTimerCallback(playerID, timeInSeconds, callback);
 }
 
 void RehtiGraphics::forcePlayerMove(int playerID, glm::vec3 location)
@@ -83,6 +135,25 @@ void RehtiGraphics::forcePlayerMove(int playerID, glm::vec3 location)
 	boundingBoxesM[ObjectType::GAMEOBJECT][playerID].max = location + GAMEOBJECT_MAX;
 
 	cameraM.setTargetAndCamera(location);
+}
+
+void RehtiGraphics::moveCharacter(int characterID, glm::vec3 location, float timeInSeconds)
+{
+	float timeInv = 1.f / timeInSeconds;
+	glm::vec3 currentLocation = characterOrientationsM[characterID].characterOrientation.position;
+	glm::vec3 diff = (location - currentLocation);
+	glm::vec3 delta = diff * timeInv;
+	glm::vec3 dir = glm::normalize(diff);
+	characterOrientationsM[characterID].characterOrientation.rotation = glm::quatLookAt(dir, POSITIVE_Y_AXIS);
+	std::function<void(float)> callback = [characterID, delta, dir, this](float dt)
+		{
+			characterOrientationsM[characterID].characterOrientation.position += delta * dt;
+			moveBoundingBox(characterID, ObjectType::CHARACTER, characterOrientationsM[characterID].characterOrientation.position);
+			characterOrientationsM[characterID].advanceAnimation(dt);
+			glm::mat4 currentMatrix = characterOrientationsM[characterID].characterOrientation.getTransformationMatrix();
+			pObjectManagerM->updateCharacterDescriptor(characterID, &currentMatrix, characterOrientationsM[characterID].boneTransformations.data(), currentFrameM);
+		};
+	timersM.addTimerCallback(characterID, timeInSeconds, callback);
 }
 
 void RehtiGraphics::forceGameObjectRotate(int objectID, float radians)
@@ -105,7 +176,7 @@ void RehtiGraphics::transformTestObject(int id, glm::mat4 transformation)
 	pObjectManagerM->updateTestObject(id, &transformation, currentFrameM);
 }
 
-void RehtiGraphics::addMapBoundingBox(const MapAABBData &mapAABBData)
+void RehtiGraphics::addMapBoundingBox(const MapAABBData& mapAABBData)
 {
 
 	std::vector<std::unique_ptr<AABB>> aabbList = createMapAABB(mapAABBData);
@@ -126,9 +197,9 @@ Hit RehtiGraphics::traceClick()
 	glm::vec3 rayOrigin = cameraM.getLocation();
 	glm::vec3 inverseDir = glm::vec3(1.f / rayDir.x, 1.f / rayDir.y, 1.f / rayDir.z);
 	float earliest = FLT_MAX;
-	for (const auto &boxPair : boundingBoxesM[ObjectType::CHARACTER])
+	for (const auto& boxPair : boundingBoxesM[ObjectType::CHARACTER])
 	{
-		const auto &box = boxPair.second;
+		const auto& box = boxPair.second;
 		AABB boxHit{};
 		float newT;
 		bool res = trace(rayOrigin, inverseDir, &box, boxHit, newT);
@@ -141,9 +212,9 @@ Hit RehtiGraphics::traceClick()
 			hit.objectType = ObjectType::CHARACTER;
 		}
 	}
-	for (const auto &boxPair : boundingBoxesM[ObjectType::GAMEOBJECT])
+	for (const auto& boxPair : boundingBoxesM[ObjectType::GAMEOBJECT])
 	{
-		const auto &box = boxPair.second;
+		const auto& box = boxPair.second;
 		AABB boxHit{};
 		float newT;
 
@@ -161,9 +232,9 @@ Hit RehtiGraphics::traceClick()
 	if (earliest < FLT_MAX)
 		return hit;
 	// map gets traced if no other hits were made
-	for (const auto &boxPair : boundingBoxesM[ObjectType::AREA])
+	for (const auto& boxPair : boundingBoxesM[ObjectType::AREA])
 	{
-		const auto &box = boxPair.second;
+		const auto& box = boxPair.second;
 		AABB boxHit{};
 		float newT;
 		// debugAABB(box, 0);
@@ -200,9 +271,9 @@ void RehtiGraphics::initWindow()
 	glfwSetFramebufferSizeCallback(pWindowM, RehtiGraphics::frameBufferResizeCallback);
 }
 
-void RehtiGraphics::frameBufferResizeCallback(GLFWwindow *window, int width, int height)
+void RehtiGraphics::frameBufferResizeCallback(GLFWwindow* window, int width, int height)
 {
-	auto app = reinterpret_cast<RehtiGraphics *>(glfwGetWindowUserPointer(window));
+	auto app = reinterpret_cast<RehtiGraphics*>(glfwGetWindowUserPointer(window));
 	app->setEngineFlags(EngineFlags::FRAME_BUFFER_RESIZED);
 }
 
@@ -226,7 +297,7 @@ void RehtiGraphics::initVulkan()
 	createSynchronization();
 }
 
-void RehtiGraphics::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo)
+void RehtiGraphics::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo)
 {
 	createInfo = {};
 	createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
@@ -264,7 +335,7 @@ void RehtiGraphics::pickPhysicalDevice()
 	vkEnumeratePhysicalDevices(instanceM, &devcount, devices.data()); // We have to do this twice, as it is how this function works. If the pointer is not null, it will try to fill out devcount devices.
 
 	// Currently picks the first suitable device
-	for (const auto &device : devices)
+	for (const auto& device : devices)
 	{
 		if (isDeviceSuitable(device))
 		{
@@ -284,7 +355,7 @@ void RehtiGraphics::createLogicalDevice()
 	QueueFamilyIndices indice = findQueueFamilies(gpuM);
 
 	std::vector<VkDeviceQueueCreateInfo> queueCreateInfos{};
-	std::set<uint32_t> uniqueQueueFamilies = {indice.graphicsFamily.value(), indice.presentFamily.value(), indice.transferFamily.value()};
+	std::set<uint32_t> uniqueQueueFamilies = { indice.graphicsFamily.value(), indice.presentFamily.value(), indice.transferFamily.value() };
 
 	float queuePriority = 1.0f;
 	for (uint32_t queueFamily : uniqueQueueFamilies)
@@ -375,7 +446,7 @@ void RehtiGraphics::createSwapChain()
 
 	// Onto conditional members
 	QueueFamilyIndices indices = findQueueFamilies(gpuM);
-	uint32_t queueFamilyIndices[] = {indices.graphicsFamily.value(), indices.presentFamily.value()};
+	uint32_t queueFamilyIndices[] = { indices.graphicsFamily.value(), indices.presentFamily.value() };
 
 	if (indices.graphicsFamily != indices.presentFamily)
 	{
@@ -504,7 +575,7 @@ void RehtiGraphics::createRenderPass()
 	depend.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT | VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT;
 	depend.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT | VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
 
-	std::array<VkAttachmentDescription, 2> attachments = {colorattachment, depthAttachment};
+	std::array<VkAttachmentDescription, 2> attachments = { colorattachment, depthAttachment };
 	VkRenderPassCreateInfo renderpassInfo{};
 	renderpassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
 	renderpassInfo.attachmentCount = static_cast<uint32_t>(attachments.size());
@@ -548,7 +619,7 @@ void RehtiGraphics::createGraphicsPipeline()
 		viewPort.maxDepth = 1.f;
 
 		VkRect2D scissor{};
-		scissor.offset = {0, 0};
+		scissor.offset = { 0, 0 };
 		scissor.extent = swapChainExtentM;
 
 		VkPipelineViewportStateCreateInfo viewportInfo{};
@@ -626,7 +697,7 @@ void RehtiGraphics::createGraphicsPipeline()
 		VkPipelineShaderStageCreateInfo vertInfo = ShaderManager::createVertexShaderInfo(logDeviceM, objectType);
 		VkPipelineShaderStageCreateInfo fragInfo = ShaderManager::createFragmentShaderInfo(logDeviceM, objectType);
 
-		VkPipelineShaderStageCreateInfo stages[2] = {vertInfo, fragInfo};
+		VkPipelineShaderStageCreateInfo stages[2] = { vertInfo, fragInfo };
 
 		VkGraphicsPipelineCreateInfo pipelineInfo{};
 		pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
@@ -660,7 +731,7 @@ void RehtiGraphics::createFramebuffers()
 
 	for (size_t i = 0u; i < swapChainImageViewsM.size(); i++)
 	{
-		std::array<VkImageView, 2> attachments = {swapChainImageViewsM[i], depthImageViewM};
+		std::array<VkImageView, 2> attachments = { swapChainImageViewsM[i], depthImageViewM };
 
 		VkFramebufferCreateInfo frameInfo{};
 		frameInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
@@ -716,13 +787,13 @@ void RehtiGraphics::recordCommandBuffer(VkCommandBuffer cmdBuffer, uint32_t imag
 	renderInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
 	renderInfo.renderPass = renderPassM;
 	renderInfo.framebuffer = swapChainFramebuffersM[imageIndex];
-	renderInfo.renderArea.offset = {0, 0};
+	renderInfo.renderArea.offset = { 0, 0 };
 	renderInfo.renderArea.extent = swapChainExtentM;
 
 	std::array<VkClearValue, 2> clearValues{};
 
-	clearValues[0].color = {{0.f, 0.f, 0.f, 1.f}};
-	clearValues[1].depthStencil = {1.f, 0};
+	clearValues[0].color = { {0.f, 0.f, 0.f, 1.f} };
+	clearValues[1].depthStencil = { 1.f, 0 };
 
 	renderInfo.clearValueCount = static_cast<uint32_t>(clearValues.size());
 	renderInfo.pClearValues = clearValues.data();
@@ -745,7 +816,7 @@ void RehtiGraphics::recordCommandBuffer(VkCommandBuffer cmdBuffer, uint32_t imag
 			VkBuffer indexBuffer = obj.indexBuffer;
 			VkDescriptorSet descSet = obj.descriptorSet;
 
-			VkDeviceSize offsets[] = {0};
+			VkDeviceSize offsets[] = { 0 };
 			vkCmdBindVertexBuffers(cmdBuffer, 0, 1, &vertexBuffer, offsets);
 			vkCmdBindIndexBuffer(cmdBuffer, indexBuffer, 0, VK_INDEX_TYPE_UINT32);
 			vkCmdBindDescriptorSets(cmdBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayoutsM[objectType], 0, 1, &descSet, 0, nullptr);
@@ -789,8 +860,8 @@ void RehtiGraphics::drawFrame()
 	VkResult res = vkAcquireNextImageKHR(logDeviceM, swapChainM, UINT64_MAX, imagesReadyM[currentFrameM], VK_NULL_HANDLE, &imageIndex);
 
 	if (res == VK_ERROR_OUT_OF_DATE_KHR ||
-			res == VK_SUBOPTIMAL_KHR ||
-			engineFlagsM & EngineFlags::FRAME_BUFFER_RESIZED)
+		res == VK_SUBOPTIMAL_KHR ||
+		engineFlagsM & EngineFlags::FRAME_BUFFER_RESIZED)
 	{
 		engineFlagsM = EngineFlags(engineFlagsM & ~EngineFlags::FRAME_BUFFER_RESIZED);
 		recreateSwapChain();
@@ -809,12 +880,12 @@ void RehtiGraphics::drawFrame()
 	VkSubmitInfo submitInfo{};
 	submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 
-	VkSemaphore waitSemaphores[] = {imagesReadyM[currentFrameM]};
-	VkSemaphore signalSemaphores[] = {rendersFinishedM[currentFrameM]};
+	VkSemaphore waitSemaphores[] = { imagesReadyM[currentFrameM] };
+	VkSemaphore signalSemaphores[] = { rendersFinishedM[currentFrameM] };
 
-	VkSwapchainKHR swapChains[] = {swapChainM};
+	VkSwapchainKHR swapChains[] = { swapChainM };
 
-	VkPipelineStageFlags waitStages[] = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
+	VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
 
 	submitInfo.waitSemaphoreCount = 1;
 	submitInfo.pWaitSemaphores = waitSemaphores;
@@ -850,7 +921,7 @@ void RehtiGraphics::mainLoop()
 	float frameCount = 0.f;
 	auto applicationStart = std::chrono::high_resolution_clock::now();
 	glm::mat4 translation = glm::translate(glm::mat4(1.f), 1.5f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS));
-
+	// moveGameObject(0, 5.f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS), 5);
 	while (!glfwWindowShouldClose(pWindowM))
 	{
 		auto start = std::chrono::high_resolution_clock::now();
@@ -860,7 +931,7 @@ void RehtiGraphics::mainLoop()
 		auto mus = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
 		statsM.frameTime = static_cast<uint64_t>(mus);
 		statsM.ftPerSec = mus * invMicro;
-		frameCount += static_cast<float>(statsM.ftPerSec);
+		timersM.elapseTime(static_cast<float>(statsM.ftPerSec));
 	}
 
 	vkDeviceWaitIdle(logDeviceM);
@@ -960,7 +1031,7 @@ void RehtiGraphics::createInstance()
 		instanceInfo.ppEnabledLayerNames = kValidationlayersM.data();
 
 		populateDebugMessengerCreateInfo(debugCreateInfo);
-		instanceInfo.pNext = (VkDebugUtilsMessengerCreateInfoEXT *)&debugCreateInfo;
+		instanceInfo.pNext = (VkDebugUtilsMessengerCreateInfoEXT*)&debugCreateInfo;
 	}
 	else
 	{
@@ -1014,9 +1085,9 @@ void RehtiGraphics::createTextureSampler()
 
 void RehtiGraphics::createDepthResources()
 {
-	depthFormatM = findSupportedFormat({VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT},
-																		 VK_IMAGE_TILING_OPTIMAL,
-																		 VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
+	depthFormatM = findSupportedFormat({ VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT },
+		VK_IMAGE_TILING_OPTIMAL,
+		VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
 	depthImageM = pObjectManagerM->createDepthImage(swapChainExtentM.width, swapChainExtentM.height, depthFormatM);
 	depthImageViewM = pObjectManagerM->createImageView(depthImageM.image, depthFormatM, VK_IMAGE_ASPECT_DEPTH_BIT);
 	pObjectManagerM->transitionDepthImageLayout(depthImageM, depthFormatM, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
@@ -1032,7 +1103,7 @@ bool RehtiGraphics::checkDeviceExtensionSupport(VkPhysicalDevice device)
 
 	std::set<std::string> requiredExtensions(kDeviceExtensionsM.begin(), kDeviceExtensionsM.end());
 
-	for (const auto &property : properties)
+	for (const auto& property : properties)
 	{
 		requiredExtensions.erase(property.extensionName); // tick off the required extensions
 	}
@@ -1048,10 +1119,10 @@ bool RehtiGraphics::checkValidationLayerSupport()
 	std::vector<VkLayerProperties> availableLayers(layerCount);
 	vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
 
-	for (const char *layerName : kValidationlayersM)
+	for (const char* layerName : kValidationlayersM)
 	{
 		bool layerFound = false;
-		for (const auto &layerProperties : availableLayers)
+		for (const auto& layerProperties : availableLayers)
 		{
 			if (strcmp(layerName, layerProperties.layerName) == 0)
 			{
@@ -1095,11 +1166,11 @@ bool RehtiGraphics::isDeviceSuitable(VkPhysicalDevice device)
 	}
 
 	return indice.isComplete() &&
-				 requiredExtensionSupport &&
-				 swapChainOk && feats.samplerAnisotropy; // Suitable, if it is has a graphics queueFamily, extensions, swapchain support, and anisotropic filtering
+		requiredExtensionSupport &&
+		swapChainOk && feats.samplerAnisotropy; // Suitable, if it is has a graphics queueFamily, extensions, swapchain support, and anisotropic filtering
 }
 
-bool RehtiGraphics::bbHit(const glm::vec3 min, const glm::vec3 max, const glm::vec3 rayOrig, const glm::vec3 dirInv, float &t)
+bool RehtiGraphics::bbHit(const glm::vec3 min, const glm::vec3 max, const glm::vec3 rayOrig, const glm::vec3 dirInv, float& t)
 {
 	float original = t;
 	float tx1 = (min.x - rayOrig.x) * dirInv.x;
@@ -1127,7 +1198,7 @@ bool RehtiGraphics::bbHit(const glm::vec3 min, const glm::vec3 max, const glm::v
 	return tmin <= tmax;
 }
 
-bool RehtiGraphics::trace(const glm::vec3 orig, const glm::vec3 dirInv, const AABB *pBoxNode, AABB &boxHit, float &t)
+bool RehtiGraphics::trace(const glm::vec3 orig, const glm::vec3 dirInv, const AABB* pBoxNode, AABB& boxHit, float& t)
 {
 	float hitT = FLT_MAX;
 	if (bbHit(pBoxNode->min, pBoxNode->max, orig, dirInv, hitT))
@@ -1199,7 +1270,7 @@ QueueFamilyIndices RehtiGraphics::findQueueFamilies(VkPhysicalDevice device)
 
 		// Find a transfer queue that is not a graphics queue (Otherwise it will be the same.)
 		if ((queueFamilies[i].queueFlags & VK_QUEUE_TRANSFER_BIT) &&
-				!(queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT))
+			!(queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT))
 		{
 			indexes.transferFamily = i;
 		}
@@ -1244,13 +1315,13 @@ SwapChainSupportDetails RehtiGraphics::querySwapChainSupport(VkPhysicalDevice de
 	return details;
 }
 
-std::vector<const char *> RehtiGraphics::getRequiredExtensions()
+std::vector<const char*> RehtiGraphics::getRequiredExtensions()
 {
 	uint32_t extCount;
-	const char **glfwExtensions;
+	const char** glfwExtensions;
 	glfwExtensions = glfwGetRequiredInstanceExtensions(&extCount);
 
-	std::vector<const char *> extensions(glfwExtensions, glfwExtensions + extCount);
+	std::vector<const char*> extensions(glfwExtensions, glfwExtensions + extCount);
 
 	if (validationLayersEnabledM)
 	{
@@ -1262,7 +1333,7 @@ std::vector<const char *> RehtiGraphics::getRequiredExtensions()
 
 VkSurfaceFormatKHR RehtiGraphics::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> availableFormats)
 {
-	for (const auto &format : availableFormats)
+	for (const auto& format : availableFormats)
 	{
 		if (format.format == VK_FORMAT_B8G8R8A8_SRGB && format.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
 			return format;
@@ -1273,7 +1344,7 @@ VkSurfaceFormatKHR RehtiGraphics::chooseSwapSurfaceFormat(const std::vector<VkSu
 
 VkPresentModeKHR RehtiGraphics::chooseSwapPresentMode(const std::vector<VkPresentModeKHR> availableModes)
 {
-	for (const auto &presentmode : availableModes)
+	for (const auto& presentmode : availableModes)
 	{
 		if (presentmode == VK_PRESENT_MODE_MAILBOX_KHR)
 			return presentmode;
@@ -1282,7 +1353,7 @@ VkPresentModeKHR RehtiGraphics::chooseSwapPresentMode(const std::vector<VkPresen
 	return VK_PRESENT_MODE_FIFO_KHR;
 }
 
-VkExtent2D RehtiGraphics::chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities)
+VkExtent2D RehtiGraphics::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities)
 {
 	if (capabilities.currentExtent.width != UINT32_MAX)
 	{ // not the special value so the current window size will do?
@@ -1295,7 +1366,7 @@ VkExtent2D RehtiGraphics::chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capab
 
 		VkExtent2D actual = {
 				static_cast<uint32_t>(width),
-				static_cast<uint32_t>(height)};
+				static_cast<uint32_t>(height) };
 
 		actual.width = std::clamp(actual.width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width);
 		actual.height = std::clamp(actual.height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height);
@@ -1312,7 +1383,7 @@ VkPushConstantRange RehtiGraphics::getCameraRange()
 	return cameraRange;
 }
 
-VkFormat RehtiGraphics::findSupportedFormat(const std::vector<VkFormat> &candidates, VkImageTiling tiling, VkFormatFeatureFlags features)
+VkFormat RehtiGraphics::findSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features)
 {
 	for (VkFormat format : candidates)
 	{
@@ -1336,6 +1407,16 @@ size_t RehtiGraphics::getNextFrame()
 	return (currentFrameM + 1) % kConcurrentFramesM;
 }
 
+void RehtiGraphics::moveBoundingBox(int objectID, ObjectType objType, glm::vec3 location)
+{
+	if (!boundingBoxesM[objType].contains(objectID))
+		return;
+	// move the bounding box as well
+	// TODO change the offsets to be queried from somewhere.
+	boundingBoxesM[objType][objectID].min = location + GAMEOBJECT_MIN;
+	boundingBoxesM[objType][objectID].max = location + GAMEOBJECT_MAX;
+}
+
 void RehtiGraphics::debugMatrix(glm::mat4 matrix)
 {
 	std::cout << "Matrix values are " << std::endl;
@@ -1345,7 +1426,7 @@ void RehtiGraphics::debugMatrix(glm::mat4 matrix)
 	}
 }
 
-void RehtiGraphics::debugAABB(const AABB &aabb, int level)
+void RehtiGraphics::debugAABB(const AABB& aabb, int level)
 {
 	for (int i = 0; i < level; i++)
 	{ // indent
@@ -1354,28 +1435,28 @@ void RehtiGraphics::debugAABB(const AABB &aabb, int level)
 	if (aabb.isLeaf())
 	{
 		std::cout << "Leaf AABB values are \n"
-							<< "Level: " << level << "\n"
-							<< "Min: " << aabb.min.x << " " << aabb.min.y << " " << aabb.min.z << "\n"
-							<< "Max: " << aabb.max.x << " " << aabb.max.y << " " << aabb.max.z << std::endl;
+			<< "Level: " << level << "\n"
+			<< "Min: " << aabb.min.x << " " << aabb.min.y << " " << aabb.min.z << "\n"
+			<< "Max: " << aabb.max.x << " " << aabb.max.y << " " << aabb.max.z << std::endl;
 		return;
 	}
 	else
 	{
 		std::cout << "AABB values are \n"
-							<< "Level: " << level << "\n"
-							<< "Min: " << aabb.min.x << " " << aabb.min.y << " " << aabb.min.z << "\n"
-							<< "Max: " << aabb.max.x << " " << aabb.max.y << " " << aabb.max.z << std::endl;
+			<< "Level: " << level << "\n"
+			<< "Min: " << aabb.min.x << " " << aabb.min.y << " " << aabb.min.z << "\n"
+			<< "Max: " << aabb.max.x << " " << aabb.max.y << " " << aabb.max.z << std::endl;
 	}
 	debugAABB(*aabb.pLeft.get(), level + 1);
 	debugAABB(*aabb.pRight.get(), level + 1);
 }
 
-void RehtiGraphics::fillAABB(std::vector<Vertex> vertices, AABB &box)
+void RehtiGraphics::fillAABB(std::vector<Vertex> vertices, AABB& box)
 {
 	glm::vec3 min = glm::vec3(FLT_MAX);
 	glm::vec3 max = glm::vec3(-FLT_MAX);
 
-	for (const Vertex &vert : vertices)
+	for (const Vertex& vert : vertices)
 	{
 		min = glm::min(min, vert.pos);
 		max = glm::max(max, vert.pos);
@@ -1385,16 +1466,16 @@ void RehtiGraphics::fillAABB(std::vector<Vertex> vertices, AABB &box)
 }
 
 VKAPI_ATTR VkBool32 VKAPI_CALL RehtiGraphics::debugCallback(
-		VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
-		VkDebugUtilsMessageTypeFlagsEXT messageType,
-		const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
-		void *pUserData)
+	VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
+	VkDebugUtilsMessageTypeFlagsEXT messageType,
+	const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
+	void* pUserData)
 {
 	std::cerr << "Validation layer: " << pCallbackData->pMessage << std::endl;
 	return VK_FALSE;
 }
 
-VkResult RehtiGraphics::CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT *pCreateInfo, const VkAllocationCallbacks *pAllocator, VkDebugUtilsMessengerEXT *pDebugMessenger)
+VkResult RehtiGraphics::CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger)
 {
 	auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
 	if (func != nullptr)
@@ -1407,7 +1488,7 @@ VkResult RehtiGraphics::CreateDebugUtilsMessengerEXT(VkInstance instance, const 
 	}
 }
 
-void RehtiGraphics::DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks *pAllocator)
+void RehtiGraphics::DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator)
 {
 	auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
 	if (func != nullptr)
@@ -1416,12 +1497,12 @@ void RehtiGraphics::DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUt
 	}
 }
 
-void RehtiGraphics::addMouseClickCallback(std::function<void(const Hit &)> callback)
+void RehtiGraphics::addMouseClickCallback(std::function<void(const Hit&)> callback)
 {
 	this->mouseClickCallbackM = callback;
 	glfwSetWindowUserPointer(this->pWindowM, this);
-	glfwSetMouseButtonCallback(this->pWindowM, [](GLFWwindow *window, int button, int action, int mods)
-														 {
+	glfwSetMouseButtonCallback(this->pWindowM, [](GLFWwindow* window, int button, int action, int mods)
+		{
 			if ((button == GLFW_MOUSE_BUTTON_LEFT || button == GLFW_MOUSE_BUTTON_RIGHT) && action == GLFW_PRESS)
 			{
 				RehtiGraphics* pGraphics = reinterpret_cast<RehtiGraphics*>(glfwGetWindowUserPointer(window));
@@ -1435,5 +1516,6 @@ void RehtiGraphics::addMouseClickCallback(std::function<void(const Hit &)> callb
 			else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_RELEASE)
 			{
 				Camera::canMove = false;
-			} });
+			}
+		});
 }

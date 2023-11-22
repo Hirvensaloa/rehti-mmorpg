@@ -134,7 +134,7 @@ void Client::processMessages()
             {
                 const GameStateMessage& gameStateMsg = MessageApi::parseGameState(msg.getBody());
 
-                const auto objAsset = assetCacheM.getCharacterAssetData()["ukko"];
+                const auto objAsset = assetCacheM.getCharacterAssetDataById("ukko");
                 pGraphLibM->addGameObject(gameStateMsg.currentPlayer.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
                 pGraphLibM->forcePlayerMove(gameStateMsg.currentPlayer.entityId, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
                 std::cout << "player"
@@ -146,20 +146,16 @@ void Client::processMessages()
 
                     std::cout << "entity"
                               << " " << entity.entityId << " " << entity.x << " " << entity.y << " " << entity.z << std::endl;
-                    const auto objAsset = assetCacheM.getCharacterAssetData()["goblin"];
+                    const auto objAsset = assetCacheM.getCharacterAssetDataById("goblin");
                     pGraphLibM->addGameObject(entity.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
                     pGraphLibM->forceGameObjectMove(entity.entityId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
                 }
                 for (const auto& object : gameStateMsg.objects)
                 {
-                    const std::string idStr = std::to_string(object.id);
-                    if (assetCacheM.getObjectAssetData().contains(idStr))
-                    {
-                        std::cout << "object"
-                                  << " " << object.id << " " << object.x << " " << object.y << " " << object.z << std::endl;
-                        const auto objAsset = assetCacheM.getObjectAssetData()[idStr];
-                        pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
-                    }
+                    std::cout << "object"
+                              << " " << object.id << " " << object.x << " " << object.y << " " << object.z << std::endl;
+                    const auto objAsset = assetCacheM.getObjectAssetDataById(object.id);
+                    pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
                 }
             }
         }

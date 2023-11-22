@@ -1,9 +1,45 @@
 #ifdef CPP_INCLUDE_SHADERS
 std::string characterVertexShaderSource = R"(
 #version 450
+// in
+layout(location = 0) in vec3 position;
+layout(location = 1) in vec3 normal;
+layout(location = 2) in uvec4 boneIndices;
+layout(location = 3) in vec4 boneWeights;
+layout(location = 4) in vec2 texCoords;
+// out
+layout(location = 0) out vec2 fragTexCoords;
+layout(location = 1) out vec3 fragNormal;
+// uniforms
+layout(push_constant) uniform SingleMatrix
+{ 
+	mat4 viewmat;
+} cameraData;
+
+layout(set = 0, binding = 0) uniform SingleMatrix2
+{
+	mat4 modelmat;
+} modelData;
+
+layout(set = 0, binding = 1) uniform BoneUniform
+{
+	mat4 boneMatrices[50];
+} boneData;
 
 void main() {
-    gl_Position = vec4(1.f); // TODO
+
+	mat4 boneMatrix = boneData.boneMatrices[boneIndices[0]] * boneWeights[0];
+	boneMatrix += boneData.boneMatrices[boneIndices[1]] * boneWeights[1];
+	boneMatrix += boneData.boneMatrices[boneIndices[2]] * boneWeights[2];
+	boneMatrix += boneData.boneMatrices[boneIndices[3]] * boneWeights[3];
+	vec4 modelvertex = vec4(position, 1.f);
+	// Combine both animation matrix and model matrix
+	mat4 localToWorld = modelData.modelmat * boneMatrix;
+	// vec4 posed = boneMatrix * modelvertex;
+    gl_Position = cameraData.viewmat * localToWorld * modelvertex;
+
+	fragNormal = vec3(transpose(inverse(localToWorld)) * vec4(normal, 0.f) );
+	fragTexCoords = texCoords;
 }
 
 )";

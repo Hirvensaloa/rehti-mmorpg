@@ -44,6 +44,8 @@ set(GRAPHICS_SOURCES
 	GraphicsTypes.cpp
 	AABB.hpp
 	AABB.cpp
+	TimerCallbackSystem.hpp
+	TimerCallbackSystem.cpp
 	shaders/testShader.vert
 	shaders/testShader.frag
 	shaders/objectShader.vert

@@ -38,11 +38,17 @@ public:
 	void addTransferQueueFamilyAccess(const uint32_t transferQueueFamily, VkQueue transferQueue);
 
 	/**
-	 * @brief Todo create interface for characters as well.
-	 * @param id
-	 * @return
+	 * @brief Adds a character to the buffer manager with the given parameters.
+	 * @param characterID is the id of the character
+	 * @param vertices of the character
+	 * @param indices of the character
+	 * @param texture of the character
+	 * @param transformation to be applied to the character
+	 * @param bindPose is the bind pose bone data of the character
+	 * @param imgSampler is the sampler for the texture of the character
+	 * @return boolean indicating success of the operation
 	*/
-	bool addCharacter(int id);
+	bool addCharacter(int characterID, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, glm::mat4 bindPose[MAX_BONES], VkSampler imgSampler);
 
 	/**
 	 * @brief Adds a game object to the buffer manager
@@ -84,13 +90,22 @@ public:
 	/// <param name="frame"></param>
 	void updateTestObject(int id, const void* srcData, uint32_t frame);
 
-	/// <summary>
-	/// updates game object transformation
-	/// </summary>
-	/// <param name="id"></param>
-	/// <param name="srcData"></param>
-	/// <param name="frame"></param>
+	/**
+	 * @brief Updates the object descriptor with the given data.
+	 * @param id of the object to update
+	 * @param srcData is the data to be copied to the buffer (4x4 matrix)
+	 * @param frame is the frame of the update
+	*/
 	void updateObjectDescriptor(int id, const void* srcData, uint32_t frame);
+
+	/**
+	 * @brief
+	 * @param id of the character
+	 * @param transformSrcData is the transformation data to be copied to the buffer (4x4 matrix)
+	 * @param boneSrcData is the bone data to be copied (list of matrixes)
+	 * @param frame is the frame of the update
+	*/
+	void updateCharacterDescriptor(int id, const void* transformSrcData, const void* boneSrcData, uint32_t frame);
 
 	/// <summary>
 	/// Creates a depth image

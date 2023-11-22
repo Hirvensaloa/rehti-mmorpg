@@ -28,8 +28,8 @@ COPY server/conanfile.txt ./server/conanfile.txt
 RUN cd server && conan install . --output-folder=build --build=missing -s build_type=Debug -s compiler.cppstd=20
 
 COPY third_party/rapidjson/include/ ./third_party/rapidjson/include/
-
-COPY third_party/assimp ./third_party/assimp
+COPY third_party/assimp ./third_party/assimp/
+COPY third_party/bcrypt ./third_party/bcrypt/
 
 
 COPY rehtiLib/utils/ ./rehtiLib/utils

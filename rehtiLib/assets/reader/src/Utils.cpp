@@ -3,6 +3,9 @@
 #include <vector>
 #include <sstream>
 
+#include "Utils.hpp"
+#include "../../Config.hpp"
+
 void readMatrixFromFile(std::vector<std::vector<std::string>> &matrix, std::string filepath)
 {
   std::ifstream file(filepath);

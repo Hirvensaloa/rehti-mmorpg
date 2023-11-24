@@ -5,6 +5,7 @@
 #include "Camera.hpp"
 #include "GraphicsObjectManager.hpp"
 #include "AABB.hpp"
+#include "TimerCallbackSystem.hpp"
 
 #include <algorithm>
 #include <iostream>
@@ -13,6 +14,8 @@
 #include <memory>
 #include <chrono>
 #include <map>
+
+// Forward declarations
 
 enum EngineFlags
 {
@@ -91,14 +94,56 @@ public:
 	 */
 	bool addGameObject(int objectID, std::vector<Vertex> vertices, std::vector<uint32_t> indices, ImageData texture, glm::vec3 location = glm::vec3(0.f));
 
+	/**
+	 * @brief Moves a game object to the given location in the given time.
+	 * @param objectID of the object to move.
+	 * @param location to move the object to.
+	 * @param timeInSeconds that it takes to move the object.
+	*/
 	void moveGameObject(int objectID, glm::vec3 location, float timeInSeconds);
-	void movePlayer(int playerID, glm::vec3 location, float timeInSeconds);
+
+	/**
+	 * @brief Rotates a game object by given radian angle in the given time frame.
+	 * @param objectID of the object to rotate.
+	 * @param radians to rotate the object by.
+	 * @param timeInSeconds that it takes to rotate the object.
+	*/
 	void rotateGameObject(int objectID, float radians, float timeInSeconds);
 
+	/**
+	 * @brief Forces the game object to move to the given location, quitting any remaining movement callbacks.
+	 * @param objectID of the object to move.
+	 * @param location to move the object to.
+	*/
 	void forceGameObjectMove(int objectID, glm::vec3 location);
+
+	/**
+	 * @brief Forces game object rotation to the given angle, quitting any remaining rotation callbacks.
+	 * @param objectID of the object to rotate.
+	 * @param radians to rotate the object by.
+	*/
+	void forceGameObjectRotate(int objectID, float radians);
+
+
+	/**
+	 * @brief Moves the player to the given location in the given time.
+		Also automatically rotates the player to face the given location and sets the animation.
+		Player movement differs from character movement in a sense that the camera is moved as well.
+	 * @param playerID of the player to move.
+	 * @param location to move the player to.
+	 * @param timeInSeconds it takes for the player to move to that location.
+	*/
+	void movePlayer(int playerID, glm::vec3 location, float timeInSeconds);
+
+	/**
+	 * @brief Forces player to move to the location given, cancelling any remaining movement callbacks and animations.
+	 * @param playerID of the player to move.
+	 * @param location to move the player to.
+	*/
 	void forcePlayerMove(int playerID, glm::vec3 location);
 
-	void forceGameObjectRotate(int objectID, float radians);
+	void moveCharacter(int characterID, glm::vec3 location, float timeInSeconds);
+
 
 	/**
 	 * @brief Adds an area to the game.
@@ -118,7 +163,7 @@ public:
 	 * @brief Adds a bounding box for the world map
 	 * @param mapAABBData see mapAABBData
 	 */
-	void addMapBoundingBox(const MapAABBData &mapAABBData);
+	void addMapBoundingBox(const MapAABBData& mapAABBData);
 
 	/**
 	 * @brief Traces a ray against all bounding boxes, starting with objects, then characters and lastly the map.
@@ -136,7 +181,7 @@ public:
 	 * @brief Adds a mouse click callback
 	 * @param callback function after a mouse click has happened
 	 */
-	void addMouseClickCallback(std::function<void(const Hit &)> callback);
+	void addMouseClickCallback(std::function<void(const Hit&)> callback);
 
 private:
 	// Functions
@@ -154,7 +199,7 @@ private:
 	/// <summary>
 	/// populates debug messenger info.
 	/// </summary>
-	void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo);
+	void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
 
 	/// <summary>
 	/// Setups the debug messenger.
@@ -292,7 +337,7 @@ private:
 	 * @param t is the distance to the hit point.
 	 * @return true if hit, false otherwise.
 	 */
-	bool bbHit(const glm::vec3 min, const glm::vec3 max, const glm::vec3 rayOrig, const glm::vec3 dirInv, float &t);
+	bool bbHit(const glm::vec3 min, const glm::vec3 max, const glm::vec3 rayOrig, const glm::vec3 dirInv, float& t);
 
 	/**
 	 * @brief Traces a given ray against a given bounding box.
@@ -302,7 +347,7 @@ private:
 	 * @param boxHit is the bounding box that was hit.
 	 * @return the distance to the hit point.
 	 */
-	bool trace(const glm::vec3 orig, const glm::vec3 dirInv, const AABB *pBoxNode, AABB &boxHit, float &t);
+	bool trace(const glm::vec3 orig, const glm::vec3 dirInv, const AABB* pBoxNode, AABB& boxHit, float& t);
 
 	/// <summary>
 	/// Rates a given GPU
@@ -329,7 +374,7 @@ private:
 	/// Looks for the required extensions set by the GLFW library.
 	/// </summary>
 	/// <returns>The extensions.</returns>
-	std::vector<const char *> getRequiredExtensions();
+	std::vector<const char*> getRequiredExtensions();
 
 	/// <summary>
 	/// Chooses a suitable surface format.
@@ -344,7 +389,7 @@ private:
 	/// <param name="availableModes">List of available modes.</param>
 	/// <returns>The chosen presentation format.</returns>
 	VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> availableModes);
-	VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities);
+	VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
 	/// <summary>
 	/// Returns push constant range object for the camera matrix.
@@ -359,13 +404,21 @@ private:
 	 * @param features
 	 * @return
 	 */
-	VkFormat findSupportedFormat(const std::vector<VkFormat> &candidates, VkImageTiling tiling, VkFormatFeatureFlags features);
+	VkFormat findSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features);
 
 	/// <summary>
 	/// Returns the index of the next frame to be drawn.
 	/// </summary>
 	/// <returns></returns>
 	size_t getNextFrame();
+
+	/**
+	 * @brief Helper function to move a bounding box.
+	 * @param objectID of the object
+	 * @param objType of the object
+	 * @param location that the object is to be moved to
+	*/
+	void moveBoundingBox(int objectID, ObjectType objType, glm::vec3 location);
 
 	/// <summary>
 	/// Prints out the given matrix.
@@ -377,17 +430,17 @@ private:
 	 * @brief Prints out the given aabb
 	 * @param aabb
 	 */
-	void debugAABB(const AABB &aabb, int level);
+	void debugAABB(const AABB& aabb, int level);
 
 	/**
 	 * @brief Fills the min and max of the given bounding box.
 	 * @param vertices to create a bounding box for.
 	 * @param box to fill.
 	 */
-	void fillAABB(std::vector<Vertex> vertices, AABB &box);
+	void fillAABB(std::vector<Vertex> vertices, AABB& box);
 
 	// Private members:
-	GLFWwindow *pWindowM;
+	GLFWwindow* pWindowM;
 	VkInstance instanceM;
 	VkDebugUtilsMessengerEXT debugMessengerM;
 	VkSurfaceKHR surfaceM;
@@ -439,7 +492,7 @@ private:
 	std::vector<VkFence> frameFencesM;
 
 	// Callbacks
-	std::function<void(const Hit &)> mouseClickCallbackM;
+	std::function<void(const Hit&)> mouseClickCallbackM;
 
 	// Other variables
 	uint32_t widthM;
@@ -449,34 +502,41 @@ private:
 	EngineStatistics statsM;
 	// Bounding box lists in an array. Each index corresponds to an object type.
 	std::array<std::map<int, AABB>, OBJECT_TYPE_COUNT> boundingBoxesM;
+	// Location and animation storage
+	std::map<int, GfxOrientation> gameObjectOrientationsM;
+	std::map<int, CharacterData> characterOrientationsM;
+
+	// timer callback system
+	TimerCallbackSystem timersM;
+
 
 	const int kConcurrentFramesM = 2;
 	size_t currentFrameM = 0;
 
 	bool validationLayersEnabledM = false;
 
-	const std::vector<const char *> kValidationlayersM = {
-			"VK_LAYER_KHRONOS_validation"};
+	const std::vector<const char*> kValidationlayersM = {
+			"VK_LAYER_KHRONOS_validation" };
 
-	const std::vector<const char *> kDeviceExtensionsM = {
-			VK_KHR_SWAPCHAIN_EXTENSION_NAME};
+	const std::vector<const char*> kDeviceExtensionsM = {
+			VK_KHR_SWAPCHAIN_EXTENSION_NAME };
 
 	// Debugging functions
 	static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
-			VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
-			VkDebugUtilsMessageTypeFlagsEXT messageType,
-			const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
-			void *pUserData);
+		VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
+		VkDebugUtilsMessageTypeFlagsEXT messageType,
+		const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
+		void* pUserData);
 
 	static VkResult CreateDebugUtilsMessengerEXT(
-			VkInstance instance,
-			const VkDebugUtilsMessengerCreateInfoEXT *pCreateInfo,
-			const VkAllocationCallbacks *pAllocator,
-			VkDebugUtilsMessengerEXT *pDebugMessenger);
+		VkInstance instance,
+		const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
+		const VkAllocationCallbacks* pAllocator,
+		VkDebugUtilsMessengerEXT* pDebugMessenger);
 
-	static void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks *pAllocator);
+	static void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
 
-	static void frameBufferResizeCallback(GLFWwindow *window, int width, int height);
+	static void frameBufferResizeCallback(GLFWwindow* window, int width, int height);
 
 #ifdef NDEBUG
 	const bool enableValidationLayers = false;

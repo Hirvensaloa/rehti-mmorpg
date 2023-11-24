@@ -119,12 +119,22 @@ boost::asio::awaitable<void> Client::interactWithObject(const int& objectId)
 
 boost::asio::awaitable<void> Client::useItem(const int itemInstanceId)
 {
-    std::cout << "useItem called, id: " << itemInstanceId << std::endl;
     if (connectionM->isConnected())
     {
         UseItemMessage msg;
         msg.itemId = itemInstanceId;
         co_await connectionM->send(MessageApi::createUseItem(msg));
+    }
+    co_return;
+}
+
+boost::asio::awaitable<void> Client::unequipItem(const int itemInstanceId)
+{
+    if (connectionM->isConnected())
+    {
+        UnequipMessage msg;
+        msg.itemId = itemInstanceId;
+        co_await connectionM->send(MessageApi::createUnequip(msg));
     }
     co_return;
 }
@@ -156,14 +166,9 @@ void Client::processMessages()
 
                 for (const auto& entity : gameStateMsg.entities)
                 {
-                    // Ignore the player itself
                     if (entity.entityId == gameStateMsg.currentPlayer.entityId)
                     {
-                        for (auto item : entity.equipment)
-                        {
-                            std::cout << "Equipped item name: " << item.name << std::endl;
-                        }
-                        continue;
+                        pGraphLibM->getGui()->setEquipment(entity.equipment);
                     }
 
                     // std::cout << "entity"
@@ -280,6 +285,9 @@ void Client::startGraphics()
 
     pGraphLibM->getGui()->addInventoryItemClickCallback([this](const int itemInstanceId)
                                                         { boost::asio::co_spawn(ioContextM, useItem(itemInstanceId), boost::asio::detached); });
+
+    pGraphLibM->getGui()->addEquipmentItemClickCallback([this](const int itemInstanceId)
+                                                        { boost::asio::co_spawn(ioContextM, unequipItem(itemInstanceId), boost::asio::detached); });
 
     std::cout << "Graphics library ready" << std::endl;
 

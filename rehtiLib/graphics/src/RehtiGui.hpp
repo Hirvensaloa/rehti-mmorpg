@@ -13,63 +13,106 @@ class GraphicsObjectManager;
 
 enum UiTab
 {
-	Inventory,
-	Equipment,
-	Skills
+    Inventory,
+    Equipment,
+    Skills
 };
 
+/**
+ * @brief Class that manages the GUI window
+ */
 class RehtiGui
 {
 
 public:
-	RehtiGui(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, GLFWwindow *pWindow, VkQueue graphicsQueue, VkDescriptorPool descPool, uint32_t imageCount, VkRenderPass renderPass, std::shared_ptr<GraphicsObjectManager> pGfxManager);
-	~RehtiGui();
+    RehtiGui(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, GLFWwindow* pWindow, VkQueue graphicsQueue, VkDescriptorPool descPool, uint32_t imageCount, VkRenderPass renderPass, std::shared_ptr<GraphicsObjectManager> pGfxManager);
+    ~RehtiGui();
 
-	void uploadFonts(VkCommandBuffer cmdBuffer);
-	void uploadEnded();
-	void newFrame();
+    void uploadFonts(VkCommandBuffer cmdBuffer);
+    void uploadEnded();
+    void newFrame();
 
-	// records ui primitives into the given command buffer.
-	void recordGuiData(VkCommandBuffer cmdBuff);
+    /**
+     * @brief Records ui primitives into the given command buffer
+     * @param cmdBuff
+     */
+    void recordGuiData(VkCommandBuffer cmdBuff);
 
-	// starts rendering ui primitives. Must be called at the top of draw function.
-	void startRender();
+    /**
+     * @brief Starts rendering ui primitives. Must be called at the top of draw function.
+     */
+    void startRender();
 
-	void addInventoryItemClickCallback(std::function<void(const int id)> callback);
+    /**
+     * @brief Adds callback function for clicking an item in inventory
+     * @param callback
+     */
+    void addInventoryItemClickCallback(std::function<void(const int id)> callback);
 
-	void setInventory(std::vector<GameItem> inventory);
+    /**
+     * @brief Adds callback function for clicking and item in equipment
+     * @param callback
+     */
+    void addEquipmentItemClickCallback(std::function<void(const int id)> callback);
 
-	void setEquipment(std::vector<GameItem> equipment);
+    /**
+     * @brief Set current contents of player's inventory
+     * @param inventory
+     */
+    void setInventory(std::vector<GameItem> inventory);
 
-	bool LoadTextureFromFile(const char *filename, const int id);
+    /**
+     * @brief Set current contents of player's equipment
+     * @param equipment
+     */
+    void setEquipment(std::vector<GameItem> equipment);
+
+    /**
+     * @brief Load texture from file and save it to member map guiIconsM with key id
+     * @param filename
+     * @param id
+     * @return success
+     */
+    bool LoadTextureFromFile(const char* filename, const int id);
 
 private:
-	/**
-	 * @brief Draws inventory tab to GUI window
-	 */
-	void drawInventory();
+    /**
+     * @brief Draws inventory tab to GUI window
+     */
+    void drawInventory();
 
-	/**
-	 * @brief Draws equipment tab to GUI window
-	 */
-	void drawEquipment();
+    /**
+     * @brief Draws equipment tab to GUI window
+     */
+    void drawEquipment();
 
-	VkDevice logDeviceM;
-	VkDescriptorPool descPoolM;
+    /**
+     * @brief Helper function for a single equipment slot
+     * @param index
+     */
+    void drawEquipmentSlot(int index);
 
-	VkQueue graphicsQueueM;
-	VkSampler samplerM;
+    VkDevice logDeviceM;
+    VkDescriptorPool descPoolM;
 
-	std::shared_ptr<GraphicsObjectManager> pGraphicsObjectManagerM;
+    VkQueue graphicsQueueM;
+    VkSampler samplerM;
 
-	UiTab openTabM;
+    std::shared_ptr<GraphicsObjectManager> pGraphicsObjectManagerM;
 
-	std::function<void(const int id)> inventoryItemClickCallbackM;
+    UiTab openTabM;
 
-	std::vector<GameItem> inventoryM;
-	std::vector<GameItem> equipmentM;
+    std::function<void(const int id)> inventoryItemClickCallbackM;
+    std::function<void(const int id)> equipmentItemClickCallbackM;
 
-	// map from id to descriptor set required for drawing.
-	// GraphicsObjectManager will clean up the resources created.
-	std::unordered_map<int, VkDescriptorSet> guiIconsM;
+    std::vector<GameItem> inventoryM;
+    std::vector<GameItem> equipmentM;
+
+    int windowWidthM = 300;
+    int windowHeightM = 500;
+    ImVec2 iconSizeM = ImVec2(windowWidthM * 0.8 / 4, windowWidthM * 0.8 / 4);
+
+    // map from id to descriptor set required for drawing.
+    // GraphicsObjectManager will clean up the resources created.
+    std::unordered_map<int, VkDescriptorSet> guiIconsM;
 };

@@ -145,6 +145,20 @@ void Server::handleMessage(const Message& msg)
                 gamer->getInventory().useItem(useItemMsg.itemId);
                 break;
             }
+            case MessageId::Unequip:
+            {
+                std::cout << connId << "Unequip message received." << std::endl;
+                const UnequipMessage unequipMsg = MessageApi::parseUnequip(body);
+                std::shared_ptr<PlayerCharacter> gamer = gameWorldM.getPlayer(connId);
+                for (auto entry : gamer->getEquipment().getSlotMap())
+                {
+                    if (entry.second != nullptr && entry.second->getInstanceId() == unequipMsg.itemId)
+                    {
+                        gamer->getEquipment().unequip(entry.first);
+                    }
+                }
+                break;
+            }
             default:
                 // Unknown header id, ignore
                 std::cout << "Unknown header id: " << msgId << std::endl;
@@ -205,10 +219,18 @@ void Server::sendGameState()
         entity.z = location.z;
         entity.hp = npc->getHp();
         std::vector<GameItem> equipmentVector;
-        for (auto const& item : npc->getEquipment().getAllEquipment())
+        for (auto entry : npc->getEquipment().getSlotMap())
         {
-            GameItem gameItem = {item->getId(), item->getInstanceId(), item->getName(), item->getStackSize()};
-            equipmentVector.push_back(gameItem);
+            if (entry.second != nullptr)
+            {
+                GameItem gameItem = {entry.second->getId(), entry.second->getInstanceId(), entry.second->getName(), entry.second->getStackSize()};
+                equipmentVector.push_back(gameItem);
+            }
+            else
+            {
+                GameItem gameItem = {-1, -1, "NoItem", 0};
+                equipmentVector.push_back(gameItem);
+            }
         }
         entity.equipment = equipmentVector;
         entityVector.push_back(entity);
@@ -224,11 +246,20 @@ void Server::sendGameState()
         entity.y = location.y;
         entity.z = location.z;
         entity.hp = player->getHp();
+
         std::vector<GameItem> equipmentVector;
-        for (auto const& item : player->getEquipment().getAllEquipment())
+        for (auto entry : player->getEquipment().getSlotMap())
         {
-            GameItem gameItem = {item->getId(), item->getInstanceId(), item->getName(), item->getStackSize()};
-            equipmentVector.push_back(gameItem);
+            if (entry.second != nullptr)
+            {
+                GameItem gameItem = {entry.second->getId(), entry.second->getInstanceId(), entry.second->getName(), entry.second->getStackSize()};
+                equipmentVector.push_back(gameItem);
+            }
+            else
+            {
+                GameItem gameItem = {-1, -1, "NoItem", 0};
+                equipmentVector.push_back(gameItem);
+            }
         }
         entity.equipment = equipmentVector;
         entityVector.push_back(entity);

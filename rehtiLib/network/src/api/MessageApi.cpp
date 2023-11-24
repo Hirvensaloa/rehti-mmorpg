@@ -116,13 +116,37 @@ UseItemMessage MessageApi::parseUseItem(std::string msgBody)
 
     if (!validMember(document, "itemId", ValueType::INT))
     {
-        throw std::runtime_error("Invalid attack message");
+        throw std::runtime_error("Invalid UseItem message");
     }
 
     UseItemMessage useItemMsg;
     useItemMsg.itemId = document["itemId"].GetInt();
 
     return useItemMsg;
+};
+
+MessageStruct MessageApi::createUnequip(const UnequipMessage& unequipMsg)
+{
+    rapidjson::Document document = createDocument();
+    rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
+    document.AddMember("itemId", unequipMsg.itemId, allocator);
+
+    return MessageStruct{unequipMsg.id, createString(document)};
+};
+
+UnequipMessage MessageApi::parseUnequip(std::string msgBody)
+{
+    rapidjson::Document document = parseDocument(msgBody);
+
+    if (!validMember(document, "itemId", ValueType::INT))
+    {
+        throw std::runtime_error("Invalid Unequip message");
+    }
+
+    UnequipMessage unequipMsg;
+    unequipMsg.itemId = document["itemId"].GetInt();
+
+    return unequipMsg;
 };
 
 MessageStruct MessageApi::createGameState(const GameStateMessage& gameState)

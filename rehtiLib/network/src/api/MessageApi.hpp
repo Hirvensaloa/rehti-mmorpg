@@ -26,7 +26,7 @@ enum MessageId
     Attack,
     ObjectInteract,
     UseItem,
-    Test,
+    Unequip,
 };
 
 struct MessageStruct
@@ -81,6 +81,12 @@ struct UseItemMessage
     int itemId;
 };
 
+struct UnequipMessage
+{
+    const MessageId id = MessageId::Unequip;
+    int itemId;
+};
+
 /*
  * Helper class for constructing and parsing messages.
  * Each message type above needs to have create and parse methods.
@@ -93,21 +99,24 @@ struct UseItemMessage
 class MessageApi
 {
 public:
-    static const MessageStruct createLogin(const LoginMessage &login);
+    static const MessageStruct createLogin(const LoginMessage& login);
     static LoginMessage parseLogin(std::string msgBody);
 
-    static const MessageStruct createMove(const MoveMessage &move);
+    static const MessageStruct createMove(const MoveMessage& move);
     static MoveMessage parseMove(std::string msgBody);
 
-    static MessageStruct createAttack(const AttackMessage &attack);
+    static MessageStruct createAttack(const AttackMessage& attack);
     static AttackMessage parseAttack(std::string msgBody);
 
-    static MessageStruct createObjectInteract(const ObjectInteractMessage &objectInteract);
+    static MessageStruct createObjectInteract(const ObjectInteractMessage& objectInteract);
     static ObjectInteractMessage parseObjectInteract(std::string msgBody);
 
-    static MessageStruct createUseItem(const UseItemMessage &useItemMsg);
+    static MessageStruct createUseItem(const UseItemMessage& useItemMsg);
     static UseItemMessage parseUseItem(std::string msgBody);
 
-    static MessageStruct createGameState(const GameStateMessage &gameState);
+    static MessageStruct createUnequip(const UnequipMessage& unequipMsg);
+    static UnequipMessage parseUnequip(std::string msgBody);
+
+    static MessageStruct createGameState(const GameStateMessage& gameState);
     static GameStateMessage parseGameState(std::string msgBody);
 };

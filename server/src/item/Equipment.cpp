@@ -44,6 +44,11 @@ std::vector<std::shared_ptr<EquippableItem>> Equipment::getAllEquipment()
     return res;
 }
 
+std::map<Slot, std::shared_ptr<EquippableItem>>& Equipment::getSlotMap()
+{
+    return slotMapM;
+}
+
 bool Equipment::equip(std::shared_ptr<EquippableItem> item)
 {
     if (item == nullptr)

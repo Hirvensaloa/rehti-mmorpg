@@ -41,6 +41,8 @@ public:
      */
     std::vector<std::shared_ptr<EquippableItem>> getAllEquipment();
 
+    std::map<Slot, std::shared_ptr<EquippableItem>>& getSlotMap();
+
 private:
     Entity* ownerM;
 

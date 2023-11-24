@@ -43,6 +43,8 @@ public:
 
     boost::asio::awaitable<void> useItem(const int itemInstanceId);
 
+    boost::asio::awaitable<void> unequipItem(const int itemInstanceId);
+
     /**
      * @brief Starts the client
      */

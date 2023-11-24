@@ -46,22 +46,29 @@ std::array<AnimationType, ANIMATION_TYPE_COUNT> getAnimationTypes();
 
 #pragma region AnimationTypes
 // Animation node. The data stored can also represent any kind of transformation.
-struct AnimationNode
+struct GfxOrientation
 {
     glm::vec3 position;
     glm::quat rotation;
     glm::vec3 scale;
+
     glm::mat4 getTransformationMatrix() const;
-    static AnimationNode interpolate(AnimationNode first, AnimationNode second, float normalizedTime);
+    static GfxOrientation interpolate(GfxOrientation first, GfxOrientation second, float factor);
+};
+
+struct AnimationNode
+{
+    double time; // time of this animation node in ticks
+    std::array<GfxOrientation, MAX_BONES> bones;
 };
 
 // Immutable data. Animations should be stored somewhere and requested when needed to be stored for a character.
 struct Animation
 {
-    double totalTicks;                                                ///< total ticks in the animation
-    double ticksPerSecond;                                            ///< ticks per second
-    float duration;                                                   ///< duration of the animation in seconds
-    std::array<std::vector<AnimationNode>, MAX_BONES> animationNodes; ///< animation nodes for each bone
+    double totalTicks;                         // total ticks in the animation
+    double ticksPerSecond;                     // ticks per second
+    float duration;                            // duration of the animation in seconds
+    std::vector<AnimationNode> animationNodes; // animation nodes
 };
 
 struct CharacterAnimationData
@@ -73,16 +80,17 @@ struct CharacterAnimationData
 
 struct BoneNode
 {
-    uint32_t parent;                // index of the parent in bone array.
+    int parent;                     // index of the parent in bone array.
     std::vector<uint32_t> children; // indices of the children in bone array.
 };
 
 struct CharacterData
 {
-    AnimationNode characterOrientation;                   // orientation of the character
-    std::array<glm::mat4, MAX_BONES> boneTransformations; // bone transformation storage data
+    GfxOrientation characterOrientation;                    // orientation of the character
+    std::array<glm::mat4, MAX_BONES> boneTransformations{}; // bone transformation storage data
     std::vector<BoneNode> bones;
     CharacterAnimationData animationData;
+    void advanceAnimation(float dt);
 };
 
 #pragma endregion

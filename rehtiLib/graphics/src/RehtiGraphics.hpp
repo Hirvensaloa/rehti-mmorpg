@@ -84,15 +84,15 @@ public:
     void addTestGameObject(int id);
 
     /**
-     * @brief
-     * @param characterID
-     * @param vertices
-     * @param indices
-     * @param texture
-     * @param animations
-     * @param location
-     * @param rotation
-     * @return
+     * @brief Adds a character object with the given id to the graphics backend. Also creates a bounding box for the object.
+     * @param characterID of the character object.
+     * @param vertices of the model
+     * @param indices of the triangles of the model
+     * @param texture of the model
+     * @param animations list of Animation structs for the character
+     * @param location of the character to be placed
+     * @param rotation of the character to be placed
+     * @return boolean indicating whether the object was added successfully.
      */
     bool addCharacterObject(int characterID, std::vector<Vertex> vertices, std::vector<uint32_t> indices, ImageData texture, std::array<Animation, ANIMATION_TYPE_COUNT> animations, std::vector<BoneNode> bones, glm::vec3 location = glm::vec3(0.f), float rotation = 0.f);
 

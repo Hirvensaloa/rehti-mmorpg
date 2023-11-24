@@ -17,6 +17,9 @@ constexpr uint32_t MAX_BONES = 50;
 constexpr glm::vec3 GAMEOBJECT_MIN = glm::vec3(-0.5f, -0.5f, -0.5f);
 constexpr glm::vec3 GAMEOBJECT_MAX = glm::vec3(0.5f, 0.5f, 0.5f);
 
+constexpr glm::vec3 CHARACTER_MIN = glm::vec3(-0.5f, 0.0f, -0.5f);
+constexpr glm::vec3 CHARACTER_MAX = glm::vec3(0.5f, 2.0f, 0.5f);
+
 constexpr size_t OBJECT_TYPE_COUNT = 4;
 constexpr size_t ANIMATION_TYPE_COUNT = 5;
 
@@ -48,9 +51,9 @@ std::array<AnimationType, ANIMATION_TYPE_COUNT> getAnimationTypes();
 // Animation node. The data stored can also represent any kind of transformation.
 struct GfxOrientation
 {
-    glm::vec3 position;
-    glm::quat rotation;
-    glm::vec3 scale;
+    glm::vec3 position; ///< position of the node
+    glm::quat rotation; ///< rotation of the node
+    glm::vec3 scale;    ///< scale of the node
 
     glm::mat4 getTransformationMatrix() const;
     static GfxOrientation interpolate(GfxOrientation first, GfxOrientation second, float factor);
@@ -58,17 +61,19 @@ struct GfxOrientation
 
 struct AnimationNode
 {
-    double time; // time of this animation node in ticks
+    double time; ///< time of this animation node in ticks
     std::array<GfxOrientation, MAX_BONES> bones;
 };
 
-// Immutable data. Animations should be stored somewhere and requested when needed to be stored for a character.
+/**
+ * @brief Immutable animation data. Animations should be stored somewhere and requested when needed to be stored for a character.
+ */
 struct Animation
 {
-    double totalTicks;                         // total ticks in the animation
-    double ticksPerSecond;                     // ticks per second
-    float duration;                            // duration of the animation in seconds
-    std::vector<AnimationNode> animationNodes; // animation nodes
+    double totalTicks;                         ///< total ticks in the animation
+    double ticksPerSecond;                     ///< ticks per second
+    float duration;                            ///< duration of the animation in seconds
+    std::vector<AnimationNode> animationNodes; ///< animation nodes
 };
 
 struct CharacterAnimationData
@@ -80,14 +85,14 @@ struct CharacterAnimationData
 
 struct BoneNode
 {
-    int parent;                     // index of the parent in bone array.
-    std::vector<uint32_t> children; // indices of the children in bone array.
+    int parent;                     ///< index of the parent in bone array.
+    std::vector<uint32_t> children; ///< indices of the children in bone array.
 };
 
 struct CharacterData
 {
-    GfxOrientation characterOrientation;                    // orientation of the character
-    std::array<glm::mat4, MAX_BONES> boneTransformations{}; // bone transformation storage data
+    GfxOrientation characterOrientation;                    ///< orientation of the character
+    std::array<glm::mat4, MAX_BONES> boneTransformations{}; ///< bone transformation storage data
     std::vector<BoneNode> bones;
     CharacterAnimationData animationData;
     void advanceAnimation(float dt);

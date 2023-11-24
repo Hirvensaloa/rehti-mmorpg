@@ -178,7 +178,6 @@ public:
 
     /**
      * @brief Adds an area to the game.
-     * @param mapAABBData is the bounding box data of the area.
      * @param vertices are the vertices of the area. They are expected to be moved to their corresponding area coordinates before calling this function.
      * @param indices of the triangles.
      * @param textures of the area. Areas support 5 textures with a blendmap: Order is: blendmap (0), black (1), red (2), green (3), blue (4), alpha (5).

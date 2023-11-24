@@ -43,14 +43,17 @@ boost::asio::awaitable<bool> Client::login()
     if (connectionM->isConnected())
     {
         std::string usr = "";
-        std::cout << "------------------ Login to Rehti ------------------" << std::endl
+        std::string pwd = "";
+        std::cout << "------------------ Login (or signup) to Rehti ------------------" << std::endl
                   << "Username: ";
         std::cin >> usr;
-        if (usr != "")
+        std::cout << "Password: ";
+        std::cin >> pwd;
+        if (usr != "" && pwd != "")
         {
             LoginMessage msg;
             msg.username = usr;
-            msg.password = "dummyValue";
+            msg.password = pwd;
             co_await connectionM->send(MessageApi::createLogin(msg));
             boost::asio::co_spawn(ioContextM, connectionM->listenForMessages(), boost::asio::detached);
 
@@ -70,12 +73,15 @@ boost::asio::awaitable<bool> Client::connect()
     {
         std::cout << "Connecting to server..." << std::endl;
         const bool ret = co_await connectionM->connectToServer(endpointsM);
-        std::cout << ret << std::endl;
 
         if (ret)
         {
             co_await login();
         }
+
+        // Set the logged in flag to true anyway so that the graphics backend can be started regardless of server being online or not. TODO: Remove when the login happens on UI, not on console.
+        loggedInFlagM = true;
+        loggedInM.notify_one();
 
         co_return ret;
     }
@@ -134,15 +140,15 @@ void Client::processMessages()
             {
                 const GameStateMessage& gameStateMsg = MessageApi::parseGameState(msg.getBody());
 
-                const auto obj = gameObjectsObjDataM["ukko"];
-                pGraphLibM->addGameObject(gameStateMsg.currentPlayer.entityId, obj.vertices, obj.indices, textureDataM["ukkotextuuri1.png"], {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
+                const auto objAsset = assetCacheM.getCharacterAssetDataById("ukko");
+                pGraphLibM->addGameObject(gameStateMsg.currentPlayer.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
                 pGraphLibM->forcePlayerMove(gameStateMsg.currentPlayer.entityId, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
                 std::cout << "player"
                           << " " << gameStateMsg.currentPlayer.entityId << " " << gameStateMsg.currentPlayer.x << " " << gameStateMsg.currentPlayer.y << " " << gameStateMsg.currentPlayer.z << std::endl;
 
                 for (const auto& entity : gameStateMsg.entities)
                 {
-                    // Ignore the player itself
+                    // Do not draw the current player twice
                     if (entity.entityId == gameStateMsg.currentPlayer.entityId)
                     {
                         continue;
@@ -150,32 +156,22 @@ void Client::processMessages()
 
                     std::cout << "entity"
                               << " " << entity.entityId << " " << entity.x << " " << entity.y << " " << entity.z << std::endl;
-                    const auto obj = gameObjectsObjDataM["orc1"];
-                    pGraphLibM->addGameObject(entity.entityId, obj.vertices, obj.indices, textureDataM["sand.png"], {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
+                    const auto objAsset = assetCacheM.getCharacterAssetDataById("goblin");
+                    pGraphLibM->addGameObject(entity.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
                     pGraphLibM->forceGameObjectMove(entity.entityId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
                 }
                 for (const auto& object : gameStateMsg.objects)
                 {
-                    const std::string idStr = std::to_string(object.id);
-                    if (gameObjectsObjDataM.contains(idStr))
-                    {
-                        std::cout << "object"
-                                  << " " << object.id << " " << object.x << " " << object.y << " " << object.z << std::endl;
-                        const auto obj = gameObjectsObjDataM[idStr];
-                        if (object.id == 1)
-                        {
-                            pGraphLibM->addGameObject(std::stoi(object.instanceId), obj.vertices, obj.indices, textureDataM["treetexture.png"], {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
-                        }
-                        else
-                        {
-                            pGraphLibM->addGameObject(std::stoi(object.instanceId), obj.vertices, obj.indices, textureDataM["housetexture.png"], {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
-                        }
-                    }
+                    std::cout << "object"
+                              << " " << object.id << " " << object.x << " " << object.y << " " << object.z << std::endl;
+                    const auto objAsset = assetCacheM.getObjectAssetDataById(object.id);
+                    pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
                 }
             }
-            else
+            else if (msgId == MessageId::Informative)
             {
-                std::cout << "Unknown message id: " << msgId << std::endl;
+                const InformativeMessage& informativeMsg = MessageApi::parseInformative(msg.getBody());
+                std::cout << "Message from server: " << informativeMsg.message << std::endl;
             }
         }
     }
@@ -215,45 +211,48 @@ void Client::handleMouseClick(const Hit& hit)
 
 void Client::startGraphics()
 {
+    // Wait for login to be successful
+    if (!loggedInFlagM)
+    {
+        std::unique_lock ul(loginMutexM);
+        loggedInM.wait(ul);
+    }
+
     pGraphLibM = new RehtiGraphics();
 
     // Create map bounding box
-    std::vector<std::vector<int>> heightMatrix;
-    std::vector<std::vector<std::string>> areaMatrix;
-    loadHeightMap(heightMatrix, Config.GENERATED_HEIGHT_MAP_PATH);
-    loadAreaMap(areaMatrix, Config.GENERATED_AREA_MAP_PATH);
+    std::vector<std::vector<int>> heightMatrix = fetchHeightMatrix();
+    std::vector<std::vector<std::string>> areaMatrix = fetchAreaMatrix();
+
+    // Load assets to memory
+    assetCacheM.loadAssets();
+
+    // Add areas to the graphics backend
     pGraphLibM->addMapBoundingBox(MapAABBData{heightMatrix, areaMatrix, Config.AREA_WIDTH, Config.HEIGHT_MAP_SCALE, Config.TILE_SIDE_SCALE, Config.TILE_SIDE_UNIT});
-
-    // Load object obj files into memory
-    const auto gameObjectsData = loadGameObjectObjs();
-    for (const auto& obj : gameObjectsData)
+    for (int i = 0; i < areaMatrix.size(); i++)
     {
-        gameObjectsObjDataM[obj.first] = createGameObjectGraphicData(obj.second.vertices, obj.second.faces);
-    }
+        for (int j = 0; j < areaMatrix[i].size(); j++)
+        {
+            const auto& areaAssetData = assetCacheM.getAreaAssetData()[areaMatrix[i][j] + std::to_string(i) + std::to_string(j)];
+            std::array<ImageData, 6> textures = {areaAssetData.blendMap, ImageData(), ImageData(), ImageData(), ImageData(), ImageData()};
 
-    // Load texture files into memory
-    const auto textures = loadTextures();
-    for (const auto& texture : textures)
-    {
-        textureDataM[texture.first] = stbImageDataToImageData(texture.second);
-        std::cout << "Loaded texture " << texture.first << std::endl;
-    }
+            // Loop through the area textures and use default texture for leftovers
+            int k = 0;
+            while (k <= Config.MAX_MAP_TEXTURES)
+            {
+                if (areaAssetData.textures.size() > k && areaAssetData.textures[k].width != 0 && areaAssetData.textures[k].height != 0)
+                {
+                    textures[k + 1] = areaAssetData.textures[k];
+                }
+                else
+                {
+                    textures[k + 1] = assetCacheM.getDefaultTexture();
+                }
+                k++;
+            };
 
-    // Load map area obj files into memory
-    std::vector<std::vector<aiVector3D>> areaVertexList;
-    std::vector<std::vector<aiFace>> areaFaceList;
-    loadAreaMapObjs(areaMatrix, areaVertexList, areaFaceList);
-    std::array<ImageData, 6> areaTextures;
-
-    for (size_t i = 0; i < areaTextures.size(); i++)
-    {
-        areaTextures[i] = TestValues::GetTestTexture();
-    }
-    std::vector<std::vector<Vertex>> areaVertices = aiVector3DMatrixToVertexVector(areaVertexList);
-    std::vector<std::vector<uint32_t>> areaIndices = aiFaceMatrixToVector(areaFaceList);
-    for (int i = 0; i < areaVertices.size(); i++)
-    {
-        pGraphLibM->addArea(areaVertices[i], areaIndices[i], areaTextures);
+            pGraphLibM->addArea(areaAssetData.vertices, areaAssetData.indices, textures);
+        }
     }
 
     // Add action callbacks

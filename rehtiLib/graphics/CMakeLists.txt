@@ -40,6 +40,7 @@ set(GRAPHICS_SOURCES
 	Camera.cpp
 	Mesh.hpp
 	Mesh.cpp
+	BasicTypes.hpp
 	GraphicsTypes.hpp
 	GraphicsTypes.cpp
 	AABB.hpp

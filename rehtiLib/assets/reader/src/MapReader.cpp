@@ -6,10 +6,11 @@
 #include "MapReader.hpp"
 #include "../../Config.hpp"
 
-void loadAccessMap(std::vector<std::vector<uint8_t>> &accessMap, std::string path)
+std::vector<std::vector<uint8_t>> fetchAccessMatrix()
 {
+  std::vector<std::vector<uint8_t>> accessMap;
   std::vector<std::vector<std::string>> accessMapString;
-  readMatrixFromFile(accessMapString, path);
+  readMatrixFromFile(accessMapString, Config.GENERATED_ACCESS_MAP_PATH);
 
   for (auto &row : accessMapString)
   {
@@ -20,12 +21,15 @@ void loadAccessMap(std::vector<std::vector<uint8_t>> &accessMap, std::string pat
     }
     accessMap.push_back(rowUint8);
   }
+
+  return accessMap;
 }
 
-void loadHeightMap(std::vector<std::vector<int>> &heightMap, std::string path)
+std::vector<std::vector<int>> fetchHeightMatrix()
 {
+  std::vector<std::vector<int>> heightMap;
   std::vector<std::vector<std::string>> heightMapString;
-  readMatrixFromFile(heightMapString, path);
+  readMatrixFromFile(heightMapString, Config.GENERATED_HEIGHT_MAP_PATH);
 
   for (auto &row : heightMapString)
   {
@@ -36,9 +40,33 @@ void loadHeightMap(std::vector<std::vector<int>> &heightMap, std::string path)
     }
     heightMap.push_back(rowInt);
   }
+
+  return heightMap;
 }
 
-void loadAreaMap(std::vector<std::vector<std::string>> &areaMap, std::string path)
+std::vector<std::vector<int>> fetchMapTextureMatrix()
 {
-  readMatrixFromFile(areaMap, path);
+  std::vector<std::vector<int>> mapTextureMap;
+  std::vector<std::vector<std::string>> mapTextureMapString;
+  readMatrixFromFile(mapTextureMapString, Config.GENERATED_MAP_TEXTURE_MAP_PATH);
+
+  for (auto &row : mapTextureMapString)
+  {
+    std::vector<int> rowInt;
+    for (auto &col : row)
+    {
+      rowInt.push_back(std::stoi(col));
+    }
+    mapTextureMap.push_back(rowInt);
+  }
+
+  return mapTextureMap;
+}
+
+std::vector<std::vector<std::string>> fetchAreaMatrix()
+{
+  std::vector<std::vector<std::string>> areaMap;
+  readMatrixFromFile(areaMap, Config.GENERATED_AREA_MAP_PATH);
+
+  return areaMap;
 }

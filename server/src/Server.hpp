@@ -30,7 +30,7 @@ public:
      * @brief Function to parse and act upon messages received from clients
      * @param msg
      */
-    void handleMessage(const Message &msg);
+    void handleMessage(const Message& msg);
 
 private:
     /**
@@ -56,9 +56,11 @@ private:
     /**
      * @brief Loads a player's data from the database and adds the player to the game
      * @param username
+     * @param password
      * @param connection
+     * @return True if player was loaded successfully, false otherwise
      */
-    void loadPlayer(std::string username, const std::shared_ptr<Connection> &connection);
+    bool loadPlayer(std::string username, std::string password, const std::shared_ptr<Connection>& connection);
 
     /**
      * @brief Saves a player's data to the database

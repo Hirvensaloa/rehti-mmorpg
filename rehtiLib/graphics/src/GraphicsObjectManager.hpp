@@ -1,13 +1,13 @@
 #pragma once
 #include "DescriptorBuilder.hpp"
-#include "Mesh.hpp"
 #include "GraphicsTypes.hpp"
+#include "Mesh.hpp"
 
-#include <vector>
-#include <unordered_map>
 #include <array>
 #include <optional>
+#include <unordered_map>
 #include <utility>
+#include <vector>
 
 /// <summary>
 /// Graphics object manager manages different types of objects that have memory and can be drawn.
@@ -59,7 +59,7 @@ public:
 	 * @param transformation to be applied to the object
 	 * @param imgSampler is the sampler for the texture of the gameobject
 	 * @return boolean indicating success of the operation
-	*/
+	 */
 	bool addGameObject(int objectId, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, VkSampler imgSampler);
 
 	/**
@@ -69,7 +69,7 @@ public:
 	 * @param indices
 	 * @param transformation
 	 * @return boolean indicating success
-	*/
+	 */
 	bool addTestObject(int id, const std::vector<SimpleVertex>& vertices, const std::vector<uint32_t>& indices, glm::mat4 transformation);
 
 	/**
@@ -78,9 +78,8 @@ public:
 	 * @param indices of the area
 	 * @param textures of the area
 	 * @return boolean indicating success
-	*/
+	 */
 	bool addArea(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, std::array<ImageData, 6> textures, VkSampler texSampler);
-
 
 	/// <summary>
 	/// Updates test object data
@@ -117,7 +116,7 @@ public:
 	 * @brief Interface for destroying an image.
 	 * TODO redo. If the idea is to let this class manage all the resources, then let it do just that.
 	 * @param image
-	*/
+	 */
 	void destroyImage(AllocatedImage image);
 
 	/**
@@ -126,7 +125,7 @@ public:
 	 * @param depthFormat
 	 * @param srcLayout
 	 * @param dstLayout
-	*/
+	 */
 	void transitionDepthImageLayout(AllocatedImage depthImage, VkFormat depthFormat, VkImageLayout srcLayout, VkImageLayout dstLayout);
 
 	/// <summary>
@@ -148,7 +147,7 @@ public:
 	/// <summary>
 	/// Copies image data to the given image.
 	/// </summary>
-	/// <param name="allocImage"></param> 
+	/// <param name="allocImage"></param>
 	/// <param name="srcData"></param>
 	void copyImage(AllocatedImage allocImage, const ImageData& srcData);
 
@@ -163,7 +162,7 @@ public:
 	 * @brief Returns the number of descriptor layouts of the given type. Currently not a very useful function. However, it might be useful in the future.
 	 * @param type of object to be queried for.
 	 * @return number of layouts
-	*/
+	 */
 	uint32_t getLayoutCount(ObjectType type) const;
 
 	/// <summary>
@@ -176,7 +175,7 @@ public:
 private:
 	/**
 	 * @brief Command unit represents everything needed to allocate, submit, record and execute commands.
-	*/
+	 */
 	struct CommandUnit
 	{
 		VkQueue queue;
@@ -214,7 +213,7 @@ private:
 	/**
 	 * @brief Returns number of queue families
 	 * @return
-	*/
+	 */
 	uint32_t getQueueFamilyCount();
 
 	/**
@@ -222,13 +221,13 @@ private:
 	 * @param id of the object
 	 * @return VK_SHARING_MODE_CONCURRENT if separate graphics queue is set.
 	 * @return VK_SHARING_MODE_EXCLUSIVE if transfer queue is the graphics queue.
-	*/
+	 */
 	VkSharingMode getSharingMode();
 
 	/**
 	 * @brief
 	 * @return
-	*/
+	 */
 	VkCommandBuffer startCommandBuffer(bool preferTransfer);
 
 	/**
@@ -236,7 +235,7 @@ private:
 	 * @param commandBuffer
 	 * @param fence
 	 * @return
-	*/
+	 */
 	bool endCommandBuffer(VkCommandBuffer commandBuffer, VkFence fence = VK_NULL_HANDLE);
 
 	/**
@@ -247,13 +246,13 @@ private:
 	 * @param newLayout
 	 * @param commandBuffer
 	 * @param srcQueueFamilyIndex & dstQueueFamilyIndex of the source family. Use the default value if you do not want to change queue ownership
-	*/
+	 */
 	void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout, VkCommandBuffer commandBuffer, VkImageAspectFlags aspectFlags = VK_IMAGE_ASPECT_COLOR_BIT, std::pair<uint32_t, uint32_t> srcAndDstQueueFamilies = { VK_QUEUE_FAMILY_IGNORED, VK_QUEUE_FAMILY_IGNORED });
 
 	/**
 	 * @brief Queue families should be transferred, if the resources are using multiple queues, and the sharingmode is exclusive, or the desired stage is available only to another queue.
 	 * TODO REWORK TRANSITIONS
-	*/
+	 */
 	std::pair<uint32_t, uint32_t> getQueueTransitionFamilies();
 
 	/**
@@ -263,7 +262,7 @@ private:
 	 * @param srcAndDstAccessMasks to be filled
 	 * @param srcAndDstStages to be filled
 	 * @return boolean indicating if the given layout pair is valid
-	*/
+	 */
 	bool getPipelineAndAccessFlags(VkImageLayout srcLayout, VkImageLayout dstLayout, std::pair<VkAccessFlags, VkAccessFlags>& srcAndDstAccessMasks, std::pair<VkPipelineStageFlags, VkPipelineStageFlags>& srcAndDstStages);
 
 	/**
@@ -271,7 +270,7 @@ private:
 	 * @param size of the staging buffer
 	 * @param allocInfo to be filled
 	 * @return The allocated buffer
-	*/
+	 */
 	AllocatedBuffer createStagingBuffer(VkDeviceSize size, VmaAllocationInfo& allocInfo);
 
 	// Required Vulkan handles

@@ -5,6 +5,7 @@
 #include "GraphicsTypes.hpp"
 
 #include <functional>
+#include <mutex>
 #include <unordered_map>
 #include <vector>
 
@@ -56,16 +57,22 @@ public:
     void addEquipmentItemClickCallback(std::function<void(const int id)> callback);
 
     /**
-     * @brief Set current contents of player's inventory
+     * @brief Set contents of player's inventory
      * @param inventory
      */
     void setInventory(std::vector<GameItem> inventory);
 
     /**
-     * @brief Set current contents of player's equipment
+     * @brief Set contents of player's equipment
      * @param equipment
      */
     void setEquipment(std::vector<GameItem> equipment);
+
+    /**
+     * @brief Set skills of player
+     * @param skills
+     */
+    void setSkills(std::vector<Skill> skills);
 
     /**
      * @brief Load texture from file and save it to member map guiIconsM with key id
@@ -85,6 +92,11 @@ private:
      * @brief Draws equipment tab to GUI window
      */
     void drawEquipment();
+
+    /**
+     * @brief Draws skills tab to GUI window
+     */
+    void drawSkills();
 
     /**
      * @brief Helper function for a single equipment slot
@@ -107,6 +119,11 @@ private:
 
     std::vector<GameItem> inventoryM;
     std::vector<GameItem> equipmentM;
+    std::vector<Skill> skillsM;
+
+    std::mutex invMutexM;
+    std::mutex equipmentMutexM;
+    std::mutex skillsMutexM;
 
     int windowWidthM = 300;
     int windowHeightM = 500;

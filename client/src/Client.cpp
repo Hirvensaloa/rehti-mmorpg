@@ -158,6 +158,8 @@ void Client::processMessages()
 
                 pGraphLibM->getGui()->setInventory(gameStateMsg.currentPlayer.inventory);
 
+                pGraphLibM->getGui()->setSkills(gameStateMsg.currentPlayer.skills);
+
                 const auto obj = gameObjectsObjDataM["ukko"];
                 pGraphLibM->addGameObject(gameStateMsg.currentPlayer.entityId, obj.vertices, obj.indices, textureDataM["ukkotextuuri1.png"], {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
                 pGraphLibM->forcePlayerMove(gameStateMsg.currentPlayer.entityId, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});

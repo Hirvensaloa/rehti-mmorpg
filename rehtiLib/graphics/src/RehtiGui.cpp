@@ -91,6 +91,14 @@ RehtiGui::RehtiGui(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice
     IM_ASSERT(ret);
     ret = LoadTextureFromFile("./assets/gui/no-icon.png", -10);
     IM_ASSERT(ret);
+    ret = LoadTextureFromFile("./assets/gui/woodcutting.png", -11);
+    IM_ASSERT(ret);
+    ret = LoadTextureFromFile("./assets/gui/mining.png", -12);
+    IM_ASSERT(ret);
+    ret = LoadTextureFromFile("./assets/gui/fishing.png", -13);
+    IM_ASSERT(ret);
+    ret = LoadTextureFromFile("./assets/gui/cooking.png", -14);
+    IM_ASSERT(ret);
 }
 
 RehtiGui::~RehtiGui()
@@ -154,6 +162,11 @@ void RehtiGui::newFrame()
         drawEquipment();
     }
 
+    if (openTabM == UiTab::Skills)
+    {
+        drawSkills();
+    }
+
     ImGui::End();
 }
 
@@ -179,16 +192,25 @@ void RehtiGui::addEquipmentItemClickCallback(std::function<void(const int id)> c
 
 void RehtiGui::setInventory(std::vector<GameItem> inventory)
 {
-    inventoryM = inventory;
+    std::unique_lock<std::mutex> lck(invMutexM);
+    inventoryM = std::move(inventory);
 }
 
 void RehtiGui::setEquipment(std::vector<GameItem> equipment)
 {
-    equipmentM = equipment;
+    std::unique_lock<std::mutex> lck(equipmentMutexM);
+    equipmentM = std::move(equipment);
+}
+
+void RehtiGui::setSkills(std::vector<Skill> skills)
+{
+    std::unique_lock<std::mutex> lck(skillsMutexM);
+    skillsM = std::move(skills);
 }
 
 void RehtiGui::drawInventory()
 {
+    std::unique_lock<std::mutex> lck(invMutexM);
     for (int i = 0; i < inventoryM.size(); i++)
     {
         ImGui::PushID(i);
@@ -258,6 +280,8 @@ void RehtiGui::drawEquipmentSlot(int index)
 
 void RehtiGui::drawEquipment()
 {
+    std::unique_lock<std::mutex> lck(equipmentMutexM);
+
     ImGui::NewLine();
     ImGui::SameLine(windowWidthM / 2 - iconSizeM[0] / 2);
     drawEquipmentSlot(0);
@@ -289,4 +313,17 @@ void RehtiGui::drawEquipment()
 
     ImGui::SameLine(windowWidthM * 3 / 4 - iconSizeM[0] / 2);
     drawEquipmentSlot(8);
+}
+
+void RehtiGui::drawSkills()
+{
+    std::unique_lock<std::mutex> lck(skillsMutexM);
+    for (auto& skill : skillsM)
+    {
+
+        VkDescriptorSet& icon = guiIconsM.contains(-(skill.id + 11)) ? guiIconsM[-(skill.id + 11)] : guiIconsM[-10];
+        ImGui::Image((ImTextureID)icon, iconSizeM);
+        ImGui::SameLine();
+        ImGui::Text((skill.name + ": " + std::to_string(skill.xp) + " XP").c_str());
+    }
 }

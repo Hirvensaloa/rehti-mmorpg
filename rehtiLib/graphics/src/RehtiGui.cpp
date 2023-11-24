@@ -128,7 +128,9 @@ void RehtiGui::newFrame()
 
     ImGui::ShowDemoWindow();
 
-    ImGui::Begin("Rehti GUI");
+    ImGui::SetNextWindowPos(ImVec2(ImGui::GetIO().DisplaySize.x - windowWidthM, ImGui::GetIO().DisplaySize.y - windowHeightM), ImGuiCond_Always);
+    ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse;
+    ImGui::Begin("Rehti GUI", NULL, window_flags);
 
     ImGui::SetWindowSize(ImVec2(windowWidthM, windowHeightM));
 

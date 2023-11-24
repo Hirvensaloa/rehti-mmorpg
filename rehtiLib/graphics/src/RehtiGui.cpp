@@ -66,7 +66,7 @@ RehtiGui::RehtiGui(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice
         throw std::runtime_error("failed to create texture sampler for gui system.");
     }
     // check_vk_result(err);
-    // TODO USE PROPER ID's, OR LOAD THE IMAGE IN ANOTHER PLACE
+    // TODO: Load the files in asset cache
     bool ret = LoadTextureFromFile("./assets/item/lobster.png", 10);
     IM_ASSERT(ret);
     ret = LoadTextureFromFile("./assets/item/iron_sword.png", 1);

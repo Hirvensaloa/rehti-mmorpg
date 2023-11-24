@@ -1,12 +1,13 @@
 #include "DatabaseManager.hpp"
 #include "../entity/PlayerCharacter.hpp"
+#include "bcrypt.h"
 
 #include <iostream>
 
-const char *DB_NAME = std::getenv("POSTGRES_DB");
-const char *DB_USER = std::getenv("POSTGRES_USER");
-const char *DB_PASSWORD = std::getenv("POSTGRES_PASSWORD");
-const char *DB_HOST = std::getenv("DB_HOST");
+const char* DB_NAME = std::getenv("POSTGRES_DB");
+const char* DB_USER = std::getenv("POSTGRES_USER");
+const char* DB_PASSWORD = std::getenv("POSTGRES_PASSWORD");
+const char* DB_HOST = std::getenv("DB_HOST");
 
 DatabaseManager::DatabaseManager() : pConnectionM{nullptr}
 {
@@ -24,7 +25,7 @@ int DatabaseManager::createConnection()
         pConnectionM = std::make_unique<pqxx::connection>(connectionParams.str());
         std::cout << "Connected to " << pConnectionM->dbname() << '\n';
     }
-    catch (std::exception const &e)
+    catch (std::exception const& e)
     {
         std::cerr << "ERROR: " << e.what() << '\n';
         return 0;
@@ -32,10 +33,11 @@ int DatabaseManager::createConnection()
     return 1;
 }
 
-PlayerTable DatabaseManager::loadPlayerDataFromDb(std::string username)
+PlayerTable DatabaseManager::loadPlayerDataFromDb(std::string username, std::string password)
 {
     pqxx::work txn{*pConnectionM};
-    pqxx::result r{txn.exec("SELECT id, username, password, position_x, position_y, hp FROM player WHERE username='" + username + "'")};
+    const std::string sanitizedUsername = txn.esc(username);
+    pqxx::result r{txn.exec("SELECT id, username, password, position_x, position_y, hp FROM player WHERE username='" + sanitizedUsername + "'")};
     if (!r.empty())
     {
         txn.commit();
@@ -46,12 +48,21 @@ PlayerTable DatabaseManager::loadPlayerDataFromDb(std::string username)
         res.position_x = r[0][3].as<int>();
         res.position_y = r[0][4].as<int>();
         res.hp = r[0][5].as<int>();
+
+        if (bcrypt::validatePassword(password, res.password))
+        {
+            return res;
+        }
+        else
+        {
+            throw std::runtime_error("Invalid password");
+        }
         return res;
     }
     else
     {
-        pqxx::result r{txn.exec("INSERT INTO player VALUES (DEFAULT,'" + username + "','dummyValue',4,4,100)")};
-        r = txn.exec("SELECT id, username, password, position_x, position_y, hp FROM player WHERE username='" + username + "'");
+        std::string hash = bcrypt::generateHash(password);
+        pqxx::result r{txn.exec("INSERT INTO player VALUES (DEFAULT,'" + sanitizedUsername + "','" + hash + "',4,4,100) RETURNING id, username, password, position_x, position_y, hp")};
         PlayerTable res;
         res.id = r[0][0].as<int>();
         res.username = std::string(r[0][1].c_str());
@@ -121,7 +132,7 @@ bool DatabaseManager::savePlayerToDb(std::shared_ptr<PlayerCharacter> player)
     }
 
     txn.exec("DELETE FROM item WHERE player_id=" + std::to_string(id) + " AND is_equipped=true");
-    for (auto &item : player->getEquipment().getAllEquipment())
+    for (auto& item : player->getEquipment().getAllEquipment())
     {
         r = txn.exec("INSERT INTO item VALUES(" + std::to_string(item->getId()) + "," + std::to_string(id) + ",1,true) ON CONFLICT (id, player_id, is_equipped) DO NOTHING");
     }

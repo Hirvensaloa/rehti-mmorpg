@@ -96,8 +96,16 @@ void Server::handleMessage(const Message& msg)
                 std::cout << connId << " | Received login message | " << body << std::endl;
                 const LoginMessage loginMsg = MessageApi::parseLogin(body);
                 std::string username = loginMsg.username;
+                std::string password = loginMsg.password;
 
-                loadPlayer(username, msg.getConn());
+                const bool success = loadPlayer(username, password, msg.getConn());
+
+                if (!success)
+                {
+                    InformativeMessage infoMsg;
+                    infoMsg.message = "Failed to load player! Maybe invalid username or password?";
+                    boost::asio::co_spawn(ioContextM, msg.getConn()->send(MessageApi::createInformative(infoMsg)), boost::asio::detached);
+                }
             }
             else
             {
@@ -280,31 +288,40 @@ void Server::initGameState()
     gameWorldM.initWorld();
 }
 
-void Server::loadPlayer(std::string username, const std::shared_ptr<Connection>& connection)
+bool Server::loadPlayer(std::string username, std::string password, const std::shared_ptr<Connection>& connection)
 {
-    auto data = dbManagerM.loadPlayerDataFromDb(username);
-    connection->connectToClient(data.id);
-    gameWorldM.addPlayer(data.username, data.id, Coordinates(data.position_x, data.position_y));
-
-    Inventory& inventory = gameWorldM.getPlayer(data.id)->getInventory();
-    std::vector<int> itemIds = dbManagerM.loadInventoryDataFromDb(data.id);
-    for (auto id : itemIds)
+    try
     {
-        inventory.addItem(AssetManager::createItemInstance(id));
+        auto data = dbManagerM.loadPlayerDataFromDb(username, password);
+        connection->connectToClient(data.id);
+        gameWorldM.addPlayer(data.username, data.id, Coordinates(data.position_x, data.position_y));
+
+        Inventory& inventory = gameWorldM.getPlayer(data.id)->getInventory();
+        std::vector<int> itemIds = dbManagerM.loadInventoryDataFromDb(data.id);
+        for (auto id : itemIds)
+        {
+            inventory.addItem(AssetManager::createItemInstance(id));
+        }
+
+        Equipment& equipment = gameWorldM.getPlayer(data.id)->getEquipment();
+        std::vector<int> equipmentIds = dbManagerM.loadEquipmentDataFromDb(data.id);
+        for (auto id : equipmentIds)
+        {
+            equipment.equip(static_pointer_cast<EquippableItem>(AssetManager::createItemInstance(id)));
+        }
+
+        SkillSet& skills = gameWorldM.getPlayer(data.id)->getSkillSet();
+        auto skillData = dbManagerM.loadSkillDataFromDb(data.id);
+        for (auto skill : skillData)
+        {
+            skills.addSkillXp(skill.first, skill.second);
+        }
+        return true;
     }
-
-    Equipment& equipment = gameWorldM.getPlayer(data.id)->getEquipment();
-    std::vector<int> equipmentIds = dbManagerM.loadEquipmentDataFromDb(data.id);
-    for (auto id : equipmentIds)
+    catch (const std::exception& e)
     {
-        equipment.equip(static_pointer_cast<EquippableItem>(AssetManager::createItemInstance(id)));
-    }
-
-    SkillSet& skills = gameWorldM.getPlayer(data.id)->getSkillSet();
-    auto skillData = dbManagerM.loadSkillDataFromDb(data.id);
-    for (auto skill : skillData)
-    {
-        skills.addSkillXp(skill.first, skill.second);
+        std::cout << "Error loading player: " << e.what() << std::endl;
+        return false;
     }
 }
 

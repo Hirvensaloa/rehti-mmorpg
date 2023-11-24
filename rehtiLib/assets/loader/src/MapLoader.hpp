@@ -60,21 +60,25 @@ static const std::vector<std::vector<std::string>> fetchAreaMap()
 }
 
 /**
- * @brief Create a height map from the area map. The height map tells the height of each tile.
+ * @brief Loads a height map and map's texture map into given parameters. Loads them together to avoid reading the same image file twice.
  *
- * It is formed by:
+ * Height map is formed by:
  * @brief 1. Going through the area map and reading the corresponding image file for each area.
  * @brief 2. Going through the image file and reading the height of each pixel. Pixels height is calculated by G * B. But the Green values first bit is a sign bit.
  *
- * @param areaMap Matrix of all the area names.
- * @return Returns a matrix representing the height map.
+ * Map's texture map is formed by:
+ * @brief 1. Going through the area map and reading the corresponding image file for each area.
+ * @brief 2. Going through the image file and reading the texture id of each pixel. Texture id is the R value.
+ *
+ * @param areaMap Matrix of all the area names
+ * @param heightMap Empty height matrix to be filled
+ * @param textureMap Empty texture map to be filled
  */
-static const std::vector<std::vector<int>> createHeightMap(const std::vector<std::vector<std::string>> &areaMap)
+static void loadHeightAndTextureMap(const std::vector<std::vector<std::string>> &areaMap, std::vector<std::vector<int>> &heightMap, std::vector<std::vector<int>> &textureMap)
 {
-  std::vector<std::vector<int>> heightMap;
-
   // Populate the height map with 0s.
   populateMatrix(heightMap, areaMap, 0, Config.AREA_WIDTH, Config.AREA_HEIGHT);
+  populateMatrix(textureMap, areaMap, 0, Config.AREA_WIDTH, Config.AREA_HEIGHT);
 
   // Loop through the area map
   for (unsigned currentAreaRowIndex = 0; currentAreaRowIndex < areaMap.size(); currentAreaRowIndex++)
@@ -112,13 +116,12 @@ static const std::vector<std::vector<int>> createHeightMap(const std::vector<std
           }
 
           const unsigned indexX = currentAreaColumnIndex * Config.AREA_WIDTH + j;
+          textureMap[indexY][indexX] = r;
           heightMap[indexY][indexX] = height;
         }
       }
     }
   }
-
-  return heightMap;
 }
 
 // Inserts the object tile map to the map.
@@ -366,28 +369,28 @@ static const std::vector<std::vector<unsigned>> generateAccessMap(const std::vec
       unsigned &access = accessMap[i][j];
 
       // Check North
-      if (i <= 0 || heightMap[i - 1].size() <= j || height - heightMap[i - 1][j] > 1 || objectBlockMap[i][j].find("N") != std::string::npos)
+      if (i <= 0 || heightMap[i - 1].size() <= j || height - heightMap[i - 1][j] > Config.MAX_PASSABLE_HEIGHT || objectBlockMap[i][j].find("N") != std::string::npos)
       {
         // Block the north bit
         access = access & 0b1110;
       }
 
       // Check East
-      if (heightMap[i].size() <= j + 1 || height - heightMap[i][j + 1] > 1 || objectBlockMap[i][j].find("E") != std::string::npos)
+      if (heightMap[i].size() <= j + 1 || height - heightMap[i][j + 1] > Config.MAX_PASSABLE_HEIGHT || objectBlockMap[i][j].find("E") != std::string::npos)
       {
         // Block the east bit
         access = access & 0b1101;
       }
 
       // Check South
-      if (heightMap.size() <= i + 1 || heightMap[i + 1].size() <= j || height - heightMap[i + 1][j] > 1 || objectBlockMap[i][j].find("S") != std::string::npos)
+      if (heightMap.size() <= i + 1 || heightMap[i + 1].size() <= j || height - heightMap[i + 1][j] > Config.MAX_PASSABLE_HEIGHT || objectBlockMap[i][j].find("S") != std::string::npos)
       {
         // Block the south bit
         access = access & 0b1011;
       }
 
       // Check West
-      if (j <= 0 || height - heightMap[i][j - 1] > 1 || objectBlockMap[i][j].find("W") != std::string::npos)
+      if (j <= 0 || height - heightMap[i][j - 1] > Config.MAX_PASSABLE_HEIGHT || objectBlockMap[i][j].find("W") != std::string::npos)
       {
         // Block the west bit
         access = access & 0b0111;

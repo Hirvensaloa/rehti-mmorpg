@@ -41,6 +41,19 @@ public:
     boost::asio::awaitable<void> interactWithObject(const int& objectId);
 
     /**
+     * @brief Send a UseItemMessage for item with given instance id
+     * @param itemInstanceId
+     */
+    boost::asio::awaitable<void> useItem(const int itemInstanceId);
+
+    /**
+     * @brief Send a UnequipMessage for item with given instance id
+     * @param itemInstanceId
+     * @return
+     */
+    boost::asio::awaitable<void> unequipItem(const int itemInstanceId);
+
+    /**
      * @brief Starts the client
      */
     void start();

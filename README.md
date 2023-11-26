@@ -192,7 +192,35 @@ Sent by: Client
 
 - **id**: Identifies the message type.
 - **username**: Username that was input by the user
-- **password**: Hash value of the password input by the user
+- **password**: Password that was input by the user
+
+</details>
+
+#### UseItemMessage
+
+Represents a command by the client to use an item. For example, a player wanting to eat food from their inventory
+
+Sent by: Client
+
+<details>
+<summary>Expand to see message attributes</summary>
+
+- **id**: Identifies the message type.
+- **itemId**: Instance ID of the item to be used
+
+</details>
+
+#### UnequipMessage
+
+Represents a command by the client to unequip an item.
+
+Sent by: Client
+
+<details>
+<summary>Expand to see message attributes</summary>
+
+- **id**: Identifies the message type.
+- **itemId**: Instance ID of the item to be used
 
 </details>
 

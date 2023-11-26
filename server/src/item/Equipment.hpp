@@ -14,7 +14,7 @@ class Equipment
 {
 
 public:
-    Equipment(Entity *owner);
+    Equipment(Entity* owner);
 
     /**
      * @brief Equip an EquippableItem to the proper slot
@@ -41,27 +41,28 @@ public:
      */
     std::vector<std::shared_ptr<EquippableItem>> getAllEquipment();
 
-private:
-    Entity *ownerM;
+    std::map<Slot, std::shared_ptr<EquippableItem>>& getSlotMap();
 
-    std::map<Slot, std::shared_ptr<EquippableItem>>
-        slotMapM;
+private:
+    Entity* ownerM;
+
+    std::map<Slot, std::shared_ptr<EquippableItem>> slotMapM;
+
+    std::shared_ptr<EquippableItem> headSlotM = nullptr;
+
+    std::shared_ptr<EquippableItem> neckSlotM = nullptr;
+
+    std::shared_ptr<EquippableItem> topSlotM = nullptr;
 
     std::shared_ptr<EquippableItem> mainHandSlotM = nullptr;
 
     std::shared_ptr<EquippableItem> offHandSlotM = nullptr;
-
-    std::shared_ptr<EquippableItem> headSlotM = nullptr;
-
-    std::shared_ptr<EquippableItem> topSlotM = nullptr;
 
     std::shared_ptr<EquippableItem> bottomSlotM = nullptr;
 
     std::shared_ptr<EquippableItem> bootsSlotM = nullptr;
 
     std::shared_ptr<EquippableItem> glovesSlotM = nullptr;
-
-    std::shared_ptr<EquippableItem> neckSlotM = nullptr;
 
     std::shared_ptr<EquippableItem> ringSlotM = nullptr;
 };

@@ -210,6 +210,20 @@ Sent by: Client
 
 </details>
 
+#### UnequipMessage
+
+Represents a command by the client to unequip an item.
+
+Sent by: Client
+
+<details>
+<summary>Expand to see message attributes</summary>
+
+- **id**: Identifies the message type.
+- **itemId**: Instance ID of the item to be used
+
+</details>
+
 To add new messages, check [here](/rehtiLib/network/src/api/MessageApi.hpp)
 
 ## Project practices

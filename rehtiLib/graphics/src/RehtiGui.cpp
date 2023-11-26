@@ -4,8 +4,6 @@
 #include "stb_image.h"
 #include <iostream>
 
-// Helper function to load an image with common settings and return a MyTextureData with a VkDescriptorSet as a sort of
-// Vulkan pointer
 bool RehtiGui::LoadTextureFromFile(const char* filename, const int id)
 {
     int width = 0, height = 0;
@@ -126,8 +124,6 @@ void RehtiGui::newFrame()
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    ImGui::ShowDemoWindow();
-
     ImGui::SetNextWindowPos(ImVec2(ImGui::GetIO().DisplaySize.x - windowWidthM, ImGui::GetIO().DisplaySize.y - windowHeightM), ImGuiCond_Always);
     ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse;
     ImGui::Begin("Rehti GUI", NULL, window_flags);
@@ -231,7 +227,6 @@ void RehtiGui::drawInventory()
             {
                 if (ImGui::Selectable(("Use " + inventoryM[i].name).c_str()))
                 {
-                    std::cout << inventoryM[i].name << std::endl;
                     inventoryItemClickCallbackM(inventoryM[i].instanceId);
                     ImGui::CloseCurrentPopup();
                 }
@@ -269,7 +264,6 @@ void RehtiGui::drawEquipmentSlot(int index)
     VkDescriptorSet icon = (equipmentM[index].id == -1 ? guiIconsM[-(index + 1)] : (guiIconsM.contains(equipmentM[index].id) ? guiIconsM[equipmentM[index].id] : guiIconsM[-10]));
     if (ImGui::ImageButton((ImTextureID)icon, iconSizeM))
     {
-        std::cout << equipmentM[index].name << std::endl;
         equipmentItemClickCallbackM(equipmentM[index].instanceId);
     }
     if (ImGui::IsItemHovered())

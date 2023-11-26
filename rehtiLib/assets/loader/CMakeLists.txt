@@ -10,6 +10,7 @@ add_executable(${TARGET}
   Main.cpp 
   src/MapLoader.hpp 
   src/Utils.hpp 
+  src/AnimationTypeGenerator.hpp
   lodepng/lodepng.cpp 
   lodepng/lodepng.h
 )

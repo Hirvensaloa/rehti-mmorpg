@@ -9,6 +9,9 @@
 #include <memory>
 #include <vector>
 
+// If you get an error here, you need to run ./scripts/generate_assets.sh
+#include "../../../../assets/generated/GeneratedAnimations.hpp"
+
 #pragma region Constants
 
 constexpr uint32_t BONES_PER_VERTEX = 4;
@@ -21,7 +24,6 @@ constexpr glm::vec3 CHARACTER_MIN = glm::vec3(-0.5f, 0.0f, -0.5f);
 constexpr glm::vec3 CHARACTER_MAX = glm::vec3(0.5f, 2.0f, 0.5f);
 
 constexpr size_t OBJECT_TYPE_COUNT = 4;
-constexpr size_t ANIMATION_TYPE_COUNT = 5;
 
 enum ObjectType : uint32_t
 {
@@ -30,15 +32,6 @@ enum ObjectType : uint32_t
     TESTOBJECT,
     AREA,
     UNDEFINED
-};
-
-enum AnimationType : uint32_t
-{
-    IDLE,
-    WALK,
-    RUN,
-    ATTACK,
-    DEATH,
 };
 
 std::array<ObjectType, OBJECT_TYPE_COUNT> getObjectTypes();
@@ -139,4 +132,11 @@ struct SimpleVertex
 {
     glm::vec3 pos;
     glm::vec3 color;
+};
+
+struct AnimationConfig
+{
+    AnimationType animType;
+    float duration;
+    bool looping;
 };

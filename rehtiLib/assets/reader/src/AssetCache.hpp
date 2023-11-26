@@ -36,22 +36,22 @@ public:
     std::map<std::string, MapAreaAssetData>& getAreaAssetData();
 
     /**
-     * @brief Returns the object asset data by id
-     * @param id object id
+     * @brief Returns the object asset data by type id
+     * @param id object type id
      * @return ObjectAssetData
      */
     const ObjectAssetData& getObjectAssetDataById(int id);
 
     /**
-     * @brief Returns the character asset data by id
-     * @param id character id
+     * @brief Returns the character asset data by type id
+     * @param id character type id
      * @return CharacterAssetData
      */
-    const CharacterAssetData& getCharacterAssetDataById(std::string id);
+    const CharacterAssetData& getCharacterAssetDataById(int id);
 
     /**
-     * @brief Returns the item asset data by id
-     * @param id item id
+     * @brief Returns the item asset data by type id
+     * @param id item type id
      * @return ItemAssetData
      */
     const ItemAssetData& getItemAssetDataById(int id);
@@ -83,9 +83,10 @@ private:
 
     /**
      * @brief Loads the character assets data
+     * @param gameCharacters The game characters data
      * @return Map of character id and its corresponding asset data (CharacterAssetData)
      */
-    std::map<std::string, CharacterAssetData> loadCharacterAssetData();
+    std::map<int, CharacterAssetData> loadCharacterAssetData(const GameCharacters& gameCharacters);
 
     /**
      * @brief Loads the map area assets data
@@ -97,7 +98,7 @@ private:
 
     std::map<std::string, MapAreaAssetData> areaAssetDataM;
     std::map<int, ObjectAssetData> objectAssetDataM;
-    std::map<std::string, CharacterAssetData> characterAssetDataM;
+    std::map<int, CharacterAssetData> characterAssetDataM;
     std::map<int, ItemAssetData> itemAssetDataM;
     std::map<std::string, ImageData> textureAssetDataM;
     ImageData defaultTextureM;

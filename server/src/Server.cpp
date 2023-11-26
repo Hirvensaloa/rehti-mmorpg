@@ -85,7 +85,7 @@ void Server::handleMessage(const Message& msg)
     try
     {
         const auto body = msg.getBody();
-        const auto msgId = msg.getHeader().id;
+        const auto msgId = static_cast<MessageId>(msg.getHeader().id);
         const auto connId = msg.getConn()->getID();
 
         if (!msg.getConn()->isLoggedIn())
@@ -147,7 +147,7 @@ void Server::handleMessage(const Message& msg)
             }
             default:
                 // Unknown header id, ignore
-                std::cout << "Unknown header id: " << msgId << std::endl;
+                std::cout << "Unknown header id: " << static_cast<int>(msgId) << std::endl;
                 break;
             }
         }
@@ -198,26 +198,38 @@ void Server::sendGameState()
     {
         GameStateEntity entity;
         const Coordinates location = npc->getLocation();
-        entity.entityId = npc->getId();
+        entity.id = npc->getId();
+        entity.instanceId = npc->getInstanceId();
         entity.name = npc->getName();
         entity.x = location.x;
         entity.y = location.y;
         entity.z = location.z;
         entity.hp = npc->getHp();
         entityVector.push_back(entity);
+
+        if (npc->getCurrentAction() != nullptr && !npc->getCurrentAction()->isCompleted())
+        {
+            entity.currentAction = npc->getCurrentAction()->getActionInfo();
+        }
     }
 
     for (auto& player : gameWorldM.getPlayers())
     {
         GameStateEntity entity;
         const Coordinates location = player->getLocation();
-        entity.entityId = player->getId();
+        entity.id = player->getId();
+        entity.instanceId = player->getInstanceId();
         entity.name = player->getName();
         entity.x = location.x;
         entity.y = location.y;
         entity.z = location.z;
         entity.hp = player->getHp();
         entityVector.push_back(entity);
+
+        if (player->getCurrentAction() != nullptr && !player->getCurrentAction()->isCompleted())
+        {
+            entity.currentAction = player->getCurrentAction()->getActionInfo();
+        }
     }
     msg.entities = entityVector;
 
@@ -240,20 +252,17 @@ void Server::sendGameState()
         {
             // Add the current player to the message e.g. the player that is connected to this connection
             std::shared_ptr<PlayerCharacter> player = gameWorldM.getPlayer(conn->getID());
-            msg.currentPlayer.entityId = player->getId();
+            msg.currentPlayer.id = player->getId();
+            msg.currentPlayer.instanceId = player->getId();
             msg.currentPlayer.name = player->getName();
             const Coordinates location = player->getLocation();
             msg.currentPlayer.x = location.x;
             msg.currentPlayer.y = location.y;
             msg.currentPlayer.z = location.z;
             msg.currentPlayer.hp = player->getHp();
-            if (player->getCurrentAction() != nullptr)
+            if (player->getCurrentAction() != nullptr && !player->getCurrentAction()->isCompleted())
             {
-                msg.currentPlayer.currentActionType = player->getCurrentAction()->getActionType();
-            }
-            else
-            {
-                msg.currentPlayer.currentActionType = Action::ActionType::None;
+                msg.currentPlayer.currentAction = player->getCurrentAction()->getActionInfo();
             }
 
             const auto skills = player->getSkillSet().getSkills();

@@ -20,3 +20,13 @@ void RespawnAction::act()
         }
     }
 }
+
+CurrentAction RespawnAction::getActionInfo()
+{
+    CurrentAction actionInfo;
+    actionInfo.id = actionTypeM;
+    actionInfo.durationMs = actionTimeM.count();
+    actionInfo.looping = true;
+    actionInfo.targetId = pEntityM->getId();
+    return actionInfo;
+}

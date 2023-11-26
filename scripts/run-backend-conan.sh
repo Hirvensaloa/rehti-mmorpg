@@ -1,5 +1,7 @@
 #!/bin/bash
 
+./scripts/generate_assets.sh
+
 if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     # Linux
     EXECUTABLE_PATH="./server/build/src/server"

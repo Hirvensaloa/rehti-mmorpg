@@ -2,6 +2,7 @@
 
 #include "AssetCache.hpp"
 #include "Assimp.hpp"
+#include "CharacterReader.hpp"
 #include "MapReader.hpp"
 
 void AssetCache::loadAssets()
@@ -16,9 +17,10 @@ void AssetCache::loadAssets()
     auto gameSkills = fetchSkills();
     const auto gameObjects = fetchObjects(gameItems, gameSkills);
     const auto areaMatrix = fetchAreaMatrix();
+    const auto gameCharacters = readCharacterData();
 
     objectAssetDataM = loadGameObjectAssetData(gameObjects);
-    characterAssetDataM = loadCharacterAssetData();
+    characterAssetDataM = loadCharacterAssetData(gameCharacters);
     areaAssetDataM = loadAreaAssetData(areaMatrix);
     // TODO: Load item asset data
     std::cout << "ASSET CACHE - Assets loaded" << std::endl;
@@ -34,7 +36,7 @@ const ObjectAssetData& AssetCache::getObjectAssetDataById(int id)
     return objectAssetDataM.at(id);
 }
 
-const CharacterAssetData& AssetCache::getCharacterAssetDataById(std::string id)
+const CharacterAssetData& AssetCache::getCharacterAssetDataById(int id)
 {
     return characterAssetDataM.at(id);
 }
@@ -54,6 +56,7 @@ struct ObjectWithFileinfo
     int id;
     std::string objFilename;
     std::string textureFilename;
+    std::string characterInteractAnimation;
 };
 
 std::map<int, ObjectAssetData> AssetCache::loadGameObjectAssetData(const GameObjects& gameObjects)
@@ -71,11 +74,11 @@ std::map<int, ObjectAssetData> AssetCache::loadGameObjectAssetData(const GameObj
     }
     for (const auto& object : gameObjects.resourceObjects)
     {
-        objectsWithFilenames.push_back({object.first, object.second.objFilename, object.second.textureFilename});
+        objectsWithFilenames.push_back({object.first, object.second.objFilename, object.second.textureFilename, object.second.characterInteractAnimation});
     }
     for (const auto& object : gameObjects.lootObjects)
     {
-        objectsWithFilenames.push_back({object.first, object.second.objFilename, object.second.textureFilename});
+        objectsWithFilenames.push_back({object.first, object.second.objFilename, object.second.textureFilename, object.second.characterInteractAnimation});
     }
 
     for (const auto& object : objectsWithFilenames)
@@ -87,37 +90,19 @@ std::map<int, ObjectAssetData> AssetCache::loadGameObjectAssetData(const GameObj
         bool success = loadOBJFile(objFilepath, vertices, faces);
         if (success)
         {
-            objectAssetDataMap[object.id] = {aiVector3DVectorToVertexVector(vertices), aiFaceVectorToFaceVector(faces), textureDataMap[object.textureFilename]};
+            objectAssetDataMap[object.id] = {aiVector3DVectorToVertexVector(vertices), aiFaceVectorToFaceVector(faces), textureDataMap[object.textureFilename], object.characterInteractAnimation};
         }
     }
 
     return objectAssetDataMap;
 }
 
-std::map<std::string, CharacterAssetData> AssetCache::loadCharacterAssetData()
+std::map<int, CharacterAssetData> AssetCache::loadCharacterAssetData(const GameCharacters& gameCharacters)
 {
     // Load character textures first
-    std::map<std::string, ImageData> textureDataMap = loadCharacterTextures();
+    std::map<std::string, ImageData> textureDataMap = loadCharacterTextures(gameCharacters);
 
-    std::map<std::string, CharacterAssetData> characterAssetDataMap;
-
-    // Load ukko.obj
-    std::vector<aiVector3D> vertices;
-    std::vector<aiFace> faces;
-    bool ukkoSuccess = loadOBJFile(Config.OBJECT_OBJ_PATH + "ukko.obj", vertices, faces, 0.05f);
-    if (ukkoSuccess)
-    {
-        characterAssetDataMap["ukko"] = {aiVector3DVectorToVertexVector(vertices), aiFaceVectorToFaceVector(faces), textureDataMap["ukkotextuuri1.png"]};
-    }
-
-    // Load goblin.obj
-    std::vector<aiVector3D> verticesGoblin;
-    std::vector<aiFace> facesGoblin;
-    bool goblinSuccess = loadOBJFile(Config.OBJECT_OBJ_PATH + "orc1.obj", verticesGoblin, facesGoblin, 0.01f);
-    if (goblinSuccess)
-    {
-        characterAssetDataMap["goblin"] = {aiVector3DVectorToVertexVector(verticesGoblin), aiFaceVectorToFaceVector(facesGoblin), textureDataMap["sand.png"]};
-    }
+    std::map<int, CharacterAssetData> characterAssetDataMap;
 
     return characterAssetDataMap;
 }

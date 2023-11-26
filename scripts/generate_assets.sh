@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Add log here
+echo ">>>>>> RUNNING ASSET GENERATION SCRIPT <<<<<<\n"
+
 if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     # Linux
     EXECUTABLE_PATH="./rehtiLib/assets/loader/build/asset_loader"
@@ -21,3 +24,5 @@ else
     echo "Executable not found at $EXECUTABLE_PATH"
     exit 1
 fi
+
+echo ">>>>>> ASSET GENERATION SCRIPT FINISHED <<<<<<\n"

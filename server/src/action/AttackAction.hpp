@@ -13,9 +13,16 @@ public:
 
     ~AttackAction() = default;
 
-    std::shared_ptr<Entity> &getTarget();
+    std::shared_ptr<Entity>& getTarget();
 
     void act();
+
+    /**
+     * @brief Returns information about the current action
+     *
+     * @return CurrentAction
+     */
+    CurrentAction getActionInfo();
 
 private:
     std::optional<Coordinates> findNextMove();

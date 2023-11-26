@@ -1,12 +1,13 @@
 # Assets
 
-All the game assets are defined here with instructions on how to add and expand on existing assets. Assets include things such as items, skills and the world map.
+All the game assets, including characters, are defined here with instructions on how to add and expand on existing assets. Assets encompass various elements such as items, skills, world map, and characters.
 
-In summary, all the game assets can be defined in a JSON format. The goal is to make managing assets as flexible and scalable as possible. Also, managing assets shouldn't require extensive understanding of the code base.
+In summary, all game assets can be defined in a JSON format. The goal is to make managing assets as flexible and scalable as possible, ensuring that managing assets doesn't require an extensive understanding of the code base.
 
 - [Item Types and Attributes](#item-types-and-attributes)
-- [Game Objects](#game-objects)
 - [Skills](#skills)
+- [Characters](#characters)
+- [Game Objects](#game-objects)
 - [Map](#map)
 
 ## Item Types and Attributes
@@ -75,6 +76,88 @@ Example:
 }
 ```
 
+## Skills
+
+In the game players have skills which allow for extracting resources and fighting monsters. Skills can be trained by doing related activities, training yields xp. Higher xp in a skill allows extracting more and/or better resources and the player will get stronger. All the skills are defined [here](/assets/skills.json).
+
+Skills have the following attributes:
+
+- **id** Unique identifier
+- **name** Name of the skill
+- **description** A brief description
+
+### Adding a new skill
+
+You can add new skills to the game by following the above definition. Add the new skill [here](/assets/skills.json). Best practice is to add the skill to the end of the list and increment the id from the last skill.
+
+Example:
+
+```json
+{
+  "id": 4,
+  "name": "Blacksmithing",
+  "description": "Mastery of crafting weapons and armor."
+}
+```
+
+## Characters
+
+Characters in the game include the player character and non-player characters (NPCs). Character assets are defined in the JSON format. The JSON is found [here](/assets/characters.json) The character JSON structure includes the following attributes:
+
+**Player Character**
+
+- **id** Unique identifier for the player class
+- **textureFilename:** Filename of the texture file under the [textures](/assets/textures/)-folder.
+- **glTFFilename:** Filename of the `.glb` (glTF binary) file under the [characters](/assets/characters/)-folder.
+
+Example player character:
+
+```javascript
+{
+  "player": {
+    "id": 0,
+    "textureFilename": "player_texture.png",
+    "glTFFilename": "player_model.glb"
+  }
+}
+```
+
+**NPCs**
+
+All the NPCs in the game are defined here in a list. NPCs have similar attributes to the player character:
+
+- **id** Unique identifier for the NPC-type. Cannot conflict with the player id.
+- **textureFilename** Filename of the texture file under the textures-folder.
+- **glTFFilename** Filename of the .glb (glTF binary) file under the characters-folder.
+
+Example npc list:
+
+```javascript
+{
+  "npcs": [
+    {
+      "id": 1,
+      "textureFilename": "player_texture.png",
+      "glTFFilename": "player_model.glb"
+    }
+  ]
+}
+```
+
+### Animations
+
+All the possible character animations in the game are listed [here](/assets/animations.json). It is simply a list of animation names (ids).
+
+The animation name in glTF file is matched to the animation id, if the animation name (glTF) contains animation id as substring (case-insensitive). When creating a new character glTF-file, make sure the glTF-file contains all the animations that you want the character to be able to play. If you create a character without any animations or some missing animations, some actions just won't play any animation.
+
+To create a new animation type:
+
+1. Add the animation to the animations JSON list (link above).
+
+2. Create and add the animation to glTF-files, for each character. (Only for the characters you want the animation to happen on)
+
+3. Map the animation to some action on client. Currently done [here](/client/src/Utils.cpp)
+
 ## Game objects
 
 Objects can be categorized into three main types: **General**, **Resource** and **Loot**. Each type has specific attributes and serves different purposes. All the objects are defined [here](/assets/objects.json)
@@ -120,7 +203,8 @@ Resource objects represent in-game resources that players can interact with, suc
 - **description:** A brief description of the resource.
 - **tileMap:** A tile map representing the resource's visual representation.
 - **textureFilename** filename of the corresponding texture file under the [textures](/assets/textures/)-folder.
-- **objFilename** filename to the `.obj` under the [objects](/assets/objects/)-folder.
+- **objFilename** filename of the `.obj` under the [objects](/assets/objects/)-folder.
+- **characterInteractAnimation** name (id) of the character animation to be played on object interaction
 
 Example resource object:
 
@@ -142,7 +226,8 @@ Example resource object:
   "description": "A tree. It is a tree.",
   "tileMap": [["XB"]],
   "textureFilename": "tree.png",
-  "objFilename": "tree.obj"
+  "objFilename": "tree.obj",
+  "characterInteractAnimation": "woodcutting"
 }
 ```
 
@@ -157,7 +242,8 @@ Loot objects represent items that can be looted, such as treasure chests or hidd
 - **description:** A brief description of the loot.
 - **tileMap:** A tile map representing the loot's visual representation.
 - **textureFilename** filename of the corresponding texture file under the [textures](/assets/textures/)-folder.
-- **objFilename** filename to the `.obj` under the [objects](/assets/objects/)-folder.
+- **objFilename** filename of the `.obj` under the [objects](/assets/objects/)-folder.
+- **characterInteractAnimation** name (id) of the character animation to be played on object interaction
 
 Example loot object:
 
@@ -179,7 +265,8 @@ Example loot object:
   "description": "Contains a treasure (If you consider a dirty, rotten shield a treasure)",
   "tileMap": [["XB"]],
   "textureFilename": "chest.png",
-  "objFilename": "lootchest.obj"
+  "objFilename": "lootchest.obj",
+  "characterInteractAnimation": "loot"
 }
 ```
 
@@ -226,30 +313,6 @@ Another example with a fence object tile map `30-fence.json`:
 
 ```json
 [["S", "XS", "S"]]
-```
-
-## Skills
-
-In the game players have skills which allow for extracting resources and fighting monsters. Skills can be trained by doing related activities, training yields xp. Higher xp in a skill allows extracting more and/or better resources and the player will get stronger. All the skills are defined [here](/assets/skills.json).
-
-Skills have the following attributes:
-
-- **id** Unique identifier
-- **name** Name of the skill
-- **description** A brief description
-
-### Adding a new skill
-
-You can add new skills to the game by following the above definition. Add the new skill [here](/assets/skills.json). Best practice is to add the skill to the end of the list and increment the id from the last skill.
-
-Example:
-
-```json
-{
-  "id": 4,
-  "name": "Blacksmithing",
-  "description": "Mastery of crafting weapons and armor."
-}
 ```
 
 ## Map

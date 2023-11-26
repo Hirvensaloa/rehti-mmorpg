@@ -6,7 +6,7 @@
 
 AttackAction::AttackAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Entity> target, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), pTargetM(target), actionTimeM(pEntityM->getAttackSpeed()) {}
 
-std::shared_ptr<Entity> &AttackAction::getTarget()
+std::shared_ptr<Entity>& AttackAction::getTarget()
 {
     return pTargetM;
 }
@@ -53,7 +53,7 @@ std::optional<Coordinates> AttackAction::findNextMove()
 {
     Coordinates pLocation = pEntityM->getLocation();
     Coordinates tLocation = pTargetM->getLocation();
-    Map &map = pEntityM->getGameWorld()->getMap();
+    Map& map = pEntityM->getGameWorld()->getMap();
     if (!(pLocation == tLocation)) // Here we can take the path straight to the target location, because we will never actually move onto the target's location as we will be in range to attack
     {
         auto path = map.findPath(pLocation, tLocation);
@@ -80,4 +80,14 @@ std::optional<Coordinates> AttackAction::findNextMove()
         }
         return pLocation;
     }
+}
+
+CurrentAction AttackAction::getActionInfo()
+{
+    CurrentAction actionInfo;
+    actionInfo.id = actionTypeM;
+    actionInfo.durationMs = actionTimeM.count();
+    actionInfo.looping = true;
+    actionInfo.targetId = pTargetM->getId();
+    return actionInfo;
 }

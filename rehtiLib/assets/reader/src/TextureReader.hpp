@@ -3,8 +3,9 @@
 #include <map>
 #include <string>
 
-#include "ObjectReader.hpp"
 #include "AssetTypes.hpp"
+#include "CharacterReader.hpp"
+#include "ObjectReader.hpp"
 
 /**
  * @file Reads the texture files
@@ -16,14 +17,15 @@
  * @param gameObjects GameObjects
  * @return Map of texture filename and its corresponding ImageData
  */
-std::map<std::string, ImageData> loadObjectTextures(const GameObjects &gameObjects);
+std::map<std::string, ImageData> loadObjectTextures(const GameObjects& gameObjects);
 
 /**
  * @brief Reads all the character's textures into a map (key=filename, value=ImageData)
+ * @param gameCharacters GameCharacters
  *
  * @return Map of texture filename and its corresponding ImageData
  */
-std::map<std::string, ImageData> loadCharacterTextures();
+std::map<std::string, ImageData> loadCharacterTextures(const GameCharacters& gameCharacters);
 
 /**
  * @brief Reads all different the map texture files
@@ -49,7 +51,7 @@ std::vector<std::vector<int>> loadMapTexturePositions();
  *
  * @return Blend map image data
  */
-ImageData createAreaBlendMap(const std::vector<std::vector<int>> &mapTexturePositionMatrix, int columnOffset, int rowOffset);
+ImageData createAreaBlendMap(const std::vector<std::vector<int>>& mapTexturePositionMatrix, int columnOffset, int rowOffset);
 
 /**
  * @brief Loads default texture into memory

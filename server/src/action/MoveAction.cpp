@@ -45,3 +45,19 @@ const std::chrono::milliseconds MoveAction::getMoveTime()
 {
     return std::chrono::milliseconds(200);
 }
+
+CurrentAction MoveAction::getActionInfo()
+{
+    CurrentAction actionInfo;
+    actionInfo.id = actionTypeM;
+    actionInfo.durationMs = actionTimeM.count();
+    actionInfo.looping = true;
+
+    if (pathM.size())
+    {
+        const Coordinates nextTarget = {pathM.front().first, pathM.front().second};
+        actionInfo.targetCoordinate = {nextTarget.x, nextTarget.y, nextTarget.z};
+    }
+
+    return actionInfo;
+}

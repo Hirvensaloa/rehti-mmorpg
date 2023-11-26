@@ -157,21 +157,22 @@ void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSec
     timersM.addTimerCallback(playerID, timeInSeconds, callback);
 }
 
-void RehtiGraphics::playAnimation(int playerID, AnimationConfig cfg)
+void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
 {
+    std::cout << "Playing animation " << cfg.animType << " on player " << characterID << std::endl;
     // reset all animations currently playing
-    timersM.finishCallback(playerID);
-    characterOrientationsM[playerID].animationData.currentAnimation = cfg.animType;
-    characterOrientationsM[playerID].animationData.currentTicks = 0;
+    timersM.finishCallback(characterID);
+    characterOrientationsM[characterID].animationData.currentAnimation = cfg.animType;
+    characterOrientationsM[characterID].animationData.currentTicks = 0;
     // add new callback to play the animation
     float factor = 1.0f;
     if (cfg.looping)
         factor = 0.f;
-    std::function<void(float)> callback = [playerID, cfg, this](float dt)
+    std::function<void(float)> callback = [characterID, cfg, this](float dt)
     {
-        characterOrientationsM[playerID].advanceAnimation(dt);
-        glm::mat4 currentMatrix = characterOrientationsM[playerID].characterOrientation.getTransformationMatrix();
-        pObjectManagerM->updateCharacterDescriptor(playerID, &currentMatrix, characterOrientationsM[playerID].boneTransformations.data(), currentFrameM);
+        characterOrientationsM[characterID].advanceAnimation(dt);
+        glm::mat4 currentMatrix = characterOrientationsM[characterID].characterOrientation.getTransformationMatrix();
+        pObjectManagerM->updateCharacterDescriptor(characterID, &currentMatrix, characterOrientationsM[characterID].boneTransformations.data(), currentFrameM);
     };
 }
 

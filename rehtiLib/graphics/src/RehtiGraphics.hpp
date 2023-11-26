@@ -148,18 +148,12 @@ public:
     */
     void movePlayer(int playerID, glm::vec3 location, float timeInSeconds);
 
-    struct AnimationConfig
-    {
-        AnimationType animType;
-        float duration;
-        bool looping;
-    };
     /**
-     * @brief
-     * @param playerID
+     * @brief Plays an animation for the given character.
+     * @param characterID
      * @param cfg
      */
-    void playAnimation(int playerID, AnimationConfig cfg);
+    void playAnimation(int characterID, AnimationConfig cfg);
 
     /**
      * @brief Forces player to move to the location given, cancelling any remaining movement callbacks and animations.

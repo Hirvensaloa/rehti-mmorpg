@@ -38,6 +38,29 @@ bool loadOBJFile(const std::string& path, std::vector<aiVector3D>& vertices, std
     return true;
 }
 
+/**
+ * @brief Loads the object from the given path.
+ * @param path to the object file.
+ * @param vertices Empty vector of float that will be filled with the vertices.
+ * @param indices Empty vector of unsigned int that will be filled with the indices.
+ * @param animations Empty array of Animation that will be filled with the animations.
+ * @param bones Empty vector of BoneNode that will be filled with the bones.
+ * @return True if the object was loaded successfully, false otherwise.
+ */
+bool loadGlTFFile(const std::string& path, std::vector<aiVector3D>& vertices, std::vector<aiFace>& faces, std::array<Animation, ANIMATION_TYPE_COUNT>& animations, std::vector<BoneNode>& bones)
+{
+    Assimp::Importer importer;
+    const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
+
+    if (!scene)
+    {
+        std::cout << "Failed to load glTF file: " << path << std::endl;
+        return false;
+    }
+
+    return true;
+}
+
 size_t fillSkeleton(aiNode* rootNode, std::vector<BoneNode>& boneList, std::vector<glm::mat4> transformations, std::map<aiString, uint32_t>& nameToIndex)
 {
     // bonecount acts as the next added index as well as count of bones

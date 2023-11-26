@@ -19,7 +19,8 @@
         ["XB"]
       ],
       "textureFilename": "treetexture.png",
-      "objFilename": "tree.obj"
+      "objFilename": "tree.obj",
+      "characterInteractAnimation": "woodcutting"
     },
     {
       "id": 30,
@@ -67,7 +68,8 @@
         ["XB"]
       ],
       "textureFilename": "treasure_chest.png",
-      "objFilename": "treasure_chest.obj"
+      "objFilename": "treasure_chest.obj",
+      "characterInteractAnimation": "loot"
     }
   ]
 }

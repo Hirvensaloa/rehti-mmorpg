@@ -6,6 +6,7 @@
 
 #include "Client.hpp"
 #include "RehtiReader.hpp"
+#include "Utils.hpp"
 
 Client::Client(std::string ip, std::string port)
     : ioContextM(boost::asio::io_context()),
@@ -134,46 +135,49 @@ void Client::processMessages()
         {
             Message msg = messagesM.pop_front();
 
-            const int msgId = msg.getHeader().id;
+            const MessageId msgId = static_cast<MessageId>(msg.getHeader().id);
 
-            if (msgId == MessageId::GameState)
+            try
             {
-                const GameStateMessage& gameStateMsg = MessageApi::parseGameState(msg.getBody());
-
-                const auto objAsset = assetCacheM.getCharacterAssetDataById("ukko");
-                pGraphLibM->addGameObject(gameStateMsg.currentPlayer.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
-                pGraphLibM->forcePlayerMove(gameStateMsg.currentPlayer.entityId, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
-                std::cout << "player"
-                          << " " << gameStateMsg.currentPlayer.entityId << " " << gameStateMsg.currentPlayer.x << " " << gameStateMsg.currentPlayer.y << " " << gameStateMsg.currentPlayer.z << std::endl;
-
-                for (const auto& entity : gameStateMsg.entities)
+                if (msgId == MessageId::GameState)
                 {
-                    // Do not draw the current player twice
-                    if (entity.entityId == gameStateMsg.currentPlayer.entityId)
+                    const GameStateMessage& gameStateMsg = MessageApi::parseGameState(msg.getBody());
+
+                    const auto objAsset = assetCacheM.getCharacterAssetDataById(0); // TODO: Currently player id refers to the player id in db. We should also have a way to indicate if the entity is a player or not. Currently the problem is that the player id might interfere with entity ids.
+                    pGraphLibM->addGameObject(gameStateMsg.currentPlayer.id, objAsset.vertices, objAsset.indices, objAsset.texture, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
+                    pGraphLibM->forcePlayerMove(gameStateMsg.currentPlayer.id, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
+                    pGraphLibM->playAnimation(gameStateMsg.currentPlayer.id, actionToAnimationConfig(gameStateMsg.currentPlayer.currentAction));
+
+                    for (const auto& entity : gameStateMsg.entities)
                     {
-                        continue;
-                    }
+                        // Do not draw the current player twice
+                        if (entity.instanceId == gameStateMsg.currentPlayer.instanceId)
+                        {
+                            continue;
+                        }
 
-                    std::cout << "entity"
-                              << " " << entity.entityId << " " << entity.x << " " << entity.y << " " << entity.z << std::endl;
-                    const auto objAsset = assetCacheM.getCharacterAssetDataById("goblin");
-                    pGraphLibM->addGameObject(entity.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
-                    pGraphLibM->forceGameObjectMove(entity.entityId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
+                        const auto objAsset = assetCacheM.getCharacterAssetDataById(entity.id);
+                        pGraphLibM->addGameObject(entity.instanceId, objAsset.vertices, objAsset.indices, objAsset.texture, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
+                        pGraphLibM->forceGameObjectMove(entity.instanceId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
+                        pGraphLibM->playAnimation(entity.instanceId, actionToAnimationConfig(entity.currentAction));
+                    }
+                    for (const auto& object : gameStateMsg.objects)
+                    {
+                        const auto objAsset = assetCacheM.getObjectAssetDataById(object.id);
+                        pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
+                    }
                 }
-                for (const auto& object : gameStateMsg.objects)
+                else if (msgId == MessageId::Informative)
                 {
-                    std::cout << "object"
-                              << " " << object.id << " " << object.x << " " << object.y << " " << object.z << std::endl;
-                    const auto objAsset = assetCacheM.getObjectAssetDataById(object.id);
-                    pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
+                    const InformativeMessage& informativeMsg = MessageApi::parseInformative(msg.getBody());
+                    std::cout << "Message from server: " << informativeMsg.message << std::endl;
                 }
             }
-            else if (msgId == MessageId::Informative)
+            catch (const std::exception& e)
             {
-                const InformativeMessage& informativeMsg = MessageApi::parseInformative(msg.getBody());
-                std::cout << "Message from server: " << informativeMsg.message << std::endl;
+                std::cerr << "Failed to parse message from server: " << e.what() << '\n';
             }
-        }
+        };
     }
 }
 

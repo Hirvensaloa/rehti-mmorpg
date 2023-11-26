@@ -1,0 +1,19 @@
+{
+  "player": {
+    "id": 0,
+    "textureFilename": "ukkotextuuri.png",
+    "glTFFilename": "ukko.glb"
+  },
+  "npcs": [
+    {
+      "id": 1,
+      "textureFilename": "ukkotextuuri.png",
+      "glTFFilename": "ukko.glb"
+    },
+    {
+      "id": 2,
+      "textureFilename": "ukkotextuuri.png",
+      "glTFFilename": "ukko.glb"
+    }
+  ]
+}

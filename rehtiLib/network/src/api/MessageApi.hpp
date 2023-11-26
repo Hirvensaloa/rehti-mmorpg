@@ -12,22 +12,11 @@
 /**
  * @file CREATING NEW MESSAGES:
  *
- * 1. Add a new enum value to MessageId enum.
+ * 1. Add a new enum value to MessageId enum. (In Types.hpp file)
  * 2. Create a new struct for the message type.
  * 3. Add a new create and parse method to MessageApi class.
  * 4. Handle the message instance on the server
  */
-
-enum MessageId
-{
-    GameState,
-    Login,
-    Move,
-    Attack,
-    ObjectInteract,
-    Test,
-    Informative,
-};
 
 struct MessageStruct
 {

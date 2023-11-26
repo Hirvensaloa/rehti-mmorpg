@@ -18,6 +18,13 @@ public:
 
     static const std::chrono::milliseconds getMoveTime();
 
+    /**
+     * @brief Returns information about the current action
+     *
+     * @return CurrentAction
+     */
+    CurrentAction getActionInfo();
+
 private:
     Coordinates targetM;
 

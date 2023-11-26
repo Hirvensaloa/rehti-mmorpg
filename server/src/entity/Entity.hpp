@@ -13,35 +13,42 @@ class GameWorld;
 class Entity : public std::enable_shared_from_this<Entity>
 {
 public:
-    Entity(GameWorld *pGameWorld, std::string name, unsigned int id = 0, Coordinates location = Coordinates());
+    Entity(GameWorld* pGameWorld, std::string name, unsigned int id = 0, Coordinates location = Coordinates());
 
     ~Entity() = default;
 
     unsigned int getId();
 
+    /**
+     * @brief Get the Instance Id object
+     *
+     * @return unsigned int
+     */
+    unsigned int getInstanceId();
+
     std::string getName();
 
-    Coordinates &getLocation();
+    Coordinates& getLocation();
 
-    void setLocation(Coordinates &location);
+    void setLocation(Coordinates& location);
 
-    Coordinates &getRespawnLocation();
+    Coordinates& getRespawnLocation();
 
-    std::shared_ptr<Action> &getCurrentAction();
+    std::shared_ptr<Action>& getCurrentAction();
 
     int getHp();
 
     int getMaxHp();
 
-    Inventory &getInventory();
+    Inventory& getInventory();
 
-    Equipment &getEquipment();
+    Equipment& getEquipment();
 
     int getRange();
 
     int getAttackSpeed();
 
-    GameWorld *getGameWorld();
+    GameWorld* getGameWorld();
 
     void changeHp(int amount);
 
@@ -49,9 +56,9 @@ public:
 
     bool move(Coordinates location);
 
-    void attack(Entity &target);
+    void attack(Entity& target);
 
-    SkillSet &getSkillSet();
+    SkillSet& getSkillSet();
 
     virtual void update() = 0;
 
@@ -63,6 +70,8 @@ public:
 
 protected:
     unsigned int idM;
+    unsigned int instanceIdM;
+    inline static int nextInstanceIdM = 0;
 
     std::string nameM;
 
@@ -76,7 +85,7 @@ protected:
 
     int hpM = maxHpM;
 
-    GameWorld *pGameWorldM;
+    GameWorld* pGameWorldM;
 
     Inventory inventoryM;
 

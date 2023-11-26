@@ -18,12 +18,6 @@ conan profile detect --force
 
 3. Make sure you have Cmake >3.27 installed
 
-4. Generate the assets (map, items and objects).
-
-```sh
-./scripts/generate_assets.sh
-```
-
 ### Running
 
 Instructions to launch and run:
@@ -114,7 +108,15 @@ Sent by: Server
   - **z**: Z-coordinate.
   - **hp**: Health points.
   - **rotation**: Rotation angle. 0-4 (North-South)
-  - **currentActionType**: Current action type. Equals to message id's that represent actions. For example, Attack and Move.
+  - **currentAction**: Current action
+    - **id**: action id (For example, move or attack). -1 means no action
+    - **durationMs**: duration for one action iteration
+    - **looping**: boolean indicating if the action should loop or not
+    - **targetId**: action target id. Intepretation depends on the action id. For example, if attack -> targetId is entityId. If move -> targetId is not defined
+    - **targetCoordinate**: target coordinates. Defined if action id is move.
+      - **x**: x-coordinate
+      - **y**: y-coordinate
+      - **z**: z-coordinate
 
 - **objects**: A collection of `GameStateObject` objects representing objects in the game world.
   - **id**: Object ID.
@@ -229,92 +231,3 @@ Run the tests with `./scripts/test-server.sh`.
 - Changes are implemented through pull requests
 
 - Change pattern: your own branch -> dev -> main
-
-## Projektin seuranta (Viedään tää osio lopuks jonnekki muualle)
-
-### Viikko 1
-
-Projektin pystytys ja teknologioihin tutustuminen
-
-#### Aleksi
-
-- Palvelimen alustus 20h
-- Kehitysympäristön pystytys 10h
-- Suunnittelu 5h
-- Kirjastoihin tutustuminen 5h
-
-Yhteensä: 40h
-
-#### Samu
-
-#### Otso
-
-### Viikko 2
-
-Kirjastojen tunkkausta
-
-#### Aleksi
-
-- Palvelimen alustus 10h
-- Tietokanta 5h
-- Kirjastojen setuppaus 10h
-
-Yhteensä: 25h
-
-#### Samu
-
-#### Otso
-
-### Viikko 3
-
-#### Aleksi
-
-- Kirjastojen asentamista 5h
-- Nettikoodi 5h
-- Tekninen suunnittelu 5h
-- Tietokanta 5h
-
-Yhteensä: 20h
-
-#### Samu
-
-#### Otso
-
-### Viikko 4
-
-#### Aleksi
-
-- Projektin suunnittelu 10h
-- Nettikoodin toteutus coroutiineilla 15h
-
-Yhteensä: 25h
-
-#### Samu
-
-#### Otso
-
-### Viikko 5
-
-#### Aleksi
-
-- Projektin suunnittelu 15h
-
-Yhteensä: 15h
-
-#### Samu
-
-#### Otso
-
-### Viikko 6
-
-#### Aleksi
-
-- Projektin suunnittelu 10h
-- Map loader toteutus 15h
-- Dokumentointi 5h
-
-Yhteensä: 30h
-
-#### Samu
-
-#### Otso

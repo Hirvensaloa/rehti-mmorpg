@@ -31,7 +31,7 @@ bool GameWorld::removePlayer(unsigned int playerId)
     return false;
 }
 
-std::vector<std::shared_ptr<PlayerCharacter>> &GameWorld::getPlayers()
+std::vector<std::shared_ptr<PlayerCharacter>>& GameWorld::getPlayers()
 {
     return playersM;
 }
@@ -49,7 +49,7 @@ std::shared_ptr<PlayerCharacter> GameWorld::getPlayer(unsigned int playerId)
     throw std::runtime_error("Player not found");
 }
 
-Map &GameWorld::getMap()
+Map& GameWorld::getMap()
 {
     return mapM;
 }
@@ -59,12 +59,12 @@ void GameWorld::addNpc(Npc npc)
     npcsM.push_back(std::make_shared<Npc>(npc));
 }
 
-std::vector<std::shared_ptr<Npc>> &GameWorld::getNpcs()
+std::vector<std::shared_ptr<Npc>>& GameWorld::getNpcs()
 {
     return npcsM;
 }
 
-std::map<std::string, std::shared_ptr<Object>> &GameWorld::getObjects()
+std::map<std::string, std::shared_ptr<Object>>& GameWorld::getObjects()
 {
     return objectsM;
 }
@@ -89,8 +89,8 @@ void GameWorld::initWorld()
 
     // Add objects to the world
     GameObjects objects = AssetManager::getObjects();
-    const std::vector<ObjectLocation> &objectLocations = AssetManager::getObjectLocations();
-    for (const ObjectLocation &objectLocation : objectLocations)
+    const std::vector<ObjectLocation>& objectLocations = AssetManager::getObjectLocations();
+    for (const ObjectLocation& objectLocation : objectLocations)
     {
         const std::optional<reader::ObjectType> optionalType = objects.getObjectType(objectLocation.id);
 
@@ -102,21 +102,21 @@ void GameWorld::initWorld()
         const reader::ObjectType type = optionalType.value();
         if (type == reader::ObjectType::GENERAL)
         {
-            const GeneralObjectStruct &generalObject = objects.getGeneralObject(objectLocation.id);
+            const GeneralObjectStruct& generalObject = objects.getGeneralObject(objectLocation.id);
             Coordinates coords{objectLocation.x, objectLocation.y};
             Object genObj(generalObject.id, objectLocation.instanceId, generalObject.name, coords, objectLocation.rotation, type);
             objectsM[objectLocation.instanceId] = std::make_shared<Object>(genObj);
         }
         else if (type == reader::ObjectType::LOOT)
         {
-            const LootObjectStruct &lootObject = objects.getLootObject(objectLocation.id);
+            const LootObjectStruct& lootObject = objects.getLootObject(objectLocation.id);
             Coordinates coords{objectLocation.x, objectLocation.y};
             LootObject lootObj(lootObject.id, objectLocation.instanceId, lootObject.name, coords, objectLocation.rotation, lootObject.yieldableItemList, type);
             objectsM[objectLocation.instanceId] = std::make_shared<LootObject>(lootObj);
         }
         else if (type == reader::ObjectType::RESOURCE)
         {
-            const ResourceObjectStruct &resourceObject = objects.getResourceObject(objectLocation.id);
+            const ResourceObjectStruct& resourceObject = objects.getResourceObject(objectLocation.id);
             Coordinates coords{objectLocation.x, objectLocation.y};
             ResourceObject resObj(resourceObject.id, objectLocation.instanceId, resourceObject.name, coords, objectLocation.rotation, resourceObject.yieldableItemList, resourceObject.xpPerYield, resourceObject.depleteChance, resourceObject.relatedSkillId, resourceObject.xpRequirement, type);
             objectsM[objectLocation.instanceId] = std::make_shared<ResourceObject>(resObj);
@@ -124,8 +124,8 @@ void GameWorld::initWorld()
     }
     std::cout << "Objects added to the world" << std::endl;
 
-    npcsM.push_back(std::make_shared<Goblin>(this, "Kimmo-Goblin", 1337, Coordinates(1, 1)));
-    npcsM.push_back(std::make_shared<Bandit>(this, "Roisto-Pena", 123, Coordinates(5, 5)));
+    npcsM.push_back(std::make_shared<Goblin>(this, "Kimmo-Goblin", 1, Coordinates(1, 1)));
+    npcsM.push_back(std::make_shared<Bandit>(this, "Roisto-Pena", 2, Coordinates(5, 5)));
     npcsM.back()->getInventory().addItem(AssetManager::createItemInstance(1));
     npcsM.back()->getInventory().useItem(1);
     std::cout << "NPCs added to the world" << std::endl;

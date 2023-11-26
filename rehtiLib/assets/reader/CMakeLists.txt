@@ -15,6 +15,10 @@ add_library(${TARGET} STATIC
   src/ObjectReader.cpp 
   src/SkillReader.hpp 
   src/SkillReader.cpp 
+  src/CharacterReader.hpp
+  src/CharacterReader.cpp
+  src/AnimationReader.hpp
+  src/AnimationReader.cpp
   src/Utils.hpp
   src/Utils.cpp
   ../Config.hpp)

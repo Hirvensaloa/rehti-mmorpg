@@ -25,7 +25,8 @@ enum MessageId
     Move,
     Attack,
     ObjectInteract,
-    Test,
+    UseItem,
+    Unequip,
     Informative,
 };
 
@@ -73,6 +74,18 @@ struct ObjectInteractMessage
 {
     const MessageId id = MessageId::ObjectInteract;
     std::string objectId;
+};
+
+struct UseItemMessage
+{
+    const MessageId id = MessageId::UseItem;
+    int itemId;
+};
+
+struct UnequipMessage
+{
+    const MessageId id = MessageId::Unequip;
+    int itemId;
 };
 
 /**
@@ -157,6 +170,12 @@ public:
      */
     static ObjectInteractMessage parseObjectInteract(std::string msgBody);
 
+    static MessageStruct createUseItem(const UseItemMessage& useItemMsg);
+    static UseItemMessage parseUseItem(std::string msgBody);
+
+    static MessageStruct createUnequip(const UnequipMessage& unequipMsg);
+    static UnequipMessage parseUnequip(std::string msgBody);
+
     /**
      * @brief Create a MessageStruct for game state
      *
@@ -164,6 +183,7 @@ public:
      * @return MessageStruct
      */
     static MessageStruct createGameState(const GameStateMessage& gameState);
+
     /**
      * @brief Parse received game state message body
      *

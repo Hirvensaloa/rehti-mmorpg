@@ -123,6 +123,28 @@ boost::asio::awaitable<void> Client::interactWithObject(const int& objectId)
     }
 }
 
+boost::asio::awaitable<void> Client::useItem(const int itemInstanceId)
+{
+    if (connectionM->isConnected())
+    {
+        UseItemMessage msg;
+        msg.itemId = itemInstanceId;
+        co_await connectionM->send(MessageApi::createUseItem(msg));
+    }
+    co_return;
+}
+
+boost::asio::awaitable<void> Client::unequipItem(const int itemInstanceId)
+{
+    if (connectionM->isConnected())
+    {
+        UnequipMessage msg;
+        msg.itemId = itemInstanceId;
+        co_await connectionM->send(MessageApi::createUnequip(msg));
+    }
+    co_return;
+}
+
 void Client::processMessages()
 {
     while (true)
@@ -140,30 +162,31 @@ void Client::processMessages()
             {
                 const GameStateMessage& gameStateMsg = MessageApi::parseGameState(msg.getBody());
 
+                pGraphLibM->getGui()->setInventory(gameStateMsg.currentPlayer.inventory);
+
+                pGraphLibM->getGui()->setSkills(gameStateMsg.currentPlayer.skills);
+
                 const auto objAsset = assetCacheM.getCharacterAssetDataById("ukko");
                 pGraphLibM->addGameObject(gameStateMsg.currentPlayer.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
                 pGraphLibM->forcePlayerMove(gameStateMsg.currentPlayer.entityId, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
-                std::cout << "player"
-                          << " " << gameStateMsg.currentPlayer.entityId << " " << gameStateMsg.currentPlayer.x << " " << gameStateMsg.currentPlayer.y << " " << gameStateMsg.currentPlayer.z << std::endl;
 
                 for (const auto& entity : gameStateMsg.entities)
                 {
-                    // Do not draw the current player twice
                     if (entity.entityId == gameStateMsg.currentPlayer.entityId)
                     {
-                        continue;
+                        pGraphLibM->getGui()->setEquipment(entity.equipment);
                     }
 
-                    std::cout << "entity"
-                              << " " << entity.entityId << " " << entity.x << " " << entity.y << " " << entity.z << std::endl;
+                    // std::cout << "entity"
+                    //           << " " << entity.entityId << " " << entity.x << " " << entity.y << " " << entity.z << std::endl;
                     const auto objAsset = assetCacheM.getCharacterAssetDataById("goblin");
                     pGraphLibM->addGameObject(entity.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
                     pGraphLibM->forceGameObjectMove(entity.entityId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
                 }
                 for (const auto& object : gameStateMsg.objects)
                 {
-                    std::cout << "object"
-                              << " " << object.id << " " << object.x << " " << object.y << " " << object.z << std::endl;
+                    // std::cout << "object"
+                    //           << " " << object.id << " " << object.x << " " << object.y << " " << object.z << std::endl;
                     const auto objAsset = assetCacheM.getObjectAssetDataById(object.id);
                     pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
                 }
@@ -238,7 +261,7 @@ void Client::startGraphics()
 
             // Loop through the area textures and use default texture for leftovers
             int k = 0;
-            while (k <= Config.MAX_MAP_TEXTURES)
+            while (k < Config.MAX_MAP_TEXTURES)
             {
                 if (areaAssetData.textures.size() > k && areaAssetData.textures[k].width != 0 && areaAssetData.textures[k].height != 0)
                 {
@@ -258,6 +281,12 @@ void Client::startGraphics()
     // Add action callbacks
     pGraphLibM->addMouseClickCallback([this](const Hit& hit)
                                       { handleMouseClick(hit); });
+
+    pGraphLibM->getGui()->addInventoryItemClickCallback([this](const int itemInstanceId)
+                                                        { boost::asio::co_spawn(ioContextM, useItem(itemInstanceId), boost::asio::detached); });
+
+    pGraphLibM->getGui()->addEquipmentItemClickCallback([this](const int itemInstanceId)
+                                                        { boost::asio::co_spawn(ioContextM, unequipItem(itemInstanceId), boost::asio::detached); });
 
     std::cout << "Graphics library ready" << std::endl;
 

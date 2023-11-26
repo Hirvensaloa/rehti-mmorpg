@@ -101,6 +101,54 @@ ObjectInteractMessage MessageApi::parseObjectInteract(std::string msgBody)
     return objectInteract;
 };
 
+MessageStruct MessageApi::createUseItem(const UseItemMessage& useItemMsg)
+{
+    rapidjson::Document document = createDocument();
+    rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
+    document.AddMember("itemId", useItemMsg.itemId, allocator);
+
+    return MessageStruct{useItemMsg.id, createString(document)};
+};
+
+UseItemMessage MessageApi::parseUseItem(std::string msgBody)
+{
+    rapidjson::Document document = parseDocument(msgBody);
+
+    if (!validMember(document, "itemId", ValueType::INT))
+    {
+        throw std::runtime_error("Invalid UseItem message");
+    }
+
+    UseItemMessage useItemMsg;
+    useItemMsg.itemId = document["itemId"].GetInt();
+
+    return useItemMsg;
+};
+
+MessageStruct MessageApi::createUnequip(const UnequipMessage& unequipMsg)
+{
+    rapidjson::Document document = createDocument();
+    rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
+    document.AddMember("itemId", unequipMsg.itemId, allocator);
+
+    return MessageStruct{unequipMsg.id, createString(document)};
+};
+
+UnequipMessage MessageApi::parseUnequip(std::string msgBody)
+{
+    rapidjson::Document document = parseDocument(msgBody);
+
+    if (!validMember(document, "itemId", ValueType::INT))
+    {
+        throw std::runtime_error("Invalid Unequip message");
+    }
+
+    UnequipMessage unequipMsg;
+    unequipMsg.itemId = document["itemId"].GetInt();
+
+    return unequipMsg;
+};
+
 MessageStruct MessageApi::createGameState(const GameStateMessage& gameState)
 {
     rapidjson::Document document = createDocument();
@@ -118,6 +166,17 @@ MessageStruct MessageApi::createGameState(const GameStateMessage& gameState)
         entityObject.AddMember("z", entity.z, allocator);
         entityObject.AddMember("hp", entity.hp, allocator);
         entityObject.AddMember("currentActionType", entity.currentActionType, allocator);
+        rapidjson::Value equipment(rapidjson::kArrayType);
+        for (const auto& item : entity.equipment)
+        {
+            rapidjson::Value itemObject(rapidjson::kObjectType);
+            itemObject.AddMember("id", item.id, allocator);
+            itemObject.AddMember("instanceId", item.instanceId, allocator);
+            itemObject.AddMember("name", rapidjson::StringRef(item.name.c_str()), allocator);
+            itemObject.AddMember("stackSize", item.stackSize, allocator);
+            equipment.PushBack(itemObject, allocator);
+        }
+        entityObject.AddMember("equipment", equipment, allocator);
         entityArray.PushBack(entityObject, allocator);
     }
     document.AddMember("entities", entityArray, allocator);
@@ -193,6 +252,18 @@ GameStateMessage MessageApi::parseGameState(std::string msgBody)
         gameStateEntity.z = entity["z"].GetInt();
         gameStateEntity.hp = entity["hp"].GetInt();
         gameStateEntity.currentActionType = entity["currentActionType"].GetInt();
+
+        gameStateEntity.equipment = std::vector<GameItem>();
+        for (const auto& item : entity["equipment"].GetArray())
+        {
+            GameItem itemObject;
+            itemObject.id = item["id"].GetInt();
+            itemObject.instanceId = item["instanceId"].GetInt();
+            itemObject.name = item["name"].GetString();
+            itemObject.stackSize = item["stackSize"].GetInt();
+
+            gameStateEntity.equipment.push_back(itemObject);
+        }
 
         gameState.entities.push_back(gameStateEntity);
     }

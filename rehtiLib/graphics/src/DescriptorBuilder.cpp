@@ -95,6 +95,8 @@ VkDescriptorPool PoolManager::createPool(VkDevice device, VkDescriptorPoolCreate
 	{
 		throw std::runtime_error("Failed to create descriptor pool");
 	}
+	freePoolsM.push_back(pool);
+
 	return pool;
 }
 
@@ -341,4 +343,9 @@ bool DescriptorBuilder::build(VkDescriptorSet& set)
 void DescriptorBuilder::setDescriptorSetLayout(const VkDescriptorSetLayoutBinding* bindings, uint32_t bindingCount, VkDescriptorSetLayout& layout)
 {
 	layout = pLayoutCacheM->createDescriptorSetLayout(bindings, bindingCount);
+}
+
+const PoolManager& DescriptorBuilder::getPoolManager() const
+{
+	return *pPoolManagerM;
 }

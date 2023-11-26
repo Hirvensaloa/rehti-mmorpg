@@ -42,6 +42,7 @@
 build
 client/out
 rehtiLib/graphics/bin
+rehtiLib/graphics/bindings
 
 
 # Visual studio files
@@ -83,3 +84,6 @@ generated
 
 # Generated doxygen files
 docs/html
+
+#imgui.ini file
+imgui.ini

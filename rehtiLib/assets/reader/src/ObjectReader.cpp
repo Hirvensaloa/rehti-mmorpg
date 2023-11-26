@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <map>
+#include <filesystem>
 #include "rapidjson/document.h"
 #include "rapidjson/filereadstream.h"
 
@@ -105,10 +106,32 @@ GameObjects fetchObjects(GameItems &gameItems, std::map<int, GameSkill> &gameSki
     const rapidjson::Value &object = *itr;
 
     // Validate common object members
-    if (!validMember(object, "type", ValueType::STRING) || !validMember(object, "id", ValueType::INT) || !validMember(object, "name", ValueType::STRING) || !validMember(object, "description", ValueType::STRING) || !validMember(object, "tileMap", ValueType::ARRAY))
+    if (!validMember(object, "type", ValueType::STRING) ||
+        !validMember(object, "id", ValueType::INT) ||
+        !validMember(object, "name", ValueType::STRING) ||
+        !validMember(object, "description", ValueType::STRING) ||
+        !validMember(object, "tileMap", ValueType::ARRAY) ||
+        !validMember(object, "textureFilename", ValueType::STRING) ||
+        !validMember(object, "objFilename", ValueType::STRING))
     {
       throw std::runtime_error("Object JSON file contains invalid object");
     }
+
+    // Validate that path to the texture and obj files exists
+    const std::string textureFilename = object["textureFilename"].GetString();
+    const std::string objFilename = object["objFilename"].GetString();
+
+    // TODO: Enable this when we have all the files, because we want to validate if the files exist
+    // const std::string texturePath = Config.TEXTURE_PATH + textureFilename;
+    // const std::string objPath = Config.OBJECT_OBJ_PATH + objFilename;
+    // if (!std::filesystem::exists(texturePath))
+    // {
+    //   throw std::runtime_error("Texture file " + texturePath + " does not exist");
+    // }
+    // if (!std::filesystem::exists(objPath))
+    // {
+    //   throw std::runtime_error("Obj file " + objPath + " does not exist");
+    // }
 
     const int objectId = object["id"].GetInt();
     const std::string objectType = object["type"].GetString();
@@ -145,6 +168,8 @@ GameObjects fetchObjects(GameItems &gameItems, std::map<int, GameSkill> &gameSki
       generalObject.name = objectName;
       generalObject.description = objectDescription;
       generalObject.tileMap = tileMap;
+      generalObject.textureFilename = textureFilename;
+      generalObject.objFilename = objFilename;
 
       gameObjects.generalObjects[objectId] = generalObject;
     }
@@ -176,6 +201,8 @@ GameObjects fetchObjects(GameItems &gameItems, std::map<int, GameSkill> &gameSki
       resourceObject.relatedSkillId = relatedSkillId;
       resourceObject.xpRequirement = xpRequirement;
       resourceObject.yieldableItemList = yieldableItemList;
+      resourceObject.textureFilename = textureFilename;
+      resourceObject.objFilename = objFilename;
 
       gameObjects.resourceObjects[objectId] = resourceObject;
     }
@@ -194,6 +221,8 @@ GameObjects fetchObjects(GameItems &gameItems, std::map<int, GameSkill> &gameSki
       lootObject.description = objectDescription;
       lootObject.tileMap = tileMap;
       lootObject.yieldableItemList = yieldableItemList;
+      lootObject.textureFilename = textureFilename;
+      lootObject.objFilename = objFilename;
 
       gameObjects.lootObjects[objectId] = lootObject;
     }

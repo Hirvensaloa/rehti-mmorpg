@@ -315,3 +315,27 @@ GameStateMessage MessageApi::parseGameState(std::string msgBody)
 
     return gameState;
 };
+
+MessageStruct MessageApi::createInformative(const InformativeMessage& informative)
+{
+    rapidjson::Document document = createDocument();
+    rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
+    document.AddMember("message", rapidjson::StringRef(informative.message.c_str()), allocator);
+
+    return MessageStruct{informative.id, createString(document)};
+};
+
+InformativeMessage MessageApi::parseInformative(std::string msgBody)
+{
+    rapidjson::Document document = parseDocument(msgBody);
+
+    if (!validMember(document, "message", ValueType::STRING))
+    {
+        throw std::runtime_error("Invalid informative message");
+    }
+
+    InformativeMessage informative;
+    informative.message = document["message"].GetString();
+
+    return informative;
+};

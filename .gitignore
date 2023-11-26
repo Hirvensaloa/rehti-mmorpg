@@ -84,3 +84,6 @@ generated
 
 # Generated doxygen files
 docs/html
+
+#imgui.ini file
+imgui.ini

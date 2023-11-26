@@ -84,7 +84,7 @@ It is possible to run the server without Docker by using `./scripts/run-backend-
 
 ### Troubleshooting
 
-- You can debug the db contents by running `psql -h 127.0.0.1 -p 6543 -U myuser -d mmorpg-database`
+- You can debug the db contents by running `psql -h 127.0.0.1 -p 6543 -U myuser -d mmorpg-database`. Password is `mypassword`.
 
 ## Client-Server Communication (API)
 
@@ -225,6 +225,20 @@ Sent by: Client
 </details>
 
 To add new messages, check [here](/rehtiLib/network/src/api/MessageApi.hpp)
+
+#### InformativeMessage
+
+Carries some information that the server wants to give to the client (Outside the gamestate context). For example, login failed.
+
+Sent by: Server
+
+<details>
+<summary>Expand to see message attributes</summary>
+
+- **id**: Identifies the message type.
+- **message**: String of descriptive information.
+
+</details>
 
 ## Project practices
 

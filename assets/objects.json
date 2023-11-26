@@ -17,7 +17,9 @@
       "description": "A tree. It is a tree.",
       "tileMap": [
         ["XB"]
-      ]
+      ],
+      "textureFilename": "treetexture.png",
+      "objFilename": "tree.obj"
     },
     {
       "id": 30,
@@ -26,7 +28,9 @@
       "description": "A sturdy fence.",
       "tileMap": [
         ["S", "XS", "S"]
-      ]
+      ],
+      "textureFilename": "fence.png",
+      "objFilename": "fence.obj"
     },
     {
       "id": 255,
@@ -40,7 +44,9 @@
         ["B", " ", " ", " ", " ", " ", "B"],
         ["B", " ", " ", " ", " ", " ", "B"],
         ["B", " ", "B", "B", "B", "B", "B"]
-      ]
+      ],
+      "textureFilename": "housetexture.png",
+      "objFilename": "house.obj"
     },
     {
       "id": 500,
@@ -59,7 +65,9 @@
       "description": "Contains a treasure (If you consider dirty, rotten shield a treasure)",
       "tileMap": [
         ["XB"]
-      ]
+      ],
+      "textureFilename": "treasure_chest.png",
+      "objFilename": "treasure_chest.obj"
     }
   ]
 }

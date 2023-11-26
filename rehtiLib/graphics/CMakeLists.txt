@@ -41,12 +41,15 @@ set(GRAPHICS_SOURCES
 	Camera.cpp
 	Mesh.hpp
 	Mesh.cpp
+	BasicTypes.hpp
 	GraphicsTypes.hpp
 	GraphicsTypes.cpp
 	AABB.hpp
 	AABB.cpp
 	RehtiGui.hpp
 	RehtiGui.cpp
+	TimerCallbackSystem.hpp
+	TimerCallbackSystem.cpp
 	shaders/testShader.vert
 	shaders/testShader.frag
 	shaders/objectShader.vert

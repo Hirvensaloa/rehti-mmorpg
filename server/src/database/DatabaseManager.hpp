@@ -36,7 +36,7 @@ public:
      * @param username
      * @return Player basic data as PlayerTable
      */
-    PlayerTable loadPlayerDataFromDb(std::string username);
+    PlayerTable loadPlayerDataFromDb(std::string username, std::string password);
 
     /**
      * @brief Load player's inventory items from the database

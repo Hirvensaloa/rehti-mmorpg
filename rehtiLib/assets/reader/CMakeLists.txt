@@ -23,18 +23,22 @@ set_target_properties(${TARGET} PROPERTIES LINKER_LANGUAGE CXX)
 
 # assimp
 
-# Add an option to enable or disable Assimp
-option(ENABLE_ASSIMP "Enable Assimp integration" ON)
+# Add an option to enable or disable asset extension (It contains dependencies that are only needed to handle object files, texture files etc. E.g stuff that the server doesn't need). 
+option(ENABLE_ASSET_EXTENSION "Enable asset extension" ON)
 
-if (ENABLE_ASSIMP)
+if (ENABLE_ASSET_EXTENSION)
+  find_package(glm REQUIRED)
   # Print message
-  message(STATUS "Assimp integration enabled")
-  # Include AssimpObjectReader files
+  message(STATUS "Asset extension enabled")
+  # Include Assimp files and all the dependencies
     target_sources(${TARGET} PRIVATE
-    src/AssimpObjectReader.hpp
-    src/AssimpObjectReader.cpp
+    src/Assimp.hpp
+    src/Assimp.cpp
     src/TextureReader.hpp
     src/TextureReader.cpp
+    src/AssetCache.hpp
+    src/AssetCache.cpp
+    src/AssetTypes.hpp
     stb/stb_image.h
   )
 
@@ -42,10 +46,10 @@ if (ENABLE_ASSIMP)
   "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
   add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../../../third_party/assimp ${CMAKE_BINARY_DIR}/build/assimp)
-  target_link_libraries(${TARGET} PUBLIC assimp::assimp)
+  target_link_libraries(${TARGET} PUBLIC assimp::assimp glm::glm)
 else ()
   # Print message
-  message(STATUS "Assimp integration disabled")
+  message(STATUS "Asset extension disabled")
   target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>"
                                                   "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 endif()

@@ -3,7 +3,7 @@
 #include "../world/GameWorld.hpp"
 #include "Entity.hpp"
 
-Entity::Entity(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : idM(id), nameM(name), locationM(location), respawnLocationM(locationM), pGameWorldM(pGameWorld), inventoryM(Inventory(this)), equipmentM(Equipment(this)), skillSetM(SkillSet()){};
+Entity::Entity(GameWorld* pGameWorld, std::string name, unsigned int id, Coordinates location) : idM(id), nameM(name), locationM(location), respawnLocationM(locationM), pGameWorldM(pGameWorld), inventoryM(Inventory(this)), equipmentM(Equipment(this)), skillSetM(SkillSet()){};
 
 unsigned int Entity::getId()
 {
@@ -15,22 +15,22 @@ std::string Entity::getName()
     return nameM;
 }
 
-Coordinates &Entity::getLocation()
+Coordinates& Entity::getLocation()
 {
     return locationM;
 }
 
-void Entity::setLocation(Coordinates &location)
+void Entity::setLocation(Coordinates& location)
 {
     locationM = location;
 }
 
-Coordinates &Entity::getRespawnLocation()
+Coordinates& Entity::getRespawnLocation()
 {
     return respawnLocationM;
 }
 
-std::shared_ptr<Action> &Entity::getCurrentAction()
+std::shared_ptr<Action>& Entity::getCurrentAction()
 {
     return currentActionM;
 }
@@ -45,12 +45,12 @@ int Entity::getMaxHp()
     return maxHpM;
 }
 
-Inventory &Entity::getInventory()
+Inventory& Entity::getInventory()
 {
     return inventoryM;
 }
 
-Equipment &Entity::getEquipment()
+Equipment& Entity::getEquipment()
 {
     return equipmentM;
 }
@@ -63,10 +63,10 @@ int Entity::getRange()
 int Entity::getAttackSpeed()
 {
     int equipmentAttackSpeed = equipmentM.getEquipmentStats().attackSpeed;
-    return equipmentAttackSpeed != 0 ? equipmentAttackSpeed : 2000;
+    return equipmentAttackSpeed > 0 ? equipmentAttackSpeed : 2000;
 }
 
-GameWorld *Entity::getGameWorld()
+GameWorld* Entity::getGameWorld()
 {
     return pGameWorldM;
 }
@@ -99,7 +99,7 @@ bool Entity::move(Coordinates target)
     return false;
 }
 
-void Entity::attack(Entity &target)
+void Entity::attack(Entity& target)
 {
     int baseDamage = 10;   // Base damage will be calculated based on skills later, placeholder value for now
     int baseAccuracy = 50; // Same here
@@ -121,7 +121,7 @@ void Entity::attack(Entity &target)
     }
 }
 
-SkillSet &Entity::getSkillSet()
+SkillSet& Entity::getSkillSet()
 {
     return skillSetM;
 }

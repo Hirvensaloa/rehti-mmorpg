@@ -48,9 +48,8 @@ struct CharacterAssetData
  */
 struct ItemAssetData
 {
-    // TODO: Add when items have icons defined
-    // StbImageData icon;
-    // TODO: Add when items have object files defined
-    // std::vector<aiVector3D> vertices;
-    // std::vector<aiFace> faces;
+    std::vector<Vertex> vertices;
+    std::vector<uint32_t> indices;
+    ImageData texture;
+    ImageData icon;
 };

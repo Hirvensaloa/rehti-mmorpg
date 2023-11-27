@@ -22,6 +22,9 @@ General item which the player cannot interact with. The player can only carry su
 - **name** Name of the item.
 - **description** Brief description of the item.
 - **isStackable** true if the item can be stacked; otherwise, false.
+- **textureFilename** Filename of the texture file under the [textures](/assets/textures/)-folder.
+- **objFilename** Filename of the texture file under the [objects](/assets/objects/)-folder.
+- **iconFilename** Filename of a icon picture under the [items](/assets/items/)-folder.
 
 **Equippable Item**
 
@@ -35,11 +38,14 @@ Item that the player can equip, giving the player possible stat boosts. Defined 
 - **stats** ItemStats object. The ItemStats object includes the following attributes:
   - **accuracy** Represents the accuracy bonus of the equippable item.
   - **damage** Indicates the damage dealt by the item.
-  - **attackSpeed** Specifies the attack speed of the item. Defined in ms.
+  - **attackSpeed** Specifies the attack speed of the item. Defined in ms. Needs to be bigger than 0.
   - **range** Denotes the range of the item's attacks in tiles.
   - **armor** Represents the armor provided by the equippable item.
   - **dodge** Indicates the dodge bonus provided by the item.
 - **isStackable** true if the item can be stacked; otherwise, false.
+- **textureFilename** Filename of the texture file under the [textures](/assets/textures/)-folder.
+- **objFilename** Filename of the texture file under the [objects](/assets/objects/)-folder.
+- **iconFilename** Filename of a icon picture under the [items](/assets/items/)-folder.
 
 **Food Item**
 
@@ -51,6 +57,9 @@ Item that the player can consume (eat) to get more health. Defined with:
 - **description** Brief description of the item.
 - **healAmount** Amount of healing provided by the food.
 - **isStackable** true if the item can be stacked; otherwise, false.
+- **textureFilename** Filename of the texture file under the [textures](/assets/textures/)-folder.
+- **objFilename** Filename of the texture file under the [objects](/assets/objects/)-folder.
+- **iconFilename** Filename of a icon picture under the [items](/assets/items/)-folder.
 
 ### Adding New Items to the Item List
 
@@ -71,7 +80,10 @@ Example:
     "damage": 20
     // ...
   },
-  "isStackable": false
+  "isStackable": false,
+  "textureFilename": "cool_texture.png",
+  "objFile": "nice_object.obj",
+  "iconFilename": "icon.png"
 }
 ```
 

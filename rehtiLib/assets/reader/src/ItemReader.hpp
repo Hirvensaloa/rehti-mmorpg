@@ -54,25 +54,21 @@ struct GeneralItemStruct
     std::string name;
     std::string description;
     bool isStackable;
+    std::string textureFilename;
+    std::string objFilename;
+    std::string iconFilename;
 };
 
-struct EquippableItemStruct
+struct EquippableItemStruct : public GeneralItemStruct
 {
-    int id;
-    std::string name;
-    std::string description;
     Slot slot;
     ItemStats stats;
     bool isStackable;
 };
 
-struct FoodItemStruct
+struct FoodItemStruct : public GeneralItemStruct
 {
-    int id;
-    std::string name;
-    std::string description;
     int healAmount;
-    bool isStackable;
 };
 
 enum class ItemType

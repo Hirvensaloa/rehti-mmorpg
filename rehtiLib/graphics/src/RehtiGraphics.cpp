@@ -160,7 +160,7 @@ void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSec
 
 void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
 {
-    std::cout << "Playing animation " << cfg.animType << " on player " << characterID << std::endl;
+    std::cout << "Playing animation " << static_cast<int>(cfg.animType) << " on player " << characterID << std::endl;
     // reset all animations currently playing
     timersM.finishCallback(characterID);
     characterOrientationsM[characterID].animationData.currentAnimation = cfg.animType;

@@ -30,7 +30,7 @@ void generateAnimationHppFile()
         hppFile << "#include <string>\n\n";
 
         hppFile << "constexpr size_t ANIMATION_TYPE_COUNT = " << animationNames.size() + 1 << ";\n\n";
-        hppFile << "enum AnimationType : uint32_t\n";
+        hppFile << "enum class AnimationType : uint32_t\n";
         hppFile << "{\n";
 
         for (size_t i = 0; i < animationNames.size(); ++i)

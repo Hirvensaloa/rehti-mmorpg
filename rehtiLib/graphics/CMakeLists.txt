@@ -65,6 +65,7 @@ set(GRAPHICS_SOURCES
 	)
 
 list(TRANSFORM GRAPHICS_SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/src/)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/../../assets/generated)
 
 target_sources(rehtiGraphics PRIVATE ${GRAPHICS_SOURCES})
 

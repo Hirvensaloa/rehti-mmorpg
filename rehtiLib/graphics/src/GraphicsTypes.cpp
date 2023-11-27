@@ -114,7 +114,7 @@ GfxOrientation GfxOrientation::interpolate(GfxOrientation first, GfxOrientation 
 
 void CharacterData::advanceAnimation(float dt)
 {
-    Animation currentAnimation = animationData.animations[animationData.currentAnimation];
+    Animation currentAnimation = animationData.animations[static_cast<int>(animationData.currentAnimation)];
     // If no animation is set, do nothing.
     if (currentAnimation.animationNodes.empty())
         return;

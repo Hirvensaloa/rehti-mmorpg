@@ -25,6 +25,8 @@ add_library(${TARGET} STATIC
 
 set_target_properties(${TARGET} PROPERTIES LINKER_LANGUAGE CXX)
 
+include_directories(${CMAKE_CURRENT_LIST_DIR}/../../assets/generated)
+
 # assimp
 
 # Add an option to enable or disable asset extension (It contains dependencies that are only needed to handle object files, texture files etc. E.g stuff that the server doesn't need). 

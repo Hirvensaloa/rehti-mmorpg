@@ -69,6 +69,24 @@ std::map<std::string, std::shared_ptr<Object>>& GameWorld::getObjects()
     return objectsM;
 }
 
+std::map<Coordinates, std::vector<std::shared_ptr<Item>>> GameWorld::getItems()
+{
+    return itemsM;
+}
+
+void GameWorld::addItem(Coordinates location, std::shared_ptr<Item> item)
+{
+    if (itemsM.contains(location))
+    {
+        itemsM[location].push_back(std::move(item));
+    }
+    else
+    {
+
+        itemsM[location] = std::vector<std::shared_ptr<Item>>{std::move(item)};
+    }
+}
+
 void GameWorld::updateGameWorld()
 {
 

@@ -22,7 +22,8 @@ void AssetCache::loadAssets()
     objectAssetDataM = loadGameObjectAssetData(gameObjects);
     characterAssetDataM = loadCharacterAssetData(gameCharacters);
     areaAssetDataM = loadAreaAssetData(areaMatrix);
-    // TODO: Load item asset data
+    itemAssetDataM = loadItemAssetData(gameItems);
+
     std::cout << "ASSET CACHE - Assets loaded" << std::endl;
 }
 
@@ -197,6 +198,72 @@ std::map<std::string, MapAreaAssetData> AssetCache::loadAreaAssetData(const std:
     }
 
     return mapAreaAssetDataMap;
+}
+
+/**
+ * @brief Loads the item assets data
+ * @param gameItems GameItems
+ * @return Map of item id and its corresponding asset data (ItemAssetData)
+ */
+std::map<int, ItemAssetData> AssetCache::loadItemAssetData(const GameItems& gameItems)
+{
+    std::map<std::string, ImageData> itemTextures = loadItemTextures(gameItems);
+
+    std::map<int, ItemAssetData> itemAssetDataMap;
+
+    // TODO: All the items can be looped in a single for loop
+    for (const auto& generalItem : gameItems.generalItems)
+    {
+        const std::string objFilepath = Config.OBJECT_OBJ_PATH + generalItem.second.objFilename;
+        std::vector<aiVector3D> vertices;
+        std::vector<aiFace> faces;
+
+        bool success = loadOBJFile(objFilepath, vertices, faces);
+        if (success)
+        {
+            itemAssetDataMap[generalItem.first] = {
+                aiVector3DVectorToVertexVector(vertices),
+                aiFaceVectorToFaceVector(faces),
+                itemTextures[generalItem.second.textureFilename],
+                itemTextures[generalItem.second.iconFilename]};
+        }
+    }
+
+    for (const auto& foodItem : gameItems.foodItems)
+    {
+        const std::string objFilepath = Config.OBJECT_OBJ_PATH + foodItem.second.objFilename;
+        std::vector<aiVector3D> vertices;
+        std::vector<aiFace> faces;
+
+        bool success = loadOBJFile(objFilepath, vertices, faces);
+        if (success)
+        {
+            itemAssetDataMap[foodItem.first] = {
+                aiVector3DVectorToVertexVector(vertices),
+                aiFaceVectorToFaceVector(faces),
+                itemTextures[foodItem.second.textureFilename],
+                itemTextures[foodItem.second.iconFilename]};
+        }
+    }
+
+    for (const auto& equippableItem : gameItems.equippableItems)
+    {
+        const std::string objFilepath = Config.OBJECT_OBJ_PATH + equippableItem.second.objFilename;
+        std::vector<aiVector3D> vertices;
+        std::vector<aiFace> faces;
+
+        bool success = loadOBJFile(objFilepath, vertices, faces);
+        if (success)
+        {
+            itemAssetDataMap[equippableItem.first] = {
+                aiVector3DVectorToVertexVector(vertices),
+                aiFaceVectorToFaceVector(faces),
+                itemTextures[equippableItem.second.textureFilename],
+                itemTextures[equippableItem.second.iconFilename]};
+        }
+    }
+
+    return itemAssetDataMap;
 }
 
 ImageData AssetCache::getDefaultTexture()

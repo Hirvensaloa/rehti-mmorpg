@@ -11,12 +11,12 @@
  * @file Reads the texture files
  */
 
-/**
- * @brief Reads all the object's textures + character textures into a map (key=filename, value=ImageData)
- *
- * @param gameObjects GameObjects
- * @return Map of texture filename and its corresponding ImageData
- */
+ /**
+  * @brief Reads all the object's textures + character textures into a map (key=filename, value=ImageData)
+  *
+  * @param gameObjects GameObjects
+  * @return Map of texture filename and its corresponding ImageData
+  */
 std::map<std::string, ImageData> loadObjectTextures(const GameObjects& gameObjects);
 
 /**
@@ -26,6 +26,14 @@ std::map<std::string, ImageData> loadObjectTextures(const GameObjects& gameObjec
  * @return Map of texture filename and its corresponding ImageData
  */
 std::map<std::string, ImageData> loadCharacterTextures(const GameCharacters& gameCharacters);
+
+/**
+ * @brief Reads all the item object textures and item icons into a map (key=filename, value=ImageData)
+ *
+ * @param gameItems GameItems
+ * @return Map of texture filename and corresponding ImageData
+ */
+std::map<std::string, ImageData> loadItemTextures(const GameItems& gameItems);
 
 /**
  * @brief Reads all different the map texture files

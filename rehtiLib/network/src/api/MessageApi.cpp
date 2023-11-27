@@ -149,6 +149,30 @@ UnequipMessage MessageApi::parseUnequip(std::string msgBody)
     return unequipMsg;
 };
 
+MessageStruct MessageApi::createDropItem(const DropItemMessage& dropItemMsg)
+{
+    rapidjson::Document document = createDocument();
+    rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
+    document.AddMember("itemId", dropItemMsg.itemId, allocator);
+
+    return MessageStruct{dropItemMsg.id, createString(document)};
+};
+
+DropItemMessage MessageApi::parseDropItem(std::string msgBody)
+{
+    rapidjson::Document document = parseDocument(msgBody);
+
+    if (!validMember(document, "itemId", ValueType::INT))
+    {
+        throw std::runtime_error("Invalid Unequip message");
+    }
+
+    DropItemMessage dropItemMsg;
+    dropItemMsg.itemId = document["itemId"].GetInt();
+
+    return dropItemMsg;
+};
+
 MessageStruct MessageApi::createGameState(const GameStateMessage& gameState)
 {
     rapidjson::Document document = createDocument();

@@ -183,6 +183,11 @@ void RehtiGui::addInventoryItemClickCallback(std::function<void(const int id)> c
     inventoryItemClickCallbackM = callback;
 }
 
+void RehtiGui::addDropItemCallback(std::function<void(const int id)> callback)
+{
+    dropItemCallbackM = callback;
+}
+
 void RehtiGui::addEquipmentItemClickCallback(std::function<void(const int id)> callback)
 {
     equipmentItemClickCallbackM = callback;
@@ -232,7 +237,8 @@ void RehtiGui::drawInventory()
                 }
                 if (ImGui::Selectable(("Drop " + inventoryM[i].name).c_str()))
                 {
-                    ImGui::CloseCurrentPopup(); // TODO: Send drop item request
+                    dropItemCallbackM(inventoryM[i].instanceId);
+                    ImGui::CloseCurrentPopup();
                 }
                 if (ImGui::Selectable("Cancel"))
                 {

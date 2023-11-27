@@ -28,6 +28,7 @@ enum MessageId
     UseItem,
     Unequip,
     Informative,
+    DropItem
 };
 
 struct MessageStruct
@@ -85,6 +86,12 @@ struct UseItemMessage
 struct UnequipMessage
 {
     const MessageId id = MessageId::Unequip;
+    int itemId;
+};
+
+struct DropItemMessage
+{
+    const MessageId id = MessageId::DropItem;
     int itemId;
 };
 
@@ -170,11 +177,47 @@ public:
      */
     static ObjectInteractMessage parseObjectInteract(std::string msgBody);
 
+    /**
+     * @brief Create a MessageStruct for using item
+     * @param useItemMsg
+     * @return MessageStruct
+     */
     static MessageStruct createUseItem(const UseItemMessage& useItemMsg);
+
+    /**
+     * @brief Parse received UseItemMessage body
+     * @param msgBody
+     * @return UseItemMessage
+     */
     static UseItemMessage parseUseItem(std::string msgBody);
 
+    /**
+     * @brief Create a MessageStruct for unequipping item
+     * @param unequipMsg
+     * @return MessageStruct
+     */
     static MessageStruct createUnequip(const UnequipMessage& unequipMsg);
+
+    /**
+     * @brief Parse received UnequipMessage body
+     * @param msgBody
+     * @return UnequipMessage
+     */
     static UnequipMessage parseUnequip(std::string msgBody);
+
+    /**
+     * @brief Create a MessageStruct for dropping item
+     * @param dropItemMsg
+     * @return MessageStruct
+     */
+    static MessageStruct createDropItem(const DropItemMessage& dropItemMsg);
+
+    /**
+     * @brief Parse received DropItemMessage body
+     * @param msgBody
+     * @return DropItemMessage
+     */
+    static DropItemMessage parseDropItem(std::string msgBody);
 
     /**
      * @brief Create a MessageStruct for game state

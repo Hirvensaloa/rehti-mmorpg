@@ -8,7 +8,9 @@ struct Coordinates
     int y;
     int z;
 
-    bool operator==(Coordinates &other);
+    bool operator==(Coordinates& other);
 
-    unsigned int distance(const Coordinates &other);
+    friend bool operator<(const Coordinates& l, const Coordinates& r);
+
+    unsigned int distance(const Coordinates& other);
 };

@@ -40,7 +40,7 @@
         "dodge": 3
       },
       "isStackable": false,
-      "iconFilename": "lobster.png",
+      "iconFilename": "no-icon.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
@@ -54,7 +54,7 @@
         "armor": 20
       },
       "isStackable": false,
-      "iconFilename": "lobster.png",
+      "iconFilename": "no-icon.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
@@ -68,7 +68,7 @@
         "armor": 10
       },
       "isStackable": false,
-      "iconFilename": "lobster.png",
+      "iconFilename": "no-icon.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
@@ -82,7 +82,7 @@
         "armor": 15
       },
       "isStackable": false,
-      "iconFilename": "lobster.png",
+      "iconFilename": "no-icon.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
@@ -96,7 +96,7 @@
         "armor": 15
       },
       "isStackable": false,
-      "iconFilename": "lobster.png",
+      "iconFilename": "no-icon.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
@@ -110,7 +110,7 @@
         "armor": 10
       },
       "isStackable": false,
-      "iconFilename": "lobster.png",
+      "iconFilename": "no-icon.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
@@ -125,7 +125,7 @@
         "dodge": 5
       },
       "isStackable": false,
-      "iconFilename": "lobster.png",
+      "iconFilename": "no-icon.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
@@ -140,7 +140,7 @@
         "armor": 5
       },
       "isStackable": false,
-      "iconFilename": "lobster.png",
+      "iconFilename": "no-icon.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
@@ -151,7 +151,7 @@
       "type": "Food",
       "healAmount": 20,
       "isStackable": false,
-      "iconFilename": "lobster.png",
+      "iconFilename": "no-icon.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
@@ -162,7 +162,7 @@
       "type": "Food",
       "healAmount": 30,
       "isStackable": false,
-      "iconFilename": "lobster.png",
+      "iconFilename": "no-icon.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     }

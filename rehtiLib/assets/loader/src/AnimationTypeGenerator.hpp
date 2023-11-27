@@ -28,7 +28,7 @@ void generateAnimationHppFile()
         hppFile << "#include <cstdint>\n";
         hppFile << "#include <string>\n\n";
 
-        hppFile << "constexpr size_t ANIMATION_TYPE_COUNT = " << animationNames.size() << ";\n\n";
+        hppFile << "constexpr size_t ANIMATION_TYPE_COUNT = " << animationNames.size() + 1 << ";\n\n";
         hppFile << "enum AnimationType : uint32_t\n";
         hppFile << "{\n";
 
@@ -38,12 +38,13 @@ void generateAnimationHppFile()
             std::transform(enumName.begin(), enumName.end(), enumName.begin(), ::toupper);
 
             hppFile << "    " << enumName;
-            if (i < animationNames.size() - 1)
+            if (i < animationNames.size())
             {
                 hppFile << ",";
             }
             hppFile << "\n";
         }
+        hppFile << "    UNDEFINED\n";
 
         hppFile << "};\n\n";
         hppFile << "inline const char* AnimationTypeStrings[] = {\n";
@@ -67,13 +68,12 @@ void generateAnimationHppFile()
         hppFile << "inline AnimationType getAnimationType(const std::string animationName) {\n";
         hppFile << "    std::string lowercaseName(animationName);\n";
         hppFile << "    std::transform(lowercaseName.begin(), lowercaseName.end(), lowercaseName.begin(), ::tolower);\n\n";
-        hppFile << "    for (size_t i = 0; i < ANIMATION_TYPE_COUNT; ++i) {\n";
+        hppFile << "    for (size_t i = 0; i < ANIMATION_TYPE_COUNT - 1; ++i) {\n";
         hppFile << "        if (lowercaseName.find(AnimationTypeStrings[i]) != std::string::npos) {\n";
         hppFile << "            return static_cast<AnimationType>(i);\n";
         hppFile << "        }\n";
         hppFile << "    }\n\n";
-        hppFile << "    // Default to the first animation type if no match is found\n";
-        hppFile << "    return static_cast<AnimationType>(0);\n";
+        hppFile << "    return AnimationType::UNDEFINED;\n";
         hppFile << "}\n";
 
         hppFile.close();

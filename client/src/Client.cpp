@@ -118,7 +118,7 @@ boost::asio::awaitable<void> Client::interactWithObject(const int& objectId)
     if (connectionM->isConnected())
     {
         ObjectInteractMessage msg;
-        msg.objectId = objectId;
+        msg.objectId = std::to_string(objectId);
         co_await connectionM->send(MessageApi::createObjectInteract(msg));
     }
 }

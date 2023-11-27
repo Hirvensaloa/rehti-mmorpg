@@ -104,6 +104,40 @@ std::map<int, CharacterAssetData> AssetCache::loadCharacterAssetData(const GameC
 
     std::map<int, CharacterAssetData> characterAssetDataMap;
 
+    { // player scope
+        Player player = gameCharacters.player;
+        const std::string filepath = Config.CHARACTER_GLTF_PATH + player.glTFFilename;
+        std::vector<CharacterVertex> vertices;
+        std::vector<uint32_t> indices;
+        std::vector<BoneNode> bones;
+        std::vector<glm::mat4> transformations;
+        std::array<Animation, ANIMATION_TYPE_COUNT> animations;
+
+        bool success = loadGlTFFile(filepath, vertices, indices, animations, bones, transformations);
+        if (success)
+        {
+            CharacterAssetData assetData = {vertices, indices, textureDataMap[player.textureFilename], transformations, bones, animations};
+            characterAssetDataMap[player.id] = assetData;
+        }
+    }
+
+    for (const NPC& npc : gameCharacters.npcs)
+    {
+        const std::string filepath = Config.CHARACTER_GLTF_PATH + npc.glTFFilename;
+        std::vector<CharacterVertex> vertices;
+        std::vector<uint32_t> indices;
+        std::vector<BoneNode> bones;
+        std::vector<glm::mat4> transformations;
+        std::array<Animation, ANIMATION_TYPE_COUNT> animations;
+
+        bool success = loadGlTFFile(filepath, vertices, indices, animations, bones, transformations);
+        if (success)
+        {
+            CharacterAssetData assetData = {vertices, indices, textureDataMap[npc.textureFilename], transformations, bones, animations};
+            characterAssetDataMap[npc.id] = assetData;
+        }
+    }
+
     return characterAssetDataMap;
 }
 

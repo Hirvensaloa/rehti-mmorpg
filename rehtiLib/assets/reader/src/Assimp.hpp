@@ -25,9 +25,29 @@ bool loadOBJFile(const std::string& path, std::vector<aiVector3D>& vertices, std
  * @param indices Empty vector of unsigned int that will be filled with the indices.
  * @param animations Empty array of Animation that will be filled with the animations.
  * @param bones Empty vector of BoneNode that will be filled with the bones.
+ * @param transformations Empty vector of glm::mat4 that will be filled with the transformations of the bind pose bones.
  * @return True if the object was loaded successfully, false otherwise.
  */
-bool loadGlTFFile(const std::string& path, std::vector<aiVector3D>& vertices, std::vector<aiFace>& faces, std::array<Animation, ANIMATION_TYPE_COUNT>& animations, std::vector<BoneNode>& bones);
+bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertices, std::vector<uint32_t>& indices, std::array<Animation, ANIMATION_TYPE_COUNT>& animations, std::vector<BoneNode>& bones, std::vector<glm::mat4>& transformations);
+
+/**
+ * @brief Loads animations from the given scene.
+ * @param scene to load animations from.
+ * @param nameToIndex map of bone names to their indices.
+ * @param animations array to fill with animations.
+ * @return boolean indicating success
+ */
+size_t loadAnimations(const aiScene* scene, const std::map<std::string, uint32_t> nameToIndex, std::array<Animation, ANIMATION_TYPE_COUNT>& animations);
+
+/**
+ * @brief Fills the given vectors with hierarchy and bone data.
+ * @param rootNode is the root node of the hierarchy.
+ * @param boneList is the list of bones.
+ * @param transformations is the list of transformations.
+ * @param nameToIndex is the map of bone names to their indices.
+ * @return The number of bones.
+ */
+size_t fillSkeleton(aiNode* rootNode, std::vector<BoneNode>& boneList, std::vector<glm::mat4>& transformations, std::map<std::string, uint32_t>& nameToIndex);
 
 /**
  * @brief Convert aiVector3D to Vertex
@@ -52,3 +72,13 @@ std::vector<uint32_t> aiFaceToFace(const aiFace& face);
  * @return Vector of RehtiGraphics Faces
  */
 std::vector<uint32_t> aiFaceVectorToFaceVector(const std::vector<aiFace>& faces);
+
+/**
+ * @brief Convert aiMatrix4x4 to glm::mat4
+ * @return glm::mat4
+ */
+glm::mat4 aiMatrix4x4ToGlm(const aiMatrix4x4& matrix);
+
+glm::quat aiQuaternionToGlm(const aiQuaternion& quaternion);
+
+glm::vec3 aiVector3DToGlm(const aiVector3D& vector);

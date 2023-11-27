@@ -143,8 +143,8 @@ void Client::processMessages()
                 {
                     const GameStateMessage& gameStateMsg = MessageApi::parseGameState(msg.getBody());
 
-                    const auto objAsset = assetCacheM.getCharacterAssetDataById(0); // TODO: Currently player id refers to the player id in db. We should also have a way to indicate if the entity is a player or not. Currently the problem is that the player id might interfere with entity ids.
-                    pGraphLibM->addGameObject(gameStateMsg.currentPlayer.id, objAsset.vertices, objAsset.indices, objAsset.texture, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
+                    const auto charAsset = assetCacheM.getCharacterAssetDataById(0); // TODO: Currently player id refers to the player id in db. We should also have a way to indicate if the entity is a player or not. Currently the problem is that the player id might interfere with entity ids.
+                    pGraphLibM->addCharacterObject(gameStateMsg.currentPlayer.id, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
                     pGraphLibM->forcePlayerMove(gameStateMsg.currentPlayer.id, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
                     pGraphLibM->playAnimation(gameStateMsg.currentPlayer.id, actionToAnimationConfig(gameStateMsg.currentPlayer.currentAction));
 
@@ -156,8 +156,8 @@ void Client::processMessages()
                             continue;
                         }
 
-                        const auto objAsset = assetCacheM.getCharacterAssetDataById(entity.id);
-                        pGraphLibM->addGameObject(entity.instanceId, objAsset.vertices, objAsset.indices, objAsset.texture, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
+                        const auto charAsset = assetCacheM.getCharacterAssetDataById(entity.id);
+                        pGraphLibM->addCharacterObject(entity.instanceId, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
                         pGraphLibM->forceGameObjectMove(entity.instanceId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
                         pGraphLibM->playAnimation(entity.instanceId, actionToAnimationConfig(entity.currentAction));
                     }

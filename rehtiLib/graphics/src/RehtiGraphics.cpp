@@ -44,7 +44,7 @@ void RehtiGraphics::addTestGameObject(int id)
     addGameObject(id, vertices, indices, texture, glm::vec3(transformation[3]));
 }
 
-bool RehtiGraphics::addCharacterObject(int characterID, std::vector<Vertex> vertices, std::vector<uint32_t> indices, ImageData texture, std::array<Animation, ANIMATION_TYPE_COUNT> animations, std::vector<BoneNode> bones, glm::vec3 location, float rotation)
+bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVertex> vertices, std::vector<uint32_t> indices, ImageData texture, std::array<Animation, ANIMATION_TYPE_COUNT> animations, std::vector<BoneNode> bones, std::vector<glm::mat4> transformations, glm::vec3 location, float rotation)
 {
     GfxOrientation characterOrientation{location, glm::quat(), glm::vec3(1.f, 1.f, 1.f)};
     CharacterAnimationData animationData{};

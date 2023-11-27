@@ -128,14 +128,14 @@ void GraphicsObjectManager::addTransferQueueFamilyAccess(const uint32_t transfer
     }
 }
 
-bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, glm::mat4 bindPose[MAX_BONES], VkSampler imgSampler)
+bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<CharacterVertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, glm::mat4 bindPose[MAX_BONES], VkSampler imgSampler)
 {
     if (characterObjectsM.contains(characterID))
     {
         return false;
     }
     CharacterObject character{};
-    VkDeviceSize vSize = vertices.size() * sizeof(Vertex);
+    VkDeviceSize vSize = vertices.size() * sizeof(CharacterVertex);
     VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
     VkDeviceSize tSize = sizeof(glm::mat4);
     VkDeviceSize imgSize = texture.width * texture.height * 4;

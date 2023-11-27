@@ -26,6 +26,7 @@ static struct
     const std::string OBJECT_JSON_PATH = ROOT_PATH + "assets/objects.json";
     const std::string SKILL_JSON_PATH = ROOT_PATH + "assets/skills.json";
     const std::string OBJECT_OBJ_PATH = ROOT_PATH + "assets/objects/";
+    const std::string CHARACTER_GLTF_PATH = ROOT_PATH + "assets/characters/";
     const std::string TEXTURE_PATH = ROOT_PATH + "assets/textures/";
     const std::string MAP_TEXTURE_MAP_PATH = TEXTURE_PATH + "map_textures.json";
     const std::string DEFAULT_TEXTURE_PATH = TEXTURE_PATH + "defaultTexture.jpg";

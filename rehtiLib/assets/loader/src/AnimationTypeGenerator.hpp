@@ -26,6 +26,7 @@ void generateAnimationHppFile()
         hppFile << "#pragma once\n\n";
 
         hppFile << "#include <cstdint>\n";
+        hppFile << "#include <algorithm>\n";
         hppFile << "#include <string>\n\n";
 
         hppFile << "constexpr size_t ANIMATION_TYPE_COUNT = " << animationNames.size() << ";\n\n";

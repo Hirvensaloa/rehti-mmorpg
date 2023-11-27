@@ -1,7 +1,7 @@
 #include "CharacterReader.hpp"
 #include "../../Config.hpp"
 #include "RehtiUtils.hpp"
-
+#include <stdexcept>
 /**
  * @brief Reads the character data from JSON file.
  * @return GameCharacters

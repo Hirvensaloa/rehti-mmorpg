@@ -94,7 +94,7 @@ public:
      * @param rotation of the character to be placed
      * @return boolean indicating whether the object was added successfully.
      */
-    bool addCharacterObject(int characterID, std::vector<Vertex> vertices, std::vector<uint32_t> indices, ImageData texture, std::array<Animation, ANIMATION_TYPE_COUNT> animations, std::vector<BoneNode> bones, glm::vec3 location = glm::vec3(0.f), float rotation = 0.f);
+    bool addCharacterObject(int characterID, std::vector<CharacterVertex> vertices, std::vector<uint32_t> indices, ImageData texture, std::array<Animation, ANIMATION_TYPE_COUNT> animations, std::vector<BoneNode> bones, std::vector<glm::mat4> transformations, glm::vec3 location = glm::vec3(0.f), float rotation = 0.f);
 
     /**
      * @brief Adds a game object with the given id to the graphics backend. Also creates a bounding box for the object.

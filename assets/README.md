@@ -156,7 +156,11 @@ To create a new animation type:
 
 2. Create and add the animation to glTF-files, for each character. (Only for the characters you want the animation to happen on)
 
-3. Map the animation to some action on client. Currently done [here](/client/src/Utils.cpp)
+3. The animations should be named by their respective id. E.g if the id of the json defined animation id is "attack", then the model software animation name could be "attack-5".
+
+4. Name the root bone of the armature to "rootbone".
+
+5. Map the animation to some action on client. Currently done [here](/client/src/Utils.cpp)
 
 ## Game objects
 

@@ -5,7 +5,10 @@
       "name": "Oak Wood",
       "description": "A piece of oak wood, yum yum!",
       "type": "General",
-      "isStackable": true
+      "isStackable": true,
+      "iconFilename": "lobster.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 1,
@@ -21,7 +24,10 @@
         "armor": 15,
         "dodge": 5
       },
-      "isStackable": false
+      "isStackable": false,
+      "iconFilename": "iron_sword.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 2,
@@ -33,7 +39,10 @@
         "armor": 10,
         "dodge": 3
       },
-      "isStackable": false
+      "isStackable": false,
+      "iconFilename": "lobster.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 3,
@@ -44,7 +53,10 @@
       "stats": {
         "armor": 20
       },
-      "isStackable": false
+      "isStackable": false,
+      "iconFilename": "lobster.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 4,
@@ -55,7 +67,10 @@
       "stats": {
         "armor": 10
       },
-      "isStackable": false
+      "isStackable": false,
+      "iconFilename": "lobster.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 5,
@@ -66,7 +81,10 @@
       "stats": {
         "armor": 15
       },
-      "isStackable": false
+      "isStackable": false,
+      "iconFilename": "lobster.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 6,
@@ -77,7 +95,10 @@
       "stats": {
         "armor": 15
       },
-      "isStackable": false
+      "isStackable": false,
+      "iconFilename": "lobster.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 7,
@@ -88,7 +109,10 @@
       "stats": {
         "armor": 10
       },
-      "isStackable": false
+      "isStackable": false,
+      "iconFilename": "lobster.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 8,
@@ -100,7 +124,10 @@
         "accuracy": 5,
         "dodge": 5
       },
-      "isStackable": false
+      "isStackable": false,
+      "iconFilename": "lobster.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 9,
@@ -112,7 +139,10 @@
         "damage": 10,
         "armor": 5
       },
-      "isStackable": false
+      "isStackable": false,
+      "iconFilename": "lobster.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 10,
@@ -120,7 +150,10 @@
       "description": "A delicious fish that heals wounds.",
       "type": "Food",
       "healAmount": 20,
-      "isStackable": false
+      "isStackable": false,
+      "iconFilename": "lobster.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 11,
@@ -128,7 +161,10 @@
       "description": "Freshly baked bread for a quick snack.",
       "type": "Food",
       "healAmount": 30,
-      "isStackable": false
+      "isStackable": false,
+      "iconFilename": "lobster.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
     }
   ]
 }

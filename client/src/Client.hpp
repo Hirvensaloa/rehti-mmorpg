@@ -47,6 +47,12 @@ public:
     boost::asio::awaitable<void> useItem(const int itemInstanceId);
 
     /**
+     * @brief Send a DropItemMessage for item with given instance id
+     * @param itemInstanceId
+     */
+    boost::asio::awaitable<void> dropItem(const int itemInstanceId);
+
+    /**
      * @brief Send a UnequipMessage for item with given instance id
      * @param itemInstanceId
      * @return

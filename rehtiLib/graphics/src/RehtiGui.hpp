@@ -51,6 +51,12 @@ public:
     void addInventoryItemClickCallback(std::function<void(const int id)> callback);
 
     /**
+     * @brief Adds callback function for dropping an item in inventory
+     * @param callback
+     */
+    void addDropItemCallback(std::function<void(const int id)> callback);
+
+    /**
      * @brief Adds callback function for clicking and item in equipment
      * @param callback
      */
@@ -115,6 +121,7 @@ private:
     UiTab openTabM;
 
     std::function<void(const int id)> inventoryItemClickCallbackM;
+    std::function<void(const int id)> dropItemCallbackM;
     std::function<void(const int id)> equipmentItemClickCallbackM;
 
     std::vector<GameItem> inventoryM;

@@ -134,6 +134,17 @@ boost::asio::awaitable<void> Client::useItem(const int itemInstanceId)
     co_return;
 }
 
+boost::asio::awaitable<void> Client::dropItem(const int itemInstanceId)
+{
+    if (connectionM->isConnected())
+    {
+        DropItemMessage msg;
+        msg.itemId = itemInstanceId;
+        co_await connectionM->send(MessageApi::createDropItem(msg));
+    }
+    co_return;
+}
+
 boost::asio::awaitable<void> Client::unequipItem(const int itemInstanceId)
 {
     if (connectionM->isConnected())
@@ -177,16 +188,12 @@ void Client::processMessages()
                         pGraphLibM->getGui()->setEquipment(entity.equipment);
                     }
 
-                    // std::cout << "entity"
-                    //           << " " << entity.entityId << " " << entity.x << " " << entity.y << " " << entity.z << std::endl;
                     const auto objAsset = assetCacheM.getCharacterAssetDataById("goblin");
                     pGraphLibM->addGameObject(entity.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
                     pGraphLibM->forceGameObjectMove(entity.entityId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
                 }
                 for (const auto& object : gameStateMsg.objects)
                 {
-                    // std::cout << "object"
-                    //           << " " << object.id << " " << object.x << " " << object.y << " " << object.z << std::endl;
                     const auto objAsset = assetCacheM.getObjectAssetDataById(object.id);
                     pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
                 }
@@ -284,6 +291,9 @@ void Client::startGraphics()
 
     pGraphLibM->getGui()->addInventoryItemClickCallback([this](const int itemInstanceId)
                                                         { boost::asio::co_spawn(ioContextM, useItem(itemInstanceId), boost::asio::detached); });
+
+    pGraphLibM->getGui()->addDropItemCallback([this](const int itemInstanceId)
+                                              { boost::asio::co_spawn(ioContextM, dropItem(itemInstanceId), boost::asio::detached); });
 
     pGraphLibM->getGui()->addEquipmentItemClickCallback([this](const int itemInstanceId)
                                                         { boost::asio::co_spawn(ioContextM, unequipItem(itemInstanceId), boost::asio::detached); });

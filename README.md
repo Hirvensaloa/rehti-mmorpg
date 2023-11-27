@@ -210,6 +210,20 @@ Sent by: Client
 
 </details>
 
+#### DropItemMessage
+
+Represents a command by the client to drop an item from their inventory.
+
+Sent by: Client
+
+<details>
+<summary>Expand to see message attributes</summary>
+
+- **id**: Identifies the message type.
+- **itemId**: Instance ID of the item to be dropped
+
+</details>
+
 #### UnequipMessage
 
 Represents a command by the client to unequip an item.
@@ -220,7 +234,7 @@ Sent by: Client
 <summary>Expand to see message attributes</summary>
 
 - **id**: Identifies the message type.
-- **itemId**: Instance ID of the item to be used
+- **itemId**: Instance ID of the item to be unequipped
 
 </details>
 

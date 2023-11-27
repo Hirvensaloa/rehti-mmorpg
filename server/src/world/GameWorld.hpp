@@ -17,11 +17,11 @@ public:
 
     ~GameWorld() = default;
 
-    std::vector<std::shared_ptr<PlayerCharacter>> &getPlayers();
+    std::vector<std::shared_ptr<PlayerCharacter>>& getPlayers();
 
     std::shared_ptr<PlayerCharacter> getPlayer(unsigned int playerId);
 
-    Map &getMap();
+    Map& getMap();
 
     void addPlayer(std::string playerName, unsigned int playerId, Coordinates location);
 
@@ -29,11 +29,15 @@ public:
 
     void addNpc(Npc npc);
 
-    std::vector<std::shared_ptr<Npc>> &getNpcs();
+    std::vector<std::shared_ptr<Npc>>& getNpcs();
 
     std::shared_ptr<Entity> getEntity(unsigned int entityId);
 
-    std::map<std::string, std::shared_ptr<Object>> &getObjects();
+    std::map<std::string, std::shared_ptr<Object>>& getObjects();
+
+    std::map<Coordinates, std::vector<std::shared_ptr<Item>>> getItems();
+
+    void addItem(Coordinates location, std::shared_ptr<Item>);
 
     void updateGameWorld();
 
@@ -41,7 +45,12 @@ public:
 
 private:
     std::vector<std::shared_ptr<PlayerCharacter>> playersM;
+
     std::vector<std::shared_ptr<Npc>> npcsM;
+
     std::map<std::string, std::shared_ptr<Object>> objectsM;
+
+    std::map<Coordinates, std::vector<std::shared_ptr<Item>>> itemsM;
+
     Map mapM;
 };

@@ -1,7 +1,7 @@
 #include "Inventory.hpp"
 #include "../entity/Entity.hpp"
 
-Inventory::Inventory(Entity *owner, int inventorySize) : ownerM(owner), inventorySizeM(inventorySize){};
+Inventory::Inventory(Entity* owner, int inventorySize) : ownerM(owner), inventorySizeM(inventorySize){};
 
 bool Inventory::addItem(std::shared_ptr<Item> item)
 {
@@ -13,17 +13,18 @@ bool Inventory::addItem(std::shared_ptr<Item> item)
     return false;
 }
 
-bool Inventory::removeItem(int itemId)
+std::shared_ptr<Item> Inventory::removeItem(int itemId)
 {
     for (auto it = itemsM.begin(); it != itemsM.end(); it++)
     {
         if ((*it)->getInstanceId() == itemId)
         {
+            std::shared_ptr<Item> removedItem = std::move(*it);
             itemsM.erase(it);
-            return true;
+            return removedItem;
         }
     }
-    return false;
+    return std::shared_ptr<Item>();
 }
 
 void Inventory::removeAllItems()
@@ -31,7 +32,7 @@ void Inventory::removeAllItems()
     itemsM.clear();
 }
 
-const std::vector<std::shared_ptr<Item>> &Inventory::getItems() const
+const std::vector<std::shared_ptr<Item>>& Inventory::getItems() const
 {
     return itemsM;
 }
@@ -52,7 +53,7 @@ void Inventory::useItem(int itemId)
     }
 }
 
-std::ostream &operator<<(std::ostream &os, const Inventory &inv)
+std::ostream& operator<<(std::ostream& os, const Inventory& inv)
 {
     os << "Inventory contents:" << std::endl;
     for (auto item : inv.getItems())

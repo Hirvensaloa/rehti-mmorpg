@@ -95,6 +95,13 @@ private:
      */
     std::map<std::string, MapAreaAssetData> loadAreaAssetData(const std::vector<std::vector<std::string>>& areaMap);
 
+    /**
+     * @brief Loads the item assets data
+     * @param gameItems GameItems
+     * @return Map of item id and its corresponding asset data (ItemAssetData)
+     */
+    std::map<int, ItemAssetData> loadItemAssetData(const GameItems& gameItems);
+
     std::map<std::string, MapAreaAssetData> areaAssetDataM;
     std::map<int, ObjectAssetData> objectAssetDataM;
     std::map<std::string, CharacterAssetData> characterAssetDataM;

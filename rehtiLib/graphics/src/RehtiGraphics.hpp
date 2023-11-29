@@ -112,6 +112,20 @@ public:
     bool addGameObject(int objectID, std::vector<Vertex> vertices, std::vector<uint32_t> indices, ImageData texture, glm::vec3 location = glm::vec3(0.f), float rotation = 0.f);
 
     /**
+     * @brief Checks if a game object with the given id exists.
+     * @param objectID
+     * @return
+     */
+    bool doesGameObjectExist(int objectID);
+
+    /**
+     * @brief Checks if a characterwith the given id exists.
+     * @param characterID
+     * @return
+     */
+    bool doesCharacterExist(int characterID);
+
+    /**
      * @brief Moves a game object to the given location in the given time.
      * @param objectID of the object to move.
      * @param location to move the object to.
@@ -544,6 +558,9 @@ private:
     float anisotropyM; // default val. Changed in <cref=isDeviceSuitable>
     EngineFlags engineFlagsM = EngineFlags::NO_FLAGS;
     EngineStatistics statsM;
+
+    // Mutex that must be acquired before modifying the data structures below (timer has its own mutex)
+    std::shared_mutex dataMutexM;
     // Bounding box lists in an array. Each index corresponds to an object type.
     std::array<std::map<int, AABB>, OBJECT_TYPE_COUNT> boundingBoxesM;
     // Location and animation storage

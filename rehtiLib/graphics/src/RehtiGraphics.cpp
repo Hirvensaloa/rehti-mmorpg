@@ -47,6 +47,9 @@ void RehtiGraphics::addTestGameObject(int id)
 
 bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVertex> vertices, std::vector<uint32_t> indices, ImageData texture, std::array<Animation, ANIMATION_TYPE_COUNT> animations, std::vector<BoneNode> bones, std::vector<glm::mat4> transformations, glm::vec3 location, float rotation)
 {
+    if (characterOrientationsM.contains(characterID)) // character already exists
+        return false;
+
     GfxOrientation characterOrientation{location, glm::quat(), glm::vec3(1.f, 1.f, 1.f)};
     CharacterAnimationData animationData{};
     animationData.animations = animations;
@@ -78,7 +81,7 @@ bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVer
     // Set animation to idle
     playAnimation(characterID, AnimationConfig{AnimationType::IDLE, 1.0f, true});
 
-    return false;
+    return true;
 }
 
 bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, std::vector<uint32_t> indices, ImageData img, glm::vec3 location, float rotation)
@@ -101,19 +104,34 @@ bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, st
     return true;
 }
 
+bool RehtiGraphics::doesGameObjectExist(int objectID)
+{
+    std::shared_lock lock(dataMutexM);
+    return gameObjectOrientationsM.contains(objectID);
+}
+
+bool RehtiGraphics::doesCharacterExist(int characterID)
+{
+    std::shared_lock lock(dataMutexM);
+    return characterOrientationsM.contains(characterID);
+}
+
 void RehtiGraphics::moveGameObject(int objectID, glm::vec3 location, float timeInSeconds)
 {
+    dataMutexM.lock();
     float timeInv = 1.f / timeInSeconds;
     glm::vec3 currentLocation = gameObjectOrientationsM[objectID].position;
     glm::vec3 delta = (location - currentLocation) * timeInv;
     std::function<void(float)> callback = [objectID, delta, this](float dt)
     {
+        std::unique_lock lock(dataMutexM);
         gameObjectOrientationsM[objectID].position += delta * dt;
         // smooth bounding box interpolation?
         moveBoundingBox(objectID, ObjectType::GAMEOBJECT, gameObjectOrientationsM[objectID].position);
         glm::mat4 currentMatrix = gameObjectOrientationsM[objectID].getTransformationMatrix();
         pObjectManagerM->updateObjectDescriptor(objectID, &currentMatrix, currentFrameM);
     };
+    dataMutexM.unlock();
     timersM.addTimerCallback(objectID, timeInSeconds, callback);
 }
 
@@ -145,6 +163,7 @@ void RehtiGraphics::forceGameObjectMove(int objectID, glm::vec3 location)
 void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSeconds)
 {
     float timeInv = 1.f / timeInSeconds;
+    dataMutexM.lock();
     glm::vec3 currentLocation = characterOrientationsM[playerID].characterOrientation.position;
     glm::vec3 diff = (location - currentLocation);
     glm::vec3 delta = diff * timeInv;
@@ -155,6 +174,7 @@ void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSec
     characterOrientationsM[playerID].animationData.currentTicks = 0;
     std::function<void(float)> callback = [playerID, delta, dir, this](float dt)
     {
+        std::unique_lock lock(dataMutexM);
         characterOrientationsM[playerID].characterOrientation.position += delta * dt;
         moveBoundingBox(playerID, ObjectType::CHARACTER, characterOrientationsM[playerID].characterOrientation.position);
         characterOrientationsM[playerID].advanceAnimation(dt);
@@ -162,11 +182,17 @@ void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSec
         pObjectManagerM->updateCharacterDescriptor(playerID, &currentMatrix, characterOrientationsM[playerID].boneTransformations.data(), currentFrameM);
         cameraM.setTargetAndCamera(characterOrientationsM[playerID].characterOrientation.position);
     };
+    dataMutexM.unlock();
     timersM.addTimerCallback(playerID, timeInSeconds, callback);
 }
 
 void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
 {
+    if (!characterOrientationsM.contains(characterID))
+    {
+        std::cout << "Character " << characterID << " does not exist" << std::endl;
+        return;
+    }
     std::cout << "Playing animation " << static_cast<int>(cfg.animType) << " on player " << characterID << std::endl;
     // reset all animations currently playing
     timersM.finishCallback(characterID);
@@ -175,7 +201,10 @@ void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
     // add new callback to play the animation
     float factor = 1.0f;
     if (cfg.looping)
+    {
         factor = 0.f;
+        cfg.duration = characterOrientationsM[characterID].animationData.animations[getAnimIndex(cfg.animType)].duration;
+    }
     std::function<void(float)> callback = [characterID, cfg, this](float dt)
     {
         characterOrientationsM[characterID].advanceAnimation(dt);
@@ -188,6 +217,7 @@ void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
 
 void RehtiGraphics::forcePlayerMove(int playerID, glm::vec3 location)
 {
+    std::unique_lock lock(dataMutexM);
     if (!boundingBoxesM[ObjectType::CHARACTER].contains(playerID))
         return;
     glm::mat4 locationTransform = glm::translate(glm::mat4(1.f), location);
@@ -204,6 +234,7 @@ void RehtiGraphics::forcePlayerMove(int playerID, glm::vec3 location)
 void RehtiGraphics::moveCharacter(int characterID, glm::vec3 location, float timeInSeconds)
 {
     float timeInv = 1.f / timeInSeconds;
+    dataMutexM.lock();
     CharacterData& charData = characterOrientationsM[characterID];
     glm::vec3 currentLocation = characterOrientationsM[characterID].characterOrientation.position;
     glm::vec3 diff = (location - currentLocation);
@@ -212,12 +243,14 @@ void RehtiGraphics::moveCharacter(int characterID, glm::vec3 location, float tim
     characterOrientationsM[characterID].characterOrientation.rotation = glm::quatLookAt(dir, POSITIVE_Y_AXIS);
     std::function<void(float)> callback = [characterID, delta, dir, this](float dt)
     {
+        std::unique_lock lock(dataMutexM);
         characterOrientationsM[characterID].characterOrientation.position += delta * dt;
         moveBoundingBox(characterID, ObjectType::CHARACTER, characterOrientationsM[characterID].characterOrientation.position);
         characterOrientationsM[characterID].advanceAnimation(dt);
         glm::mat4 currentMatrix = characterOrientationsM[characterID].characterOrientation.getTransformationMatrix();
         pObjectManagerM->updateCharacterDescriptor(characterID, &currentMatrix, characterOrientationsM[characterID].boneTransformations.data(), currentFrameM);
     };
+    dataMutexM.unlock();
     timersM.addTimerCallback(characterID, timeInSeconds, callback);
 }
 

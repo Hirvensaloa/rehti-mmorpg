@@ -1,6 +1,7 @@
 #pragma once
 #include <functional>
 #include <map>
+#include <mutex>
 
 constexpr float EPSILON = 1e-6f;
 
@@ -54,6 +55,6 @@ private:
     // 2. Fast removal while iterating
     // 3. Semi fast removal while not iterating
     // 4. Fast insertion to the back of the structure
-
+    std::mutex mutexM;
     std::map<int, CallBackTimer> timersM;
 };

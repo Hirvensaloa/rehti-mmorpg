@@ -2,6 +2,7 @@
 
 void TimerCallbackSystem::elapseTime(float dt)
 {
+    std::unique_lock lock(mutexM);
     for (auto it = timersM.begin(); it != timersM.end();)
     {
         auto& timer = it->second;
@@ -11,7 +12,8 @@ void TimerCallbackSystem::elapseTime(float dt)
         timer.time -= elapsedTime * timer.factor;
         if (abs(timer.time) < EPSILON)
         {
-            timersM.erase(it++);
+            // erase moves the iterator to the next element
+            it = timersM.erase(it);
         }
         else
         {
@@ -22,17 +24,20 @@ void TimerCallbackSystem::elapseTime(float dt)
 
 void TimerCallbackSystem::addTimerCallback(int id, float time, std::function<void(float dt)> callback, float factor)
 {
+    std::unique_lock lock(mutexM);
     timersM[id] = {time, factor, callback};
 }
 
 bool TimerCallbackSystem::forceQuitCallback(int id)
 {
+    std::unique_lock lock(mutexM);
     size_t elementsRemoved = timersM.erase(id);
     return 0 < elementsRemoved;
 }
 
 bool TimerCallbackSystem::finishCallback(int id)
 {
+    std::unique_lock lock(mutexM);
     auto it = timersM.find(id);
     if (it != timersM.end())
     {

@@ -8,8 +8,8 @@
 
 #pragma region Manager
 
-GraphicsObjectManager::GraphicsObjectManager(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, VkQueue graphicsQueue, uint32_t graphicsQueueFamily, const uint32_t frameCount)
-    : graphicsCommandUnitM({graphicsQueue, VK_NULL_HANDLE, graphicsQueueFamily}), logDeviceM(logDevice), frameCountM(frameCount)
+GraphicsObjectManager::GraphicsObjectManager(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, VkQueue graphicsQueue, std::shared_mutex& graphicsMutex, uint32_t graphicsQueueFamily, const uint32_t frameCount)
+    : graphicsCommandUnitM({graphicsQueue, VK_NULL_HANDLE, graphicsQueueFamily}), logDeviceM(logDevice), frameCountM(frameCount), graphicsQueueMutexM(graphicsMutex)
 {
     // Create a new command pool for the graphics queue
     VkCommandPoolCreateInfo cmdPoolCreateInfo{};
@@ -139,6 +139,8 @@ bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<Char
     {
         return false;
     }
+    std::unique_lock<std::shared_mutex> lock(graphicsQueueMutexM);
+    std::cout << "locked in addCharacter" << std::endl;
     CharacterObject character{};
     VkDeviceSize vSize = vertices.size() * sizeof(CharacterVertex);
     VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
@@ -197,7 +199,6 @@ bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<Char
     copyImage(character.texture, texture);
 
     characterObjectsM[characterID] = character;
-
     return true;
 }
 
@@ -207,6 +208,8 @@ bool GraphicsObjectManager::addGameObject(int id, const std::vector<Vertex>& ver
     {
         return false;
     }
+    std::unique_lock<std::shared_mutex> lock(graphicsQueueMutexM);
+    std::cout << "locked in addGameobject" << std::endl;
     GameObject gameObject{};
     VkDeviceSize vSize = vertices.size() * sizeof(Vertex);
     VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
@@ -256,7 +259,6 @@ bool GraphicsObjectManager::addGameObject(int id, const std::vector<Vertex>& ver
     copyImage(gameObject.texture, texture);
     // Now the game object data should be available for the gpu.
     gameObjectsM[id] = gameObject;
-
     return true;
 }
 
@@ -588,6 +590,8 @@ bool GraphicsObjectManager::addTestObject(int id, const std::vector<SimpleVertex
 
 bool GraphicsObjectManager::addArea(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, std::array<ImageData, 6> textures, VkSampler texSampler)
 {
+    std::unique_lock<std::shared_mutex> lock(graphicsQueueMutexM);
+    std::cout << "locked in addArea" << std::endl;
     VkDeviceSize vSize = vertices.size() * sizeof(Vertex);
     VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
     AreaObject area{};
@@ -614,7 +618,6 @@ bool GraphicsObjectManager::addArea(const std::vector<Vertex>& vertices, const s
         copyImage(area.textures[i], textures[i]);
     }
     areaObjectsM.push_back(area);
-
     return true;
 }
 

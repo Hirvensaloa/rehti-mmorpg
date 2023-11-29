@@ -26,7 +26,7 @@ const std::vector<VkDescriptorPoolSize> STANDARD_POOL_SIZES({{VK_DESCRIPTOR_TYPE
 /// </summary>
 class PoolManager
 {
-  public:
+public:
     PoolManager(VkDevice device);
     ~PoolManager();
 
@@ -63,7 +63,7 @@ class PoolManager
         return logDeviceM;
     }
 
-  private:
+private:
     /// <summary>
     /// Returns a pool from free pools or creates a new one.
     /// Does not push the returned pool to used pools.
@@ -82,7 +82,7 @@ class PoolManager
 /// </summary>
 class DescriptorSetLayoutCache
 {
-  public:
+public:
     DescriptorSetLayoutCache(VkDevice device);
     ~DescriptorSetLayoutCache();
 
@@ -109,7 +109,7 @@ class DescriptorSetLayoutCache
         size_t hash() const;
     };
 
-  private:
+private:
     struct DescriptorLayoutHasher
     {
         size_t operator()(const DescriptorSetLayoutInfo& info) const
@@ -127,7 +127,7 @@ class DescriptorSetLayoutCache
 /// </summary>
 class DescriptorBuilder
 {
-  public:
+public:
     DescriptorBuilder(PoolManager& poolManager, DescriptorSetLayoutCache& cache);
     ~DescriptorBuilder();
 
@@ -140,6 +140,16 @@ class DescriptorBuilder
     /// <returns>The builder itself.</returns>
     DescriptorBuilder& bindBuffer(VkDescriptorBufferInfo& bufferInfo, VkDescriptorType type,
                                   VkShaderStageFlags stageFlags);
+
+    /**
+     * @brief Creates a descriptor set layout binding and a write descriptor set for multiple buffers.
+     * @param bufferInfos is a pointer to the list of buffer info structs.
+     * @param type is the type of resource.
+     * @param stageFlags is the shader stage.
+     * @param count is the number of elements in the bufferInfos array.
+     * @return The builder itself
+     */
+    DescriptorBuilder& bindBuffers(const VkDescriptorBufferInfo* bufferInfos, VkDescriptorType type, VkShaderStageFlags stageFlags, uint32_t count);
 
     /// <summary>
     /// Creates a descriptor set layout binding and a write descriptor set for an image.
@@ -188,7 +198,7 @@ class DescriptorBuilder
 
     const PoolManager& getPoolManager() const;
 
-  private:
+private:
     uint32_t currentBindingM;
     std::vector<VkWriteDescriptorSet> writeSetsM;
     std::vector<VkDescriptorSetLayoutBinding> layoutBindingsM;

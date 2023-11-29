@@ -5,10 +5,10 @@ void TimerCallbackSystem::elapseTime(float dt)
     for (auto it = timersM.begin(); it != timersM.end();)
     {
         auto& timer = it->second;
-        float deltaTime = dt * timer.factor;
+        float deltaTime = dt;
         float elapsedTime = std::min(timer.time, deltaTime);
         timer.callback(elapsedTime);
-        timer.time -= elapsedTime;
+        timer.time -= elapsedTime * timer.factor;
         if (abs(timer.time) < EPSILON)
         {
             timersM.erase(it++);

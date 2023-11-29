@@ -91,6 +91,8 @@ public:
      * @param indices of the triangles of the model
      * @param texture of the model
      * @param animations list of Animation structs for the character
+     * @param bones list of BoneNode structs for the character
+     * @param transformations list of transformation matrices for the character. IMPORTANT: THE FIRST MATRIX IS THE GLOBAL INVERSE TRANSFORMATION MATRIX. So the transformations start from the second matrix.
      * @param location of the character to be placed
      * @param rotation of the character to be placed
      * @return boolean indicating whether the object was added successfully.
@@ -497,7 +499,9 @@ private:
     // Auxiliary classes
     std::shared_ptr<GraphicsObjectManager> pObjectManagerM;
     std::shared_ptr<RehtiGui> pGuiM;
+
     // Queues
+    std::shared_mutex graphicsQueueMutexM;
     VkQueue graphicsQueueM;
     VkQueue presentQueueM;
 

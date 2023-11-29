@@ -53,13 +53,14 @@ bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVer
     animationData.currentAnimation = AnimationType::IDLE;
     animationData.currentTicks = 0;
     CharacterData charData{};
+    charData.inverseGlobalTransformation = transformations[0];
     charData.animationData = animationData;
     charData.characterOrientation = characterOrientation;
     for (size_t i = 0; i < bones.size(); i++)
     {
         BoneNode bone = bones[i];
         charData.bones.push_back(bone);
-        charData.boneTransformations[i] = glm::mat4(1.f); // identity
+        charData.boneTransformations[i] = glm::mat4(1.f); // transformations[i + 1];
     }
 
     bool res = pObjectManagerM->addCharacter(characterID, vertices, indices, texture, characterOrientation.getTransformationMatrix(), charData.boneTransformations.data(), textureSamplerM);
@@ -73,6 +74,9 @@ bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVer
     bb.pLeft = nullptr;
     bb.pRight = nullptr;
     boundingBoxesM[ObjectType::CHARACTER][characterID] = bb;
+
+    // Set animation to idle
+    playAnimation(characterID, AnimationConfig{AnimationType::IDLE, 1.0f, true});
 
     return false;
 }
@@ -146,6 +150,9 @@ void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSec
     glm::vec3 delta = diff * timeInv;
     glm::vec3 dir = glm::normalize(diff);
     characterOrientationsM[playerID].characterOrientation.rotation = glm::quatLookAt(dir, POSITIVE_Y_AXIS);
+    timersM.finishCallback(playerID);
+    characterOrientationsM[playerID].animationData.currentAnimation = AnimationType::WALK;
+    characterOrientationsM[playerID].animationData.currentTicks = 0;
     std::function<void(float)> callback = [playerID, delta, dir, this](float dt)
     {
         characterOrientationsM[playerID].characterOrientation.position += delta * dt;
@@ -175,18 +182,21 @@ void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
         glm::mat4 currentMatrix = characterOrientationsM[characterID].characterOrientation.getTransformationMatrix();
         pObjectManagerM->updateCharacterDescriptor(characterID, &currentMatrix, characterOrientationsM[characterID].boneTransformations.data(), currentFrameM);
     };
+
+    timersM.addTimerCallback(characterID, cfg.duration, callback, factor);
 }
 
 void RehtiGraphics::forcePlayerMove(int playerID, glm::vec3 location)
 {
-    if (!boundingBoxesM[ObjectType::GAMEOBJECT].contains(playerID))
+    if (!boundingBoxesM[ObjectType::CHARACTER].contains(playerID))
         return;
     glm::mat4 locationTransform = glm::translate(glm::mat4(1.f), location);
+    characterOrientationsM[playerID].characterOrientation.position = location;
     // Assume changes are made after draw call. hence why currentFrameM is used
-    pObjectManagerM->updateObjectDescriptor(playerID, &locationTransform, currentFrameM);
+    pObjectManagerM->updateCharacterDescriptor(playerID, &locationTransform, characterOrientationsM[playerID].boneTransformations.data(), currentFrameM);
     // move the bounding box as well
-    boundingBoxesM[ObjectType::GAMEOBJECT][playerID].min = location + GAMEOBJECT_MIN;
-    boundingBoxesM[ObjectType::GAMEOBJECT][playerID].max = location + GAMEOBJECT_MAX;
+    boundingBoxesM[ObjectType::CHARACTER][playerID].min = location + CHARACTER_MIN;
+    boundingBoxesM[ObjectType::CHARACTER][playerID].max = location + CHARACTER_MAX;
 
     cameraM.setTargetAndCamera(location);
 }
@@ -474,7 +484,7 @@ void RehtiGraphics::createObjectManager()
 {
     QueueFamilyIndices indices = findQueueFamilies(gpuM);
 
-    pObjectManagerM = std::make_shared<GraphicsObjectManager>(instanceM, gpuM, logDeviceM, graphicsQueueM, indices.graphicsFamily.value(), kConcurrentFramesM);
+    pObjectManagerM = std::make_shared<GraphicsObjectManager>(instanceM, gpuM, logDeviceM, graphicsQueueM, graphicsQueueMutexM, indices.graphicsFamily.value(), kConcurrentFramesM);
 
     uint32_t transferQueueFamily;
     VkQueue transferQueue;
@@ -961,10 +971,10 @@ void RehtiGraphics::drawFrame()
     submitInfo.pCommandBuffers = &commandBuffersM[currentFrameM];
     submitInfo.signalSemaphoreCount = 1;
     submitInfo.pSignalSemaphores = signalSemaphores;
-
+    graphicsQueueMutexM.lock();
     if (vkQueueSubmit(graphicsQueueM, 1, &submitInfo, frameFencesM[currentFrameM]) != VK_SUCCESS)
         throw std::runtime_error("Failed to submit draw command buffer");
-
+    graphicsQueueMutexM.unlock();
     VkPresentInfoKHR presInfo{};
     presInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
     presInfo.waitSemaphoreCount = 1;
@@ -1188,8 +1198,10 @@ void RehtiGraphics::createGui()
     submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
     submitInfo.commandBufferCount = 1;
     submitInfo.pCommandBuffers = &commandBuffersM[0];
+    graphicsQueueMutexM.lock();
     vkQueueSubmit(graphicsQueueM, 1, &submitInfo, nullptr);
     vkQueueWaitIdle(graphicsQueueM);
+    graphicsQueueMutexM.unlock();
     pGuiM->uploadEnded();
 }
 

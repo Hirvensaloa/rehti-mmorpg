@@ -50,7 +50,8 @@ bool loadOBJFile(const std::string& path, std::vector<aiVector3D>& vertices, std
 bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertices, std::vector<uint32_t>& indices, std::array<Animation, ANIMATION_TYPE_COUNT>& animations, std::vector<BoneNode>& bones, std::vector<glm::mat4>& transformations)
 {
     Assimp::Importer importer;
-    const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
+    // additionally flip the winding order. Our engine uses clockwise convention, while gltf is ccw
+    const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals | aiProcess_FlipWindingOrder);
 
     if (!scene)
     {
@@ -64,7 +65,8 @@ bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertice
         std::cout << "Failed to find rootbone in glTF file: " << path << std::endl;
         return false;
     }
-
+    glm::mat4 rootInverseTransform = glm::inverse(aiMatrix4x4ToGlm(rootBone->mTransformation));
+    transformations.push_back(rootInverseTransform);
     std::map<std::string, uint32_t> nameToIndex;
 
     // aiNode* modelNode = scene->mRootNode->FindNode("Model");
@@ -100,13 +102,15 @@ bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertice
         // bones
 
         // get bone weights and ids
-        size_t bones = mesh->mNumBones;
-        for (size_t i = 0; i < bones; i++)
+        size_t boneCount = mesh->mNumBones;
+        for (size_t i = 0; i < boneCount; i++)
         {
             aiBone* bone = mesh->mBones[i];
             std::string boneName = std::string(bone->mName.C_Str());
             uint32_t index = nameToIndex[boneName];
             size_t numWeights = bone->mNumWeights;
+            bones[index].boneOffset = aiMatrix4x4ToGlm(bone->mOffsetMatrix);
+
             for (size_t j = 0; j < numWeights; j++)
             {
                 aiVertexWeight weight = bone->mWeights[j];
@@ -143,7 +147,7 @@ size_t loadAnimations(const aiScene* scene, std::map<std::string, uint32_t> name
         std::string animName = std::string(animation->mName.C_Str());
         AnimationType animType = getAnimationType(animName);
 
-        if (animType == 7u) // future undefined
+        if (animType == AnimationType::UNDEFINED) // future undefined
         {
             continue;
         }

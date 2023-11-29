@@ -27,7 +27,7 @@ std::array<VkDescriptorSetLayoutBinding, 3> CharacterObject::getDescriptorSetLay
     // transformations
     array[1].binding = 1;
     array[1].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-    array[1].descriptorCount = MAX_BONES;
+    array[1].descriptorCount = 1; // one big buffer
     array[1].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
     array[1].pImmutableSamplers = nullptr;
 
@@ -114,7 +114,7 @@ GfxOrientation GfxOrientation::interpolate(GfxOrientation first, GfxOrientation 
 
 void CharacterData::advanceAnimation(float dt)
 {
-    Animation currentAnimation = animationData.animations[static_cast<int>(animationData.currentAnimation)];
+    Animation currentAnimation = animationData.animations[static_cast<uint32_t>(animationData.currentAnimation)];
     // If no animation is set, do nothing.
     if (currentAnimation.animationNodes.empty())
         return;
@@ -151,6 +151,11 @@ void CharacterData::advanceAnimation(float dt)
 
         boneIndex++;
         bonesToUpdate--;
+    }
+    // TODO make this more efficient
+    for (size_t i = 0; i < bones.size(); i++)
+    {
+        boneTransformations[i] = inverseGlobalTransformation * boneTransformations[i] * bones[i].boneOffset;
     }
 }
 

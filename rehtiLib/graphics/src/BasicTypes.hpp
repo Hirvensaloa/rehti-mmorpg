@@ -10,7 +10,7 @@
 #include <vector>
 
 // If you get an error here, you need to run ./scripts/generate_assets.sh
-#include "GeneratedAnimations.hpp"
+#include "../../../assets/generated/GeneratedAnimations.hpp"
 
 #pragma region Constants
 
@@ -78,6 +78,7 @@ struct CharacterAnimationData
 
 struct BoneNode
 {
+    glm::mat4 boneOffset;           ///< offset matrix of the bone
     int parent;                     ///< index of the parent in bone array.
     std::vector<uint32_t> children; ///< indices of the children in bone array.
 };
@@ -85,6 +86,7 @@ struct BoneNode
 struct CharacterData
 {
     GfxOrientation characterOrientation;                    ///< orientation of the character
+    glm::mat4 inverseGlobalTransformation;                  ///< inverse global transformation of the character
     std::array<glm::mat4, MAX_BONES> boneTransformations{}; ///< bone transformation storage data
     std::vector<BoneNode> bones;
     CharacterAnimationData animationData;

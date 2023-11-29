@@ -55,7 +55,9 @@ CurrentAction MoveAction::getActionInfo()
 
     if (pathM.size())
     {
-        const Coordinates nextTarget = {pathM.front().first, pathM.front().second};
+        int x = static_cast<int>(pathM.front().first);
+        int y = static_cast<int>(pathM.front().second);
+        const Coordinates nextTarget = {x, y};
         actionInfo.targetCoordinate = {nextTarget.x, nextTarget.y, nextTarget.z};
     }
 

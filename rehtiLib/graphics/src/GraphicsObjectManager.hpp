@@ -4,7 +4,9 @@
 #include "Mesh.hpp"
 
 #include <array>
+#include <mutex>
 #include <optional>
+#include <shared_mutex>
 #include <unordered_map>
 #include <utility>
 #include <vector>
@@ -23,7 +25,7 @@ public:
     /// <param name="logDevice"></param>
     /// <param name="transferQueue"> that can receive transfer operations.</param>
     /// <param name="queueFamily"> of the queue that was supplied</param>
-    GraphicsObjectManager(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, VkQueue graphicsQueue, uint32_t graphicsQueueFamily, const uint32_t frameCount);
+    GraphicsObjectManager(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, VkQueue graphicsQueue, std::shared_mutex& graphicsMutex, uint32_t graphicsQueueFamily, const uint32_t frameCount);
 
     /// <summary>
     /// Destructor
@@ -284,6 +286,7 @@ private:
     VkDevice logDeviceM;
     VmaAllocator allocatorM;
 
+    std::shared_mutex& graphicsQueueMutexM;
     CommandUnit graphicsCommandUnitM;
     std::optional<CommandUnit> transferCommandUnitM;
     // Todo make a better system

@@ -13,7 +13,7 @@ class GameWorld;
 class Entity : public std::enable_shared_from_this<Entity>
 {
 public:
-    Entity(GameWorld* pGameWorld, std::string name, unsigned int id = 0, Coordinates location = Coordinates());
+    Entity(GameWorld* pGameWorld, std::string name, int baseAccuracy, int baseDamage, SpawnCoordinateBounds spawnCoordinateBounds, unsigned int id = 0, Coordinates location = Coordinates());
 
     ~Entity() = default;
 
@@ -77,7 +77,7 @@ protected:
 
     Coordinates locationM;
 
-    Coordinates respawnLocationM;
+    SpawnCoordinateBounds spawnCoordinateBoundsM;
 
     std::shared_ptr<Action> currentActionM = nullptr;
 
@@ -92,6 +92,9 @@ protected:
     Equipment equipmentM;
 
     SkillSet skillSetM;
+
+    int baseDamageM;
+    int baseAccuracyM;
 
     bool isDisconnectedM = false; // for players only, but defined for entity for polymorphism reaons
 

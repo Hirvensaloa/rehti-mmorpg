@@ -240,11 +240,23 @@ Sent by: Client
 
 </details>
 
-To add new messages, check [here](/rehtiLib/network/src/api/MessageApi.hpp)
+#### TalkMessage
+
+A message to initiate talk to a npc. The response is given in InformativeMessage. Currently, there is no dialogue e.g. player cant say anything to the npc.
+
+Sent by: Client
+
+<details>
+<summary>Expand to see message attributes</summary>
+
+- **id**: Identifies the message type.
+- **npcId**: Npc id the player wants to talk to
+
+</details>
 
 #### InformativeMessage
 
-Carries some information that the server wants to give to the client (Outside the gamestate context). For example, login failed.
+Carries some information that the server wants to give to the client (Outside the gamestate context). For example, login failed npc said something.
 
 Sent by: Server
 
@@ -255,6 +267,8 @@ Sent by: Server
 - **message**: String of descriptive information.
 
 </details>
+
+To add new messages, check [here](/rehtiLib/network/src/api/MessageApi.hpp)
 
 ## Project practices
 

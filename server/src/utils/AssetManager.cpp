@@ -76,3 +76,8 @@ std::shared_ptr<Item> AssetManager::createItemInstance(int id)
         return nullptr;
     }
 };
+
+GameCharacters AssetManager::getGameCharacters()
+{
+    return gameCharactersM;
+};

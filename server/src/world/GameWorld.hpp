@@ -31,6 +31,14 @@ public:
 
     std::vector<std::shared_ptr<Npc>>& getNpcs();
 
+    /**
+     * @brief Get npc by id
+     *
+     * @param npcId
+     * @return std::shared_ptr<Npc>
+     */
+    std::shared_ptr<Npc> getNpc(unsigned int npcId);
+
     std::shared_ptr<Entity> getEntity(unsigned int entityId);
 
     std::map<std::string, std::shared_ptr<Object>>& getObjects();
@@ -51,6 +59,8 @@ private:
     std::map<std::string, std::shared_ptr<Object>> objectsM;
 
     std::map<Coordinates, std::vector<std::shared_ptr<Item>>> itemsM;
+
+    GameCharacters gameCharactersM;
 
     Map mapM;
 };

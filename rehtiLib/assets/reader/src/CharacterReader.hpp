@@ -3,11 +3,29 @@
 #include <string>
 #include <vector>
 
+struct SpawnCoordinateBounds
+{
+    int xMin;
+    int xMax;
+    int yMin;
+    int yMax;
+};
+
+const struct
+{
+    static const std::string Passive = "PASSIVE";
+    static const std::string Aggressive = "AGGRESSIVE";
+    static const std::string Peaceful = "PEACEFUL";
+} AggressionType;
+
 struct Player
 {
     int id;
     std::string textureFilename;
     std::string glTFFilename;
+    SpawnCoordinateBounds spawnCoordinateBounds;
+    int baseDamage;
+    int baseAccuracy;
 };
 
 struct NPC
@@ -15,6 +33,13 @@ struct NPC
     int id;
     std::string textureFilename;
     std::string glTFFilename;
+    SpawnCoordinateBounds spawnCoordinateBounds;
+    int spawnAmount;
+    std::string agressionType;
+    int agressionRange;
+    int baseDamage;
+    int baseAccuracy;
+    std::vector<std::string> chatResponses;
 };
 
 /**
@@ -31,3 +56,11 @@ struct GameCharacters
  * @return GameCharacters
  */
 GameCharacters readCharacterData();
+
+/**
+ * @brief Check if SpawnCoordinateBounds is valid. Throws error if not.
+ * @param spawnCoordinateBounds SpawnCoordinateBounds
+ * @param worldWidth in tiles
+ * @param worldHeight in tiles
+ */
+void validSpawnCoordinateBounds(SpawnCoordinateBounds spawnCoordinateBounds, int worldWidth, int worldHeight);

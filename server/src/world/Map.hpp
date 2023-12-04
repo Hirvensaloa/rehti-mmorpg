@@ -2,8 +2,8 @@
 
 #include <cstdint>
 #include <iostream>
-#include <vector>
 #include <optional>
+#include <vector>
 
 #include "Coordinates.hpp"
 
@@ -15,30 +15,37 @@
 class Map
 {
 public:
-  /**
-   * @brief Loads the map information from generated assets. Currently loads the access map and height map information.
-   * @note Call this before using any other methods of this class.
-   * @returns Nothing
-   */
-  static void loadMap();
+    /**
+     * @brief Loads the map information from generated assets. Currently loads the access map and height map information.
+     * @note Call this before using any other methods of this class.
+     * @returns Nothing
+     */
+    static void loadMap();
 
-  /**
-   * @brief Finds a path from start to end
-   * @param start Starting coordinates
-   * @param end Ending coordinates
-   * @returns Vector of coordinates (x,y) that form the path. Empty vector if no path found.
-   */
-  static std::vector<std::pair<unsigned, unsigned>> findPath(Coordinates start, Coordinates end);
+    /**
+     * @brief Finds a path from start to end
+     * @param start Starting coordinates
+     * @param end Ending coordinates
+     * @returns Vector of coordinates (x,y) that form the path. Empty vector if no path found.
+     */
+    static std::vector<std::pair<unsigned, unsigned>> findPath(Coordinates start, Coordinates end);
 
-  /**
-   * @brief Gives the height for the given (x, y) coordinates
-   * @param x X-coordinate
-   * @param y Y-coordinate
-   * @returns Height of the given coordinates wrapped in optional.
-   */
-  static std::optional<int> getHeight(int x, int y);
+    /**
+     * @brief Gives the height for the given (x, y) coordinates
+     * @param x X-coordinate
+     * @param y Y-coordinate
+     * @returns Height of the given coordinates wrapped in optional.
+     */
+    static std::optional<int> getHeight(int x, int y);
+
+    /**
+     * @brief Get the access map
+     *
+     * @return access map
+     */
+    static const std::vector<std::vector<uint8_t>>& getAccessMap();
 
 private:
-  inline static std::vector<std::vector<uint8_t>> accessMapM = {};
-  inline static std::vector<std::vector<int>> heightMapM = {};
+    inline static std::vector<std::vector<uint8_t>> accessMapM = {};
+    inline static std::vector<std::vector<int>> heightMapM = {};
 };

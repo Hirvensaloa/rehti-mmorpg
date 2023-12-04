@@ -6,22 +6,27 @@
 
 void Map::loadMap()
 {
-  accessMapM = fetchAccessMatrix();
-  heightMapM = fetchHeightMatrix();
-  std::cout << "Map loaded successfully!" << std::endl;
+    accessMapM = fetchAccessMatrix();
+    heightMapM = fetchHeightMatrix();
+    std::cout << "Map loaded successfully!" << std::endl;
 }
 
 std::vector<std::pair<unsigned, unsigned>> Map::findPath(Coordinates start, Coordinates end)
 {
-  return astar(accessMapM, {start.x, start.y}, {end.x, end.y});
+    return astar(accessMapM, {start.x, start.y}, {end.x, end.y});
 }
 
 std::optional<int> Map::getHeight(int x, int y)
 {
-  if (x < 0 || y < 0 || y >= heightMapM.size() || x >= heightMapM[y].size())
-  {
-    return std::nullopt;
-  }
+    if (x < 0 || y < 0 || y >= heightMapM.size() || x >= heightMapM[y].size())
+    {
+        return std::nullopt;
+    }
 
-  return heightMapM[y][x];
+    return heightMapM[y][x];
+}
+
+const std::vector<std::vector<uint8_t>>& Map::getAccessMap()
+{
+    return accessMapM;
 }

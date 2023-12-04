@@ -21,7 +21,8 @@ enum class MessageId
     Informative,
     UseItem,
     Unequip,
-    DropItem
+    DropItem,
+    Talk
 };
 
 enum class ActionType

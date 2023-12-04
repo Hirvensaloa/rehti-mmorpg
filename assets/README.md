@@ -121,6 +121,13 @@ Characters in the game include the player character and non-player characters (N
 - **id** Unique identifier for the player class
 - **textureFilename:** Filename of the texture file under the [textures](/assets/textures/)-folder.
 - **glTFFilename:** Filename of the `.glb` (glTF binary) file under the [characters](/assets/characters/)-folder.
+- **spawnCoordinateBounds** The coordinate bounds in which the new players are spawned. Also acts as a respawn area.
+  - **xMin** Minimum x-coordinate
+  - **xMax** Maximum x-coordinate
+  - **yMin** Minimum y-coordinate
+  - **yMax** Minimum y-coordinate
+- **baseDamage** The damage the players deal without equipment. Defined in integers.
+- **baseAccuracy** The accuracy which the player has without any equipment. Defined in integers. 1 = 1%
 
 Example player character:
 
@@ -129,7 +136,15 @@ Example player character:
   "player": {
     "id": 0,
     "textureFilename": "player_texture.png",
-    "glTFFilename": "player_model.glb"
+    "glTFFilename": "player_model.glb",
+    "spawnCoordinateBounds": {
+      "xMin": 1,
+      "xMax": 10,
+      "yMin": 1,
+      "yMax": 10
+    },
+    "baseDamage": 15,
+    "baseAccuracy": 10
   }
 }
 ```
@@ -139,8 +154,23 @@ Example player character:
 All the NPCs in the game are defined here in a list. NPCs have similar attributes to the player character:
 
 - **id** Unique identifier for the NPC-type. Cannot conflict with the player id.
+- **name** Name of the npc
 - **textureFilename** Filename of the texture file under the textures-folder.
 - **glTFFilename** Filename of the .glb (glTF binary) file under the characters-folder.
+- **spawnCoordinateBounds** The coordinate bounds in which the new players are spawned. Also acts as a respawn area.
+  - **xMin** Minimum x-coordinate
+  - **xMax** Maximum x-coordinate
+  - **yMin** Minimum y-coordinate
+  - **yMax** Minimum y-coordinate
+- **spawnAmount** The amount of this npc that should be spawned
+- **agressionType** Defines the npcs behaviour. Possible types are defined below:
+
+  `PASSIVE`: Doesn't attack anyone ever. `PEACEFUL`: Not aggressive if not provoked. `AGGRESSIVE`: Always aggressive.
+
+- **aggressionRange** Range in which the aggressive npcs look for targets. Defined in number of tiles.
+- **baseDamage** The damage a npc deals without equipment. Defined in integers.
+- **baseAccuracy** The accuracy which a npc has without any equipment. Defined in integers. 1 = 1%
+- **chatResponses** A list of strings that the npc can say if talked to. The list can be empty.
 
 Example npc list:
 
@@ -150,7 +180,19 @@ Example npc list:
     {
       "id": 1,
       "textureFilename": "player_texture.png",
-      "glTFFilename": "player_model.glb"
+      "glTFFilename": "player_model.glb",
+      "spawnCoordinateBounds": {
+        "xMin": 1,
+        "xMax": 10,
+        "yMin": 1,
+        "yMax": 10
+      },
+      "spawnAmount": 2,
+      "agressionType": "AGRESSIVE",
+      "agressionRange": 40,
+      "baseDamage": 10,
+      "baseAccuracy": 10,
+      "chatResponses": ["Hello there."]
     }
   ]
 }

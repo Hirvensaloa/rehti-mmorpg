@@ -385,12 +385,13 @@ bool Server::loadPlayer(std::string username, std::string password, const std::s
 {
     try
     {
-        const auto playerData = AssetManager::getGameCharacters().player;
-        const auto spawnCoordinate = getRandomCoordinate(playerData.spawnCoordinateBounds);
+        const auto& playerData = AssetManager::getGameCharacters().player;
+        const auto& accessMap = gameWorldM.getMap().getAccessMap();
+        const auto spawnCoordinate = getRandomCoordinates(playerData.spawnCoordinateBounds, accessMap);
 
         auto data = dbManagerM.loadPlayerDataFromDb(username, password, spawnCoordinate);
         connection->connectToClient(data.id);
-        gameWorldM.addPlayer(data.username, data.id, Coordinates(data.position_x, data.position_y));
+        gameWorldM.addPlayer(data.username, data.id, playerData.baseDamage, playerData.baseAccuracy, playerData.spawnCoordinateBounds, Coordinates(data.position_x, data.position_y));
 
         Inventory& inventory = gameWorldM.getPlayer(data.id)->getInventory();
         std::vector<int> itemIds = dbManagerM.loadInventoryDataFromDb(data.id);

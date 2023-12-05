@@ -7,14 +7,15 @@
 #include "../object/ResourceObject.hpp"
 #include "../utils/AssetManager.hpp"
 #include "GameWorld.hpp"
+#include "Utils.hpp"
 
 #include <iostream>
 
 GameWorld::GameWorld() : mapM(Map()){};
 
-void GameWorld::addPlayer(std::string playerName, unsigned int playerId, Coordinates location)
+void GameWorld::addPlayer(std::string playerName, unsigned int playerId, int baseDamage, int baseAccuracy, SpawnCoordinateBounds spawnCoordinateBounds, Coordinates location)
 {
-    playersM.push_back(std::make_shared<PlayerCharacter>(this, playerName, playerId, location));
+    playersM.push_back(std::make_shared<PlayerCharacter>(this, playerName, baseDamage, baseAccuracy, spawnCoordinateBounds, playerId, location));
 }
 
 bool GameWorld::removePlayer(unsigned int playerId)
@@ -156,39 +157,30 @@ void GameWorld::initWorld()
     std::cout << "Objects added to the world" << std::endl;
 
     // Add NPCs to the world
-    gameCharactersM = AssetManager::getGameCharacters();
+    const auto& npcs = AssetManager::getGameCharacters().npcs;
     const auto accessMap = mapM.getAccessMap();
-    for (const auto& npc : gameCharactersM.npcs)
+    for (const auto& npc : npcs)
     {
-        if (npc.agressionType == AggressionType.Peaceful)
+        int i = 0;
+        while (i < npc.spawnAmount)
         {
-            int i = 0;
-            while (i < npc.spawnAmount)
+            Coordinates coords = getRandomCoordinates(npc.spawnCoordinateBounds, accessMap);
+
+            if (npc.agressionType == AggressionType.Peaceful)
             {
-                Coordinates coords = getRandomCoordinates(npc.spawnCoordinateBounds, accessMap);
                 npcsM.push_back(std::make_shared<Npc>(this, npc.name, npc.baseDamage, npc.baseAccuracy, npc.spawnCoordinateBounds, npc.chatResponses, npc.id, coords));
-                i++;
             }
-        }
-        else if (npc.agressionType == AggressionType.Aggressive)
-        {
-            int i = 0;
-            while (i < npc.spawnAmount)
+            else if (npc.agressionType == AggressionType.Aggressive)
             {
-                Coordinates coords = getRandomCoordinates(npc.spawnCoordinateBounds, accessMap);
                 npcsM.push_back(std::make_shared<AggressiveNpc>(this, npc.name, npc.agressionRange, npc.baseDamage, npc.baseAccuracy, npc.spawnCoordinateBounds, npc.chatResponses, npc.id, coords));
-                i++;
             }
-        }
-        else if (npc.agressionType == AggressionType.Passive)
-        {
-            int i = 0;
-            while (i < npc.spawnAmount)
+            else if (npc.agressionType == AggressionType.Passive)
             {
-                Coordinates coords = getRandomCoordinates(npc.spawnCoordinateBounds, accessMap);
                 npcsM.push_back(std::make_shared<PassiveNpc>(this, npc.name, npc.baseDamage, npc.baseAccuracy, npc.spawnCoordinateBounds, npc.chatResponses, npc.id, coords));
-                i++;
             }
+
+            std::cout << "NPC " << npc.name << " added to the world at " << coords.x << " " << coords.y << " " << coords.z << std::endl;
+            i++;
         }
     }
     std::cout << "NPCs added to the world" << std::endl;

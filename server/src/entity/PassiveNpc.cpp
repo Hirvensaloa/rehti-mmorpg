@@ -1,4 +1,5 @@
 #include "PassiveNpc.hpp"
+#include "../world/GameWorld.hpp"
 
 PassiveNpc::PassiveNpc(
     GameWorld* pGameWorld,
@@ -50,7 +51,7 @@ std::shared_ptr<PlayerCharacter> PassiveNpc::findAttackingPlayer()
         std::shared_ptr<PlayerCharacter> player = pGameWorldM->getPlayers()[i];
         const CurrentAction actionInfo = player->getCurrentAction()->getActionInfo();
 
-        if (actionInfo.actionType == ActionType::Attack && actionInfo.targetId == instanceIdM)
+        if (actionInfo.id == ActionType::Attack && actionInfo.targetId == instanceIdM)
         {
             return player;
         }

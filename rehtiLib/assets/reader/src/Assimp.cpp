@@ -65,15 +65,14 @@ bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertice
         std::cout << "Failed to find rootbone in glTF file: " << path << std::endl;
         return false;
     }
-    // bruh the root rootbone matrix is added to the list of transformations in fillskeleton what the fuck were you doing??
     glm::mat4 rootInverseTransform = glm::mat4(1.f); // glm::inverse(aiMatrix4x4ToGlm(rootBone->mTransformation));
     transformations.push_back(rootInverseTransform);
+
     std::map<std::string, uint32_t> nameToIndex;
 
     // aiNode* modelNode = scene->mRootNode->FindNode("Model");
     // fill armature / skeleton
     size_t boneCount = fillSkeleton(rootBone, bones, transformations, nameToIndex);
-
     size_t loadedAnimations = loadAnimations(scene, nameToIndex, animations);
     if (loadedAnimations == 0)
     {

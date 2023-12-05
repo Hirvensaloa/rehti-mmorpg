@@ -60,8 +60,10 @@ GameCharacters readCharacterData()
     for (const auto& npc : npcs.GetArray())
     {
         if (!validMember(npc, "id", ValueType::INT) ||
+            !validMember(npc, "name", ValueType::STRING) ||
             !validMember(npc, "textureFilename", ValueType::STRING) ||
-            !validMember(npc, "glTFFilename", ValueType::STRING) !validMember(npc, "spawnCoordinateBounds", ValueType::OBJECT) ||
+            !validMember(npc, "glTFFilename", ValueType::STRING) ||
+            !validMember(npc, "spawnCoordinateBounds", ValueType::OBJECT) ||
             !validMember(npc["spawnCoordinateBounds"], "xMin", ValueType::INT) ||
             !validMember(npc["spawnCoordinateBounds"], "xMax", ValueType::INT) ||
             !validMember(npc["spawnCoordinateBounds"], "yMin", ValueType::INT) ||
@@ -78,11 +80,12 @@ GameCharacters readCharacterData()
         // Check if agressionType is valid
         if (npc["agressionType"].GetString() != AggressionType.Passive && npc["agressionType"].GetString() != AggressionType.Aggressive && npc["agressionType"].GetString() != AggressionType.Peaceful)
         {
-            throw std::runtime_error("Invalid JSON structure. NPC agressionType is invalid. Received: " + npc["agressionType"].GetString() + ". Expected: " + AggressionType.Passive + ", " + AggressionType.Aggressive + " or " + AggressionType.Peaceful + ".");
+            throw std::runtime_error("Invalid JSON structure. NPC agressionType is invalid. Received: " + static_cast<std::string>(npc["agressionType"].GetString()) + ". Expected: " + AggressionType.Passive + ", " + AggressionType.Aggressive + " or " + AggressionType.Peaceful + ".");
         }
 
         NPC npcData;
         npcData.id = npc["id"].GetInt();
+        npcData.name = npc["name"].GetString();
         npcData.textureFilename = npc["textureFilename"].GetString();
         npcData.glTFFilename = npc["glTFFilename"].GetString();
         npcData.spawnCoordinateBounds.xMin = npc["spawnCoordinateBounds"]["xMin"].GetInt();

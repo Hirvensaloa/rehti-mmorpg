@@ -223,9 +223,9 @@ Coordinates getRandomCoordinates(const SpawnCoordinateBounds& spawnCoordinateBou
             }
         }
 
-        if (!hasNoAccess)
+        if (hasNoAccess)
         {
-            throw std::runtime_error("No accessible coordinates found");
+            throw std::runtime_error("No accessible coordinates found. xMin: " + std::to_string(spawnCoordinateBounds.xMin) + " xMax: " + std::to_string(spawnCoordinateBounds.xMax) + " yMin: " + std::to_string(spawnCoordinateBounds.yMin) + " yMax: " + std::to_string(spawnCoordinateBounds.yMax));
         }
     }
 

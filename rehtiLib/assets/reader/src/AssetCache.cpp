@@ -20,9 +20,13 @@ void AssetCache::loadAssets()
     const auto gameCharacters = readCharacterData();
 
     objectAssetDataM = loadGameObjectAssetData(gameObjects);
+    std::cout << "ASSET CACHE - Object assets loaded" << std::endl;
     characterAssetDataM = loadCharacterAssetData(gameCharacters);
+    std::cout << "ASSET CACHE - Character assets loaded" << std::endl;
     areaAssetDataM = loadAreaAssetData(areaMatrix);
+    std::cout << "ASSET CACHE - Area assets loaded" << std::endl;
     itemAssetDataM = loadItemAssetData(gameItems);
+    std::cout << "ASSET CACHE - Item assets loaded" << std::endl;
 
     std::cout << "ASSET CACHE - Assets loaded" << std::endl;
 }
@@ -104,7 +108,6 @@ std::map<int, CharacterAssetData> AssetCache::loadCharacterAssetData(const GameC
     std::map<std::string, ImageData> textureDataMap = loadCharacterTextures(gameCharacters);
 
     std::map<int, CharacterAssetData> characterAssetDataMap;
-
     { // player scope
         Player player = gameCharacters.player;
         const std::string filepath = Config.CHARACTER_GLTF_PATH + player.glTFFilename;
@@ -113,7 +116,6 @@ std::map<int, CharacterAssetData> AssetCache::loadCharacterAssetData(const GameC
         std::vector<BoneNode> bones;
         std::vector<glm::mat4> transformations;
         std::array<Animation, ANIMATION_TYPE_COUNT> animations;
-
         bool success = loadGlTFFile(filepath, vertices, indices, animations, bones, transformations);
         if (success)
         {

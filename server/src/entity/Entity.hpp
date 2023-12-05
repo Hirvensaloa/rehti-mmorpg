@@ -30,9 +30,14 @@ public:
 
     Coordinates& getLocation();
 
-    void setLocation(Coordinates& location);
+    void setLocation(Coordinates location);
 
-    Coordinates& getRespawnLocation();
+    /**
+     * @brief Returns a random location within the spawn bounds
+     *
+     * @return Coordinates
+     */
+    Coordinates getRespawnLocation();
 
     std::shared_ptr<Action>& getCurrentAction();
 

@@ -13,9 +13,9 @@ struct SpawnCoordinateBounds
 
 const struct
 {
-    static const std::string Passive = "PASSIVE";
-    static const std::string Aggressive = "AGGRESSIVE";
-    static const std::string Peaceful = "PEACEFUL";
+    const std::string Passive = "PASSIVE";
+    const std::string Aggressive = "AGGRESSIVE";
+    const std::string Peaceful = "PEACEFUL";
 } AggressionType;
 
 struct Player
@@ -31,6 +31,7 @@ struct Player
 struct NPC
 {
     int id;
+    std::string name;
     std::string textureFilename;
     std::string glTFFilename;
     SpawnCoordinateBounds spawnCoordinateBounds;

@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "../world/GameWorld.hpp"
+#include "../world/Utils.hpp"
 #include "Entity.hpp"
 
 Entity::Entity(
@@ -14,14 +15,13 @@ Entity::Entity(
     : idM(id),
       nameM(name),
       locationM(location),
-      respawnLocationM(locationM),
       pGameWorldM(pGameWorld),
       inventoryM(Inventory(this)),
       equipmentM(Equipment(this)),
       skillSetM(SkillSet()),
       baseDamageM(baseDamage),
       baseAccuracyM(baseAccuracy),
-      SpawnCoordinateBounds spawnCoordinateBounds,
+      spawnCoordinateBoundsM(spawnCoordinateBounds)
 {
     instanceIdM = nextInstanceIdM++;
 };
@@ -46,14 +46,17 @@ Coordinates& Entity::getLocation()
     return locationM;
 }
 
-void Entity::setLocation(Coordinates& location)
+void Entity::setLocation(Coordinates location)
 {
     locationM = location;
 }
 
-Coordinates& Entity::getRespawnLocation()
+Coordinates Entity::getRespawnLocation()
 {
-    return respawnLocationM;
+    const auto accessMap = pGameWorldM->getMap().getAccessMap();
+    Coordinates coords = getRandomCoordinates(spawnCoordinateBoundsM, accessMap);
+
+    return coords;
 }
 
 std::shared_ptr<Action>& Entity::getCurrentAction()

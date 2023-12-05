@@ -13,7 +13,8 @@ class PassiveNpc : public Npc
 {
 
 public:
-    PassiveNpc(GameWorld* pGameWorld, std::string name, int baseDamage, int baseAccuracy, SpawnCoordinateBounds spawnCoordinateBounds, unsigned int id = 0, Coordinates location = Coordinates());
+    PassiveNpc(GameWorld* pGameWorld, std::string name, int baseDamage, int baseAccuracy, SpawnCoordinateBounds spawnCoordinateBounds, std::vector<std::string> chatResponses,
+               unsigned int id = 0, Coordinates location = Coordinates());
 
     ~PassiveNpc() = default;
 

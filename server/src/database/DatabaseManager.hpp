@@ -4,6 +4,8 @@
 
 class PlayerCharacter;
 
+struct Coordinates;
+
 struct PlayerTable
 {
     int id;

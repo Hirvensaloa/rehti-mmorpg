@@ -77,7 +77,7 @@ std::shared_ptr<Item> AssetManager::createItemInstance(int id)
     }
 };
 
-GameCharacters AssetManager::getGameCharacters()
+const GameCharacters& AssetManager::getGameCharacters()
 {
     return gameCharactersM;
 };

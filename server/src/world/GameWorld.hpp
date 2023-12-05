@@ -23,7 +23,16 @@ public:
 
     Map& getMap();
 
-    void addPlayer(std::string playerName, unsigned int playerId, Coordinates location);
+    /**
+     * @brief Adds player to the game world
+     *
+     * @param playerName
+     * @param playerId
+     * @param baseDamage
+     * @param baseAccuracy
+     * @param location Coordinates
+     */
+    void addPlayer(std::string playerName, unsigned int playerId, int baseDamage, int baseAccuracy, SpawnCoordinateBounds spawnCoordinateBounds, Coordinates location);
 
     bool removePlayer(unsigned int playerId);
 
@@ -59,8 +68,6 @@ private:
     std::map<std::string, std::shared_ptr<Object>> objectsM;
 
     std::map<Coordinates, std::vector<std::shared_ptr<Item>>> itemsM;
-
-    GameCharacters gameCharactersM;
 
     Map mapM;
 };

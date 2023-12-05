@@ -48,14 +48,26 @@ struct GfxOrientation
     glm::quat rotation; ///< rotation of the node
     glm::vec3 scale;    ///< scale of the node
 
+    /**
+     * @brief Compiles the transformation matrix of this orientation.
+     * @return Matrix that represents the transformation of this orientation.
+     */
     glm::mat4 getTransformationMatrix() const;
+
+    /**
+     * @brief Interpolates between two orientations linearly.
+     * @param first is the initial orientation
+     * @param second is the target orientation
+     * @param factor is how much of the second orientation should be used.
+     * @return orientation linearly interpolated between the two orientations.
+     */
     static GfxOrientation interpolate(GfxOrientation first, GfxOrientation second, float factor);
 };
 
 struct AnimationNode
 {
-    double time; ///< time of this animation node in ticks
-    std::array<GfxOrientation, MAX_BONES> bones;
+    double time;                                 ///< time of this animation node in ticks
+    std::array<GfxOrientation, MAX_BONES> bones; ///< bone orientations
 };
 
 /**

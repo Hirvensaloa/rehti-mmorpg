@@ -65,7 +65,8 @@ bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertice
         std::cout << "Failed to find rootbone in glTF file: " << path << std::endl;
         return false;
     }
-    glm::mat4 rootInverseTransform = glm::inverse(aiMatrix4x4ToGlm(rootBone->mTransformation));
+    // bruh the root rootbone matrix is added to the list of transformations in fillskeleton what the fuck were you doing??
+    glm::mat4 rootInverseTransform = glm::mat4(1.f); // glm::inverse(aiMatrix4x4ToGlm(rootBone->mTransformation));
     transformations.push_back(rootInverseTransform);
     std::map<std::string, uint32_t> nameToIndex;
 
@@ -147,7 +148,7 @@ size_t loadAnimations(const aiScene* scene, std::map<std::string, uint32_t> name
         std::string animName = std::string(animation->mName.C_Str());
         AnimationType animType = getAnimationType(animName);
 
-        if (animType == AnimationType::UNDEFINED) // future undefined
+        if (animType == AnimationType::UNDEFINED)
         {
             continue;
         }
@@ -203,7 +204,71 @@ size_t loadAnimations(const aiScene* scene, std::map<std::string, uint32_t> name
         animations[static_cast<uint32_t>(animType)] = newAnimation;
         loadedAnimations++;
     } // end of animation for
+
     return loadedAnimations;
+}
+
+size_t loadAnimations2(const aiScene* scene, std::map<std::string, uint32_t> nameToIndex, std::array<Animation, ANIMATION_TYPE_COUNT>& animations)
+{
+    size_t loadedAnimations = 0;
+    // for each animation
+    for (uint32_t i = 0; i < scene->mNumAnimations; i++)
+    {
+        aiAnimation* animation = scene->mAnimations[i];
+        std::string animName = std::string(animation->mName.C_Str());
+        AnimationType animType = getAnimationType(animName);
+
+        if (animType == AnimationType::UNDEFINED || animation->mNumChannels == 0)
+        {
+            continue;
+        }
+        Animation newAnimation{};
+        uint32_t numBoneChannels = animation->mNumChannels;
+        uint32_t numBones = 0;
+        uint32_t maxKeys = std::max(animation->mChannels[0]->mNumPositionKeys,
+                                    animation->mChannels[0]->mNumRotationKeys,
+                                    animation->mChannels[0]->mNumScalingKeys);
+        newAnimation.animationNodes.resize(maxKeys);
+        newAnimation.totalTicks = animation->mDuration;
+        newAnimation.ticksPerSecond = (0 < animation->mTicksPerSecond) ? animation->mTicksPerSecond : 24;
+        // for each bone
+        for (uint32_t j = 0; j < numBoneChannels; j++)
+        {
+            aiNodeAnim* animationNode = animation->mChannels[j];
+            std::string boneName = std::string(animationNode->mNodeName.C_Str());
+            if (!nameToIndex.contains(boneName)) // discard control nodes, etc.
+            {
+                continue;
+            }
+            uint32_t index = nameToIndex[boneName];
+            uint32_t numKeys = std::max(animationNode->mNumPositionKeys,
+                                        animationNode->mNumRotationKeys,
+                                        animationNode->mNumScalingKeys);
+            if (maxKeys < numKeys)
+            {
+                maxKeys = numKeys;
+            }
+            // for each animation key
+            for (uint32_t k = 0; k < numKeys; k++)
+            {
+
+                aiVectorKey positionKey = animationNode->mPositionKeys[k];
+                aiQuatKey rotationKey = animationNode->mRotationKeys[k];
+                aiVectorKey scaleKey = animationNode->mScalingKeys[k];
+
+                GfxOrientation orientation{};
+                orientation.position = aiVector3DToGlm(positionKey.mValue);
+                orientation.rotation = aiQuaternionToGlm(rotationKey.mValue);
+                orientation.scale = aiVector3DToGlm(scaleKey.mValue);
+
+                // set the orientation of the bone at keyframe j
+                //
+                // 				animations[static_cast<uint32_t>(animType)].animationNodes[k].bones[index] = orientation;
+
+            } // for each animation key
+            numBones++;
+        } // end of bone for
+    }     // end of animation for
 }
 
 size_t fillSkeleton(aiNode* rootNode, std::vector<BoneNode>& boneList, std::vector<glm::mat4>& transformations, std::map<std::string, uint32_t>& nameToIndex)

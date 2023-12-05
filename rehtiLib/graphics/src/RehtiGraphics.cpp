@@ -5,9 +5,8 @@
 #include "GLFW/glfw3.h"
 #include <cstring>
 
-void RehtiGraphics::demo()
+void RehtiGraphics::startMainLoop()
 {
-    // addTestGameObject(0);
     mainLoop();
 }
 

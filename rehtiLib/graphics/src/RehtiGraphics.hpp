@@ -59,12 +59,16 @@ struct EngineStatistics
 class RehtiGraphics
 {
 public:
-    // Demos the latest changes to the graphics class
-    void demo();
+    /**
+     * @brief Starts a rendering loop until the window is closed.
+     */
+    void startMainLoop();
 
-    /// <summary>
-    /// Initializes the window and vulkan.
-    /// </summary>
+    /**
+     * @brief Initializes the graphics backend.
+     * @param width of the window
+     * @param height of the window
+     */
     RehtiGraphics(uint32_t width = 1200, uint32_t height = 900);
 
     /// <summary>
@@ -72,10 +76,10 @@ public:
     /// </summary>
     ~RehtiGraphics();
 
-    /// <summary>
-    /// Adds a test cube to the graphics backend for testing purposes.
-    /// </summary>
-    /// <param name="id">The id of the test cube.</param>
+    /**
+     * @brief Adds a test cube for testing purposes.
+     * @param id of the test object.
+     */
     void addTestObject(int id);
 
     /**
@@ -237,39 +241,40 @@ public:
 private:
     // Functions
 
-    /// <summary>
-    /// Initializes glfw window.
-    /// </summary>
+    /**
+     * @brief Initializes the window.
+     */
     void initWindow();
 
-    /// <summary>
-    /// Initializes vulkan and creates the instance.
-    /// </summary>
+    /**
+     * @brief Initializes vulkan instance.
+     */
     void initVulkan();
 
-    /// <summary>
-    /// populates debug messenger info.
-    /// </summary>
+    /**
+     * @brief Populates the debug messenger info.
+     * @param createInfo
+     */
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
 
-    /// <summary>
-    /// Setups the debug messenger.
-    /// </summary>
+    /**
+     * @brief Setups the debug messenger.
+     */
     void setupDebugMessenger();
 
-    /// <summary>
-    /// Chooses an appropriate gpu.
-    /// </summary>
+    /**
+     * @brief  Chooses an appropriate gpu.
+     */
     void pickPhysicalDevice();
 
-    /// <summary>
-    /// Creates the interactable logical device.
-    /// </summary>
+    /**
+     * @brief Creates the interactable logical device.
+     */
     void createLogicalDevice();
 
-    /// <summary>
-    /// Creates the graphics object manager.
-    /// </summary>
+    /**
+     * @brief Creates the graphics object manager.
+     */
     void createObjectManager();
 
     /// <summary>
@@ -277,90 +282,88 @@ private:
     /// </summary>
     void createSwapChain();
 
-    /// <summary>
-    /// Recreates the swapchain.
-    /// </summary>
+    /**
+     * @brief Recreates the swapchain.
+     */
     void recreateSwapChain();
 
-    /// <summary>
-    /// Cleans up swapchain related resources. This function is used for easier recreation of the swap chain.
-    /// </summary>
+    /**
+     * @brief Cleans up swapchain related resources. This function is used for easier recreation of the swap chain.
+     */
     void cleanupSwapChain();
 
-    /// <summary>
-    /// Creates the image views.
-    /// </summary>
+    /**
+     * @brief Creates the image views.
+     */
     void createImageViews();
 
-    /// <summary>
-    /// Creates the render pass
-    /// </summary>
+    /**
+     * @brief Creates the render pass.
+     */
     void createRenderPass();
 
-    /// <summary>
-    /// Creates the graphics pipeline.
-    /// </summary>
+    /**
+     * @brief Creates the graphics pipeline.
+     */
     void createGraphicsPipeline();
 
-    /// <summary>
-    /// Creates the framebuffers.
-    /// </summary>
+    /**
+     * @brief Creates the framebuffers.
+     */
     void createFramebuffers();
 
-    /// <summary>
-    /// Creates the command pool.
-    /// </summary>
+    /**
+     * @brief Creates the command pool.
+     */
     void createCommandPool();
 
-    /// <summary>
-    /// Creates the command buffers.
-    /// </summary>
+    /**
+     * @brief Creates the command buffers.
+     */
     void createCommandBuffers();
 
-    /// <summary>
-    /// Records command buffers
-    /// </summary>
-    /// <param name="cmdBuffer">  to record</param>
-    /// <param name="imageIndex"> is the index of the swap chain image to write to</param>
+    /**
+     * @brief Records the command buffer.
+     * @param cmdBuffer to record to.
+     * @param imageIndex of the swapchain image.
+     */
     void recordCommandBuffer(VkCommandBuffer cmdBuffer, uint32_t imageIndex);
 
-    /// <summary>
-    /// Creates the appropriate semaphores and fences.
-    /// </summary>
+    /**
+     * @brief Initializes the appropriate semaphores and fences.
+     */
     void createSynchronization();
 
-    /// <summary>
-    /// Draws a frame.
-    /// </summary>
+    /**
+     * @brief Draws a frame and records the previous frame time.
+     */
     void drawFrame();
 
-    /// <summary>
-    /// Loops, polls events and draws frames.
-    /// </summary>
+    /**
+     * @brief Loops, polls events and draws frames.
+     */
     void mainLoop();
 
-    /// <summary>
-    /// Cleans up used resources.
-    /// </summary>
+    /**
+     * @brief Cleans up used resources.
+     */
     void cleanup();
 
     // Helper functions
 
-    /// <summary>
-    /// Creates vulkan instance.
-    /// </summary>
+    /**
+     * @brief Creates vulkan instance.
+     */
     void createInstance();
 
-    /// <summary>
-    /// Creates a surface to draw on.
-    /// </summary>
+    /**
+     * @brief Creates a surface to draw on.
+     */
     void createSurface();
 
-    /// <summary>
-    /// Creates a texture sampler.
-    /// Note: Sampler is completely separate from the actual textures.
-    /// Those are created in the GraphicsObjectManager as part of some graphics object.
-    /// </summary>
+    /**
+     * @brief Creates a texture sampler.
+     */
     void createTextureSampler();
 
     /**
@@ -373,15 +376,24 @@ private:
      */
     void createGui();
 
-    /// <summary>
-    /// Checks for device extension support.
-    /// </summary>
-    /// <param name="device"> to check extensions for.</param>
-    /// <returns>
-    /// boolean indicating whether required extensions set by <paramref name="deviceExtensions"/> are met.
-    /// </returns>
+    /**
+     * @brief Checks whether the given device supports the required extensions.
+     * @param device to check.
+     * @return boolean indicating whether the device supports the required extensions.
+     */
     bool checkDeviceExtensionSupport(VkPhysicalDevice device);
+
+    /**
+     * @brief Checks whether the given device supports the required layers.
+     * @return boolean indicating whether the layers are found.
+     */
     bool checkValidationLayerSupport();
+
+    /**
+     * @brief Checks whether the given device supports the required features.
+     * @param device to check.
+     * @return boolean indicating whether the device supports the required features.
+     */
     bool isDeviceSuitable(VkPhysicalDevice device);
 
     /**
@@ -389,7 +401,7 @@ private:
      * @param min is the smaller coordinate of the bounding box.
      * @param max is the larger coordinate of the bounding box.
      * @param rayOrig is the origin of the ray.
-     * @param dirInv is the inverse of the direction of the ray.
+     * @param dirInv is the coordinate-wise inverse of the direction of the ray.
      * @param t is the distance to the hit point.
      * @return true if hit, false otherwise.
      */
@@ -405,52 +417,57 @@ private:
      */
     bool trace(const glm::vec3 orig, const glm::vec3 dirInv, const AABB* pBoxNode, AABB& boxHit, float& t);
 
-    /// <summary>
-    /// Rates a given GPU
-    /// </summary>
-    /// <param name="device">gpu.</param>
-    /// <returns>A score as an integer</returns>
+    /**
+     * @brief Rates the given gpu.
+     * @param device to rate.
+     */
     int rateDevice(VkPhysicalDevice device);
 
-    /// <summary>
-    /// Looks for a queue family that supports graphics and presentation operations.
-    /// </summary>
-    /// <param name="device">gpu.</param>
-    /// <returns>The </returns>
+    /**
+     * @brief Looks for queue families.
+     * @param device to look queues for.
+     * @return Struct indicating queue family support.
+     */
     QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
 
-    /// <summary>
-    /// Looks for swapchain support.
-    /// </summary>
-    /// <param name="device">gpu.</param>
-    /// <returns>Details of the support available.</returns>
+    /**
+     * @brief Looks for swapchain support.
+     * @param device to look support for.
+     * @return Swapchain support details.
+     */
     SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
 
-    /// <summary>
-    /// Looks for the required extensions set by the GLFW library.
-    /// </summary>
-    /// <returns>The extensions.</returns>
+    /**
+     * @brief Returns the required extensions as c strings.
+     * @return vector of c strings.
+     */
     std::vector<const char*> getRequiredExtensions();
 
-    /// <summary>
-    /// Chooses a suitable surface format.
-    /// </summary>
-    /// <param name="availableFormats">List of formats available.</param>
-    /// <returns>The chosen format.</returns>
+    /**
+     * @brief Chooses a surface format.
+     * @param availableFormats to choose from.
+     * @return format from the list.
+     */
     VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> availableFormats);
 
-    /// <summary>
-    /// Chooses a presentation mode.
-    /// </summary>
-    /// <param name="availableModes">List of available modes.</param>
-    /// <returns>The chosen presentation format.</returns>
+    /**
+     * @brief Chooses a present mode.
+     * @param availableModes to choose from.
+     * @return Presentmode chosen.
+     */
     VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> availableModes);
+
+    /**
+     * @brief Chooses a swap extent based on the provided capabilities.
+     * @param capabilities of the surface in use.
+     * @return VkExtent2D object.
+     */
     VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
-    /// <summary>
-    /// Returns push constant range object for the camera matrix.
-    /// </summary>
-    /// <returns></returns>
+    /**
+     * @brief Returns the size of the camera matrix.
+     * @return VkPushConstantRange object.
+     */
     VkPushConstantRange getCameraRange();
 
     /**
@@ -462,10 +479,10 @@ private:
      */
     VkFormat findSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features);
 
-    /// <summary>
-    /// Returns the index of the next frame to be drawn.
-    /// </summary>
-    /// <returns></returns>
+    /**
+     * @brief Returns the index of the next frame.
+     * @return
+     */
     size_t getNextFrame();
 
     /**
@@ -476,10 +493,10 @@ private:
      */
     void moveBoundingBox(int objectID, ObjectType objType, glm::vec3 location);
 
-    /// <summary>
-    /// Prints out the given matrix.
-    /// </summary>
-    /// <param name="matrix"></param>
+    /**
+     * @brief Prints out a matrix
+     * @param matrix to print
+     */
     void debugMatrix(glm::mat4 matrix);
 
     /**
@@ -555,12 +572,11 @@ private:
     // Other variables
     uint32_t widthM;
     uint32_t heightM;
-    float anisotropyM; // default val. Changed in <cref=isDeviceSuitable>
+    float anisotropyM;
     EngineFlags engineFlagsM = EngineFlags::NO_FLAGS;
     EngineStatistics statsM;
 
-    // Mutex that must be acquired before modifying the data structures below (timer has its own mutex)
-    std::shared_mutex dataMutexM;
+    std::shared_mutex dataMutexM; ///< Mutex that must be acquired before modifying the data structures below (timer has its own mutex)
     // Bounding box lists in an array. Each index corresponds to an object type.
     std::array<std::map<int, AABB>, OBJECT_TYPE_COUNT> boundingBoxesM;
     // Location and animation storage

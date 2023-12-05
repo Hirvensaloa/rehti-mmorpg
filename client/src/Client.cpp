@@ -202,7 +202,7 @@ void Client::processMessages()
                     {
                         const auto objAsset = assetCacheM.getObjectAssetDataById(object.id);
                         // Convert rotation 0, 1, 2, 3 to 0, pi/2, pi, 3pi/2
-                        const float rotation = object.rotation * (M_PI / 2);
+                        const float rotation = object.rotation * (glm::pi<float>() / 2);
                         pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y}, rotation);
                     }
                 }
@@ -315,5 +315,5 @@ void Client::startGraphics()
 
     graphLibReadyFlagM = true;
     graphLibReadyM.notify_one();
-    pGraphLibM->demo();
+    pGraphLibM->startMainLoop();
 }

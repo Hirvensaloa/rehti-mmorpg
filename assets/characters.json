@@ -2,7 +2,7 @@
   "player": {
     "id": 0,
     "textureFilename": "ukkotextuuri.png",
-    "glTFFilename": "ukko.glb",
+    "glTFFilename": "simplecharacter.glb",
     "spawnCoordinateBounds": {
       "xMin": 1,
       "xMax": 10,
@@ -17,7 +17,7 @@
       "id": 1,
       "name": "Troll",
       "textureFilename": "ukkotextuuri.png",
-      "glTFFilename": "ukko.glb",
+      "glTFFilename": "simplecharacter.glb",
       "spawnCoordinateBounds": {
         "xMin": 1,
         "xMax": 10,
@@ -35,7 +35,7 @@
       "id": 2,
       "name": "Goblin",
       "textureFilename": "ukkotextuuri.png",
-      "glTFFilename": "ukko.glb",
+      "glTFFilename": "simplecharacter.glb",
       "spawnCoordinateBounds": {
         "xMin": 1,
         "xMax": 10,
@@ -53,7 +53,7 @@
       "id": 3,
       "name": "Bandit",
       "textureFilename": "ukkotextuuri.png",
-      "glTFFilename": "ukko.glb",
+      "glTFFilename": "simplecharacter.glb",
       "spawnCoordinateBounds": {
         "xMin": 1,
         "xMax": 30,

@@ -132,7 +132,6 @@ std::map<int, CharacterAssetData> AssetCache::loadCharacterAssetData(const GameC
         std::vector<BoneNode> bones;
         std::vector<glm::mat4> transformations;
         std::array<Animation, ANIMATION_TYPE_COUNT> animations;
-
         bool success = loadGlTFFile(filepath, vertices, indices, animations, bones, transformations);
         if (success)
         {

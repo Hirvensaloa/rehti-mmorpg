@@ -224,9 +224,9 @@ size_t loadAnimations2(const aiScene* scene, std::map<std::string, uint32_t> nam
         Animation newAnimation{};
         uint32_t numBoneChannels = animation->mNumChannels;
         uint32_t numBones = 0;
-        uint32_t maxKeys = std::max(animation->mChannels[0]->mNumPositionKeys,
-                                    animation->mChannels[0]->mNumRotationKeys,
-                                    animation->mChannels[0]->mNumScalingKeys);
+        uint32_t maxKeys = std::max({animation->mChannels[0]->mNumPositionKeys,
+                                     animation->mChannels[0]->mNumRotationKeys,
+                                     animation->mChannels[0]->mNumScalingKeys});
         newAnimation.animationNodes.resize(maxKeys);
         newAnimation.totalTicks = animation->mDuration;
         newAnimation.ticksPerSecond = (0 < animation->mTicksPerSecond) ? animation->mTicksPerSecond : 24;
@@ -240,9 +240,9 @@ size_t loadAnimations2(const aiScene* scene, std::map<std::string, uint32_t> nam
                 continue;
             }
             uint32_t index = nameToIndex[boneName];
-            uint32_t numKeys = std::max(animationNode->mNumPositionKeys,
-                                        animationNode->mNumRotationKeys,
-                                        animationNode->mNumScalingKeys);
+            uint32_t numKeys = std::max({animationNode->mNumPositionKeys,
+                                         animationNode->mNumRotationKeys,
+                                         animationNode->mNumScalingKeys});
             if (maxKeys < numKeys)
             {
                 maxKeys = numKeys;

@@ -116,6 +116,7 @@ struct Hit
     int id;
     ObjectType objectType;
     glm::vec3 hitPoint;
+    int button; ///< The button that was pressed. For example GLFW_MOUSE_BUTTON_LEFT
 };
 
 struct ImageData

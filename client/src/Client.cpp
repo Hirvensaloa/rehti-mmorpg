@@ -1,3 +1,4 @@
+#include "GLFW/glfw3.h"
 #include <boost/asio/co_spawn.hpp>
 #include <boost/asio/detached.hpp>
 #include <boost/asio/ip/tcp.hpp>
@@ -100,6 +101,16 @@ boost::asio::awaitable<void> Client::attack(const int& targetId)
         AttackMessage msg;
         msg.targetId = targetId;
         co_await connectionM->send(MessageApi::createAttack(msg));
+    }
+}
+
+boost::asio::awaitable<void> Client::talk(const int& npcId)
+{
+    if (connectionM->isConnected())
+    {
+        TalkMessage msg;
+        msg.npcId = npcId;
+        co_await connectionM->send(MessageApi::createTalk(msg));
     }
 }
 
@@ -236,7 +247,13 @@ void Client::handleMouseClick(const Hit& hit)
 					break;
 				case ObjectType::CHARACTER:
 					std::cout << "Character" << std::endl;
-					co_await attack(hit.id);
+                    if (hit.button == GLFW_MOUSE_BUTTON_LEFT)
+                    {
+                        co_await attack(hit.id);
+                    } else if (hit.button == GLFW_MOUSE_BUTTON_RIGHT)
+                    {
+					    co_await talk(hit.id);
+                    }
 					break;
 				case ObjectType::GAMEOBJECT:
 					co_await interactWithObject(hit.id);

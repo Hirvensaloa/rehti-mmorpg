@@ -38,6 +38,8 @@ std::array<ObjectType, OBJECT_TYPE_COUNT> getObjectTypes();
 
 std::array<AnimationType, ANIMATION_TYPE_COUNT> getAnimationTypes();
 
+uint32_t getAnimIndex(AnimationType animType);
+
 #pragma endregion
 
 #pragma region AnimationTypes

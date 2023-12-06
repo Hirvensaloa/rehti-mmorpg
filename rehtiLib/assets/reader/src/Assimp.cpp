@@ -268,6 +268,7 @@ size_t loadAnimations2(const aiScene* scene, std::map<std::string, uint32_t> nam
             numBones++;
         } // end of bone for
     }     // end of animation for
+    return loadedAnimations;
 }
 
 size_t fillSkeleton(aiNode* rootNode, std::vector<BoneNode>& boneList, std::vector<glm::mat4>& transformations, std::map<std::string, uint32_t>& nameToIndex)

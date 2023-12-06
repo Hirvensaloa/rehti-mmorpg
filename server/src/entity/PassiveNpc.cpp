@@ -49,7 +49,12 @@ std::shared_ptr<PlayerCharacter> PassiveNpc::findAttackingPlayer()
     for (int i = 0; i < pGameWorldM->getPlayers().size(); i++)
     {
         std::shared_ptr<PlayerCharacter> player = pGameWorldM->getPlayers()[i];
-        const CurrentAction actionInfo = player->getCurrentAction()->getActionInfo();
+        const auto action = player->getCurrentAction();
+        if (action == nullptr)
+        {
+            continue;
+        }
+        const CurrentAction actionInfo = action->getActionInfo();
 
         if (actionInfo.id == ActionType::Attack && actionInfo.targetId == instanceIdM)
         {

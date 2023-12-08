@@ -246,6 +246,7 @@ size_t loadAnimations2(const aiScene* scene, std::map<std::string, uint32_t> nam
             if (maxKeys < numKeys)
             {
                 maxKeys = numKeys;
+                newAnimation.animationNodes.resize(maxKeys);
             }
             // for each animation key
             for (uint32_t k = 0; k < numKeys; k++)
@@ -260,9 +261,8 @@ size_t loadAnimations2(const aiScene* scene, std::map<std::string, uint32_t> nam
                 orientation.rotation = aiQuaternionToGlm(rotationKey.mValue);
                 orientation.scale = aiVector3DToGlm(scaleKey.mValue);
 
-                // set the orientation of the bone at keyframe j
-                //
-                // 				animations[static_cast<uint32_t>(animType)].animationNodes[k].bones[index] = orientation;
+                // set the orientation of the bone at keyframe k
+                newAnimation.animationNodes[k].bones[index] = orientation;
 
             } // for each animation key
             numBones++;

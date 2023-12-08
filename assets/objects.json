@@ -11,9 +11,9 @@
             "yieldPercentage": 100
           }
         ],
-        "xpPerYield": 10
+        "xpPerYield": 10,
+        "depleteChance": 20
       },
-      "depleteChance": 20,
       "relatedSkillId": 0,
       "xpRequirement": 0,
       "description": "A tree. It is a tree.",

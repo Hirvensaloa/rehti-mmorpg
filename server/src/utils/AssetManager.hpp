@@ -23,6 +23,13 @@ public:
 
     static const GameItems& getItems();
 
+    /**
+     * @brief Get the GameCharacters object
+     *
+     * @return GameCharacters
+     */
+    static const GameCharacters& getGameCharacters();
+
     // Nullptr if item id is not found
     static std::shared_ptr<Item> createItemInstance(int id);
 

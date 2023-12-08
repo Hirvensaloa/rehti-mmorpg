@@ -2,9 +2,22 @@
 
 #include <iostream>
 
-PlayerCharacter::PlayerCharacter(GameWorld *pGameWorld, std::string name, unsigned int id, Coordinates location) : Entity(pGameWorld, name, id, location)
+PlayerCharacter::PlayerCharacter(
+    GameWorld* pGameWorld,
+    std::string name,
+    int baseDamage,
+    int baseAccuracy,
+    SpawnCoordinateBounds spawnCoordinateBounds,
+    unsigned int id,
+    Coordinates location)
+    : Entity(pGameWorld,
+             name,
+             baseDamage,
+             baseAccuracy,
+             spawnCoordinateBounds,
+             id,
+             location)
 {
-    respawnLocationM = Coordinates(5, 5);
     respawnTimeM = std::chrono::milliseconds(2000);
 };
 

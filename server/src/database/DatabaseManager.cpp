@@ -33,7 +33,7 @@ int DatabaseManager::createConnection()
     return 1;
 }
 
-PlayerTable DatabaseManager::loadPlayerDataFromDb(std::string username, std::string password)
+PlayerTable DatabaseManager::loadPlayerDataFromDb(std::string username, std::string password, Coordinates spawnCoordinate)
 {
     pqxx::work txn{*pConnectionM};
     const std::string sanitizedUsername = txn.esc(username);
@@ -61,8 +61,10 @@ PlayerTable DatabaseManager::loadPlayerDataFromDb(std::string username, std::str
     }
     else
     {
+        const std::string sanitizedX = txn.esc(std::to_string(spawnCoordinate.x));
+        const std::string sanitizedY = txn.esc(std::to_string(spawnCoordinate.y));
         std::string hash = bcrypt::generateHash(password);
-        pqxx::result r{txn.exec("INSERT INTO player VALUES (DEFAULT,'" + sanitizedUsername + "','" + hash + "',4,4,100) RETURNING id, username, password, position_x, position_y, hp")};
+        pqxx::result r{txn.exec("INSERT INTO player VALUES (DEFAULT,'" + sanitizedUsername + "','" + hash + "'," + sanitizedX + "," + sanitizedY + ",100) RETURNING id, username, password, position_x, position_y, hp")};
         PlayerTable res;
         res.id = r[0][0].as<int>();
         res.username = std::string(r[0][1].c_str());

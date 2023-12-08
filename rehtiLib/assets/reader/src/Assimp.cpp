@@ -65,15 +65,14 @@ bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertice
         std::cout << "Failed to find rootbone in glTF file: " << path << std::endl;
         return false;
     }
-    // bruh the root rootbone matrix is added to the list of transformations in fillskeleton what the fuck were you doing??
     glm::mat4 rootInverseTransform = glm::mat4(1.f); // glm::inverse(aiMatrix4x4ToGlm(rootBone->mTransformation));
     transformations.push_back(rootInverseTransform);
+
     std::map<std::string, uint32_t> nameToIndex;
 
     // aiNode* modelNode = scene->mRootNode->FindNode("Model");
     // fill armature / skeleton
     size_t boneCount = fillSkeleton(rootBone, bones, transformations, nameToIndex);
-
     size_t loadedAnimations = loadAnimations(scene, nameToIndex, animations);
     if (loadedAnimations == 0)
     {
@@ -225,9 +224,9 @@ size_t loadAnimations2(const aiScene* scene, std::map<std::string, uint32_t> nam
         Animation newAnimation{};
         uint32_t numBoneChannels = animation->mNumChannels;
         uint32_t numBones = 0;
-        uint32_t maxKeys = std::max(animation->mChannels[0]->mNumPositionKeys,
-                                    animation->mChannels[0]->mNumRotationKeys,
-                                    animation->mChannels[0]->mNumScalingKeys);
+        uint32_t maxKeys = std::max({animation->mChannels[0]->mNumPositionKeys,
+                                     animation->mChannels[0]->mNumRotationKeys,
+                                     animation->mChannels[0]->mNumScalingKeys});
         newAnimation.animationNodes.resize(maxKeys);
         newAnimation.totalTicks = animation->mDuration;
         newAnimation.ticksPerSecond = (0 < animation->mTicksPerSecond) ? animation->mTicksPerSecond : 24;
@@ -241,12 +240,13 @@ size_t loadAnimations2(const aiScene* scene, std::map<std::string, uint32_t> nam
                 continue;
             }
             uint32_t index = nameToIndex[boneName];
-            uint32_t numKeys = std::max(animationNode->mNumPositionKeys,
-                                        animationNode->mNumRotationKeys,
-                                        animationNode->mNumScalingKeys);
+            uint32_t numKeys = std::max({animationNode->mNumPositionKeys,
+                                         animationNode->mNumRotationKeys,
+                                         animationNode->mNumScalingKeys});
             if (maxKeys < numKeys)
             {
                 maxKeys = numKeys;
+                newAnimation.animationNodes.resize(maxKeys);
             }
             // for each animation key
             for (uint32_t k = 0; k < numKeys; k++)
@@ -261,14 +261,14 @@ size_t loadAnimations2(const aiScene* scene, std::map<std::string, uint32_t> nam
                 orientation.rotation = aiQuaternionToGlm(rotationKey.mValue);
                 orientation.scale = aiVector3DToGlm(scaleKey.mValue);
 
-                // set the orientation of the bone at keyframe j
-                //
-                // 				animations[static_cast<uint32_t>(animType)].animationNodes[k].bones[index] = orientation;
+                // set the orientation of the bone at keyframe k
+                newAnimation.animationNodes[k].bones[index] = orientation;
 
             } // for each animation key
             numBones++;
         } // end of bone for
     }     // end of animation for
+    return loadedAnimations;
 }
 
 size_t fillSkeleton(aiNode* rootNode, std::vector<BoneNode>& boneList, std::vector<glm::mat4>& transformations, std::map<std::string, uint32_t>& nameToIndex)

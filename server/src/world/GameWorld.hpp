@@ -23,13 +23,30 @@ public:
 
     Map& getMap();
 
-    void addPlayer(std::string playerName, unsigned int playerId, Coordinates location);
+    /**
+     * @brief Adds player to the game world
+     *
+     * @param playerName
+     * @param playerId
+     * @param baseDamage
+     * @param baseAccuracy
+     * @param location Coordinates
+     */
+    void addPlayer(std::string playerName, unsigned int playerId, int baseDamage, int baseAccuracy, SpawnCoordinateBounds spawnCoordinateBounds, Coordinates location);
 
     bool removePlayer(unsigned int playerId);
 
     void addNpc(Npc npc);
 
     std::vector<std::shared_ptr<Npc>>& getNpcs();
+
+    /**
+     * @brief Get npc by id
+     *
+     * @param npcId
+     * @return std::shared_ptr<Npc>
+     */
+    std::shared_ptr<Npc> getNpc(unsigned int npcId);
 
     std::shared_ptr<Entity> getEntity(unsigned int entityId);
 

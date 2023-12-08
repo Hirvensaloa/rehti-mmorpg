@@ -1,14 +1,32 @@
-#include "Bandit.hpp"
+#include "AggressiveNpc.hpp"
 #include "../entity/PlayerCharacter.hpp"
 #include "../world/GameWorld.hpp"
 
 #include <iostream>
 
-Bandit::Bandit(GameWorld* pGameWorld, std::string name, unsigned int id, Coordinates location) : Npc(pGameWorld, name, id, location){};
+AggressiveNpc::AggressiveNpc(
+    GameWorld* pGameWorld,
+    std::string name,
+    int aggressionRange,
+    int baseDamage,
+    int baseAccuracy,
+    SpawnCoordinateBounds spawnCoordinateBounds,
+    std::vector<std::string> chatResponses,
+    unsigned int id,
+    Coordinates location)
+    : Npc(
+          pGameWorld,
+          name,
+          baseDamage,
+          baseAccuracy,
+          spawnCoordinateBounds,
+          chatResponses,
+          id,
+          location),
+      aggressionRangeM(aggressionRange){};
 
-void Bandit::update()
+void AggressiveNpc::update()
 {
-    // Bandits are aggressive and will attack the nearest player
     if (currentActionM && !currentActionM->isCompleted())
     {
         currentActionM->act();
@@ -23,9 +41,8 @@ void Bandit::update()
     }
 };
 
-std::shared_ptr<PlayerCharacter> Bandit::findClosestPlayer()
+std::shared_ptr<PlayerCharacter> AggressiveNpc::findClosestPlayer()
 {
-    unsigned int smallestDistance = 9999;
     std::shared_ptr<PlayerCharacter> closestPlayer = nullptr;
     for (int i = 0; i < pGameWorldM->getPlayers().size(); i++)
     {
@@ -33,10 +50,10 @@ std::shared_ptr<PlayerCharacter> Bandit::findClosestPlayer()
         if (player->getHp() != 0)
         {
             unsigned int dist = locationM.distance(player->getLocation());
-            if (dist < smallestDistance)
+            if (dist < aggressionRangeM)
             {
                 closestPlayer = player;
-                smallestDistance = dist;
+                aggressionRangeM = dist;
             }
         }
     }

@@ -140,7 +140,6 @@ bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<Char
         return false;
     }
     std::unique_lock<std::shared_mutex> lock(graphicsQueueMutexM);
-    std::cout << "locked in addCharacter" << std::endl;
     CharacterObject character{};
     VkDeviceSize vSize = vertices.size() * sizeof(CharacterVertex);
     VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
@@ -209,7 +208,6 @@ bool GraphicsObjectManager::addGameObject(int id, const std::vector<Vertex>& ver
         return false;
     }
     std::unique_lock<std::shared_mutex> lock(graphicsQueueMutexM);
-    std::cout << "locked in addGameobject" << std::endl;
     GameObject gameObject{};
     VkDeviceSize vSize = vertices.size() * sizeof(Vertex);
     VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
@@ -591,7 +589,6 @@ bool GraphicsObjectManager::addTestObject(int id, const std::vector<SimpleVertex
 bool GraphicsObjectManager::addArea(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, std::array<ImageData, 6> textures, VkSampler texSampler)
 {
     std::unique_lock<std::shared_mutex> lock(graphicsQueueMutexM);
-    std::cout << "locked in addArea" << std::endl;
     VkDeviceSize vSize = vertices.size() * sizeof(Vertex);
     VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
     AreaObject area{};

@@ -38,6 +38,8 @@ std::array<ObjectType, OBJECT_TYPE_COUNT> getObjectTypes();
 
 std::array<AnimationType, ANIMATION_TYPE_COUNT> getAnimationTypes();
 
+uint32_t getAnimIndex(AnimationType animType);
+
 #pragma endregion
 
 #pragma region AnimationTypes
@@ -116,6 +118,7 @@ struct Hit
     int id;
     ObjectType objectType;
     glm::vec3 hitPoint;
+    int button; ///< The button that was pressed. For example GLFW_MOUSE_BUTTON_LEFT
 };
 
 struct ImageData

@@ -10,6 +10,7 @@
 #include "Server.hpp"
 #include "action/ObjectInteractAction.hpp"
 #include "utils/AssetManager.hpp"
+#include "world/Utils.hpp"
 
 uint16_t PORT = 9999;
 int TICK_RATE = 32;
@@ -186,6 +187,18 @@ void Server::handleMessage(const Message& msg)
                 }
             }
             break;
+            case MessageId::Talk:
+            {
+                std::cout << connId << "Talk message received." << std::endl;
+                const TalkMessage talkMsg = MessageApi::parseTalk(body);
+                std::shared_ptr<Npc> npc = gameWorldM.getNpc(talkMsg.npcId);
+                const std::string response = npc->getChatResponse();
+
+                InformativeMessage infoMsg;
+                infoMsg.message = response;
+                boost::asio::co_spawn(ioContextM, msg.getConn()->send(MessageApi::createInformative(infoMsg)), boost::asio::detached);
+                break;
+            }
             default:
                 // Unknown header id, ignore
                 std::cout << "Unknown header id: " << static_cast<int>(msgId) << std::endl;
@@ -372,9 +385,13 @@ bool Server::loadPlayer(std::string username, std::string password, const std::s
 {
     try
     {
-        auto data = dbManagerM.loadPlayerDataFromDb(username, password);
+        const auto& playerData = AssetManager::getGameCharacters().player;
+        const auto& accessMap = gameWorldM.getMap().getAccessMap();
+        const auto spawnCoordinate = getRandomCoordinates(playerData.spawnCoordinateBounds, accessMap);
+
+        auto data = dbManagerM.loadPlayerDataFromDb(username, password, spawnCoordinate);
         connection->connectToClient(data.id);
-        gameWorldM.addPlayer(data.username, data.id, Coordinates(data.position_x, data.position_y));
+        gameWorldM.addPlayer(data.username, data.id, playerData.baseDamage, playerData.baseAccuracy, playerData.spawnCoordinateBounds, Coordinates(data.position_x, data.position_y));
 
         Inventory& inventory = gameWorldM.getPlayer(data.id)->getInventory();
         std::vector<int> itemIds = dbManagerM.loadInventoryDataFromDb(data.id);

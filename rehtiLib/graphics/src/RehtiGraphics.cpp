@@ -1650,7 +1650,8 @@ void RehtiGraphics::addMouseClickCallback(std::function<void(const Hit&)> callba
 			if ((button == GLFW_MOUSE_BUTTON_LEFT || button == GLFW_MOUSE_BUTTON_RIGHT) && action == GLFW_PRESS)
 			{
 				RehtiGraphics* pGraphics = reinterpret_cast<RehtiGraphics*>(glfwGetWindowUserPointer(window));
-				const Hit hit = pGraphics->traceClick();
+                Hit hit = pGraphics->traceClick();
+                hit.button = button;
 				pGraphics->mouseClickCallbackM(hit);
 			}
 			else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_PRESS)

@@ -1,3 +1,4 @@
+#include "GLFW/glfw3.h"
 #include <boost/asio/co_spawn.hpp>
 #include <boost/asio/detached.hpp>
 #include <boost/asio/ip/tcp.hpp>
@@ -103,6 +104,16 @@ boost::asio::awaitable<void> Client::attack(const int& targetId)
     }
 }
 
+boost::asio::awaitable<void> Client::talk(const int& npcId)
+{
+    if (connectionM->isConnected())
+    {
+        TalkMessage msg;
+        msg.npcId = npcId;
+        co_await connectionM->send(MessageApi::createTalk(msg));
+    }
+}
+
 boost::asio::awaitable<void> Client::move(const int& x, const int& y)
 {
     if (connectionM->isConnected())
@@ -176,35 +187,110 @@ void Client::processMessages()
                 {
                     const GameStateMessage& gameStateMsg = MessageApi::parseGameState(msg.getBody());
 
-                    const auto charAsset = assetCacheM.getCharacterAssetDataById(0); // TODO: Currently player id refers to the player id in db. We should also have a way to indicate if the entity is a player or not. Currently the problem is that the player id might interfere with entity ids.
-                    pGraphLibM->addCharacterObject(gameStateMsg.currentPlayer.id, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
-                    pGraphLibM->forcePlayerMove(gameStateMsg.currentPlayer.id, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
-                    pGraphLibM->playAnimation(gameStateMsg.currentPlayer.id, actionToAnimationConfig(gameStateMsg.currentPlayer.currentAction));
-                    pGraphLibM->getGui()->setInventory(gameStateMsg.currentPlayer.inventory);
+                    const auto& currentPlayer = gameStateMsg.currentPlayer;
+                    const auto& prevCurrentPlayer = prevGameStateM.currentPlayer;
+                    if (currentPlayer != prevCurrentPlayer)
+                    {
+                        const auto charAsset = assetCacheM.getCharacterAssetDataById(0); // TODO: Currently player id refers to the player id in db. We should also have a way to indicate if the entity is a player or not. Currently the problem is that the player id might interfere with entity ids.
+                        pGraphLibM->addCharacterObject(gameStateMsg.currentPlayer.id, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
+                    }
+                    else
+                    {
+                        if (!currentPlayer.hasSameActionAs(prevCurrentPlayer))
+                        {
+                            // Move action is special case as we need to animate and move the entity at the same time
+                            if (currentPlayer.currentAction.id == ActionType::Move)
+                            {
+                                pGraphLibM->moveCharacter(currentPlayer.id, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y}, currentPlayer.currentAction.durationMs / 1000.0f);
+                            }
+                            else
+                            {
+                                pGraphLibM->playAnimation(currentPlayer.id, actionToAnimationConfig(currentPlayer.currentAction));
+                            }
+                        }
 
-                    pGraphLibM->getGui()->setSkills(gameStateMsg.currentPlayer.skills);
+                        if (!currentPlayer.hasSameEquipmentAs(prevCurrentPlayer))
+                        {
+                            pGraphLibM->setEquipment(currentPlayer.id, currentPlayer.equipment);
+                        }
+
+                        if (currentPlayer.inventory != prevCurrentPlayer.inventory)
+                        {
+                            pGraphLibM->setInventory(currentPlayer.inventory);
+                        }
+
+                        if (currentPlayer.skills != prevCurrentPlayer.skills)
+                        {
+                            pGraphLibM->setSkills(currentPlayer.skills);
+                        }
+                    }
+
+                    std::set<int> entityIdsToRemove;
+                    for (gameStateMsg.entities)
+                    {
+                        // Do not remove the current player
+                        if (entity.instanceId == currentPlayer.id)
+                        {
+                            continue;
+                        }
+                        entityIdsToRemove.insert(entity.instanceId);
+                    }
 
                     for (const auto& entity : gameStateMsg.entities)
                     {
                         // Do not draw the current player twice
-                        if (entity.instanceId == gameStateMsg.currentPlayer.id)
+                        if (entity.instanceId == currentPlayer.id)
                         {
-                            pGraphLibM->getGui()->setEquipment(entity.equipment);
                             continue;
                         }
 
-                        const auto charAsset = assetCacheM.getCharacterAssetDataById(entity.id);
-                        pGraphLibM->addCharacterObject(entity.instanceId, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
-                        pGraphLibM->forceCharacterMove(entity.instanceId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
-                        pGraphLibM->playAnimation(entity.instanceId, actionToAnimationConfig(entity.currentAction));
+                        // Find entity from the previous gamestate message
+                        const auto& prevEntity = std::find_if(prevGameStateMsgM.entities.begin(), prevGameStateMsgM.entities.end(), [&entity](const auto& e)
+                                                              { return e.instanceId == entity.instanceId; });
+
+                        // If the entity is not found, add it to the graphics backend
+                        if (prevEntity == prevGameStateMsgM.entities.end())
+                        {
+                            const auto& charAsset = assetCacheM.getCharacterAssetDataById(entity.id);
+                            pGraphLibM->addCharacterObject(entity.instanceId, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
+                        }
+                        else
+                        {
+                            // If the entity is found, check if it has changed action
+                            if (!entity.hasSameActionAs(*prevEntity))
+                            {
+                                // Move action is special case as we need to animate and move the entity at the same time
+                                if (entity.currentAction.id == ActionType::Move)
+                                {
+                                    pGraphLibM->moveCharacter(entity.instanceId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y}, entity.currentAction.durationMs / 1000.0f);
+                                }
+                                else
+                                {
+                                    pGraphLibM->playAnimation(entity.instanceId, actionToAnimationConfig(entity.currentAction));
+                                }
+                            }
+
+                            // Do not remove entity as it is in the current gamestate message
+                            entityIdsToRemove.erase(entity.instanceId);
+                        }
                     }
-                    for (const auto& object : gameStateMsg.objects)
+
+                    // Remove all the leftover entities from the graphics backend
+                    for (const auto& entityId : entityIdsToRemove)
+                    {
+                        pGraphLibM->removeCharacterObject(entityId);
+                    }
+
+                    // Initialize objects only once. If the previous gamestate message is empty, we know that this is the first gamestate message. Therefore we initialize the objects. For now the server doesn't update the objects after startup.
+                    if (prevGameStateMsgM.objects.empty())
                     {
                         const auto objAsset = assetCacheM.getObjectAssetDataById(object.id);
                         // Convert rotation 0, 1, 2, 3 to 0, pi/2, pi, 3pi/2
                         const float rotation = object.rotation * (glm::pi<float>() / 2);
                         pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y}, rotation);
                     }
+
+                    prevGameStateMsgM = gameStateMsg;
                 }
                 else if (msgId == MessageId::Informative)
                 {
@@ -236,7 +322,13 @@ void Client::handleMouseClick(const Hit& hit)
 					break;
 				case ObjectType::CHARACTER:
 					std::cout << "Character" << std::endl;
-					co_await attack(hit.id);
+                    if (hit.button == GLFW_MOUSE_BUTTON_LEFT)
+                    {
+                        co_await attack(hit.id);
+                    } else if (hit.button == GLFW_MOUSE_BUTTON_RIGHT)
+                    {
+					    co_await talk(hit.id);
+                    }
 					break;
 				case ObjectType::GAMEOBJECT:
 					co_await interactWithObject(hit.id);

@@ -91,6 +91,11 @@ std::array<AnimationType, ANIMATION_TYPE_COUNT> getAnimationTypes()
     return array;
 }
 
+uint32_t getAnimIndex(AnimationType animType)
+{
+    return static_cast<uint32_t>(animType);
+}
+
 glm::mat4 GfxOrientation::getTransformationMatrix() const
 {
     glm::mat4 transformation = glm::mat4(1.0f);

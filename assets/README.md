@@ -256,12 +256,12 @@ Resource objects represent in-game resources that players can interact with, suc
 - **yieldableItems:** Items that are yielded on interaction. Not required if itemTransformTable is defined (If both are defined, `itemTransformTable` is ignored). Resource objects cannot both yield and transform items.
   - **yieldableItemList:** A list of items that can be yielded from this resource, along with the percentage chance to yield each item.
   - **xpPerYield:** The amount of experience points (XP) gained when yielding once from this resource
+  - **depleteChance:** The chance of depleting the resource when yielded.
 - **itemTranformList:** A table of items indicating how items are transformed. When interacting with the player, the first item found from the player's inventory that matches a item in the `itemTransformTable` is used. Not required if `yieldableItems` are defined.
   - **itemId:** Item to id to be transformed.
   - **resultItemId:** The result item id.
   - **resultItemQuantity:** The amount of result items that is received.
   - **xpPerTransform:** The amount of xp that is given when itemId is transformed to result item(s).
-- **depleteChance:** The chance of depleting the resource when yielded.
 - **relatedSkillId:** The skill related to this resource (e.g., 0 (Woodcutting) for a tree).
 - **xpRequirement:** The required XP in the related skill to yield from this resource.
 - **description:** A brief description of the resource.
@@ -278,19 +278,21 @@ Example resource objects:
     "id": 1,
     "type": "Resource",
     "name": "Tree",
-    "yieldableItemList": [
-      {
-        "itemId": 0,
-        "yieldPercentage": 100
-      }
-    ],
-    "xpPerYield": 10,
-    "depleteChance": 20,
+    "yieldableItems": {
+      "yieldableItemList": [
+        {
+          "itemId": 0,
+          "yieldPercentage": 100
+        }
+      ],
+      "xpPerYield": 10,
+      "depleteChance": 20
+    },
     "relatedSkillId": 0,
     "xpRequirement": 0,
     "description": "A tree. It is a tree.",
     "tileMap": [["XB"]],
-    "textureFilename": "tree.png",
+    "textureFilename": "treetexture.png",
     "objFilename": "tree.obj",
     "characterInteractAnimation": "woodcutting"
   },

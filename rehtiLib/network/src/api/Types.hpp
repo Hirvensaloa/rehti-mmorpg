@@ -156,6 +156,7 @@ struct GameStateEntity
                 return false;
             }
         }
+        return true;
     }
 };
 

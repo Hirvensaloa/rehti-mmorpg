@@ -192,7 +192,7 @@ void Client::processMessages()
                     if (currentPlayer != prevCurrentPlayer)
                     {
                         const auto charAsset = assetCacheM.getCharacterAssetDataById(0); // TODO: Currently player id refers to the player id in db. We should also have a way to indicate if the entity is a player or not. Currently the problem is that the player id might interfere with entity ids.
-                        pGraphLibM->addCharacterObject(gameStateMsg.currentPlayer.id, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
+                        pGraphLibM->addCharacterObject(currentPlayer.id, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y});
                     }
                     else
                     {
@@ -201,7 +201,7 @@ void Client::processMessages()
                             // Move action is special case as we need to animate and move the entity at the same time
                             if (currentPlayer.currentAction.id == ActionType::Move)
                             {
-                                pGraphLibM->moveCharacter(currentPlayer.id, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y}, currentPlayer.currentAction.durationMs / 1000.0f);
+                                pGraphLibM->movePlayer(currentPlayer.id, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y}, currentPlayer.currentAction.durationMs / 1000.0f);
                             }
                             else
                             {

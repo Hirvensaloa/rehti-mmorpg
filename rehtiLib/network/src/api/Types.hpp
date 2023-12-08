@@ -70,7 +70,7 @@ struct CurrentAction
      * @param other CurrentAction to compare to
      * @return bool
      */
-    operator==(const CurrentAction & other)
+    bool operator==(const CurrentAction& other) const
     {
         return id == other.id && durationMs == other.durationMs && looping == other.looping && targetId == other.targetId && targetCoordinate.x == other.targetCoordinate.x && targetCoordinate.y == other.targetCoordinate.y && targetCoordinate.z == other.targetCoordinate.z;
     }
@@ -89,7 +89,7 @@ struct GameItem
      * @param other GameItem to compare to
      * @return bool
      */
-    operator==(const GameItem & other)
+    bool operator==(const GameItem& other) const
     {
         return id == other.id && instanceId == other.instanceId && name == other.name && stackSize == other.stackSize;
     }
@@ -113,7 +113,7 @@ struct GameStateEntity
      *
      * @param other GameStateEntity to compare to
      */
-    operator==(const GameStateEntity & other)
+    bool operator==(const GameStateEntity& other) const
     {
         return id == other.id && instanceId == other.instanceId;
     }
@@ -124,7 +124,7 @@ struct GameStateEntity
      * @param other GameStateEntity to compare to
      * @return bool
      */
-    bool hasSameLocationAs(const GameStateEntity& other)
+    bool hasSameLocationAs(const GameStateEntity& other) const
     {
         return x == other.x && y == other.y && z == other.z;
     }
@@ -135,7 +135,7 @@ struct GameStateEntity
      * @param other GameStateEntity to compare to
      * @return bool
      */
-    bool hasSameActionAs(const GameStateEntity& other)
+    bool hasSameActionAs(const GameStateEntity& other) const
     {
         return currentAction == other.currentAction;
     }
@@ -146,7 +146,7 @@ struct GameStateEntity
      * @param other GameStateEntity to compare to
      * @return bool
      */
-    bool hasSameEquipmentAs(const GameStateEntity& other)
+    bool hasSameEquipmentAs(const GameStateEntity& other) const
     {
         // Just check the if the indices match. The equipment should be always in the same order.
         for (int i = 0; i < equipment.size(); i++)
@@ -171,7 +171,7 @@ struct Skill
      * @param other Skill to compare to
      * @return bool
      */
-    operator==(const Skill & other)
+    bool operator==(const Skill& other) const
     {
         return id == other.id && name == other.name && xp == other.xp;
     }
@@ -189,7 +189,7 @@ struct CurrentPlayer : GameStateEntity
      * @param other CurrentPlayer to compare to
      * @return bool
      */
-    bool hasSameSkillsAs(const CurrentPlayer& other)
+    bool hasSameSkillsAs(const CurrentPlayer& other) const
     {
         // Just check the if the indices match. This is enough because the skills are always in the same order.
         for (int i = 0; i < skills.size(); i++)
@@ -207,7 +207,7 @@ struct CurrentPlayer : GameStateEntity
      * @param other CurrentPlayer to compare to
      * @return bool
      */
-    bool hasSameInventoryAs(const CurrentPlayer& other)
+    bool hasSameInventoryAs(const CurrentPlayer& other) const
     {
         // Just check the if the indices match. If the items are not in the same order, the inventory is not the same. Items need to be redrawn.
         for (int i = 0; i < inventory.size(); i++)

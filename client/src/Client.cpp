@@ -188,7 +188,7 @@ void Client::processMessages()
                     const GameStateMessage& gameStateMsg = MessageApi::parseGameState(msg.getBody());
 
                     const auto& currentPlayer = gameStateMsg.currentPlayer;
-                    const auto& prevCurrentPlayer = prevGameStateM.currentPlayer;
+                    const auto& prevCurrentPlayer = prevGameStateMsgM.currentPlayer;
                     if (currentPlayer != prevCurrentPlayer)
                     {
                         const auto charAsset = assetCacheM.getCharacterAssetDataById(0); // TODO: Currently player id refers to the player id in db. We should also have a way to indicate if the entity is a player or not. Currently the problem is that the player id might interfere with entity ids.

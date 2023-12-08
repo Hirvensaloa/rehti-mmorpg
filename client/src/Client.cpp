@@ -211,22 +211,22 @@ void Client::processMessages()
 
                         if (!currentPlayer.hasSameEquipmentAs(prevCurrentPlayer))
                         {
-                            pGraphLibM->setEquipment(currentPlayer.id, currentPlayer.equipment);
+                            pGraphLibM->getGui()->setEquipment(currentPlayer.equipment);
                         }
 
                         if (currentPlayer.inventory != prevCurrentPlayer.inventory)
                         {
-                            pGraphLibM->setInventory(currentPlayer.inventory);
+                            pGraphLibM->getGui()->setInventory(currentPlayer.inventory);
                         }
 
                         if (currentPlayer.skills != prevCurrentPlayer.skills)
                         {
-                            pGraphLibM->setSkills(currentPlayer.skills);
+                            pGraphLibM->getGui()->setSkills(currentPlayer.skills);
                         }
                     }
 
                     std::set<int> entityIdsToRemove;
-                    for (gameStateMsg.entities)
+                    for (const auto& entity : gameStateMsg.entities)
                     {
                         // Do not remove the current player
                         if (entity.instanceId == currentPlayer.id)
@@ -278,16 +278,20 @@ void Client::processMessages()
                     // Remove all the leftover entities from the graphics backend
                     for (const auto& entityId : entityIdsToRemove)
                     {
-                        pGraphLibM->removeCharacterObject(entityId);
+                        // TODO: implement removeCharacterObject interface
+                        // pGraphLibM->removeCharacterObject(entityId);
                     }
 
                     // Initialize objects only once. If the previous gamestate message is empty, we know that this is the first gamestate message. Therefore we initialize the objects. For now the server doesn't update the objects after startup.
                     if (prevGameStateMsgM.objects.empty())
                     {
-                        const auto objAsset = assetCacheM.getObjectAssetDataById(object.id);
-                        // Convert rotation 0, 1, 2, 3 to 0, pi/2, pi, 3pi/2
-                        const float rotation = object.rotation * (glm::pi<float>() / 2);
-                        pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y}, rotation);
+                        for (const auto& object : gameStateMsg.objects)
+                        {
+                            const auto objAsset = assetCacheM.getObjectAssetDataById(object.id);
+                            // Convert rotation 0, 1, 2, 3 to 0, pi/2, pi, 3pi/2
+                            const float rotation = object.rotation * (glm::pi<float>() / 2);
+                            pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y}, rotation);
+                        }
                     }
 
                     prevGameStateMsgM = gameStateMsg;

@@ -116,5 +116,7 @@ private:
 
     Hit lastHitM; ///< Last detected hit from a mouse click
 
+    GameStateMessage prevGameStateMsgM; ///< Previous game state message.
+
     AssetCache& assetCacheM = AssetCache::getInstance();
 };

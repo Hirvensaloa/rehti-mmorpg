@@ -150,7 +150,7 @@ void GameWorld::initWorld()
         {
             const ResourceObjectStruct& resourceObject = objects.getResourceObject(objectLocation.id);
             Coordinates coords{objectLocation.x, objectLocation.y};
-            ResourceObject resObj(resourceObject.id, objectLocation.instanceId, resourceObject.name, coords, objectLocation.rotation, resourceObject.yieldableItemList, resourceObject.xpPerYield, resourceObject.depleteChance, resourceObject.relatedSkillId, resourceObject.xpRequirement, type);
+            ResourceObject resObj(resourceObject.id, objectLocation.instanceId, resourceObject.name, coords, objectLocation.rotation, resourceObject.yieldableItemList, resourceObject.xpPerYield, resourceObject.depleteChance, resourceObject.relatedSkillId, resourceObject.xpRequirement, type, ResourceObject.itemTransformList);
             objectsM[objectLocation.instanceId] = std::make_shared<ResourceObject>(resObj);
         }
     }

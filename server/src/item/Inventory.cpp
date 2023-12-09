@@ -5,7 +5,7 @@ Inventory::Inventory(Entity* owner, int inventorySize) : ownerM(owner), inventor
 
 bool Inventory::addItem(std::shared_ptr<Item> item)
 {
-    if (itemsM.size() <= inventorySizeM)
+    if (itemsM.size() < inventorySizeM)
     {
         itemsM.push_back(item);
         return true;

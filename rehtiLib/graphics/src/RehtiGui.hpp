@@ -69,6 +69,12 @@ public:
     void setInventory(std::vector<GameItem> inventory);
 
     /**
+     * @brief Get reference to the player's equipment vector
+     * @return std::vector<GameItem>&
+     */
+    std::vector<GameItem>& getEquipment();
+
+    /**
      * @brief Set contents of player's equipment
      * @param equipment
      */
@@ -79,6 +85,12 @@ public:
      * @param skills
      */
     void setSkills(std::vector<Skill> skills);
+
+    /**
+     * @brief Set hp of player
+     * @param hp
+     */
+    void setHp(int hp);
 
     /**
      * @brief Load texture from file and save it to member map guiIconsM with key id
@@ -127,6 +139,8 @@ private:
     std::vector<GameItem> inventoryM;
     std::vector<GameItem> equipmentM;
     std::vector<Skill> skillsM;
+
+    int hpM;
 
     std::mutex invMutexM;
     std::mutex equipmentMutexM;

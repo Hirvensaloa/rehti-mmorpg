@@ -37,9 +37,12 @@ struct GameStateMessage
     std::vector<GameStateObject> objects;
     CurrentPlayer currentPlayer;
 
-    GameStateMessage operator=(const GameStateMessage& other)
+    GameStateMessage& operator=(const GameStateMessage& other)
     {
-        return GameStateMessage{MessageId::GameState, other.entities, other.objects, other.currentPlayer};
+        entities = other.entities;
+        objects = other.objects;
+        currentPlayer = other.currentPlayer;
+        return *this;
     }
 };
 

@@ -187,12 +187,17 @@ void Client::processMessages()
                 {
                     const GameStateMessage& gameStateMsg = MessageApi::parseGameState(msg.getBody());
 
+                    std::shared_ptr<RehtiGui> pGui = pGraphLibM->getGui();
+
                     const auto& currentPlayer = gameStateMsg.currentPlayer;
                     const auto& prevCurrentPlayer = prevGameStateMsgM.currentPlayer;
                     if (currentPlayer != prevCurrentPlayer)
                     {
                         const auto charAsset = assetCacheM.getCharacterAssetDataById(currentPlayer.id);
                         pGraphLibM->addCharacterObject(currentPlayer.instanceId, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y});
+                        pGui->setInventory(currentPlayer.inventory);
+                        pGui->setSkills(currentPlayer.skills);
+                        pGui->setHp(currentPlayer.hp);
                     }
                     else
                     {
@@ -211,19 +216,19 @@ void Client::processMessages()
                             }
                         }
 
-                        if (!currentPlayer.hasSameEquipmentAs(prevCurrentPlayer))
-                        {
-                            pGraphLibM->getGui()->setEquipment(currentPlayer.equipment);
-                        }
-
                         if (currentPlayer.inventory != prevCurrentPlayer.inventory)
                         {
-                            pGraphLibM->getGui()->setInventory(currentPlayer.inventory);
+                            pGui->setInventory(currentPlayer.inventory);
                         }
 
                         if (currentPlayer.skills != prevCurrentPlayer.skills)
                         {
-                            pGraphLibM->getGui()->setSkills(currentPlayer.skills);
+                            pGui->setSkills(currentPlayer.skills);
+                        }
+
+                        if (currentPlayer.hp != prevCurrentPlayer.hp)
+                        {
+                            pGui->setHp(currentPlayer.hp);
                         }
                     }
 
@@ -243,6 +248,10 @@ void Client::processMessages()
                         // Do not draw the current player twice
                         if (entity.instanceId == currentPlayer.instanceId)
                         {
+                            if (entity.equipment != pGui->getEquipment())
+                            {
+                                pGui->setEquipment(entity.equipment);
+                            }
                             continue;
                         }
 

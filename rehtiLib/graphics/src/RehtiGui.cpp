@@ -97,6 +97,12 @@ RehtiGui::RehtiGui(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice
     IM_ASSERT(ret);
     ret = LoadTextureFromFile("./assets/gui/cooking.png", -14);
     IM_ASSERT(ret);
+    ret = LoadTextureFromFile("./assets/gui/accuracy.png", -15);
+    IM_ASSERT(ret);
+    ret = LoadTextureFromFile("./assets/gui/strength.png", -16);
+    IM_ASSERT(ret);
+    ret = LoadTextureFromFile("./assets/gui/defence.png", -17);
+    IM_ASSERT(ret);
 }
 
 RehtiGui::~RehtiGui()
@@ -127,6 +133,8 @@ void RehtiGui::newFrame()
     ImGui::SetNextWindowPos(ImVec2(ImGui::GetIO().DisplaySize.x - windowWidthM, ImGui::GetIO().DisplaySize.y - windowHeightM), ImGuiCond_Always);
     ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse;
     ImGui::Begin("Rehti GUI", NULL, window_flags);
+
+    ImGui::Text("Health points: %d", hpM);
 
     ImGui::SetWindowSize(ImVec2(windowWidthM, windowHeightM));
 
@@ -199,6 +207,11 @@ void RehtiGui::setInventory(std::vector<GameItem> inventory)
     inventoryM = std::move(inventory);
 }
 
+std::vector<GameItem>& RehtiGui::getEquipment()
+{
+    return equipmentM;
+}
+
 void RehtiGui::setEquipment(std::vector<GameItem> equipment)
 {
     std::unique_lock<std::mutex> lck(equipmentMutexM);
@@ -209,6 +222,11 @@ void RehtiGui::setSkills(std::vector<Skill> skills)
 {
     std::unique_lock<std::mutex> lck(skillsMutexM);
     skillsM = std::move(skills);
+}
+
+void RehtiGui::setHp(int hp)
+{
+    hpM = hp;
 }
 
 void RehtiGui::drawInventory()

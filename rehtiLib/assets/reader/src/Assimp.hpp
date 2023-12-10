@@ -90,3 +90,9 @@ glm::quat aiQuaternionToGlm(const aiQuaternion& quaternion);
  * @return glm::vec3
  */
 glm::vec3 aiVector3DToGlm(const aiVector3D& vector);
+
+/**
+ * @brief Prints out faulty vertices
+ * @param vertices to check
+ */
+void debugCharacterVertices(const std::vector<CharacterVertex>& vertices);

@@ -44,7 +44,7 @@ void RehtiGraphics::addTestGameObject(int id)
     addGameObject(id, vertices, indices, texture, glm::vec3(transformation[3]));
 }
 
-bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVertex> vertices, std::vector<uint32_t> indices, ImageData texture, std::array<Animation, ANIMATION_TYPE_COUNT> animations, std::vector<BoneNode> bones, std::vector<glm::mat4> transformations, glm::vec3 location, float rotation)
+bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVertex> vertices, std::vector<uint32_t> indices, ImageData texture, std::array<Animation, ANIMATION_TYPE_COUNT> animations, std::vector<BoneNode> bones, std::vector<glm::mat4> transformations, glm::vec3 location, float rotation, bool isPlayer)
 {
     if (characterOrientationsM.contains(characterID)) // character already exists
         return false;
@@ -76,6 +76,11 @@ bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVer
     bb.pLeft = nullptr;
     bb.pRight = nullptr;
     boundingBoxesM[ObjectType::CHARACTER][characterID] = bb;
+
+    if (isPlayer)
+    {
+        cameraM.setTargetAndCamera(location);
+    }
 
     // Set animation to idle
     playAnimation(characterID, AnimationConfig{AnimationType::IDLE, 1.0f, true});
@@ -137,6 +142,7 @@ void RehtiGraphics::moveGameObject(int objectID, glm::vec3 location, float timeI
 void RehtiGraphics::rotateGameObject(int objectID, float radians, float timeInSeconds)
 {
     float timeInv = 1.f / timeInSeconds;
+    timersM.finishCallback(objectID);
     glm::quat currentRotation = gameObjectOrientationsM[objectID].rotation;
     glm::quat targetRotation = glm::rotate(currentRotation, radians, POSITIVE_Y_AXIS);
     std::function<void(float)> callback = [objectID, currentRotation, targetRotation, timeInv, this](float dt)
@@ -161,22 +167,29 @@ void RehtiGraphics::forceGameObjectMove(int objectID, glm::vec3 location)
 
 void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSeconds)
 {
-    std::cout << "Moving player " << playerID << std::endl;
     float timeInv = 1.f / timeInSeconds;
     bool succ = timersM.finishCallback(playerID);
 
     dataMutexM.lock();
     glm::vec3 currentLocation = characterOrientationsM[playerID].characterOrientation.position;
     glm::vec3 diff = (location - currentLocation);
+    if (diff.length() < 0.0001f)
+    {
+        dataMutexM.unlock();
+        return;
+    }
+
     glm::vec3 delta = diff * timeInv;
     glm::vec3 dir = glm::normalize(diff);
-    // characterOrientationsM[playerID].characterOrientation.rotation = glm::quatLookAt(dir, POSITIVE_Y_AXIS);
+    constexpr float smallIncrementInRadians = 1.f * glm::half_pi<float>();
+    characterOrientationsM[playerID].characterOrientation.rotation = glm::quatLookAt(dir, POSITIVE_Y_AXIS);
     characterOrientationsM[playerID].animationData.currentAnimation = AnimationType::WALK;
     // characterOrientationsM[playerID].animationData.currentTicks = 0;
-    std::function<void(float)> callback = [playerID, delta, dir, this](float dt)
+    std::function<void(float)> callback = [playerID, delta, dir, smallIncrementInRadians, this](float dt)
     {
         std::unique_lock lock(dataMutexM);
         characterOrientationsM[playerID].characterOrientation.position += delta * dt;
+        // characterOrientationsM[playerID].characterOrientation.rotation *= glm::angleAxis(smallIncrementInRadians, POSITIVE_Y_AXIS);
         moveBoundingBox(playerID, ObjectType::CHARACTER, characterOrientationsM[playerID].characterOrientation.position);
         characterOrientationsM[playerID].advanceAnimation(dt);
         glm::mat4 currentMatrix = characterOrientationsM[playerID].characterOrientation.getTransformationMatrix();
@@ -189,11 +202,6 @@ void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSec
 
 void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
 {
-    if (!characterOrientationsM.contains(characterID))
-    {
-        std::cout << "Character " << characterID << " does not exist" << std::endl;
-        return;
-    }
     // reset all animations currently playing
     timersM.finishCallback(characterID);
     dataMutexM.lock();
@@ -201,7 +209,7 @@ void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
     characterOrientationsM[characterID].animationData.currentTicks = 0;
     // add new callback to play the animation
     float factor = 1.0f;
-    if (cfg.looping)
+    if (cfg.looping || cfg.animType == AnimationType::IDLE)
     {
         factor = 0.f;
         cfg.duration = characterOrientationsM[characterID].animationData.animations[getAnimIndex(cfg.animType)].duration;
@@ -234,7 +242,6 @@ void RehtiGraphics::forcePlayerMove(int playerID, glm::vec3 location)
 
 void RehtiGraphics::moveCharacter(int characterID, glm::vec3 location, float timeInSeconds)
 {
-    // std::cout << "Character " << characterID << " moving " << std::endl;
     float timeInv = 1.f / timeInSeconds;
     bool succ = timersM.finishCallback(characterID);
 

@@ -2,16 +2,17 @@
 
 #include <GLFW/glfw3.h>
 #include <iostream>
-
+constexpr float heightOffset = 1.5f;
 double Camera::mouseX = 0;
 double Camera::mouseY = 0;
 bool Camera::canMove = false;
 
 Camera::Camera(glm::vec3 targetPos, float width, float height, float fovRad, float near, float far, float sensitivity)
-    : targetM(targetPos), cameraMatrixM(1.f) // identity
+    : targetM(targetPos.x, targetPos.y + heightOffset, targetPos.z), cameraMatrixM(1.f) // identity
       ,
       sensitivityM(sensitivity), zoomM(STANDARD_ZOOM), zoomSensitivityM(50.f * sensitivity), widthM(width), heightM(height)
 {
+
     projectionM = glm::perspective(fovRad, width / height, near, far);
     projectionM[1][1] *= -1; // flip y axis
     moveLocation(-getForward() * zoomM);
@@ -197,9 +198,10 @@ void Camera::setLocation(glm::vec3 location)
 
 void Camera::setTargetAndCamera(glm::vec3 location)
 {
+    glm::vec3 locationWithoffSet = location + glm::vec3(0.f, heightOffset, 0.f);
     glm::vec3 diff = getLocation() - targetM;
-    targetM = location;
-    setLocation(location + diff);
+    targetM = locationWithoffSet;
+    setLocation(locationWithoffSet + diff);
 }
 
 void Camera::scrollCallback(GLFWwindow* pWindow, double xOffSet, double yOffSet)

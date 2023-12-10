@@ -20,8 +20,6 @@ Client::Client(std::string ip, std::string port)
 {
     graphicsThreadM = std::thread([this]()
                                   { startGraphics(); });
-    connectionThreadM = std::thread([this]()
-                                    { boost::asio::co_spawn(ioContextM, connect(), boost::asio::detached); });
 
     ioThreadM = std::thread([this]()
                             { ioContextM.run(); });
@@ -35,13 +33,15 @@ void Client::start()
         std::unique_lock ul(graphLibMutexM);
         graphLibReadyM.wait(ul);
     }
-
+    connectionThreadM = std::thread([this]()
+                                    { boost::asio::co_spawn(ioContextM, connect(), boost::asio::detached); });
     std::cout << "Starting to process messages..." << std::endl;
     processMessages();
 }
 
 boost::asio::awaitable<bool> Client::login()
 {
+
     if (connectionM->isConnected())
     {
         std::string usr = "";
@@ -80,10 +80,6 @@ boost::asio::awaitable<bool> Client::connect()
         {
             co_await login();
         }
-
-        // Set the logged in flag to true anyway so that the graphics backend can be started regardless of server being online or not. TODO: Remove when the login happens on UI, not on console.
-        loggedInFlagM = true;
-        loggedInM.notify_one();
 
         co_return ret;
     }
@@ -192,7 +188,7 @@ void Client::processMessages()
                     if (currentPlayer != prevCurrentPlayer)
                     {
                         const auto charAsset = assetCacheM.getCharacterAssetDataById(currentPlayer.id);
-                        pGraphLibM->addCharacterObject(currentPlayer.instanceId, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y});
+                        pGraphLibM->addCharacterObject(currentPlayer.instanceId, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y}, 0.f, true);
                     }
                     else
                     {
@@ -202,7 +198,6 @@ void Client::processMessages()
                             if (currentPlayer.currentAction.id == ActionType::Move)
                             {
                                 const auto& coords = currentPlayer.currentAction.targetCoordinate;
-                                std::cout << "moving player. x:" << coords.x << " y:" << coords.y << " z:" << coords.z << std::endl;
                                 pGraphLibM->movePlayer(currentPlayer.instanceId, {coords.x, Config.HEIGHT_MAP_SCALE * coords.z, coords.y}, currentPlayer.currentAction.durationMs / 1000.0f);
                             }
                             else
@@ -354,21 +349,15 @@ void Client::handleMouseClick(const Hit& hit)
 
 void Client::startGraphics()
 {
-    // Wait for login to be successful
-    if (!loggedInFlagM)
-    {
-        std::unique_lock ul(loginMutexM);
-        loggedInM.wait(ul);
-    }
 
+    // Load assets to memory
+    assetCacheM.loadAssets();
+    // init graphics library
     pGraphLibM = new RehtiGraphics();
 
     // Create map bounding box
     std::vector<std::vector<int>> heightMatrix = fetchHeightMatrix();
     std::vector<std::vector<std::string>> areaMatrix = fetchAreaMatrix();
-
-    // Load assets to memory
-    assetCacheM.loadAssets();
 
     // Add areas to the graphics backend
     pGraphLibM->addMapBoundingBox(MapAABBData{heightMatrix, areaMatrix, Config.AREA_WIDTH, Config.HEIGHT_MAP_SCALE, Config.TILE_SIDE_SCALE, Config.TILE_SIDE_UNIT});

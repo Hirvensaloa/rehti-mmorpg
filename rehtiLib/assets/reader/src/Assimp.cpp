@@ -9,6 +9,7 @@
 #include <queue>
 
 constexpr double EPSILON = 0.00001;
+constexpr float EPSILON_F = 0.00001f;
 
 #pragma region Inlines
 
@@ -25,6 +26,11 @@ inline float interpolatedTimeFactor(const double now, const double prevTimeFrame
 inline bool equalD(const double a, const double b)
 {
     return abs(a - b) < EPSILON;
+}
+
+inline bool equalF(const float a, const float b)
+{
+    return abs(a - b) < EPSILON_F;
 }
 
 inline glm::vec3 interpolateLinear(const glm::vec3& start, const glm::vec3& end, float timeFactor)
@@ -151,15 +157,16 @@ bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertice
     {
         aiMesh* mesh = scene->mMeshes[meshI];
         bool normals = mesh->HasNormals();
-
+        bool texCoords = mesh->HasTextureCoords(0);
         for (unsigned int j = 0; j < mesh->mNumVertices; j++)
         {
             CharacterVertex charVert{};
             charVert.pos = aiVector3DToGlm(mesh->mVertices[j]);
             if (normals)
                 charVert.normal = aiVector3DToGlm(mesh->mNormals[j]);
+            if (texCoords)
+                charVert.texCoord = glm::vec2(mesh->mTextureCoords[0][j].x, mesh->mTextureCoords[0][j].y);
 
-            charVert.texCoord = glm::vec2(mesh->mTextureCoords[0][j].x, mesh->mTextureCoords[0][j].y);
             vertices.push_back(charVert);
         }
         // The following vector tells how many bones are registered per vertex. (max 4)
@@ -173,11 +180,14 @@ bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertice
         // bones
 
         // get bone weights and ids
-        size_t boneCount = mesh->mNumBones;
-        for (size_t i = 0; i < boneCount; i++)
+        for (size_t i = 0; i < mesh->mNumBones; i++)
         {
             aiBone* bone = mesh->mBones[i];
             std::string boneName = std::string(bone->mName.C_Str());
+            if (!nameToIndex.contains(boneName)) // discard control nodes, etc.
+            {
+                continue;
+            }
             uint32_t index = nameToIndex[boneName];
             size_t numWeights = bone->mNumWeights;
             bones[index].boneOffset = aiMatrix4x4ToGlm(bone->mOffsetMatrix);
@@ -187,6 +197,11 @@ bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertice
                 aiVertexWeight weight = bone->mWeights[j];
                 uint32_t vertexIndex = weight.mVertexId;
                 float weightValue = weight.mWeight;
+                if (equalF(weightValue, 0.f))
+                {
+                    continue;
+                }
+
                 uint32_t currentBone = bonesUsed[vertexIndex];
                 if (currentBone < 4)
                 {
@@ -197,8 +212,9 @@ bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertice
                 else
                 {
                     std::cout << "Vertex " << vertexIndex << " has more than 4 bones" << std::endl;
+                    float boneSum = vertices[vertexIndex].boneWeights.x + vertices[vertexIndex].boneWeights.y + vertices[vertexIndex].boneWeights.z + vertices[vertexIndex].boneWeights.w;
 
-                    vertices[vertexIndex].boneWeights = glm::normalize(vertices[vertexIndex].boneWeights);
+                    vertices[vertexIndex].boneWeights /= boneSum;
                     break;
                 }
             } // end of weight for
@@ -207,76 +223,6 @@ bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertice
     debugCharacterVertices(vertices);
     return true;
 }
-
-// size_t loadAnimations(const aiScene* scene, std::map<std::string, uint32_t> nameToIndex, std::array<Animation, ANIMATION_TYPE_COUNT>& animations)
-//{
-//     size_t loadedAnimations = 0;
-//     // for each animation
-//     for (uint32_t i = 0; i < scene->mNumAnimations; i++)
-//     {
-//         aiAnimation* animation = scene->mAnimations[i];
-//         std::string animName = std::string(animation->mName.C_Str());
-//         AnimationType animType = getAnimationType(animName);
-//
-//         if (animType == AnimationType::UNDEFINED)
-//         {
-//             continue;
-//         }
-//
-//         Animation newAnimation{};
-//         newAnimation.totalTicks = animation->mDuration;
-//         // Animations will be played at 24 fps if no information is present on the play speed
-//         newAnimation.ticksPerSecond = (0 < animation->mTicksPerSecond) ? animation->mTicksPerSecond : 24;
-//         newAnimation.duration = animation->mDuration / animation->mTicksPerSecond;
-//
-//         // bonecount is the number of bones in the skeleton, hopefully
-//         uint32_t animationBoneCount = animation->mNumChannels;
-//         if (animationBoneCount == 0) // No bones for an animation, skip it
-//         {
-//             continue;
-//         }
-//         // assume that all bones have the same number of keys, so pick smallest number of keys from the root bone
-//         size_t numKeys = std::min(
-//             {animation->mChannels[0]->mNumPositionKeys,
-//              animation->mChannels[0]->mNumRotationKeys,
-//              animation->mChannels[0]->mNumScalingKeys});
-//         // resize and consequently initialize animationNodes to zero
-//         newAnimation.animationNodes.resize(numKeys);
-//         // for each animation key
-//         for (uint32_t j = 0; j < numKeys; j++)
-//         {
-//             // assume all bones having the same time (they should in theory)
-//             newAnimation.animationNodes[j].time = animation->mChannels[0]->mPositionKeys[j].mTime;
-//             // for each bone
-//             for (uint32_t k = 0; k < animation->mNumChannels; k++)
-//             {
-//
-//                 aiNodeAnim* assimBone = animation->mChannels[k];
-//
-//                 aiVectorKey positionKey = assimBone->mPositionKeys[j];
-//                 aiQuatKey rotationKey = assimBone->mRotationKeys[j];
-//                 aiVectorKey scaleKey = assimBone->mScalingKeys[j];
-//
-//                 GfxOrientation orientation{};
-//                 orientation.position = aiVector3DToGlm(positionKey.mValue);
-//                 orientation.rotation = aiQuaternionToGlm(rotationKey.mValue);
-//                 orientation.scale = aiVector3DToGlm(scaleKey.mValue);
-//
-//                 // set the orientation of the bone at keyframe j
-//                 std::string boneName = std::string(assimBone->mNodeName.C_Str());
-//                 uint32_t index = nameToIndex[boneName];
-//                 newAnimation.animationNodes[j].bones[index] = orientation;
-//             } // end of bone for
-//         }     // end of keyframe for
-//
-//         // animationtype can be conveniently used as index
-//         // The inventor is powerful and a genius
-//         animations[static_cast<uint32_t>(animType)] = newAnimation;
-//         loadedAnimations++;
-//     } // end of animation for
-//
-//     return loadedAnimations;
-// }
 
 size_t loadAnimations(const aiScene* scene, std::map<std::string, uint32_t> nameToIndex, std::array<Animation, ANIMATION_TYPE_COUNT>& animations)
 {
@@ -327,6 +273,9 @@ size_t loadAnimations(const aiScene* scene, std::map<std::string, uint32_t> name
             uint32_t si = 0;
             uint32_t ri = 0;
             uint32_t ti = 0;
+            bool hasScale = 1 < nSca;
+            bool hasRotation = 1 < nRot;
+            bool hasPosition = 1 < nPos;
             double totalKeys = std::max({animationNode->mScalingKeys[nSca - 1].mTime,
                                          animationNode->mRotationKeys[nRot - 1].mTime,
                                          animationNode->mPositionKeys[nPos - 1].mTime});
@@ -340,7 +289,10 @@ size_t loadAnimations(const aiScene* scene, std::map<std::string, uint32_t> name
                 aiVectorKey sk = animationNode->mScalingKeys[si];
                 aiQuatKey rk = animationNode->mRotationKeys[ri];
                 aiVectorKey pk = animationNode->mPositionKeys[ti];
-                double now = std::min({sk.mTime, rk.mTime, pk.mTime});
+                double st = (hasScale) ? sk.mTime : newAnimation.totalTicks;
+                double rt = (hasRotation) ? rk.mTime : newAnimation.totalTicks;
+                double pt = (hasPosition) ? pk.mTime : newAnimation.totalTicks;
+                double now = std::min({st, rt, pt});
                 // prev
                 aiVectorKey psk = animationNode->mScalingKeys[psi];
                 aiQuatKey prk = animationNode->mRotationKeys[pri];
@@ -355,15 +307,15 @@ size_t loadAnimations(const aiScene* scene, std::map<std::string, uint32_t> name
                 newAnimation.animationNodes[keyIndex].bones[index] = orientation;
                 newAnimation.animationNodes[keyIndex].time = now;
                 // advance the indices
-                if (equalD(now, sk.mTime))
+                if (hasScale && equalD(now, sk.mTime))
                 {
                     si++;
                 }
-                if (equalD(now, rk.mTime))
+                if (hasRotation && equalD(now, rk.mTime))
                 {
                     ri++;
                 }
-                if (equalD(now, pk.mTime))
+                if (hasPosition && equalD(now, pk.mTime))
                 {
                     ti++;
                 }
@@ -466,15 +418,22 @@ glm::vec3 aiVector3DToGlm(const aiVector3D& vector)
 
 void debugCharacterVertices(const std::vector<CharacterVertex>& vertices)
 {
+    uint32_t i = 0;
+    uint32_t faultyVertices = 0;
     for (const auto& vertex : vertices)
     {
         glm::vec4 w = vertex.boneWeights;
         float boneSum = w.x + w.y + w.z + w.w;
         if (0.001f < abs(boneSum - 1.f))
         {
-            std::cout << "Vertex " << vertex.pos.x << " " << vertex.pos.y << " " << vertex.pos.z << " has faulty bone weights with a sum of " << boneSum << std::endl;
+            std::cout << "Vertex " << i << " has faulty bone weights with a sum of " << boneSum << std::endl;
+            std::cout << "Bone weights: " << w.x << ", " << w.y << ", " << w.z << ", " << w.w << std::endl;
+            std::cout << "Bone IDs: " << vertex.boneIDs.x << ", " << vertex.boneIDs.y << ", " << vertex.boneIDs.z << ", " << vertex.boneIDs.w << std::endl;
+            faultyVertices++;
         }
+        i++;
     }
+    std::cout << "Found " << faultyVertices << " faulty vertices" << std::endl;
 }
 
 Vertex aiVector3DToVertex(const aiVector3D& vector)

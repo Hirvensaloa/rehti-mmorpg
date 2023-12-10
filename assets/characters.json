@@ -2,7 +2,7 @@
   "player": {
     "id": 0,
     "textureFilename": "ukkotextuuri.png",
-    "glTFFilename": "simplecharacter.glb",
+    "glTFFilename": "ukko.glb",
     "spawnCoordinateBounds": {
       "xMin": 1,
       "xMax": 10,

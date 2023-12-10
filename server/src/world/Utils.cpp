@@ -80,15 +80,15 @@ std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<u
     std::priority_queue<Node*, std::vector<Node*>, nodeCompare> open;
     open.push(&startNode);
 
-    // Create the closed set, which contains all the nodes that have been visited. ALSO contains a pointer to the open set node, if the node is in the open set (This is because prio queue access is O(n))
-    std::vector<std::vector<std::pair<bool, Node*>>> closed(mapHeight, std::vector<std::pair<bool, Node*>>(mapWidth, {false, nullptr}));
+    // Create the closed set, which contains all the nodes (with direction) that have been visited. ALSO contains a pointer to the open set node, if the node is in the open set (This is because prio queue access is O(n))
+    std::vector<std::vector<std::array<std::pair<bool, Node*>, 8>>> closed(mapHeight, std::vector<std::array<std::pair<bool, Node*>, 8>>(mapWidth));
 
     while (!open.empty())
     {
         // Get the node with the lowest total cost
         Node* current = open.top();
         open.pop();
-        closed[current->coords.first][current->coords.second].second = nullptr;
+        closed[current->coords.first][current->coords.second][Direction::SOUTH].second = nullptr;
 
         // Check if the current node is the end node
         if (current->coords == endNode.coords)
@@ -105,7 +105,7 @@ std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<u
         }
 
         // Add the current node to the closed set
-        closed[current->coords.first][current->coords.second].first = true;
+        closed[current->coords.first][current->coords.second][Direction::SOUTH].first = true;
 
         // Check all the neighbours
         for (int i = 0; i < 8; i++)
@@ -160,7 +160,7 @@ std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<u
             }
 
             // Check if the neighbour is in the closed set
-            if (closed[neighbourCoords.first][neighbourCoords.second].first)
+            if (closed[neighbourCoords.first][neighbourCoords.second][checkDir].first)
             {
                 continue;
             }
@@ -169,7 +169,7 @@ std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<u
             unsigned costFromStart = current->costFromStart + 1;
 
             // Check if the neighbour is in the open set
-            Node* neighbour = closed[neighbourCoords.first][neighbourCoords.second].second;
+            Node* neighbour = closed[neighbourCoords.first][neighbourCoords.second][checkDir].second;
 
             if (neighbour == nullptr)
             {
@@ -178,7 +178,7 @@ std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<u
 
                 // Add the neighbour to the open set
                 open.push(neighbour);
-                closed[neighbourCoords.first][neighbourCoords.second].second = neighbour;
+                closed[neighbourCoords.first][neighbourCoords.second][checkDir].second = neighbour;
             }
             // Check if the cost from start is lower than the previous cost from start
             else if (costFromStart < neighbour->costFromStart)

@@ -89,6 +89,24 @@ struct GameItems
         return generalItems.contains(id) || equippableItems.contains(id) || foodItems.contains(id);
     }
 
+    const std::vector<int> getAllIds() const
+    {
+        std::vector<int> ids;
+        for (const auto& [id, _] : generalItems)
+        {
+            ids.push_back(id);
+        }
+        for (const auto& [id, _] : equippableItems)
+        {
+            ids.push_back(id);
+        }
+        for (const auto& [id, _] : foodItems)
+        {
+            ids.push_back(id);
+        }
+        return ids;
+    }
+
     std::optional<ItemType> getItemType(int id)
     {
         if (generalItems.contains(id))

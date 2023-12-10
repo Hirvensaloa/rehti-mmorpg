@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -73,6 +74,19 @@ struct CurrentAction
     bool operator==(const CurrentAction& other) const
     {
         return id == other.id && durationMs == other.durationMs && looping == other.looping && targetId == other.targetId && targetCoordinate.x == other.targetCoordinate.x && targetCoordinate.y == other.targetCoordinate.y && targetCoordinate.z == other.targetCoordinate.z;
+    }
+
+    /**
+     * @brief Print the CurrentAction to the console
+     */
+    void print()
+    {
+        std::cout << "CurrentAction: " << std::endl;
+        std::cout << "id: " << static_cast<int>(id) << std::endl;
+        std::cout << "durationMs: " << durationMs << std::endl;
+        std::cout << "looping: " << looping << std::endl;
+        std::cout << "targetId: " << targetId << std::endl;
+        std::cout << "targetCoordinate: " << targetCoordinate.x << ", " << targetCoordinate.y << ", " << targetCoordinate.z << std::endl;
     }
 };
 

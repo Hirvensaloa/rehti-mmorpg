@@ -274,19 +274,20 @@ void Server::sendGameState()
             }
         }
         entity.equipment = equipmentVector;
-        entityVector.push_back(entity);
 
         if (npc->getCurrentAction() != nullptr && !npc->getCurrentAction()->isCompleted())
         {
             entity.currentAction = npc->getCurrentAction()->getActionInfo();
         }
+
+        entityVector.push_back(entity);
     }
 
     for (auto& player : gameWorldM.getPlayers())
     {
         GameStateEntity entity;
         const Coordinates location = player->getLocation();
-        entity.id = player->getId();
+        entity.id = AssetManager::getGameCharacters().player.id; // This is not unique, it is used to identify the type of entity. This case the type of entity is player.
         entity.instanceId = player->getInstanceId();
         entity.name = player->getName();
         entity.x = location.x;
@@ -309,12 +310,13 @@ void Server::sendGameState()
             }
         }
         entity.equipment = equipmentVector;
-        entityVector.push_back(entity);
 
         if (player->getCurrentAction() != nullptr && !player->getCurrentAction()->isCompleted())
         {
             entity.currentAction = player->getCurrentAction()->getActionInfo();
         }
+
+        entityVector.push_back(entity);
     }
     msg.entities = entityVector;
 
@@ -337,8 +339,8 @@ void Server::sendGameState()
         {
             // Add the current player to the message e.g. the player that is connected to this connection
             std::shared_ptr<PlayerCharacter> player = gameWorldM.getPlayer(conn->getID());
-            msg.currentPlayer.id = player->getId();
-            msg.currentPlayer.instanceId = player->getId();
+            msg.currentPlayer.id = AssetManager::getGameCharacters().player.id; // This is not unique, it is used to identify the type of entity. This case the type of entity is player.;
+            msg.currentPlayer.instanceId = player->getInstanceId();
             msg.currentPlayer.name = player->getName();
             const Coordinates location = player->getLocation();
             msg.currentPlayer.x = location.x;

@@ -26,7 +26,7 @@ CurrentAction Action::getActionInfo()
     actionInfo.id = actionTypeM;
     actionInfo.durationMs = actionTimeM.count();
     actionInfo.looping = false;
-    actionInfo.targetId = pEntityM->getId();
+    actionInfo.targetId = pEntityM->getInstanceId();
     return actionInfo;
 };
 

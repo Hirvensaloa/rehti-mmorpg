@@ -53,12 +53,17 @@ CurrentAction MoveAction::getActionInfo()
     actionInfo.durationMs = actionTimeM.count();
     actionInfo.looping = true;
 
-    if (pathM.size())
+    if (pathM.size() > 0)
     {
         int x = static_cast<int>(pathM.front().first);
         int y = static_cast<int>(pathM.front().second);
         const Coordinates nextTarget = {x, y};
         actionInfo.targetCoordinate = {nextTarget.x, nextTarget.y, nextTarget.z};
+    }
+    else
+    {
+        const Coordinates target = pEntityM->getLocation();
+        actionInfo.targetCoordinate = {target.x, target.y, target.z};
     }
 
     return actionInfo;

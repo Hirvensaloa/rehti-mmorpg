@@ -69,7 +69,7 @@ std::shared_ptr<Npc> GameWorld::getNpc(unsigned int npcId)
 {
     for (auto it = npcsM.begin(); it != npcsM.end(); it++)
     {
-        if ((*it)->getId() == npcId)
+        if ((*it)->getInstanceId() == npcId)
         {
 
             return (*it);

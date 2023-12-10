@@ -12,7 +12,7 @@ class ResourceObject : public Object
 public:
     ResourceObject(int id, std::string instanceId, std::string name, Coordinates coords, unsigned int rotation, std::vector<YieldableItem> yieldableItemList, int xpPerYield, int depleteChance, int relatedSkillId, int xpRequirement, reader::ObjectType type, std::vector<ItemTransform> itemTransformList);
 
-    ResourceObject(const ResourceObjectStruct& object, const ObjectLocation& location, reader::ObjectType type, std::vector<ItemTransform> itemTransformList);
+    ResourceObject(const ResourceObjectStruct& object, const ObjectLocation& location, reader::ObjectType type);
 
     /**
      * @brief Interact with the object.

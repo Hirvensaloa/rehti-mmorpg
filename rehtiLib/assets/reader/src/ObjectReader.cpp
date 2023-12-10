@@ -177,16 +177,22 @@ GameObjects fetchObjects(GameItems& gameItems, std::map<int, GameSkill>& gameSki
         }
         else if (objectType == "Resource")
         {
-            if (!validMember(object, "yieldableItems", ValueType::OBJECT) ||
-                !validMember(object, "itemTransformList", ValueType::ARRAY) ||
-                !validMember(object, "depleteChance", ValueType::INT) ||
-                !validMember(object, "relatedSkillId", ValueType::INT) ||
+            bool hasYieldableItems = validMember(object, "yieldableItems", ValueType::OBJECT, false);
+            if (!hasYieldableItems)
+            {
+                if (!validMember(object, "itemTransformList", ValueType::ARRAY, false))
+                {
+                    throw std::runtime_error("Object JSON file needs to have either yieldableItems or itemTransformList");
+                }
+            }
+
+            if (!validMember(object, "relatedSkillId", ValueType::INT) ||
                 !validMember(object, "xpRequirement", ValueType::INT) ||
                 !validMember(object, "characterInteractAnimation", ValueType::STRING))
             {
                 throw std::runtime_error("Object JSON file contains invalid resource object");
             }
-            const int depleteChance = object["depleteChance"].GetInt();
+
             const int relatedSkillId = object["relatedSkillId"].GetInt();
             const int xpRequirement = object["xpRequirement"].GetInt();
             const std::string characterInteractAnimation = object["characterInteractAnimation"].GetString();
@@ -200,59 +206,69 @@ GameObjects fetchObjects(GameItems& gameItems, std::map<int, GameSkill>& gameSki
                 throw std::runtime_error("No animation with name " + characterInteractAnimation + " found when loading object");
             }
 
-            const rapidjson::Value& yieldableItems = object["yieldableItems"];
-            if (!validMember(yieldableItems, "yieldableItemList", ValueType::ARRAY) || !validMember(yieldableItems, "xpPerYield", ValueType::INT))
-            {
-                throw std::runtime_error("Object JSON file contains invalid yieldable items");
-            }
-            const int xpPerYield = yieldableItems["xpPerYield"].GetInt();
-
-            std::vector<YieldableItem> yieldableItemList = fetchYieldableItemList(gameItems, yieldableItems);
-
-            std::vector<ItemTransform> itemTransformList;
-            for (auto& itemTransform : object["itemTransformList"].GetArray())
-            {
-                if (!itemTransform.IsObject() || !validMember(itemTransform, "itemId", ValueType::INT) || !validMember(itemTransform, "resultItemId", ValueType::INT) || !validMember(itemTransform, "resultItemQuantity", ValueType::INT) || !validMember(itemTransform, "xpPerTransform", ValueType::INT))
-                {
-                    throw std::runtime_error("Object JSON file contains invalid item transform");
-                }
-
-                const int itemId = itemTransform["itemId"].GetInt();
-                const int resultItemId = itemTransform["resultItemId"].GetInt();
-                const int resultItemQuantity = itemTransform["resultItemQuantity"].GetInt();
-                const int xpPerTransform = itemTransform["xpPerTransform"].GetInt();
-
-                if (!gameItems.containsId(itemId))
-                {
-                    throw std::runtime_error("No item with id " + std::to_string(itemId) + " found when loading object");
-                }
-                if (!gameItems.containsId(resultItemId))
-                {
-                    throw std::runtime_error("No item with id " + std::to_string(resultItemId) + " found when loading object");
-                }
-
-                ItemTransform iTransform;
-                iTransform.itemId = itemId;
-                iTransform.resultItemId = resultItemId;
-                iTransform.resultItemQuantity = resultItemQuantity;
-                iTransform.xpPerTransform = xpPerTransform;
-                itemTransformList.push_back(iTransform);
-            }
-
             ResourceObjectStruct resourceObject;
+
+            if (hasYieldableItems)
+            {
+                const rapidjson::Value& yieldableItems = object["yieldableItems"];
+                if (!validMember(yieldableItems, "yieldableItemList", ValueType::ARRAY) ||
+                    !validMember(yieldableItems, "xpPerYield", ValueType::INT) ||
+                    !validMember(yieldableItems, "depleteChance", ValueType::INT))
+                {
+                    throw std::runtime_error("Object JSON file contains invalid yieldable items");
+                }
+                const int xpPerYield = yieldableItems["xpPerYield"].GetInt();
+                const int depleteChance = yieldableItems["depleteChance"].GetInt();
+
+                std::vector<YieldableItem> yieldableItemList = fetchYieldableItemList(gameItems, yieldableItems);
+
+                resourceObject.yieldableItems.yieldableItemList = yieldableItemList;
+                resourceObject.yieldableItems.xpPerYield = xpPerYield;
+                resourceObject.depleteChance = depleteChance;
+            }
+            else
+            {
+                std::vector<ItemTransform> itemTransformList;
+                for (auto& itemTransform : object["itemTransformList"].GetArray())
+                {
+                    if (!itemTransform.IsObject() || !validMember(itemTransform, "itemId", ValueType::INT) || !validMember(itemTransform, "resultItemId", ValueType::INT) || !validMember(itemTransform, "resultItemQuantity", ValueType::INT) || !validMember(itemTransform, "xpPerTransform", ValueType::INT))
+                    {
+                        throw std::runtime_error("Object JSON file contains invalid item transform");
+                    }
+
+                    const int itemId = itemTransform["itemId"].GetInt();
+                    const int resultItemId = itemTransform["resultItemId"].GetInt();
+                    const int resultItemQuantity = itemTransform["resultItemQuantity"].GetInt();
+                    const int xpPerTransform = itemTransform["xpPerTransform"].GetInt();
+
+                    if (!gameItems.containsId(itemId))
+                    {
+                        throw std::runtime_error("No item with id " + std::to_string(itemId) + " found when loading object");
+                    }
+                    if (!gameItems.containsId(resultItemId))
+                    {
+                        throw std::runtime_error("No item with id " + std::to_string(resultItemId) + " found when loading object");
+                    }
+
+                    ItemTransform iTransform;
+                    iTransform.itemId = itemId;
+                    iTransform.resultItemId = resultItemId;
+                    iTransform.resultItemQuantity = resultItemQuantity;
+                    iTransform.xpPerTransform = xpPerTransform;
+                    itemTransformList.push_back(iTransform);
+                }
+                resourceObject.itemTransformList = itemTransformList;
+            }
+
             resourceObject.id = objectId;
             resourceObject.name = objectName;
             resourceObject.description = objectDescription;
             resourceObject.tileMap = tileMap;
-            resourceObject.yieldableItems.xpPerYield = xpPerYield;
-            resourceObject.depleteChance = depleteChance;
             resourceObject.relatedSkillId = relatedSkillId;
             resourceObject.xpRequirement = xpRequirement;
-            resourceObject.yieldableItems.yieldableItemList = yieldableItemList;
             resourceObject.textureFilename = textureFilename;
             resourceObject.objFilename = objFilename;
             resourceObject.characterInteractAnimation = characterInteractAnimation;
-            resourceObject.itemTransformList = itemTransformList;
 
             gameObjects.resourceObjects[objectId] = resourceObject;
         }

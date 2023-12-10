@@ -34,4 +34,7 @@ private:
     std::chrono::milliseconds moveTimeM = MoveAction::getMoveTime();
 
     ActionType actionTypeM = ActionType::Attack;
+
+    std::optional<Coordinates> nextMoveM; ///< The next move to be taken, is defined if the target is not in range
+    bool targetInRangeM = true;           ///< True if the target is in range
 };

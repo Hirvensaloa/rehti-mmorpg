@@ -33,18 +33,22 @@ void AttackAction::act()
                     completedM = true;
                 }
             }
+
+            targetInRangeM = true;
         }
 
         else if (std::chrono::system_clock::now() > startTimeM + moveTimeM)
         {
-            std::optional<Coordinates> nextMove = findNextMove();
+            nextMoveM = findNextMove();
 
             // If we cannot find a path to the target, do nothing e.g. stay agressive and wait for the target to potentially come to range.
-            if (nextMove.has_value())
+            if (nextMoveM.has_value())
             {
-                pEntityM->move(nextMove.value());
+                pEntityM->move(nextMoveM.value());
                 startTimeM = std::chrono::system_clock::now();
             }
+
+            targetInRangeM = false;
         }
     }
 }
@@ -85,9 +89,32 @@ std::optional<Coordinates> AttackAction::findNextMove()
 CurrentAction AttackAction::getActionInfo()
 {
     CurrentAction actionInfo;
-    actionInfo.id = actionTypeM;
-    actionInfo.durationMs = actionTimeM.count();
-    actionInfo.looping = true;
-    actionInfo.targetId = pTargetM->getId();
-    return actionInfo;
+
+    // If the target is not in range, we need display move action or none if we cannot find a path to the target
+    if (!targetInRangeM)
+    {
+        if (nextMoveM.has_value())
+        {
+            actionInfo.id = ActionType::Move;
+            actionInfo.durationMs = moveTimeM.count();
+            actionInfo.looping = true;
+            actionInfo.targetCoordinate = {nextMoveM.value().x, nextMoveM.value().y, nextMoveM.value().z};
+        }
+        else
+        {
+            actionInfo.id = ActionType::None;
+            actionInfo.durationMs = 1000;
+            actionInfo.looping = true;
+            actionInfo.targetCoordinate = {pEntityM->getLocation().x, pEntityM->getLocation().y, pEntityM->getLocation().z};
+        }
+        return actionInfo;
+    }
+    else
+    {
+        actionInfo.id = actionTypeM;
+        actionInfo.durationMs = actionTimeM.count();
+        actionInfo.looping = true;
+        actionInfo.targetId = pTargetM->getInstanceId();
+        return actionInfo;
+    }
 }

@@ -38,9 +38,31 @@
       "xpRequirement": 0,
       "description": "A cooking fire. It is a cooking fire.",
       "tileMap": [["XB"]],
-      "textureFilename": "cookingfiretexture.png",
-      "objFilename": "cookingfire.obj",
+      "textureFilename": "defaultTexture.jpg",
+      "objFilename": "basictreestump.obj",
       "characterInteractAnimation": "cooking"
+    },
+    {
+      "id": 3,
+      "type": "Resource",
+      "name": "Fishing spot",
+      "yieldableItems": {
+        "yieldableItemList": [
+          {
+            "itemId": 12,
+            "yieldPercentage": 100
+          }
+        ],
+        "xpPerYield": 10,
+        "depleteChance": 20
+      },
+      "relatedSkillId": 2,
+      "xpRequirement": 0,
+      "description": "A fishing spot. It is a fishing spot.",
+      "tileMap": [["XB"]],
+      "textureFilename": "defaultTexture.jpg",
+      "objFilename": "basictreestump.obj",
+      "characterInteractAnimation": "fishing"
     },
     {
       "id": 30,

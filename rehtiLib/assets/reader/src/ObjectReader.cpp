@@ -192,6 +192,7 @@ GameObjects fetchObjects(GameItems& gameItems, std::map<int, GameSkill>& gameSki
             {
                 throw std::runtime_error("Object JSON file contains invalid resource object");
             }
+
             const int relatedSkillId = object["relatedSkillId"].GetInt();
             const int xpRequirement = object["xpRequirement"].GetInt();
             const std::string characterInteractAnimation = object["characterInteractAnimation"].GetString();

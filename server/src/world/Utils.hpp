@@ -30,10 +30,23 @@ struct Node
     };
 };
 
-// Check if cell is valid and accessible from given direction
+/**
+ * @brief Check if cell is valid and accessible from given direction
+ *
+ * @param map The access map of the map.
+ * @param cell The cell to check.
+ * @param dir The direction from which the cell is accessed.
+ * @return true if the cell is valid, false otherwise.
+ */
 bool isValidCell(const std::vector<std::vector<uint8_t>>& map, std::pair<unsigned, unsigned> cell, Direction dir);
 
-// Calculate the euclidean distance between two points
+/**
+ * @brief Calculate the euclidean distance between two points
+ *
+ * @param start pair (x, y)
+ * @param end pair (x, y)
+ * @return Euclidean distance in tiles
+ */
 unsigned euclideanDistance(std::pair<unsigned, unsigned> start, std::pair<unsigned, unsigned> end);
 
 /*

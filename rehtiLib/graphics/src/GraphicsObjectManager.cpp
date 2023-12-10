@@ -618,6 +618,78 @@ bool GraphicsObjectManager::addArea(const std::vector<Vertex>& vertices, const s
     return true;
 }
 
+bool GraphicsObjectManager::cleanResources(int id, ObjectType type)
+{
+    switch (type)
+    {
+    case ObjectType::CHARACTER:
+    {
+        if (!characterObjectsM.contains(id))
+            return false;
+        auto& character = characterObjectsM[id];
+        vmaDestroyBuffer(allocatorM, character.vertexData.buffer, character.vertexData.allocation);
+        vmaDestroyBuffer(allocatorM, character.indexData.buffer, character.indexData.allocation);
+        vmaDestroyImage(allocatorM, character.texture.image, character.texture.allocation);
+        vkDestroyImageView(logDeviceM, character.textureView, nullptr);
+        for (auto& bufObject : character.characterUniformBuffers)
+        {
+            vmaDestroyBuffer(allocatorM, bufObject.boneTransformations.buffer, bufObject.boneTransformations.allocation);
+            vmaDestroyBuffer(allocatorM, bufObject.transformBuffer.buffer, bufObject.transformBuffer.allocation);
+        }
+        characterObjectsM.erase(id);
+        return true;
+    }
+    case ObjectType::GAMEOBJECT:
+    {
+        if (!gameObjectsM.contains(id))
+            return false;
+        auto& object = gameObjectsM[id];
+        vmaDestroyBuffer(allocatorM, object.vertexData.buffer, object.vertexData.allocation);
+        vmaDestroyBuffer(allocatorM, object.indexData.buffer, object.indexData.allocation);
+        vmaDestroyImage(allocatorM, object.texture.image, object.texture.allocation);
+        vkDestroyImageView(logDeviceM, object.textureView, nullptr);
+        for (auto& bufObject : object.uniformBuffers)
+        {
+            vmaDestroyBuffer(allocatorM, bufObject.transformBuffer.buffer, bufObject.transformBuffer.allocation);
+        }
+        gameObjectsM.erase(id);
+        return true;
+    }
+    case ObjectType::TESTOBJECT:
+    {
+        if (!testObjectsM.contains(id))
+            return false;
+        auto& test = testObjectsM[id];
+        vmaDestroyBuffer(allocatorM, test.vertexData.buffer, test.vertexData.allocation);
+        vmaDestroyBuffer(allocatorM, test.indexData.buffer, test.indexData.allocation);
+        for (auto& bufObject : test.uniformBuffers)
+        {
+            vmaDestroyBuffer(allocatorM, bufObject.transformBuffer.buffer, bufObject.transformBuffer.allocation);
+        }
+        testObjectsM.erase(id);
+        return true;
+    }
+    case ObjectType::AREA:
+    {
+        if (areaObjectsM.size() <= id || id < 0)
+            return false;
+        auto& area = areaObjectsM[id];
+        vmaDestroyBuffer(allocatorM, area.vertexData.buffer, area.vertexData.allocation);
+        vmaDestroyBuffer(allocatorM, area.indexData.buffer, area.indexData.allocation);
+        for (size_t i = 0; i < area.textures.size(); i++)
+        {
+            vmaDestroyImage(allocatorM, area.textures[i].image, area.textures[i].allocation);
+            vkDestroyImageView(logDeviceM, area.textureViews[i], nullptr);
+        }
+        areaObjectsM.erase(areaObjectsM.begin() + id);
+        return true;
+    }
+    default:
+        return false;
+    }
+    return false;
+}
+
 void GraphicsObjectManager::updateTestObject(int id, const void* srcData, uint32_t frame)
 {
     auto& object = testObjectsM[id];

@@ -88,6 +88,18 @@ bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVer
     return true;
 }
 
+bool RehtiGraphics::removeCharacterObject(int characterID)
+{
+    if (!characterOrientationsM.contains(characterID))
+        return false;
+
+    pObjectManagerM->cleanResources(characterID, ObjectType::CHARACTER);
+    characterOrientationsM.erase(characterID);
+    boundingBoxesM[ObjectType::CHARACTER].erase(characterID);
+
+    return true;
+}
+
 bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, std::vector<uint32_t> indices, ImageData img, glm::vec3 location, float rotation)
 {
     glm::mat4 transformation = glm::translate(glm::mat4(1.f), location);
@@ -104,6 +116,18 @@ bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, st
     boundingBoxesM[ObjectType::GAMEOBJECT][objectID] = bb;
 
     gameObjectOrientationsM[objectID] = GfxOrientation{location, glm::quat(), glm::vec3(1.f, 1.f, 1.f)};
+
+    return true;
+}
+
+bool RehtiGraphics::removeGameObject(int objectID)
+{
+    if (!gameObjectOrientationsM.contains(objectID))
+        return false;
+
+    pObjectManagerM->cleanResources(objectID, ObjectType::GAMEOBJECT);
+    gameObjectOrientationsM.erase(objectID);
+    boundingBoxesM[ObjectType::GAMEOBJECT].erase(objectID);
 
     return true;
 }

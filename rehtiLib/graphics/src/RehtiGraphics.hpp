@@ -104,6 +104,13 @@ public:
     bool addCharacterObject(int characterID, std::vector<CharacterVertex> vertices, std::vector<uint32_t> indices, ImageData texture, std::array<Animation, ANIMATION_TYPE_COUNT> animations, std::vector<BoneNode> bones, std::vector<glm::mat4> transformations, glm::vec3 location = glm::vec3(0.f), float rotation = 0.f, bool isPlayer = false);
 
     /**
+     * @brief Removes a character object with the given id from the graphics backend.
+     * @param characterID of the character object.
+     * @return boolean indicating whether the object was removed successfully.
+     */
+    bool removeCharacterObject(int characterID);
+
+    /**
      * @brief Adds a game object with the given id to the graphics backend. Also creates a bounding box for the object.
      * @param objectID
      * @param vertices of the model
@@ -114,6 +121,13 @@ public:
      * @return boolean indicating whether the object was added successfully.
      */
     bool addGameObject(int objectID, std::vector<Vertex> vertices, std::vector<uint32_t> indices, ImageData texture, glm::vec3 location = glm::vec3(0.f), float rotation = 0.f);
+
+    /**
+     * @brief Removes a game object with the given id from the graphics backend.
+     * @param objectID of the game object.
+     * @return boolean indicating whether the object was removed successfully.
+     */
+    bool removeGameObject(int objectID);
 
     /**
      * @brief Checks if a game object with the given id exists.

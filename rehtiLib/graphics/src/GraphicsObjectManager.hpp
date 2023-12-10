@@ -86,6 +86,14 @@ public:
     bool addArea(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, std::array<ImageData, 6> textures, VkSampler texSampler);
 
     /**
+     * @brief Cleans resources of the given id, if they exists.
+     * @param id is the id of the object.
+     * @param type is the type of the object.
+     * @return boolean indicating success
+     */
+    bool cleanResources(int id, ObjectType type);
+
+    /**
      * @brief Updates test object data.
      * @param id is the ID of the object.
      * @param srcData is the source data.

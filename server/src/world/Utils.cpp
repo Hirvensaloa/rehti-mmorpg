@@ -38,8 +38,17 @@ bool isValidCell(const std::vector<std::vector<uint8_t>>& map, std::pair<unsigne
     }
 }
 
-unsigned euclideanDistance(std::pair<unsigned, unsigned> start, std::pair<unsigned, unsigned> end)
+unsigned int euclideanDistance(std::pair<unsigned, unsigned> start, std::pair<unsigned, unsigned> end)
 {
+    // Prevent overflow
+    if (end.first < start.first)
+    {
+        std::swap(start, end);
+    }
+    if (end.second < start.second)
+    {
+        std::swap(start, end);
+    }
     return std::sqrt(std::pow(end.first - start.first, 2) + std::pow(end.second - start.second, 2));
 }
 

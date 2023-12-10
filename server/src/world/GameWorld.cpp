@@ -192,14 +192,14 @@ std::shared_ptr<Entity> GameWorld::getEntity(unsigned int entityId)
 {
     for (auto npc : npcsM)
     {
-        if (npc->getId() == entityId)
+        if (npc->getInstanceId() == entityId)
         {
             return npc;
         }
     }
     for (auto player : playersM)
     {
-        if (player->getId() == entityId)
+        if (player->getInstanceId() == entityId)
         {
             return player;
         }

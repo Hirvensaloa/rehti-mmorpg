@@ -946,6 +946,9 @@ void RehtiGraphics::recordCommandBuffer(VkCommandBuffer cmdBuffer, uint32_t imag
         }
     }
 
+    // record gui data
+    pGuiM->recordGuiData(cmdBuffer);
+
     vkCmdEndRenderPass(cmdBuffer);
 
     if (vkEndCommandBuffer(cmdBuffer) != VK_SUCCESS)
@@ -974,6 +977,7 @@ void RehtiGraphics::createSynchronization()
 
 void RehtiGraphics::drawFrame()
 {
+    pGuiM->startRender();
     // wait
     vkWaitForFences(logDeviceM, 1, &frameFencesM[currentFrameM], VK_TRUE, UINT64_MAX);
 
@@ -1047,6 +1051,7 @@ void RehtiGraphics::mainLoop()
     {
         auto start = std::chrono::high_resolution_clock::now();
         glfwPollEvents();
+        pGuiM->newFrame();
         drawFrame();
         auto elapsed = std::chrono::high_resolution_clock::now() - start;
         auto mus = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
@@ -1083,6 +1088,7 @@ void RehtiGraphics::cleanup()
     pObjectManagerM->destroyImage(depthImageM);
     vkDestroyImageView(logDeviceM, depthImageViewM, nullptr);
     // Delete the managers and builders
+    pGuiM.reset();
     pObjectManagerM.reset();
     // Destroy sampler
     vkDestroySampler(logDeviceM, textureSamplerM, nullptr);
@@ -1659,21 +1665,26 @@ void RehtiGraphics::addMouseClickCallback(std::function<void(const Hit&)> callba
     glfwSetWindowUserPointer(this->pWindowM, this);
     glfwSetMouseButtonCallback(this->pWindowM, [](GLFWwindow* window, int button, int action, int mods)
                                {
-			if ((button == GLFW_MOUSE_BUTTON_LEFT || button == GLFW_MOUSE_BUTTON_RIGHT) && action == GLFW_PRESS)
-			{
-				RehtiGraphics* pGraphics = reinterpret_cast<RehtiGraphics*>(glfwGetWindowUserPointer(window));
+        ImGuiIO& io = ImGui::GetIO();
+        io.AddMouseButtonEvent(button, action);
+        if (!io.WantCaptureMouse)
+        {
+            if ((button == GLFW_MOUSE_BUTTON_LEFT || button == GLFW_MOUSE_BUTTON_RIGHT) && action == GLFW_PRESS)
+            {
+                RehtiGraphics* pGraphics = reinterpret_cast<RehtiGraphics*>(glfwGetWindowUserPointer(window));
                 Hit hit = pGraphics->traceClick();
                 hit.button = button;
-				pGraphics->mouseClickCallbackM(hit);
-			}
-			else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_PRESS)
-			{
-				Camera::canMove = true;
-			}
-			else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_RELEASE)
-			{
-				Camera::canMove = false;
-			} });
+                pGraphics->mouseClickCallbackM(hit);
+            }
+            else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_PRESS)
+            {
+                Camera::canMove = true;
+            }
+            else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_RELEASE)
+            {
+                Camera::canMove = false;
+            }
+        } });
 }
 
 std::shared_ptr<RehtiGui> RehtiGraphics::getGui()

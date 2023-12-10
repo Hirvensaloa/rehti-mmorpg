@@ -11,10 +11,10 @@ ResourceObject::ResourceObject(int id, std::string instanceId, std::string name,
     this->itemTransformListM = itemTransformList;
 }
 
-ResourceObject::ResourceObject(const ResourceObjectStruct& object, const ObjectLocation& location, reader::ObjectType type, std::vector<ItemTransform> itemTransformList) : Object(object.id, location.instanceId, object.name, {location.x, location.y}, location.rotation, type)
+ResourceObject::ResourceObject(const ResourceObjectStruct& object, const ObjectLocation& location, reader::ObjectType type) : Object(object.id, location.instanceId, object.name, {location.x, location.y}, location.rotation, type)
 {
-    this->yieldableItemListM = object.yieldableItemList;
-    this->xpPerYieldM = object.xpPerYield;
+    this->yieldableItemListM = object.yieldableItems.yieldableItemList;
+    this->xpPerYieldM = object.yieldableItems.xpPerYield;
     this->depleteChanceM = object.depleteChance;
     this->relatedSkillIdM = object.relatedSkillId;
     this->xpRequirementM = object.xpRequirement;
@@ -23,6 +23,14 @@ ResourceObject::ResourceObject(const ResourceObjectStruct& object, const ObjectL
 
 void ResourceObject::interact(Entity& entity)
 {
+    // Check that player matches the xp requirement
+    const auto skill = entity.getSkillSet().getSkills().at(relatedSkillIdM);
+    if (skill.xp < xpRequirementM)
+    {
+        std::cout << "Entity " << entity.getName() << " does not have enough xp to interact with " << getName() << std::endl;
+        return;
+    }
+
     // Yieldable items have priority over item transforms
     if (!this->yieldableItemListM.empty())
     {
@@ -71,9 +79,12 @@ void ResourceObject::interact(Entity& entity)
                     inventory.removeItem(item->getId());
 
                     int itemsAdded = 0;
+                    std::string itemName = "";
                     while (itemAmountToBeAdded > 0)
                     {
                         std::shared_ptr<Item> resultItem = AssetManager::createItemInstance(itemTransform.resultItemId);
+                        itemName = resultItem->getName();
+
                         const bool success = inventory.addItem(resultItem);
 
                         // Let's not do anything if we can't add the item to the inventory. We cannot be sure why it happens.
@@ -87,7 +98,7 @@ void ResourceObject::interact(Entity& entity)
 
                     // Xp is given only once per transform
                     entity.getSkillSet().addSkillXp(relatedSkillIdM, itemTransform.xpPerTransform);
-                    std::cout << "Entity " << entity.getName() << " transformed " << item->getName() << " into " << itemsAdded << " " << resultItem->getName() << " and " << itemTransform.xpPerTransform << " xp" << std::endl;
+                    std::cout << "Entity " << entity.getName() << " transformed " << item->getName() << " into " << itemsAdded << " " << itemName << " and " << itemTransform.xpPerTransform << " xp" << std::endl;
                     return;
                 }
             }

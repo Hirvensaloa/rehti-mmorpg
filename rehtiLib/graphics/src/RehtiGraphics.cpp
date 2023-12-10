@@ -194,7 +194,6 @@ void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
         std::cout << "Character " << characterID << " does not exist" << std::endl;
         return;
     }
-    std::cout << "Playing animation " << static_cast<int>(cfg.animType) << " on player " << characterID << std::endl;
     // reset all animations currently playing
     timersM.finishCallback(characterID);
     dataMutexM.lock();
@@ -235,7 +234,7 @@ void RehtiGraphics::forcePlayerMove(int playerID, glm::vec3 location)
 
 void RehtiGraphics::moveCharacter(int characterID, glm::vec3 location, float timeInSeconds)
 {
-    std::cout << "Character " << characterID << " moving " << std::endl;
+    // std::cout << "Character " << characterID << " moving " << std::endl;
     float timeInv = 1.f / timeInSeconds;
     bool succ = timersM.finishCallback(characterID);
 

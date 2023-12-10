@@ -1,7 +1,7 @@
 #include "Inventory.hpp"
 #include "../entity/Entity.hpp"
 
-Inventory::Inventory(Entity* owner, int inventorySize) : ownerM(owner), inventorySizeM(inventorySize){};
+Inventory::Inventory(Entity* owner) : ownerM(owner){};
 
 bool Inventory::addItem(std::shared_ptr<Item> item)
 {
@@ -30,6 +30,11 @@ std::shared_ptr<Item> Inventory::removeItem(int itemId)
 void Inventory::removeAllItems()
 {
     itemsM.clear();
+}
+
+bool Inventory::isFull() const
+{
+    return itemsM.size() == inventorySizeM;
 }
 
 const std::vector<std::shared_ptr<Item>>& Inventory::getItems() const

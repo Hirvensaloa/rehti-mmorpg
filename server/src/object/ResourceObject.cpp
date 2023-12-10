@@ -21,13 +21,54 @@ ResourceObject::ResourceObject(const ResourceObjectStruct& object, const ObjectL
     this->itemTransformListM = object.itemTransformList;
 }
 
-void ResourceObject::interact(Entity& entity)
+bool ResourceObject::canInteract(Entity& entity)
 {
     // Check that player matches the xp requirement
     const auto skill = entity.getSkillSet().getSkills().at(relatedSkillIdM);
     if (skill.xp < xpRequirementM)
     {
         std::cout << "Entity " << entity.getName() << " does not have enough xp to interact with " << getName() << std::endl;
+        return false;
+    }
+
+    // Yieldable items have priority over item transforms. If yieldable items is not empty, we need to check if the entity has enough inventory space
+    if (!this->yieldableItemListM.empty())
+    {
+        if (entity.getInventory().isFull())
+        {
+            std::cout << "Entity " << entity.getName() << " does not have enough inventory space to interact with " << getName() << std::endl;
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    else if (!this->itemTransformListM.empty())
+    {
+        // We need to check if the entity has any of the items that can be transformed
+        Inventory& inventory = entity.getInventory();
+        const auto& items = inventory.getItems();
+        for (ItemTransform itemTransform : itemTransformListM)
+        {
+            for (const auto& item : items)
+            {
+                if (item->getId() == itemTransform.itemId)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
+void ResourceObject::interact(Entity& entity)
+{
+    if (!canInteract(entity))
+    {
+        std::cout << "Entity " << entity.getName() << " cannot interact with " << getName() << std::endl;
         return;
     }
 
@@ -76,7 +117,7 @@ void ResourceObject::interact(Entity& entity)
                         continue;
                     }
 
-                    inventory.removeItem(item->getId());
+                    inventory.removeItem(item->getInstanceId());
 
                     int itemsAdded = 0;
                     std::string itemName = "";

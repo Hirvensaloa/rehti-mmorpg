@@ -13,6 +13,13 @@ public:
     LootObject(const LootObjectStruct& object, const ObjectLocation& location, reader::ObjectType objectType);
 
     /**
+     * @brief Check if the entity can interact with the object.
+     * @param entity that interacts with the object.
+     * @return True if the entity can interact with the object.
+     */
+    bool canInteract(Entity& entity);
+
+    /**
      * @brief Interact with the object.
      * @param entity that interacts with the object.
      */

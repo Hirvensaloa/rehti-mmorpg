@@ -23,7 +23,8 @@ void MoveAction::act()
         if (std::chrono::system_clock::now() > startTimeM + actionTimeM)
         {
             auto next = pathM.front();
-            if (pEntityM->move(Coordinates(next.first, next.second)))
+            nextMoveM = Coordinates(next.first, next.second);
+            if (pEntityM->move(nextMoveM.value()))
             {
                 pathM.erase(pathM.begin());
             }
@@ -53,11 +54,9 @@ CurrentAction MoveAction::getActionInfo()
     actionInfo.durationMs = actionTimeM.count();
     actionInfo.looping = true;
 
-    if (pathM.size() > 0)
+    if (nextMoveM.has_value())
     {
-        int x = static_cast<int>(pathM.front().first);
-        int y = static_cast<int>(pathM.front().second);
-        const Coordinates nextTarget = {x, y};
+        const Coordinates nextTarget = nextMoveM.value();
         actionInfo.targetCoordinate = {nextTarget.x, nextTarget.y, nextTarget.z};
     }
     else

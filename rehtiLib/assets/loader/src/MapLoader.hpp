@@ -115,6 +115,9 @@ static void loadHeightAndTextureMap(const std::vector<std::vector<std::string>>&
                         height *= -1;
                     }
 
+                    // TODO: For debugging, remove before merge
+                    height = 0;
+
                     const unsigned indexX = currentAreaColumnIndex * Config.AREA_WIDTH + j;
                     textureMap[indexY][indexX] = r;
                     heightMap[indexY][indexX] = height;

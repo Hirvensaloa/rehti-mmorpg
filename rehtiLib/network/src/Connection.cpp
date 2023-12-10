@@ -16,7 +16,7 @@
 
 #include "Connection.hpp"
 
-const uint32_t MAX_BUFFER_SIZE = 8192;
+const uint32_t MAX_BUFFER_SIZE = 8192 * 4;
 
 Connection::Connection(owner parent, boost::asio::io_context& context,
                        boost::asio::ip::tcp::socket socket, MessageQueue& inc)

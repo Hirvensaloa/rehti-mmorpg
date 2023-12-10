@@ -6,35 +6,46 @@ LootObject::LootObject(int id, std::string instanceId, std::string name, Coordin
 {
 }
 
-LootObject::LootObject(const LootObjectStruct &object, const ObjectLocation &location, reader::ObjectType type)
+LootObject::LootObject(const LootObjectStruct& object, const ObjectLocation& location, reader::ObjectType type)
     : Object(object.id, location.instanceId, object.name, {location.x, location.y}, location.rotation, type), yieldableItemListM(object.yieldableItemList)
 {
 }
 
-void LootObject::interact(Entity &entity)
+bool LootObject::canInteract(Entity& entity)
 {
-  int rand = std::rand() % 100;
-  int cumulativeChance = 0;
+    // Currently every entity can interact with loot objects
+    return true;
+}
 
-  for (YieldableItem item : yieldableItemListM)
-  {
-    if (cumulativeChance < rand && rand < cumulativeChance + item.yieldPercentage)
+void LootObject::interact(Entity& entity)
+{
+    if (!canInteract(entity))
     {
-      const GameItems &items = AssetManager::getItems();
-      if (!items.containsId(item.itemId))
-      {
         return;
-      }
-
-      Inventory &inventory = entity.getInventory();
-      std::shared_ptr<Item> itemPtr = AssetManager::createItemInstance(item.itemId);
-      inventory.addItem(itemPtr);
-
-      std::cout << "Player " << entity.getName() << " looted " << itemPtr->getName() << " from " << getName() << std::endl;
-      return;
     }
-    cumulativeChance += item.yieldPercentage;
-  }
 
-  return;
+    int rand = std::rand() % 100;
+    int cumulativeChance = 0;
+
+    for (YieldableItem item : yieldableItemListM)
+    {
+        if (cumulativeChance < rand && rand < cumulativeChance + item.yieldPercentage)
+        {
+            const GameItems& items = AssetManager::getItems();
+            if (!items.containsId(item.itemId))
+            {
+                return;
+            }
+
+            Inventory& inventory = entity.getInventory();
+            std::shared_ptr<Item> itemPtr = AssetManager::createItemInstance(item.itemId);
+            inventory.addItem(itemPtr);
+
+            std::cout << "Player " << entity.getName() << " looted " << itemPtr->getName() << " from " << getName() << std::endl;
+            return;
+        }
+        cumulativeChance += item.yieldPercentage;
+    }
+
+    return;
 }

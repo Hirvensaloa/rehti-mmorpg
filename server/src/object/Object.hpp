@@ -57,6 +57,14 @@ public:
     const reader::ObjectType& getObjectType();
 
     /**
+     * @brief Check if the object can be interacted with by a entity. There might be several reason for not being able to interact with an object (inventory full, not enought xp etc. )
+     *
+     * @param entity that interacts with the object.
+     * @return true if the object can be interacted with.
+     */
+    virtual bool canInteract(Entity& entity) { return false; };
+
+    /**
      * @brief Interact with the object.
      * @param entity that interacts with the object.
      */

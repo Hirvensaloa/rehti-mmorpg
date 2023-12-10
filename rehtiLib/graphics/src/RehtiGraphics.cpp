@@ -44,7 +44,7 @@ void RehtiGraphics::addTestGameObject(int id)
     addGameObject(id, vertices, indices, texture, glm::vec3(transformation[3]));
 }
 
-bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVertex> vertices, std::vector<uint32_t> indices, ImageData texture, std::array<Animation, ANIMATION_TYPE_COUNT> animations, std::vector<BoneNode> bones, std::vector<glm::mat4> transformations, glm::vec3 location, float rotation)
+bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVertex> vertices, std::vector<uint32_t> indices, ImageData texture, std::array<Animation, ANIMATION_TYPE_COUNT> animations, std::vector<BoneNode> bones, std::vector<glm::mat4> transformations, glm::vec3 location, float rotation, bool isPlayer)
 {
     if (characterOrientationsM.contains(characterID)) // character already exists
         return false;
@@ -76,6 +76,11 @@ bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVer
     bb.pLeft = nullptr;
     bb.pRight = nullptr;
     boundingBoxesM[ObjectType::CHARACTER][characterID] = bb;
+
+    if (isPlayer)
+    {
+        cameraM.setTargetAndCamera(location);
+    }
 
     // Set animation to idle
     playAnimation(characterID, AnimationConfig{AnimationType::IDLE, 1.0f, true});
@@ -197,11 +202,7 @@ void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSec
 
 void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
 {
-    if (!characterOrientationsM.contains(characterID))
-    {
-        std::cout << "Character " << characterID << " does not exist" << std::endl;
-        return;
-    }
+
     // reset all animations currently playing
     timersM.finishCallback(characterID);
     dataMutexM.lock();
@@ -242,7 +243,6 @@ void RehtiGraphics::forcePlayerMove(int playerID, glm::vec3 location)
 
 void RehtiGraphics::moveCharacter(int characterID, glm::vec3 location, float timeInSeconds)
 {
-    std::cout << "Character " << characterID << " moving " << std::endl;
     float timeInv = 1.f / timeInSeconds;
     bool succ = timersM.finishCallback(characterID);
 

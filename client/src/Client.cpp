@@ -191,8 +191,8 @@ void Client::processMessages()
                     const auto& prevCurrentPlayer = prevGameStateMsgM.currentPlayer;
                     if (currentPlayer != prevCurrentPlayer)
                     {
-                        const auto charAsset = assetCacheM.getCharacterAssetDataById(0); // TODO: Currently player id refers to the player id in db. We should also have a way to indicate if the entity is a player or not. Currently the problem is that the player id might interfere with entity ids.
-                        pGraphLibM->addCharacterObject(currentPlayer.id, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y});
+                        const auto charAsset = assetCacheM.getCharacterAssetDataById(currentPlayer.id);
+                        pGraphLibM->addCharacterObject(currentPlayer.instanceId, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y});
                     }
                     else
                     {
@@ -201,11 +201,13 @@ void Client::processMessages()
                             // Move action is special case as we need to animate and move the entity at the same time
                             if (currentPlayer.currentAction.id == ActionType::Move)
                             {
-                                pGraphLibM->movePlayer(currentPlayer.id, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y}, currentPlayer.currentAction.durationMs / 1000.0f);
+                                const auto& coords = currentPlayer.currentAction.targetCoordinate;
+                                std::cout << "moving player. x:" << coords.x << " y:" << coords.y << " z:" << coords.z << std::endl;
+                                pGraphLibM->movePlayer(currentPlayer.instanceId, {coords.x, Config.HEIGHT_MAP_SCALE * coords.z, coords.y}, currentPlayer.currentAction.durationMs / 1000.0f);
                             }
                             else
                             {
-                                pGraphLibM->playAnimation(currentPlayer.id, actionToAnimationConfig(currentPlayer.currentAction));
+                                pGraphLibM->playAnimation(currentPlayer.instanceId, actionToAnimationConfig(currentPlayer.currentAction));
                             }
                         }
 
@@ -229,7 +231,7 @@ void Client::processMessages()
                     for (const auto& entity : gameStateMsg.entities)
                     {
                         // Do not remove the current player
-                        if (entity.instanceId == currentPlayer.id)
+                        if (entity.instanceId == currentPlayer.instanceId)
                         {
                             continue;
                         }
@@ -239,10 +241,13 @@ void Client::processMessages()
                     for (const auto& entity : gameStateMsg.entities)
                     {
                         // Do not draw the current player twice
-                        if (entity.instanceId == currentPlayer.id)
+                        if (entity.instanceId == currentPlayer.instanceId)
                         {
                             continue;
                         }
+
+                        // Do not remove entity as it is in the current gamestate message
+                        entityIdsToRemove.erase(entity.instanceId);
 
                         // Find entity from the previous gamestate message
                         const auto& prevEntity = std::find_if(prevGameStateMsgM.entities.begin(), prevGameStateMsgM.entities.end(), [&entity](const auto& e)
@@ -262,16 +267,15 @@ void Client::processMessages()
                                 // Move action is special case as we need to animate and move the entity at the same time
                                 if (entity.currentAction.id == ActionType::Move)
                                 {
-                                    pGraphLibM->moveCharacter(entity.instanceId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y}, entity.currentAction.durationMs / 1000.0f);
+                                    const auto& coords = entity.currentAction.targetCoordinate;
+                                    // std::cout << "Moving entity. x:" << coords.x << " y:" << coords.y << " z:" << coords.z << std::endl;
+                                    pGraphLibM->moveCharacter(entity.instanceId, {coords.x, Config.HEIGHT_MAP_SCALE * coords.z, coords.y}, entity.currentAction.durationMs / 1000.0f);
                                 }
                                 else
                                 {
                                     pGraphLibM->playAnimation(entity.instanceId, actionToAnimationConfig(entity.currentAction));
                                 }
                             }
-
-                            // Do not remove entity as it is in the current gamestate message
-                            entityIdsToRemove.erase(entity.instanceId);
                         }
                     }
 

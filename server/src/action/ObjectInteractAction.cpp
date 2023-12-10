@@ -28,22 +28,24 @@ void ObjectInteractAction::act()
                     completedM = true;
                 }
             }
-        }
 
+            targetInRangeM = true;
+        }
         else if (std::chrono::system_clock::now() > startTimeM + moveTimeM)
         {
-            auto nextMove = findNextMove();
+            nextMoveM = findNextMove();
 
             // If we cannot find a path to the target, we will just stop the action
-            if (!nextMove.has_value())
+            if (!nextMoveM.has_value())
             {
                 completedM = true;
-                std::cout << "ObjectInteractAction::act(): Could not find a path to the target" << std::endl;
                 return;
             };
 
-            pEntityM->move(nextMove.value());
+            pEntityM->move(nextMoveM.value());
             startTimeM = std::chrono::system_clock::now();
+
+            targetInRangeM = false;
         }
     }
 }
@@ -90,9 +92,34 @@ std::optional<Coordinates> ObjectInteractAction::findNextMove()
 CurrentAction ObjectInteractAction::getActionInfo()
 {
     CurrentAction actionInfo;
-    actionInfo.id = actionTypeM;
-    actionInfo.durationMs = actionTimeM.count();
-    actionInfo.looping = true;
-    actionInfo.targetId = pTargetM->getId();
-    return actionInfo;
+
+    // If the target is not in range, we will return the next move to be taken
+    if (!targetInRangeM)
+    {
+        if (nextMoveM.has_value())
+        {
+            actionInfo.id = ActionType::Move;
+            actionInfo.durationMs = moveTimeM.count();
+            actionInfo.looping = false;
+            actionInfo.targetId = std::stoi(pTargetM->getInstanceId());
+            actionInfo.targetCoordinate = {nextMoveM.value().x, nextMoveM.value().y, nextMoveM.value().z};
+            return actionInfo;
+        }
+        else
+        {
+            actionInfo.id = ActionType::None;
+            actionInfo.durationMs = 1000;
+            actionInfo.looping = true;
+            actionInfo.targetId = std::stoi(pTargetM->getInstanceId());
+            return actionInfo;
+        }
+    }
+    else
+    {
+        actionInfo.id = actionTypeM;
+        actionInfo.durationMs = actionTimeM.count();
+        actionInfo.looping = true;
+        actionInfo.targetId = std::stoi(pTargetM->getInstanceId());
+        return actionInfo;
+    }
 }

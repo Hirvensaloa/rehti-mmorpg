@@ -100,9 +100,10 @@ glm::mat4 GfxOrientation::getTransformationMatrix() const
 {
     glm::mat4 transformation = glm::mat4(1.0f);
 
-    transformation = glm::scale(transformation, scale);
-    transformation = glm::mat4(rotation) * transformation;
-    transformation = glm::translate(transformation, position);
+    glm::mat4 scalingMat = glm::scale(glm::mat4(1.0f), scale);
+    glm::mat4 rotatMat = glm::mat4(rotation);
+    glm::mat4 translMat = glm::translate(glm::mat4(1.0f), position);
+    transformation = translMat * rotatMat * scalingMat;
     return transformation;
 }
 

@@ -161,7 +161,6 @@ void RehtiGraphics::forceGameObjectMove(int objectID, glm::vec3 location)
 
 void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSeconds)
 {
-    std::cout << "Moving player " << playerID << std::endl;
     float timeInv = 1.f / timeInSeconds;
     bool succ = timersM.finishCallback(playerID);
 
@@ -194,7 +193,6 @@ void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
         std::cout << "Character " << characterID << " does not exist" << std::endl;
         return;
     }
-    std::cout << "Playing animation " << static_cast<int>(cfg.animType) << " on player " << characterID << std::endl;
     // reset all animations currently playing
     timersM.finishCallback(characterID);
     dataMutexM.lock();

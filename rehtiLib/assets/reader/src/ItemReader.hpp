@@ -78,6 +78,11 @@ enum class ItemType
     FOOD
 };
 
+/**
+ * @brief Contains all the item data in the game. This is used to load item assets into memory and create item instances to the game.
+ * @note Does not contain item instances, only item definitions. For example, what is lobster like and what are its stats.
+ *
+ */
 struct GameItems
 {
     std::map<int, GeneralItemStruct> generalItems;
@@ -125,5 +130,9 @@ struct GameItems
     }
 };
 
-// Reads items defined in the items.json file and returns them as a GameItems struct. GameItems can be referred to create item instances to the game (based on the id).
+/**
+ * @brief Reads items defined in the items.json file and returns them as a GameItems struct. GameItems can be referred to create item instances to the game (based on the id).
+ *
+ * @return GameItems
+ */
 GameItems fetchItems();

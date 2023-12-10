@@ -79,6 +79,14 @@ std::vector<uint32_t> aiFaceVectorToFaceVector(const std::vector<aiFace>& faces)
  */
 glm::mat4 aiMatrix4x4ToGlm(const aiMatrix4x4& matrix);
 
+/**
+ * @brief Convert aiQuaternion to glm::quat
+ * @return glm::quat
+ */
 glm::quat aiQuaternionToGlm(const aiQuaternion& quaternion);
 
+/**
+ * @brief Convert aiVector3D to glm::vec3
+ * @return glm::vec3
+ */
 glm::vec3 aiVector3DToGlm(const aiVector3D& vector);

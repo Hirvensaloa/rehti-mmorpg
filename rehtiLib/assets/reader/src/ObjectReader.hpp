@@ -94,6 +94,9 @@ namespace reader
     };
 }
 
+/**
+ * @brief Contains all the objects defined in the objects.json file
+ */
 struct GameObjects
 {
     std::map<int, GeneralObjectStruct> generalObjects;

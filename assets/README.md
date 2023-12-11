@@ -170,7 +170,7 @@ All the NPCs in the game are defined here in a list. NPCs have similar attribute
 - **aggressionRange** Range in which the aggressive npcs look for targets. Defined in number of tiles.
 - **baseDamage** The damage a npc deals without equipment. Defined in integers.
 - **baseAccuracy** The accuracy which a npc has without any equipment. Defined in integers. 1 = 1%
-- **chatResponses** A list of strings that the npc can say if talked to. The list can be empty.
+- **chatResponses** A list of strings that the npc can respond with, if talked to. The list can be empty.
 
 Example npc list:
 

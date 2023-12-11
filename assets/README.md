@@ -1,6 +1,6 @@
 # Assets
 
-All the game assets, including characters, are defined here with instructions on how to add and expand on existing assets. Assets encompass various elements such as items, skills, world map, and characters.
+All the game assets are defined here with instructions on how to add and expand on existing assets. Assets encompass various elements such as items, skills, world map, and characters.
 
 In summary, all game assets can be defined in a JSON format. The goal is to make managing assets as flexible and scalable as possible, ensuring that managing assets doesn't require an extensive understanding of the code base.
 

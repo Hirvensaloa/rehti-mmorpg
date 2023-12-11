@@ -192,7 +192,9 @@ struct Skill
     }
 };
 
-// Current player (The player who receives the message). Contains more info which is not exposed to other players.
+/**
+ * @brief Current player (The player who receives the message). Contains more info which is not exposed to other players.
+ */
 struct CurrentPlayer : GameStateEntity
 {
     std::vector<Skill> skills;

@@ -13,14 +13,38 @@
 class AssetManager
 {
 public:
+    /**
+     * @brief Loads all the assets into memory.
+     *
+     */
     static void loadAssets();
 
+    /**
+     * @brief Get the Object Locations object
+     *
+     * @return std::vector<ObjectLocation>
+     */
     static const std::vector<ObjectLocation>& getObjectLocations();
 
+    /**
+     * @brief Get the Skills object
+     *
+     * @return std::map<int, GameSkill>
+     */
     static const std::map<int, GameSkill>& getSkills();
 
+    /**
+     * @brief Get the GameObjects object
+     *
+     * @return GameObjects
+     */
     static const GameObjects& getObjects();
 
+    /**
+     * @brief Get the GameItems object
+     *
+     * @return GameItems
+     */
     static const GameItems& getItems();
 
     /**
@@ -30,7 +54,12 @@ public:
      */
     static const GameCharacters& getGameCharacters();
 
-    // Nullptr if item id is not found
+    /**
+     * @brief Creates an instance of an item.
+     *
+     * @param id Item id
+     * @return std::shared_ptr<Item>, nullptr if item id is not found.
+     */
     static std::shared_ptr<Item> createItemInstance(int id);
 
 private:

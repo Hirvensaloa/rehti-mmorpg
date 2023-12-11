@@ -150,7 +150,7 @@ void GameWorld::initWorld()
         {
             const ResourceObjectStruct& resourceObject = objects.getResourceObject(objectLocation.id);
             Coordinates coords{objectLocation.x, objectLocation.y};
-            ResourceObject resObj(resourceObject.id, objectLocation.instanceId, resourceObject.name, coords, objectLocation.rotation, resourceObject.yieldableItemList, resourceObject.xpPerYield, resourceObject.depleteChance, resourceObject.relatedSkillId, resourceObject.xpRequirement, type);
+            ResourceObject resObj(resourceObject.id, objectLocation.instanceId, resourceObject.name, coords, objectLocation.rotation, resourceObject.yieldableItems.yieldableItemList, resourceObject.yieldableItems.xpPerYield, resourceObject.depleteChance, resourceObject.relatedSkillId, resourceObject.xpRequirement, type, resourceObject.itemTransformList);
             objectsM[objectLocation.instanceId] = std::make_shared<ResourceObject>(resObj);
         }
     }
@@ -158,13 +158,12 @@ void GameWorld::initWorld()
 
     // Add NPCs to the world
     const auto& npcs = AssetManager::getGameCharacters().npcs;
-    const auto accessMap = mapM.getAccessMap();
     for (const auto& npc : npcs)
     {
         int i = 0;
         while (i < npc.spawnAmount)
         {
-            Coordinates coords = getRandomCoordinates(npc.spawnCoordinateBounds, accessMap);
+            Coordinates coords = Map::getRandomCoordinates(npc.spawnCoordinateBounds);
 
             if (npc.agressionType == AggressionType.Peaceful)
             {
@@ -192,14 +191,14 @@ std::shared_ptr<Entity> GameWorld::getEntity(unsigned int entityId)
 {
     for (auto npc : npcsM)
     {
-        if (npc->getId() == entityId)
+        if (npc->getInstanceId() == entityId)
         {
             return npc;
         }
     }
     for (auto player : playersM)
     {
-        if (player->getId() == entityId)
+        if (player->getInstanceId() == entityId)
         {
             return player;
         }

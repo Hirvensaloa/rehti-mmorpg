@@ -22,15 +22,14 @@ public:
     CurrentAction getActionInfo();
 
 private:
-    std::optional<Coordinates> findNextMove();
-
     std::shared_ptr<Object> pTargetM;
 
-    std::chrono::milliseconds actionTimeM = std::chrono::milliseconds(200);
+    std::chrono::milliseconds actionTimeM = std::chrono::milliseconds(3000);
     std::chrono::milliseconds moveTimeM = MoveAction::getMoveTime();
 
     const ActionType actionTypeM = ActionType::ObjectInteract;
 
-    std::optional<Coordinates> nextMoveM; ///< The next move to be taken, is defined if the target is not in range
-    bool targetInRangeM = true;           ///< True if the target is in range
+    std::vector<std::pair<int, int>> pathToTargetM; ///< Path to the target
+    std::optional<Coordinates> nextMoveM;           ///< Next move to be taken
+    bool targetInRangeM = true;                     ///< True if the target is in range
 };

@@ -165,6 +165,28 @@
       "iconFilename": "no-icon.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
+    },
+    {
+      "id": 12,
+      "name": "Raw lobster",
+      "description": "A raw lobster that can be cooked.",
+      "type": "Food",
+      "healAmount": -5,
+      "isStackable": false,
+      "iconFilename": "lobster.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
+    },
+    {
+      "id": 13,
+      "name": "Cooked lobster",
+      "description": "A cooked lobster that heals wounds.",
+      "type": "Food",
+      "healAmount": 50,
+      "isStackable": false,
+      "iconFilename": "lobster.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
     }
   ]
 }

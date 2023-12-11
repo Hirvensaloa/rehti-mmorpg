@@ -4,32 +4,72 @@
       "id": 1,
       "type": "Resource",
       "name": "Tree",
-      "yieldableItemList": [
-        {
-          "itemId": 0,
-          "yieldPercentage": 100
-        }
-      ],
-      "xpPerYield": 10,
-      "depleteChance": 20,
+      "yieldableItems": {
+        "yieldableItemList": [
+          {
+            "itemId": 0,
+            "yieldPercentage": 100
+          }
+        ],
+        "xpPerYield": 10,
+        "depleteChance": 20
+      },
       "relatedSkillId": 0,
       "xpRequirement": 0,
       "description": "A tree. It is a tree.",
-      "tileMap": [
-        ["XB"]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "treetexture.png",
       "objFilename": "tree.obj",
       "characterInteractAnimation": "woodcutting"
+    },
+    {
+      "id": 2,
+      "type": "Resource",
+      "name": "Cooking fire",
+      "itemTransformList": [
+        {
+          "itemId": 12,
+          "resultItemId": 13,
+          "resultItemQuantity": 1,
+          "xpPerTransform": 10
+        }
+      ],
+      "relatedSkillId": 3,
+      "xpRequirement": 0,
+      "description": "A cooking fire. It is a cooking fire.",
+      "tileMap": [["XB"]],
+      "textureFilename": "defaultTexture.jpg",
+      "objFilename": "basictreestump.obj",
+      "characterInteractAnimation": "cooking"
+    },
+    {
+      "id": 3,
+      "type": "Resource",
+      "name": "Fishing spot",
+      "yieldableItems": {
+        "yieldableItemList": [
+          {
+            "itemId": 12,
+            "yieldPercentage": 100
+          }
+        ],
+        "xpPerYield": 10,
+        "depleteChance": 20
+      },
+      "relatedSkillId": 2,
+      "xpRequirement": 0,
+      "description": "A fishing spot. It is a fishing spot.",
+      "tileMap": [["XB"]],
+      "textureFilename": "defaultTexture.jpg",
+      "objFilename": "basictreestump.obj",
+      "characterInteractAnimation": "fishing"
     },
     {
       "id": 30,
       "type": "General",
       "name": "Fence",
       "description": "A sturdy fence.",
-      "tileMap": [
-        ["S", "XS", "S"]
-      ],
+      "tileMap": [["S", "XS", "S"]],
       "textureFilename": "fence.png",
       "objFilename": "fence.obj"
     },
@@ -64,9 +104,7 @@
         }
       ],
       "description": "Contains a treasure (If you consider dirty, rotten shield a treasure)",
-      "tileMap": [
-        ["XB"]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "treasure_chest.png",
       "objFilename": "treasure_chest.obj",
       "characterInteractAnimation": "loot"

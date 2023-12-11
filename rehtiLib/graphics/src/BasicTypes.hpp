@@ -9,7 +9,7 @@
 #include <memory>
 #include <vector>
 
-// If you get an error here, you need to run ./scripts/generate_assets.sh
+// If you get an error here, you might need to run ./scripts/generate_assets.sh
 #include "../../../assets/generated/GeneratedAnimations.hpp"
 
 #pragma region Constants

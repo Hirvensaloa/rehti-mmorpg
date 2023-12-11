@@ -15,26 +15,14 @@ Camera::Camera(glm::vec3 targetPos, float width, float height, float fovRad, flo
 
     projectionM = glm::perspective(fovRad, width / height, near, far);
     projectionM[1][1] *= -1; // flip y axis
-    moveLocation(-getForward() * zoomM);
+    moveLocation(targetM - getForward() * zoomM);
+    orbitRotate(glm::vec2(0.f, 2.f));
 }
 
 glm::mat4 Camera::getViewMatrix() const
 {
-    // TODO change to target
     glm::mat4 view = glm::lookAt(getLocation(), targetM, POSITIVE_Y_AXIS);
     return view;
-}
-
-glm::mat4 Camera::getScuffedViewMatrix() const
-{
-    // construct inverse of the camera matrix.
-    // Due to orthonormality (of the orientation), the inverse is the transpose of the orientation, with negated translation.
-    glm::mat4 viewMatrix = glm::transpose(glm::mat3(cameraMatrixM));
-    viewMatrix[3][0] = -glm::dot(getLocation(), getRight());
-    viewMatrix[3][1] = -glm::dot(getLocation(), getUp());
-    viewMatrix[3][2] = -glm::dot(getLocation(), getForward());
-    viewMatrix[3][3] = 1.f;
-    return viewMatrix;
 }
 
 glm::mat4 Camera::getOrientation() const

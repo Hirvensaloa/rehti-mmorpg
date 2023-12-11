@@ -69,7 +69,7 @@ public:
      * @param width of the window
      * @param height of the window
      */
-    RehtiGraphics(uint32_t width = 1200, uint32_t height = 900);
+    RehtiGraphics(uint32_t width = 1200, uint32_t height = 900, glm::vec3 cameraLocation = glm::vec3(0.f));
 
     /// <summary>
     /// Cleans up all the resources used by vulkan.

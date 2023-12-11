@@ -63,7 +63,7 @@ void AttackAction::act()
     }
 }
 
-std::vector<std::pair<unsigned int, unsigned int>> AttackAction::findPathToTarget()
+std::vector<std::pair<int, int>> AttackAction::findPathToTarget()
 {
     // If we are on the same tile as the target, we will try to find a path to a neighbor tile
     if (pEntityM->getLocation() == pTargetM->getLocation())

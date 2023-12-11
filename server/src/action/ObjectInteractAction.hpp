@@ -29,7 +29,7 @@ private:
 
     const ActionType actionTypeM = ActionType::ObjectInteract;
 
-    std::vector<std::pair<unsigned int, unsigned int>> pathToTargetM; ///< Path to the target
-    std::optional<Coordinates> nextMoveM;                             ///< Next move to be taken
-    bool targetInRangeM = true;                                       ///< True if the target is in range
+    std::vector<std::pair<int, int>> pathToTargetM; ///< Path to the target
+    std::optional<Coordinates> nextMoveM;           ///< Next move to be taken
+    bool targetInRangeM = true;                     ///< True if the target is in range
 };

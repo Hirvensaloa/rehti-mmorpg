@@ -53,8 +53,7 @@ void Entity::setLocation(Coordinates location)
 
 Coordinates Entity::getRespawnLocation()
 {
-    const auto accessMap = pGameWorldM->getMap().getAccessMap();
-    Coordinates coords = getRandomCoordinates(spawnCoordinateBoundsM, accessMap);
+    Coordinates coords = Map::getRandomCoordinates(spawnCoordinateBoundsM);
 
     return coords;
 }

@@ -277,7 +277,6 @@ void Client::processMessages()
                                 if (entity.currentAction.id == ActionType::Move)
                                 {
                                     const auto& coords = entity.currentAction.targetCoordinate;
-                                    // std::cout << "Moving entity. x:" << coords.x << " y:" << coords.y << " z:" << coords.z << std::endl;
                                     pGraphLibM->moveCharacter(entity.instanceId, {coords.x, Config.HEIGHT_MAP_SCALE * coords.z, coords.y}, entity.currentAction.durationMs / 1000.0f);
                                 }
                                 else

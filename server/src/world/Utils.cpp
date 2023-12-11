@@ -6,7 +6,7 @@
 
 #include "Utils.hpp"
 
-bool isValidCell(const std::vector<std::vector<uint8_t>>& map, std::pair<unsigned, unsigned> coords, Direction dir)
+bool isValidCell(const std::vector<std::vector<uint8_t>>& map, std::pair<int, int> coords, Direction dir)
 {
     if (coords.first >= map.size() || coords.second >= map[coords.first].size() || coords.first < 0 || coords.second < 0)
     {
@@ -38,9 +38,11 @@ bool isValidCell(const std::vector<std::vector<uint8_t>>& map, std::pair<unsigne
     }
 }
 
-unsigned euclideanDistance(std::pair<unsigned, unsigned> start, std::pair<unsigned, unsigned> end)
+unsigned int euclideanDistance(std::pair<int, int> start, std::pair<int, int> end)
 {
-    return std::sqrt(std::pow(end.first - start.first, 2) + std::pow(end.second - start.second, 2));
+    int firstDiff= end.first - start.first;
+    int secondDiff = end.second - start.second;
+    return std::sqrt( firstDiff * firstDiff + secondDiff * secondDiff );
 }
 
 struct nodeCompare
@@ -51,24 +53,24 @@ struct nodeCompare
     }
 };
 
-std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<uint8_t>>& map, std::pair<unsigned, unsigned> start, std::pair<unsigned, unsigned> end)
+std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& map, std::pair<int, int> start, std::pair<int, int> end)
 {
     // Check that the start and end are within the map
     if (start.first >= map.size() || start.second >= map[start.first].size() || end.first >= map.size() || end.second >= map[end.first].size())
     {
-        return std::vector<std::pair<unsigned, unsigned>>();
+        return std::vector<std::pair<int, int>>();
     }
 
     // Check if the start and end are accessible
-    const unsigned& startCell = map[start.first][start.second];
-    const unsigned& endCell = map[end.first][end.second];
+    const int& startCell = map[start.first][start.second];
+    const int& endCell = map[end.first][end.second];
 
     if (startCell == 0 || endCell == 0)
     {
-        return std::vector<std::pair<unsigned, unsigned>>();
+        return std::vector<std::pair<int, int>>();
     }
 
-    std::vector<std::pair<unsigned, unsigned>> path;
+    std::vector<std::pair<int, int>> path;
     unsigned mapHeight = map.size();
     unsigned mapWidth = std::max(map[start.first].size(), map[end.first].size()); // Map might not be a square, so we need to get the maximum width
 
@@ -88,7 +90,7 @@ std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<u
         // Get the node with the lowest total cost
         Node* current = open.top();
         open.pop();
-        closed[current->coords.first][current->coords.second][Direction::SOUTH].second = nullptr;
+        closed[current->coords.first][current->coords.second][current->dirFromParent].second = nullptr;
 
         // Check if the current node is the end node
         if (current->coords == endNode.coords)
@@ -105,13 +107,13 @@ std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<u
         }
 
         // Add the current node to the closed set
-        closed[current->coords.first][current->coords.second][Direction::SOUTH].first = true;
+        closed[current->coords.first][current->coords.second][current->dirFromParent].first = true;
 
         // Check all the neighbours
         for (int i = 0; i < 8; i++)
         {
             // Get the coordinates of the neighbour
-            std::pair<unsigned, unsigned> neighbourCoords = current->coords;
+            std::pair<int, int> neighbourCoords = current->coords;
             Direction checkDir; // The direction of the current cell from the neighbours perspective
             switch (i)
             {
@@ -166,7 +168,7 @@ std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<u
             }
 
             // Calculate the cost from start to the neighbour
-            unsigned costFromStart = current->costFromStart + 1;
+            unsigned int costFromStart = current->costFromStart + 1;
 
             // Check if the neighbour is in the open set
             Node* neighbour = closed[neighbourCoords.first][neighbourCoords.second][checkDir].second;
@@ -174,7 +176,7 @@ std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<u
             if (neighbour == nullptr)
             {
                 // Create the neighbour node
-                neighbour = new Node{neighbourCoords, costFromStart, euclideanDistance(neighbourCoords, endNode.coords), current};
+                neighbour = new Node{neighbourCoords, costFromStart, euclideanDistance(neighbourCoords, endNode.coords), current, checkDir};
 
                 // Add the neighbour to the open set
                 open.push(neighbour);
@@ -192,42 +194,4 @@ std::vector<std::pair<unsigned, unsigned>> astar(const std::vector<std::vector<u
 
     // No path found, return an empty vector
     return path;
-}
-
-Coordinates getRandomCoordinates(const SpawnCoordinateBounds& spawnCoordinateBounds, const std::vector<std::vector<uint8_t>>& accessMatrix)
-{
-
-    int x = rand() % (spawnCoordinateBounds.xMax - spawnCoordinateBounds.xMin + 1) + spawnCoordinateBounds.xMin;
-    int y = rand() % (spawnCoordinateBounds.yMax - spawnCoordinateBounds.yMin + 1) + spawnCoordinateBounds.yMin;
-    int randomCounter = x * y;
-
-    bool hasNoAccess = true;
-    // Loop through the accessMatrix randomCounter times and find a random coordinate that is accessible. Decrease the randomCounter by 1 each time a coordinate is accessible.
-    while (randomCounter > 0)
-    {
-        for (int i = spawnCoordinateBounds.yMin; i < spawnCoordinateBounds.yMax; i++)
-        {
-            for (int j = spawnCoordinateBounds.xMin; j < spawnCoordinateBounds.xMax; j++)
-            {
-                if (accessMatrix[i].size() > j && accessMatrix[i][j] != 0) // We need to check if the accessMatrix[i] has j as an index because the accessMatrix is not a square matrix.
-                {
-                    hasNoAccess = false;
-                    randomCounter--;
-                    if (randomCounter == 0)
-                    {
-                        x = j;
-                        y = i;
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (hasNoAccess)
-        {
-            throw std::runtime_error("No accessible coordinates found. xMin: " + std::to_string(spawnCoordinateBounds.xMin) + " xMax: " + std::to_string(spawnCoordinateBounds.xMax) + " yMin: " + std::to_string(spawnCoordinateBounds.yMin) + " yMax: " + std::to_string(spawnCoordinateBounds.yMax));
-        }
-    }
-
-    return Coordinates(x, y);
 }

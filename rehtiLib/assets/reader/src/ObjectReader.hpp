@@ -31,7 +31,11 @@ struct ObjectLocation
  */
 std::string generateObjectInstanceId(ObjectLocation objectLocation);
 
-// Reads all the objects on the map. Server can use this to spawn objects on the map.
+/**
+ * @brief Reads all the objects on the map. Server can use this to spawn objects on the map.
+ *
+ * @return List of ObjectLocation structs
+ */
 const std::vector<ObjectLocation> readObjectLocations();
 
 struct GeneralObjectStruct
@@ -50,10 +54,24 @@ struct YieldableItem
     int yieldPercentage;
 };
 
-struct ResourceObjectStruct : public GeneralObjectStruct
+struct YieldableItems
 {
     std::vector<YieldableItem> yieldableItemList;
     int xpPerYield;
+};
+
+struct ItemTransform
+{
+    int itemId;
+    int resultItemId;
+    int resultItemQuantity;
+    int xpPerTransform;
+};
+
+struct ResourceObjectStruct : public GeneralObjectStruct
+{
+    YieldableItems yieldableItems;
+    std::vector<ItemTransform> itemTransformList;
     int depleteChance;
     int relatedSkillId;
     int xpRequirement;
@@ -76,6 +94,9 @@ namespace reader
     };
 }
 
+/**
+ * @brief Contains all the objects defined in the objects.json file
+ */
 struct GameObjects
 {
     std::map<int, GeneralObjectStruct> generalObjects;
@@ -171,5 +192,11 @@ struct GameObjects
     }
 };
 
-// Reads objects defined in the objects.json file and returns them as a GameObjects struct
+/**
+ * @brief Reads objects defined in the objects.json file and returns them as a GameObjects struct
+ *
+ * @param gameItems GameItems
+ * @param gameSkills GameSkills
+ * @return GameObjects
+ */
 GameObjects fetchObjects(GameItems& gameItems, std::map<int, GameSkill>& gameSkills);

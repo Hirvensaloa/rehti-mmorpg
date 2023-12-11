@@ -157,7 +157,7 @@ All the NPCs in the game are defined here in a list. NPCs have similar attribute
 - **name** Name of the npc
 - **textureFilename** Filename of the texture file under the textures-folder.
 - **glTFFilename** Filename of the .glb (glTF binary) file under the characters-folder.
-- **spawnCoordinateBounds** The coordinate bounds in which the new players are spawned. Also acts as a respawn area.
+- **spawnCoordinateBounds** The coordinate bounds in which the new players are spawned. Acts as a respawn area. Also the coordinates that the npc can move within.
   - **xMin** Minimum x-coordinate
   - **xMax** Maximum x-coordinate
   - **yMin** Minimum y-coordinate
@@ -248,14 +248,20 @@ Example general object:
 
 **Resource Objects**
 
-Resource objects represent in-game resources that players can interact with, such as trees for woodcutting, ore deposits for mining, and more. They have the following attributes:
+Resource objects represent in-game resources that players can interact with, such as trees for woodcutting, ore deposits for mining, and more. Resource objects can yield items when interacted with (For example, chopping a tree) OR they can transform items (For example, cooking raw fish). Resource objects have the following attributes:
 
 - **id:** A unique identifier for the object.
 - **type:** "Resource" to indicate the object type.
 - **name:** The name or description of the resource.
-- **yieldableItemList:** A list of items that can be yielded from this resource, along with the percentage chance to yield each item.
-- **xpPerYield:** The amount of experience points (XP) gained when yielding once from this resource.
-- **depleteChance:** The chance of depleting the resource when yielded.
+- **yieldableItems:** Items that are yielded on interaction. Not required if itemTransformTable is defined (If both are defined, `itemTransformTable` is ignored). Resource objects cannot both yield and transform items.
+  - **yieldableItemList:** A list of items that can be yielded from this resource, along with the percentage chance to yield each item.
+  - **xpPerYield:** The amount of experience points (XP) gained when yielding once from this resource
+  - **depleteChance:** The chance of depleting the resource when yielded.
+- **itemTranformList:** A table of items indicating how items are transformed. When interacting with the player, the first item found from the player's inventory that matches a item in the `itemTransformTable` is used. Not required if `yieldableItems` are defined.
+  - **itemId:** Item to id to be transformed.
+  - **resultItemId:** The result item id.
+  - **resultItemQuantity:** The amount of result items that is received.
+  - **xpPerTransform:** The amount of xp that is given when itemId is transformed to result item(s).
 - **relatedSkillId:** The skill related to this resource (e.g., 0 (Woodcutting) for a tree).
 - **xpRequirement:** The required XP in the related skill to yield from this resource.
 - **description:** A brief description of the resource.
@@ -264,29 +270,53 @@ Resource objects represent in-game resources that players can interact with, suc
 - **objFilename** filename of the `.obj` under the [objects](/assets/objects/)-folder.
 - **characterInteractAnimation** name (id) of the character animation to be played on object interaction
 
-Example resource object:
+Example resource objects:
 
 ```json
-{
-  "id": 1,
-  "type": "Resource",
-  "name": "Tree",
-  "yieldableItemList": [
-    {
-      "itemId": 0,
-      "yieldPercentage": 100
-    }
-  ],
-  "xpPerYield": 10,
-  "depleteChance": 20,
-  "relatedSkillId": 0,
-  "xpRequirement": 0,
-  "description": "A tree. It is a tree.",
-  "tileMap": [["XB"]],
-  "textureFilename": "tree.png",
-  "objFilename": "tree.obj",
-  "characterInteractAnimation": "woodcutting"
-}
+[
+  {
+    "id": 1,
+    "type": "Resource",
+    "name": "Tree",
+    "yieldableItems": {
+      "yieldableItemList": [
+        {
+          "itemId": 0,
+          "yieldPercentage": 100
+        }
+      ],
+      "xpPerYield": 10,
+      "depleteChance": 20
+    },
+    "relatedSkillId": 0,
+    "xpRequirement": 0,
+    "description": "A tree. It is a tree.",
+    "tileMap": [["XB"]],
+    "textureFilename": "treetexture.png",
+    "objFilename": "tree.obj",
+    "characterInteractAnimation": "woodcutting"
+  },
+  {
+    "id": 2,
+    "type": "Resource",
+    "name": "Cooking fire",
+    "itemTransformList": [
+      {
+        "itemId": 12,
+        "resultItemId": 13,
+        "resultItemQuantity": 1,
+        "xpPerTransform": 10
+      }
+    ],
+    "relatedSkillId": 3,
+    "xpRequirement": 0,
+    "description": "A cooking fire. It is a cooking fire.",
+    "tileMap": [["XB"]],
+    "textureFilename": "cookingfiretexture.png",
+    "objFilename": "cookingfire.obj",
+    "characterInteractAnimation": "cooking"
+  }
+]
 ```
 
 **Loot Objects**

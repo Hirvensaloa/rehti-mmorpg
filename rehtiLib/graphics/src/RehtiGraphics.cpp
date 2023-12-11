@@ -202,7 +202,6 @@ void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSec
 
 void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
 {
-
     // reset all animations currently playing
     timersM.finishCallback(characterID);
     dataMutexM.lock();

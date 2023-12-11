@@ -1,4 +1,6 @@
 #include "Npc.hpp"
+#include "../utils/AssetManager.hpp"
+#include "../world/Map.hpp"
 
 #include <iostream>
 
@@ -18,21 +20,29 @@ Npc::Npc(
              spawnCoordinateBounds,
              id,
              location),
-      chatResponsesM(chatResponses){};
+      chatResponsesM(chatResponses)
+{
+    // Add a random item to the NPC's inventory
+    const GameItems& gameItems = AssetManager::getItems();
+    const std::vector<int> ids = gameItems.getAllIds();
+    const int randomId = ids[rand() % ids.size()];
+    const std::shared_ptr<Item> item = AssetManager::createItemInstance(randomId);
+    getInventory().addItem(item);
+};
 
 void Npc::update()
 {
-    // By default, NPCs just walk around
     if (currentActionM != nullptr && !currentActionM->isCompleted())
     {
         currentActionM->act();
     }
     else
     {
+        // By default, NPCs just walk around
         const int notWalk = rand() % 10;
         if (!notWalk)
         {
-            setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), Coordinates(rand() % 10, rand() % 10), this->shared_from_this()));
+            setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), Map::getRandomCoordinates(this->spawnCoordinateBoundsM), this->shared_from_this()));
         }
     }
 }

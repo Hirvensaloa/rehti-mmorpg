@@ -389,7 +389,7 @@ bool Server::loadPlayer(std::string username, std::string password, const std::s
     {
         const auto& playerData = AssetManager::getGameCharacters().player;
         const auto& accessMap = gameWorldM.getMap().getAccessMap();
-        const auto spawnCoordinate = getRandomCoordinates(playerData.spawnCoordinateBounds, accessMap);
+        const auto spawnCoordinate = Map::getRandomCoordinates(playerData.spawnCoordinateBounds);
 
         auto data = dbManagerM.loadPlayerDataFromDb(username, password, spawnCoordinate);
         connection->connectToClient(data.id);

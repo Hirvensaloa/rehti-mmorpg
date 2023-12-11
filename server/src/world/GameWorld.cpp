@@ -158,13 +158,12 @@ void GameWorld::initWorld()
 
     // Add NPCs to the world
     const auto& npcs = AssetManager::getGameCharacters().npcs;
-    const auto accessMap = mapM.getAccessMap();
     for (const auto& npc : npcs)
     {
         int i = 0;
         while (i < npc.spawnAmount)
         {
-            Coordinates coords = getRandomCoordinates(npc.spawnCoordinateBounds, accessMap);
+            Coordinates coords = Map::getRandomCoordinates(npc.spawnCoordinateBounds);
 
             if (npc.agressionType == AggressionType.Peaceful)
             {

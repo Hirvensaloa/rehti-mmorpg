@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "Coordinates.hpp"
+#include "RehtiReader.hpp"
 
 /**
  * @brief Static class representing the map of the game world. Map contains information about which tiles are accessible and which are not.
@@ -28,7 +29,7 @@ public:
      * @param end Ending coordinates
      * @returns Vector of coordinates (x,y) that form the path. Empty vector if no path found.
      */
-    static std::vector<std::pair<unsigned, unsigned>> findPath(Coordinates start, Coordinates end);
+    static std::vector<std::pair<int, int>> findPath(Coordinates start, Coordinates end);
 
     /**
      * @brief Gives the height for the given (x, y) coordinates
@@ -44,6 +45,14 @@ public:
      * @return access map
      */
     static const std::vector<std::vector<uint8_t>>& getAccessMap();
+
+    /**
+     * @brief Gets a random coordinate within the given bounds.
+     *
+     * @param coordinateBounds
+     * @return Coordinates
+     */
+    static Coordinates getRandomCoordinates(const SpawnCoordinateBounds& coordinateBounds);
 
 private:
     inline static std::vector<std::vector<uint8_t>> accessMapM = {};

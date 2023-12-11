@@ -157,7 +157,7 @@ All the NPCs in the game are defined here in a list. NPCs have similar attribute
 - **name** Name of the npc
 - **textureFilename** Filename of the texture file under the textures-folder.
 - **glTFFilename** Filename of the .glb (glTF binary) file under the characters-folder.
-- **spawnCoordinateBounds** The coordinate bounds in which the new players are spawned. Also acts as a respawn area.
+- **spawnCoordinateBounds** The coordinate bounds in which the new players are spawned. Acts as a respawn area. Also the coordinates that the npc can move within.
   - **xMin** Minimum x-coordinate
   - **xMax** Maximum x-coordinate
   - **yMin** Minimum y-coordinate

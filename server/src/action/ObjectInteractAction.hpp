@@ -12,6 +12,9 @@ public:
 
     ~ObjectInteractAction() = default;
 
+    /**
+     * @brief Runs one iteration of the action
+     */
     void act();
 
     /**

@@ -25,8 +25,6 @@ public:
     CurrentAction getActionInfo();
 
 private:
-    std::optional<Coordinates> findNextMove();
-
     /**
      * @brief Finds a path to the target
      *
@@ -43,6 +41,6 @@ private:
     ActionType actionTypeM = ActionType::Attack;
 
     std::vector<std::pair<int, int>> pathToTargetM; ///< Path to the target
-    std::optional<Coordinates> nextMoveM;                             ///< The next move to be taken, is defined if the target is not in range
-    bool targetInRangeM = true;                                       ///< True if the target is in range
+    std::optional<Coordinates> nextMoveM;           ///< The next move to be taken, is defined if the target is not in range
+    bool targetInRangeM = true;                     ///< True if the target is in range
 };

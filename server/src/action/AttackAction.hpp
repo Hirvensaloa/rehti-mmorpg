@@ -36,7 +36,7 @@ private:
 
     std::chrono::milliseconds actionTimeM;
 
-    std::chrono::milliseconds moveTimeM = MoveAction::getMoveTime();
+    std::chrono::milliseconds moveTimeM = MOVE_TIME;
 
     ActionType actionTypeM = ActionType::Attack;
 

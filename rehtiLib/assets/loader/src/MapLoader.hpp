@@ -406,6 +406,12 @@ static const std::vector<std::vector<unsigned>> generateAccessMap(const std::vec
                 // Block the west bit
                 access = access & 0b0111;
             }
+
+            // Check if the tile is completely blocked
+            if (objectBlockMap[i][j].find("B") != std::string::npos)
+            {
+                access = 0;
+            }
         }
     }
 

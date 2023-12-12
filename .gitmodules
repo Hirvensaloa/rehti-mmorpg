@@ -11,4 +11,6 @@
 [submodule "third_party/bcrypt"]
 	path = third_party/bcrypt
 	url = git@github.com:hilch/Bcrypt.cpp.git
-	
+[submodule "third_party/soloud"]
+	path = third_party/soloud
+	url = git@github.com:jarikomppa/soloud.git

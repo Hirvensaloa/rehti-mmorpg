@@ -35,6 +35,12 @@ std::map<std::string, ImageData> loadObjectTextures(const GameObjects& gameObjec
     // Read all the textures
     for (const auto& filename : textureFilenames)
     {
+        // Skip if the texture is already loaded. Multiple objects can have the same texture
+        if (textures.contains(filename))
+        {
+            continue;
+        }
+
         data = stbi_load((Config.TEXTURE_PATH + filename).c_str(), &width, &height, &channels, 4);
         if (data)
         {
@@ -43,18 +49,22 @@ std::map<std::string, ImageData> loadObjectTextures(const GameObjects& gameObjec
         }
         else
         {
-            // TODO: Enable once we have all the textures for each object
-            // throw std::runtime_error("Failed to load texture: " + filename);
+            throw std::runtime_error("Failed to load texture: " + filename);
         }
     }
 
     return textures;
 }
 
-std::map<std::string, ImageData> loadCharacterTextures()
+std::map<std::string, ImageData> loadCharacterTextures(const GameCharacters& gameCharacters)
 {
-    // TODO: Define character textures in JSON
-    std::vector<std::string> textureFilenames = {"ukkotextuuri1.png", "sand.png"};
+    std::vector<std::string> textureFilenames;
+
+    textureFilenames.push_back(gameCharacters.player.textureFilename);
+    for (const auto& npc : gameCharacters.npcs)
+    {
+        textureFilenames.push_back(npc.textureFilename);
+    }
 
     std::map<std::string, ImageData> textures;
 
@@ -63,6 +73,12 @@ std::map<std::string, ImageData> loadCharacterTextures()
 
     for (const auto& filename : textureFilenames)
     {
+        // Skip if the texture is already loaded. Multiple characters can have the same texture
+        if (textures.contains(filename))
+        {
+            continue;
+        }
+
         data = stbi_load((Config.TEXTURE_PATH + filename).c_str(), &width, &height, &channels, 4);
         if (data)
         {
@@ -111,6 +127,11 @@ std::map<std::string, ImageData> loadItemTextures(const GameItems& gameItems)
     // Load all the obj textures
     for (const auto& filename : textureFilenames)
     {
+        if (textures.contains(filename))
+        {
+            continue;
+        }
+
         data = stbi_load((Config.TEXTURE_PATH + filename).c_str(), &width, &height, &channels, 4);
         if (data)
         {
@@ -126,6 +147,11 @@ std::map<std::string, ImageData> loadItemTextures(const GameItems& gameItems)
     // Load all the icon textures
     for (const auto& filename : iconFilenames)
     {
+        if (textures.contains(filename))
+        {
+            continue;
+        }
+
         data = stbi_load((Config.ITEM_ICON_PATH + filename).c_str(), &width, &height, &channels, 4);
         if (data)
         {

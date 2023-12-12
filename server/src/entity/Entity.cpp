@@ -1,13 +1,39 @@
 #include <iostream>
 
 #include "../world/GameWorld.hpp"
+#include "../world/Utils.hpp"
 #include "Entity.hpp"
 
-Entity::Entity(GameWorld* pGameWorld, std::string name, unsigned int id, Coordinates location) : idM(id), nameM(name), locationM(location), respawnLocationM(locationM), pGameWorldM(pGameWorld), inventoryM(Inventory(this)), equipmentM(Equipment(this)), skillSetM(SkillSet()){};
+Entity::Entity(
+    GameWorld* pGameWorld,
+    std::string name,
+    int baseAccuracy,
+    int baseDamage,
+    SpawnCoordinateBounds spawnCoordinateBounds,
+    unsigned int id,
+    Coordinates location)
+    : idM(id),
+      nameM(name),
+      locationM(location),
+      pGameWorldM(pGameWorld),
+      inventoryM(Inventory(this)),
+      equipmentM(Equipment(this)),
+      skillSetM(SkillSet()),
+      baseDamageM(baseDamage),
+      baseAccuracyM(baseAccuracy),
+      spawnCoordinateBoundsM(spawnCoordinateBounds)
+{
+    instanceIdM = nextInstanceIdM++;
+};
 
 unsigned int Entity::getId()
 {
     return idM;
+}
+
+unsigned int Entity::getInstanceId()
+{
+    return instanceIdM;
 }
 
 std::string Entity::getName()
@@ -20,14 +46,16 @@ Coordinates& Entity::getLocation()
     return locationM;
 }
 
-void Entity::setLocation(Coordinates& location)
+void Entity::setLocation(Coordinates location)
 {
     locationM = location;
 }
 
-Coordinates& Entity::getRespawnLocation()
+Coordinates Entity::getRespawnLocation()
 {
-    return respawnLocationM;
+    Coordinates coords = Map::getRandomCoordinates(spawnCoordinateBoundsM);
+
+    return coords;
 }
 
 std::shared_ptr<Action>& Entity::getCurrentAction()
@@ -101,11 +129,8 @@ bool Entity::move(Coordinates target)
 
 void Entity::attack(Entity& target)
 {
-    int baseDamage = 10;   // Base damage will be calculated based on skills later, placeholder value for now
-    int baseAccuracy = 50; // Same here
-
-    int totalAccuracy = getEquipment().getEquipmentStats().accuracy + baseAccuracy - target.getEquipment().getEquipmentStats().dodge;
-    int totalDamage = getEquipment().getEquipmentStats().damage + baseDamage - target.getEquipment().getEquipmentStats().armor;
+    int totalAccuracy = getEquipment().getEquipmentStats().accuracy + baseAccuracyM - target.getEquipment().getEquipmentStats().dodge;
+    int totalDamage = getEquipment().getEquipmentStats().damage + baseDamageM - target.getEquipment().getEquipmentStats().armor;
 
     bool hitConnects = totalAccuracy > rand() % 100;
 

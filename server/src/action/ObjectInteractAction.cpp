@@ -8,81 +8,96 @@ ObjectInteractAction::ObjectInteractAction(std::chrono::system_clock::time_point
 
 void ObjectInteractAction::act()
 {
-  if (!completedM)
-  {
-    int currentDistance = pEntityM->getLocation().distance(pTargetM->getLocation());
-    if (currentDistance <= pEntityM->getRange() && currentDistance > 0)
+    if (!pTargetM->canInteract(*pEntityM))
     {
-      if (std::chrono::system_clock::now() > startTimeM + actionTimeM)
-      {
-        reader::ObjectType type = pTargetM->getObjectType();
-        // If item type is resource then we will continue the action forever, until stopped by the player
-        if (type == reader::ObjectType::RESOURCE)
-        {
-          pTargetM->interact(*pEntityM);
-          startTimeM = std::chrono::system_clock::now();
-        }
-        else
-        {
-          pTargetM->interact(*pEntityM);
-          completedM = true;
-        }
-      }
-    }
-
-    else if (std::chrono::system_clock::now() > startTimeM + moveTimeM)
-    {
-      auto nextMove = findNextMove();
-
-      // If we cannot find a path to the target, we will just stop the action
-      if (!nextMove.has_value())
-      {
         completedM = true;
-        std::cout << "ObjectInteractAction::act(): Could not find a path to the target" << std::endl;
         return;
-      };
-
-      pEntityM->move(nextMove.value());
-      startTimeM = std::chrono::system_clock::now();
     }
-  }
+
+    if (!completedM)
+    {
+        int currentDistance = pEntityM->getLocation().distance(pTargetM->getLocation());
+        if (currentDistance <= pEntityM->getRange() && currentDistance > 0)
+        {
+            if (std::chrono::system_clock::now() > startTimeM + actionTimeM)
+            {
+                reader::ObjectType type = pTargetM->getObjectType();
+                // If item type is resource then we will continue the action forever, until stopped by the player
+                if (type == reader::ObjectType::RESOURCE)
+                {
+                    pTargetM->interact(*pEntityM);
+                    startTimeM = std::chrono::system_clock::now();
+                }
+                else
+                {
+                    pTargetM->interact(*pEntityM);
+                    completedM = true;
+                }
+            }
+
+            targetInRangeM = true;
+        }
+        else if (std::chrono::system_clock::now() > startTimeM + moveTimeM)
+        {
+            targetInRangeM = false;
+
+            // If there is no path to the target or the target has changed location, we will try to find one
+            if (pathToTargetM.size() == 0 || (pathToTargetM.back().first != pTargetM->getLocation().x || pathToTargetM.back().second != pTargetM->getLocation().y))
+            {
+                pathToTargetM = pEntityM->getGameWorld()->getMap().findPath(pEntityM->getLocation(), pTargetM->getLocation());
+
+                // If we cannot find a path to the target, we will just stop the action
+                if (pathToTargetM.size() == 0)
+                {
+                    nextMoveM = std::nullopt;
+                    completedM = true;
+                    return;
+                };
+            }
+
+            auto next = pathToTargetM.front();
+            nextMoveM = Coordinates(next.first, next.second);
+
+            pEntityM->move(nextMoveM.value());
+
+            pathToTargetM.erase(pathToTargetM.begin());
+            startTimeM = std::chrono::system_clock::now();
+        }
+    }
 }
 
-std::optional<Coordinates> ObjectInteractAction::findNextMove()
+CurrentAction ObjectInteractAction::getActionInfo()
 {
-  Coordinates pLocation = pEntityM->getLocation();
-  Coordinates tLocation = pTargetM->getLocation();
-  Map &map = pEntityM->getGameWorld()->getMap();
-  if (!(pLocation == tLocation))
-  {
-    // Here we can take the path straight to the target location, because we will never actually move onto the target's location as we will be in range to interact
-    auto path = map.findPath(pLocation, tLocation);
+    CurrentAction actionInfo;
 
-    if (path.empty())
+    // If the target is not in range, we will return the next move to be taken
+    if (!targetInRangeM)
     {
-      return std::nullopt;
-    }
-
-    return Coordinates(path[0].first, path[0].second);
-  }
-  else // Find some available tile next to the target to move to, in case the target moved to our location. Just keeps this here, if for some reason the object could move.
-  {
-    for (int i = -1; i < 2; i++)
-    {
-      for (int j = -1; j < 2; j++)
-      {
-        auto pathToNeighbor = map.findPath(pLocation, Coordinates(tLocation.x + i, tLocation.y + j));
-
-        if (pathToNeighbor.size() != 0)
+        if (nextMoveM.has_value())
         {
-          return Coordinates(pathToNeighbor[0].first, pathToNeighbor[0].second);
+            actionInfo.id = ActionType::Move;
+            actionInfo.durationMs = moveTimeM.count();
+            actionInfo.looping = false;
+            actionInfo.targetId = pTargetM->getId();
+            const Coordinates nextMove = nextMoveM.value();
+            actionInfo.targetCoordinate = {nextMove.x, nextMove.y, nextMove.z};
+            return actionInfo;
         }
         else
         {
-          return std::nullopt;
+            actionInfo.id = ActionType::None;
+            actionInfo.durationMs = 1000;
+            actionInfo.looping = true;
+            actionInfo.targetId = pTargetM->getId();
+            return actionInfo;
         }
-      }
     }
-    return pLocation;
-  }
+    else
+    {
+        actionInfo.id = actionTypeM;
+        actionInfo.durationMs = actionTimeM.count();
+        actionInfo.looping = true;
+        actionInfo.targetId = pTargetM->getId();
+        return actionInfo;
+    }
 }

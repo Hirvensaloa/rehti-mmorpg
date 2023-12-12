@@ -8,8 +8,8 @@
 
 #pragma region Manager
 
-GraphicsObjectManager::GraphicsObjectManager(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, VkQueue graphicsQueue, uint32_t graphicsQueueFamily, const uint32_t frameCount)
-    : graphicsCommandUnitM({graphicsQueue, VK_NULL_HANDLE, graphicsQueueFamily}), logDeviceM(logDevice), frameCountM(frameCount)
+GraphicsObjectManager::GraphicsObjectManager(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, VkQueue graphicsQueue, std::shared_mutex& graphicsMutex, uint32_t graphicsQueueFamily, const uint32_t frameCount)
+    : graphicsCommandUnitM({graphicsQueue, VK_NULL_HANDLE, graphicsQueueFamily}), logDeviceM(logDevice), frameCountM(frameCount), graphicsQueueMutexM(graphicsMutex)
 {
     // Create a new command pool for the graphics queue
     VkCommandPoolCreateInfo cmdPoolCreateInfo{};
@@ -133,14 +133,15 @@ void GraphicsObjectManager::addTransferQueueFamilyAccess(const uint32_t transfer
     }
 }
 
-bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, glm::mat4 bindPose[MAX_BONES], VkSampler imgSampler)
+bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<CharacterVertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, glm::mat4 bindPose[MAX_BONES], VkSampler imgSampler)
 {
     if (characterObjectsM.contains(characterID))
     {
         return false;
     }
+    std::unique_lock<std::shared_mutex> lock(graphicsQueueMutexM);
     CharacterObject character{};
-    VkDeviceSize vSize = vertices.size() * sizeof(Vertex);
+    VkDeviceSize vSize = vertices.size() * sizeof(CharacterVertex);
     VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
     VkDeviceSize tSize = sizeof(glm::mat4);
     VkDeviceSize imgSize = texture.width * texture.height * 4;
@@ -197,7 +198,6 @@ bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<Vert
     copyImage(character.texture, texture);
 
     characterObjectsM[characterID] = character;
-
     return true;
 }
 
@@ -207,6 +207,7 @@ bool GraphicsObjectManager::addGameObject(int id, const std::vector<Vertex>& ver
     {
         return false;
     }
+    std::unique_lock<std::shared_mutex> lock(graphicsQueueMutexM);
     GameObject gameObject{};
     VkDeviceSize vSize = vertices.size() * sizeof(Vertex);
     VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
@@ -256,7 +257,6 @@ bool GraphicsObjectManager::addGameObject(int id, const std::vector<Vertex>& ver
     copyImage(gameObject.texture, texture);
     // Now the game object data should be available for the gpu.
     gameObjectsM[id] = gameObject;
-
     return true;
 }
 
@@ -588,6 +588,7 @@ bool GraphicsObjectManager::addTestObject(int id, const std::vector<SimpleVertex
 
 bool GraphicsObjectManager::addArea(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, std::array<ImageData, 6> textures, VkSampler texSampler)
 {
+    std::unique_lock<std::shared_mutex> lock(graphicsQueueMutexM);
     VkDeviceSize vSize = vertices.size() * sizeof(Vertex);
     VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
     AreaObject area{};
@@ -614,8 +615,79 @@ bool GraphicsObjectManager::addArea(const std::vector<Vertex>& vertices, const s
         copyImage(area.textures[i], textures[i]);
     }
     areaObjectsM.push_back(area);
-
     return true;
+}
+
+bool GraphicsObjectManager::cleanResources(int id, ObjectType type)
+{
+    switch (type)
+    {
+    case ObjectType::CHARACTER:
+    {
+        if (!characterObjectsM.contains(id))
+            return false;
+        auto& character = characterObjectsM[id];
+        vmaDestroyBuffer(allocatorM, character.vertexData.buffer, character.vertexData.allocation);
+        vmaDestroyBuffer(allocatorM, character.indexData.buffer, character.indexData.allocation);
+        vmaDestroyImage(allocatorM, character.texture.image, character.texture.allocation);
+        vkDestroyImageView(logDeviceM, character.textureView, nullptr);
+        for (auto& bufObject : character.characterUniformBuffers)
+        {
+            vmaDestroyBuffer(allocatorM, bufObject.boneTransformations.buffer, bufObject.boneTransformations.allocation);
+            vmaDestroyBuffer(allocatorM, bufObject.transformBuffer.buffer, bufObject.transformBuffer.allocation);
+        }
+        characterObjectsM.erase(id);
+        return true;
+    }
+    case ObjectType::GAMEOBJECT:
+    {
+        if (!gameObjectsM.contains(id))
+            return false;
+        auto& object = gameObjectsM[id];
+        vmaDestroyBuffer(allocatorM, object.vertexData.buffer, object.vertexData.allocation);
+        vmaDestroyBuffer(allocatorM, object.indexData.buffer, object.indexData.allocation);
+        vmaDestroyImage(allocatorM, object.texture.image, object.texture.allocation);
+        vkDestroyImageView(logDeviceM, object.textureView, nullptr);
+        for (auto& bufObject : object.uniformBuffers)
+        {
+            vmaDestroyBuffer(allocatorM, bufObject.transformBuffer.buffer, bufObject.transformBuffer.allocation);
+        }
+        gameObjectsM.erase(id);
+        return true;
+    }
+    case ObjectType::TESTOBJECT:
+    {
+        if (!testObjectsM.contains(id))
+            return false;
+        auto& test = testObjectsM[id];
+        vmaDestroyBuffer(allocatorM, test.vertexData.buffer, test.vertexData.allocation);
+        vmaDestroyBuffer(allocatorM, test.indexData.buffer, test.indexData.allocation);
+        for (auto& bufObject : test.uniformBuffers)
+        {
+            vmaDestroyBuffer(allocatorM, bufObject.transformBuffer.buffer, bufObject.transformBuffer.allocation);
+        }
+        testObjectsM.erase(id);
+        return true;
+    }
+    case ObjectType::AREA:
+    {
+        if (areaObjectsM.size() <= id || id < 0)
+            return false;
+        auto& area = areaObjectsM[id];
+        vmaDestroyBuffer(allocatorM, area.vertexData.buffer, area.vertexData.allocation);
+        vmaDestroyBuffer(allocatorM, area.indexData.buffer, area.indexData.allocation);
+        for (size_t i = 0; i < area.textures.size(); i++)
+        {
+            vmaDestroyImage(allocatorM, area.textures[i].image, area.textures[i].allocation);
+            vkDestroyImageView(logDeviceM, area.textureViews[i], nullptr);
+        }
+        areaObjectsM.erase(areaObjectsM.begin() + id);
+        return true;
+    }
+    default:
+        return false;
+    }
+    return false;
 }
 
 void GraphicsObjectManager::updateTestObject(int id, const void* srcData, uint32_t frame)

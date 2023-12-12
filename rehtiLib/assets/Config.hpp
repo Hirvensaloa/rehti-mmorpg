@@ -26,6 +26,7 @@ static struct
     const std::string OBJECT_JSON_PATH = ROOT_PATH + "assets/objects.json";
     const std::string SKILL_JSON_PATH = ROOT_PATH + "assets/skills.json";
     const std::string OBJECT_OBJ_PATH = ROOT_PATH + "assets/objects/";
+    const std::string CHARACTER_GLTF_PATH = ROOT_PATH + "assets/characters/";
     const std::string TEXTURE_PATH = ROOT_PATH + "assets/textures/";
     const std::string MAP_TEXTURE_MAP_PATH = TEXTURE_PATH + "map_textures.json";
     const std::string DEFAULT_TEXTURE_PATH = TEXTURE_PATH + "defaultTexture.jpg";
@@ -39,6 +40,7 @@ static struct
     const std::string GENERATED_OBJECT_JSON_PATH = GENERATED_ASSETS_PATH + "objects.json";
     const std::string GENERATED_AREA_OBJ_PATH = GENERATED_ASSETS_PATH + "areas/";
     const std::string GENERATED_MAP_TEXTURE_MAP_PATH = GENERATED_ASSETS_PATH + "map_texture_map.txt";
+    const std::string GENERATED_ANIMATIONS_HPP_PATH = GENERATED_ASSETS_PATH + "GeneratedAnimations.hpp";
 
     const float HEIGHT_MAP_SCALE = 0.15;        ///< Percentage value of how much the height is scaled from the original unit.
     const float TILE_SIDE_SCALE = 1.0;          ///< Percentage value of how much the side is scaled from the original unit.

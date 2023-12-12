@@ -4,6 +4,8 @@
 
 class PlayerCharacter;
 
+struct Coordinates;
+
 struct PlayerTable
 {
     int id;
@@ -34,9 +36,10 @@ public:
      * @brief Fetches player basic data from the database (table player) by username.
      * Creates a new player with given username to the database if it does not yet exist
      * @param username
+     * @param spawnCoordinate The coordinate on which player is spawned. Used if the player is not found from the db.
      * @return Player basic data as PlayerTable
      */
-    PlayerTable loadPlayerDataFromDb(std::string username, std::string password);
+    PlayerTable loadPlayerDataFromDb(std::string username, std::string password, Coordinates spawnCoordinate);
 
     /**
      * @brief Load player's inventory items from the database

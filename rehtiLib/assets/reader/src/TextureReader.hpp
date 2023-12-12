@@ -4,26 +4,28 @@
 #include <string>
 
 #include "AssetTypes.hpp"
+#include "CharacterReader.hpp"
 #include "ObjectReader.hpp"
 
 /**
  * @file Reads the texture files
  */
 
-/**
- * @brief Reads all the object's textures + character textures into a map (key=filename, value=ImageData)
- *
- * @param gameObjects GameObjects
- * @return Map of texture filename and its corresponding ImageData
- */
+ /**
+  * @brief Reads all the object's textures + character textures into a map (key=filename, value=ImageData)
+  *
+  * @param gameObjects GameObjects
+  * @return Map of texture filename and its corresponding ImageData
+  */
 std::map<std::string, ImageData> loadObjectTextures(const GameObjects& gameObjects);
 
 /**
  * @brief Reads all the character's textures into a map (key=filename, value=ImageData)
+ * @param gameCharacters GameCharacters
  *
  * @return Map of texture filename and its corresponding ImageData
  */
-std::map<std::string, ImageData> loadCharacterTextures();
+std::map<std::string, ImageData> loadCharacterTextures(const GameCharacters& gameCharacters);
 
 /**
  * @brief Reads all the item object textures and item icons into a map (key=filename, value=ImageData)

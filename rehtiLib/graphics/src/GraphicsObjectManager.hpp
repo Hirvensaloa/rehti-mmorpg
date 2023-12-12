@@ -4,38 +4,41 @@
 #include "Mesh.hpp"
 
 #include <array>
+#include <mutex>
 #include <optional>
+#include <shared_mutex>
 #include <unordered_map>
 #include <utility>
 #include <vector>
 
-/// <summary>
-/// Graphics object manager manages different types of objects that have memory and can be drawn.
-/// </summary>
+/**
+ * @brief Graphics object manager manages different types of objects that have memory and can be drawn.
+ */
 class GraphicsObjectManager
 {
 public:
-    /// <summary>
-    /// Creates a graphics object manager.
-    /// </summary>
-    /// <param name="instance"> is a vulkan instance.</param>
-    /// <param name="gpu"></param>
-    /// <param name="logDevice"></param>
-    /// <param name="transferQueue"> that can receive transfer operations.</param>
-    /// <param name="queueFamily"> of the queue that was supplied</param>
-    GraphicsObjectManager(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, VkQueue graphicsQueue,
-                          uint32_t graphicsQueueFamily, const uint32_t frameCount);
+    /**
+     * @brief Creates a graphics object manager.
+     * @param instance is a Vulkan instance.
+     * @param gpu is the physical device.
+     * @param logDevice is the logical device.
+     * @param graphicsQueue is the queue for graphics operations.
+     * @param graphicsMutex is a mutex for graphics operations.
+     * @param graphicsQueueFamily is the family index of the graphics queue.
+     * @param frameCount is the number of frames.
+     */
+    GraphicsObjectManager(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, VkQueue graphicsQueue, std::shared_mutex& graphicsMutex, uint32_t graphicsQueueFamily, const uint32_t frameCount);
 
-    /// <summary>
-    /// Destructor
-    /// </summary>
+    /**
+     * @brief Destructor.
+     */
     ~GraphicsObjectManager();
 
-    /// <summary>
-    /// Adds the given transfer queue to the manager.
-    /// </summary>
-    /// <param name="families"></param>
-    /// <param name="familyCount"></param>
+    /**
+     * @brief Adds the given transfer queue to the manager.
+     * @param transferQueueFamily is the family index of the transfer queue.
+     * @param transferQueue is the transfer queue.
+     */
     void addTransferQueueFamilyAccess(const uint32_t transferQueueFamily, VkQueue transferQueue);
 
     /**
@@ -49,7 +52,7 @@ public:
      * @param imgSampler is the sampler for the texture of the character
      * @return boolean indicating success of the operation
      */
-    bool addCharacter(int characterID, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, glm::mat4 bindPose[MAX_BONES], VkSampler imgSampler);
+    bool addCharacter(int characterID, const std::vector<CharacterVertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, glm::mat4 bindPose[MAX_BONES], VkSampler imgSampler);
 
     /**
      * @brief Adds a game object to the buffer manager
@@ -82,12 +85,20 @@ public:
      */
     bool addArea(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, std::array<ImageData, 6> textures, VkSampler texSampler);
 
-    /// <summary>
-    /// Updates test object data
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="srcData"></param>
-    /// <param name="frame"></param>
+    /**
+     * @brief Cleans resources of the given id, if they exists.
+     * @param id is the id of the object.
+     * @param type is the type of the object.
+     * @return boolean indicating success
+     */
+    bool cleanResources(int id, ObjectType type);
+
+    /**
+     * @brief Updates test object data.
+     * @param id is the ID of the object.
+     * @param srcData is the source data.
+     * @param frame is the frame number.
+     */
     void updateTestObject(int id, const void* srcData, uint32_t frame);
 
     /**
@@ -107,15 +118,17 @@ public:
      */
     void updateCharacterDescriptor(int id, const void* transformSrcData, const void* boneSrcData, uint32_t frame);
 
-    /// <summary>
-    /// Creates a depth image
-    /// </summary>
-    /// <returns></returns>
+    /**
+     * @brief Creates a depth image.
+     * @param width is the width of the image.
+     * @param height is the height of the image.
+     * @param depthFormat is the format of the depth image.
+     * @returns AllocatedImage object.
+     */
     AllocatedImage createDepthImage(uint32_t width, uint32_t height, VkFormat depthFormat);
 
     /**
-     * @brief Interface for destroying an image.
-     * TODO redo. If the idea is to let this class manage all the resources, then let it do just that.
+     * @brief Interface for destroying an image That is owned by the user of this class.
      * @param image
      */
     void destroyImage(AllocatedImage image);
@@ -129,16 +142,13 @@ public:
      */
     void transitionDepthImageLayout(AllocatedImage depthImage, VkFormat depthFormat, VkImageLayout srcLayout, VkImageLayout dstLayout);
 
-    /// <summary>
-    /// Creates an image view for the given image and format.
-    /// Todo extend support for more parameters and configurations.
-    /// </summary>
-    /// <param name="image"> to create a view for.</param>
-    /// <param name="format"> of the image view.</param>
-    /// <returns>The created image view. The caller is responsible for the destruction of the allocated
-    /// resource.</returns>
-    VkImageView createImageView(VkImage image, VkFormat format,
-                                VkImageAspectFlags aspectFlags = VK_IMAGE_ASPECT_COLOR_BIT);
+    /**
+     * @brief Creates an image view for the given image and format.
+     * @param image The image for which to create a view.
+     * @param format The format of the image view.
+     * @return The created image view. The caller is responsible for the destruction of the allocated resource.
+     */
+    VkImageView createImageView(VkImage image, VkFormat format, VkImageAspectFlags aspectFlags = VK_IMAGE_ASPECT_COLOR_BIT);
 
     /**
      * @brief Creates an image for the given data and stores the memory to this class
@@ -147,40 +157,39 @@ public:
      */
     CombinedImage createCombinedImage(uint32_t width, uint32_t height, VkFormat format);
 
-    /// <summary>
-    /// Copies the given data to the given buffer.
-    /// </summary>
-    /// <param name="allocBuffer"> is the allocated buffer struct</param>
-    /// <param name="srcData"> is the data to cpy</param>
+    /**
+     * @brief Copies the given data to the given buffer.
+     * @param allocBuffer is the buffer to which the data is copied.
+     * @param srcData is the source data.
+     */
     void copyBuffer(AllocatedBuffer allocBuffer, const void* srcData);
 
-    /// <summary>
-    /// Copies image data to the given image.
-    /// </summary>
-    /// <param name="allocImage"></param>
-    /// <param name="srcData"></param>
+    /**
+     * @brief Copies the given data to the given image.
+     * @param allocImage is the image to copy to.
+     * @param srcData is the source image data.
+     */
     void copyImage(AllocatedImage allocImage, const ImageData& srcData);
 
-    /// <summary>
-    /// Returns the layout of the given type.
-    /// </summary>
-    /// <param name="type"> of object for which a layout is desired</param>
-    /// <returns>Descriptor set layout</returns>
+    /**
+     * @brief Returns the descriptor set layout for the given object type.
+     * @param type
+     * @return
+     */
     VkDescriptorSetLayout getLayout(ObjectType type) const;
 
     /**
-     * @brief Returns the number of descriptor layouts of the given type. Currently not a very useful function. However,
-     * it might be useful in the future.
+     * @brief Returns the number of descriptor layouts of the given type. Currently not a very useful function. However, it might be useful in the future.
      * @param type of object to be queried for.
      * @return number of layouts
      */
     uint32_t getLayoutCount(ObjectType type) const;
 
-    /// <summary>
-    /// Returns drawable objects of the given type.
-    /// </summary>
-    /// <param name="type"> of object desired for drawing</param>
-    /// <returns>List of drawableobject structs</returns>
+    /**
+     * @brief Returns drawable objects of the given type.
+     * @param type of object desired for drawing
+     * @return List of drawableobject structs
+     */
     std::vector<DrawableObject> getDrawableObjects(ObjectType type, uint32_t frame) const;
 
 private:
@@ -189,47 +198,47 @@ private:
      */
     struct CommandUnit
     {
-        VkQueue queue;
-        VkCommandPool commandPool;
-        uint32_t queueFamilyIndex;
+        VkQueue queue;             ///< Queue for the command unit
+        VkCommandPool commandPool; ///< Command pool for the command unit
+        uint32_t queueFamilyIndex; ///< Queue family index of the command unit
         VkCommandBuffer startCommandBuffer(VkDevice logDevice);
         bool endCommandBuffer(VkDevice logDevice, VkCommandBuffer commandBuffer, VkFence fence = VK_NULL_HANDLE);
     };
 
-    /// <summary>
-    /// Creates a buffer with the given parameters.
-    /// </summary>
-    /// <param name="size">Size of the buffer in bytes.</param>
-    /// <param name="usage">Flags signaling the usage of the buffer to be allocated.</param>
-    AllocatedBuffer createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VmaAllocationInfo& info,
-                                 VmaMemoryUsage memUsage = VMA_MEMORY_USAGE_AUTO,
-                                 VmaAllocationCreateFlags vmaCreationFlags = 0, VkMemoryPropertyFlags requiredFlags = 0,
-                                 VkMemoryPropertyFlags preferredFlags = 0);
-    AllocatedBuffer createBuffer(VkDeviceSize size, VkBufferUsageFlags usage,
-                                 VmaMemoryUsage memUsage = VMA_MEMORY_USAGE_AUTO,
-                                 VmaAllocationCreateFlags vmaCreationFlags = 0, VkMemoryPropertyFlags requiredFlags = 0,
-                                 VkMemoryPropertyFlags preferredFlags = 0);
+    /**
+     * @brief Creates a buffer with the given parameters.
+     * @param size is the size of the buffer in bytes.
+     * @param usage is the usage of the buffer.
+     * @param info is the allocation info of the buffer to be filled.
+     * @param memUsage is the memory usage of the buffer.
+     * @param vmaCreationFlags are the flags for the creation of the buffer.
+     * @param requiredFlags are the required memory property flags.
+     * @param preferredFlags are the preferred memory property flags.
+     * @return The allocated buffer.
+     */
+    AllocatedBuffer createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VmaAllocationInfo& info, VmaMemoryUsage memUsage = VMA_MEMORY_USAGE_AUTO, VmaAllocationCreateFlags vmaCreationFlags = 0, VkMemoryPropertyFlags requiredFlags = 0, VkMemoryPropertyFlags preferredFlags = 0);
+    AllocatedBuffer createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VmaMemoryUsage memUsage = VMA_MEMORY_USAGE_AUTO, VmaAllocationCreateFlags vmaCreationFlags = 0, VkMemoryPropertyFlags requiredFlags = 0, VkMemoryPropertyFlags preferredFlags = 0);
 
-    /// <summary>
-    /// Creates an allocated image. The standard parameters make it easy to create a texture image on the gpu.
-    /// More specific use case must be specified through the parameters.
-    /// </summary>
-    /// <param name="width">of the image</param>
-    /// <param name="height"> of the image</param>
-    /// <param name="format"> of the image</param>
-    /// <param name="tiling"> of the image</param>
-    /// <param name="usage"> of the image</param>
-    /// <param name="memUsage"> is the vma memory usage of the image</param>
-    AllocatedImage createImage(uint32_t width, uint32_t height, VkFormat format,
-                               VkImageTiling tiling = VK_IMAGE_TILING_OPTIMAL,
-                               VkImageUsageFlags usage = VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
-                               VmaMemoryUsage memUsage = VMA_MEMORY_USAGE_AUTO,
-                               VmaAllocationCreateFlags vmaCreationFlags = 0, VkMemoryPropertyFlags requiredFlags = 0,
-                               VkMemoryPropertyFlags preferredFlags = 0);
+    /**
+     * @brief Creates an allocated image.
+     *        The standard parameters make it easy to create a texture image on the GPU.
+     *        More specific use cases must be specified through the parameters.
+     * @param width The width of the image.
+     * @param height The height of the image.
+     * @param format The format of the image.
+     * @param tiling The tiling of the image.
+     * @param usage The usage of the image.
+     * @param memUsage The VMA memory usage of the image.
+     * @param vmaCreationFlags The VMA creation flags of the image.
+     * @param requiredFlags The required memory property flags.
+     * @param preferredFlags The preferred memory property flags.
+     * @return The allocated image.
+     */
+    AllocatedImage createImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling = VK_IMAGE_TILING_OPTIMAL, VkImageUsageFlags usage = VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT, VmaMemoryUsage memUsage = VMA_MEMORY_USAGE_AUTO, VmaAllocationCreateFlags vmaCreationFlags = 0, VkMemoryPropertyFlags requiredFlags = 0, VkMemoryPropertyFlags preferredFlags = 0);
 
-    /// <summary>
-    /// Initiates the descriptor builder.
-    /// </summary>
+    /**
+     * @brief Initializes the descriptorBuilder member.
+     */
     void createDescriptorBuilder();
 
     /**
@@ -247,39 +256,34 @@ private:
     VkSharingMode getSharingMode();
 
     /**
-     * @brief
-     * @return
+     * @brief Allocates and begins a command buffer.
+     * @param preferTransfer indicates if the transfer unit should be used.
+     * @return The allocated command buffer.
      */
     VkCommandBuffer startCommandBuffer(bool preferTransfer);
 
     /**
-     * @brief Tries to end the given command buffer.
-     * @param commandBuffer
-     * @param fence
-     * @return
+     * @brief Submits the given command buffer to be executed on the gpu.
+     * @param commandBuffer to end
+     * @param fence to set signal.
+     * @return boolean indicating success
      */
     bool endCommandBuffer(VkCommandBuffer commandBuffer, VkFence fence = VK_NULL_HANDLE);
 
     /**
      * @brief Records image layout transition barrier to the given command buffer.
-     * @param image
-     * @param format
-     * @param oldLayout
-     * @param newLayout
-     * @param commandBuffer
-     * @param srcQueueFamilyIndex & dstQueueFamilyIndex of the source family. Use the default value if you do not want
-     * to change queue ownership
+     * @param image to transition
+     * @param format of the image
+     * @param oldLayout of the image
+     * @param newLayout of the image
+     * @param commandBuffer to record the transition to
+     * @param srcQueueFamilyIndex & dstQueueFamilyIndex of the source family. Use the default value if you do not want to change queue ownership
      */
-    void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout,
-                               VkCommandBuffer commandBuffer,
-                               VkImageAspectFlags aspectFlags = VK_IMAGE_ASPECT_COLOR_BIT,
-                               std::pair<uint32_t, uint32_t> srcAndDstQueueFamilies = {VK_QUEUE_FAMILY_IGNORED,
-                                                                                       VK_QUEUE_FAMILY_IGNORED});
+    void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout, VkCommandBuffer commandBuffer, VkImageAspectFlags aspectFlags = VK_IMAGE_ASPECT_COLOR_BIT, std::pair<uint32_t, uint32_t> srcAndDstQueueFamilies = {VK_QUEUE_FAMILY_IGNORED, VK_QUEUE_FAMILY_IGNORED});
 
     /**
-     * @brief Queue families should be transferred, if the resources are using multiple queues, and the sharingmode is
-     * exclusive, or the desired stage is available only to another queue.
-     * TODO REWORK TRANSITIONS
+     * @brief Queue families should be transferred, if the resources are using multiple queues, and the sharingmode is exclusive, or the desired stage is available only to another queue.
+     * todo could be updated in the future.
      */
     std::pair<uint32_t, uint32_t> getQueueTransitionFamilies();
 
@@ -305,6 +309,7 @@ private:
     VkDevice logDeviceM;
     VmaAllocator allocatorM;
 
+    std::shared_mutex& graphicsQueueMutexM;
     CommandUnit graphicsCommandUnitM;
     std::optional<CommandUnit> transferCommandUnitM;
     // Todo make a better system

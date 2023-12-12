@@ -6,7 +6,7 @@
 
 AttackAction::AttackAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Entity> target, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), pTargetM(target), actionTimeM(pEntityM->getAttackSpeed()) {}
 
-std::shared_ptr<Entity> &AttackAction::getTarget()
+std::shared_ptr<Entity>& AttackAction::getTarget()
 {
     return pTargetM;
 }
@@ -27,57 +27,99 @@ void AttackAction::act()
             {
                 pEntityM->attack(*pTargetM);
                 startTimeM = std::chrono::system_clock::now();
-                if (pTargetM->getHp() == 0)
+                if (pTargetM->getHp() <= 0)
                 {
                     std::cout << "Attack action completed. Target eliminated." << std::endl;
                     completedM = true;
                 }
             }
+
+            targetInRangeM = true;
         }
 
         else if (std::chrono::system_clock::now() > startTimeM + moveTimeM)
         {
-            std::optional<Coordinates> nextMove = findNextMove();
+            targetInRangeM = false;
 
-            // If we cannot find a path to the target, do nothing e.g. stay agressive and wait for the target to potentially come to range.
-            if (nextMove.has_value())
+            // If the path to the target is empty or the target has changed location, we will try to find a new path
+            if (pathToTargetM.size() == 0 || (pathToTargetM.back().first != pTargetM->getLocation().x || pathToTargetM.back().second != pTargetM->getLocation().y))
             {
-                pEntityM->move(nextMove.value());
-                startTimeM = std::chrono::system_clock::now();
+                pathToTargetM = findPathToTarget();
+
+                // If we cannot find a path to the target, just set the next move to none and do nothing. We want to stay aggressive and see if we can find a path later.
+                if (pathToTargetM.size() == 0)
+                {
+                    nextMoveM = std::nullopt;
+                    return;
+                }
             }
+
+            nextMoveM = Coordinates(pathToTargetM.front().first, pathToTargetM.front().second);
+
+            pEntityM->move(nextMoveM.value());
+            startTimeM = std::chrono::system_clock::now();
+            pathToTargetM.erase(pathToTargetM.begin());
         }
     }
 }
 
-std::optional<Coordinates> AttackAction::findNextMove()
+std::vector<std::pair<int, int>> AttackAction::findPathToTarget()
 {
-    Coordinates pLocation = pEntityM->getLocation();
-    Coordinates tLocation = pTargetM->getLocation();
-    Map &map = pEntityM->getGameWorld()->getMap();
-    if (!(pLocation == tLocation)) // Here we can take the path straight to the target location, because we will never actually move onto the target's location as we will be in range to attack
+    // If we are on the same tile as the target, we will try to find a path to a neighbor tile
+    if (pEntityM->getLocation() == pTargetM->getLocation())
     {
-        auto path = map.findPath(pLocation, tLocation);
-
-        if (path.empty())
-        {
-            return std::nullopt;
-        }
-
-        return Coordinates(path[0].first, path[0].second);
-    }
-    else // Find some available tile next to the target to move to, in case the target moved to our location
-    {
+        Coordinates pLocation = pEntityM->getLocation();
+        Coordinates tLocation = pTargetM->getLocation();
+        Map& map = pEntityM->getGameWorld()->getMap();
         for (int i = -1; i < 2; i++)
         {
             for (int j = -1; j < 2; j++)
             {
+
                 auto pathToNeighbor = map.findPath(pLocation, Coordinates(tLocation.x + i, tLocation.y + j));
                 if (pathToNeighbor.size() != 0)
                 {
-                    return Coordinates(pathToNeighbor[0].first, pathToNeighbor[0].second);
+                    return pathToNeighbor;
                 }
             }
         }
-        return pLocation;
+        return {};
+    }
+    else
+    {
+        return pEntityM->getGameWorld()->getMap().findPath(pEntityM->getLocation(), pTargetM->getLocation());
+    }
+}
+
+CurrentAction AttackAction::getActionInfo()
+{
+    CurrentAction actionInfo;
+
+    // If the target is not in range, we need display move action or none if we cannot find a path to the target
+    if (!targetInRangeM)
+    {
+        if (nextMoveM.has_value())
+        {
+            actionInfo.id = ActionType::Move;
+            actionInfo.durationMs = moveTimeM.count();
+            actionInfo.looping = true;
+            actionInfo.targetCoordinate = {nextMoveM.value().x, nextMoveM.value().y, nextMoveM.value().z};
+        }
+        else
+        {
+            actionInfo.id = ActionType::None;
+            actionInfo.durationMs = 1000;
+            actionInfo.looping = true;
+            actionInfo.targetCoordinate = {pEntityM->getLocation().x, pEntityM->getLocation().y, pEntityM->getLocation().z};
+        }
+        return actionInfo;
+    }
+    else
+    {
+        actionInfo.id = actionTypeM;
+        actionInfo.durationMs = actionTimeM.count();
+        actionInfo.looping = true;
+        actionInfo.targetId = pTargetM->getInstanceId();
+        return actionInfo;
     }
 }

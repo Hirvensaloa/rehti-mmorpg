@@ -5,13 +5,13 @@
 #include "GLFW/glfw3.h"
 #include <cstring>
 
-void RehtiGraphics::demo()
+void RehtiGraphics::startMainLoop()
 {
     mainLoop();
 }
 
-RehtiGraphics::RehtiGraphics(uint32_t width, uint32_t height)
-    : widthM(width), heightM(height), anisotropyM(1.f), cameraM(Camera(glm::vec3(0.f, 0.f, 0.f), static_cast<float>(width), static_cast<float>(height)))
+RehtiGraphics::RehtiGraphics(uint32_t width, uint32_t height, glm::vec3 cameraLocation)
+    : widthM(width), heightM(height), anisotropyM(1.f), cameraM(Camera(cameraLocation, static_cast<float>(width), static_cast<float>(height)))
 {
     initWindow();
     cameraM.registerCameraControls(pWindowM);
@@ -27,8 +27,7 @@ void RehtiGraphics::addTestObject(int id)
 {
     std::vector<SimpleVertex> vertices = TestValues::kSimpleCubeVertices;
     std::vector<uint32_t> indices = TestValues::kSimpleCubeIndices;
-    glm::mat4 transformation =
-        glm::translate(glm::mat4(1.f), 1.5f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS));
+    glm::mat4 transformation = glm::translate(glm::mat4(1.f), 1.5f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS));
     pObjectManagerM->addTestObject(id, vertices, indices, transformation);
     std::cout << "Camera orientation, view and projection matrices:" << std::endl;
     debugMatrix(cameraM.getOrientation());
@@ -41,15 +40,71 @@ void RehtiGraphics::addTestGameObject(int id)
     std::vector<Vertex> vertices = TestValues::GetTestVertices();
     std::vector<uint32_t> indices = TestValues::GetTestIndices();
     ImageData texture = TestValues::GetTestTexture();
-    glm::mat4 transformation =
-        glm::translate(glm::mat4(1.f), 1.5f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS));
+    glm::mat4 transformation = glm::translate(glm::mat4(1.f), 1.5f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS));
     addGameObject(id, vertices, indices, texture, glm::vec3(transformation[3]));
 }
 
-bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, std::vector<uint32_t> indices,
-                                  ImageData img, glm::vec3 location)
+bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVertex> vertices, std::vector<uint32_t> indices, ImageData texture, std::array<Animation, ANIMATION_TYPE_COUNT> animations, std::vector<BoneNode> bones, std::vector<glm::mat4> transformations, glm::vec3 location, float rotation, bool isPlayer)
+{
+    if (characterOrientationsM.contains(characterID)) // character already exists
+        return false;
+
+    GfxOrientation characterOrientation{location, glm::quat(), glm::vec3(1.f, 1.f, 1.f)};
+    CharacterAnimationData animationData{};
+    animationData.animations = animations;
+    animationData.currentAnimation = AnimationType::IDLE;
+    animationData.currentTicks = 0;
+    CharacterData charData{};
+    charData.inverseGlobalTransformation = transformations[0];
+    charData.animationData = animationData;
+    charData.characterOrientation = characterOrientation;
+    for (size_t i = 0; i < bones.size(); i++)
+    {
+        BoneNode bone = bones[i];
+        charData.bones.push_back(bone);
+        charData.boneTransformations[i] = glm::mat4(1.f); // transformations[i + 1];
+    }
+
+    bool res = pObjectManagerM->addCharacter(characterID, vertices, indices, texture, characterOrientation.getTransformationMatrix(), charData.boneTransformations.data(), textureSamplerM);
+    if (!res)
+        return false;
+
+    characterOrientationsM[characterID] = charData;
+    AABB bb{};
+    bb.min = location + CHARACTER_MIN;
+    bb.max = location + CHARACTER_MAX;
+    bb.pLeft = nullptr;
+    bb.pRight = nullptr;
+    boundingBoxesM[ObjectType::CHARACTER][characterID] = bb;
+
+    if (isPlayer)
+    {
+        cameraM.setTargetAndCamera(location);
+    }
+
+    // Set animation to idle
+    playAnimation(characterID, AnimationConfig{AnimationType::IDLE, 1.0f, true});
+
+    return true;
+}
+
+bool RehtiGraphics::removeCharacterObject(int characterID)
+{
+    if (!characterOrientationsM.contains(characterID))
+        return false;
+
+    pObjectManagerM->cleanResources(characterID, ObjectType::CHARACTER);
+    characterOrientationsM.erase(characterID);
+    boundingBoxesM[ObjectType::CHARACTER].erase(characterID);
+
+    return true;
+}
+
+bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, std::vector<uint32_t> indices, ImageData img, glm::vec3 location, float rotation)
 {
     glm::mat4 transformation = glm::translate(glm::mat4(1.f), location);
+    glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.f), rotation, POSITIVE_Y_AXIS);
+    transformation = transformation * rotationMatrix;
     bool res = pObjectManagerM->addGameObject(objectID, vertices, indices, img, transformation, textureSamplerM);
     if (!res)
         return false;
@@ -65,25 +120,53 @@ bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, st
     return true;
 }
 
+bool RehtiGraphics::removeGameObject(int objectID)
+{
+    if (!gameObjectOrientationsM.contains(objectID))
+        return false;
+
+    pObjectManagerM->cleanResources(objectID, ObjectType::GAMEOBJECT);
+    gameObjectOrientationsM.erase(objectID);
+    boundingBoxesM[ObjectType::GAMEOBJECT].erase(objectID);
+
+    return true;
+}
+
+bool RehtiGraphics::doesGameObjectExist(int objectID)
+{
+    std::shared_lock lock(dataMutexM);
+    return gameObjectOrientationsM.contains(objectID);
+}
+
+bool RehtiGraphics::doesCharacterExist(int characterID)
+{
+    std::shared_lock lock(dataMutexM);
+    return characterOrientationsM.contains(characterID);
+}
+
 void RehtiGraphics::moveGameObject(int objectID, glm::vec3 location, float timeInSeconds)
 {
+    dataMutexM.lock();
     float timeInv = 1.f / timeInSeconds;
     glm::vec3 currentLocation = gameObjectOrientationsM[objectID].position;
     glm::vec3 delta = (location - currentLocation) * timeInv;
     std::function<void(float)> callback = [objectID, delta, this](float dt)
     {
+        std::unique_lock lock(dataMutexM);
         gameObjectOrientationsM[objectID].position += delta * dt;
         // smooth bounding box interpolation?
         moveBoundingBox(objectID, ObjectType::GAMEOBJECT, gameObjectOrientationsM[objectID].position);
         glm::mat4 currentMatrix = gameObjectOrientationsM[objectID].getTransformationMatrix();
         pObjectManagerM->updateObjectDescriptor(objectID, &currentMatrix, currentFrameM);
     };
+    dataMutexM.unlock();
     timersM.addTimerCallback(objectID, timeInSeconds, callback);
 }
 
 void RehtiGraphics::rotateGameObject(int objectID, float radians, float timeInSeconds)
 {
     float timeInv = 1.f / timeInSeconds;
+    timersM.finishCallback(objectID);
     glm::quat currentRotation = gameObjectOrientationsM[objectID].rotation;
     glm::quat targetRotation = glm::rotate(currentRotation, radians, POSITIVE_Y_AXIS);
     std::function<void(float)> callback = [objectID, currentRotation, targetRotation, timeInv, this](float dt)
@@ -109,33 +192,74 @@ void RehtiGraphics::forceGameObjectMove(int objectID, glm::vec3 location)
 void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSeconds)
 {
     float timeInv = 1.f / timeInSeconds;
+    bool succ = timersM.finishCallback(playerID);
+
+    dataMutexM.lock();
     glm::vec3 currentLocation = characterOrientationsM[playerID].characterOrientation.position;
     glm::vec3 diff = (location - currentLocation);
+    if (diff.length() < 0.0001f)
+    {
+        dataMutexM.unlock();
+        return;
+    }
+
     glm::vec3 delta = diff * timeInv;
     glm::vec3 dir = glm::normalize(diff);
+    constexpr float smallIncrementInRadians = 1.f * glm::half_pi<float>();
     characterOrientationsM[playerID].characterOrientation.rotation = glm::quatLookAt(dir, POSITIVE_Y_AXIS);
-    std::function<void(float)> callback = [playerID, delta, dir, this](float dt)
+    characterOrientationsM[playerID].animationData.currentAnimation = AnimationType::WALK;
+    // characterOrientationsM[playerID].animationData.currentTicks = 0;
+    std::function<void(float)> callback = [playerID, delta, dir, smallIncrementInRadians, this](float dt)
     {
+        std::unique_lock lock(dataMutexM);
         characterOrientationsM[playerID].characterOrientation.position += delta * dt;
+        // characterOrientationsM[playerID].characterOrientation.rotation *= glm::angleAxis(smallIncrementInRadians, POSITIVE_Y_AXIS);
         moveBoundingBox(playerID, ObjectType::CHARACTER, characterOrientationsM[playerID].characterOrientation.position);
         characterOrientationsM[playerID].advanceAnimation(dt);
         glm::mat4 currentMatrix = characterOrientationsM[playerID].characterOrientation.getTransformationMatrix();
         pObjectManagerM->updateCharacterDescriptor(playerID, &currentMatrix, characterOrientationsM[playerID].boneTransformations.data(), currentFrameM);
         cameraM.setTargetAndCamera(characterOrientationsM[playerID].characterOrientation.position);
     };
+    dataMutexM.unlock();
     timersM.addTimerCallback(playerID, timeInSeconds, callback);
+}
+
+void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
+{
+    // reset all animations currently playing
+    timersM.finishCallback(characterID);
+    dataMutexM.lock();
+    characterOrientationsM[characterID].animationData.currentAnimation = cfg.animType;
+    characterOrientationsM[characterID].animationData.currentTicks = 0;
+    // add new callback to play the animation
+    float factor = 1.0f;
+    if (cfg.looping || cfg.animType == AnimationType::IDLE)
+    {
+        factor = 0.f;
+        cfg.duration = characterOrientationsM[characterID].animationData.animations[getAnimIndex(cfg.animType)].duration;
+    }
+    std::function<void(float)> callback = [characterID, cfg, this](float dt)
+    {
+        characterOrientationsM[characterID].advanceAnimation(dt);
+        glm::mat4 currentMatrix = characterOrientationsM[characterID].characterOrientation.getTransformationMatrix();
+        pObjectManagerM->updateCharacterDescriptor(characterID, &currentMatrix, characterOrientationsM[characterID].boneTransformations.data(), currentFrameM);
+    };
+    dataMutexM.unlock();
+    timersM.addTimerCallback(characterID, cfg.duration, callback, factor);
 }
 
 void RehtiGraphics::forcePlayerMove(int playerID, glm::vec3 location)
 {
-    if (!boundingBoxesM[ObjectType::GAMEOBJECT].contains(playerID))
+    std::unique_lock lock(dataMutexM);
+    if (!boundingBoxesM[ObjectType::CHARACTER].contains(playerID))
         return;
     glm::mat4 locationTransform = glm::translate(glm::mat4(1.f), location);
+    characterOrientationsM[playerID].characterOrientation.position = location;
     // Assume changes are made after draw call. hence why currentFrameM is used
-    pObjectManagerM->updateObjectDescriptor(playerID, &locationTransform, currentFrameM);
+    pObjectManagerM->updateCharacterDescriptor(playerID, &locationTransform, characterOrientationsM[playerID].boneTransformations.data(), currentFrameM);
     // move the bounding box as well
-    boundingBoxesM[ObjectType::GAMEOBJECT][playerID].min = location + GAMEOBJECT_MIN;
-    boundingBoxesM[ObjectType::GAMEOBJECT][playerID].max = location + GAMEOBJECT_MAX;
+    boundingBoxesM[ObjectType::CHARACTER][playerID].min = location + CHARACTER_MIN;
+    boundingBoxesM[ObjectType::CHARACTER][playerID].max = location + CHARACTER_MAX;
 
     cameraM.setTargetAndCamera(location);
 }
@@ -143,6 +267,10 @@ void RehtiGraphics::forcePlayerMove(int playerID, glm::vec3 location)
 void RehtiGraphics::moveCharacter(int characterID, glm::vec3 location, float timeInSeconds)
 {
     float timeInv = 1.f / timeInSeconds;
+    bool succ = timersM.finishCallback(characterID);
+
+    dataMutexM.lock();
+    CharacterData& charData = characterOrientationsM[characterID];
     glm::vec3 currentLocation = characterOrientationsM[characterID].characterOrientation.position;
     glm::vec3 diff = (location - currentLocation);
     glm::vec3 delta = diff * timeInv;
@@ -150,13 +278,25 @@ void RehtiGraphics::moveCharacter(int characterID, glm::vec3 location, float tim
     characterOrientationsM[characterID].characterOrientation.rotation = glm::quatLookAt(dir, POSITIVE_Y_AXIS);
     std::function<void(float)> callback = [characterID, delta, dir, this](float dt)
     {
+        std::unique_lock lock(dataMutexM);
         characterOrientationsM[characterID].characterOrientation.position += delta * dt;
         moveBoundingBox(characterID, ObjectType::CHARACTER, characterOrientationsM[characterID].characterOrientation.position);
         characterOrientationsM[characterID].advanceAnimation(dt);
         glm::mat4 currentMatrix = characterOrientationsM[characterID].characterOrientation.getTransformationMatrix();
         pObjectManagerM->updateCharacterDescriptor(characterID, &currentMatrix, characterOrientationsM[characterID].boneTransformations.data(), currentFrameM);
     };
+    dataMutexM.unlock();
     timersM.addTimerCallback(characterID, timeInSeconds, callback);
+}
+
+void RehtiGraphics::forceCharacterMove(int characterID, glm::vec3 location)
+{
+    timersM.forceQuitCallback(characterID);
+    moveBoundingBox(characterID, ObjectType::CHARACTER, location);
+    characterOrientationsM[characterID].characterOrientation.position = location;
+    glm::mat4 locationTransform = glm::translate(glm::mat4(1.f), location);
+    // Assume changes are made after draw call. hence why currentFrameM is used
+    pObjectManagerM->updateCharacterDescriptor(characterID, &locationTransform, characterOrientationsM[characterID].boneTransformations.data(), currentFrameM);
 }
 
 void RehtiGraphics::forceGameObjectRotate(int objectID, float radians)
@@ -306,12 +446,8 @@ void RehtiGraphics::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreate
 {
     createInfo = {};
     createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
-    createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |
-                                 VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
-                                 VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
-    createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
-                             VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT |
-                             VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
+    createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
+    createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
     createInfo.pfnUserCallback = debugCallback;
 }
 
@@ -341,9 +477,7 @@ void RehtiGraphics::pickPhysicalDevice()
     }
 
     std::vector<VkPhysicalDevice> devices(devcount);
-    vkEnumeratePhysicalDevices(instanceM, &devcount,
-                               devices.data()); // We have to do this twice, as it is how this function works. If the
-                                                // pointer is not null, it will try to fill out devcount devices.
+    vkEnumeratePhysicalDevices(instanceM, &devcount, devices.data()); // We have to do this twice, as it is how this function works. If the pointer is not null, it will try to fill out devcount devices.
 
     // Currently picks the first suitable device
     for (const auto& device : devices)
@@ -418,8 +552,7 @@ void RehtiGraphics::createObjectManager()
 {
     QueueFamilyIndices indices = findQueueFamilies(gpuM);
 
-    pObjectManagerM = std::make_unique<GraphicsObjectManager>(instanceM, gpuM, logDeviceM, graphicsQueueM,
-                                                              indices.graphicsFamily.value(), kConcurrentFramesM);
+    pObjectManagerM = std::make_shared<GraphicsObjectManager>(instanceM, gpuM, logDeviceM, graphicsQueueM, graphicsQueueMutexM, indices.graphicsFamily.value(), kConcurrentFramesM);
 
     uint32_t transferQueueFamily;
     VkQueue transferQueue;
@@ -442,8 +575,7 @@ void RehtiGraphics::createSwapChain()
 
     uint32_t imageCount = details.capabilities.minImageCount + 1; // for now, could choose smarter
 
-    if (imageCount > details.capabilities.maxImageCount &&
-        details.capabilities.maxImageCount > 0) // 0 means "infinite". So > 0 means it has a limit
+    if (imageCount > details.capabilities.maxImageCount && details.capabilities.maxImageCount > 0) // 0 means "infinite". So > 0 means it has a limit
         imageCount = details.capabilities.maxImageCount;
 
     // Info time!!
@@ -525,9 +657,8 @@ void RehtiGraphics::createImageViews()
         VkImageViewCreateInfo imageInfo{};
         imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
         imageInfo.image = swapChainImagesM[i];
-        imageInfo.viewType =
-            VK_IMAGE_VIEW_TYPE_2D;                // how image should be interpreted, for example you might use images as 2d textures.
-        imageInfo.format = swapChainImageFormatM; // how image should be interpreted
+        imageInfo.viewType = VK_IMAGE_VIEW_TYPE_2D; // how image should be interpreted, for example you might use images as 2d textures.
+        imageInfo.format = swapChainImageFormatM;   // how image should be interpreted
 
         imageInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
         imageInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
@@ -669,8 +800,7 @@ void RehtiGraphics::createGraphicsPipeline()
 
         // Colorblending
         VkPipelineColorBlendAttachmentState colorBlendState{};
-        colorBlendState.colorWriteMask =
-            VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
+        colorBlendState.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
         colorBlendState.blendEnable = VK_FALSE;
         // Rest is optional. Maybe adding later
 
@@ -732,8 +862,7 @@ void RehtiGraphics::createGraphicsPipeline()
         pipelineInfo.basePipelineIndex = -1;
 
         // Create the actual pipeline
-        if (vkCreateGraphicsPipelines(logDeviceM, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipelinesM[objectType]) !=
-            VK_SUCCESS)
+        if (vkCreateGraphicsPipelines(logDeviceM, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipelinesM[objectType]) != VK_SUCCESS)
             throw std::runtime_error("Pipeline layout creation failed");
 
         // Cleanup
@@ -813,19 +942,17 @@ void RehtiGraphics::recordCommandBuffer(VkCommandBuffer cmdBuffer, uint32_t imag
 
     renderInfo.clearValueCount = static_cast<uint32_t>(clearValues.size());
     renderInfo.pClearValues = clearValues.data();
-    // Begin renderpass
+
     vkCmdBeginRenderPass(cmdBuffer, &renderInfo, VK_SUBPASS_CONTENTS_INLINE);
 
-    // get transformation matrix
     glm::mat4 renderMat = cameraM.getWorldToScreenMatrix();
-    // record object draw calls
+
     for (ObjectType objectType : getObjectTypes())
     {
         // Bind correct pipeline for object type
         vkCmdBindPipeline(cmdBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelinesM[objectType]);
         // Push constant is the same for all pipelines
-        vkCmdPushConstants(cmdBuffer, pipelineLayoutsM[objectType], VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(glm::mat4),
-                           &renderMat);
+        vkCmdPushConstants(cmdBuffer, pipelineLayoutsM[objectType], VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(glm::mat4), &renderMat);
 
         for (DrawableObject obj : pObjectManagerM->getDrawableObjects(objectType, currentFrameM))
         {
@@ -867,9 +994,7 @@ void RehtiGraphics::createSynchronization()
 
     for (size_t i = 0; i < kConcurrentFramesM; i++)
     {
-        if (vkCreateSemaphore(logDeviceM, &semaInfo, nullptr, &imagesReadyM[i]) != VK_SUCCESS ||
-            vkCreateSemaphore(logDeviceM, &semaInfo, nullptr, &rendersFinishedM[i]) != VK_SUCCESS ||
-            vkCreateFence(logDeviceM, &fenceInfo, nullptr, &frameFencesM[i]) != VK_SUCCESS)
+        if (vkCreateSemaphore(logDeviceM, &semaInfo, nullptr, &imagesReadyM[i]) != VK_SUCCESS || vkCreateSemaphore(logDeviceM, &semaInfo, nullptr, &rendersFinishedM[i]) != VK_SUCCESS || vkCreateFence(logDeviceM, &fenceInfo, nullptr, &frameFencesM[i]) != VK_SUCCESS)
             throw std::runtime_error("Creating synchros failed");
     }
 }
@@ -881,8 +1006,7 @@ void RehtiGraphics::drawFrame()
     vkWaitForFences(logDeviceM, 1, &frameFencesM[currentFrameM], VK_TRUE, UINT64_MAX);
 
     uint32_t imageIndex;
-    VkResult res = vkAcquireNextImageKHR(logDeviceM, swapChainM, UINT64_MAX, imagesReadyM[currentFrameM],
-                                         VK_NULL_HANDLE, &imageIndex);
+    VkResult res = vkAcquireNextImageKHR(logDeviceM, swapChainM, UINT64_MAX, imagesReadyM[currentFrameM], VK_NULL_HANDLE, &imageIndex);
 
     if (res == VK_ERROR_OUT_OF_DATE_KHR ||
         res == VK_SUBOPTIMAL_KHR ||
@@ -919,10 +1043,10 @@ void RehtiGraphics::drawFrame()
     submitInfo.pCommandBuffers = &commandBuffersM[currentFrameM];
     submitInfo.signalSemaphoreCount = 1;
     submitInfo.pSignalSemaphores = signalSemaphores;
-
+    graphicsQueueMutexM.lock();
     if (vkQueueSubmit(graphicsQueueM, 1, &submitInfo, frameFencesM[currentFrameM]) != VK_SUCCESS)
         throw std::runtime_error("Failed to submit draw command buffer");
-
+    graphicsQueueMutexM.unlock();
     VkPresentInfoKHR presInfo{};
     presInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
     presInfo.waitSemaphoreCount = 1;
@@ -945,9 +1069,8 @@ void RehtiGraphics::mainLoop()
     statsM.frameTime = 0;
     float frameCount = 0.f;
     auto applicationStart = std::chrono::high_resolution_clock::now();
-    glm::mat4 translation =
-        glm::translate(glm::mat4(1.f), 1.5f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS));
-
+    glm::mat4 translation = glm::translate(glm::mat4(1.f), 1.5f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS));
+    // moveGameObject(0, 5.f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS), 5);
     while (!glfwWindowShouldClose(pWindowM))
     {
         auto start = std::chrono::high_resolution_clock::now();
@@ -1029,8 +1152,7 @@ void RehtiGraphics::createInstance()
 
     if (enableValidationLayers && !checkValidationLayerSupport())
     {
-        std::cout << "WARNING: Validation layers requested, but not available!\n Continuing without validation."
-                  << std::endl;
+        std::cout << "WARNING: Validation layers requested, but not available!\n Continuing without validation." << std::endl;
     }
 
     // Create info
@@ -1114,13 +1236,12 @@ void RehtiGraphics::createTextureSampler()
 
 void RehtiGraphics::createDepthResources()
 {
-    depthFormatM =
-        findSupportedFormat({VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT},
-                            VK_IMAGE_TILING_OPTIMAL, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
+    depthFormatM = findSupportedFormat({VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT},
+                                       VK_IMAGE_TILING_OPTIMAL,
+                                       VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
     depthImageM = pObjectManagerM->createDepthImage(swapChainExtentM.width, swapChainExtentM.height, depthFormatM);
     depthImageViewM = pObjectManagerM->createImageView(depthImageM.image, depthFormatM, VK_IMAGE_ASPECT_DEPTH_BIT);
-    pObjectManagerM->transitionDepthImageLayout(depthImageM, depthFormatM, VK_IMAGE_LAYOUT_UNDEFINED,
-                                                VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
+    pObjectManagerM->transitionDepthImageLayout(depthImageM, depthFormatM, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
 }
 
 void RehtiGraphics::createGui()
@@ -1151,8 +1272,10 @@ void RehtiGraphics::createGui()
     submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
     submitInfo.commandBufferCount = 1;
     submitInfo.pCommandBuffers = &commandBuffersM[0];
+    graphicsQueueMutexM.lock();
     vkQueueSubmit(graphicsQueueM, 1, &submitInfo, nullptr);
     vkQueueWaitIdle(graphicsQueueM);
+    graphicsQueueMutexM.unlock();
     pGuiM->uploadEnded();
 }
 
@@ -1353,8 +1476,7 @@ QueueFamilyIndices RehtiGraphics::findQueueFamilies(VkPhysicalDevice device)
 SwapChainSupportDetails RehtiGraphics::querySwapChainSupport(VkPhysicalDevice device)
 {
     SwapChainSupportDetails details;
-    vkGetPhysicalDeviceSurfaceCapabilitiesKHR(
-        device, surfaceM, &details.capabilities); // A bit unorthodox for vulkan but I guess it will do
+    vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surfaceM, &details.capabilities); // A bit unorthodox for vulkan but I guess it will do
 
     // now to the formats
     uint32_t formatCount;
@@ -1362,8 +1484,7 @@ SwapChainSupportDetails RehtiGraphics::querySwapChainSupport(VkPhysicalDevice de
 
     if (formatCount != 0)
     {
-        details.formats.resize(
-            formatCount); // Usually we just created the vector, but now that we have a struct we just resize it
+        details.formats.resize(formatCount); // Usually we just created the vector, but now that we have a struct we just resize it
         vkGetPhysicalDeviceSurfaceFormatsKHR(device, surfaceM, &formatCount, details.formats.data());
     }
 
@@ -1373,8 +1494,7 @@ SwapChainSupportDetails RehtiGraphics::querySwapChainSupport(VkPhysicalDevice de
 
     if (presentModeCount != 0)
     {
-        details.presentModes.resize(
-            presentModeCount); // usually we just created the vector, but now that we have a struct we just resize it
+        details.presentModes.resize(presentModeCount); // usually we just created the vector, but now that we have a struct we just resize it
         vkGetPhysicalDeviceSurfacePresentModesKHR(device, surfaceM, &presentModeCount, details.presentModes.data());
     }
 
@@ -1435,8 +1555,7 @@ VkExtent2D RehtiGraphics::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capab
             static_cast<uint32_t>(height)};
 
         actual.width = std::clamp(actual.width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width);
-        actual.height =
-            std::clamp(actual.height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height);
+        actual.height = std::clamp(actual.height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height);
         return actual;
     }
 }
@@ -1444,8 +1563,7 @@ VkExtent2D RehtiGraphics::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capab
 VkPushConstantRange RehtiGraphics::getCameraRange()
 {
     VkPushConstantRange cameraRange;
-    cameraRange.stageFlags =
-        VK_SHADER_STAGE_VERTEX_BIT; // Camera information is only relevant in vertex shader for now.
+    cameraRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT; // Camera information is only relevant in vertex shader for now.
     cameraRange.offset = 0;
     cameraRange.size = cameraM.getUboSize(); // one matrix for now
     return cameraRange;
@@ -1571,25 +1689,26 @@ void RehtiGraphics::addMouseClickCallback(std::function<void(const Hit&)> callba
     glfwSetWindowUserPointer(this->pWindowM, this);
     glfwSetMouseButtonCallback(this->pWindowM, [](GLFWwindow* window, int button, int action, int mods)
                                {
-			ImGuiIO& io = ImGui::GetIO();
-			io.AddMouseButtonEvent(button, action);
-			if (!io.WantCaptureMouse)
-			{
-				if ((button == GLFW_MOUSE_BUTTON_LEFT || button == GLFW_MOUSE_BUTTON_RIGHT) && action == GLFW_PRESS)
-				{
-					RehtiGraphics* pGraphics = reinterpret_cast<RehtiGraphics*>(glfwGetWindowUserPointer(window));
-					const Hit hit = pGraphics->traceClick();
-					pGraphics->mouseClickCallbackM(hit);
-				}
-				else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_PRESS)
-				{
-					Camera::canMove = true;
-				}
-				else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_RELEASE)
-				{
-					Camera::canMove = false;
-				}
-			} });
+        ImGuiIO& io = ImGui::GetIO();
+        io.AddMouseButtonEvent(button, action);
+        if (!io.WantCaptureMouse)
+        {
+            if ((button == GLFW_MOUSE_BUTTON_LEFT || button == GLFW_MOUSE_BUTTON_RIGHT) && action == GLFW_PRESS)
+            {
+                RehtiGraphics* pGraphics = reinterpret_cast<RehtiGraphics*>(glfwGetWindowUserPointer(window));
+                Hit hit = pGraphics->traceClick();
+                hit.button = button;
+                pGraphics->mouseClickCallbackM(hit);
+            }
+            else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_PRESS)
+            {
+                Camera::canMove = true;
+            }
+            else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_RELEASE)
+            {
+                Camera::canMove = false;
+            }
+        } });
 }
 
 std::shared_ptr<RehtiGui> RehtiGraphics::getGui()

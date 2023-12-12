@@ -1,0 +1,71 @@
+{
+  "player": {
+    "id": 0,
+    "textureFilename": "ukkotextuuri.png",
+    "glTFFilename": "ukko.glb",
+    "spawnCoordinateBounds": {
+      "xMin": 1,
+      "xMax": 10,
+      "yMin": 1,
+      "yMax": 10
+    },
+    "baseDamage": 15,
+    "baseAccuracy": 10
+  },
+  "npcs": [
+    {
+      "id": 1,
+      "name": "Troll",
+      "textureFilename": "ukkotextuuri.png",
+      "glTFFilename": "simplecharacter.glb",
+      "spawnCoordinateBounds": {
+        "xMin": 1,
+        "xMax": 10,
+        "yMin": 1,
+        "yMax": 10
+      },
+      "spawnAmount": 2,
+      "agressionType": "PEACEFUL",
+      "agressionRange": 40,
+      "baseDamage": 10,
+      "baseAccuracy": 10,
+      "chatResponses": ["Hello there."]
+    },
+    {
+      "id": 2,
+      "name": "Goblin",
+      "textureFilename": "ukkotextuuri.png",
+      "glTFFilename": "simplecharacter.glb",
+      "spawnCoordinateBounds": {
+        "xMin": 1,
+        "xMax": 10,
+        "yMin": 1,
+        "yMax": 10
+      },
+      "spawnAmount": 2,
+      "agressionType": "PASSIVE",
+      "agressionRange": 40,
+      "baseDamage": 10,
+      "baseAccuracy": 10,
+      "chatResponses": ["Hello there."]
+    },
+    {
+      "id": 3,
+      "name": "Bandit",
+      "textureFilename": "ukkotextuuri.png",
+      "glTFFilename": "simplecharacter.glb",
+      "spawnCoordinateBounds": {
+        "xMin": 1,
+        "xMax": 30,
+        "yMin": 1,
+        "yMax": 30
+      },
+      "spawnAmount": 2,
+      "agressionType": "AGGRESSIVE",
+      "agressionRange": 40,
+      "baseDamage": 10,
+      "baseAccuracy": 10,
+      "chatResponses": []
+    }
+  ]
+}

@@ -17,6 +17,13 @@ public:
      */
     void act();
 
+    /**
+     * @brief Returns information about the current action
+     *
+     * @return CurrentAction
+     */
+    CurrentAction getActionInfo();
+
 private:
     std::chrono::milliseconds actionTimeM;
 

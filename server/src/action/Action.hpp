@@ -8,27 +8,43 @@
 
 class Entity;
 
+/**
+ * @brief Represents an action that an entity can perform
+ */
 class Action
 {
 public:
-    enum ActionType
-    {
-        None = -1,
-        Move = MessageId::Move,
-        Attack = MessageId::Attack,
-        ObjectInteract = MessageId::ObjectInteract,
-        Respawn
-    };
-
     Action(std::chrono::system_clock::time_point startTime, std::shared_ptr<Entity> pEntity);
 
     ~Action() = default;
 
+    /**
+     * @brief Get the time when the action started
+     *
+     * @return std::chrono::system_clock::time_point
+     */
     std::chrono::system_clock::time_point getStartTime();
 
+    /**
+     * @brief Get the time how long a single iteration of the action takes
+     *
+     * @return std::chrono::milliseconds
+     */
     std::chrono::milliseconds getActionTime();
 
+    /**
+     * @brief Get the ActionType object
+     *
+     * @return ActionType
+     */
     ActionType getActionType();
+
+    /**
+     * @brief Returns information about the current action
+     *
+     * @return CurrentAction
+     */
+    virtual CurrentAction getActionInfo();
 
     bool isCompleted();
 

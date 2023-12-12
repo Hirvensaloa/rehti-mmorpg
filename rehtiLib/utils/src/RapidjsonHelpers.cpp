@@ -10,7 +10,6 @@
 #include "rapidjson/document.h"
 #include "rapidjson/prettywriter.h"
 
-// Reads JSON file to rapidjson document
 rapidjson::Document readJson(std::string path)
 {
     std::ifstream jsonFile(path);
@@ -53,11 +52,11 @@ std::string valueTypeToString(ValueType type)
     }
 };
 
-bool validMember(const rapidjson::Value& value, const std::string& memberName, ValueType type, bool required)
+bool validMember(const rapidjson::Value& value, const std::string& memberName, ValueType type, bool printError)
 {
     if (!value.HasMember(memberName.c_str()))
     {
-        if (required)
+        if (printError)
         {
             std::cerr << "Error: Could not find member: " << memberName << std::endl;
         }
@@ -87,7 +86,7 @@ bool validMember(const rapidjson::Value& value, const std::string& memberName, V
         break;
     }
 
-    if (!ret && required)
+    if (!ret && printError)
     {
         std::cerr << "Error: JSON item member type does not match. Key '" << memberName << "' should be " << valueTypeToString(type) << std::endl;
     }

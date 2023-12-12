@@ -30,6 +30,7 @@ public:
      * @param playerId
      * @param baseDamage
      * @param baseAccuracy
+     * @param spawnCoordinateBounds Bounds within which the player can spawn
      * @param location Coordinates
      */
     void addPlayer(std::string playerName, unsigned int playerId, int baseDamage, int baseAccuracy, SpawnCoordinateBounds spawnCoordinateBounds, Coordinates location);

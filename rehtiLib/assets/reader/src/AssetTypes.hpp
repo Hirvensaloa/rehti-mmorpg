@@ -12,15 +12,15 @@
  * @file Contains all the asset related types
  */
 
- /**
-  * @brief Contains asset data loaded into memory for a specific area
-  */
+/**
+ * @brief Contains asset data loaded into memory for a specific area
+ */
 struct MapAreaAssetData
 {
-	std::vector<Vertex> vertices;
-	std::vector<uint32_t> indices;
-	std::vector<ImageData> textures;
-	ImageData blendMap;
+    std::vector<Vertex> vertices;
+    std::vector<uint32_t> indices;
+    std::vector<ImageData> textures;
+    ImageData blendMap;
 };
 
 /**
@@ -28,10 +28,10 @@ struct MapAreaAssetData
  */
 struct ObjectAssetData
 {
-	std::vector<Vertex> vertices;
-	std::vector<uint32_t> indices;
-	ImageData texture;
-	std::string characterInteractAnimation;
+    std::vector<Vertex> vertices;
+    std::vector<uint32_t> indices;
+    ImageData texture;
+    std::string characterInteractAnimation;
 };
 
 /**
@@ -39,12 +39,12 @@ struct ObjectAssetData
  */
 struct CharacterAssetData
 {
-	std::vector<CharacterVertex> vertices;
-	std::vector<uint32_t> indices;
-	ImageData texture;
-	std::vector<glm::mat4> boneTransformations{}; ///< bone transformation storage data
-	std::vector<BoneNode> bones;
-	std::array<Animation, ANIMATION_TYPE_COUNT> animations;
+    std::vector<CharacterVertex> vertices;
+    std::vector<uint32_t> indices;
+    ImageData texture;
+    std::vector<glm::mat4> boneTransformations{}; ///< bone transformation storage data
+    std::vector<BoneNode> bones;
+    std::array<Animation, ANIMATION_TYPE_COUNT> animations;
 };
 
 /**
@@ -52,8 +52,8 @@ struct CharacterAssetData
  */
 struct ItemAssetData
 {
-	std::vector<Vertex> vertices;
-	std::vector<uint32_t> indices;
-	ImageData texture;
-	ImageData icon;
+    std::vector<Vertex> vertices;
+    std::vector<uint32_t> indices;
+    ImageData texture;
+    ImageData icon;
 };

@@ -4,7 +4,15 @@
 
 #include <iostream>
 
-MoveAction::MoveAction(std::chrono::system_clock::time_point startTime, Coordinates target, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), targetM(target), pathM(pEntity->getGameWorld()->getMap().findPath(pEntityM->getLocation(), targetM)) {}
+MoveAction::MoveAction(std::chrono::system_clock::time_point startTime, Coordinates target, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), targetM(target)
+{
+    pathM = pEntity->getGameWorld()->getMap().findPath(pEntityM->getLocation(), targetM);
+    if (pathM.size() > 0)
+    {
+        auto next = pathM.front();
+        nextMoveM = Coordinates(next.first, next.second);
+    }
+}
 
 Coordinates MoveAction::getTarget()
 {
@@ -13,38 +21,35 @@ Coordinates MoveAction::getTarget()
 
 void MoveAction::act()
 {
+    if (completedM)
+    {
+        return;
+    }
+
     if (pathM.size() == 0)
     {
         completedM = true;
     }
 
-    if (!completedM)
+    if (std::chrono::system_clock::now() > startTimeM + actionTimeM)
     {
-        if (std::chrono::system_clock::now() > startTimeM + actionTimeM)
+        auto next = pathM.front();
+        nextMoveM = Coordinates(next.first, next.second);
+        if (pEntityM->move(nextMoveM.value()))
         {
-            auto next = pathM.front();
-            nextMoveM = Coordinates(next.first, next.second);
-            if (pEntityM->move(nextMoveM.value()))
-            {
-                pathM.erase(pathM.begin());
-            }
+            pathM.erase(pathM.begin());
+        }
 
-            else
-            {
-                std::cout << "illegal move" << std::endl;
-            }
-            startTimeM = std::chrono::system_clock::now();
-            if (pEntityM->getLocation() == targetM)
-            {
-                completedM = true;
-            }
+        else
+        {
+            std::cout << "illegal move" << std::endl;
+        }
+        startTimeM = std::chrono::system_clock::now();
+        if (pEntityM->getLocation() == targetM)
+        {
+            completedM = true;
         }
     }
-}
-
-const std::chrono::milliseconds MoveAction::getMoveTime()
-{
-    return std::chrono::milliseconds(200);
 }
 
 CurrentAction MoveAction::getActionInfo()

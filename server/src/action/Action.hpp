@@ -40,7 +40,7 @@ public:
     ActionType getActionType();
 
     /**
-     * @brief Returns information about the current action
+     * @brief Returns information about the current action. This is used to send information to the client.
      *
      * @return CurrentAction
      */

@@ -4,7 +4,7 @@
 #include "../world/Map.hpp"
 #include "ObjectInteractAction.hpp"
 
-ObjectInteractAction::ObjectInteractAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Object> pTarget, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), pTargetM(pTarget) {}
+ObjectInteractAction::ObjectInteractAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Object> pTarget, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), pTargetM(pTarget), moveTimeM(pEntityM->getMoveSpeed()) {}
 
 void ObjectInteractAction::act()
 {

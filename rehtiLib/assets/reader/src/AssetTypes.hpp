@@ -31,6 +31,7 @@ struct ObjectAssetData
     std::vector<Vertex> vertices;
     std::vector<uint32_t> indices;
     ImageData texture;
+    std::string characterInteractAnimation;
 };
 
 /**
@@ -38,9 +39,12 @@ struct ObjectAssetData
  */
 struct CharacterAssetData
 {
-    std::vector<Vertex> vertices;
+    std::vector<CharacterVertex> vertices;
     std::vector<uint32_t> indices;
     ImageData texture;
+    std::vector<glm::mat4> boneTransformations{}; ///< bone transformation storage data
+    std::vector<BoneNode> bones;
+    std::array<Animation, ANIMATION_TYPE_COUNT> animations;
 };
 
 /**

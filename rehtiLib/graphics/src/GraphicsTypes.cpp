@@ -27,7 +27,7 @@ std::array<VkDescriptorSetLayoutBinding, 3> CharacterObject::getDescriptorSetLay
     // transformations
     array[1].binding = 1;
     array[1].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-    array[1].descriptorCount = MAX_BONES;
+    array[1].descriptorCount = 1; // one big buffer
     array[1].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
     array[1].pImmutableSamplers = nullptr;
 
@@ -91,13 +91,19 @@ std::array<AnimationType, ANIMATION_TYPE_COUNT> getAnimationTypes()
     return array;
 }
 
+uint32_t getAnimIndex(AnimationType animType)
+{
+    return static_cast<uint32_t>(animType);
+}
+
 glm::mat4 GfxOrientation::getTransformationMatrix() const
 {
     glm::mat4 transformation = glm::mat4(1.0f);
 
-    transformation = glm::scale(transformation, scale);
-    transformation = glm::mat4(rotation) * transformation;
-    transformation = glm::translate(transformation, position);
+    glm::mat4 scalingMat = glm::scale(glm::mat4(1.0f), scale);
+    glm::mat4 rotatMat = glm::mat4(rotation);
+    glm::mat4 translMat = glm::translate(glm::mat4(1.0f), position);
+    transformation = translMat * rotatMat * scalingMat;
     return transformation;
 }
 
@@ -114,7 +120,7 @@ GfxOrientation GfxOrientation::interpolate(GfxOrientation first, GfxOrientation 
 
 void CharacterData::advanceAnimation(float dt)
 {
-    Animation currentAnimation = animationData.animations[animationData.currentAnimation];
+    Animation currentAnimation = animationData.animations[static_cast<uint32_t>(animationData.currentAnimation)];
     // If no animation is set, do nothing.
     if (currentAnimation.animationNodes.empty())
         return;
@@ -151,6 +157,11 @@ void CharacterData::advanceAnimation(float dt)
 
         boneIndex++;
         bonesToUpdate--;
+    }
+    // TODO make this more efficient
+    for (size_t i = 0; i < bones.size(); i++)
+    {
+        boneTransformations[i] = inverseGlobalTransformation * boneTransformations[i] * bones[i].boneOffset;
     }
 }
 

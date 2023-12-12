@@ -12,24 +12,11 @@
 /**
  * @file CREATING NEW MESSAGES:
  *
- * 1. Add a new enum value to MessageId enum.
+ * 1. Add a new enum value to MessageId enum. (In Types.hpp file)
  * 2. Create a new struct for the message type.
  * 3. Add a new create and parse method to MessageApi class.
  * 4. Handle the message instance on the server
  */
-
-enum MessageId
-{
-    GameState,
-    Login,
-    Move,
-    Attack,
-    ObjectInteract,
-    UseItem,
-    Unequip,
-    Informative,
-    DropItem
-};
 
 struct MessageStruct
 {
@@ -49,6 +36,14 @@ struct GameStateMessage
     std::vector<GameStateEntity> entities;
     std::vector<GameStateObject> objects;
     CurrentPlayer currentPlayer;
+
+    GameStateMessage& operator=(const GameStateMessage& other)
+    {
+        entities = other.entities;
+        objects = other.objects;
+        currentPlayer = other.currentPlayer;
+        return *this;
+    }
 };
 
 struct LoginMessage
@@ -93,6 +88,12 @@ struct DropItemMessage
 {
     const MessageId id = MessageId::DropItem;
     int itemId;
+};
+
+struct TalkMessage
+{
+    const MessageId id = MessageId::Talk;
+    int npcId;
 };
 
 /**
@@ -234,6 +235,22 @@ public:
      * @return GameStateMessage
      */
     static GameStateMessage parseGameState(std::string msgBody);
+
+    /**
+     * @brief Create a MessageStruct for talking to NPC
+     *
+     * @param talk TalkMessage
+     * @return MessageStruct
+     */
+    static MessageStruct createTalk(const TalkMessage& talk);
+
+    /**
+     * @brief Parse received talk message body
+     *
+     * @param msgBody
+     * @return TalkMessage
+     */
+    static TalkMessage parseTalk(std::string msgBody);
 
     /**
      * @brief Create a MessageStruct for informative message

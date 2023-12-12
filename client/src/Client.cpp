@@ -1,3 +1,4 @@
+#include "GLFW/glfw3.h"
 #include <boost/asio/co_spawn.hpp>
 #include <boost/asio/detached.hpp>
 #include <boost/asio/ip/tcp.hpp>
@@ -6,6 +7,7 @@
 
 #include "Client.hpp"
 #include "RehtiReader.hpp"
+#include "Utils.hpp"
 
 Client::Client(std::string ip, std::string port)
     : ioContextM(boost::asio::io_context()),
@@ -18,8 +20,6 @@ Client::Client(std::string ip, std::string port)
 {
     graphicsThreadM = std::thread([this]()
                                   { startGraphics(); });
-    connectionThreadM = std::thread([this]()
-                                    { boost::asio::co_spawn(ioContextM, connect(), boost::asio::detached); });
 
     ioThreadM = std::thread([this]()
                             { ioContextM.run(); });
@@ -33,13 +33,15 @@ void Client::start()
         std::unique_lock ul(graphLibMutexM);
         graphLibReadyM.wait(ul);
     }
-
+    connectionThreadM = std::thread([this]()
+                                    { boost::asio::co_spawn(ioContextM, connect(), boost::asio::detached); });
     std::cout << "Starting to process messages..." << std::endl;
     processMessages();
 }
 
 boost::asio::awaitable<bool> Client::login()
 {
+
     if (connectionM->isConnected())
     {
         std::string usr = "";
@@ -79,10 +81,6 @@ boost::asio::awaitable<bool> Client::connect()
             co_await login();
         }
 
-        // Set the logged in flag to true anyway so that the graphics backend can be started regardless of server being online or not. TODO: Remove when the login happens on UI, not on console.
-        loggedInFlagM = true;
-        loggedInM.notify_one();
-
         co_return ret;
     }
     catch (const std::exception& e)
@@ -99,6 +97,16 @@ boost::asio::awaitable<void> Client::attack(const int& targetId)
         AttackMessage msg;
         msg.targetId = targetId;
         co_await connectionM->send(MessageApi::createAttack(msg));
+    }
+}
+
+boost::asio::awaitable<void> Client::talk(const int& npcId)
+{
+    if (connectionM->isConnected())
+    {
+        TalkMessage msg;
+        msg.npcId = npcId;
+        co_await connectionM->send(MessageApi::createTalk(msg));
     }
 }
 
@@ -167,43 +175,144 @@ void Client::processMessages()
         {
             Message msg = messagesM.pop_front();
 
-            const int msgId = msg.getHeader().id;
+            const MessageId msgId = static_cast<MessageId>(msg.getHeader().id);
 
-            if (msgId == MessageId::GameState)
+            try
             {
-                const GameStateMessage& gameStateMsg = MessageApi::parseGameState(msg.getBody());
-
-                pGraphLibM->getGui()->setInventory(gameStateMsg.currentPlayer.inventory);
-
-                pGraphLibM->getGui()->setSkills(gameStateMsg.currentPlayer.skills);
-
-                const auto objAsset = assetCacheM.getCharacterAssetDataById("ukko");
-                pGraphLibM->addGameObject(gameStateMsg.currentPlayer.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
-                pGraphLibM->forcePlayerMove(gameStateMsg.currentPlayer.entityId, {gameStateMsg.currentPlayer.x, Config.HEIGHT_MAP_SCALE * gameStateMsg.currentPlayer.z, gameStateMsg.currentPlayer.y});
-
-                for (const auto& entity : gameStateMsg.entities)
+                if (msgId == MessageId::GameState)
                 {
-                    if (entity.entityId == gameStateMsg.currentPlayer.entityId)
+                    const GameStateMessage& gameStateMsg = MessageApi::parseGameState(msg.getBody());
+
+                    std::shared_ptr<RehtiGui> pGui = pGraphLibM->getGui();
+
+                    const auto& currentPlayer = gameStateMsg.currentPlayer;
+                    const auto& prevCurrentPlayer = prevGameStateMsgM.currentPlayer;
+                    if (currentPlayer != prevCurrentPlayer)
                     {
-                        pGraphLibM->getGui()->setEquipment(entity.equipment);
+                        const auto charAsset = assetCacheM.getCharacterAssetDataById(currentPlayer.id);
+                        pGraphLibM->addCharacterObject(currentPlayer.instanceId, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y}, 0.f, true);
+                        pGui->setInventory(currentPlayer.inventory);
+                        pGui->setSkills(currentPlayer.skills);
+                        pGui->setHp(currentPlayer.hp);
+                    }
+                    else
+                    {
+                        if (!currentPlayer.hasSameActionAs(prevCurrentPlayer))
+                        {
+                            // Move action is special case as we need to animate and move the entity at the same time
+                            if (currentPlayer.currentAction.id == ActionType::Move)
+                            {
+                                const auto& coords = currentPlayer.currentAction.targetCoordinate;
+                                pGraphLibM->movePlayer(currentPlayer.instanceId, {coords.x, Config.HEIGHT_MAP_SCALE * coords.z, coords.y}, currentPlayer.currentAction.durationMs / 1000.0f);
+                            }
+                            else
+                            {
+                                pGraphLibM->playAnimation(currentPlayer.instanceId, actionToAnimationConfig(currentPlayer.currentAction));
+                            }
+                        }
+
+                        if (currentPlayer.inventory != prevCurrentPlayer.inventory)
+                        {
+                            pGui->setInventory(currentPlayer.inventory);
+                        }
+
+                        if (currentPlayer.skills != prevCurrentPlayer.skills)
+                        {
+                            pGui->setSkills(currentPlayer.skills);
+                        }
+
+                        if (currentPlayer.hp != prevCurrentPlayer.hp)
+                        {
+                            pGui->setHp(currentPlayer.hp);
+                        }
                     }
 
-                    const auto objAsset = assetCacheM.getCharacterAssetDataById("goblin");
-                    pGraphLibM->addGameObject(entity.entityId, objAsset.vertices, objAsset.indices, objAsset.texture, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
-                    pGraphLibM->forceGameObjectMove(entity.entityId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
+                    std::set<int> entityIdsToRemove;
+                    for (const auto& entity : gameStateMsg.entities)
+                    {
+                        // Do not remove the current player
+                        if (entity.instanceId == currentPlayer.instanceId)
+                        {
+                            continue;
+                        }
+                        entityIdsToRemove.insert(entity.instanceId);
+                    }
+
+                    for (const auto& entity : gameStateMsg.entities)
+                    {
+                        // Do not draw the current player twice
+                        if (entity.instanceId == currentPlayer.instanceId)
+                        {
+                            if (entity.equipment != pGui->getEquipment())
+                            {
+                                pGui->setEquipment(entity.equipment);
+                            }
+                            continue;
+                        }
+
+                        // Do not remove entity as it is in the current gamestate message
+                        entityIdsToRemove.erase(entity.instanceId);
+
+                        // Find entity from the previous gamestate message
+                        const auto& prevEntity = std::find_if(prevGameStateMsgM.entities.begin(), prevGameStateMsgM.entities.end(), [&entity](const auto& e)
+                                                              { return e.instanceId == entity.instanceId; });
+
+                        // If the entity is not found, add it to the graphics backend
+                        if (prevEntity == prevGameStateMsgM.entities.end())
+                        {
+                            const auto& charAsset = assetCacheM.getCharacterAssetDataById(entity.id);
+                            pGraphLibM->addCharacterObject(entity.instanceId, charAsset.vertices, charAsset.indices, charAsset.texture, charAsset.animations, charAsset.bones, charAsset.boneTransformations, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
+                        }
+                        else
+                        {
+                            // If the entity is found, check if it has changed action
+                            if (!entity.hasSameActionAs(*prevEntity))
+                            {
+                                // Move action is special case as we need to animate and move the entity at the same time
+                                if (entity.currentAction.id == ActionType::Move)
+                                {
+                                    const auto& coords = entity.currentAction.targetCoordinate;
+                                    pGraphLibM->moveCharacter(entity.instanceId, {coords.x, Config.HEIGHT_MAP_SCALE * coords.z, coords.y}, entity.currentAction.durationMs / 1000.0f);
+                                }
+                                else
+                                {
+                                    pGraphLibM->playAnimation(entity.instanceId, actionToAnimationConfig(entity.currentAction));
+                                }
+                            }
+                        }
+                    }
+
+                    // Remove all the leftover entities from the graphics backend
+                    for (const auto& entityId : entityIdsToRemove)
+                    {
+                        pGraphLibM->removeCharacterObject(entityId);
+                    }
+
+                    // Initialize objects only once. If the previous gamestate message is empty, we know that this is the first gamestate message. Therefore we initialize the objects. For now the server doesn't update the objects after startup.
+                    if (prevGameStateMsgM.objects.empty())
+                    {
+                        for (const auto& object : gameStateMsg.objects)
+                        {
+                            const auto objAsset = assetCacheM.getObjectAssetDataById(object.id);
+                            // Convert rotation 0, 1, 2, 3 to 0, pi/2, pi, 3pi/2
+                            const float rotation = object.rotation * (glm::pi<float>() / 2);
+                            pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y}, rotation);
+                        }
+                    }
+
+                    prevGameStateMsgM = gameStateMsg;
                 }
-                for (const auto& object : gameStateMsg.objects)
+                else if (msgId == MessageId::Informative)
                 {
-                    const auto objAsset = assetCacheM.getObjectAssetDataById(object.id);
-                    pGraphLibM->addGameObject(std::stoi(object.instanceId), objAsset.vertices, objAsset.indices, objAsset.texture, {object.x, Config.HEIGHT_MAP_SCALE * object.z, object.y});
+                    const InformativeMessage& informativeMsg = MessageApi::parseInformative(msg.getBody());
+                    std::cout << "Message from server: " << informativeMsg.message << std::endl;
                 }
             }
-            else if (msgId == MessageId::Informative)
+            catch (const std::exception& e)
             {
-                const InformativeMessage& informativeMsg = MessageApi::parseInformative(msg.getBody());
-                std::cout << "Message from server: " << informativeMsg.message << std::endl;
+                std::cerr << "Failed to parse message from server: " << e.what() << '\n';
             }
-        }
+        };
     }
 }
 
@@ -223,7 +332,14 @@ void Client::handleMouseClick(const Hit& hit)
 					break;
 				case ObjectType::CHARACTER:
 					std::cout << "Character" << std::endl;
-					co_await attack(hit.id);
+					if (hit.button == GLFW_MOUSE_BUTTON_LEFT)
+					{
+						co_await attack(hit.id);
+					}
+					else if (hit.button == GLFW_MOUSE_BUTTON_RIGHT)
+					{
+						co_await talk(hit.id);
+					}
 					break;
 				case ObjectType::GAMEOBJECT:
 					co_await interactWithObject(hit.id);
@@ -241,21 +357,15 @@ void Client::handleMouseClick(const Hit& hit)
 
 void Client::startGraphics()
 {
-    // Wait for login to be successful
-    if (!loggedInFlagM)
-    {
-        std::unique_lock ul(loginMutexM);
-        loggedInM.wait(ul);
-    }
 
+    // Load assets to memory
+    assetCacheM.loadAssets();
+    // init graphics library
     pGraphLibM = new RehtiGraphics();
 
     // Create map bounding box
     std::vector<std::vector<int>> heightMatrix = fetchHeightMatrix();
     std::vector<std::vector<std::string>> areaMatrix = fetchAreaMatrix();
-
-    // Load assets to memory
-    assetCacheM.loadAssets();
 
     // Add areas to the graphics backend
     pGraphLibM->addMapBoundingBox(MapAABBData{heightMatrix, areaMatrix, Config.AREA_WIDTH, Config.HEIGHT_MAP_SCALE, Config.TILE_SIDE_SCALE, Config.TILE_SIDE_UNIT});
@@ -302,5 +412,5 @@ void Client::startGraphics()
 
     graphLibReadyFlagM = true;
     graphLibReadyM.notify_one();
-    pGraphLibM->demo();
+    pGraphLibM->startMainLoop();
 }

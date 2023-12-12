@@ -1,0 +1,11 @@
+[
+  "idle",
+  "walk",
+  "run",
+  "attack",
+  "woodcutting",
+  "cooking",
+  "fishing",
+  "loot",
+  "death"
+]

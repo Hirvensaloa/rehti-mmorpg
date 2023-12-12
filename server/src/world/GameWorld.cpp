@@ -1,20 +1,21 @@
 #include <memory>
 #include <optional>
 
-#include "../entity/Bandit.hpp"
-#include "../entity/Goblin.hpp"
+#include "../entity/AggressiveNpc.hpp"
+#include "../entity/PassiveNpc.hpp"
 #include "../object/LootObject.hpp"
 #include "../object/ResourceObject.hpp"
 #include "../utils/AssetManager.hpp"
 #include "GameWorld.hpp"
+#include "Utils.hpp"
 
 #include <iostream>
 
 GameWorld::GameWorld() : mapM(Map()){};
 
-void GameWorld::addPlayer(std::string playerName, unsigned int playerId, Coordinates location)
+void GameWorld::addPlayer(std::string playerName, unsigned int playerId, int baseDamage, int baseAccuracy, SpawnCoordinateBounds spawnCoordinateBounds, Coordinates location)
 {
-    playersM.push_back(std::make_shared<PlayerCharacter>(this, playerName, playerId, location));
+    playersM.push_back(std::make_shared<PlayerCharacter>(this, playerName, baseDamage, baseAccuracy, spawnCoordinateBounds, playerId, location));
 }
 
 bool GameWorld::removePlayer(unsigned int playerId)
@@ -62,6 +63,19 @@ void GameWorld::addNpc(Npc npc)
 std::vector<std::shared_ptr<Npc>>& GameWorld::getNpcs()
 {
     return npcsM;
+}
+
+std::shared_ptr<Npc> GameWorld::getNpc(unsigned int npcId)
+{
+    for (auto it = npcsM.begin(); it != npcsM.end(); it++)
+    {
+        if ((*it)->getInstanceId() == npcId)
+        {
+
+            return (*it);
+        }
+    }
+    throw std::runtime_error("NPC not found");
 }
 
 std::map<std::string, std::shared_ptr<Object>>& GameWorld::getObjects()
@@ -136,16 +150,38 @@ void GameWorld::initWorld()
         {
             const ResourceObjectStruct& resourceObject = objects.getResourceObject(objectLocation.id);
             Coordinates coords{objectLocation.x, objectLocation.y};
-            ResourceObject resObj(resourceObject.id, objectLocation.instanceId, resourceObject.name, coords, objectLocation.rotation, resourceObject.yieldableItemList, resourceObject.xpPerYield, resourceObject.depleteChance, resourceObject.relatedSkillId, resourceObject.xpRequirement, type);
+            ResourceObject resObj(resourceObject.id, objectLocation.instanceId, resourceObject.name, coords, objectLocation.rotation, resourceObject.yieldableItems.yieldableItemList, resourceObject.yieldableItems.xpPerYield, resourceObject.depleteChance, resourceObject.relatedSkillId, resourceObject.xpRequirement, type, resourceObject.itemTransformList);
             objectsM[objectLocation.instanceId] = std::make_shared<ResourceObject>(resObj);
         }
     }
     std::cout << "Objects added to the world" << std::endl;
 
-    npcsM.push_back(std::make_shared<Goblin>(this, "Kimmo-Goblin", 1337, Coordinates(1, 1)));
-    npcsM.push_back(std::make_shared<Bandit>(this, "Roisto-Pena", 123, Coordinates(5, 5)));
-    npcsM.back()->getInventory().addItem(AssetManager::createItemInstance(1));
-    npcsM.back()->getInventory().useItem(1);
+    // Add NPCs to the world
+    const auto& npcs = AssetManager::getGameCharacters().npcs;
+    for (const auto& npc : npcs)
+    {
+        int i = 0;
+        while (i < npc.spawnAmount)
+        {
+            Coordinates coords = Map::getRandomCoordinates(npc.spawnCoordinateBounds);
+
+            if (npc.agressionType == AggressionType.Peaceful)
+            {
+                npcsM.push_back(std::make_shared<Npc>(this, npc.name, npc.baseDamage, npc.baseAccuracy, npc.spawnCoordinateBounds, npc.chatResponses, npc.id, coords));
+            }
+            else if (npc.agressionType == AggressionType.Aggressive)
+            {
+                npcsM.push_back(std::make_shared<AggressiveNpc>(this, npc.name, npc.agressionRange, npc.baseDamage, npc.baseAccuracy, npc.spawnCoordinateBounds, npc.chatResponses, npc.id, coords));
+            }
+            else if (npc.agressionType == AggressionType.Passive)
+            {
+                npcsM.push_back(std::make_shared<PassiveNpc>(this, npc.name, npc.baseDamage, npc.baseAccuracy, npc.spawnCoordinateBounds, npc.chatResponses, npc.id, coords));
+            }
+
+            std::cout << "NPC " << npc.name << " added to the world at " << coords.x << " " << coords.y << " " << coords.z << std::endl;
+            i++;
+        }
+    }
     std::cout << "NPCs added to the world" << std::endl;
 
     std::cout << "Game world initialized" << std::endl;
@@ -155,14 +191,14 @@ std::shared_ptr<Entity> GameWorld::getEntity(unsigned int entityId)
 {
     for (auto npc : npcsM)
     {
-        if (npc->getId() == entityId)
+        if (npc->getInstanceId() == entityId)
         {
             return npc;
         }
     }
     for (auto player : playersM)
     {
-        if (player->getId() == entityId)
+        if (player->getInstanceId() == entityId)
         {
             return player;
         }

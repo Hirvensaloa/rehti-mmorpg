@@ -19,6 +19,21 @@
       "id": 3,
       "name": "Cooking",
       "description": "Useful for cooking."
+    },
+    {
+      "id": 4,
+      "name": "Accuracy",
+      "description": "Combat skill of accuracy."
+    },
+    {
+      "id": 5,
+      "name": "Strength",
+      "description": "Combat skill of strength."
+    },
+    {
+      "id": 6,
+      "name": "Defence",
+      "description": "Combat skill of defence."
     }
   ]
 }

@@ -38,12 +38,12 @@ set(SOURCES
         entity/Entity.cpp
         entity/PlayerCharacter.hpp
         entity/PlayerCharacter.cpp
-        entity/Goblin.cpp
-        entity/Goblin.hpp
+        entity/PassiveNpc.cpp
+        entity/PassiveNpc.hpp
         entity/Npc.cpp
         entity/Npc.hpp
-        entity/Bandit.cpp
-        entity/Bandit.hpp
+        entity/AggressiveNpc.cpp
+        entity/AggressiveNpc.hpp
 
         item/Equipment.hpp
         item/Equipment.cpp

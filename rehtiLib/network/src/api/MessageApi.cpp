@@ -183,13 +183,27 @@ MessageStruct MessageApi::createGameState(const GameStateMessage& gameState)
     for (const auto& entity : gameState.entities)
     {
         rapidjson::Value entityObject(rapidjson::kObjectType);
-        entityObject.AddMember("entityId", entity.entityId, allocator);
+        entityObject.AddMember("id", entity.id, allocator);
+        entityObject.AddMember("instanceId", entity.instanceId, allocator);
         entityObject.AddMember("name", rapidjson::StringRef(entity.name.c_str()), allocator);
         entityObject.AddMember("x", entity.x, allocator);
         entityObject.AddMember("y", entity.y, allocator);
         entityObject.AddMember("z", entity.z, allocator);
         entityObject.AddMember("hp", entity.hp, allocator);
-        entityObject.AddMember("currentActionType", entity.currentActionType, allocator);
+
+        // Add the current action object
+        rapidjson::Value currentAction(rapidjson::kObjectType);
+        currentAction.AddMember("id", static_cast<int>(entity.currentAction.id), allocator);
+        currentAction.AddMember("durationMs", entity.currentAction.durationMs, allocator);
+        currentAction.AddMember("looping", entity.currentAction.looping, allocator);
+        currentAction.AddMember("targetId", entity.currentAction.targetId, allocator);
+        rapidjson::Value targetCoordinate(rapidjson::kObjectType);
+        targetCoordinate.AddMember("x", entity.currentAction.targetCoordinate.x, allocator);
+        targetCoordinate.AddMember("y", entity.currentAction.targetCoordinate.y, allocator);
+        targetCoordinate.AddMember("z", entity.currentAction.targetCoordinate.z, allocator);
+        currentAction.AddMember("targetCoordinate", targetCoordinate, allocator);
+        entityObject.AddMember("currentAction", currentAction, allocator);
+
         rapidjson::Value equipment(rapidjson::kArrayType);
         for (const auto& item : entity.equipment)
         {
@@ -222,13 +236,27 @@ MessageStruct MessageApi::createGameState(const GameStateMessage& gameState)
 
     // Add current player
     rapidjson::Value currentPlayer(rapidjson::kObjectType);
-    currentPlayer.AddMember("entityId", gameState.currentPlayer.entityId, allocator);
+    currentPlayer.AddMember("id", gameState.currentPlayer.id, allocator);
+    currentPlayer.AddMember("instanceId", gameState.currentPlayer.instanceId, allocator);
     currentPlayer.AddMember("name", rapidjson::StringRef(gameState.currentPlayer.name.c_str()), allocator);
     currentPlayer.AddMember("x", gameState.currentPlayer.x, allocator);
     currentPlayer.AddMember("y", gameState.currentPlayer.y, allocator);
     currentPlayer.AddMember("z", gameState.currentPlayer.z, allocator);
     currentPlayer.AddMember("hp", gameState.currentPlayer.hp, allocator);
-    currentPlayer.AddMember("currentActionType", gameState.currentPlayer.currentActionType, allocator);
+
+    // Add the current action object
+    rapidjson::Value currentAction(rapidjson::kObjectType);
+    currentAction.AddMember("id", static_cast<int>(gameState.currentPlayer.currentAction.id), allocator);
+    currentAction.AddMember("durationMs", gameState.currentPlayer.currentAction.durationMs, allocator);
+    currentAction.AddMember("looping", gameState.currentPlayer.currentAction.looping, allocator);
+    currentAction.AddMember("targetId", gameState.currentPlayer.currentAction.targetId, allocator);
+    rapidjson::Value targetCoordinate(rapidjson::kObjectType);
+    targetCoordinate.AddMember("x", gameState.currentPlayer.currentAction.targetCoordinate.x, allocator);
+    targetCoordinate.AddMember("y", gameState.currentPlayer.currentAction.targetCoordinate.y, allocator);
+    targetCoordinate.AddMember("z", gameState.currentPlayer.currentAction.targetCoordinate.z, allocator);
+    currentAction.AddMember("targetCoordinate", targetCoordinate, allocator);
+    currentPlayer.AddMember("currentAction", currentAction, allocator);
+
     rapidjson::Value skills(rapidjson::kArrayType);
     for (const auto& skill : gameState.currentPlayer.skills)
     {
@@ -269,13 +297,23 @@ GameStateMessage MessageApi::parseGameState(std::string msgBody)
     for (const auto& entity : document["entities"].GetArray())
     {
         GameStateEntity gameStateEntity;
-        gameStateEntity.entityId = entity["entityId"].GetInt();
+        gameStateEntity.id = entity["id"].GetInt();
+        gameStateEntity.instanceId = entity["instanceId"].GetInt();
         gameStateEntity.name = entity["name"].GetString();
         gameStateEntity.x = entity["x"].GetInt();
         gameStateEntity.y = entity["y"].GetInt();
         gameStateEntity.z = entity["z"].GetInt();
         gameStateEntity.hp = entity["hp"].GetInt();
-        gameStateEntity.currentActionType = entity["currentActionType"].GetInt();
+
+        // Read the current action object
+        const auto& currentAction = entity["currentAction"];
+        gameStateEntity.currentAction.id = static_cast<ActionType>(currentAction["id"].GetInt());
+        gameStateEntity.currentAction.durationMs = currentAction["durationMs"].GetInt();
+        gameStateEntity.currentAction.looping = currentAction["looping"].GetBool();
+        gameStateEntity.currentAction.targetId = currentAction["targetId"].GetInt();
+        gameStateEntity.currentAction.targetCoordinate.x = currentAction["targetCoordinate"]["x"].GetInt();
+        gameStateEntity.currentAction.targetCoordinate.y = currentAction["targetCoordinate"]["y"].GetInt();
+        gameStateEntity.currentAction.targetCoordinate.z = currentAction["targetCoordinate"]["z"].GetInt();
 
         gameStateEntity.equipment = std::vector<GameItem>();
         for (const auto& item : entity["equipment"].GetArray())
@@ -306,13 +344,24 @@ GameStateMessage MessageApi::parseGameState(std::string msgBody)
         gameState.objects.push_back(gameStateObject);
     }
 
-    gameState.currentPlayer.entityId = document["currentPlayer"]["entityId"].GetInt();
+    gameState.currentPlayer.id = document["currentPlayer"]["id"].GetInt();
+    gameState.currentPlayer.instanceId = document["currentPlayer"]["instanceId"].GetInt();
     gameState.currentPlayer.name = document["currentPlayer"]["name"].GetString();
     gameState.currentPlayer.x = document["currentPlayer"]["x"].GetInt();
     gameState.currentPlayer.y = document["currentPlayer"]["y"].GetInt();
     gameState.currentPlayer.z = document["currentPlayer"]["z"].GetInt();
     gameState.currentPlayer.hp = document["currentPlayer"]["hp"].GetInt();
-    gameState.currentPlayer.currentActionType = document["currentPlayer"]["currentActionType"].GetInt();
+
+    // Read the current action object
+    const auto& currentAction = document["currentPlayer"]["currentAction"];
+    gameState.currentPlayer.currentAction.id = static_cast<ActionType>(currentAction["id"].GetInt());
+    gameState.currentPlayer.currentAction.durationMs = currentAction["durationMs"].GetInt();
+    gameState.currentPlayer.currentAction.looping = currentAction["looping"].GetBool();
+    gameState.currentPlayer.currentAction.targetId = currentAction["targetId"].GetInt();
+    gameState.currentPlayer.currentAction.targetCoordinate.x = currentAction["targetCoordinate"]["x"].GetInt();
+    gameState.currentPlayer.currentAction.targetCoordinate.y = currentAction["targetCoordinate"]["y"].GetInt();
+    gameState.currentPlayer.currentAction.targetCoordinate.z = currentAction["targetCoordinate"]["z"].GetInt();
+
     gameState.currentPlayer.skills = std::vector<Skill>();
 
     for (const auto& skill : document["currentPlayer"]["skills"].GetArray())
@@ -338,6 +387,30 @@ GameStateMessage MessageApi::parseGameState(std::string msgBody)
     }
 
     return gameState;
+};
+
+MessageStruct MessageApi::createTalk(const TalkMessage& talkMsg)
+{
+    rapidjson::Document document = createDocument();
+    rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
+    document.AddMember("npcId", talkMsg.npcId, allocator);
+
+    return MessageStruct{talkMsg.id, createString(document)};
+};
+
+TalkMessage MessageApi::parseTalk(std::string msgBody)
+{
+    rapidjson::Document document = parseDocument(msgBody);
+
+    if (!validMember(document, "npcId", ValueType::INT))
+    {
+        throw std::runtime_error("Invalid talk message");
+    }
+
+    TalkMessage talkMsg;
+    talkMsg.npcId = document["npcId"].GetInt();
+
+    return talkMsg;
 };
 
 MessageStruct MessageApi::createInformative(const InformativeMessage& informative)

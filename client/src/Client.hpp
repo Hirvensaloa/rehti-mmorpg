@@ -55,9 +55,15 @@ public:
     /**
      * @brief Send a UnequipMessage for item with given instance id
      * @param itemInstanceId
-     * @return
      */
     boost::asio::awaitable<void> unequipItem(const int itemInstanceId);
+
+    /**
+     * @brief Send talk message to the server
+     *
+     * @param npcId Id of the npc to talk to
+     */
+    boost::asio::awaitable<void> talk(const int& npcId);
 
     /**
      * @brief Starts the client
@@ -104,11 +110,9 @@ private:
     bool graphLibReadyFlagM = false;        ///< GraphLib ready flag
     std::mutex graphLibMutexM;
 
-    std::condition_variable loggedInM; ///< Login lock
-    bool loggedInFlagM = false;        ///< Login flag
-    std::mutex loginMutexM;
-
     Hit lastHitM; ///< Last detected hit from a mouse click
+
+    GameStateMessage prevGameStateMsgM; ///< Previous game state message.
 
     AssetCache& assetCacheM = AssetCache::getInstance();
 };

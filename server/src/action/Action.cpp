@@ -15,10 +15,20 @@ std::chrono::milliseconds Action::getActionTime()
     return actionTimeM;
 }
 
-Action::ActionType Action::getActionType()
+ActionType Action::getActionType()
 {
     return actionTypeM;
 }
+
+CurrentAction Action::getActionInfo()
+{
+    CurrentAction actionInfo;
+    actionInfo.id = actionTypeM;
+    actionInfo.durationMs = actionTimeM.count();
+    actionInfo.looping = false;
+    actionInfo.targetId = pEntityM->getInstanceId();
+    return actionInfo;
+};
 
 bool Action::isCompleted()
 {

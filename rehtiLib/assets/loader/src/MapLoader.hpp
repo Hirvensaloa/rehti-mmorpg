@@ -221,7 +221,7 @@ static void changeBlockDirection(std::vector<std::vector<std::string>>& objectTi
 /**
  * @brief Generate the object block map. The map defines how the objects block the tiles around itself.
  *
- * 1. Go through the area map and read the corresponding image file for each area. (<area_name>-obj.png).
+ * 1. Go through the area map and read the corresponding image file for each area. ([area_name]-obj.png).
  *
  * 2. For each area read the image file and check if there are any objects in the tile. Object is defined if R * G is not 255 * 255.
  *

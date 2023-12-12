@@ -111,6 +111,10 @@ CurrentAction AttackAction::getActionInfo()
             actionInfo.looping = true;
             actionInfo.targetCoordinate = {pEntityM->getLocation().x, pEntityM->getLocation().y, pEntityM->getLocation().z};
         }
+
+        // Even though we are moving, we still want to inform the other entities about the target we are trying to attack
+        actionInfo.targetId = pTargetM->getInstanceId();
+
         return actionInfo;
     }
     else

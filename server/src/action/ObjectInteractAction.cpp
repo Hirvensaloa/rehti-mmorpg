@@ -8,61 +8,63 @@ ObjectInteractAction::ObjectInteractAction(std::chrono::system_clock::time_point
 
 void ObjectInteractAction::act()
 {
+    if (completedM)
+    {
+        return;
+    }
+
     if (!pTargetM->canInteract(*pEntityM))
     {
         completedM = true;
         return;
     }
 
-    if (!completedM)
+    int currentDistance = pEntityM->getLocation().distance(pTargetM->getLocation());
+    if (currentDistance <= pEntityM->getRange() && currentDistance > 0)
     {
-        int currentDistance = pEntityM->getLocation().distance(pTargetM->getLocation());
-        if (currentDistance <= pEntityM->getRange() && currentDistance > 0)
+        if (std::chrono::system_clock::now() > startTimeM + actionTimeM)
         {
-            if (std::chrono::system_clock::now() > startTimeM + actionTimeM)
+            reader::ObjectType type = pTargetM->getObjectType();
+            // If item type is resource then we will continue the action forever, until stopped by the player
+            if (type == reader::ObjectType::RESOURCE)
             {
-                reader::ObjectType type = pTargetM->getObjectType();
-                // If item type is resource then we will continue the action forever, until stopped by the player
-                if (type == reader::ObjectType::RESOURCE)
-                {
-                    pTargetM->interact(*pEntityM);
-                    startTimeM = std::chrono::system_clock::now();
-                }
-                else
-                {
-                    pTargetM->interact(*pEntityM);
-                    completedM = true;
-                }
+                pTargetM->interact(*pEntityM);
+                startTimeM = std::chrono::system_clock::now();
             }
-
-            targetInRangeM = true;
+            else
+            {
+                pTargetM->interact(*pEntityM);
+                completedM = true;
+            }
         }
-        else if (std::chrono::system_clock::now() > startTimeM + moveTimeM)
+
+        targetInRangeM = true;
+    }
+    else if (std::chrono::system_clock::now() > startTimeM + moveTimeM)
+    {
+        targetInRangeM = false;
+
+        // If there is no path to the target or the target has changed location, we will try to find one
+        if (pathToTargetM.size() == 0 || (pathToTargetM.back().first != pTargetM->getLocation().x || pathToTargetM.back().second != pTargetM->getLocation().y))
         {
-            targetInRangeM = false;
+            pathToTargetM = pEntityM->getGameWorld()->getMap().findPath(pEntityM->getLocation(), pTargetM->getLocation());
 
-            // If there is no path to the target or the target has changed location, we will try to find one
-            if (pathToTargetM.size() == 0 || (pathToTargetM.back().first != pTargetM->getLocation().x || pathToTargetM.back().second != pTargetM->getLocation().y))
+            // If we cannot find a path to the target, we will just stop the action
+            if (pathToTargetM.size() == 0)
             {
-                pathToTargetM = pEntityM->getGameWorld()->getMap().findPath(pEntityM->getLocation(), pTargetM->getLocation());
-
-                // If we cannot find a path to the target, we will just stop the action
-                if (pathToTargetM.size() == 0)
-                {
-                    nextMoveM = std::nullopt;
-                    completedM = true;
-                    return;
-                };
-            }
-
-            auto next = pathToTargetM.front();
-            nextMoveM = Coordinates(next.first, next.second);
-
-            pEntityM->move(nextMoveM.value());
-
-            pathToTargetM.erase(pathToTargetM.begin());
-            startTimeM = std::chrono::system_clock::now();
+                nextMoveM = std::nullopt;
+                completedM = true;
+                return;
+            };
         }
+
+        auto next = pathToTargetM.front();
+        nextMoveM = Coordinates(next.first, next.second);
+
+        pEntityM->move(nextMoveM.value());
+
+        pathToTargetM.erase(pathToTargetM.begin());
+        startTimeM = std::chrono::system_clock::now();
     }
 }
 

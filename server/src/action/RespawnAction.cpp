@@ -8,16 +8,17 @@ RespawnAction::RespawnAction(std::chrono::system_clock::time_point startTime, st
 
 void RespawnAction::act()
 {
-
-    if (!completedM)
+    if (completedM)
     {
-        if (std::chrono::system_clock::now() > startTimeM + actionTimeM)
-        {
-            pEntityM->changeHp(pEntityM->getMaxHp());
-            pEntityM->setLocation(pEntityM->getRespawnLocation());
-            completedM = true;
-            std::cout << "Entity " << pEntityM->getName() << "Respawned" << std::endl;
-        }
+        return;
+    }
+
+    if (std::chrono::system_clock::now() > startTimeM + actionTimeM)
+    {
+        pEntityM->changeHp(pEntityM->getMaxHp());
+        pEntityM->setLocation(pEntityM->getRespawnLocation());
+        completedM = true;
+        std::cout << "Entity " << pEntityM->getName() << "Respawned" << std::endl;
     }
 }
 

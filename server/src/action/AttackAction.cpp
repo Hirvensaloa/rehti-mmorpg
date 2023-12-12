@@ -36,7 +36,6 @@ void AttackAction::act()
 
             targetInRangeM = true;
         }
-
         else if (std::chrono::system_clock::now() > startTimeM + moveTimeM)
         {
             targetInRangeM = false;
@@ -65,17 +64,17 @@ void AttackAction::act()
 
 std::vector<std::pair<int, int>> AttackAction::findPathToTarget()
 {
+    Coordinates pLocation = pEntityM->getLocation();
+    Coordinates tLocation = pTargetM->getLocation();
+    Map& map = pEntityM->getGameWorld()->getMap();
+
     // If we are on the same tile as the target, we will try to find a path to a neighbor tile
     if (pEntityM->getLocation() == pTargetM->getLocation())
     {
-        Coordinates pLocation = pEntityM->getLocation();
-        Coordinates tLocation = pTargetM->getLocation();
-        Map& map = pEntityM->getGameWorld()->getMap();
         for (int i = -1; i < 2; i++)
         {
             for (int j = -1; j < 2; j++)
             {
-
                 auto pathToNeighbor = map.findPath(pLocation, Coordinates(tLocation.x + i, tLocation.y + j));
                 if (pathToNeighbor.size() != 0)
                 {
@@ -87,7 +86,7 @@ std::vector<std::pair<int, int>> AttackAction::findPathToTarget()
     }
     else
     {
-        return pEntityM->getGameWorld()->getMap().findPath(pEntityM->getLocation(), pTargetM->getLocation());
+        return map.findPath(pLocation, tLocation);
     }
 }
 

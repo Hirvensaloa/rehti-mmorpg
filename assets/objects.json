@@ -70,7 +70,7 @@
       "name": "Fence",
       "description": "A sturdy fence.",
       "tileMap": [["S", "XS", "S"]],
-      "textureFilename": "fence.png",
+      "textureFilename": "defaultTexture.jpg",
       "objFilename": "fence.obj"
     },
     {
@@ -105,7 +105,7 @@
       ],
       "description": "Contains a treasure (If you consider dirty, rotten shield a treasure)",
       "tileMap": [["XB"]],
-      "textureFilename": "treasure_chest.png",
+      "textureFilename": "defaultTexture.jpg",
       "objFilename": "treasure_chest.obj",
       "characterInteractAnimation": "loot"
     }

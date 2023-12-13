@@ -1,0 +1,33 @@
+services:
+  mmorpg-server:
+    container_name: mmorpg-server
+    depends_on:
+      - mmorpg-database
+    build:
+      context: ./
+      dockerfile: ./server/Dockerfile
+    ports:
+      # WARNING: Do not ever remove the 127.0.0.1 as on some systems Docker host ports are exposed outside the Firewall! https://docs.docker.com/network/
+      - '127.0.0.1:9999:9999'
+    environment:
+      DB_HOST: mmorpg-database
+      POSTGRES_DB: mmorpg-database
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    x-develop:
+      watch:
+        - action: rebuild
+          path: ./server
+  mmorpg-database:
+    container_name: mmorpg-database
+    image: postgres:16rc1-alpine3.17
+    restart: unless-stopped
+    ports:
+      # WARNING: Do not ever remove the 127.0.0.1 as on some systems Docker host ports are exposed outside the Firewall! https://docs.docker.com/network/
+      - '127.0.0.1:6543:5432'
+    environment:
+      POSTGRES_DB: mmorpg-database
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - ./database/deploy.sql:/docker-entrypoint-initdb.d/deploy.sql

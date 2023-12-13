@@ -1,0 +1,10 @@
+[requires]
+boost/1.83.0
+libpqxx/7.7.5
+
+[tool_requires]
+cmake/3.27.0
+
+[generators]
+CMakeDeps
+CMakeToolchain

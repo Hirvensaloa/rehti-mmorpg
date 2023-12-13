@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['accuracy_1349',['accuracy',['../structItemStats.html#aa65f7b3f9d2504fa9a1594c9cb7f712b',1,'ItemStats']]],
+  ['actiontimem_1350',['actionTimeM',['../classAction.html#a15c7a9385ffa5134c2fa90c9f49e15d2',1,'Action']]],
+  ['actiontypem_1351',['actionTypeM',['../classAction.html#a0163cb265c2f9c085a77c08d1f8f6cc5',1,'Action']]],
+  ['aggressiontype_1352',['AggressionType',['../CharacterReader_8hpp.html#a890da001f3f8c6eeab22cb77bb2a1e7f',1,'CharacterReader.hpp']]],
+  ['aggressive_1353',['Aggressive',['../CharacterReader_8hpp.html#a12cdacf304e1facb140935596e9faf6c',1,'CharacterReader.hpp']]],
+  ['agressionrange_1354',['agressionRange',['../structNPC.html#a9bbda00b87975e8e175869e0d9b1c07a',1,'NPC']]],
+  ['agressiontype_1355',['agressionType',['../structNPC.html#a0ebb7102d8ca750b0590d8c7c87f7a8e',1,'NPC']]],
+  ['allocation_1356',['allocation',['../structAllocatedImage.html#a6374bbe549aabc16f21c58b717329028',1,'AllocatedImage::allocation()'],['../structAllocatedBuffer.html#aad4979df72f7e827fd80171e42bfb463',1,'AllocatedBuffer::allocation()']]],
+  ['animationdata_1357',['animationData',['../structCharacterData.html#a4bcd563af0b12fd8e64195988fe4461b',1,'CharacterData']]],
+  ['animationnodes_1358',['animationNodes',['../structAnimation.html#ad86afc8b3de1c6b4cd332fc6ad89ec97',1,'Animation']]],
+  ['animations_1359',['animations',['../structCharacterAssetData.html#a0c42ca99e550144f681f91b1af42e8c2',1,'CharacterAssetData::animations()'],['../structCharacterAnimationData.html#a7bb6bb375869ef4b542ec3f4f90a0b8d',1,'CharacterAnimationData::animations()']]],
+  ['animtype_1360',['animType',['../structAnimationConfig.html#ac0affbb0f2c23d614fcc024faf7eb8da',1,'AnimationConfig']]],
+  ['areamatrix_1361',['areaMatrix',['../structMapAABBData.html#a2b9f13a2e5d9f706b42b967442639268',1,'MapAABBData']]],
+  ['areasize_1362',['areaSize',['../structMapAABBData.html#abe4dae45b586634dc1142962436653cc',1,'MapAABBData']]],
+  ['armor_1363',['armor',['../structItemStats.html#a4850999f61ce899846a9fc0749101700',1,'ItemStats']]],
+  ['attackspeed_1364',['attackSpeed',['../structItemStats.html#a5a2d4c5e4a9be9f00eb900fae233dabc',1,'ItemStats']]]
+];

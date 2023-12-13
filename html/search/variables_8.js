@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['icon_1434',['icon',['../structItemAssetData.html#a9b768ea3a229aa3ddbf3004a3cf6d2c8',1,'ItemAssetData']]],
+  ['iconfilename_1435',['iconFilename',['../structGeneralItemStruct.html#a87ef62371f5a8b48ae070d474f698861',1,'GeneralItemStruct']]],
+  ['id_1436',['id',['../structPlayerTable.html#a329df8d5d0fb032aee3b49638e0333e6',1,'PlayerTable::id()'],['../structObjectWithFileinfo.html#acae5ff0e654f69647f88c84ec8105ed2',1,'ObjectWithFileinfo::id()'],['../structPlayer.html#a05e05f3a23de78da7ec032ec2bcf8c6c',1,'Player::id()'],['../structNPC.html#a1b705223f885df652f2faffc4735d03c',1,'NPC::id()'],['../structGeneralItemStruct.html#a3b4a8f58825e01d2efaa09f2982f0382',1,'GeneralItemStruct::id()'],['../structObjectLocation.html#a314a5871bdfe51f37212e401a346c88a',1,'ObjectLocation::id()'],['../structGeneralObjectStruct.html#ab988c26a8d2fa5f727386cde175d95aa',1,'GeneralObjectStruct::id()'],['../structHit.html#a2b838f24cf63f77dead39f7ddda122e2',1,'Hit::id()'],['../Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19',1,'id():&#160;Server.cpp']]],
+  ['idm_1437',['idM',['../classEntity.html#a962711c2d488e19c3a1e90d06ba6ed40',1,'Entity::idM()'],['../classItem.html#ae86ddbe31e199974673de4f5a3113880',1,'Item::idM()']]],
+  ['image_1438',['image',['../structAllocatedImage.html#a13e4a58bd70b09a3743df9effc0dc9f6',1,'AllocatedImage']]],
+  ['imageallocation_1439',['imageAllocation',['../structCombinedImage.html#a4e1739ab98eb640db28ec9f56b5e29bd',1,'CombinedImage']]],
+  ['imageview_1440',['imageView',['../structCombinedImage.html#a27218f46fc23f96b2b17404ad997bfd4',1,'CombinedImage']]],
+  ['indexbuffer_1441',['indexBuffer',['../structDrawableObject.html#a838dc347ac75ccb7702feae2a86e2225',1,'DrawableObject']]],
+  ['indexcount_1442',['indexCount',['../structDrawableObject.html#a97398e485390354d0cba7c8269eb27c7',1,'DrawableObject::indexCount()'],['../structCharacterObject.html#a0510ef9cd1ac06709f432e03c606d259',1,'CharacterObject::indexCount()'],['../structGameObject.html#a95e23cb7aa3c527c72151e6a4e965915',1,'GameObject::indexCount()'],['../structAreaObject.html#aeab43038b69d5b74e98d48425b4198a5',1,'AreaObject::indexCount()'],['../structTestObject.html#aae9a01efbd7eeb1465a007fc6af498b7',1,'TestObject::indexCount()']]],
+  ['indexdata_1443',['indexData',['../structCharacterObject.html#a846ed38b6c3c71b9230d01606d76ea83',1,'CharacterObject::indexData()'],['../structTestObject.html#a90430a37d6e84f206088ac1ffa40e9d1',1,'TestObject::indexData()'],['../structAreaObject.html#afccb800be7ca37690340003b37e19290',1,'AreaObject::indexData()'],['../structGameObject.html#a7d7a4e27bf16b1baac26f4939c4a979e',1,'GameObject::indexData()']]],
+  ['indices_1444',['indices',['../structMapAreaAssetData.html#aaf72bdede05143e7c2d4123b2ca1a50c',1,'MapAreaAssetData::indices()'],['../structObjectAssetData.html#acaa377fe8cc84cce28f9feddf0a635d4',1,'ObjectAssetData::indices()'],['../structCharacterAssetData.html#a3bfe22664b48179ca3731a1ac49c8808',1,'CharacterAssetData::indices()'],['../structItemAssetData.html#acdc97da676955373664a073c2f5ce1bf',1,'ItemAssetData::indices()']]],
+  ['instanceid_1445',['instanceId',['../structObjectLocation.html#a9a1b0fcd18d78068f7e5aedf831810e2',1,'ObjectLocation']]],
+  ['instanceidm_1446',['instanceIdM',['../classEntity.html#a8a4d5ba64ab84d98ca5163c9ff316dca',1,'Entity::instanceIdM()'],['../classItem.html#ae4696ac2fcb6490c4d8596aacd7e0576',1,'Item::instanceIdM()']]],
+  ['inventory_5fsize_1447',['INVENTORY_SIZE',['../Inventory_8hpp.html#a5ca8401e5dd1fe0f398abd86f0024966',1,'Inventory.hpp']]],
+  ['inventorym_1448',['inventoryM',['../classEntity.html#a59dc9f5ee3fea7f0939dd84990eaadf1',1,'Entity']]],
+  ['inverseglobaltransformation_1449',['inverseGlobalTransformation',['../structCharacterData.html#aad9c13417d18858d26a22d84bca94884',1,'CharacterData']]],
+  ['isdisconnectedm_1450',['isDisconnectedM',['../classEntity.html#a0463371c854cfb5e9676d86b579e5d23',1,'Entity']]],
+  ['isstackable_1451',['isStackable',['../structGeneralItemStruct.html#ac6f055df8253f75944338e92f13eec58',1,'GeneralItemStruct::isStackable()'],['../structEquippableItemStruct.html#a0ec4a39d4a12b97e70bedca251ecfd28',1,'EquippableItemStruct::isStackable()']]],
+  ['isstackablem_1452',['isStackableM',['../classItem.html#ad3b5556a9399cc37d3d1ba1891c73594',1,'Item']]],
+  ['itemid_1453',['itemId',['../structYieldableItem.html#aa3e282dd2dacec6cac4d2bb16e717933',1,'YieldableItem::itemId()'],['../structItemTransform.html#af12f51199c6320bc0a55d60d12d522d4',1,'ItemTransform::itemId()']]],
+  ['itemtransformlist_1454',['itemTransformList',['../structResourceObjectStruct.html#a22ab7caf153b49d41f8d1fbffc4d6ad0',1,'ResourceObjectStruct']]]
+];

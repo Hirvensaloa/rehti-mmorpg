@@ -1,14 +1,22 @@
 var searchData=
 [
-  ['damage_1397',['damage',['../structItemStats.html#aa27bf4804e6a04714567667dd391e61b',1,'ItemStats']]],
-  ['db_5fhost_1398',['DB_HOST',['../DatabaseManager_8cpp.html#acf5fbf484a608969e9b70092deeb8b46',1,'DatabaseManager.cpp']]],
-  ['db_5fname_1399',['DB_NAME',['../DatabaseManager_8cpp.html#aa5300938a896db556ceda58871743f20',1,'DatabaseManager.cpp']]],
-  ['db_5fpassword_1400',['DB_PASSWORD',['../DatabaseManager_8cpp.html#aeaed5a4a41660a3ca802c9be554cf6e2',1,'DatabaseManager.cpp']]],
-  ['db_5fuser_1401',['DB_USER',['../DatabaseManager_8cpp.html#a28516573c2a0d658b8c7aaedbc7a15bb',1,'DatabaseManager.cpp']]],
-  ['depletechance_1402',['depleteChance',['../structResourceObjectStruct.html#aff4a775b822e9e2840136a54681ae621',1,'ResourceObjectStruct']]],
-  ['description_1403',['description',['../structGameSkill.html#ac94665c401faef76580de1cd759f6361',1,'GameSkill::description()'],['../structGeneralObjectStruct.html#a31bc5e5677ccf7f827d90c6c337117b2',1,'GeneralObjectStruct::description()'],['../structGeneralItemStruct.html#a2093c9bdf44bf32e53fcaa75897bf051',1,'GeneralItemStruct::description()']]],
-  ['descriptorset_1404',['descriptorSet',['../structGameObjectUniformBuffer.html#a924cd519cd3ad251f355d9dc2661b992',1,'GameObjectUniformBuffer::descriptorSet()'],['../structTestObjectUniformBuffer.html#a5db9a0cd2a2931fb324ffe8126e9bdf8',1,'TestObjectUniformBuffer::descriptorSet()'],['../structCharacterObjectUniformBuffer.html#a1db0342b36f457955835627685765995',1,'CharacterObjectUniformBuffer::descriptorSet()'],['../structAreaObject.html#ab1ca0ce0c1f7996f7f2da74e0164b15f',1,'AreaObject::descriptorSet()'],['../structDrawableObject.html#a4052367ccee05701a51e069fa98c817d',1,'DrawableObject::descriptorSet()']]],
-  ['dirfromparent_1405',['dirFromParent',['../structNode.html#a6b573374ad7db0c92befeb6b675f50ed',1,'Node']]],
-  ['dodge_1406',['dodge',['../structItemStats.html#a8a087522973be960e245662b9fb412f0',1,'ItemStats']]],
-  ['duration_1407',['duration',['../structAnimation.html#a66cc7333638f071b0401072ba95c55fd',1,'Animation::duration()'],['../structAnimationConfig.html#a9a698064de63e29932a27a7a83e7e337',1,'AnimationConfig::duration()']]]
+  ['damage_2566',['damage',['../structItemStats.html#aa27bf4804e6a04714567667dd391e61b',1,'ItemStats']]],
+  ['data_2567',['data',['../structuivector.html#a427d761df4bb4f0f19b4a973fc224c78',1,'uivector::data()'],['../structucvector.html#ace794c5713208c5a20f21762cd87c919',1,'ucvector::data()'],['../structLodePNGBitWriter.html#aeabd9ce60873a85f587df7df46548d04',1,'LodePNGBitWriter::data()'],['../structLodePNGBitReader.html#a7b8c81e8fb2da022f3662c8c8ccd6e7d',1,'LodePNGBitReader::data()']]],
+  ['day_2568',['day',['../structLodePNGTime.html#aa3dee3b7b3a1e730fbded7a7b8cf355e',1,'LodePNGTime']]],
+  ['db_5fhost_2569',['DB_HOST',['../DatabaseManager_8cpp.html#acf5fbf484a608969e9b70092deeb8b46',1,'DatabaseManager.cpp']]],
+  ['db_5fname_2570',['DB_NAME',['../DatabaseManager_8cpp.html#aa5300938a896db556ceda58871743f20',1,'DatabaseManager.cpp']]],
+  ['db_5fpassword_2571',['DB_PASSWORD',['../DatabaseManager_8cpp.html#aeaed5a4a41660a3ca802c9be554cf6e2',1,'DatabaseManager.cpp']]],
+  ['db_5fuser_2572',['DB_USER',['../DatabaseManager_8cpp.html#a28516573c2a0d658b8c7aaedbc7a15bb',1,'DatabaseManager.cpp']]],
+  ['decoder_2573',['decoder',['../structLodePNGState.html#abd2c38ffc68f04b0e4159e1f97ba1f76',1,'LodePNGState']]],
+  ['default_5ftexture_5fpath_2574',['DEFAULT_TEXTURE_PATH',['../Config_8hpp.html#a307abe364533858606a5394e92426868',1,'Config.hpp']]],
+  ['depletechance_2575',['depleteChance',['../structResourceObjectStruct.html#aff4a775b822e9e2840136a54681ae621',1,'ResourceObjectStruct']]],
+  ['deqqueuem_2576',['deqQueueM',['../classMessageQueue.html#a1ca271531edb716dea9332b6e16f7df1',1,'MessageQueue']]],
+  ['description_2577',['description',['../structGeneralItemStruct.html#a2093c9bdf44bf32e53fcaa75897bf051',1,'GeneralItemStruct::description()'],['../structGeneralObjectStruct.html#a31bc5e5677ccf7f827d90c6c337117b2',1,'GeneralObjectStruct::description()'],['../structGameSkill.html#ac94665c401faef76580de1cd759f6361',1,'GameSkill::description()']]],
+  ['descriptorset_2578',['descriptorSet',['../structTestObjectUniformBuffer.html#a5db9a0cd2a2931fb324ffe8126e9bdf8',1,'TestObjectUniformBuffer::descriptorSet()'],['../structAreaObject.html#ab1ca0ce0c1f7996f7f2da74e0164b15f',1,'AreaObject::descriptorSet()'],['../structCharacterObjectUniformBuffer.html#a1db0342b36f457955835627685765995',1,'CharacterObjectUniformBuffer::descriptorSet()'],['../structGameObjectUniformBuffer.html#a924cd519cd3ad251f355d9dc2661b992',1,'GameObjectUniformBuffer::descriptorSet()'],['../structDrawableObject.html#a4052367ccee05701a51e069fa98c817d',1,'DrawableObject::descriptorSet()']]],
+  ['dirfromparent_2579',['dirFromParent',['../structNode.html#a6b573374ad7db0c92befeb6b675f50ed',1,'Node']]],
+  ['distancebase_2580',['DISTANCEBASE',['../lodepng_8cpp.html#acaf561f0c4e23840e58b49221ed4a39d',1,'lodepng.cpp']]],
+  ['distanceextra_2581',['DISTANCEEXTRA',['../lodepng_8cpp.html#ae2b6129cf7ecfc3c6bc1c15c0bf2eed0',1,'lodepng.cpp']]],
+  ['dodge_2582',['dodge',['../structItemStats.html#a8a087522973be960e245662b9fb412f0',1,'ItemStats']]],
+  ['duration_2583',['duration',['../structAnimation.html#a66cc7333638f071b0401072ba95c55fd',1,'Animation::duration()'],['../structAnimationConfig.html#a9a698064de63e29932a27a7a83e7e337',1,'AnimationConfig::duration()']]],
+  ['durationms_2584',['durationMs',['../structCurrentAction.html#a0d116ef2b4e70f51eabb9a40d21ce253',1,'CurrentAction']]]
 ];

@@ -1,10 +1,13 @@
 <map id="CharacterReader.cpp" name="CharacterReader.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="315,5,472,32"/>
-<area shape="rect" id="node2" href="$CharacterReader_8hpp.html" title=" " alt="" coords="153,80,311,107"/>
-<area shape="rect" id="node5" title=" " alt="" coords="336,80,451,107"/>
-<area shape="rect" id="node6" href="$MapReader_8hpp.html" title=" " alt="" coords="5,80,128,107"/>
-<area shape="rect" id="node7" title=" " alt="" coords="475,80,589,107"/>
-<area shape="rect" id="node8" title=" " alt="" coords="614,80,701,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="77,155,136,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="181,155,243,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="188,5,345,32"/>
+<area shape="rect" id="node2" href="$CharacterReader_8hpp.html" title=" " alt="" coords="187,155,346,181"/>
+<area shape="rect" id="node5" href="$Config_8hpp.html" title=" " alt="" coords="5,80,120,107"/>
+<area shape="rect" id="node6" href="$MapReader_8hpp.html" title=" " alt="" coords="40,155,163,181"/>
+<area shape="rect" id="node7" href="$RehtiUtils_8hpp.html" title=" " alt="" coords="357,80,472,107"/>
+<area shape="rect" id="node11" title=" " alt="" coords="497,80,583,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="112,229,171,256"/>
+<area shape="rect" id="node4" title=" " alt="" coords="235,229,298,256"/>
+<area shape="rect" id="node8" href="$RapidjsonHelpers_8hpp.html" title=" " alt="" coords="370,155,569,181"/>
+<area shape="rect" id="node10" href="$TileUtils_8hpp.html" title=" " alt="" coords="593,155,732,181"/>
+<area shape="rect" id="node9" title=" " alt="" coords="388,229,551,256"/>
 </map>

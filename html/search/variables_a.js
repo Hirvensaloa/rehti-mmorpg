@@ -1,6 +1,23 @@
 var searchData=
 [
-  ['locationm_1462',['locationM',['../classEntity.html#ad4efd2cdec88b079059aaa0cdcb5bf80',1,'Entity']]],
-  ['looping_1463',['looping',['../structAnimationConfig.html#a7fe850c82630460bb1f1e8f1c7d018d1',1,'AnimationConfig']]],
-  ['lootobjects_1464',['lootObjects',['../structGameObjects.html#af463486af2fe181dcbe428aec16bd121',1,'GameObjects']]]
+  ['lazymatching_2693',['lazymatching',['../structLodePNGCompressSettings.html#ad4ffde429dee40a8c314016f5f6fdab5',1,'LodePNGCompressSettings']]],
+  ['left_2694',['left',['../structTileHeight.html#aced7aab06bbaca92d9cfd62d56177018',1,'TileHeight']]],
+  ['lengthbase_2695',['LENGTHBASE',['../lodepng_8cpp.html#a6e921f21ce796d21b10a5602708356c9',1,'lodepng.cpp']]],
+  ['lengthextra_2696',['LENGTHEXTRA',['../lodepng_8cpp.html#a36f7494abb7d8fa1ed4c00495ccc69b9',1,'lodepng.cpp']]],
+  ['lengths_2697',['lengths',['../structHuffmanTree.html#aef81d45a5c56276c5699a8e9a575021d',1,'HuffmanTree']]],
+  ['listsize_2698',['listsize',['../structBPMLists.html#a3a41279ef589f0365c33d42b044f4864',1,'BPMLists']]],
+  ['locationm_2699',['locationM',['../classEntity.html#ad4efd2cdec88b079059aaa0cdcb5bf80',1,'Entity']]],
+  ['lodepng_5fcrc32_5ftable0_2700',['lodepng_crc32_table0',['../lodepng_8cpp.html#ae59be880a9f141c0a962fe09419a348e',1,'lodepng.cpp']]],
+  ['lodepng_5fcrc32_5ftable1_2701',['lodepng_crc32_table1',['../lodepng_8cpp.html#a87bc364423720a9ae467246ef35fb1ca',1,'lodepng.cpp']]],
+  ['lodepng_5fcrc32_5ftable2_2702',['lodepng_crc32_table2',['../lodepng_8cpp.html#a843c65302b8d32af93843638b729a9ec',1,'lodepng.cpp']]],
+  ['lodepng_5fcrc32_5ftable3_2703',['lodepng_crc32_table3',['../lodepng_8cpp.html#a01bbcfb703906a8cf4374723edecdd22',1,'lodepng.cpp']]],
+  ['lodepng_5fcrc32_5ftable4_2704',['lodepng_crc32_table4',['../lodepng_8cpp.html#adee38ea50be03d62839031a9a42fe612',1,'lodepng.cpp']]],
+  ['lodepng_5fcrc32_5ftable5_2705',['lodepng_crc32_table5',['../lodepng_8cpp.html#a5709c9cb03e1ed43fb2eb82307229e42',1,'lodepng.cpp']]],
+  ['lodepng_5fcrc32_5ftable6_2706',['lodepng_crc32_table6',['../lodepng_8cpp.html#a4df0ad7a818ddb43e866e0be95d47877',1,'lodepng.cpp']]],
+  ['lodepng_5fcrc32_5ftable7_2707',['lodepng_crc32_table7',['../lodepng_8cpp.html#ac26c0f2545457dac8baa0be6957f320f',1,'lodepng.cpp']]],
+  ['lodepng_5fdefault_5fcompress_5fsettings_2708',['lodepng_default_compress_settings',['../lodepng_8cpp.html#a0b5cf190f94f8f11ed5c0abb3504ad86',1,'lodepng_default_compress_settings():&#160;lodepng.cpp'],['../lodepng_8h.html#a0b5cf190f94f8f11ed5c0abb3504ad86',1,'lodepng_default_compress_settings():&#160;lodepng.cpp']]],
+  ['lodepng_5fdefault_5fdecompress_5fsettings_2709',['lodepng_default_decompress_settings',['../lodepng_8cpp.html#aab7a41a03154aa8d9ef65f2d434641b6',1,'lodepng_default_decompress_settings():&#160;lodepng.cpp'],['../lodepng_8h.html#aab7a41a03154aa8d9ef65f2d434641b6',1,'lodepng_default_decompress_settings():&#160;lodepng.cpp']]],
+  ['lodepng_5fversion_5fstring_2710',['LODEPNG_VERSION_STRING',['../lodepng_8cpp.html#a8b5b5e358236bf8112bd6e58ae8da1b2',1,'LODEPNG_VERSION_STRING():&#160;lodepng.cpp'],['../lodepng_8h.html#a8b5b5e358236bf8112bd6e58ae8da1b2',1,'LODEPNG_VERSION_STRING():&#160;lodepng.cpp']]],
+  ['looping_2711',['looping',['../structCurrentAction.html#a4c290813fd1694c24fb0320a02eb1e23',1,'CurrentAction::looping()'],['../structAnimationConfig.html#a7fe850c82630460bb1f1e8f1c7d018d1',1,'AnimationConfig::looping()']]],
+  ['lootobjects_2712',['lootObjects',['../structGameObjects.html#af463486af2fe181dcbe428aec16bd121',1,'GameObjects']]]
 ];

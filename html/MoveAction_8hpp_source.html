@@ -91,7 +91,7 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> std::chrono::milliseconds <a class="code" href="classMoveAction.html#a8f30ecd102663a2c3d3779b7013f2e4f">getMoveTime</a>();</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    CurrentAction <a class="code" href="classMoveAction.html#af6fb27a4bfae4210125ef5824ad4b430">getActionInfo</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="structCurrentAction.html">CurrentAction</a> <a class="code" href="classMoveAction.html#af6fb27a4bfae4210125ef5824ad4b430">getActionInfo</a>();</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="structCoordinates.html">Coordinates</a> targetM;</div>
@@ -101,9 +101,11 @@ $(function() {
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    std::chrono::milliseconds actionTimeM = std::chrono::milliseconds(1000);</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    ActionType actionTypeM = ActionType::Move;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950b">ActionType</a> actionTypeM = <a class="code" href="Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950ba6bc362dbf494c61ea117fe3c71ca48a5">ActionType::Move</a>;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
 <div class="ttc" id="aAction_8hpp_html"><div class="ttname"><a href="Action_8hpp.html">Action.hpp</a></div></div>
+<div class="ttc" id="aTypes_8hpp_html_a21d5e8f8cdaa838586b31007df0a950b"><div class="ttname"><a href="Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950b">ActionType</a></div><div class="ttdeci">ActionType</div><div class="ttdef"><b>Definition:</b> Types.hpp:30</div></div>
+<div class="ttc" id="aTypes_8hpp_html_a21d5e8f8cdaa838586b31007df0a950ba6bc362dbf494c61ea117fe3c71ca48a5"><div class="ttname"><a href="Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950ba6bc362dbf494c61ea117fe3c71ca48a5">ActionType::Move</a></div><div class="ttdeci">@ Move</div></div>
 <div class="ttc" id="aclassAction_html"><div class="ttname"><a href="classAction.html">Action</a></div><div class="ttdoc">Represents an action that an entity can perform.</div><div class="ttdef"><b>Definition:</b> Action.hpp:15</div></div>
 <div class="ttc" id="aclassMoveAction_html"><div class="ttname"><a href="classMoveAction.html">MoveAction</a></div><div class="ttdef"><b>Definition:</b> MoveAction.hpp:9</div></div>
 <div class="ttc" id="aclassMoveAction_html_a1ee9bd769f411021d342f30445a38430"><div class="ttname"><a href="classMoveAction.html#a1ee9bd769f411021d342f30445a38430">MoveAction::getTarget</a></div><div class="ttdeci">Coordinates getTarget()</div><div class="ttdef"><b>Definition:</b> MoveAction.cpp:9</div></div>
@@ -113,6 +115,7 @@ $(function() {
 <div class="ttc" id="aclassMoveAction_html_ae6b8ef446b4ecfb3ef452d3a8e35ac29"><div class="ttname"><a href="classMoveAction.html#ae6b8ef446b4ecfb3ef452d3a8e35ac29">MoveAction::act</a></div><div class="ttdeci">void act()</div><div class="ttdef"><b>Definition:</b> MoveAction.cpp:14</div></div>
 <div class="ttc" id="aclassMoveAction_html_af6fb27a4bfae4210125ef5824ad4b430"><div class="ttname"><a href="classMoveAction.html#af6fb27a4bfae4210125ef5824ad4b430">MoveAction::getActionInfo</a></div><div class="ttdeci">CurrentAction getActionInfo()</div><div class="ttdoc">Returns information about the current action.</div><div class="ttdef"><b>Definition:</b> MoveAction.cpp:50</div></div>
 <div class="ttc" id="astructCoordinates_html"><div class="ttname"><a href="structCoordinates.html">Coordinates</a></div><div class="ttdoc">Struct for coordinates.</div><div class="ttdef"><b>Definition:</b> Coordinates.hpp:7</div></div>
+<div class="ttc" id="astructCurrentAction_html"><div class="ttname"><a href="structCurrentAction.html">CurrentAction</a></div><div class="ttdoc">CurrentAction struct representing an action that can be performed by an entity.</div><div class="ttdef"><b>Definition:</b> Types.hpp:61</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,9 +1,10 @@
 <map id="AssetTypes.hpp" name="AssetTypes.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="155,5,278,32"/>
-<area shape="rect" id="node2" href="$AssetCache_8hpp.html" title=" " alt="" coords="312,155,438,181"/>
-<area shape="rect" id="node4" href="$Assimp_8hpp.html" title=" " alt="" coords="22,80,120,107"/>
-<area shape="rect" id="node6" href="$TextureReader_8hpp.html" title=" " alt="" coords="145,80,288,107"/>
-<area shape="rect" id="node3" href="$AssetCache_8cpp.html" title=" " alt="" coords="118,229,243,256"/>
-<area shape="rect" id="node5" href="$Assimp_8cpp.html" title=" " alt="" coords="24,155,121,181"/>
-<area shape="rect" id="node7" href="$TextureReader_8cpp.html" title=" " alt="" coords="145,155,288,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="180,5,303,32"/>
+<area shape="rect" id="node2" href="$AssetCache_8hpp.html" title=" " alt="" coords="81,155,207,181"/>
+<area shape="rect" id="node5" href="$Assimp_8hpp.html" title=" " alt="" coords="192,80,291,107"/>
+<area shape="rect" id="node7" href="$TextureReader_8hpp.html" title=" " alt="" coords="315,80,458,107"/>
+<area shape="rect" id="node3" href="$includeWithAssimp_2RehtiReader_8hpp.html" title=" " alt="" coords="181,229,310,256"/>
+<area shape="rect" id="node4" href="$AssetCache_8cpp.html" title=" " alt="" coords="5,229,131,256"/>
+<area shape="rect" id="node6" href="$Assimp_8cpp.html" title=" " alt="" coords="283,155,381,181"/>
+<area shape="rect" id="node8" href="$TextureReader_8cpp.html" title=" " alt="" coords="457,155,599,181"/>
 </map>

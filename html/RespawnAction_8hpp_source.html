@@ -84,20 +84,23 @@ $(function() {
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRespawnAction.html#af1252eed057df3205512d9e21d7d75b2">act</a>();</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    CurrentAction <a class="code" href="classRespawnAction.html#adbbc94b70638dc04b60bca767052e77a">getActionInfo</a>();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="structCurrentAction.html">CurrentAction</a> <a class="code" href="classRespawnAction.html#adbbc94b70638dc04b60bca767052e77a">getActionInfo</a>();</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    std::chrono::milliseconds actionTimeM;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    ActionType actionTypeM = ActionType::Respawn;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950b">ActionType</a> actionTypeM = <a class="code" href="Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950baad566b6224151be0d95e6d4ffc6dc1af">ActionType::Respawn</a>;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
 <div class="ttc" id="aAction_8hpp_html"><div class="ttname"><a href="Action_8hpp.html">Action.hpp</a></div></div>
+<div class="ttc" id="aTypes_8hpp_html_a21d5e8f8cdaa838586b31007df0a950b"><div class="ttname"><a href="Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950b">ActionType</a></div><div class="ttdeci">ActionType</div><div class="ttdef"><b>Definition:</b> Types.hpp:30</div></div>
+<div class="ttc" id="aTypes_8hpp_html_a21d5e8f8cdaa838586b31007df0a950baad566b6224151be0d95e6d4ffc6dc1af"><div class="ttname"><a href="Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950baad566b6224151be0d95e6d4ffc6dc1af">ActionType::Respawn</a></div><div class="ttdeci">@ Respawn</div></div>
 <div class="ttc" id="aclassAction_html"><div class="ttname"><a href="classAction.html">Action</a></div><div class="ttdoc">Represents an action that an entity can perform.</div><div class="ttdef"><b>Definition:</b> Action.hpp:15</div></div>
 <div class="ttc" id="aclassRespawnAction_html"><div class="ttname"><a href="classRespawnAction.html">RespawnAction</a></div><div class="ttdoc">Action used for respawning entities.</div><div class="ttdef"><b>Definition:</b> RespawnAction.hpp:9</div></div>
 <div class="ttc" id="aclassRespawnAction_html_a3a82bd3e3914f911b620eb8294702eec"><div class="ttname"><a href="classRespawnAction.html#a3a82bd3e3914f911b620eb8294702eec">RespawnAction::RespawnAction</a></div><div class="ttdeci">RespawnAction(std::chrono::system_clock::time_point startTime, std::chrono::milliseconds respawnTime, std::shared_ptr&lt; Entity &gt; pEntity)</div><div class="ttdef"><b>Definition:</b> RespawnAction.cpp:7</div></div>
 <div class="ttc" id="aclassRespawnAction_html_adbbc94b70638dc04b60bca767052e77a"><div class="ttname"><a href="classRespawnAction.html#adbbc94b70638dc04b60bca767052e77a">RespawnAction::getActionInfo</a></div><div class="ttdeci">CurrentAction getActionInfo()</div><div class="ttdoc">Returns information about the current action.</div><div class="ttdef"><b>Definition:</b> RespawnAction.cpp:24</div></div>
 <div class="ttc" id="aclassRespawnAction_html_aea803af86b6bf7000889641a7e91f3bc"><div class="ttname"><a href="classRespawnAction.html#aea803af86b6bf7000889641a7e91f3bc">RespawnAction::~RespawnAction</a></div><div class="ttdeci">~RespawnAction()=default</div></div>
 <div class="ttc" id="aclassRespawnAction_html_af1252eed057df3205512d9e21d7d75b2"><div class="ttname"><a href="classRespawnAction.html#af1252eed057df3205512d9e21d7d75b2">RespawnAction::act</a></div><div class="ttdeci">void act()</div><div class="ttdoc">After time indicated by actionTimeM has passed, moves pEntity to its respawn location and changes hp ...</div><div class="ttdef"><b>Definition:</b> RespawnAction.cpp:9</div></div>
+<div class="ttc" id="astructCurrentAction_html"><div class="ttname"><a href="structCurrentAction.html">CurrentAction</a></div><div class="ttdoc">CurrentAction struct representing an action that can be performed by an entity.</div><div class="ttdef"><b>Definition:</b> Types.hpp:61</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

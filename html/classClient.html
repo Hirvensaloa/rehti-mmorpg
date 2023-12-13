@@ -90,13 +90,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a0dfd50dbe59821fc99489c425d80066b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends an object interaction message to the server.  <a href="classClient.html#a0dfd50dbe59821fc99489c425d80066b">More...</a><br /></td></tr>
 <tr class="separator:a0dfd50dbe59821fc99489c425d80066b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ab2c62c905b79659c11a276c24dc2a2"><td class="memItemLeft" align="right" valign="top">boost::asio::awaitable&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClient.html#a4ab2c62c905b79659c11a276c24dc2a2">useItem</a> (const int itemInstanceId)</td></tr>
-<tr class="memdesc:a4ab2c62c905b79659c11a276c24dc2a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a UseItemMessage for item with given instance id.  <a href="classClient.html#a4ab2c62c905b79659c11a276c24dc2a2">More...</a><br /></td></tr>
+<tr class="memdesc:a4ab2c62c905b79659c11a276c24dc2a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a <a class="el" href="structUseItemMessage.html">UseItemMessage</a> for item with given instance id.  <a href="classClient.html#a4ab2c62c905b79659c11a276c24dc2a2">More...</a><br /></td></tr>
 <tr class="separator:a4ab2c62c905b79659c11a276c24dc2a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7883a1cd2003100d45eae6e670dd7990"><td class="memItemLeft" align="right" valign="top">boost::asio::awaitable&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClient.html#a7883a1cd2003100d45eae6e670dd7990">dropItem</a> (const int itemInstanceId)</td></tr>
-<tr class="memdesc:a7883a1cd2003100d45eae6e670dd7990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a DropItemMessage for item with given instance id.  <a href="classClient.html#a7883a1cd2003100d45eae6e670dd7990">More...</a><br /></td></tr>
+<tr class="memdesc:a7883a1cd2003100d45eae6e670dd7990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a <a class="el" href="structDropItemMessage.html">DropItemMessage</a> for item with given instance id.  <a href="classClient.html#a7883a1cd2003100d45eae6e670dd7990">More...</a><br /></td></tr>
 <tr class="separator:a7883a1cd2003100d45eae6e670dd7990"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e89bfa822c4f41d5a8f8d4a1269311a"><td class="memItemLeft" align="right" valign="top">boost::asio::awaitable&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClient.html#a5e89bfa822c4f41d5a8f8d4a1269311a">unequipItem</a> (const int itemInstanceId)</td></tr>
-<tr class="memdesc:a5e89bfa822c4f41d5a8f8d4a1269311a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a UnequipMessage for item with given instance id.  <a href="classClient.html#a5e89bfa822c4f41d5a8f8d4a1269311a">More...</a><br /></td></tr>
+<tr class="memdesc:a5e89bfa822c4f41d5a8f8d4a1269311a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a <a class="el" href="structUnequipMessage.html">UnequipMessage</a> for item with given instance id.  <a href="classClient.html#a5e89bfa822c4f41d5a8f8d4a1269311a">More...</a><br /></td></tr>
 <tr class="separator:a5e89bfa822c4f41d5a8f8d4a1269311a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bd5853aea615d870a314ef884d8d5a5"><td class="memItemLeft" align="right" valign="top">boost::asio::awaitable&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClient.html#a1bd5853aea615d870a314ef884d8d5a5">talk</a> (const int &amp;npcId)</td></tr>
 <tr class="memdesc:a1bd5853aea615d870a314ef884d8d5a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send talk message to the server.  <a href="classClient.html#a1bd5853aea615d870a314ef884d8d5a5">More...</a><br /></td></tr>
@@ -105,7 +105,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a742373e08a80d993d2651b6fff76f5b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the client.  <a href="classClient.html#a742373e08a80d993d2651b6fff76f5b9">More...</a><br /></td></tr>
 <tr class="separator:a742373e08a80d993d2651b6fff76f5b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53b6b98d3802205726318ffc6fda5bb0"><td class="memItemLeft" align="right" valign="top">boost::asio::awaitable&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClient.html#a53b6b98d3802205726318ffc6fda5bb0">login</a> ()</td></tr>
-<tr class="memdesc:a53b6b98d3802205726318ffc6fda5bb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prompts user for login information and sends a LoginMessage with that information. Currently only username used for identification.  <a href="classClient.html#a53b6b98d3802205726318ffc6fda5bb0">More...</a><br /></td></tr>
+<tr class="memdesc:a53b6b98d3802205726318ffc6fda5bb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prompts user for login information and sends a <a class="el" href="structLoginMessage.html">LoginMessage</a> with that information. Currently only username used for identification.  <a href="classClient.html#a53b6b98d3802205726318ffc6fda5bb0">More...</a><br /></td></tr>
 <tr class="separator:a53b6b98d3802205726318ffc6fda5bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afebeedfe876105645a3937b4ee2058df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClient.html#afebeedfe876105645a3937b4ee2058df">processMessages</a> ()</td></tr>
 <tr class="memdesc:afebeedfe876105645a3937b4ee2058df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes messages from the server.  <a href="classClient.html#afebeedfe876105645a3937b4ee2058df">More...</a><br /></td></tr>
@@ -209,7 +209,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Send a DropItemMessage for item with given instance id. </p>
+<p>Send a <a class="el" href="structDropItemMessage.html">DropItemMessage</a> for item with given instance id. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">itemInstanceId</td><td></td></tr>
@@ -286,7 +286,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Prompts user for login information and sends a LoginMessage with that information. Currently only username used for identification. </p>
+<p>Prompts user for login information and sends a <a class="el" href="structLoginMessage.html">LoginMessage</a> with that information. Currently only username used for identification. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if user inputs a valid username, false otherwise. </dd></dl>
 
 </div>
@@ -427,7 +427,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Send a UnequipMessage for item with given instance id. </p>
+<p>Send a <a class="el" href="structUnequipMessage.html">UnequipMessage</a> for item with given instance id. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">itemInstanceId</td><td></td></tr>
@@ -453,7 +453,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Send a UseItemMessage for item with given instance id. </p>
+<p>Send a <a class="el" href="structUseItemMessage.html">UseItemMessage</a> for item with given instance id. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">itemInstanceId</td><td></td></tr>

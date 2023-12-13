@@ -101,10 +101,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af43e806ee7bef967ac55632b97d392ed"><td class="memItemLeft" align="right" valign="top">std::chrono::milliseconds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#af43e806ee7bef967ac55632b97d392ed">getActionTime</a> ()</td></tr>
 <tr class="memdesc:af43e806ee7bef967ac55632b97d392ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the time how long a single iteration of the action takes.  <a href="classAction.html#af43e806ee7bef967ac55632b97d392ed">More...</a><br /></td></tr>
 <tr class="separator:af43e806ee7bef967ac55632b97d392ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d0bc2831bcdb95d61454eddf8d3299d"><td class="memItemLeft" align="right" valign="top">ActionType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#a7d0bc2831bcdb95d61454eddf8d3299d">getActionType</a> ()</td></tr>
+<tr class="memitem:a7d0bc2831bcdb95d61454eddf8d3299d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950b">ActionType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#a7d0bc2831bcdb95d61454eddf8d3299d">getActionType</a> ()</td></tr>
 <tr class="memdesc:a7d0bc2831bcdb95d61454eddf8d3299d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the ActionType object.  <a href="classAction.html#a7d0bc2831bcdb95d61454eddf8d3299d">More...</a><br /></td></tr>
 <tr class="separator:a7d0bc2831bcdb95d61454eddf8d3299d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a96206e5351d01fc1924d2e2746948a"><td class="memItemLeft" align="right" valign="top">virtual CurrentAction&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#a0a96206e5351d01fc1924d2e2746948a">getActionInfo</a> ()</td></tr>
+<tr class="memitem:a0a96206e5351d01fc1924d2e2746948a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structCurrentAction.html">CurrentAction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#a0a96206e5351d01fc1924d2e2746948a">getActionInfo</a> ()</td></tr>
 <tr class="memdesc:a0a96206e5351d01fc1924d2e2746948a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns information about the current action. This is used to send information to the client.  <a href="classAction.html#a0a96206e5351d01fc1924d2e2746948a">More...</a><br /></td></tr>
 <tr class="separator:a0a96206e5351d01fc1924d2e2746948a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad90eea20bc25a93fb59078c8c8c03ace"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#ad90eea20bc25a93fb59078c8c8c03ace">isCompleted</a> ()</td></tr>
@@ -118,7 +118,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a1d2964e41388a92b30e35272b3f56f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15c7a9385ffa5134c2fa90c9f49e15d2"><td class="memItemLeft" align="right" valign="top">std::chrono::milliseconds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#a15c7a9385ffa5134c2fa90c9f49e15d2">actionTimeM</a> = std::chrono::milliseconds(0)</td></tr>
 <tr class="separator:a15c7a9385ffa5134c2fa90c9f49e15d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0163cb265c2f9c085a77c08d1f8f6cc5"><td class="memItemLeft" align="right" valign="top">ActionType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#a0163cb265c2f9c085a77c08d1f8f6cc5">actionTypeM</a> = ActionType::None</td></tr>
+<tr class="memitem:a0163cb265c2f9c085a77c08d1f8f6cc5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950b">ActionType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#a0163cb265c2f9c085a77c08d1f8f6cc5">actionTypeM</a> = <a class="el" href="Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950ba6adf97f83acf6453d4a6a4b1070f3754">ActionType::None</a></td></tr>
 <tr class="separator:a0163cb265c2f9c085a77c08d1f8f6cc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e1ef504d99e2f09ad894847a47f6138"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classEntity.html">Entity</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAction.html#a8e1ef504d99e2f09ad894847a47f6138">pEntityM</a></td></tr>
 <tr class="separator:a8e1ef504d99e2f09ad894847a47f6138"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,7 +219,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">CurrentAction Action::getActionInfo </td>
+          <td class="memname"><a class="el" href="structCurrentAction.html">CurrentAction</a> Action::getActionInfo </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -233,7 +233,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns information about the current action. This is used to send information to the client. </p>
-<dl class="section return"><dt>Returns</dt><dd>CurrentAction </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structCurrentAction.html" title="CurrentAction struct representing an action that can be performed by an entity.">CurrentAction</a> </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classRespawnAction.html#adbbc94b70638dc04b60bca767052e77a">RespawnAction</a>, <a class="el" href="classObjectInteractAction.html#a7eec88d6de92894e483ed039ed81ee29">ObjectInteractAction</a>, <a class="el" href="classMoveAction.html#af6fb27a4bfae4210125ef5824ad4b430">MoveAction</a>, and <a class="el" href="classAttackAction.html#ad49e0e16548ca1a72cc0e7da8fbbfdfa">AttackAction</a>.</p>
 
@@ -266,7 +266,7 @@ Protected Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ActionType Action::getActionType </td>
+          <td class="memname"><a class="el" href="Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950b">ActionType</a> Action::getActionType </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -349,7 +349,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ActionType Action::actionTypeM = ActionType::None</td>
+          <td class="memname"><a class="el" href="Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950b">ActionType</a> Action::actionTypeM = <a class="el" href="Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950ba6adf97f83acf6453d4a6a4b1070f3754">ActionType::None</a></td>
         </tr>
       </table>
   </td>

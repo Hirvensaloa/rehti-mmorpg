@@ -79,7 +79,7 @@ $(function() {
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="DatabaseManager_8hpp.html">database/DatabaseManager.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="GameWorld_8hpp.html">world/GameWorld.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;network.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="network_8h.html">network.h</a>&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classServer.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classServer.html">Server</a></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
@@ -90,7 +90,7 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c">processMessages</a>();</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413">handleMessage</a>(<span class="keyword">const</span> Message&amp; msg);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413">handleMessage</a>(<span class="keyword">const</span> <a class="code" href="classMessage.html">Message</a>&amp; msg);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> ticker();</div>
@@ -111,7 +111,7 @@ $(function() {
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    std::vector&lt;std::shared_ptr&lt;Connection&gt;&gt; connectionsM;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    MessageQueue messagesM;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="classMessageQueue.html">MessageQueue</a> messagesM;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    std::thread ioThreadM;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
@@ -129,11 +129,14 @@ $(function() {
 <div class="ttc" id="aGameWorld_8hpp_html"><div class="ttname"><a href="GameWorld_8hpp.html">GameWorld.hpp</a></div></div>
 <div class="ttc" id="aclassDatabaseManager_html"><div class="ttname"><a href="classDatabaseManager.html">DatabaseManager</a></div><div class="ttdoc">Class for handling database queries.</div><div class="ttdef"><b>Definition:</b> DatabaseManager.hpp:23</div></div>
 <div class="ttc" id="aclassGameWorld_html"><div class="ttname"><a href="classGameWorld.html">GameWorld</a></div><div class="ttdef"><b>Definition:</b> GameWorld.hpp:13</div></div>
+<div class="ttc" id="aclassMessageQueue_html"><div class="ttname"><a href="classMessageQueue.html">MessageQueue</a></div><div class="ttdef"><b>Definition:</b> MessageQueue.hpp:12</div></div>
+<div class="ttc" id="aclassMessage_html"><div class="ttname"><a href="classMessage.html">Message</a></div><div class="ttdef"><b>Definition:</b> Message.hpp:19</div></div>
 <div class="ttc" id="aclassServer_html"><div class="ttname"><a href="classServer.html">Server</a></div><div class="ttdoc">Main class for the server.</div><div class="ttdef"><b>Definition:</b> Server.hpp:15</div></div>
 <div class="ttc" id="aclassServer_html_a18a8fea9b1688c806fa5be9b4d5ac413"><div class="ttname"><a href="classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413">Server::handleMessage</a></div><div class="ttdeci">void handleMessage(const Message &amp;msg)</div><div class="ttdoc">Function to parse and act upon messages received from clients.</div><div class="ttdef"><b>Definition:</b> Server.cpp:84</div></div>
 <div class="ttc" id="aclassServer_html_a881ea1e86b4045e588f8cfafdd2bc441"><div class="ttname"><a href="classServer.html#a881ea1e86b4045e588f8cfafdd2bc441">Server::acceptConnections</a></div><div class="ttdeci">void acceptConnections()</div><div class="ttdoc">Function to accept new connections from clients, runs on a seperate thread.</div><div class="ttdef"><b>Definition:</b> Server.cpp:45</div></div>
 <div class="ttc" id="aclassServer_html_ad5ec9462b520e59f7ea831e157ee5e59"><div class="ttname"><a href="classServer.html#ad5ec9462b520e59f7ea831e157ee5e59">Server::Server</a></div><div class="ttdeci">Server()</div><div class="ttdef"><b>Definition:</b> Server.cpp:20</div></div>
 <div class="ttc" id="aclassServer_html_aee6c47f62d04cd4dcf435ccedfd05e2c"><div class="ttname"><a href="classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c">Server::processMessages</a></div><div class="ttdeci">void processMessages()</div><div class="ttdoc">Server's main loop for processing messages.</div><div class="ttdef"><b>Definition:</b> Server.cpp:69</div></div>
+<div class="ttc" id="anetwork_8h_html"><div class="ttname"><a href="network_8h.html">network.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

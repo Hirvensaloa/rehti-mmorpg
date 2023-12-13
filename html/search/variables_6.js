@@ -1,9 +1,19 @@
 var searchData=
 [
-  ['gameobject_5fmax_1420',['GAMEOBJECT_MAX',['../BasicTypes_8hpp.html#abe2c25d0d5503db825ae5f7a94d80e88',1,'BasicTypes.hpp']]],
-  ['gameobject_5fmin_1421',['GAMEOBJECT_MIN',['../BasicTypes_8hpp.html#a9d4119a2bbb7fcaca540fdad8842e8b5',1,'BasicTypes.hpp']]],
-  ['generalitems_1422',['generalItems',['../structGameItems.html#a7b5e6ff5cbf92e0d04a617419f814122',1,'GameItems']]],
-  ['generalobjects_1423',['generalObjects',['../structGameObjects.html#a804aea9ab57ec939e824c130a0f6657b',1,'GameObjects']]],
-  ['gltffilename_1424',['glTFFilename',['../structPlayer.html#a877460225eaa89d75d6100909fe78001',1,'Player::glTFFilename()'],['../structNPC.html#ae4884ec1173f57961bb7267ee4538d5d',1,'NPC::glTFFilename()']]],
-  ['graphicsfamily_1425',['graphicsFamily',['../structQueueFamilyIndices.html#a1e525a27a080ff5b5a4e545bdbc4da09',1,'QueueFamilyIndices']]]
+  ['gama_5fdefined_2607',['gama_defined',['../structLodePNGInfo.html#a60d6edb00a28a423dbd1bf2a693a16b0',1,'LodePNGInfo']]],
+  ['gama_5fgamma_2608',['gama_gamma',['../structLodePNGInfo.html#afd1e6f7f1fe1c473774a64148dfed25a',1,'LodePNGInfo']]],
+  ['gameobject_5fmax_2609',['GAMEOBJECT_MAX',['../BasicTypes_8hpp.html#abe2c25d0d5503db825ae5f7a94d80e88',1,'BasicTypes.hpp']]],
+  ['gameobject_5fmin_2610',['GAMEOBJECT_MIN',['../BasicTypes_8hpp.html#a9d4119a2bbb7fcaca540fdad8842e8b5',1,'BasicTypes.hpp']]],
+  ['generalitems_2611',['generalItems',['../structGameItems.html#a7b5e6ff5cbf92e0d04a617419f814122',1,'GameItems']]],
+  ['generalobjects_2612',['generalObjects',['../structGameObjects.html#a804aea9ab57ec939e824c130a0f6657b',1,'GameObjects']]],
+  ['generated_5faccess_5fmap_5fpath_2613',['GENERATED_ACCESS_MAP_PATH',['../Config_8hpp.html#af57fe6ae5d94e8390088a0b812d1e68c',1,'Config.hpp']]],
+  ['generated_5fanimations_5fhpp_5fpath_2614',['GENERATED_ANIMATIONS_HPP_PATH',['../Config_8hpp.html#a00e15c7c96c34f57a41b358bcc8ad746',1,'Config.hpp']]],
+  ['generated_5farea_5fmap_5fpath_2615',['GENERATED_AREA_MAP_PATH',['../Config_8hpp.html#abdcbaa5858b73824d75197e92b3aca56',1,'Config.hpp']]],
+  ['generated_5farea_5fobj_5fpath_2616',['GENERATED_AREA_OBJ_PATH',['../Config_8hpp.html#a21b0b566cfd67faf5950ecefad6f3613',1,'Config.hpp']]],
+  ['generated_5fassets_5fpath_2617',['GENERATED_ASSETS_PATH',['../Config_8hpp.html#a061c7b21c73060b6693f2c37b98c1822',1,'Config.hpp']]],
+  ['generated_5fheight_5fmap_5fpath_2618',['GENERATED_HEIGHT_MAP_PATH',['../Config_8hpp.html#aa4623cfc1f412bbe3b65b6dcb1127eff',1,'Config.hpp']]],
+  ['generated_5fmap_5ftexture_5fmap_5fpath_2619',['GENERATED_MAP_TEXTURE_MAP_PATH',['../Config_8hpp.html#ad39c7bbea6ea4035beb1863941ff3f57',1,'Config.hpp']]],
+  ['generated_5fobject_5fjson_5fpath_2620',['GENERATED_OBJECT_JSON_PATH',['../Config_8hpp.html#a1deb88da80a448a4291434146b79e2fb',1,'Config.hpp']]],
+  ['gltffilename_2621',['glTFFilename',['../structPlayer.html#a877460225eaa89d75d6100909fe78001',1,'Player::glTFFilename()'],['../structNPC.html#ae4884ec1173f57961bb7267ee4538d5d',1,'NPC::glTFFilename()']]],
+  ['graphicsfamily_2622',['graphicsFamily',['../structQueueFamilyIndices.html#a1e525a27a080ff5b5a4e545bdbc4da09',1,'QueueFamilyIndices']]]
 ];

@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structItemAssetData.html" title="Contains asset data loaded into memory for a specific item." alt="" coords="5,5,124,32"/>
+<area shape="rect" id="node1" href="$structGameStateEntity.html" title=" " alt="" coords="5,5,139,32"/>
+<area shape="rect" id="node2" href="$structCurrentPlayer.html" title="Current player (The player who receives the message). Contains more info which is not exposed to othe..." alt="" coords="187,5,297,32"/>
 </map>

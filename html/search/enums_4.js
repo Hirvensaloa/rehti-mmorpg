@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['slot_1566',['Slot',['../ItemReader_8hpp.html#ad4a01c7a209d816f94f4864b76f8087f',1,'ItemReader.hpp']]]
+  ['lodepngcolortype_2915',['LodePNGColorType',['../lodepng_8h.html#a8f763b6ae712d9802dec37019dfa0102',1,'lodepng.h']]],
+  ['lodepngfilterstrategy_2916',['LodePNGFilterStrategy',['../lodepng_8h.html#ad5215c95d5bedc9103d8e6490398254f',1,'lodepng.h']]]
 ];

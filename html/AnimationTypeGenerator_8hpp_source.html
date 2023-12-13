@@ -85,7 +85,7 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    std::vector&lt;std::string&gt; animationNames = <a class="code" href="AnimationReader_8cpp.html#acf7a424ee8d40510f3a350fbfa9f282e">readAnimations</a>();</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    std::ofstream hppFile(Config.GENERATED_ANIMATIONS_HPP_PATH);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    std::ofstream hppFile(<a class="code" href="Config_8hpp.html#ad0cc2507186e506752e831b40cdb5353">Config</a>.GENERATED_ANIMATIONS_HPP_PATH);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">if</span> (hppFile.is_open())</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
@@ -157,6 +157,7 @@ $(function() {
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
 <div class="ttc" id="aAnimationReader_8cpp_html_acf7a424ee8d40510f3a350fbfa9f282e"><div class="ttname"><a href="AnimationReader_8cpp.html#acf7a424ee8d40510f3a350fbfa9f282e">readAnimations</a></div><div class="ttdeci">std::vector&lt; std::string &gt; readAnimations()</div><div class="ttdoc">Reads animations described in JSON file.</div><div class="ttdef"><b>Definition:</b> AnimationReader.cpp:10</div></div>
 <div class="ttc" id="aAnimationTypeGenerator_8hpp_html_a30821e3dbdc264cc93b3a86ce57cf8fe"><div class="ttname"><a href="AnimationTypeGenerator_8hpp.html#a30821e3dbdc264cc93b3a86ce57cf8fe">generateAnimationHppFile</a></div><div class="ttdeci">void generateAnimationHppFile()</div><div class="ttdoc">Generate GeneratedAnimations.hpp file.</div><div class="ttdef"><b>Definition:</b> AnimationTypeGenerator.hpp:14</div></div>
+<div class="ttc" id="aConfig_8hpp_html_ad0cc2507186e506752e831b40cdb5353"><div class="ttname"><a href="Config_8hpp.html#ad0cc2507186e506752e831b40cdb5353">Config</a></div><div class="ttdeci">static struct @0 Config</div><div class="ttdoc">Contains the configuration values for the game.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

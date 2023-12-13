@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['skills_1592',['Skills',['../RehtiGui_8hpp.html#a9e65c39b7ba698a6aca45b7be06db7cda6bb2660822733330ca13ed03dc82249d',1,'RehtiGui.hpp']]],
-  ['south_1593',['SOUTH',['../server_2src_2world_2Utils_8hpp.html#a224b9163917ac32fc95a60d8c1eec3aaa8ef5c0bce69283a9986011a63eea8a6b',1,'Utils.hpp']]],
-  ['south_5feast_1594',['SOUTH_EAST',['../server_2src_2world_2Utils_8hpp.html#a224b9163917ac32fc95a60d8c1eec3aaad9ab50fab1cc6f797e75ef86ee46a926',1,'Utils.hpp']]],
-  ['south_5fwest_1595',['SOUTH_WEST',['../server_2src_2world_2Utils_8hpp.html#a224b9163917ac32fc95a60d8c1eec3aaa90b239afc7fa8d4642b326cc0fce0ddc',1,'Utils.hpp']]]
+  ['resource_2973',['RESOURCE',['../namespacereader.html#a0526cee19604ff986f552c5bc06d7ee7a4f49da9035f276c0947466eb7c42249a',1,'reader']]],
+  ['respawn_2974',['Respawn',['../Types_8hpp.html#a21d5e8f8cdaa838586b31007df0a950baad566b6224151be0d95e6d4ffc6dc1af',1,'Types.hpp']]],
+  ['ring_2975',['RING',['../ItemReader_8hpp.html#ad4a01c7a209d816f94f4864b76f8087fae69b8a2544417fb71e2767e95d7ac8f3',1,'ItemReader.hpp']]]
 ];

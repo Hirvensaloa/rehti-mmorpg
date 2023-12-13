@@ -1,0 +1,8 @@
+<map id="AssetManager" name="AssetManager">
+<area shape="rect" id="node1" title="Holds definitions to all the items, objects and skills in the game. This class is used to fetch the d..." alt="" coords="195,273,309,300"/>
+<area shape="rect" id="node2" href="$da/d28/structGameCharacters.html" title="Contains all the character data. This is used to load character assets into memory and spawn characte..." alt="" coords="32,184,163,211"/>
+<area shape="rect" id="node3" href="$dc/d7b/structPlayer.html" title=" " alt="" coords="66,95,129,121"/>
+<area shape="rect" id="node4" href="$dd/df0/structSpawnCoordinateBounds.html" title=" " alt="" coords="5,5,189,32"/>
+<area shape="rect" id="node5" href="$dd/db4/structGameItems.html" title="Contains all the item data in the game. This is used to load item assets into memory and create item ..." alt="" coords="203,184,301,211"/>
+<area shape="rect" id="node6" href="$db/df2/structGameObjects.html" title="Contains all the objects defined in the objects.json file." alt="" coords="326,184,437,211"/>
+</map>

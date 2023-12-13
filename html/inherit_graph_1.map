@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classAction.html" title="Represents an action that an entity can perform." alt="" coords="5,81,68,108"/>
-<area shape="rect" id="node2" href="$classAttackAction.html" title=" " alt="" coords="141,5,246,32"/>
-<area shape="rect" id="node3" href="$classMoveAction.html" title=" " alt="" coords="144,56,243,83"/>
-<area shape="rect" id="node4" href="$classObjectInteractAction.html" title=" " alt="" coords="116,107,271,133"/>
-<area shape="rect" id="node5" href="$classRespawnAction.html" title="Action used for respawning entities." alt="" coords="132,157,255,184"/>
+<area shape="rect" id="node1" href="$db/d09/classAction.html" title="Represents an action that an entity can perform." alt="" coords="5,81,68,108"/>
+<area shape="rect" id="node2" href="$dd/d98/classAttackAction.html" title=" " alt="" coords="141,5,246,32"/>
+<area shape="rect" id="node3" href="$d7/ded/classMoveAction.html" title=" " alt="" coords="144,56,243,83"/>
+<area shape="rect" id="node4" href="$d5/d4d/classObjectInteractAction.html" title=" " alt="" coords="116,107,271,133"/>
+<area shape="rect" id="node5" href="$db/d1d/classRespawnAction.html" title="Action used for respawning entities." alt="" coords="132,157,255,184"/>
 </map>

@@ -1,0 +1,5 @@
+<map id="MoveAction" name="MoveAction">
+<area shape="rect" id="node1" title=" " alt="" coords="39,95,138,121"/>
+<area shape="rect" id="node2" href="$db/d09/classAction.html" title="Represents an action that an entity can perform." alt="" coords="5,5,68,32"/>
+<area shape="rect" id="node3" href="$dc/d27/structCoordinates.html" title="Struct for coordinates." alt="" coords="92,5,192,32"/>
+</map>

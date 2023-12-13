@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['x_2872',['x',['../structCoordinates.html#a11c878fbd2d0805c91af17d2ba2289a1',1,'Coordinates::x()'],['../structVertex.html#aa592e1564aa3b226ff629b824b240310',1,'Vertex::x()'],['../structObjectLocation.html#a3b44c2c55bd8d984d599ed0860e3ff93',1,'ObjectLocation::x()'],['../structMoveMessage.html#af378af150ae07ca7e8ab9964fe9918a9',1,'MoveMessage::x()'],['../structGameStateObject.html#a34a2c8440df08820cdf73c606098c3a1',1,'GameStateObject::x()'],['../structCoordinate.html#ad462d671f1feb865911333e3ff5f0a5d',1,'Coordinate::x()'],['../structGameStateEntity.html#ac50cc77e09bbabfb594f1f6909884183',1,'GameStateEntity::x()']]],
-  ['xmax_2873',['xMax',['../structSpawnCoordinateBounds.html#aac1aeabb5558cc9eca5ab2c915894325',1,'SpawnCoordinateBounds']]],
-  ['xmin_2874',['xMin',['../structSpawnCoordinateBounds.html#a3ecb877840c5594857b3c1d783768dff',1,'SpawnCoordinateBounds']]],
-  ['xp_2875',['xp',['../structSkillInfo.html#adcd6bfaa8abdcc37cf4eed386076fdb6',1,'SkillInfo::xp()'],['../structSkill.html#a371569b6831bb3ca1454cb5f69762c6b',1,'Skill::xp()']]],
-  ['xppertransform_2876',['xpPerTransform',['../structItemTransform.html#abce21253ad99b356312cf7d1e4263c3e',1,'ItemTransform']]],
-  ['xpperyield_2877',['xpPerYield',['../structYieldableItems.html#a01ff1ef5263feaef4d109adf7f6c8f14',1,'YieldableItems']]],
-  ['xprequirement_2878',['xpRequirement',['../structResourceObjectStruct.html#a25775da5c474c20ed07952e422387cc5',1,'ResourceObjectStruct']]]
+  ['weight_3365',['weight',['../de/de8/structBPMNode.html#a349ff0204b52858db88a47940509f14e',1,'BPMNode']]],
+  ['width_3366',['width',['../d5/df1/structImageData.html#adb4f71231e40fe71fd7e0590881f94d0',1,'ImageData']]],
+  ['widthm_3367',['widthM',['../d1/df0/classCamera.html#a396200a14161b3e34cc174f837e8a2c3',1,'Camera::widthM()'],['../d7/d6d/classRehtiGraphics.html#a5fdf855c2f8d1484528c9830588dba9a',1,'RehtiGraphics::widthM()']]],
+  ['windowheightm_3368',['windowHeightM',['../d3/ddd/classRehtiGui.html#a8552f58aca06f9fae34c44b94a16b642',1,'RehtiGui']]],
+  ['windowsize_3369',['windowsize',['../d7/df2/structLodePNGCompressSettings.html#a01e77a9db5c2c4dfe6c79bf04f0bf84e',1,'LodePNGCompressSettings']]],
+  ['windowwidthm_3370',['windowWidthM',['../d3/ddd/classRehtiGui.html#a2f402dd5b2bfc1ebcf88393d09f51076',1,'RehtiGui']]],
+  ['workguardm_3371',['workGuardM',['../db/d00/classServer.html#a1d9a5b3b9836e03af58d16ccb3c9bbc1',1,'Server::workGuardM()'],['../d1/d37/classClient.html#a2c76ea84c61d2bdc36004ddf8ad755d5',1,'Client::workGuardM()']]],
+  ['writesetsm_3372',['writeSetsM',['../dc/db4/classDescriptorBuilder.html#a076a14eec82f58761d996ccfe4403a69',1,'DescriptorBuilder']]]
 ];

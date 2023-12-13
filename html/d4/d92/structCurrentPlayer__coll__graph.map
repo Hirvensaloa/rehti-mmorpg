@@ -1,0 +1,6 @@
+<map id="CurrentPlayer" name="CurrentPlayer">
+<area shape="rect" id="node1" title="Current player (The player who receives the message). Contains more info which is not exposed to othe..." alt="" coords="17,260,127,287"/>
+<area shape="rect" id="node2" href="$db/de6/structGameStateEntity.html" title=" " alt="" coords="5,184,139,211"/>
+<area shape="rect" id="node3" href="$d2/d52/structCurrentAction.html" title="CurrentAction struct representing an action that can be performed by an entity." alt="" coords="17,95,127,121"/>
+<area shape="rect" id="node4" href="$d1/d60/structCoordinate.html" title=" " alt="" coords="25,5,119,32"/>
+</map>

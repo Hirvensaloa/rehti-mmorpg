@@ -1,0 +1,7 @@
+<map id="Action" name="Action">
+<area shape="rect" id="node1" title="Represents an action that an entity can perform." alt="" coords="228,5,291,32"/>
+<area shape="rect" id="node2" href="$dd/d98/classAttackAction.html" title=" " alt="" coords="5,80,111,107"/>
+<area shape="rect" id="node3" href="$d7/ded/classMoveAction.html" title=" " alt="" coords="135,80,234,107"/>
+<area shape="rect" id="node4" href="$d5/d4d/classObjectInteractAction.html" title=" " alt="" coords="258,80,413,107"/>
+<area shape="rect" id="node5" href="$db/d1d/classRespawnAction.html" title="Action used for respawning entities." alt="" coords="437,80,559,107"/>
+</map>

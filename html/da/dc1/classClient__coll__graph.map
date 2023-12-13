@@ -1,0 +1,17 @@
+<map id="Client" name="Client">
+<area shape="rect" id="node1" title=" " alt="" coords="363,439,423,465"/>
+<area shape="rect" id="node2" href="$d3/df0/classMessageQueue.html" title=" " alt="" coords="69,349,191,376"/>
+<area shape="rect" id="node3" href="$dd/d17/classAssetCache.html" title="Loads all of the assets into memory (objects, textures, etc.)." alt="" coords="215,349,314,376"/>
+<area shape="rect" id="node4" href="$d5/df1/structImageData.html" title=" " alt="" coords="5,260,100,287"/>
+<area shape="rect" id="node5" href="$d7/d6d/classRehtiGraphics.html" title=" " alt="" coords="339,349,452,376"/>
+<area shape="rect" id="node6" href="$dd/d85/classTimerCallbackSystem.html" title="Class for handling smooth interpolation of events. A callback can be registered with a given id and t..." alt="" coords="125,260,290,287"/>
+<area shape="rect" id="node7" href="$d1/df0/classCamera.html" title=" " alt="" coords="315,260,388,287"/>
+<area shape="rect" id="node8" href="$d1/d0a/structEngineStatistics.html" title=" " alt="" coords="412,260,539,287"/>
+<area shape="rect" id="node9" href="$df/d96/structAllocatedImage.html" title=" " alt="" coords="563,260,687,287"/>
+<area shape="rect" id="node10" href="$d2/daa/structHit.html" title=" " alt="" coords="485,349,527,376"/>
+<area shape="rect" id="node11" href="$d2/d33/structGameStateMessage.html" title=" " alt="" coords="636,349,789,376"/>
+<area shape="rect" id="node12" href="$d6/d7f/structCurrentPlayer.html" title="Current player (The player who receives the message). Contains more info which is not exposed to othe..." alt="" coords="711,260,821,287"/>
+<area shape="rect" id="node13" href="$db/de6/structGameStateEntity.html" title=" " alt="" coords="699,184,833,211"/>
+<area shape="rect" id="node14" href="$d2/d52/structCurrentAction.html" title="CurrentAction struct representing an action that can be performed by an entity." alt="" coords="711,95,821,121"/>
+<area shape="rect" id="node15" href="$d1/d60/structCoordinate.html" title=" " alt="" coords="719,5,813,32"/>
+</map>

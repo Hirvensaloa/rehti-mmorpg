@@ -1,7 +1,25 @@
 var searchData=
 [
-  ['validmember_2424',['validMember',['../RapidjsonHelpers_8cpp.html#a06910a135e488eced76c3354fb3a2a7e',1,'validMember(const rapidjson::Value &amp;value, const std::string &amp;memberName, ValueType type, bool printError):&#160;RapidjsonHelpers.cpp'],['../RapidjsonHelpers_8hpp.html#a22099430f0f4690744a72fc8bb831fbb',1,'validMember(const rapidjson::Value &amp;value, const std::string &amp;memberName, ValueType type, bool printError=true):&#160;RapidjsonHelpers.cpp']]],
-  ['validspawncoordinatebounds_2425',['validSpawnCoordinateBounds',['../CharacterReader_8cpp.html#a56581b803e4cb4205c729df269203a3f',1,'validSpawnCoordinateBounds(SpawnCoordinateBounds spawnCoordinateBounds, int worldWidth, int worldHeight):&#160;CharacterReader.cpp'],['../CharacterReader_8hpp.html#a56581b803e4cb4205c729df269203a3f',1,'validSpawnCoordinateBounds(SpawnCoordinateBounds spawnCoordinateBounds, int worldWidth, int worldHeight):&#160;CharacterReader.cpp']]],
-  ['valuetypetostring_2426',['valueTypeToString',['../RapidjsonHelpers_8cpp.html#a2e43a36fa8b3b1eb37ddf7059e6d6db8',1,'valueTypeToString(ValueType type):&#160;RapidjsonHelpers.cpp'],['../RapidjsonHelpers_8hpp.html#a2e43a36fa8b3b1eb37ddf7059e6d6db8',1,'valueTypeToString(ValueType type):&#160;RapidjsonHelpers.cpp']]],
-  ['vertex_2427',['Vertex',['../structVertex.html#a2c558c054a0a2c970588c063073803a0',1,'Vertex']]]
+  ['ucvector_5finit_2739',['ucvector_init',['../dd/dc0/lodepng_8cpp.html#a60a049b22568cd14fac6be2e13e89264',1,'lodepng.cpp']]],
+  ['ucvector_5freserve_2740',['ucvector_reserve',['../dd/dc0/lodepng_8cpp.html#a425d1b818abf2c2c221449f5bbbe6b60',1,'lodepng.cpp']]],
+  ['ucvector_5fresize_2741',['ucvector_resize',['../dd/dc0/lodepng_8cpp.html#ae4e2da90ae4abb858852f211eb28d622',1,'lodepng.cpp']]],
+  ['uivector_5fcleanup_2742',['uivector_cleanup',['../dd/dc0/lodepng_8cpp.html#a58616079535e14a89a469632d078d336',1,'lodepng.cpp']]],
+  ['uivector_5finit_2743',['uivector_init',['../dd/dc0/lodepng_8cpp.html#aa03164e774d0dea9886ccdbb3f591f49',1,'lodepng.cpp']]],
+  ['uivector_5fpush_5fback_2744',['uivector_push_back',['../dd/dc0/lodepng_8cpp.html#a5cfb7c89e9f18896101fddb10786cbc2',1,'lodepng.cpp']]],
+  ['uivector_5fresize_2745',['uivector_resize',['../dd/dc0/lodepng_8cpp.html#a348bbe51fbdd2881e2caabe468611a26',1,'lodepng.cpp']]],
+  ['unequip_2746',['unequip',['../d1/d42/classEquipment.html#a387a4ffde7aa0d0cf27612da45182cfe',1,'Equipment']]],
+  ['unequipitem_2747',['unequipItem',['../d1/d37/classClient.html#a5e89bfa822c4f41d5a8f8d4a1269311a',1,'Client']]],
+  ['unfilter_2748',['unfilter',['../dd/dc0/lodepng_8cpp.html#a39d1622b642f0bc9d90900a8933d1da8',1,'lodepng.cpp']]],
+  ['unfilterscanline_2749',['unfilterScanline',['../dd/dc0/lodepng_8cpp.html#a89921f11a4106a6174ce974e008b25a6',1,'lodepng.cpp']]],
+  ['update_2750',['update',['../d8/d9c/classPlayerCharacter.html#a6a0338ab611988c7ace3f14d82bad13e',1,'PlayerCharacter::update()'],['../da/de6/classPassiveNpc.html#a09827b4717c77c7cbe16665ac954168d',1,'PassiveNpc::update()'],['../df/d30/classNpc.html#a02469aac6500ae06782d0f75148d5b50',1,'Npc::update()'],['../da/d61/classEntity.html#a59a29d9b7474baf13c9c76859242287d',1,'Entity::update()'],['../dd/d9d/classAggressiveNpc.html#ac9bad388273f1b1f1ab9ba59b83f089f',1,'AggressiveNpc::update()']]],
+  ['update_5fadler32_2751',['update_adler32',['../dd/dc0/lodepng_8cpp.html#a6b8e3bf04ec5a378eabb8851728421dd',1,'lodepng.cpp']]],
+  ['updatecharacterdescriptor_2752',['updateCharacterDescriptor',['../d2/d70/classGraphicsObjectManager.html#a910dd51e70870f3722929248389d2e5f',1,'GraphicsObjectManager']]],
+  ['updategameworld_2753',['updateGameWorld',['../d5/d78/classGameWorld.html#af562a0de20546a4b69c309fa6a742d4a',1,'GameWorld']]],
+  ['updatehashchain_2754',['updateHashChain',['../dd/dc0/lodepng_8cpp.html#a51f66e0bdf02611b97c119279fed51e6',1,'lodepng.cpp']]],
+  ['updateobjectdescriptor_2755',['updateObjectDescriptor',['../d2/d70/classGraphicsObjectManager.html#a8acb83e2be6ac72bc4a3123dc0111b68',1,'GraphicsObjectManager']]],
+  ['updatetestobject_2756',['updateTestObject',['../d2/d70/classGraphicsObjectManager.html#ae66832cb94faab7096807f10df1f0f65',1,'GraphicsObjectManager']]],
+  ['uploadended_2757',['uploadEnded',['../d3/ddd/classRehtiGui.html#a42dc48eaec5a585787f7b4f76a47aa3f',1,'RehtiGui']]],
+  ['uploadfonts_2758',['uploadFonts',['../d3/ddd/classRehtiGui.html#ab00ca0c03e997ead6333978ad70b1690',1,'RehtiGui']]],
+  ['use_2759',['use',['../d0/dae/classItem.html#af6b967e4234d297a17d187e40dd23e1c',1,'Item::use()'],['../d8/d81/classFoodItem.html#aa973b99f39c57b819fdbf638aa676e11',1,'FoodItem::use()'],['../dd/dc3/classEquippableItem.html#ae31b6510e30e1bf80125e9821f40f7e3',1,'EquippableItem::use()']]],
+  ['useitem_2760',['useItem',['../d1/d37/classClient.html#a4ab2c62c905b79659c11a276c24dc2a2',1,'Client::useItem()'],['../dd/d7a/classInventory.html#a3e0483d7cf95b5529970ba20c71cb501',1,'Inventory::useItem()']]]
 ];

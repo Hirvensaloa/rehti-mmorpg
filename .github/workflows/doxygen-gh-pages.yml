@@ -19,5 +19,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: docs
-          target_folder: docs
+          target_folder: .
           config_file: docs/Doxyfile

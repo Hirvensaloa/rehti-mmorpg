@@ -1,6 +1,0 @@
-<map id="AggressiveNpc" name="AggressiveNpc">
-<area shape="rect" id="node1" title="AggressiveNpc is a type of Npc that attacks the player within its aggression range." alt="" coords="25,244,144,271"/>
-<area shape="rect" id="node2" href="$classNpc.html" title="Base NPC class. It represents a peaceful NPC that does not attack the player under any circumstances." alt="" coords="61,169,108,196"/>
-<area shape="rect" id="node3" href="$classEntity.html" title=" " alt="" coords="55,95,115,121"/>
-<area shape="rect" id="node4" title=" " alt="" coords="5,5,164,47"/>
-</map>

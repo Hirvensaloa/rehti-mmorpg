@@ -1,0 +1,4 @@
+<map id="ItemAssetData" name="ItemAssetData">
+<area shape="rect" id="node1" title="Contains asset data loaded into memory for a specific item." alt="" coords="5,109,124,136"/>
+<area shape="rect" id="node2" href="$structImageData.html" title=" " alt="" coords="17,5,112,32"/>
+</map>

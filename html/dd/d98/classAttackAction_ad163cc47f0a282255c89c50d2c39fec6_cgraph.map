@@ -1,0 +1,8 @@
+<map id="AttackAction::act" name="AttackAction::act">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,139,57"/>
+<area shape="rect" id="node2" href="$dd/d98/classAttackAction.html#ac867c6e8d4ce94d908fad8c80a13eb5a" title="Finds a path to the target." alt="" coords="187,23,365,65"/>
+<area shape="rect" id="node3" href="$d7/db0/classMap.html#a693fa7c9f08dfb26f74afce62d795b59" title="Finds a path from start to end." alt="" coords="413,31,524,57"/>
+<area shape="rect" id="node4" href="$d9/de9/server_2src_2world_2Utils_8cpp.html#ac2a70af5436b8b68792d3d467a42cc98" title="A&#45;star algorithm made to work with the access map format. Allows diagonal movement and has a heuristi..." alt="" coords="572,31,627,57"/>
+<area shape="rect" id="node5" href="$d9/de9/server_2src_2world_2Utils_8cpp.html#a301851ebbe7e47130cde965d54a9b220" title="Calculate the euclidean distance between two points." alt="" coords="675,5,817,32"/>
+<area shape="rect" id="node6" href="$d9/de9/server_2src_2world_2Utils_8cpp.html#a1e58627f4f02de892dd1d1931b08243f" title="Check if cell is valid and accessible from given direction." alt="" coords="701,56,791,83"/>
+</map>

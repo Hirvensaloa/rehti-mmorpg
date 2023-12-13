@@ -1,0 +1,5 @@
+<map id="RehtiGraphics::forceGameObjectMove" name="RehtiGraphics::forceGameObjectMove">
+<area shape="rect" id="node1" title="Forces the game object to move to the given location, quitting any remaining movement callbacks." alt="" coords="5,35,199,76"/>
+<area shape="rect" id="node2" href="$dd/d85/classTimerCallbackSystem.html#abbe5757fb1797f2e2bb229a28023201f" title="Immediately forces the removal of the callback with the given id, without finishing the remaining tim..." alt="" coords="286,5,451,47"/>
+<area shape="rect" id="node3" href="$d7/d6d/classRehtiGraphics.html#a1a332491febf46b86750d5d73e3e97ad" title="Helper function to move a bounding box." alt="" coords="247,71,491,98"/>
+</map>

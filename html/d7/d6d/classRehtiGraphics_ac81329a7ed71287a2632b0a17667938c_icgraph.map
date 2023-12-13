@@ -1,0 +1,12 @@
+<map id="RehtiGraphics::chooseSwapSurfaceFormat" name="RehtiGraphics::chooseSwapSurfaceFormat">
+<area shape="rect" id="node1" title="Chooses a surface format." alt="" coords="1623,27,1825,69"/>
+<area shape="rect" id="node2" href="$d7/d6d/classRehtiGraphics.html#a2c18492cbece076acf3d35ddd1b5d7cb" title="Creates the swapchain." alt="" coords="1377,27,1575,69"/>
+<area shape="rect" id="node3" href="$d7/d6d/classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3" title="Initializes vulkan instance." alt="" coords="1131,5,1317,32"/>
+<area shape="rect" id="node5" href="$d7/d6d/classRehtiGraphics.html#a203320e8973b2886132afadb3e2dd7f9" title="Recreates the swapchain." alt="" coords="1119,57,1329,98"/>
+<area shape="rect" id="node4" href="$d7/d6d/classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469" title="Initializes the graphics backend." alt="" coords="859,5,1071,32"/>
+<area shape="rect" id="node6" href="$d7/d6d/classRehtiGraphics.html#ac049915f0d6b38117ece68d74eaec027" title="Draws a frame and records the previous frame time." alt="" coords="867,64,1062,91"/>
+<area shape="rect" id="node7" href="$d7/d6d/classRehtiGraphics.html#a82d71e93dd76cde425cc34df93cf4723" title="Loops, polls events and draws frames." alt="" coords="625,64,811,91"/>
+<area shape="rect" id="node8" href="$d7/d6d/classRehtiGraphics.html#aba5f89e9dc6f91cfef79f525151a067d" title="Starts a rendering loop until the window is closed." alt="" coords="363,64,577,91"/>
+<area shape="rect" id="node9" href="$d1/d37/classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,64,315,91"/>
+<area shape="rect" id="node10" href="$d1/d37/classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="5,64,112,91"/>
+</map>

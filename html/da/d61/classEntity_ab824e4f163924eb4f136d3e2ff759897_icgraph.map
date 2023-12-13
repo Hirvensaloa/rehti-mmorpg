@@ -1,0 +1,8 @@
+<map id="Entity::getName" name="Entity::getName">
+<area shape="rect" id="node1" title="Get the name of this entity." alt="" coords="489,107,616,133"/>
+<area shape="rect" id="node2" href="$da/d61/classEntity.html#a47790391860583a3c1c41dd5f8e532e6" title="Perform an attack on target entity." alt="" coords="285,5,393,32"/>
+<area shape="rect" id="node3" href="$d8/d9c/classPlayerCharacter.html#a48c9398c4d91b8adb78a7fe2a8ad9ddf" title="Performs player&#39;s attack on target entity. Calculates hit chance and damage, and on succesful hit app..." alt="" coords="251,56,426,83"/>
+<area shape="rect" id="node4" href="$da/d47/classResourceObject.html#aef108c1b74c650c9a0c0bfcb5d25d8c5" title="Check if the entity can interact with the object." alt="" coords="236,107,441,133"/>
+<area shape="rect" id="node5" href="$da/d47/classResourceObject.html#aaee08d1b37836242c2ede45abbf7df71" title="Interact with the object." alt="" coords="5,132,188,159"/>
+<area shape="rect" id="node6" href="$d7/d3a/classLootObject.html#a4ef8634a19756ec50a158923bab05fc7" title="Interact with the object." alt="" coords="263,208,414,235"/>
+</map>

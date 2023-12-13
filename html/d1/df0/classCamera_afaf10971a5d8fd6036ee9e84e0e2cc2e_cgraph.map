@@ -1,0 +1,4 @@
+<map id="Camera::move" name="Camera::move">
+<area shape="rect" id="node1" title="Moves both the camera and the camera target by the given vector." alt="" coords="5,5,124,32"/>
+<area shape="rect" id="node2" href="$d1/df0/classCamera.html#a9cdd547b79e817e68bf62f2bc256ee02" title="Moves the camera by the given vector." alt="" coords="172,5,345,32"/>
+</map>

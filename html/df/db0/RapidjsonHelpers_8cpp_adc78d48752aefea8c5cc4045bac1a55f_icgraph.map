@@ -1,0 +1,19 @@
+<map id="parseDocument" name="parseDocument">
+<area shape="rect" id="node1" title="Parses a string into a rapidjson document." alt="" coords="859,233,984,260"/>
+<area shape="rect" id="node2" href="$d9/d32/classMessageApi.html#a7b60d0df5208867e213b6977cd7dfa5c" title="Parse received attack message body." alt="" coords="599,107,785,133"/>
+<area shape="rect" id="node6" href="$d9/d32/classMessageApi.html#a52c324a1829023525da86194a03cc7c1" title="Parse received DropItemMessage body." alt="" coords="589,157,795,184"/>
+<area shape="rect" id="node7" href="$d9/d32/classMessageApi.html#a659cb92306d636d7604d92e635d1cefe" title="Parse received game state message body." alt="" coords="583,5,801,32"/>
+<area shape="rect" id="node11" href="$d9/d32/classMessageApi.html#ae95f1734de57fc8dfc3aaacf23b15cb4" title="Parse received informative message body." alt="" coords="581,56,803,83"/>
+<area shape="rect" id="node12" href="$d9/d32/classMessageApi.html#a4047b45cf04bfb04f3875d176a66dbd5" title="Parse received login message body." alt="" coords="602,208,782,235"/>
+<area shape="rect" id="node13" href="$d9/d32/classMessageApi.html#ab4d05517efa68dd0fd431fdf393037e9" title="Parse received move message body." alt="" coords="601,259,783,285"/>
+<area shape="rect" id="node14" href="$d9/d32/classMessageApi.html#a932f360ea725a51b99d67328faa855e7" title="Parse received object interaction message body." alt="" coords="573,309,811,336"/>
+<area shape="rect" id="node15" href="$d9/d32/classMessageApi.html#af5e75fd9e9dc2b889198ceb5624c7ad6" title="Parse received talk message body." alt="" coords="607,360,777,387"/>
+<area shape="rect" id="node16" href="$d9/d32/classMessageApi.html#a429cc85fb1d2331fbfe682a599d2d82a" title="Parse received UnequipMessage body." alt="" coords="593,411,791,437"/>
+<area shape="rect" id="node17" href="$d9/d32/classMessageApi.html#a2bfc506643f9d64164615fe13bf4a42f" title="Parse received UseItemMessage body." alt="" coords="592,461,792,488"/>
+<area shape="rect" id="node3" href="$db/d00/classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413" title="Function to parse and act upon messages received from clients." alt="" coords="347,284,521,311"/>
+<area shape="rect" id="node4" href="$db/d00/classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c" title="Server&#39;s main loop for processing messages." alt="" coords="108,284,295,311"/>
+<area shape="rect" id="node5" href="$dc/d17/server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,284,60,311"/>
+<area shape="rect" id="node8" href="$d1/d37/classClient.html#afebeedfe876105645a3937b4ee2058df" title="Processes messages from the server." alt="" coords="343,31,525,57"/>
+<area shape="rect" id="node9" href="$d1/d37/classClient.html#a742373e08a80d993d2651b6fff76f5b9" title="Starts the client." alt="" coords="152,31,251,57"/>
+<area shape="rect" id="node10" href="$dc/dad/client_2src_2Main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
+</map>

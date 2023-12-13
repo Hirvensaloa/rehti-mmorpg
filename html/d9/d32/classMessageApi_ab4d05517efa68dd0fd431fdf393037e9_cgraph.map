@@ -1,0 +1,6 @@
+<map id="MessageApi::parseMove" name="MessageApi::parseMove">
+<area shape="rect" id="node1" title="Parse received move message body." alt="" coords="5,31,187,57"/>
+<area shape="rect" id="node2" href="$df/db0/RapidjsonHelpers_8cpp.html#adc78d48752aefea8c5cc4045bac1a55f" title="Parses a string into a rapidjson document." alt="" coords="235,5,360,32"/>
+<area shape="rect" id="node3" href="$df/db0/RapidjsonHelpers_8cpp.html#a06910a135e488eced76c3354fb3a2a7e" title="Check if rapidjson value contains a member with the given name AND check that the type matches the gi..." alt="" coords="243,56,351,83"/>
+<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a2e43a36fa8b3b1eb37ddf7059e6d6db8" title="Convertes ValueType to string." alt="" coords="408,56,548,83"/>
+</map>

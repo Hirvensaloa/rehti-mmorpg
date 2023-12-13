@@ -1,0 +1,7 @@
+<map id="RehtiGui::newFrame" name="RehtiGui::newFrame">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,160,83"/>
+<area shape="rect" id="node2" href="$d3/ddd/classRehtiGui.html#a748c7f0cb7eca33108efbb7f170bdf8d" title="Draws equipment tab to GUI window." alt="" coords="208,5,396,32"/>
+<area shape="rect" id="node4" href="$d3/ddd/classRehtiGui.html#a7f442c86a95465c4b99a654cd3fca7d3" title="Draws inventory tab to GUI window." alt="" coords="212,56,392,83"/>
+<area shape="rect" id="node5" href="$d3/ddd/classRehtiGui.html#af7bf7c9f09fa5ad744da6839788b5cb2" title="Draws skills tab to GUI window." alt="" coords="225,107,379,133"/>
+<area shape="rect" id="node3" href="$d3/ddd/classRehtiGui.html#a4b74abcf40dce26a7076ee634c9f8b92" title="Helper function for a single equipment slot." alt="" coords="444,5,657,32"/>
+</map>

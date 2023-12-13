@@ -1,0 +1,6 @@
+<map id="RehtiGraphics::isDeviceSuitable" name="RehtiGraphics::isDeviceSuitable">
+<area shape="rect" id="node1" title="Checks whether the given device supports the required features." alt="" coords="749,13,980,39"/>
+<area shape="rect" id="node2" href="$d7/d6d/classRehtiGraphics.html#aa22ca7610c8b7bbef6825db97feb4b8c" title="Chooses an appropriate gpu." alt="" coords="499,5,701,47"/>
+<area shape="rect" id="node3" href="$d7/d6d/classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3" title="Initializes vulkan instance." alt="" coords="265,13,451,39"/>
+<area shape="rect" id="node4" href="$d7/d6d/classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469" title="Initializes the graphics backend." alt="" coords="5,13,217,39"/>
+</map>

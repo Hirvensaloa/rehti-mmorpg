@@ -1,0 +1,5 @@
+<map id="MessageApi::createUnequip" name="MessageApi::createUnequip">
+<area shape="rect" id="node1" title="Create a MessageStruct for unequipping item." alt="" coords="5,31,209,57"/>
+<area shape="rect" id="node2" href="$df/db0/RapidjsonHelpers_8cpp.html#a59f6cf501e740544668f6340bb64d99a" title="Creates rapidjson document *." alt="" coords="257,5,388,32"/>
+<area shape="rect" id="node3" href="$df/db0/RapidjsonHelpers_8cpp.html#a7d05a2aa9e4c418be1b3a18cd4190b83" title="Creates a string from a rapidjson document." alt="" coords="272,56,373,83"/>
+</map>

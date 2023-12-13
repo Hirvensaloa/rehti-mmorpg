@@ -1,0 +1,13 @@
+<map id="Npc::Npc" name="Npc::Npc">
+<area shape="rect" id="node1" title=" " alt="" coords="5,165,85,192"/>
+<area shape="rect" id="node2" href="$dd/d7a/classInventory.html#a9e1fad5a5f8ef1d2aec5ba9d86531d0d" title="Adds item(s) to inventory." alt="" coords="158,48,303,75"/>
+<area shape="rect" id="node3" href="$da/d74/classAssetManager.html#a7112131ee4657d508b2029eebb3975f6" title="Creates an instance of an item." alt="" coords="133,99,328,141"/>
+<area shape="rect" id="node9" href="$dd/db4/structGameItems.html#a5095720ca872030b60a9edce77def289" title=" " alt="" coords="149,165,312,192"/>
+<area shape="rect" id="node10" href="$da/d61/classEntity.html#a1f1ef1b13908ffef9f2c4f2f455fdb71" title="Get the Inventory object of this entity." alt="" coords="155,216,306,243"/>
+<area shape="rect" id="node11" href="$da/d74/classAssetManager.html#a5964947567c6cd30b292b25510830123" title="Get the GameItems object." alt="" coords="140,267,321,293"/>
+<area shape="rect" id="node4" href="$dd/db4/structGameItems.html#aa28c24034d12b17b9f85d9c46d9cb9a1" title=" " alt="" coords="404,5,577,32"/>
+<area shape="rect" id="node5" href="$dd/db4/structGameItems.html#a12d353035869abb44b959b2fd56dc320" title=" " alt="" coords="376,56,605,83"/>
+<area shape="rect" id="node6" href="$dd/db4/structGameItems.html#a5525518c6b68815489b0453e43da1024" title=" " alt="" coords="397,107,585,133"/>
+<area shape="rect" id="node7" href="$dd/db4/structGameItems.html#a0947ecd8654943fb367afd0bcb0d37b4" title=" " alt="" coords="387,157,595,184"/>
+<area shape="rect" id="node8" href="$dd/db4/structGameItems.html#af9a7b3d5920e2b356499038c77ff4498" title=" " alt="" coords="397,208,584,235"/>
+</map>

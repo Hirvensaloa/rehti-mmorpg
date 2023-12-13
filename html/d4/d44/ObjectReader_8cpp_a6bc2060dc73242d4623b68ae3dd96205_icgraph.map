@@ -1,0 +1,12 @@
+<map id="fetchYieldableItemList" name="fetchYieldableItemList">
+<area shape="rect" id="node1" title=" " alt="" coords="989,56,1157,83"/>
+<area shape="rect" id="node2" href="$d4/d44/ObjectReader_8cpp.html#ad6b3fd19ac4147a4760304254626b9fb" title="Reads objects defined in the objects.json file and returns them as a GameObjects struct." alt="" coords="837,56,941,83"/>
+<area shape="rect" id="node3" href="$dd/d17/classAssetCache.html#a65f5a313ec992e8d4fd1212272f404d0" title="Loads all the assets into memory." alt="" coords="603,5,781,32"/>
+<area shape="rect" id="node6" href="$da/d74/classAssetManager.html#a7e4bdea0c4d3ffa0c4142cb108ab1b09" title="Loads all the assets into memory." alt="" coords="595,56,789,83"/>
+<area shape="rect" id="node10" href="$d5/da8/rehtiLib_2assets_2loader_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="665,107,719,133"/>
+<area shape="rect" id="node4" href="$d1/d37/classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="387,5,542,32"/>
+<area shape="rect" id="node5" href="$d1/d37/classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="198,5,305,32"/>
+<area shape="rect" id="node7" href="$d5/d78/classGameWorld.html#ab78e304a7c2babd4addacd751b56c98c" title="Initializes the game world. Loads assets and map. Adds npcs and objects to the world." alt="" coords="383,56,547,83"/>
+<area shape="rect" id="node8" href="$db/d00/classServer.html#a50304dfbea44f60fb1da1f4754d582dd" title="Initializes the gamestate and gameworld." alt="" coords="168,56,335,83"/>
+<area shape="rect" id="node9" href="$db/d00/classServer.html#ad5ec9462b520e59f7ea831e157ee5e59" title=" " alt="" coords="5,56,120,83"/>
+</map>

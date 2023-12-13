@@ -1,0 +1,13 @@
+<map id="Map::getRandomCoordinates" name="Map::getRandomCoordinates">
+<area shape="rect" id="node1" title="Gets a random coordinate within the given bounds." alt="" coords="816,107,1027,133"/>
+<area shape="rect" id="node2" href="$da/d61/classEntity.html#a399fd12cf21daaf0f8da5d19f1f30569" title="Returns a random location within the spawn bounds." alt="" coords="565,5,768,32"/>
+<area shape="rect" id="node3" href="$d5/d78/classGameWorld.html#ab78e304a7c2babd4addacd751b56c98c" title="Initializes the game world. Loads assets and map. Adds npcs and objects to the world." alt="" coords="585,56,749,83"/>
+<area shape="rect" id="node6" href="$db/d00/classServer.html#ae66426d3906c2a9e5b217c65c4ce5db3" title="Loads a player&#39;s data from the database and adds the player to the game." alt="" coords="596,107,737,133"/>
+<area shape="rect" id="node10" href="$df/d30/classNpc.html#a02469aac6500ae06782d0f75148d5b50" title="Updates the NPC." alt="" coords="617,157,717,184"/>
+<area shape="rect" id="node11" href="$da/de6/classPassiveNpc.html#a09827b4717c77c7cbe16665ac954168d" title="Updates the PassiveNpc." alt="" coords="592,208,741,235"/>
+<area shape="rect" id="node4" href="$db/d00/classServer.html#a50304dfbea44f60fb1da1f4754d582dd" title="Initializes the gamestate and gameworld." alt="" coords="347,56,513,83"/>
+<area shape="rect" id="node5" href="$db/d00/classServer.html#ad5ec9462b520e59f7ea831e157ee5e59" title=" " alt="" coords="144,56,259,83"/>
+<area shape="rect" id="node7" href="$db/d00/classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413" title="Function to parse and act upon messages received from clients." alt="" coords="343,107,517,133"/>
+<area shape="rect" id="node8" href="$db/d00/classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c" title="Server&#39;s main loop for processing messages." alt="" coords="108,107,295,133"/>
+<area shape="rect" id="node9" href="$dc/d17/server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,107,60,133"/>
+</map>

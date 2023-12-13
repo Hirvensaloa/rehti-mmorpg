@@ -1,0 +1,4 @@
+<map id="readPng" name="readPng">
+<area shape="rect" id="node1" title="Reads a PNG file and returns the image data, width and height." alt="" coords="5,5,80,32"/>
+<area shape="rect" id="node2" href="$dd/dc0/lodepng_8cpp.html#ab56bbf4d0a24238ef2d6fe125705a8ce" title=" " alt="" coords="128,5,273,32"/>
+</map>

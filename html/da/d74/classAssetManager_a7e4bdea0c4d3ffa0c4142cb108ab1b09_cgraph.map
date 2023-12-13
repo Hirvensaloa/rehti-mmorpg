@@ -1,0 +1,18 @@
+<map id="AssetManager::loadAssets" name="AssetManager::loadAssets">
+<area shape="rect" id="node1" title="Loads all the assets into memory." alt="" coords="5,245,200,272"/>
+<area shape="rect" id="node2" href="$d0/de9/ItemReader_8cpp.html#a286ea81c3d4e57928c83bbdbb69b21ad" title="Reads items defined in the items.json file and returns them as a GameItems struct...." alt="" coords="438,93,530,120"/>
+<area shape="rect" id="node7" href="$d4/d44/ObjectReader_8cpp.html#ad6b3fd19ac4147a4760304254626b9fb" title="Reads objects defined in the objects.json file and returns them as a GameObjects struct." alt="" coords="248,169,352,196"/>
+<area shape="rect" id="node10" href="$d4/d3b/SkillReader_8cpp.html#a91ba713ab4fead50c273429c4901350a" title="Fetches the skills from the skills.json file and returns them as a map." alt="" coords="439,245,529,272"/>
+<area shape="rect" id="node11" href="$dd/d41/CharacterReader_8cpp.html#a30723b62eb00af0495c7e19e633d9b5a" title="Reads the character data from JSON file." alt="" coords="411,397,557,424"/>
+<area shape="rect" id="node15" href="$d4/d44/ObjectReader_8cpp.html#aff718dd14b1957673e8cc06bb1294b9b" title="Reads all the objects on the map. Server can use this to spawn objects on the map." alt="" coords="407,346,561,373"/>
+<area shape="rect" id="node3" href="$dd/db4/structGameItems.html#aa28c24034d12b17b9f85d9c46d9cb9a1" title=" " alt="" coords="637,42,811,69"/>
+<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a96a8e9ed25c4d2e4b36389bc82050d5c" title="Reads JSON file to rapidjson document." alt="" coords="685,270,763,297"/>
+<area shape="rect" id="node5" href="$df/db0/RapidjsonHelpers_8cpp.html#a06910a135e488eced76c3354fb3a2a7e" title="Check if rapidjson value contains a member with the given name AND check that the type matches the gi..." alt="" coords="670,182,778,209"/>
+<area shape="rect" id="node6" href="$df/db0/RapidjsonHelpers_8cpp.html#a2e43a36fa8b3b1eb37ddf7059e6d6db8" title="Convertes ValueType to string." alt="" coords="885,182,1025,209"/>
+<area shape="rect" id="node8" href="$d4/d44/ObjectReader_8cpp.html#a6bc2060dc73242d4623b68ae3dd96205" title=" " alt="" coords="400,42,568,69"/>
+<area shape="rect" id="node9" href="$d8/d8b/AnimationReader_8cpp.html#acf7a424ee8d40510f3a350fbfa9f282e" title="Reads animations described in JSON file." alt="" coords="421,194,547,221"/>
+<area shape="rect" id="node12" href="$d7/d31/MapReader_8cpp.html#a54309908b24ddb8124bb51147ed4ce35" title="Loads the access map from the given path." alt="" coords="653,397,795,424"/>
+<area shape="rect" id="node14" href="$dd/d41/CharacterReader_8cpp.html#a56581b803e4cb4205c729df269203a3f" title="Check if SpawnCoordinateBounds is valid. Throws error if not." alt="" coords="616,448,832,474"/>
+<area shape="rect" id="node13" href="$d3/da8/rehtiLib_2assets_2reader_2src_2Utils_8cpp.html#aabe32cf7f7f2a7f7154cbceaeafb49a6" title="Reads a matrix from a text file. Values should be separated by commas and rows by newlines." alt="" coords="880,397,1029,424"/>
+<area shape="rect" id="node16" href="$d4/d44/ObjectReader_8cpp.html#afb0e5d4cc4396f61761ac27e98f7c252" title="Generates a unique id for an object instance." alt="" coords="629,346,819,373"/>
+</map>

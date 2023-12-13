@@ -1,0 +1,6 @@
+<map id="Client::talk" name="Client::talk">
+<area shape="rect" id="node1" title="Send talk message to the server." alt="" coords="5,31,99,57"/>
+<area shape="rect" id="node2" href="$d9/d32/classMessageApi.html#ad4fedd36d7a46e42113b1a76505aa573" title="Create a MessageStruct for talking to NPC." alt="" coords="147,31,323,57"/>
+<area shape="rect" id="node3" href="$df/db0/RapidjsonHelpers_8cpp.html#a59f6cf501e740544668f6340bb64d99a" title="Creates rapidjson document *." alt="" coords="371,5,501,32"/>
+<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a7d05a2aa9e4c418be1b3a18cd4190b83" title="Creates a string from a rapidjson document." alt="" coords="385,56,487,83"/>
+</map>

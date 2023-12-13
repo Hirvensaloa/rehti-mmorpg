@@ -1,0 +1,5 @@
+<map id="TimerCallbackSystem::forceQuitCallback" name="TimerCallbackSystem::forceQuitCallback">
+<area shape="rect" id="node1" title="Immediately forces the removal of the callback with the given id, without finishing the remaining tim..." alt="" coords="307,27,472,69"/>
+<area shape="rect" id="node2" href="$d7/d6d/classRehtiGraphics.html#aa0fe4714ffc957fc647c4e392397e3f5" title="Forces character to the given location, cancelling any remaining movement callbacks and animations." alt="" coords="5,5,259,32"/>
+<area shape="rect" id="node3" href="$d7/d6d/classRehtiGraphics.html#a3445d3e9f5e90a1a23bea394666d2ad7" title="Forces the game object to move to the given location, quitting any remaining movement callbacks." alt="" coords="35,57,229,98"/>
+</map>

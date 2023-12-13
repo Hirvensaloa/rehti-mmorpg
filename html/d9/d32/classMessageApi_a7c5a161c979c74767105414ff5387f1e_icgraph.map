@@ -1,0 +1,7 @@
+<map id="MessageApi::createObjectInteract" name="MessageApi::createObjectInteract">
+<area shape="rect" id="node1" title="Create a MessageStruct for object interaction." alt="" coords="836,5,1028,47"/>
+<area shape="rect" id="node2" href="$d1/d37/classClient.html#a0dfd50dbe59821fc99489c425d80066b" title="Sends an object interaction message to the server." alt="" coords="597,13,788,39"/>
+<area shape="rect" id="node3" href="$d1/d37/classClient.html#a52e1bc60eed13224e0711a1b067d4738" title="Handles a mouse click hit on the graphics window." alt="" coords="363,13,549,39"/>
+<area shape="rect" id="node4" href="$d1/d37/classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,13,315,39"/>
+<area shape="rect" id="node5" href="$d1/d37/classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="5,13,112,39"/>
+</map>

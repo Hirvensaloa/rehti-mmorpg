@@ -1,0 +1,27 @@
+<map id="Camera::getLocation" name="Camera::getLocation">
+<area shape="rect" id="node1" title="Returns the location of the camera." alt="" coords="1973,132,2131,159"/>
+<area shape="rect" id="node2" href="$d1/df0/classCamera.html#acdb736eec57c3cdbeff41069f378f713" title="returns the camera matrix with the target as the origon." alt="" coords="1687,31,1925,57"/>
+<area shape="rect" id="node7" href="$d1/df0/classCamera.html#a36cab1c476d0ebaeb8c9a1f29625345b" title="Returns the camera ray in world space." alt="" coords="1717,81,1895,108"/>
+<area shape="rect" id="node8" href="$d7/d6d/classRehtiGraphics.html#a1cfaaeadfe98542d6819596175eac875" title="Traces a ray against all bounding boxes, starting with objects, then characters and lastly the map." alt="" coords="1430,81,1617,108"/>
+<area shape="rect" id="node12" href="$d1/df0/classCamera.html#a2f90e661a78172675ca06ea69667b531" title="Returns the view matrix of the camera, which is the inverse of the model matrix of the camera...." alt="" coords="1718,183,1894,209"/>
+<area shape="rect" id="node19" href="$d1/df0/classCamera.html#a7e5afa229f8c473b74d4984e0663cc8f" title="Sets the camera target to the given location and moves camera by the same amount." alt="" coords="1697,285,1915,312"/>
+<area shape="rect" id="node3" href="$d1/df0/classCamera.html#adad2ddd78627a085dfb4f00b0add991f" title="rotates the camera around the target." alt="" coords="1446,31,1601,57"/>
+<area shape="rect" id="node4" href="$d1/df0/classCamera.html#a1f4afe22efd7c7d274391e4703387f78" title="Constructor for the camera." alt="" coords="1176,5,1308,32"/>
+<area shape="rect" id="node5" href="$d1/df0/classCamera.html#a7a11d366f18cc5f2ad7183bb8792e7c9" title="Registers the camera controls to the given window." alt="" coords="1124,56,1360,83"/>
+<area shape="rect" id="node6" href="$d7/d6d/classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469" title="Initializes the graphics backend." alt="" coords="864,56,1076,83"/>
+<area shape="rect" id="node9" href="$d7/d6d/classRehtiGraphics.html#a3e448f8ad5fd760e066f3be8fd627b48" title="Adds a mouse click callback." alt="" coords="363,107,583,149"/>
+<area shape="rect" id="node10" href="$d1/d37/classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,147,315,173"/>
+<area shape="rect" id="node11" href="$d1/d37/classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="5,147,112,173"/>
+<area shape="rect" id="node13" href="$d7/d6d/classRehtiGraphics.html#aee9717d7bdb276ed3b0be0775c00e24c" title="Adds a test cube for testing purposes." alt="" coords="1417,132,1630,159"/>
+<area shape="rect" id="node14" href="$d1/df0/classCamera.html#a1d263c318c088257b74934d93b9e3a78" title="Returns the world to screen matrix." alt="" coords="1425,183,1622,225"/>
+<area shape="rect" id="node15" href="$d7/d6d/classRehtiGraphics.html#a6ce071a893e0edc43841a8d0c01700ed" title="Records the command buffer." alt="" coords="1127,177,1357,218"/>
+<area shape="rect" id="node16" href="$d7/d6d/classRehtiGraphics.html#ac049915f0d6b38117ece68d74eaec027" title="Draws a frame and records the previous frame time." alt="" coords="873,183,1067,209"/>
+<area shape="rect" id="node17" href="$d7/d6d/classRehtiGraphics.html#a82d71e93dd76cde425cc34df93cf4723" title="Loops, polls events and draws frames." alt="" coords="631,181,816,208"/>
+<area shape="rect" id="node18" href="$d7/d6d/classRehtiGraphics.html#aba5f89e9dc6f91cfef79f525151a067d" title="Starts a rendering loop until the window is closed." alt="" coords="365,176,580,203"/>
+<area shape="rect" id="node20" href="$d7/d6d/classRehtiGraphics.html#ac817516ac285d8b37e44ed594a903bd1" title="Adds a character object with the given id to the graphics backend. Also creates a bounding box for th..." alt="" coords="1419,249,1627,290"/>
+<area shape="rect" id="node24" href="$d7/d6d/classRehtiGraphics.html#a6e2e9da4d7d742bda2d1232e27c8df8e" title="Forces player to move to the location given, cancelling any remaining movement callbacks and animatio..." alt="" coords="1408,315,1639,341"/>
+<area shape="rect" id="node25" href="$d7/d6d/classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5" title="Moves the player to the given location in the given time. Also automatically rotates the player to fa..." alt="" coords="1424,365,1623,392"/>
+<area shape="rect" id="node21" href="$d1/d37/classClient.html#afebeedfe876105645a3937b4ee2058df" title="Processes messages from the server." alt="" coords="1151,311,1333,337"/>
+<area shape="rect" id="node22" href="$d1/d37/classClient.html#a742373e08a80d993d2651b6fff76f5b9" title="Starts the client." alt="" coords="921,311,1019,337"/>
+<area shape="rect" id="node23" href="$dc/dad/client_2src_2Main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="696,311,751,337"/>
+</map>

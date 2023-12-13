@@ -1,0 +1,4 @@
+<map id="MessageApi::createAttack" name="MessageApi::createAttack">
+<area shape="rect" id="node1" title="Create a MessageStruct for attack action." alt="" coords="163,5,355,32"/>
+<area shape="rect" id="node2" href="$d1/d37/classClient.html#a4803a7c5331ade167dbea71c01dfe7fb" title="Sends an attack message to the server." alt="" coords="5,5,115,32"/>
+</map>

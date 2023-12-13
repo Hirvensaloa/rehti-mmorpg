@@ -1,0 +1,5 @@
+<map id="Inventory::isFull" name="Inventory::isFull">
+<area shape="rect" id="node1" title="Checks if inventory is full." alt="" coords="489,5,615,32"/>
+<area shape="rect" id="node2" href="$da/d47/classResourceObject.html#aef108c1b74c650c9a0c0bfcb5d25d8c5" title="Check if the entity can interact with the object." alt="" coords="236,5,441,32"/>
+<area shape="rect" id="node3" href="$da/d47/classResourceObject.html#aaee08d1b37836242c2ede45abbf7df71" title="Interact with the object." alt="" coords="5,5,188,32"/>
+</map>

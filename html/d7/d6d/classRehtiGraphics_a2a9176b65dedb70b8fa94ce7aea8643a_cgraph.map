@@ -1,0 +1,9 @@
+<map id="RehtiGraphics::addMapBoundingBox" name="RehtiGraphics::addMapBoundingBox">
+<area shape="rect" id="node1" title="Adds a bounding box for the world map." alt="" coords="5,81,264,108"/>
+<area shape="rect" id="node2" href="$d4/ded/AABB_8cpp.html#a84f9fe626856f524cb482bca08c4f2f2" title="Creates a list of AABBs trees for each area in the areaMatrix." alt="" coords="312,81,439,108"/>
+<area shape="rect" id="node3" href="$d4/ded/AABB_8cpp.html#a8673fc5f0b3d4ca8745793df1c907d7e" title="Recursively creates an AABB tree for a single area." alt="" coords="487,81,616,108"/>
+<area shape="rect" id="node4" href="$dc/d45/TileUtils_8cpp.html#af086816b936f3b43277dedaefc4eb915" title="Calculate the height of the tile&#39;s corners and sides, based on it&#39;s neighbours heights." alt="" coords="664,5,819,32"/>
+<area shape="rect" id="node5" href="$dc/d45/TileUtils_8cpp.html#ae114cd84c557bcebaa6279a25f98f23e" title="Find minimum and maximum height of the tile." alt="" coords="671,56,812,83"/>
+<area shape="rect" id="node6" href="$d4/ded/AABB_8cpp.html#a445c2c3a703ab69e974859af3682b1a5" title="Constructs a maximum vector from two vectors." alt="" coords="695,107,787,133"/>
+<area shape="rect" id="node7" href="$d4/ded/AABB_8cpp.html#abc4a6a4eceb21ddd3da0192c2953f865" title="Constructs a minimum vector from two vectors." alt="" coords="697,157,785,184"/>
+</map>

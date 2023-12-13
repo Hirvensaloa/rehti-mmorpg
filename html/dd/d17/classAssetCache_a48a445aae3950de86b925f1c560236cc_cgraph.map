@@ -1,0 +1,16 @@
+<map id="AssetCache::loadAreaAssetData" name="AssetCache::loadAreaAssetData">
+<area shape="rect" id="node1" title="Loads the map area assets data." alt="" coords="5,148,236,175"/>
+<area shape="rect" id="node2" href="$d8/d40/Assimp_8cpp.html#aaab18d6f2188530eb4622a96323262f0" title="Convert vector of aiFace to vector of RehtiGraphics Faces." alt="" coords="285,5,473,32"/>
+<area shape="rect" id="node4" href="$d8/d40/Assimp_8cpp.html#a9ddad02911e2eec37c2ade7bb7d97e3d" title="Convert vector of aiVector3D to vector of Vertex." alt="" coords="284,57,475,98"/>
+<area shape="rect" id="node6" href="$dd/d03/TextureReader_8cpp.html#a636fa7589e29d10011a40e3a81c7bca0" title="Creates a blend map for one area. Blend map shows which texture is used on each tile." alt="" coords="300,123,459,149"/>
+<area shape="rect" id="node7" href="$dd/d03/TextureReader_8cpp.html#a7f962298cc265201d8af32486a80494a" title="Loads map texture positions. E.g. which tile contains which texture." alt="" coords="287,173,472,200"/>
+<area shape="rect" id="node9" href="$dd/d03/TextureReader_8cpp.html#a55f26d9ad46394d9d0dcaa236bf2c9d6" title="Reads all different the map texture files." alt="" coords="313,224,446,251"/>
+<area shape="rect" id="node14" href="$d8/d40/Assimp_8cpp.html#ad1fec01f0d6059e5e66dcf2bd0840137" title="Loads the object from the given path." alt="" coords="331,275,427,301"/>
+<area shape="rect" id="node3" href="$d8/d40/Assimp_8cpp.html#a7cbf60c3304e9dd0f4aa2171ec35c28f" title="Convert aiFace to RehtiGraphics Face." alt="" coords="544,5,651,32"/>
+<area shape="rect" id="node5" href="$d8/d40/Assimp_8cpp.html#ad5612bf8567030f4f54822987bc925c4" title="Convert aiVector3D to Vertex." alt="" coords="523,64,672,91"/>
+<area shape="rect" id="node8" href="$d3/da8/rehtiLib_2assets_2reader_2src_2Utils_8cpp.html#aabe32cf7f7f2a7f7154cbceaeafb49a6" title="Reads a matrix from a text file. Values should be separated by commas and rows by newlines." alt="" coords="523,148,672,175"/>
+<area shape="rect" id="node10" href="$df/db0/RapidjsonHelpers_8cpp.html#a96a8e9ed25c4d2e4b36389bc82050d5c" title="Reads JSON file to rapidjson document." alt="" coords="558,199,637,225"/>
+<area shape="rect" id="node11" href="$d6/d40/stb__image_8h.html#aefdc7387857a14894bbf321e9ea4f048" title=" " alt="" coords="557,249,638,276"/>
+<area shape="rect" id="node12" href="$df/db0/RapidjsonHelpers_8cpp.html#a06910a135e488eced76c3354fb3a2a7e" title="Check if rapidjson value contains a member with the given name AND check that the type matches the gi..." alt="" coords="543,300,651,327"/>
+<area shape="rect" id="node13" href="$df/db0/RapidjsonHelpers_8cpp.html#a2e43a36fa8b3b1eb37ddf7059e6d6db8" title="Convertes ValueType to string." alt="" coords="720,300,860,327"/>
+</map>

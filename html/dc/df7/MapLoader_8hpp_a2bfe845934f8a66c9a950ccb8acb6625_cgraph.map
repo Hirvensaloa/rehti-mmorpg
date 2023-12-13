@@ -1,0 +1,4 @@
+<map id="fetchAreaMap" name="fetchAreaMap">
+<area shape="rect" id="node1" title="Fetches the area map from the JSON file. Throws an exception if the file corrupted." alt="" coords="5,5,119,32"/>
+<area shape="rect" id="node2" href="$df/db0/RapidjsonHelpers_8cpp.html#a96a8e9ed25c4d2e4b36389bc82050d5c" title="Reads JSON file to rapidjson document." alt="" coords="167,5,245,32"/>
+</map>

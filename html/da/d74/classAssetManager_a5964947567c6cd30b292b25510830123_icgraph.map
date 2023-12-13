@@ -1,0 +1,6 @@
+<map id="AssetManager::getItems" name="AssetManager::getItems">
+<area shape="rect" id="node1" title="Get the GameItems object." alt="" coords="236,56,417,83"/>
+<area shape="rect" id="node2" href="$d7/d3a/classLootObject.html#a4ef8634a19756ec50a158923bab05fc7" title="Interact with the object." alt="" coords="21,5,172,32"/>
+<area shape="rect" id="node3" href="$da/d47/classResourceObject.html#aaee08d1b37836242c2ede45abbf7df71" title="Interact with the object." alt="" coords="5,56,188,83"/>
+<area shape="rect" id="node4" href="$df/d30/classNpc.html#acc6bbca4c1aac12599be12ffe7289ee4" title=" " alt="" coords="57,107,137,133"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="RehtiGraphics::addTestGameObject" name="RehtiGraphics::addTestGameObject">
+<area shape="rect" id="node1" title="Adds a test game object with a test texture for testing purposes." alt="" coords="5,150,216,191"/>
+<area shape="rect" id="node2" href="$d7/d6d/classRehtiGraphics.html#aea4a763d818fd3095763798d5b4b0c24" title="Adds a game object with the given id to the graphics backend. Also creates a bounding box for the obj..." alt="" coords="264,5,491,32"/>
+<area shape="rect" id="node3" href="$d6/d80/Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="539,31,672,57"/>
+<area shape="rect" id="node4" href="$d6/d10/namespaceTestValues.html#a6485056c3a7bb71694d6e645294dd80b" title=" " alt="" coords="280,107,475,133"/>
+<area shape="rect" id="node5" href="$d6/d10/namespaceTestValues.html#a56d4ce3f8bbe46417cbe8e96a01d641b" title=" " alt="" coords="279,157,475,184"/>
+<area shape="rect" id="node6" href="$d6/d10/namespaceTestValues.html#ad836b9caf0ef40ea5d7ee46afa0e7927" title=" " alt="" coords="277,208,477,235"/>
+<area shape="rect" id="node7" href="$d6/d80/Camera_8hpp.html#a139a997d06bd43f993fc788e5050ed60" title=" " alt="" coords="310,259,445,285"/>
+<area shape="rect" id="node8" href="$d6/d80/Camera_8hpp.html#ac57ad755be51ffc9cc41b032426ba68b" title=" " alt="" coords="310,309,445,336"/>
+</map>

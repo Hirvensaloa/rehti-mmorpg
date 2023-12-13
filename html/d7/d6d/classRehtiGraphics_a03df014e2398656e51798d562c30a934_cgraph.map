@@ -1,0 +1,6 @@
+<map id="RehtiGraphics::rotateGameObject" name="RehtiGraphics::rotateGameObject">
+<area shape="rect" id="node1" title="Rotates a game object by given radian angle in the given time frame." alt="" coords="5,71,204,112"/>
+<area shape="rect" id="node2" href="$dd/d85/classTimerCallbackSystem.html#af8ea3ade97f14ca226c625ad4d70f90b" title="Adds a new timer callback for the given id." alt="" coords="252,5,417,47"/>
+<area shape="rect" id="node3" href="$dd/d85/classTimerCallbackSystem.html#add46c4d14ad6d925b927c7d5720f5e6d" title="Forces the callback to be completed with the time left in the timer and removes it from the system." alt="" coords="252,71,417,112"/>
+<area shape="rect" id="node4" href="$d6/d80/Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="268,137,401,163"/>
+</map>

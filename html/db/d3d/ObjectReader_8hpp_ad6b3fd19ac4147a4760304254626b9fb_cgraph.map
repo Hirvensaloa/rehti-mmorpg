@@ -1,0 +1,9 @@
+<map id="fetchObjects" name="fetchObjects">
+<area shape="rect" id="node1" title="Reads objects defined in the objects.json file and returns them as a GameObjects struct." alt="" coords="5,93,109,120"/>
+<area shape="rect" id="node2" href="$dd/db4/structGameItems.html#aa28c24034d12b17b9f85d9c46d9cb9a1" title=" " alt="" coords="373,5,547,32"/>
+<area shape="rect" id="node3" href="$d4/d44/ObjectReader_8cpp.html#a6bc2060dc73242d4623b68ae3dd96205" title=" " alt="" coords="157,43,325,69"/>
+<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a06910a135e488eced76c3354fb3a2a7e" title="Check if rapidjson value contains a member with the given name AND check that the type matches the gi..." alt="" coords="406,68,514,95"/>
+<area shape="rect" id="node6" href="$d8/d8b/AnimationReader_8cpp.html#acf7a424ee8d40510f3a350fbfa9f282e" title="Reads animations described in JSON file." alt="" coords="179,144,304,171"/>
+<area shape="rect" id="node7" href="$df/db0/RapidjsonHelpers_8cpp.html#a96a8e9ed25c4d2e4b36389bc82050d5c" title="Reads JSON file to rapidjson document." alt="" coords="421,169,499,196"/>
+<area shape="rect" id="node5" href="$df/db0/RapidjsonHelpers_8cpp.html#a2e43a36fa8b3b1eb37ddf7059e6d6db8" title="Convertes ValueType to string." alt="" coords="595,68,735,95"/>
+</map>

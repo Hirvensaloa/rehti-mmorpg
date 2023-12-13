@@ -1,0 +1,6 @@
+<map id="Map::loadMap" name="Map::loadMap">
+<area shape="rect" id="node1" title="Loads the map information from generated assets. Currently loads the access map and height map inform..." alt="" coords="5,31,120,57"/>
+<area shape="rect" id="node2" href="$d7/d31/MapReader_8cpp.html#a54309908b24ddb8124bb51147ed4ce35" title="Loads the access map from the given path." alt="" coords="168,5,311,32"/>
+<area shape="rect" id="node4" href="$d7/d31/MapReader_8cpp.html#a2ac7fa2ac999e004c723cd45b861c13c" title="Loads the height map from the given path." alt="" coords="169,56,309,83"/>
+<area shape="rect" id="node3" href="$d3/da8/rehtiLib_2assets_2reader_2src_2Utils_8cpp.html#aabe32cf7f7f2a7f7154cbceaeafb49a6" title="Reads a matrix from a text file. Values should be separated by commas and rows by newlines." alt="" coords="359,31,508,57"/>
+</map>

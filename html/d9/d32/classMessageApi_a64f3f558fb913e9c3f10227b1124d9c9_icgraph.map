@@ -1,0 +1,4 @@
+<map id="MessageApi::createMove" name="MessageApi::createMove">
+<area shape="rect" id="node1" title="Create a MessageStruct for move action." alt="" coords="159,5,345,32"/>
+<area shape="rect" id="node2" href="$d1/d37/classClient.html#a68216a3e4b0cd1f2f72388f7bcd77bd7" title="Sends a move message to the server." alt="" coords="5,5,111,32"/>
+</map>

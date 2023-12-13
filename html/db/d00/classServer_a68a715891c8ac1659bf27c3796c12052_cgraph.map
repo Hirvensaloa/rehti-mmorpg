@@ -1,0 +1,17 @@
+<map id="Server::ticker" name="Server::ticker">
+<area shape="rect" id="node1" title="Timer function that is used to start server ticks, runs on a separate thread." alt="" coords="5,107,113,133"/>
+<area shape="rect" id="node2" href="$db/d00/classServer.html#a2dd422dc25689dc106a6d5fe1d3b3298" title="Function that updates the gamestate on each server tick, called by ticker()" alt="" coords="161,107,257,133"/>
+<area shape="rect" id="node3" href="$d5/d78/classGameWorld.html#a477715a67955886d0076cec9fe72ba4e" title=" " alt="" coords="623,56,791,83"/>
+<area shape="rect" id="node4" href="$d5/d78/classGameWorld.html#a24e7fbf1913f7f737ad5bae536b96e46" title="Removes player from the game world." alt="" coords="320,56,517,83"/>
+<area shape="rect" id="node5" href="$db/d00/classServer.html#a3f8208fe6744f4c10ead5905b657c64b" title="Saves a player&#39;s data to the database." alt="" coords="347,5,491,32"/>
+<area shape="rect" id="node7" href="$db/d00/classServer.html#a2252e5384a7a5e755c200c104d745fcb" title="Sends the current gamestate to connected clients." alt="" coords="331,157,507,184"/>
+<area shape="rect" id="node15" href="$d5/d78/classGameWorld.html#af562a0de20546a4b69c309fa6a742d4a" title="Updates the game world. Updates all the npcs and players." alt="" coords="305,208,532,235"/>
+<area shape="rect" id="node6" href="$d1/d61/classDatabaseManager.html#a2074813855734007c9ac259a848f9314" title="Save player&#39;s basic data, items and skills to the database." alt="" coords="580,5,833,32"/>
+<area shape="rect" id="node8" href="$d9/d32/classMessageApi.html#a5986c7cab7f5e2bd418deebb790c4cb0" title="Create a MessageStruct for game state." alt="" coords="595,208,818,235"/>
+<area shape="rect" id="node11" href="$da/d74/classAssetManager.html#a13997292d4ce8dfa909e939b20ac71d4" title="Get the GameCharacters object." alt="" coords="580,259,833,285"/>
+<area shape="rect" id="node12" href="$d5/d78/classGameWorld.html#a3b6d4cac8cda722200ee3e72754ce8f1" title="Get all npcs." alt="" coords="627,309,786,336"/>
+<area shape="rect" id="node13" href="$d5/d78/classGameWorld.html#ac53061b8a814e6228ac433cb91a1f511" title="Get all objects." alt="" coords="619,107,795,133"/>
+<area shape="rect" id="node14" href="$d5/d78/classGameWorld.html#acd967a70218090ebcb533b851375e5e1" title=" " alt="" coords="619,157,794,184"/>
+<area shape="rect" id="node9" href="$df/db0/RapidjsonHelpers_8cpp.html#a59f6cf501e740544668f6340bb64d99a" title="Creates rapidjson document *." alt="" coords="881,183,1012,209"/>
+<area shape="rect" id="node10" href="$df/db0/RapidjsonHelpers_8cpp.html#a7d05a2aa9e4c418be1b3a18cd4190b83" title="Creates a string from a rapidjson document." alt="" coords="896,233,997,260"/>
+</map>

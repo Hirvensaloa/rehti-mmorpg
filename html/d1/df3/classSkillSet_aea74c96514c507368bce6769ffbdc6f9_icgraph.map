@@ -1,0 +1,5 @@
+<map id="SkillSet::getSkillXp" name="SkillSet::getSkillXp">
+<area shape="rect" id="node1" title="Returns the current xp of the skill with the given id. Returns nullopt if the skill doesn&#39;t exist." alt="" coords="439,5,584,32"/>
+<area shape="rect" id="node2" href="$d1/df3/classSkillSet.html#ac596a383d539ca70c06b65377dfddbc1" title="Returns the level of the skill calculated based on the current xp in the skill. Returns nullopt if th..." alt="" coords="228,5,391,32"/>
+<area shape="rect" id="node3" href="$d8/d9c/classPlayerCharacter.html#a48c9398c4d91b8adb78a7fe2a8ad9ddf" title="Performs player&#39;s attack on target entity. Calculates hit chance and damage, and on succesful hit app..." alt="" coords="5,5,180,32"/>
+</map>

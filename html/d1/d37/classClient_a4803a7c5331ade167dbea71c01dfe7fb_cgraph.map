@@ -1,0 +1,6 @@
+<map id="Client::attack" name="Client::attack">
+<area shape="rect" id="node1" title="Sends an attack message to the server." alt="" coords="5,31,115,57"/>
+<area shape="rect" id="node2" href="$d9/d32/classMessageApi.html#a6cb0f4dce07f614a14bd3386b4edeaeb" title="Create a MessageStruct for attack action." alt="" coords="163,31,355,57"/>
+<area shape="rect" id="node3" href="$df/db0/RapidjsonHelpers_8cpp.html#a59f6cf501e740544668f6340bb64d99a" title="Creates rapidjson document *." alt="" coords="403,5,533,32"/>
+<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a7d05a2aa9e4c418be1b3a18cd4190b83" title="Creates a string from a rapidjson document." alt="" coords="417,56,519,83"/>
+</map>

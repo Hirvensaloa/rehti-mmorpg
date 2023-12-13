@@ -1,0 +1,8 @@
+<map id="createMapAABB" name="createMapAABB">
+<area shape="rect" id="node1" title="Creates a list of AABBs trees for each area in the areaMatrix." alt="" coords="5,81,132,108"/>
+<area shape="rect" id="node2" href="$d4/ded/AABB_8cpp.html#a8673fc5f0b3d4ca8745793df1c907d7e" title="Recursively creates an AABB tree for a single area." alt="" coords="180,81,309,108"/>
+<area shape="rect" id="node3" href="$dc/d45/TileUtils_8cpp.html#af086816b936f3b43277dedaefc4eb915" title="Calculate the height of the tile&#39;s corners and sides, based on it&#39;s neighbours heights." alt="" coords="357,5,512,32"/>
+<area shape="rect" id="node4" href="$dc/d45/TileUtils_8cpp.html#ae114cd84c557bcebaa6279a25f98f23e" title="Find minimum and maximum height of the tile." alt="" coords="364,56,505,83"/>
+<area shape="rect" id="node5" href="$d4/ded/AABB_8cpp.html#a445c2c3a703ab69e974859af3682b1a5" title="Constructs a maximum vector from two vectors." alt="" coords="389,107,481,133"/>
+<area shape="rect" id="node6" href="$d4/ded/AABB_8cpp.html#abc4a6a4eceb21ddd3da0192c2953f865" title="Constructs a minimum vector from two vectors." alt="" coords="391,157,479,184"/>
+</map>

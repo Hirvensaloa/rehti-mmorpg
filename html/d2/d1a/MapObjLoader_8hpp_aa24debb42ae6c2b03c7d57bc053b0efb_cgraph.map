@@ -1,0 +1,6 @@
+<map id="generateAreaObjs" name="generateAreaObjs">
+<area shape="rect" id="node1" title="Generates obj map for each area of the map." alt="" coords="5,56,144,83"/>
+<area shape="rect" id="node2" href="$dc/d45/TileUtils_8cpp.html#af086816b936f3b43277dedaefc4eb915" title="Calculate the height of the tile&#39;s corners and sides, based on it&#39;s neighbours heights." alt="" coords="192,5,347,32"/>
+<area shape="rect" id="node3" href="$d2/d1a/MapObjLoader_8hpp.html#aa6e77692699581ab90c93b9f8a589c17" title="Writes a face to an OBJ file." alt="" coords="227,56,311,83"/>
+<area shape="rect" id="node4" href="$d2/d1a/MapObjLoader_8hpp.html#a167afe55692731c9613180a95c04c56c" title="Writes a vertex to an OBJ file." alt="" coords="221,107,318,133"/>
+</map>

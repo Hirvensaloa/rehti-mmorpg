@@ -1,0 +1,21 @@
+<map id="readJson" name="readJson">
+<area shape="rect" id="node1" title="Reads JSON file to rapidjson document." alt="" coords="1319,183,1397,209"/>
+<area shape="rect" id="node2" href="$dc/df7/MapLoader_8hpp.html#a2bfe845934f8a66c9a950ccb8acb6625" title="Fetches the area map from the JSON file. Throws an exception if the file corrupted." alt="" coords="1137,5,1250,32"/>
+<area shape="rect" id="node4" href="$d0/de9/ItemReader_8cpp.html#a286ea81c3d4e57928c83bbdbb69b21ad" title="Reads items defined in the items.json file and returns them as a GameItems struct...." alt="" coords="907,157,999,184"/>
+<area shape="rect" id="node12" href="$d4/d44/ObjectReader_8cpp.html#ad6b3fd19ac4147a4760304254626b9fb" title="Reads objects defined in the objects.json file and returns them as a GameObjects struct." alt="" coords="901,107,1005,133"/>
+<area shape="rect" id="node13" href="$d4/d3b/SkillReader_8cpp.html#a91ba713ab4fead50c273429c4901350a" title="Fetches the skills from the skills.json file and returns them as a map." alt="" coords="907,208,998,235"/>
+<area shape="rect" id="node14" href="$dd/d03/TextureReader_8cpp.html#a55f26d9ad46394d9d0dcaa236bf2c9d6" title="Reads all different the map texture files." alt="" coords="1127,360,1260,387"/>
+<area shape="rect" id="node16" href="$d8/d8b/AnimationReader_8cpp.html#acf7a424ee8d40510f3a350fbfa9f282e" title="Reads animations described in JSON file." alt="" coords="1131,56,1256,83"/>
+<area shape="rect" id="node18" href="$dd/d41/CharacterReader_8cpp.html#a30723b62eb00af0495c7e19e633d9b5a" title="Reads the character data from JSON file." alt="" coords="880,309,1025,336"/>
+<area shape="rect" id="node19" href="$d4/d44/ObjectReader_8cpp.html#aff718dd14b1957673e8cc06bb1294b9b" title="Reads all the objects on the map. Server can use this to spawn objects on the map." alt="" coords="1116,259,1271,285"/>
+<area shape="rect" id="node3" href="$d5/da8/rehtiLib_2assets_2loader_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="665,107,719,133"/>
+<area shape="rect" id="node5" href="$dd/d17/classAssetCache.html#a65f5a313ec992e8d4fd1212272f404d0" title="Loads all the assets into memory." alt="" coords="603,233,781,260"/>
+<area shape="rect" id="node8" href="$da/d74/classAssetManager.html#a7e4bdea0c4d3ffa0c4142cb108ab1b09" title="Loads all the assets into memory." alt="" coords="595,183,789,209"/>
+<area shape="rect" id="node6" href="$d1/d37/classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="387,233,542,260"/>
+<area shape="rect" id="node7" href="$d1/d37/classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="198,233,305,260"/>
+<area shape="rect" id="node9" href="$d5/d78/classGameWorld.html#ab78e304a7c2babd4addacd751b56c98c" title="Initializes the game world. Loads assets and map. Adds npcs and objects to the world." alt="" coords="383,183,547,209"/>
+<area shape="rect" id="node10" href="$db/d00/classServer.html#a50304dfbea44f60fb1da1f4754d582dd" title="Initializes the gamestate and gameworld." alt="" coords="168,183,335,209"/>
+<area shape="rect" id="node11" href="$db/d00/classServer.html#ad5ec9462b520e59f7ea831e157ee5e59" title=" " alt="" coords="5,183,120,209"/>
+<area shape="rect" id="node15" href="$dd/d17/classAssetCache.html#a48a445aae3950de86b925f1c560236cc" title="Loads the map area assets data." alt="" coords="837,360,1068,387"/>
+<area shape="rect" id="node17" href="$d1/d8a/AnimationTypeGenerator_8hpp.html#a30821e3dbdc264cc93b3a86ce57cf8fe" title="Generate GeneratedAnimations.hpp file." alt="" coords="855,56,1051,83"/>
+</map>

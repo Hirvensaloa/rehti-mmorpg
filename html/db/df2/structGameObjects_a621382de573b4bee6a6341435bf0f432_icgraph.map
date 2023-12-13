@@ -1,0 +1,6 @@
+<map id="GameObjects::getResourceObject" name="GameObjects::getResourceObject">
+<area shape="rect" id="node1" title=" " alt="" coords="595,5,793,47"/>
+<area shape="rect" id="node2" href="$d5/d78/classGameWorld.html#ab78e304a7c2babd4addacd751b56c98c" title="Initializes the game world. Loads assets and map. Adds npcs and objects to the world." alt="" coords="383,13,547,39"/>
+<area shape="rect" id="node3" href="$db/d00/classServer.html#a50304dfbea44f60fb1da1f4754d582dd" title="Initializes the gamestate and gameworld." alt="" coords="168,13,335,39"/>
+<area shape="rect" id="node4" href="$db/d00/classServer.html#ad5ec9462b520e59f7ea831e157ee5e59" title=" " alt="" coords="5,13,120,39"/>
+</map>

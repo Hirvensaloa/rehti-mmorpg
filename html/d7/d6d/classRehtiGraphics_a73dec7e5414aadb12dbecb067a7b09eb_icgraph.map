@@ -1,0 +1,5 @@
+<map id="RehtiGraphics::DestroyDebugUtilsMessengerEXT" name="RehtiGraphics::DestroyDebugUtilsMessengerEXT">
+<area shape="rect" id="node1" title=" " alt="" coords="496,5,711,47"/>
+<area shape="rect" id="node2" href="$d7/d6d/classRehtiGraphics.html#ad3df13b713fcfc461d206a323a5657dd" title="Cleans up used resources." alt="" coords="276,13,448,39"/>
+<area shape="rect" id="node3" href="$d7/d6d/classRehtiGraphics.html#ac5a68f1877be335b148ce98837402530" title="Cleans up all the resources used by vulkan." alt="" coords="5,13,228,39"/>
+</map>

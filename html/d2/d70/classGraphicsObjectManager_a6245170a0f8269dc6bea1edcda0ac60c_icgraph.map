@@ -1,0 +1,10 @@
+<map id="GraphicsObjectManager::startCommandBuffer" name="GraphicsObjectManager::startCommandBuffer">
+<area shape="rect" id="node1" title="Allocates and begins a command buffer." alt="" coords="496,136,675,177"/>
+<area shape="rect" id="node2" href="$d2/d70/classGraphicsObjectManager.html#a149cc91ffc0073433e4c3734eb80c8b9" title="Copies the given data to the given buffer." alt="" coords="251,136,429,177"/>
+<area shape="rect" id="node7" href="$d2/d70/classGraphicsObjectManager.html#a9d3d8755593f5f4cd26ba45c689e31ee" title="Copies the given data to the given image." alt="" coords="251,71,429,112"/>
+<area shape="rect" id="node8" href="$d2/d70/classGraphicsObjectManager.html#a9b1f91690fd93e7d7d34d4a6ec8585a7" title="Transitions the given image to the given layout using graphics queue." alt="" coords="232,201,448,243"/>
+<area shape="rect" id="node3" href="$d2/d70/classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf" title="Adds an area object to the buffer manager." alt="" coords="5,5,184,47"/>
+<area shape="rect" id="node4" href="$d2/d70/classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
+<area shape="rect" id="node5" href="$d2/d70/classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
+<area shape="rect" id="node6" href="$d2/d70/classGraphicsObjectManager.html#a8f8086ab3f1129a2a4ff1435ed5b1c72" title="Adds a test object to the buffer manager." alt="" coords="5,201,184,243"/>
+</map>

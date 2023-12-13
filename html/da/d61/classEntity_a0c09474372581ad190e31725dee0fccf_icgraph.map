@@ -1,0 +1,6 @@
+<map id="Entity::getSkillSet" name="Entity::getSkillSet">
+<area shape="rect" id="node1" title="Get the SkillSet of this entity." alt="" coords="489,56,627,83"/>
+<area shape="rect" id="node2" href="$d8/d9c/classPlayerCharacter.html#a48c9398c4d91b8adb78a7fe2a8ad9ddf" title="Performs player&#39;s attack on target entity. Calculates hit chance and damage, and on succesful hit app..." alt="" coords="251,5,426,32"/>
+<area shape="rect" id="node3" href="$da/d47/classResourceObject.html#aef108c1b74c650c9a0c0bfcb5d25d8c5" title="Check if the entity can interact with the object." alt="" coords="236,56,441,83"/>
+<area shape="rect" id="node4" href="$da/d47/classResourceObject.html#aaee08d1b37836242c2ede45abbf7df71" title="Interact with the object." alt="" coords="5,81,188,108"/>
+</map>

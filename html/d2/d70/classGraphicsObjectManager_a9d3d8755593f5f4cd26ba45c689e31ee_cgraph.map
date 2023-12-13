@@ -1,0 +1,12 @@
+<map id="GraphicsObjectManager::copyImage" name="GraphicsObjectManager::copyImage">
+<area shape="rect" id="node1" title="Copies the given data to the given image." alt="" coords="5,136,184,177"/>
+<area shape="rect" id="node2" href="$d2/d70/classGraphicsObjectManager.html#a0f54e4c067ab0dea4897191617d9a722" title="Helper for creating a staging buffer." alt="" coords="232,37,411,79"/>
+<area shape="rect" id="node6" href="$d2/d70/classGraphicsObjectManager.html#a8db31ba380265e1794f57cc65962f58b" title="Submits the given command buffer to be executed on the gpu." alt="" coords="232,103,411,144"/>
+<area shape="rect" id="node7" href="$d2/d70/classGraphicsObjectManager.html#a6245170a0f8269dc6bea1edcda0ac60c" title="Allocates and begins a command buffer." alt="" coords="232,168,411,209"/>
+<area shape="rect" id="node9" href="$d2/d70/classGraphicsObjectManager.html#ae498965da68ae9ead548d9c32aab4368" title="Records image layout transition barrier to the given command buffer." alt="" coords="232,235,411,276"/>
+<area shape="rect" id="node3" href="$d2/d70/classGraphicsObjectManager.html#acaa2f62a870f1426abe523acb1d8ef6f" title="Creates a buffer with the given parameters." alt="" coords="484,37,663,79"/>
+<area shape="rect" id="node4" href="$d2/d70/classGraphicsObjectManager.html#a48087fcc6c8ff32a160ff8105240538d" title="Returns number of queue families." alt="" coords="736,5,915,47"/>
+<area shape="rect" id="node5" href="$d2/d70/classGraphicsObjectManager.html#a1f57aa379d9151b4dcb74622f011e008" title="Returns the sharing mode of created resources." alt="" coords="736,71,915,112"/>
+<area shape="rect" id="node8" href="$d0/d17/structGraphicsObjectManager_1_1CommandUnit.html#a062348d8349e31388763a6a7e6ed5148" title=" " alt="" coords="459,158,688,214"/>
+<area shape="rect" id="node10" href="$d2/d70/classGraphicsObjectManager.html#a120007297e679f8ef7555f8acd312dd6" title="Fills access masks and pipeline stages when given source and destination layouts for an image." alt="" coords="469,239,677,280"/>
+</map>

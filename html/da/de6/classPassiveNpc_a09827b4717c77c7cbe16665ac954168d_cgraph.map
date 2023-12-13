@@ -1,0 +1,8 @@
+<map id="PassiveNpc::update" name="PassiveNpc::update">
+<area shape="rect" id="node1" title="Updates the PassiveNpc." alt="" coords="5,71,155,98"/>
+<area shape="rect" id="node2" href="$da/de6/classPassiveNpc.html#a1d4367020137513d808174d8b243ec9e" title="Finds out if there is a player attacking the PassiveNpc." alt="" coords="213,5,403,47"/>
+<area shape="rect" id="node4" href="$d7/db0/classMap.html#aa2714237c8af3b86a11dcebc6d944145" title="Gets a random coordinate within the given bounds." alt="" coords="203,71,413,98"/>
+<area shape="rect" id="node6" href="$da/d61/classEntity.html#ae00ca26a951f822510d3d93e4c42dce3" title="Set the current action to parameter action." alt="" coords="244,122,372,149"/>
+<area shape="rect" id="node3" href="$d5/d78/classGameWorld.html#acd967a70218090ebcb533b851375e5e1" title=" " alt="" coords="461,13,636,39"/>
+<area shape="rect" id="node5" href="$d7/db0/classMap.html#a3a7c641cd6c7281013272940d0613d90" title="Get the access map." alt="" coords="473,71,625,98"/>
+</map>

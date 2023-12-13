@@ -1,0 +1,6 @@
+<map id="loadHeightAndTextureMap" name="loadHeightAndTextureMap">
+<area shape="rect" id="node1" title="Loads a height map and map&#39;s texture map into given parameters. Loads them together to avoid reading ..." alt="" coords="5,31,200,57"/>
+<area shape="rect" id="node2" href="$d2/d99/rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#ad1be74eedb711007334181940ecab15e" title="Populates a matrix with a default value. The matrix is all the areas combined and expanded e...." alt="" coords="248,5,369,32"/>
+<area shape="rect" id="node3" href="$d2/d99/rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#a268e2459aa1a71ba1802287fa45a3124" title="Reads a PNG file and returns the image data, width and height." alt="" coords="271,56,346,83"/>
+<area shape="rect" id="node4" href="$dd/dc0/lodepng_8cpp.html#ab56bbf4d0a24238ef2d6fe125705a8ce" title=" " alt="" coords="417,56,563,83"/>
+</map>

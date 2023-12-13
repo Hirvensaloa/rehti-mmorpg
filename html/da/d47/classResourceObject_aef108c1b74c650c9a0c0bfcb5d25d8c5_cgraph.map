@@ -1,0 +1,10 @@
+<map id="ResourceObject::canInteract" name="ResourceObject::canInteract">
+<area shape="rect" id="node1" title="Check if the entity can interact with the object." alt="" coords="5,157,211,184"/>
+<area shape="rect" id="node2" href="$da/d61/classEntity.html#a1f1ef1b13908ffef9f2c4f2f455fdb71" title="Get the Inventory object of this entity." alt="" coords="259,5,409,32"/>
+<area shape="rect" id="node3" href="$dd/d7a/classInventory.html#aef99806828639fb74770654b3ccba845" title=" " alt="" coords="259,56,409,83"/>
+<area shape="rect" id="node4" href="$da/d61/classEntity.html#ab824e4f163924eb4f136d3e2ff759897" title="Get the name of this entity." alt="" coords="271,107,397,133"/>
+<area shape="rect" id="node5" href="$d8/d4b/classObject.html#aa957bd6b49bc3034489df9ff0e844e3c" title="Get the name of the object." alt="" coords="268,157,400,184"/>
+<area shape="rect" id="node6" href="$d1/df3/classSkillSet.html#a0f3b00c08b7353db5b61b06223f187d0" title="Returns map with skill id keys and SkillInfo values." alt="" coords="267,208,401,235"/>
+<area shape="rect" id="node7" href="$da/d61/classEntity.html#a0c09474372581ad190e31725dee0fccf" title="Get the SkillSet of this entity." alt="" coords="265,259,403,285"/>
+<area shape="rect" id="node8" href="$dd/d7a/classInventory.html#ae64c114e81d5ee14653161f425510a26" title="Checks if inventory is full." alt="" coords="271,309,397,336"/>
+</map>

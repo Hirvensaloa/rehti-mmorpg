@@ -1,0 +1,15 @@
+<map id="Camera::registerCameraControls" name="Camera::registerCameraControls">
+<area shape="rect" id="node1" title="Registers the camera controls to the given window." alt="" coords="5,81,241,108"/>
+<area shape="rect" id="node2" href="$d1/df0/classCamera.html#a181c120dfb345250af184b22ba225887" title="Callback for registering mouse movement." alt="" coords="289,5,489,32"/>
+<area shape="rect" id="node3" href="$d1/df0/classCamera.html#adad2ddd78627a085dfb4f00b0add991f" title="rotates the camera around the target." alt="" coords="312,56,467,83"/>
+<area shape="rect" id="node8" href="$d1/df0/classCamera.html#a3fd0454142eb9ec06bd4268fa4b8043f" title="callback for registering mouse scroll" alt="" coords="303,107,475,133"/>
+<area shape="rect" id="node9" href="$d1/df0/classCamera.html#af6dc1153bcd85dcb5f4c2c551e3a09b0" title="Zooms the camera by the given amount." alt="" coords="598,157,715,184"/>
+<area shape="rect" id="node4" href="$d1/df0/classCamera.html#acdb736eec57c3cdbeff41069f378f713" title="returns the camera matrix with the target as the origon." alt="" coords="537,5,776,32"/>
+<area shape="rect" id="node6" href="$d1/df0/classCamera.html#aa21e94d4bfd57c15897a8a2948d6356c" title="Returns the right direction of the camera." alt="" coords="589,56,725,83"/>
+<area shape="rect" id="node7" href="$d6/d80/Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="590,107,723,133"/>
+<area shape="rect" id="node5" href="$d1/df0/classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="824,5,981,32"/>
+<area shape="rect" id="node10" href="$d1/df0/classCamera.html#ae44d552243a7b430e94ed9e70adcf07b" title="Returns the forward direction of the camera." alt="" coords="825,56,980,83"/>
+<area shape="rect" id="node11" href="$d6/d80/Camera_8hpp.html#a9aa49a596ee3c1727433dbdb9e88ee11" title=" " alt="" coords="853,107,953,133"/>
+<area shape="rect" id="node12" href="$d6/d80/Camera_8hpp.html#a36e54119227d0fd2ae43b7b7c8e04e53" title=" " alt="" coords="855,157,951,184"/>
+<area shape="rect" id="node13" href="$d1/df0/classCamera.html#a4e5c1cba3172130eaff779eca5ff5af9" title="Sets the camera location to the given location." alt="" coords="825,208,981,235"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="fillSkeleton" name="fillSkeleton">
+<area shape="rect" id="node1" title="Fills the given vectors with hierarchy and bone data." alt="" coords="5,31,100,57"/>
+<area shape="rect" id="node2" href="$d8/d40/Assimp_8cpp.html#aec04d4c1442d730b5dd16bce0b52a876" title="Convert aiMatrix4x4 to glm::mat4." alt="" coords="148,5,289,32"/>
+<area shape="rect" id="node3" href="$d8/d40/Assimp_8cpp.html#a2053055d0e1b287a09d0bd479030df01" title=" " alt="" coords="149,56,288,83"/>
+</map>

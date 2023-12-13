@@ -1,0 +1,4 @@
+<map id="AggressiveNpc::findClosestPlayer" name="AggressiveNpc::findClosestPlayer">
+<area shape="rect" id="node1" title="Finds the closest player to the AggressiveNpc." alt="" coords="225,5,424,47"/>
+<area shape="rect" id="node2" href="$dd/d9d/classAggressiveNpc.html#ac9bad388273f1b1f1ab9ba59b83f089f" title="Updates the AggressiveNpc." alt="" coords="5,13,177,39"/>
+</map>

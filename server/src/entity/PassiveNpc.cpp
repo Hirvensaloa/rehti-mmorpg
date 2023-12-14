@@ -46,9 +46,10 @@ void PassiveNpc::update()
 
 std::shared_ptr<PlayerCharacter> PassiveNpc::findAttackingPlayer()
 {
-    for (int i = 0; i < pGameWorldM->getPlayers().size(); i++)
+    auto players = pGameWorldM->getPlayers();
+    for (int i = 0; i < players.size(); i++)
     {
-        std::shared_ptr<PlayerCharacter> player = pGameWorldM->getPlayers()[i];
+        std::shared_ptr<PlayerCharacter> player = players[i];
         const auto action = player->getCurrentAction();
         if (action == nullptr)
         {

@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-AttackAction::AttackAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Entity> target, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), pTargetM(target), actionTimeM(pEntityM->getAttackSpeed()) {}
+AttackAction::AttackAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Entity> target, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), pTargetM(target), actionTimeM(pEntityM->getAttackSpeed()), moveTimeM(pEntityM->getMoveSpeed()) {}
 
 std::shared_ptr<Entity>& AttackAction::getTarget()
 {
@@ -36,46 +36,53 @@ void AttackAction::act()
 
             targetInRangeM = true;
         }
-
-        else if (std::chrono::system_clock::now() > startTimeM + moveTimeM)
+        else
         {
+            if (targetInRangeM)
+            {
+                startTimeM = std::chrono::system_clock::now();
+            }
             targetInRangeM = false;
 
-            // If the path to the target is empty or the target has changed location, we will try to find a new path
-            if (pathToTargetM.size() == 0 || (pathToTargetM.back().first != pTargetM->getLocation().x || pathToTargetM.back().second != pTargetM->getLocation().y))
+            if (std::chrono::system_clock::now() > startTimeM + moveTimeM)
             {
-                pathToTargetM = findPathToTarget();
 
-                // If we cannot find a path to the target, just set the next move to none and do nothing. We want to stay aggressive and see if we can find a path later.
-                if (pathToTargetM.size() == 0)
+                // If the path to the target is empty or the target has changed location, we will try to find a new path
+                if (pathToTargetM.size() == 0 || (pathToTargetM.back().first != pTargetM->getLocation().x || pathToTargetM.back().second != pTargetM->getLocation().y))
                 {
-                    nextMoveM = std::nullopt;
-                    return;
+                    pathToTargetM = findPathToTarget();
+
+                    // If we cannot find a path to the target, just set the next move to none and do nothing. We want to stay aggressive and see if we can find a path later.
+                    if (pathToTargetM.size() == 0)
+                    {
+                        nextMoveM = std::nullopt;
+                        return;
+                    }
                 }
+
+                nextMoveM = Coordinates(pathToTargetM.front().first, pathToTargetM.front().second);
+
+                pEntityM->move(nextMoveM.value());
+                startTimeM = std::chrono::system_clock::now();
+                pathToTargetM.erase(pathToTargetM.begin());
             }
-
-            nextMoveM = Coordinates(pathToTargetM.front().first, pathToTargetM.front().second);
-
-            pEntityM->move(nextMoveM.value());
-            startTimeM = std::chrono::system_clock::now();
-            pathToTargetM.erase(pathToTargetM.begin());
         }
     }
 }
 
 std::vector<std::pair<int, int>> AttackAction::findPathToTarget()
 {
+    Coordinates pLocation = pEntityM->getLocation();
+    Coordinates tLocation = pTargetM->getLocation();
+    Map& map = pEntityM->getGameWorld()->getMap();
+
     // If we are on the same tile as the target, we will try to find a path to a neighbor tile
     if (pEntityM->getLocation() == pTargetM->getLocation())
     {
-        Coordinates pLocation = pEntityM->getLocation();
-        Coordinates tLocation = pTargetM->getLocation();
-        Map& map = pEntityM->getGameWorld()->getMap();
         for (int i = -1; i < 2; i++)
         {
             for (int j = -1; j < 2; j++)
             {
-
                 auto pathToNeighbor = map.findPath(pLocation, Coordinates(tLocation.x + i, tLocation.y + j));
                 if (pathToNeighbor.size() != 0)
                 {
@@ -87,7 +94,7 @@ std::vector<std::pair<int, int>> AttackAction::findPathToTarget()
     }
     else
     {
-        return pEntityM->getGameWorld()->getMap().findPath(pEntityM->getLocation(), pTargetM->getLocation());
+        return map.findPath(pLocation, tLocation);
     }
 }
 
@@ -112,6 +119,10 @@ CurrentAction AttackAction::getActionInfo()
             actionInfo.looping = true;
             actionInfo.targetCoordinate = {pEntityM->getLocation().x, pEntityM->getLocation().y, pEntityM->getLocation().z};
         }
+
+        // Even though we are moving, we still want to inform the other entities about the target we are trying to attack
+        actionInfo.targetId = pTargetM->getInstanceId();
+
         return actionInfo;
     }
     else

@@ -205,6 +205,10 @@ void Client::processMessages()
                                 const auto& coords = currentPlayer.currentAction.targetCoordinate;
                                 pGraphLibM->movePlayer(currentPlayer.instanceId, {coords.x, Config.HEIGHT_MAP_SCALE * coords.z, coords.y}, currentPlayer.currentAction.durationMs / 1000.0f);
                             }
+                            else if (currentPlayer.currentAction.id == ActionType::Respawn)
+                            {
+                                pGraphLibM->forceCharacterMove(currentPlayer.instanceId, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y});
+                            }
                             else
                             {
                                 pGraphLibM->playAnimation(currentPlayer.instanceId, actionToAnimationConfig(currentPlayer.currentAction));
@@ -273,6 +277,10 @@ void Client::processMessages()
                                 {
                                     const auto& coords = entity.currentAction.targetCoordinate;
                                     pGraphLibM->moveCharacter(entity.instanceId, {coords.x, Config.HEIGHT_MAP_SCALE * coords.z, coords.y}, entity.currentAction.durationMs / 1000.0f);
+                                }
+                                else if (entity.currentAction.id == ActionType::Respawn)
+                                {
+                                    pGraphLibM->forceCharacterMove(entity.instanceId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
                                 }
                                 else
                                 {

@@ -40,9 +40,9 @@ bool isValidCell(const std::vector<std::vector<uint8_t>>& map, std::pair<int, in
 
 unsigned int euclideanDistance(std::pair<int, int> start, std::pair<int, int> end)
 {
-    int firstDiff= end.first - start.first;
+    int firstDiff = end.first - start.first;
     int secondDiff = end.second - start.second;
-    return std::sqrt( firstDiff * firstDiff + secondDiff * secondDiff );
+    return std::sqrt(firstDiff * firstDiff + secondDiff * secondDiff);
 }
 
 struct nodeCompare

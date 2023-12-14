@@ -98,6 +98,12 @@ public:
     int getAttackSpeed();
 
     /**
+     * @brief Get the movement speed of this entity
+     * @return std::chrono::milliseconds
+     */
+    std::chrono::milliseconds getMoveSpeed();
+
+    /**
      * @brief Get pointer to the GameWorld that this entity resides in
      * @return GameWorld*
      */
@@ -186,4 +192,6 @@ protected:
     bool isDisconnectedM = false; // for players only, but defined for entity for polymorphism reaons
 
     std::chrono::milliseconds respawnTimeM{10000};
+
+    std::chrono::milliseconds moveSpeedM{1000};
 };

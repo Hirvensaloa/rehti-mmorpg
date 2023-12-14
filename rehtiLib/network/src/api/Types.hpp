@@ -79,7 +79,7 @@ struct CurrentAction
     /**
      * @brief Print the CurrentAction to the console
      */
-    void print()
+    void print() const
     {
         std::cout << "CurrentAction: " << std::endl;
         std::cout << "id: " << static_cast<int>(id) << std::endl;

@@ -16,8 +16,6 @@ public:
 
     void act();
 
-    static const std::chrono::milliseconds getMoveTime();
-
     /**
      * @brief Returns information about the current action
      *
@@ -31,7 +29,7 @@ private:
     std::vector<std::pair<int, int>> pathM;
     std::optional<Coordinates> nextMoveM; ///< Next move to be taken. Stores the first element of pathM, after its deleted. Ww need this to be able to tell the client where we are moving next.
 
-    std::chrono::milliseconds actionTimeM = std::chrono::milliseconds(1000);
+    std::chrono::milliseconds actionTimeM;
 
     ActionType actionTypeM = ActionType::Move;
 };

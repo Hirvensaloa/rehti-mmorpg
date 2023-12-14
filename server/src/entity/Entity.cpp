@@ -94,6 +94,11 @@ int Entity::getAttackSpeed()
     return equipmentAttackSpeed > 0 ? equipmentAttackSpeed : 2000;
 }
 
+std::chrono::milliseconds Entity::getMoveSpeed()
+{
+    return moveSpeedM;
+}
+
 GameWorld* Entity::getGameWorld()
 {
     return pGameWorldM;

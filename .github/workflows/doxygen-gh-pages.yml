@@ -38,7 +38,7 @@ jobs:
         run: git submodule add https://github.com/Makistos/dotcomb.git
 
       - name: generate image
-        run: python3 dotcomb/dotcomb.py --output collaboration-graph.png
+        run: cd dotcomb && python3 ./dotcomb.py -f -d /tmp/project/ > output.dot && dot -Tpng -o collaboration.png output.dot
 
       - name: commit and push
         run: |

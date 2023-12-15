@@ -109,7 +109,7 @@ std::map<int, CharacterAssetData> AssetCache::loadCharacterAssetData(const GameC
 
     std::map<int, CharacterAssetData> characterAssetDataMap;
     { // player scope
-        Player player = gameCharacters.player;
+        PlayerData player = gameCharacters.player;
         const std::string filepath = Config.CHARACTER_GLTF_PATH + player.glTFFilename;
         std::vector<CharacterVertex> vertices;
         std::vector<uint32_t> indices;
@@ -124,7 +124,7 @@ std::map<int, CharacterAssetData> AssetCache::loadCharacterAssetData(const GameC
         }
     }
 
-    for (const NPC& npc : gameCharacters.npcs)
+    for (const NPCData& npc : gameCharacters.npcs)
     {
         const std::string filepath = Config.CHARACTER_GLTF_PATH + npc.glTFFilename;
         std::vector<CharacterVertex> vertices;

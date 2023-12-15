@@ -9,6 +9,9 @@
 #include "../object/Object.hpp"
 #include "Map.hpp"
 
+/**
+ * @brief GameWorld class. It contains all the player, npc, object and item instances.
+ */
 class GameWorld
 {
 

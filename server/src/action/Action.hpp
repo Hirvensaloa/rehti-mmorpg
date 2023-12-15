@@ -47,8 +47,9 @@ public:
     virtual CurrentAction getActionInfo();
 
     /**
-     * @brief Returns whether the action is completed or not
-     * @return bool
+     * @brief Returns true if the action is completed
+     *
+     * @return boolean
      */
     bool isCompleted();
 

@@ -25,7 +25,7 @@ General item which the player cannot interact with. The player can only carry su
 - **isStackable** true if the item can be stacked; otherwise, false.
 - **textureFilename** Filename of the texture file under the [textures](/assets/textures/)-folder.
 - **objFilename** Filename of the texture file under the [objects](/assets/objects/)-folder.
-- **iconFilename** Filename of a icon picture under the [items](/assets/items/)-folder.
+- **iconFilename** Filename of a icon picture under the [items](/assets/item/)-folder.
 
 **Equippable Item**
 
@@ -46,7 +46,7 @@ Item that the player can equip, giving the player possible stat boosts. Defined 
 - **isStackable** true if the item can be stacked; otherwise, false.
 - **textureFilename** Filename of the texture file under the [textures](/assets/textures/)-folder.
 - **objFilename** Filename of the texture file under the [objects](/assets/objects/)-folder.
-- **iconFilename** Filename of a icon picture under the [items](/assets/items/)-folder.
+- **iconFilename** Filename of a icon picture under the [items](/assets/item/)-folder.
 
 **Food Item**
 
@@ -60,7 +60,7 @@ Item that the player can consume (eat) to get more health. Defined with:
 - **isStackable** true if the item can be stacked; otherwise, false.
 - **textureFilename** Filename of the texture file under the [textures](/assets/textures/)-folder.
 - **objFilename** Filename of the texture file under the [objects](/assets/objects/)-folder.
-- **iconFilename** Filename of a icon picture under the [items](/assets/items/)-folder.
+- **iconFilename** Filename of a icon picture under the [items](/assets/item/)-folder.
 
 ### Adding New Items to the Item List
 
@@ -114,7 +114,7 @@ Example:
 
 ## Characters
 
-Characters in the game include the player character and non-player characters (NPCs). Character assets are defined in the JSON format. The JSON is found [here](/assets/characters.json) The character JSON structure includes the following attributes:
+Characters in the game include the player character and non-player characters (NPCs). Character assets are defined in the JSON format. The JSON is found [here](/assets/characters.json). The character JSON structure includes the following attributes:
 
 **Player Character**
 
@@ -214,11 +214,11 @@ To create a new animation type:
 
 4. Name the root bone of the armature to "rootbone".
 
-5. Map the animation to some action on client. Currently done [here](/client/src/Utils.cpp)
+5. Map the animation to some action on client. Currently done [here](/client/src/Utils.cpp).
 
 ## Game objects
 
-Objects can be categorized into three main types: **General**, **Resource** and **Loot**. Each type has specific attributes and serves different purposes. All the objects are defined [here](/assets/objects.json)
+Objects can be categorized into three main types: **General**, **Resource** and **Loot**. Each type has specific attributes and serves different purposes. All the objects are defined [here](/assets/objects.json).
 
 **General Objects**
 
@@ -257,7 +257,7 @@ Resource objects represent in-game resources that players can interact with, suc
   - **yieldableItemList:** A list of items that can be yielded from this resource, along with the percentage chance to yield each item.
   - **xpPerYield:** The amount of experience points (XP) gained when yielding once from this resource
   - **depleteChance:** The chance of depleting the resource when yielded.
-- **itemTranformList:** A table of items indicating how items are transformed. When interacting with the player, the first item found from the player's inventory that matches a item in the `itemTransformTable` is used. Not required if `yieldableItems` are defined.
+- **itemTranformList:** A table of items indicating how items are transformed. When interacting with the player, the first item found from the player's inventory that matches an item in the `itemTransformTable` is used. Not required if `yieldableItems` are defined.
   - **itemId:** Item to id to be transformed.
   - **resultItemId:** The result item id.
   - **resultItemQuantity:** The amount of result items that is received.
@@ -366,7 +366,7 @@ NOTE: The provided item IDs should range from 0 to 255 x 255 - 1 (255x255 is non
 
 ### Tile map
 
-Each object should have a tile map. Object tile map defines which tiles does the object block around itself. For example, a house wants to define all of the tiles which have walls, as blocked. Object's can also block a tile from a certain direction. For example, a fence can block only south direction so that player can still be on the same tile as the fence but the fence will just block southside access.
+Each object should have a tile map. Object tile map defines which tiles does the object block around itself. For example, a house wants to define all of the tiles which have walls, as blocked. Object's can also block a tile from a certain direction. For example, a fence can block only the south direction so that the player can still be on the same tile as the fence but the fence will just block southside access.
 
 Object tile map is defined as a matrix. Elements have string values.
 

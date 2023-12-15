@@ -17,8 +17,9 @@ public:
     ~AttackAction() = default;
 
     /**
-     * @brief Returns the target of the action
-     * @return std::shared_ptr<Entity>&
+     * @brief Get the target Entity of the action
+     *
+     * @return std::shared_ptr<Entity>
      */
     std::shared_ptr<Entity>& getTarget();
 

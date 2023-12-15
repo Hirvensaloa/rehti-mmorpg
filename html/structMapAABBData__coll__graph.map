@@ -1,7 +1,0 @@
-<map id="MapAABBData" name="MapAABBData">
-<area shape="rect" id="node1" title="Helper struct to store all the data necessary for creating a map AABB tree." alt="" coords="204,189,321,267"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,5,152,97"/>
-<area shape="rect" id="node3" title=" " alt="" coords="176,13,227,90"/>
-<area shape="rect" id="node4" title=" " alt="" coords="251,5,397,97"/>
-<area shape="rect" id="node5" title=" " alt="" coords="434,13,473,90"/>
-</map>

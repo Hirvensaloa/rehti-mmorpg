@@ -1,6 +1,0 @@
-<map id="GameObjects" name="GameObjects">
-<area shape="rect" id="node1" title="Contains all the objects defined in the objects.json file." alt="" coords="278,160,449,325"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,13,220,90"/>
-<area shape="rect" id="node3" title=" " alt="" coords="245,13,482,90"/>
-<area shape="rect" id="node4" title=" " alt="" coords="507,5,700,97"/>
-</map>

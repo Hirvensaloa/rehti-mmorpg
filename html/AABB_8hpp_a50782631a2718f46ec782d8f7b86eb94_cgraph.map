@@ -1,6 +1,0 @@
-<map id="createMapAABB" name="createMapAABB">
-<area shape="rect" id="node1" title="Creates a list of AABBs trees for each area in the areaMatrix." alt="" coords="5,31,132,57"/>
-<area shape="rect" id="node2" href="$AABB_8cpp.html#a8673fc5f0b3d4ca8745793df1c907d7e" title="Recursively creates an AABB tree for a single area." alt="" coords="180,31,309,57"/>
-<area shape="rect" id="node3" href="$AABB_8cpp.html#a445c2c3a703ab69e974859af3682b1a5" title="Constructs a maximum vector from two vectors." alt="" coords="357,5,449,32"/>
-<area shape="rect" id="node4" href="$AABB_8cpp.html#abc4a6a4eceb21ddd3da0192c2953f865" title="Constructs a minimum vector from two vectors." alt="" coords="359,56,447,83"/>
-</map>

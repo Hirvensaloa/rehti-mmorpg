@@ -1,6 +1,0 @@
-<map id="AssetCache::getCharacterAssetDataById" name="AssetCache::getCharacterAssetDataById">
-<area shape="rect" id="node1" title="Returns the character asset data by type id." alt="" coords="485,5,676,47"/>
-<area shape="rect" id="node2" href="$classClient.html#afebeedfe876105645a3937b4ee2058df" title="Processes messages from the server." alt="" coords="255,13,437,39"/>
-<area shape="rect" id="node3" href="$classClient.html#a742373e08a80d993d2651b6fff76f5b9" title="Starts the client." alt="" coords="108,13,207,39"/>
-<area shape="rect" id="node4" href="$client_2src_2Main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,60,39"/>
-</map>

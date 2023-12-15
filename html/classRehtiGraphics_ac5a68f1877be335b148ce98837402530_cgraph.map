@@ -1,7 +1,0 @@
-<map id="RehtiGraphics::~RehtiGraphics" name="RehtiGraphics::~RehtiGraphics">
-<area shape="rect" id="node1" title="Cleans up all the resources used by vulkan." alt="" coords="5,78,228,105"/>
-<area shape="rect" id="node2" href="$classRehtiGraphics.html#ad3df13b713fcfc461d206a323a5657dd" title="Cleans up used resources." alt="" coords="276,78,448,105"/>
-<area shape="rect" id="node3" href="$classRehtiGraphics.html#a1cd5f2629ff675d6c0596aef87192fab" title="Cleans up swapchain related resources. This function is used for easier recreation of the swap chain." alt="" coords="500,5,707,47"/>
-<area shape="rect" id="node4" href="$classRehtiGraphics.html#a73dec7e5414aadb12dbecb067a7b09eb" title=" " alt="" coords="496,71,711,112"/>
-<area shape="rect" id="node5" href="$BasicTypes_8hpp.html#ad436010e95d51ba6cac7b17355b1f26b" title=" " alt="" coords="542,137,665,163"/>
-</map>

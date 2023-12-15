@@ -23,13 +23,11 @@ jobs:
       - name: Generate doxygen
         run: doxygen docs/Doxyfile
 
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: gh-pages
-
       - name: Create jekyll
         run: touch ./nojekyll
+
+      - name: Checkout out to gh-pages branch
+        run: git checkout gh-pages
 
       - name: Add Doxygen Awesome CSS as submodule
         run: git submodule add https://github.com/jothepro/doxygen-awesome-css.git

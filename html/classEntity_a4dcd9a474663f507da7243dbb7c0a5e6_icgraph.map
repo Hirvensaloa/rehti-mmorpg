@@ -1,6 +1,0 @@
-<map id="Entity::changeHp" name="Entity::changeHp">
-<area shape="rect" id="node1" title="Change the hp of this entity by amount." alt="" coords="228,56,360,83"/>
-<area shape="rect" id="node2" href="$classEntity.html#a47790391860583a3c1c41dd5f8e532e6" title="Perform an attack on target entity." alt="" coords="39,5,147,32"/>
-<area shape="rect" id="node3" href="$classPlayerCharacter.html#a48c9398c4d91b8adb78a7fe2a8ad9ddf" title="Performs player&#39;s attack on target entity. Calculates hit chance and damage, and on succesful hit app..." alt="" coords="5,56,180,83"/>
-<area shape="rect" id="node4" href="$classFoodItem.html#aa973b99f39c57b819fdbf638aa676e11" title="Eats the item." alt="" coords="35,107,150,133"/>
-</map>

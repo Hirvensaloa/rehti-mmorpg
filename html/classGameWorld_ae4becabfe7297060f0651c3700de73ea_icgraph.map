@@ -1,7 +1,0 @@
-<map id="GameWorld::getMap" name="GameWorld::getMap">
-<area shape="rect" id="node1" title=" " alt="" coords="755,5,909,32"/>
-<area shape="rect" id="node2" href="$classServer.html#ae66426d3906c2a9e5b217c65c4ce5db3" title="Loads a player&#39;s data from the database and adds the player to the game." alt="" coords="565,5,707,32"/>
-<area shape="rect" id="node3" href="$classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413" title="Function to parse and act upon messages received from clients." alt="" coords="343,5,517,32"/>
-<area shape="rect" id="node4" href="$classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c" title="Server&#39;s main loop for processing messages." alt="" coords="108,5,295,32"/>
-<area shape="rect" id="node5" href="$server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
-</map>

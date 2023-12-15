@@ -1,4 +1,0 @@
-<map id="GraphicsObjectManager::transitionImageLayout" name="GraphicsObjectManager::transitionImageLayout">
-<area shape="rect" id="node1" title="Records image layout transition barrier to the given command buffer." alt="" coords="5,5,184,47"/>
-<area shape="rect" id="node2" href="$classGraphicsObjectManager.html#a120007297e679f8ef7555f8acd312dd6" title="Fills access masks and pipeline stages when given source and destination layouts for an image." alt="" coords="232,5,440,47"/>
-</map>

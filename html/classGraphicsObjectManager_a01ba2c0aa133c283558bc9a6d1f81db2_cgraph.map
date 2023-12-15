@@ -1,4 +1,0 @@
-<map id="GraphicsObjectManager::createDepthImage" name="GraphicsObjectManager::createDepthImage">
-<area shape="rect" id="node1" title="Creates a depth image." alt="" coords="5,5,184,47"/>
-<area shape="rect" id="node2" href="$classGraphicsObjectManager.html#a66285158960fc1f0c9bf7524597148da" title="Creates an allocated image. The standard parameters make it easy to create a texture image on the GPU..." alt="" coords="232,5,411,47"/>
-</map>

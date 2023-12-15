@@ -1,6 +1,0 @@
-<map id="readCharacterData" name="readCharacterData">
-<area shape="rect" id="node1" title="Reads the character data from JSON file." alt="" coords="5,31,151,57"/>
-<area shape="rect" id="node2" href="$MapReader_8cpp.html#a54309908b24ddb8124bb51147ed4ce35" title="Loads the access map from the given path." alt="" coords="235,5,378,32"/>
-<area shape="rect" id="node4" href="$CharacterReader_8cpp.html#a56581b803e4cb4205c729df269203a3f" title="Check if SpawnCoordinateBounds is valid. Throws error if not." alt="" coords="199,56,415,83"/>
-<area shape="rect" id="node3" href="$rehtiLib_2assets_2reader_2src_2Utils_8cpp.html#aabe32cf7f7f2a7f7154cbceaeafb49a6" title="Reads a matrix from a text file. Values should be separated by commas and rows by newlines." alt="" coords="463,5,612,32"/>
-</map>

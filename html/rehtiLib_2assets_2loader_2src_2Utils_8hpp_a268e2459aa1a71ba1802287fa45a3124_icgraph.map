@@ -1,5 +1,0 @@
-<map id="readPng" name="readPng">
-<area shape="rect" id="node1" title="Reads a PNG file and returns the image data, width and height." alt="" coords="248,31,323,57"/>
-<area shape="rect" id="node2" href="$MapLoader_8hpp.html#a92b85c2d8b6ae5061af00c879b873c19" title="Generate the object block map. The map defines how the objects block the tiles around itself." alt="" coords="18,5,187,32"/>
-<area shape="rect" id="node3" href="$MapLoader_8hpp.html#a40e0538b150e65b8ba2e089a514fcc2c" title="Loads a height map and map&#39;s texture map into given parameters. Loads them together to avoid reading ..." alt="" coords="5,56,200,83"/>
-</map>

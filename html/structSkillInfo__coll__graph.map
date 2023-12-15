@@ -1,5 +1,0 @@
-<map id="SkillInfo" name="SkillInfo">
-<area shape="rect" id="node1" title="Each player has a set of skills. This struct contains the name of the skill and the current xp in the..." alt="" coords="23,145,98,223"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,5,44,83"/>
-<area shape="rect" id="node3" title=" " alt="" coords="69,5,127,83"/>
-</map>

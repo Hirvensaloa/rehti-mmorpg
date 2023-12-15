@@ -1,5 +1,0 @@
-<map id="generateAreaObjs" name="generateAreaObjs">
-<area shape="rect" id="node1" title="Generates obj map for each area of the map." alt="" coords="5,31,144,57"/>
-<area shape="rect" id="node2" href="$MapObjLoader_8hpp.html#aa6e77692699581ab90c93b9f8a589c17" title="Writes a face to an OBJ file." alt="" coords="199,5,283,32"/>
-<area shape="rect" id="node3" href="$MapObjLoader_8hpp.html#a167afe55692731c9613180a95c04c56c" title="Writes a vertex to an OBJ file." alt="" coords="192,56,289,83"/>
-</map>

@@ -1,4 +1,0 @@
-<map id="ResourceObject::canInteract" name="ResourceObject::canInteract">
-<area shape="rect" id="node1" title="Check if the entity can interact with the object." alt="" coords="236,5,441,32"/>
-<area shape="rect" id="node2" href="$classResourceObject.html#aaee08d1b37836242c2ede45abbf7df71" title="Interact with the object." alt="" coords="5,5,188,32"/>
-</map>

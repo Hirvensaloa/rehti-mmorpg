@@ -1,4 +1,0 @@
-<map id="RehtiGraphics::createDepthResources" name="RehtiGraphics::createDepthResources">
-<area shape="rect" id="node1" title="Creates resources required for a depth buffer." alt="" coords="5,5,207,47"/>
-<area shape="rect" id="node2" href="$classRehtiGraphics.html#a5b0af8d71acd97adc7264acab4ee7ed5" title="Looks for a suitable format from given candidates." alt="" coords="255,5,465,47"/>
-</map>

@@ -1,9 +1,0 @@
-digraph "SkillSet"
-{
- // LATEX_PDF_SIZE
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="{SkillSet\n||+ SkillSet()\l+ getSkills()\l+ getSkillXp()\l+ getSkillLevel()\l+ addSkillXp()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Contains all the skills that a character has."];
-  Node2 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -skillsM" ,arrowhead="odiamond",fontname="Helvetica"];
-  Node2 [label="{map\< int, SkillInfo \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
-}

@@ -1,4 +1,0 @@
-<map id="writeVertex" name="writeVertex">
-<area shape="rect" id="node1" title="Writes a vertex to an OBJ file." alt="" coords="192,5,289,32"/>
-<area shape="rect" id="node2" href="$MapObjLoader_8hpp.html#aa24debb42ae6c2b03c7d57bc053b0efb" title="Generates obj map for each area of the map." alt="" coords="5,5,144,32"/>
-</map>

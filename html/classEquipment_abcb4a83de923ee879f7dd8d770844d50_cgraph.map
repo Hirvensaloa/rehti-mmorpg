@@ -1,5 +1,0 @@
-<map id="Equipment::equip" name="Equipment::equip">
-<area shape="rect" id="node1" title="Equip an EquippableItem to the proper slot." alt="" coords="5,31,141,57"/>
-<area shape="rect" id="node2" href="$classInventory.html#a9e1fad5a5f8ef1d2aec5ba9d86531d0d" title="Adds item to the inventory." alt="" coords="192,5,337,32"/>
-<area shape="rect" id="node3" href="$classEntity.html#a1f1ef1b13908ffef9f2c4f2f455fdb71" title="Get the Inventory object of this entity." alt="" coords="189,56,340,83"/>
-</map>

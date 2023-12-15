@@ -1,7 +1,0 @@
-<map id="RehtiGraphics::addMapBoundingBox" name="RehtiGraphics::addMapBoundingBox">
-<area shape="rect" id="node1" title="Adds a bounding box for the world map." alt="" coords="5,31,264,57"/>
-<area shape="rect" id="node2" href="$AABB_8cpp.html#a84f9fe626856f524cb482bca08c4f2f2" title="Creates a list of AABBs trees for each area in the areaMatrix." alt="" coords="312,31,439,57"/>
-<area shape="rect" id="node3" href="$AABB_8cpp.html#a8673fc5f0b3d4ca8745793df1c907d7e" title="Recursively creates an AABB tree for a single area." alt="" coords="487,31,616,57"/>
-<area shape="rect" id="node4" href="$AABB_8cpp.html#a445c2c3a703ab69e974859af3682b1a5" title="Constructs a maximum vector from two vectors." alt="" coords="664,5,756,32"/>
-<area shape="rect" id="node5" href="$AABB_8cpp.html#abc4a6a4eceb21ddd3da0192c2953f865" title="Constructs a minimum vector from two vectors." alt="" coords="666,56,754,83"/>
-</map>

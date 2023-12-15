@@ -1,5 +1,0 @@
-<map id="RehtiGui::drawEquipmentSlot" name="RehtiGui::drawEquipmentSlot">
-<area shape="rect" id="node1" title="Helper function for a single equipment slot." alt="" coords="444,5,657,32"/>
-<area shape="rect" id="node2" href="$classRehtiGui.html#a748c7f0cb7eca33108efbb7f170bdf8d" title="Draws equipment tab to GUI window." alt="" coords="208,5,396,32"/>
-<area shape="rect" id="node3" href="$classRehtiGui.html#a5cff62a80fd8c20208c9d6319f8ed2d5" title=" " alt="" coords="5,5,160,32"/>
-</map>

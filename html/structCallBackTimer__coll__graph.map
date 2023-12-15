@@ -1,5 +1,0 @@
-<map id="CallBackTimer" name="CallBackTimer">
-<area shape="rect" id="node1" title="Struct representing a callback with a timer. Timer is decremented with the given deltatime." alt="" coords="43,160,160,237"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,5,56,83"/>
-<area shape="rect" id="node3" title=" " alt="" coords="81,5,266,83"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="createAreaAABB" name="createAreaAABB">
-<area shape="rect" id="node1" title="Recursively creates an AABB tree for a single area." alt="" coords="5,31,135,57"/>
-<area shape="rect" id="node2" href="$AABB_8cpp.html#a445c2c3a703ab69e974859af3682b1a5" title="Constructs a maximum vector from two vectors." alt="" coords="183,5,275,32"/>
-<area shape="rect" id="node3" href="$AABB_8cpp.html#abc4a6a4eceb21ddd3da0192c2953f865" title="Constructs a minimum vector from two vectors." alt="" coords="185,56,273,83"/>
-</map>

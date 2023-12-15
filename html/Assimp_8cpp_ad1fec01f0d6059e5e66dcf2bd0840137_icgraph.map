@@ -1,9 +1,0 @@
-<map id="loadOBJFile" name="loadOBJFile">
-<area shape="rect" id="node1" title="Loads the object from the given path." alt="" coords="867,64,963,91"/>
-<area shape="rect" id="node2" href="$classAssetCache.html#a48a445aae3950de86b925f1c560236cc" title="Loads the map area assets data." alt="" coords="588,5,819,32"/>
-<area shape="rect" id="node6" href="$classAssetCache.html#acd699db149530b94fd54b52cc9047967" title="Loads the game object assets data." alt="" coords="596,57,811,98"/>
-<area shape="rect" id="node7" href="$classAssetCache.html#abda1d5aaa6bafdccb3fc7619c8096d88" title="Loads the item assets data." alt="" coords="588,123,819,149"/>
-<area shape="rect" id="node3" href="$classAssetCache.html#a65f5a313ec992e8d4fd1212272f404d0" title="Loads all the assets into memory." alt="" coords="363,64,540,91"/>
-<area shape="rect" id="node4" href="$classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,64,315,91"/>
-<area shape="rect" id="node5" href="$classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="5,64,112,91"/>
-</map>

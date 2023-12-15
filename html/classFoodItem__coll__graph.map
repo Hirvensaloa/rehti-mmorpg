@@ -1,7 +1,0 @@
-<map id="FoodItem" name="FoodItem">
-<area shape="rect" id="node1" title="Represents an item that can be eaten." alt="" coords="5,419,155,540"/>
-<area shape="rect" id="node2" href="$classItem.html" title="Base class for items." alt="" coords="150,189,285,369"/>
-<area shape="rect" id="node3" title=" " alt="" coords="27,5,66,83"/>
-<area shape="rect" id="node4" title=" " alt="" coords="193,5,244,83"/>
-<area shape="rect" id="node5" title=" " alt="" coords="321,5,380,83"/>
-</map>

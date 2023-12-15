@@ -1,7 +1,0 @@
-<map id="AggressiveNpc::update" name="AggressiveNpc::update">
-<area shape="rect" id="node1" title="Updates the AggressiveNpc." alt="" coords="5,60,177,87"/>
-<area shape="rect" id="node2" href="$classAggressiveNpc.html#a37453d355991dae967fcea1baafb72e3" title="Finds the closest player to the AggressiveNpc." alt="" coords="225,23,424,65"/>
-<area shape="rect" id="node5" href="$classEntity.html#ae00ca26a951f822510d3d93e4c42dce3" title="Set the current action to parameter action." alt="" coords="261,89,389,116"/>
-<area shape="rect" id="node3" href="$structCoordinates.html#afd7a34a1bae5f10f5abbde76839a891c" title="Calculate the euclidean distance between two Coordinates." alt="" coords="478,5,641,32"/>
-<area shape="rect" id="node4" href="$classGameWorld.html#acd967a70218090ebcb533b851375e5e1" title=" " alt="" coords="472,56,647,83"/>
-</map>

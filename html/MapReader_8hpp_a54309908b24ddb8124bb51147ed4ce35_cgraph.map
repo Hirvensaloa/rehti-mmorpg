@@ -1,4 +1,0 @@
-<map id="fetchAccessMatrix" name="fetchAccessMatrix">
-<area shape="rect" id="node1" title="Loads the access map from the given path." alt="" coords="5,5,148,32"/>
-<area shape="rect" id="node2" href="$rehtiLib_2assets_2reader_2src_2Utils_8cpp.html#aabe32cf7f7f2a7f7154cbceaeafb49a6" title="Reads a matrix from a text file. Values should be separated by commas and rows by newlines." alt="" coords="196,5,345,32"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="createMapAABB" name="createMapAABB">
-<area shape="rect" id="node1" title="Creates a list of AABBs trees for each area in the areaMatrix." alt="" coords="669,5,796,32"/>
-<area shape="rect" id="node2" href="$classRehtiGraphics.html#a2a9176b65dedb70b8fa94ce7aea8643a" title="Adds a bounding box for the world map." alt="" coords="363,5,621,32"/>
-<area shape="rect" id="node3" href="$classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,5,315,32"/>
-<area shape="rect" id="node4" href="$classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="5,5,112,32"/>
-</map>

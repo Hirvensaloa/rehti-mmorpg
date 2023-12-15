@@ -1,5 +1,0 @@
-<map id="RehtiGraphics::moveGameObject" name="RehtiGraphics::moveGameObject">
-<area shape="rect" id="node1" title="Moves a game object to the given location in the given time." alt="" coords="5,42,244,69"/>
-<area shape="rect" id="node2" href="$classTimerCallbackSystem.html#af8ea3ade97f14ca226c625ad4d70f90b" title="Adds a new timer callback for the given id." alt="" coords="331,5,497,47"/>
-<area shape="rect" id="node3" href="$classRehtiGraphics.html#a1a332491febf46b86750d5d73e3e97ad" title="Helper function to move a bounding box." alt="" coords="292,71,536,98"/>
-</map>

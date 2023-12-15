@@ -1,4 +1,0 @@
-<map id="Entity::move" name="Entity::move">
-<area shape="rect" id="node1" title="Move to a neighboring tile." alt="" coords="5,5,109,32"/>
-<area shape="rect" id="node2" href="$structCoordinates.html#afd7a34a1bae5f10f5abbde76839a891c" title="Calculate the euclidean distance between two Coordinates." alt="" coords="157,5,320,32"/>
-</map>

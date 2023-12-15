@@ -1,5 +1,0 @@
-<map id="Camera::cursorPosCallback" name="Camera::cursorPosCallback">
-<area shape="rect" id="node1" title="Callback for registering mouse movement." alt="" coords="549,5,749,32"/>
-<area shape="rect" id="node2" href="$classCamera.html#a7a11d366f18cc5f2ad7183bb8792e7c9" title="Registers the camera controls to the given window." alt="" coords="265,5,501,32"/>
-<area shape="rect" id="node3" href="$classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469" title="Initializes the graphics backend." alt="" coords="5,5,217,32"/>
-</map>

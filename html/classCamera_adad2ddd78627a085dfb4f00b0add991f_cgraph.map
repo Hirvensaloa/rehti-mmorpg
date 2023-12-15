@@ -1,7 +1,0 @@
-<map id="Camera::orbitRotate" name="Camera::orbitRotate">
-<area shape="rect" id="node1" title="rotates the camera around the target." alt="" coords="5,56,160,83"/>
-<area shape="rect" id="node2" href="$classCamera.html#acdb736eec57c3cdbeff41069f378f713" title="returns the camera matrix with the target as the origon." alt="" coords="208,5,447,32"/>
-<area shape="rect" id="node4" href="$classCamera.html#aa21e94d4bfd57c15897a8a2948d6356c" title="Returns the right direction of the camera." alt="" coords="259,56,395,83"/>
-<area shape="rect" id="node5" href="$Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="261,107,394,133"/>
-<area shape="rect" id="node3" href="$classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="495,5,652,32"/>
-</map>

@@ -1,4 +1,0 @@
-<map id="RehtiGraphics::addGameObject" name="RehtiGraphics::addGameObject">
-<area shape="rect" id="node1" title="Adds a game object with the given id to the graphics backend. Also creates a bounding box for the obj..." alt="" coords="5,5,232,32"/>
-<area shape="rect" id="node2" href="$Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="280,5,413,32"/>
-</map>

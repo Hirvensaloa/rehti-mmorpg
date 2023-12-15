@@ -1,9 +1,0 @@
-<map id="ObjectAssetData" name="ObjectAssetData">
-<area shape="rect" id="node1" title="Contains asset data loaded into memory for a specific object." alt="" coords="195,300,326,377"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,160,140,237"/>
-<area shape="rect" id="node3" href="$structImageData.html" title=" " alt="" coords="164,160,259,237"/>
-<area shape="rect" id="node4" title=" " alt="" coords="139,5,177,83"/>
-<area shape="rect" id="node5" title=" " alt="" coords="201,5,325,83"/>
-<area shape="rect" id="node6" title=" " alt="" coords="283,160,342,237"/>
-<area shape="rect" id="node7" title=" " alt="" coords="461,160,607,237"/>
-</map>

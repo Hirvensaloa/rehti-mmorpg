@@ -1,8 +1,0 @@
-<map id="DescriptorBuilder" name="DescriptorBuilder">
-<area shape="rect" id="node1" title="DescriptorBuilder uses PoolManager and DescriptorLayoutCache to manage and create descriptor sets." alt="" coords="475,160,674,369"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,5,232,97"/>
-<area shape="rect" id="node3" title=" " alt="" coords="256,5,453,97"/>
-<area shape="rect" id="node4" title=" " alt="" coords="477,5,672,97"/>
-<area shape="rect" id="node5" title=" " alt="" coords="696,13,771,90"/>
-<area shape="rect" id="node6" title=" " alt="" coords="795,13,1002,90"/>
-</map>

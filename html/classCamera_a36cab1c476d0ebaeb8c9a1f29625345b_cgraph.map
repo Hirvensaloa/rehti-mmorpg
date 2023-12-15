@@ -1,4 +1,0 @@
-<map id="Camera::getCameraRay" name="Camera::getCameraRay">
-<area shape="rect" id="node1" title="Returns the camera ray in world space." alt="" coords="5,5,184,32"/>
-<area shape="rect" id="node2" href="$classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="232,5,389,32"/>
-</map>

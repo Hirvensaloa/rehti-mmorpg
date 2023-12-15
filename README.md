@@ -34,7 +34,7 @@ The game, in its sandbox-style, allows players to set their own goals. This coul
 
 ## How to play
 
-You can play the game by installing the client, see [here](#client-1).
+You can play the game by installing the client, see [here](#installation).
 
 ### Login/Signup
 
@@ -54,7 +54,7 @@ All the controls happen with the mouse.
 
 **Moving the camera** You can move the camera by holding down the scroll wheel and moving the mouse. You can zoom in and out by scrolling the scroll wheel.
 
-**Managing items** Items are managed from the inventory tab in the bottom right corner. A dropdown menu opens when cliking on the item.
+**Managing items** Items are managed from the inventory tab in the bottom right corner. A dropdown menu opens when clicking on the item.
 
 **Managing equipment** Equipment can be equiped from the inventory. You can unequip items by clicking on the item in the equipment tab.
 
@@ -62,7 +62,7 @@ All the controls happen with the mouse.
 
 ### Prerequisites
 
-1. Make sure to fetch git submodules. This needs to be run everytime new submodules are added.
+1. Make sure to fetch git submodules. This needs to be run every time new submodules are added.
 
 ```sh
 git submodule update --recursive --init
@@ -96,7 +96,7 @@ Instructions to launch and run the client and server for local development:
 
 #### <a name="client-pre"></a>Prerequisites
 
-- (Optional) Add an environment variable called VK_LAYER_PATH and point it to vulkan-validationlayers bin/json path. (Conan library directory)
+- (Optional) Add an environment variable called VK_LAYER_PATH and point it to the vulkan-validationlayers bin/json path. (Conan library directory)
 
 #### Running
 
@@ -112,7 +112,7 @@ Server runs on C++ and uses Boost.Asio for networking. Database is made with Pos
 
 ### <a name="server-pre"></a>Prerequisites
 
-To run the server and database, make sure you have `docker-compose` and `docker` installed. Docker-compose installation also instructs or automagically installs Docker, depending what do you choose.
+To run the server and database, make sure you have `docker-compose` and `docker` installed. Docker-compose installation also instructs or automagically installs Docker, depending what you choose.
 
 - Install docker-compose [here](https://docs.docker.com/compose/install/).
 
@@ -134,7 +134,7 @@ It is possible to run the server without Docker by using `./scripts/run-backend-
 
 - Docker compose version 2.22 or higher needed
 
-- `./scripts/run-backend.sh --watch` to automatically rebuild the server everytime changes occur. NOTE: Watch is experimental docker-compose feature. In our case, this might quickly increase your docker build cache, so make sure to sometimes run `docker system prune` or other clean up commands.
+- `./scripts/run-backend.sh --watch` to automatically rebuild the server every time changes occur. NOTE: Watch is an experimental docker-compose feature. In our case, this might quickly increase your docker build cache, so make sure to sometimes run `docker system prune` or other clean up commands.
 
 ### Troubleshooting
 
@@ -160,7 +160,7 @@ The server is implemented in C++. The server's main loop advances the game 32 ti
 
 ### Database
 
-The database uses PostgreSQL version 16. The project does not demand much from the database as there are very few read and write operations. Additionally, data sizes are not expected to grow to several hundred, or even tens, of gigabytes. We could have chosen any general database technology for this reason. However, we ended up selecting PostgreSQL because we had previous experience with it, and the C++ ecosystem provided a simple interface library for the database (libpqx).
+The database uses PostgreSQL version 16. The project does not demand much from the database as there are very few read and write operations. Additionally, data sizes are not expected to grow to several hundred, or even tens, of gigabytes. We could have chosen any general database technology for this reason. However, we ended up selecting PostgreSQL because we had previous experience with it, and the C++ ecosystem provided a simple interface library for the database (libpqxx).
 
 ### API
 
@@ -196,7 +196,7 @@ Sent by: Server
     - **id**: action id (For example, move or attack). -1 means no action
     - **durationMs**: duration for one action iteration
     - **looping**: boolean indicating if the action should loop or not
-    - **targetId**: action target id. Intepretation depends on the action id. For example, if attack -> targetId is entityId. If move -> targetId is not defined
+    - **targetId**: action target id. Interpretation depends on the action id. For example, if attack -> targetId is entityId. If move -> targetId is not defined
     - **targetCoordinate**: target coordinates. Defined if action id is move.
       - **x**: x-coordinate
       - **y**: y-coordinate

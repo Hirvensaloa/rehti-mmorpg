@@ -4,6 +4,9 @@
 #include <optional>
 #include <string>
 
+/**
+ * @brief Each player has a set of skills. This struct contains the name of the skill and the current xp in the skill.
+ */
 struct SkillInfo
 {
     const std::string name;

@@ -1,6 +1,6 @@
 # REHTI MMORPG
 
-Welcome to the Rehti MMORPG repository! This project implements a barebones MMORPG game written in C++.
+Welcome to the Rehti MMORPG repository! This project implements a MMORPG game written in C++.
 
 Table of contents:
 

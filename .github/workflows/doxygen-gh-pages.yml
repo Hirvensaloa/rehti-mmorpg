@@ -23,6 +23,11 @@ jobs:
       - name: Generate doxygen
         run: doxygen docs/Doxyfile
 
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+
       - name: Create jekyll
         run: touch ./nojekyll
 

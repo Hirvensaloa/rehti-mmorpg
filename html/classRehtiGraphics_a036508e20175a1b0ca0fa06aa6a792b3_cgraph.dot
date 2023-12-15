@@ -1,0 +1,19 @@
+digraph "RehtiGraphics::isDeviceSuitable"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="RehtiGraphics::isDeviceSuitable",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Checks whether the given device supports the required features."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="RehtiGraphics::checkDevice\lExtensionSupport",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a214e3327349d6861ef4b206374c9fe02",tooltip="Checks whether the given device supports the required extensions."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="RehtiGraphics::findQueue\lFamilies",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a4153cb9e66212ea84f6e702fc1a331fc",tooltip="Looks for queue families."];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="QueueFamilyIndices\l::hasTransferOnlyQueue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structQueueFamilyIndices.html#a9ea89d103d736bcfbfde0cb19d973e4a",tooltip=" "];
+  Node3 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="QueueFamilyIndices\l::isComplete",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structQueueFamilyIndices.html#a652cdfabe4719ae21a701e77d57e7899",tooltip=" "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="RehtiGraphics::querySwap\lChainSupport",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a24a0247a5de37828a58de2cc93f27fb0",tooltip="Looks for swapchain support."];
+}

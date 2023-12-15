@@ -1,0 +1,55 @@
+digraph "RehtiGraphics::mainLoop"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="RehtiGraphics::mainLoop",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Loops, polls events and draws frames."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="RehtiGraphics::drawFrame",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ac049915f0d6b38117ece68d74eaec027",tooltip="Draws a frame and records the previous frame time."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="RehtiGraphics::getNextFrame",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a06f4b52d37e0e9b7adb86d8e724ba1f0",tooltip="Returns the index of the next frame."];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="RehtiGraphics::recordCommand\lBuffer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a6ce071a893e0edc43841a8d0c01700ed",tooltip="Records the command buffer."];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="getObjectTypes",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$BasicTypes_8hpp.html#ad436010e95d51ba6cac7b17355b1f26b",tooltip=" "];
+  Node4 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Camera::getWorldToScreen\lMatrix",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCamera.html#a1d263c318c088257b74934d93b9e3a78",tooltip="Returns the world to screen matrix."];
+  Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="Camera::getViewMatrix",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCamera.html#a2f90e661a78172675ca06ea69667b531",tooltip="Returns the view matrix of the camera, which is the inverse of the model matrix of the camera...."];
+  Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="Camera::getLocation",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1",tooltip="Returns the location of the camera."];
+  Node7 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="POSITIVE_Y_AXIS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748",tooltip=" "];
+  Node2 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="RehtiGraphics::recreateSwap\lChain",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a203320e8973b2886132afadb3e2dd7f9",tooltip="Recreates the swapchain."];
+  Node10 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="RehtiGraphics::cleanupSwap\lChain",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a1cd5f2629ff675d6c0596aef87192fab",tooltip="Cleans up swapchain related resources. This function is used for easier recreation of the swap chain."];
+  Node10 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="RehtiGraphics::createFramebuffers",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a7713292234071d8a2ce195f75fb04cd8",tooltip="Creates the framebuffers."];
+  Node10 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="RehtiGraphics::createImage\lViews",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a627450c10409454e21a1e5c7ce28130d",tooltip="Creates the image views."];
+  Node10 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="RehtiGraphics::createSwap\lChain",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a2c18492cbece076acf3d35ddd1b5d7cb",tooltip="Creates the swapchain."];
+  Node14 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="RehtiGraphics::chooseSwap\lExtent",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a75ec64c97d7fe08381b9afc797a0e250",tooltip="Chooses a swap extent based on the provided capabilities."];
+  Node14 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="RehtiGraphics::chooseSwap\lPresentMode",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#af2d71b2ee66f2987bed675ca104cf7e0",tooltip="Chooses a present mode."];
+  Node14 -> Node17 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 [label="RehtiGraphics::chooseSwap\lSurfaceFormat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ac81329a7ed71287a2632b0a17667938c",tooltip="Chooses a surface format."];
+  Node14 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="RehtiGraphics::findQueue\lFamilies",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a4153cb9e66212ea84f6e702fc1a331fc",tooltip="Looks for queue families."];
+  Node18 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="QueueFamilyIndices\l::hasTransferOnlyQueue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structQueueFamilyIndices.html#a9ea89d103d736bcfbfde0cb19d973e4a",tooltip=" "];
+  Node18 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="QueueFamilyIndices\l::isComplete",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structQueueFamilyIndices.html#a652cdfabe4719ae21a701e77d57e7899",tooltip=" "];
+  Node14 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="RehtiGraphics::querySwap\lChainSupport",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a24a0247a5de37828a58de2cc93f27fb0",tooltip="Looks for swapchain support."];
+  Node1 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="TimerCallbackSystem\l::elapseTime",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classTimerCallbackSystem.html#a887d675b42267d0775fa9ac6121191d6",tooltip="Elapses time by the given delta time, meaning calling the callbacks with the given delta time."];
+  Node1 -> Node23 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node23 [label="POSITIVE_X_AXIS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Camera_8hpp.html#a139a997d06bd43f993fc788e5050ed60",tooltip=" "];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node24 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node24 [label="POSITIVE_Z_AXIS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Camera_8hpp.html#ac57ad755be51ffc9cc41b032426ba68b",tooltip=" "];
+}

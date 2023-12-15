@@ -1,0 +1,10 @@
+digraph "GraphicsObjectManager::startCommandBuffer"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="GraphicsObjectManager\l::startCommandBuffer",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Allocates and begins a command buffer."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="GraphicsObjectManager\l::CommandUnit::startCommand\lBuffer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structGraphicsObjectManager_1_1CommandUnit.html#a062348d8349e31388763a6a7e6ed5148",tooltip=" "];
+}

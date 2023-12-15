@@ -1,0 +1,38 @@
+digraph "GraphicsObjectManager::addCharacter"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="GraphicsObjectManager\l::addCharacter",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Adds a character to the buffer manager with the given parameters."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="GraphicsObjectManager\l::copyBuffer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#a149cc91ffc0073433e4c3734eb80c8b9",tooltip="Copies the given data to the given buffer."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="GraphicsObjectManager\l::createStagingBuffer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#a0f54e4c067ab0dea4897191617d9a722",tooltip="Helper for creating a staging buffer."];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="GraphicsObjectManager\l::createBuffer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#acaa2f62a870f1426abe523acb1d8ef6f",tooltip="Creates a buffer with the given parameters."];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="GraphicsObjectManager\l::getQueueFamilyCount",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#a48087fcc6c8ff32a160ff8105240538d",tooltip="Returns number of queue families."];
+  Node4 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="GraphicsObjectManager\l::getSharingMode",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#a1f57aa379d9151b4dcb74622f011e008",tooltip="Returns the sharing mode of created resources."];
+  Node2 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="GraphicsObjectManager\l::endCommandBuffer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#a8db31ba380265e1794f57cc65962f58b",tooltip="Submits the given command buffer to be executed on the gpu."];
+  Node2 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="GraphicsObjectManager\l::startCommandBuffer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#a6245170a0f8269dc6bea1edcda0ac60c",tooltip="Allocates and begins a command buffer."];
+  Node8 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="GraphicsObjectManager\l::CommandUnit::startCommand\lBuffer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structGraphicsObjectManager_1_1CommandUnit.html#a062348d8349e31388763a6a7e6ed5148",tooltip=" "];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="GraphicsObjectManager\l::copyImage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#a9d3d8755593f5f4cd26ba45c689e31ee",tooltip="Copies the given data to the given image."];
+  Node10 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="GraphicsObjectManager\l::transitionImageLayout",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#ae498965da68ae9ead548d9c32aab4368",tooltip="Records image layout transition barrier to the given command buffer."];
+  Node11 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="GraphicsObjectManager\l::getPipelineAndAccessFlags",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#a120007297e679f8ef7555f8acd312dd6",tooltip="Fills access masks and pipeline stages when given source and destination layouts for an image."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="GraphicsObjectManager\l::createImage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#a66285158960fc1f0c9bf7524597148da",tooltip="Creates an allocated image. The standard parameters make it easy to create a texture image on the GPU..."];
+  Node1 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="GraphicsObjectManager\l::createImageView",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#aa7ea92ddcf8c00c47420e545fe08b7be",tooltip="Creates an image view for the given image and format."];
+}

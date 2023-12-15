@@ -1,0 +1,10 @@
+digraph "GraphicsObjectManager::transitionImageLayout"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="GraphicsObjectManager\l::transitionImageLayout",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Records image layout transition barrier to the given command buffer."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="GraphicsObjectManager\l::getPipelineAndAccessFlags",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#a120007297e679f8ef7555f8acd312dd6",tooltip="Fills access masks and pipeline stages when given source and destination layouts for an image."];
+}

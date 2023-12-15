@@ -1,0 +1,10 @@
+digraph "Entity::getRange"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Entity::getRange",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Get tha attack range of this entity."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Equipment::getEquipmentStats",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEquipment.html#a3a0856f2c28cc76096b0556faa859eff",tooltip="Get combined stats of equipped items."];
+}

@@ -1,0 +1,22 @@
+digraph "aiVector3DVectorToVertexVector"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="aiVector3DVectorToVertex\lVector",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Convert vector of aiVector3D to vector of Vertex."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="AssetCache::loadAreaAssetData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAssetCache.html#a48a445aae3950de86b925f1c560236cc",tooltip="Loads the map area assets data."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="AssetCache::loadAssets",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAssetCache.html#a65f5a313ec992e8d4fd1212272f404d0",tooltip="Loads all the assets into memory."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Client::startGraphics",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#a7b7406bdc248547627fd669a92b86d6c",tooltip="Starts the graphics library."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Client::Client",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#ad3e41ed92e71d5c3717db96e68b9541b",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="AssetCache::loadGameObject\lAssetData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAssetCache.html#acd699db149530b94fd54b52cc9047967",tooltip="Loads the game object assets data."];
+  Node6 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="AssetCache::loadItemAssetData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAssetCache.html#abda1d5aaa6bafdccb3fc7619c8096d88",tooltip="Loads the item assets data."];
+  Node7 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

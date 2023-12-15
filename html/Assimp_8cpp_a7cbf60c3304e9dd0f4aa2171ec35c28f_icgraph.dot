@@ -1,0 +1,29 @@
+digraph "aiFaceToFace"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="aiFaceToFace",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Convert aiFace to RehtiGraphics Face."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="aiFaceVectorToFaceVector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#aaab18d6f2188530eb4622a96323262f0",tooltip="Convert vector of aiFace to vector of RehtiGraphics Faces."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="AssetCache::loadAreaAssetData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAssetCache.html#a48a445aae3950de86b925f1c560236cc",tooltip="Loads the map area assets data."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="AssetCache::loadAssets",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAssetCache.html#a65f5a313ec992e8d4fd1212272f404d0",tooltip="Loads all the assets into memory."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Client::startGraphics",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#a7b7406bdc248547627fd669a92b86d6c",tooltip="Starts the graphics library."];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Client::Client",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#ad3e41ed92e71d5c3717db96e68b9541b",tooltip=" "];
+  Node2 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="AssetCache::loadGameObject\lAssetData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAssetCache.html#acd699db149530b94fd54b52cc9047967",tooltip="Loads the game object assets data."];
+  Node7 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="AssetCache::loadItemAssetData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAssetCache.html#abda1d5aaa6bafdccb3fc7619c8096d88",tooltip="Loads the item assets data."];
+  Node8 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="loadGlTFFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#a815da1a9fca11840a96af6ddd1fafafc",tooltip="Loads the object from the given path."];
+  Node9 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="AssetCache::loadCharacter\lAssetData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAssetCache.html#ad9b550b38f4ca4b4d1c5dadd54089ad9",tooltip="Loads the character assets data."];
+  Node10 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

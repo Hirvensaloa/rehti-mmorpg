@@ -1,0 +1,16 @@
+digraph "Camera::getCameraRay"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="Camera::getCameraRay",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Returns the camera ray in world space."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="RehtiGraphics::traceClick",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a1cfaaeadfe98542d6819596175eac875",tooltip="Traces a ray against all bounding boxes, starting with objects, then characters and lastly the map."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="RehtiGraphics::addMouseClick\lCallback",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a3e448f8ad5fd760e066f3be8fd627b48",tooltip="Adds a mouse click callback."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Client::startGraphics",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#a7b7406bdc248547627fd669a92b86d6c",tooltip="Starts the graphics library."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Client::Client",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#ad3e41ed92e71d5c3717db96e68b9541b",tooltip=" "];
+}

@@ -1,0 +1,21 @@
+digraph "ShaderManager::compileGLSLToSpirv"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="ShaderManager::compileGLSLTo\lSpirv",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Compiles a given GLSL code to SPIRV."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="ShaderManager::createShader\lModule",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceShaderManager.html#a72cac2147eeeaa5b2d4e8981579e3689",tooltip="Creates a shader module from a file."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="ShaderManager::createFragment\lShaderInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceShaderManager.html#abfd9bcbabdfe3ea9c2341eff7fbb23e4",tooltip="Creates a fragment shader info to be used in pipeline creation."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="RehtiGraphics::createGraphics\lPipeline",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ac307d6b1b052e5e07374056e833e01de",tooltip="Creates the graphics pipeline."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="RehtiGraphics::initVulkan",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3",tooltip="Initializes vulkan instance."];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="RehtiGraphics::RehtiGraphics",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469",tooltip="Initializes the graphics backend."];
+  Node2 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="ShaderManager::createVertex\lShaderInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceShaderManager.html#ab64875c63a588c002e5f9f6b11faee1a",tooltip="Creates a vertex shader info to be used in pipeline creation."];
+  Node7 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

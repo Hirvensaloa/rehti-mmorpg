@@ -1,0 +1,16 @@
+digraph "AggressiveNpc::update"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="AggressiveNpc::update",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Updates the AggressiveNpc."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="AggressiveNpc::findClosest\lPlayer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAggressiveNpc.html#a37453d355991dae967fcea1baafb72e3",tooltip="Finds the closest player to the AggressiveNpc."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Coordinates::distance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structCoordinates.html#afd7a34a1bae5f10f5abbde76839a891c",tooltip="Calculate the euclidean distance between two Coordinates."];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="GameWorld::getPlayers",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameWorld.html#acd967a70218090ebcb533b851375e5e1",tooltip=" "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Entity::setAction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html#ae00ca26a951f822510d3d93e4c42dce3",tooltip="Set the current action to parameter action."];
+}

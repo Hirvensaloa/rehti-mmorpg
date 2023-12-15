@@ -1,0 +1,28 @@
+digraph "Map::getRandomCoordinates"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="Map::getRandomCoordinates",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Gets a random coordinate within the given bounds."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Entity::getRespawnLocation",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html#a399fd12cf21daaf0f8da5d19f1f30569",tooltip="Returns a random location within the spawn bounds."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="GameWorld::initWorld",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameWorld.html#ab78e304a7c2babd4addacd751b56c98c",tooltip="Initializes the game world. Loads assets and map. Adds npcs and objects to the world."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Server::initGameState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classServer.html#a50304dfbea44f60fb1da1f4754d582dd",tooltip="Initializes the gamestate and gameworld."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Server::Server",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classServer.html#ad5ec9462b520e59f7ea831e157ee5e59",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Server::loadPlayer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classServer.html#ae66426d3906c2a9e5b217c65c4ce5db3",tooltip="Loads a player's data from the database and adds the player to the game."];
+  Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="Server::handleMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413",tooltip="Function to parse and act upon messages received from clients."];
+  Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="Server::processMessages",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c",tooltip="Server's main loop for processing messages."];
+  Node8 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4",tooltip=" "];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="Npc::update",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNpc.html#a02469aac6500ae06782d0f75148d5b50",tooltip="Updates the NPC."];
+  Node1 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="PassiveNpc::update",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPassiveNpc.html#a09827b4717c77c7cbe16665ac954168d",tooltip="Updates the PassiveNpc."];
+}

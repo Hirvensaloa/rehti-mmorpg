@@ -1,0 +1,18 @@
+digraph "fillSkeleton"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="fillSkeleton",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Fills the given vectors with hierarchy and bone data."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="loadGlTFFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#a815da1a9fca11840a96af6ddd1fafafc",tooltip="Loads the object from the given path."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="AssetCache::loadCharacter\lAssetData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAssetCache.html#ad9b550b38f4ca4b4d1c5dadd54089ad9",tooltip="Loads the character assets data."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="AssetCache::loadAssets",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAssetCache.html#a65f5a313ec992e8d4fd1212272f404d0",tooltip="Loads all the assets into memory."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Client::startGraphics",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#a7b7406bdc248547627fd669a92b86d6c",tooltip="Starts the graphics library."];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Client::Client",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#ad3e41ed92e71d5c3717db96e68b9541b",tooltip=" "];
+}

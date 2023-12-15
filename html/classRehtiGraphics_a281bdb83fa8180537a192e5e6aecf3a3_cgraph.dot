@@ -1,0 +1,16 @@
+digraph "RehtiGraphics::createInstance"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="RehtiGraphics::createInstance",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Creates vulkan instance."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="RehtiGraphics::checkValidation\lLayerSupport",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ac589482bb07e8473c46cbb6fc67a3740",tooltip="Checks whether the given device supports the required layers."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="RehtiGraphics::getRequired\lExtensions",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a732a16966142700e2323acc6007286a1",tooltip="Returns the required extensions as c strings."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="RehtiGraphics::populateDebug\lMessengerCreateInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a48c28ff35dd115c2deb3ee8cc99490c6",tooltip="Populates the debug messenger info."];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="RehtiGraphics::debugCallback",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#afc773ddc6b8f3d70bf0a8031577f3ceb",tooltip=" "];
+}

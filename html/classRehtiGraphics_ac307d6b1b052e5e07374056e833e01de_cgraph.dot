@@ -1,0 +1,43 @@
+digraph "RehtiGraphics::createGraphicsPipeline"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="RehtiGraphics::createGraphics\lPipeline",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Creates the graphics pipeline."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="ShaderManager::createFragment\lShaderInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceShaderManager.html#abfd9bcbabdfe3ea9c2341eff7fbb23e4",tooltip="Creates a fragment shader info to be used in pipeline creation."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="ShaderManager::createShader\lModule",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceShaderManager.html#a72cac2147eeeaa5b2d4e8981579e3689",tooltip="Creates a shader module from a file."];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="ShaderManager::compileGLSLTo\lSpirv",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceShaderManager.html#a7b7005ce467ff4cb0465418eeae09c55",tooltip="Compiles a given GLSL code to SPIRV."];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="ShaderManager::getShaderCode",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceShaderManager.html#a7290d17f0cfbec86001a9299d7dfbfc6",tooltip="Returns the shader code as a string corresponding to the given stage and object type."];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="ShaderManager::createVertex\lShaderInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceShaderManager.html#ab64875c63a588c002e5f9f6b11faee1a",tooltip="Creates a vertex shader info to be used in pipeline creation."];
+  Node6 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="ShaderManager::destroyShader\lModules",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceShaderManager.html#a02a208f45a128b627abdff6e82e421a0",tooltip="Destroys created shader modules. This function can be called after pipeline creation."];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="getAttributeDescription",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$GraphicsTypes_8cpp.html#ae0d47a3d5f817a21814d359bf09a6e8e",tooltip="Returns a vector of VkVertexInputAttributeDescription for the given object type."];
+  Node8 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="getCharacterVertexAttribute\lDescriptions",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$GraphicsTypes_8cpp.html#a61b2c21259fb6b05ff574a27954cb6c6",tooltip=" "];
+  Node8 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="getSimpleVertexAttribute\lDescriptions",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$GraphicsTypes_8cpp.html#a14038fb86979b563ecf2249d10d274e6",tooltip=" "];
+  Node8 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="getVertexAttributeDescriptions",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$GraphicsTypes_8cpp.html#a0d13e158265eb7ef848be49f9dbac689",tooltip=" "];
+  Node1 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="getBindingDescription",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$GraphicsTypes_8cpp.html#a7ba8e166543eb669a4714dbdc68accd0",tooltip="Returns the vertex binding description for the given object type."];
+  Node12 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="getCharacterVertexBinding\lDescription",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$GraphicsTypes_8cpp.html#a8e9b584aad384b8a9e159124172dcaea",tooltip=" "];
+  Node12 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="getSimpleVertexBindingDescription",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$GraphicsTypes_8cpp.html#aeee734b844699ea7f04afb42ffef5768",tooltip=" "];
+  Node12 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="getVertexBindingDescription",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$GraphicsTypes_8cpp.html#a4ace64fbd2d42a899038930a28b3dd8e",tooltip=" "];
+  Node1 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="RehtiGraphics::getCamera\lRange",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#affb0483295aa80648144ecdb82f6a3b2",tooltip="Returns the size of the camera matrix."];
+  Node16 -> Node17 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 [label="Camera::getUboSize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCamera.html#a9f5741607bb6b27d2fb130247cd26b95",tooltip="Returns the size of the camera's UBO."];
+  Node1 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="getObjectTypes",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$BasicTypes_8hpp.html#ad436010e95d51ba6cac7b17355b1f26b",tooltip=" "];
+}

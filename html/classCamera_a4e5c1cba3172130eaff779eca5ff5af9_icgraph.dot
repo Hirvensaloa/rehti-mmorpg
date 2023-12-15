@@ -1,0 +1,32 @@
+digraph "Camera::setLocation"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="Camera::setLocation",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Sets the camera location to the given location."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Camera::setTargetAndCamera",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCamera.html#a7e5afa229f8c473b74d4984e0663cc8f",tooltip="Sets the camera target to the given location and moves camera by the same amount."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="RehtiGraphics::addCharacter\lObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ac817516ac285d8b37e44ed594a903bd1",tooltip="Adds a character object with the given id to the graphics backend. Also creates a bounding box for th..."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Client::processMessages",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#afebeedfe876105645a3937b4ee2058df",tooltip="Processes messages from the server."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Client::start",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#a742373e08a80d993d2651b6fff76f5b9",tooltip="Starts the client."];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_2src_2Main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97",tooltip=" "];
+  Node2 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="RehtiGraphics::forcePlayerMove",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a6e2e9da4d7d742bda2d1232e27c8df8e",tooltip="Forces player to move to the location given, cancelling any remaining movement callbacks and animatio..."];
+  Node2 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="RehtiGraphics::movePlayer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5",tooltip="Moves the player to the given location in the given time. Also automatically rotates the player to fa..."];
+  Node8 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="Camera::zoom",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCamera.html#af6dc1153bcd85dcb5f4c2c551e3a09b0",tooltip="Zooms the camera by the given amount."];
+  Node9 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="Camera::registerCameraControls",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCamera.html#a7a11d366f18cc5f2ad7183bb8792e7c9",tooltip="Registers the camera controls to the given window."];
+  Node10 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="RehtiGraphics::RehtiGraphics",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469",tooltip="Initializes the graphics backend."];
+  Node9 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="Camera::scrollCallback",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCamera.html#a3fd0454142eb9ec06bd4268fa4b8043f",tooltip="callback for registering mouse scroll"];
+  Node12 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

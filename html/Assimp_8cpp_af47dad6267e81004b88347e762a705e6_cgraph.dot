@@ -1,0 +1,12 @@
+digraph "fillSkeleton"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="fillSkeleton",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Fills the given vectors with hierarchy and bone data."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="aiMatrix4x4ToGlm",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#aec04d4c1442d730b5dd16bce0b52a876",tooltip="Convert aiMatrix4x4 to glm::mat4."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="containsSubString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#a2053055d0e1b287a09d0bd479030df01",tooltip=" "];
+}

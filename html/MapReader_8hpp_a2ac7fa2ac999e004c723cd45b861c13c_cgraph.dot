@@ -1,0 +1,10 @@
+digraph "fetchHeightMatrix"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="fetchHeightMatrix",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Loads the height map from the given path."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="readMatrixFromFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rehtiLib_2assets_2reader_2src_2Utils_8cpp.html#aabe32cf7f7f2a7f7154cbceaeafb49a6",tooltip="Reads a matrix from a text file. Values should be separated by commas and rows by newlines."];
+}

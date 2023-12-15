@@ -1,0 +1,18 @@
+digraph "GameCharacters"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{GameCharacters\n||}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Contains all the character data. This is used to load character assets into memory and spawn characte..."];
+  Node2 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +player" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node2 [label="{PlayerData\n||}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structPlayerData.html",tooltip="Contains all the player data. This is used to load player assets into memory and spawn players on the..."];
+  Node3 -> Node2 [color="grey25",fontsize="10",style="solid",label=" +baseAccuracy\n+baseDamage\n+id" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node3 [label="{int\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node4 -> Node2 [color="grey25",fontsize="10",style="solid",label=" +glTFFilename\n+textureFilename" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node4 [label="{string\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node5 -> Node2 [color="grey25",fontsize="10",style="solid",label=" +spawnCoordinateBounds" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 [label="{SpawnCoordinateBounds\n||}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structSpawnCoordinateBounds.html",tooltip="Contains the spawn coordinate bounds for a character."];
+  Node3 -> Node5 [color="grey25",fontsize="10",style="solid",label=" +xMax\n+xMin\n+yMax\n+yMin" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node6 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +npcs" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node6 [label="{vector\< NPCData \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+}

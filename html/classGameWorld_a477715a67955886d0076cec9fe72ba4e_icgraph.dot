@@ -1,0 +1,29 @@
+digraph "GameWorld::getPlayer"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="GameWorld::getPlayer",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Server::handleMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413",tooltip="Function to parse and act upon messages received from clients."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Server::processMessages",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c",tooltip="Server's main loop for processing messages."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Server::loadPlayer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classServer.html#ae66426d3906c2a9e5b217c65c4ce5db3",tooltip="Loads a player's data from the database and adds the player to the game."];
+  Node5 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Server::savePlayer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classServer.html#a3f8208fe6744f4c10ead5905b657c64b",tooltip="Saves a player's data to the database."];
+  Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="Server::tick",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classServer.html#a2dd422dc25689dc106a6d5fe1d3b3298",tooltip="Function that updates the gamestate on each server tick, called by ticker()"];
+  Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="Server::ticker",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classServer.html#a68a715891c8ac1659bf27c3796c12052",tooltip="Timer function that is used to start server ticks, runs on a separate thread."];
+  Node8 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="Server::Server",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classServer.html#ad5ec9462b520e59f7ea831e157ee5e59",tooltip=" "];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="Server::sendGameState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classServer.html#a2252e5384a7a5e755c200c104d745fcb",tooltip="Sends the current gamestate to connected clients."];
+  Node10 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

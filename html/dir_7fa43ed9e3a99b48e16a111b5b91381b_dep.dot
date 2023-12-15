@@ -1,0 +1,12 @@
+digraph "rehtiLib" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_7fa43ed9e3a99b48e16a111b5b91381b {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_7fa43ed9e3a99b48e16a111b5b91381b.html"];
+    dir_7fa43ed9e3a99b48e16a111b5b91381b [shape=plaintext label="rehtiLib"];
+  dir_c06811b8199beb4c697950829a4c58ec [shape=box label="assets" fillcolor="white" style="filled" color="red" URL="dir_c06811b8199beb4c697950829a4c58ec.html"];
+  dir_5311ac799357c12e8d6677b53f5ac4d2 [shape=box label="graphics" fillcolor="white" style="filled" color="red" URL="dir_5311ac799357c12e8d6677b53f5ac4d2.html"];
+  }
+  dir_c06811b8199beb4c697950829a4c58ec->dir_5311ac799357c12e8d6677b53f5ac4d2 [headlabel="1", labeldistance=1.5 headhref="dir_000007_000001.html"];
+}

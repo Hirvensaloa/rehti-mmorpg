@@ -1,0 +1,44 @@
+digraph "loadGlTFFile"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="loadGlTFFile",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Loads the object from the given path."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="aiFaceToFace",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#a7cbf60c3304e9dd0f4aa2171ec35c28f",tooltip="Convert aiFace to RehtiGraphics Face."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="aiMatrix4x4ToGlm",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#aec04d4c1442d730b5dd16bce0b52a876",tooltip="Convert aiMatrix4x4 to glm::mat4."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="aiVector3DToGlm",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#af714162056ba854a84fa8ff6ee9ff516",tooltip="Convert aiVector3D to glm::vec3."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="debugCharacterVertices",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#ac7d1323db3bfb183d6e70fab3f431ed6",tooltip="Prints out faulty vertices."];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="equalF",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#a34a35189f1598429dc9003c820683963",tooltip=" "];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="fillSkeleton",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#af47dad6267e81004b88347e762a705e6",tooltip="Fills the given vectors with hierarchy and bone data."];
+  Node7 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="containsSubString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#a2053055d0e1b287a09d0bd479030df01",tooltip=" "];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="loadAnimations",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#acb65074d785be3958ddb16a3865228d3",tooltip="Loads animations from the given scene."];
+  Node9 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="equalD",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#a49f04ae968a1677ced2c91be115ea8dc",tooltip=" "];
+  Node9 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="getAnimIndex",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$BasicTypes_8hpp.html#abeaa9e402d6a6f63c932da7fa203c38c",tooltip=" "];
+  Node9 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="interpolateAIQuatkeys",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#ab9ddfd5d96ddb6ab2180134628abcf3b",tooltip=" "];
+  Node12 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="aiQuaternionToGlm",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#a82d60c84bd6e80bf366a651cd18fb805",tooltip="Convert aiQuaternion to glm::quat."];
+  Node12 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="interpolatedTimeFactor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#a3cf31b63f2461c3970db4c1977c7d4bc",tooltip=" "];
+  Node12 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="interpolateLinear",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#a83b6795b8d851b9bee5e289c2759b108",tooltip=" "];
+  Node9 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="interpolateAIVectorkeys",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#ab1d32709e6bd0b18a804efcc942fea3c",tooltip=" "];
+  Node16 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

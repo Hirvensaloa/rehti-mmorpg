@@ -1,0 +1,18 @@
+digraph "maxVector"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="maxVector",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Constructs a maximum vector from two vectors."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="createAreaAABB",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$AABB_8cpp.html#a8673fc5f0b3d4ca8745793df1c907d7e",tooltip="Recursively creates an AABB tree for a single area."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="createMapAABB",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$AABB_8cpp.html#a84f9fe626856f524cb482bca08c4f2f2",tooltip="Creates a list of AABBs trees for each area in the areaMatrix."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="RehtiGraphics::addMapBoundingBox",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a2a9176b65dedb70b8fa94ce7aea8643a",tooltip="Adds a bounding box for the world map."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Client::startGraphics",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#a7b7406bdc248547627fd669a92b86d6c",tooltip="Starts the graphics library."];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Client::Client",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#ad3e41ed92e71d5c3717db96e68b9541b",tooltip=" "];
+}

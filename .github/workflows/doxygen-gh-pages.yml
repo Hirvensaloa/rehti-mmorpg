@@ -26,8 +26,11 @@ jobs:
       - name: Create jekyll
         run: touch ./nojekyll
 
-      - name: Checkout out to gh-pages branch
-        run: git checkout gh-pages
+      - name: Checkout out to gh-pages branch (Keep changes)
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+          clean: false
 
       - name: Add Doxygen Awesome CSS as submodule
         run: git submodule add https://github.com/jothepro/doxygen-awesome-css.git

@@ -11,9 +11,4 @@
 [submodule "third_party/bcrypt"]
 	path = third_party/bcrypt
 	url = git@github.com:hilch/Bcrypt.cpp.git
-[submodule "doxygen-awesome-css"]
-	path = doxygen-awesome-css
-	url = https://github.com/jothepro/doxygen-awesome-css.git
-[submodule "dotcomb"]
-	path = dotcomb
-	url = https://github.com/Makistos/dotcomb.git
+	

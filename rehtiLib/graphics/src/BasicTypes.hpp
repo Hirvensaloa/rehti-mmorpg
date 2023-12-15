@@ -111,7 +111,43 @@ struct CharacterData
 
 #pragma region GraphicsObjectTypes
 
-typedef AnimationNode ObjOrientation;
+/**
+ * @brief Directional light struct representing a directional light.
+ */
+struct DirectionalLight
+{
+    alignas(16) glm::vec3 direction; ///< direction of the directional light
+    alignas(16) glm::vec3 color;     ///< color of the directional light
+    float intensity;                 ///< intensity of the directional light
+};
+
+/**
+ * @brief Point light struct representing a point that shines light in all directions.
+ */
+struct PointLight
+{
+    alignas(16) glm::vec3 position; ///< position of the point light
+    alignas(16) glm::vec3 color;    ///< color of the point light
+    float intensity;                ///< intensity of the point light
+};
+
+struct PhongMaterial
+{
+    alignas(16) glm::vec3 ambient;  ///< ambient color of the material
+    alignas(16) glm::vec3 diffuse;  ///< diffuse color of the material
+    alignas(16) glm::vec3 specular; ///< specular color of the material
+    float shininess;                ///< shininess of the material
+    static PhongMaterial getDefaultMaterial();
+};
+
+/**
+ * @brief Camera data used for shading.
+ */
+struct CameraData
+{
+    alignas(16) glm::vec3 position;
+    alignas(16) glm::vec3 direction;
+};
 
 struct Hit
 {
@@ -144,7 +180,6 @@ struct Vertex
     glm::vec2 texCoord;
 };
 
-// TODO Use assimp and checkout the library.
 struct SimpleVertex
 {
     glm::vec3 pos;
@@ -153,6 +188,7 @@ struct SimpleVertex
 
 struct AnimationConfig
 {
+    glm::vec3 animationDirection = glm::vec3(0.f, 0.f, -1.f);
     AnimationType animType;
     float duration;
     bool looping;

@@ -20,8 +20,8 @@ struct AllocatedImage
 // Has image view in addition to AllocatedImage struct
 struct CombinedImage
 {
-	AllocatedImage imageAllocation;
-	VkImageView imageView;
+    AllocatedImage imageAllocation;
+    VkImageView imageView;
 };
 
 struct AllocatedBuffer
@@ -39,12 +39,12 @@ struct GameObjectUniformBuffer
     void* mappedTransformData;       // Pointer to the mapped data of the transform buffer
 };
 
-// Test object descriptor data
-struct TestObjectUniformBuffer
+// Simple uniform buffer with a single allocated buffer
+struct SimpleUniformBuffer
 {
-    VkDescriptorSet descriptorSet;   // Descriptor set of the data
-    AllocatedBuffer transformBuffer; // Buffer containing the transform data (glm::mat4)
-    void* mappedTransformData;       // Pointer to the mapped data of the transform buffer
+    VkDescriptorSet descriptorSet; // Descriptor set of the data
+    AllocatedBuffer buffer;        // Buffer containing whatever data is needed
+    void* mappedTransformData;     // Pointer to the mapped data of the transform buffer
 };
 
 // Character buffer object
@@ -60,22 +60,26 @@ struct CharacterObject
 {
     AllocatedBuffer vertexData;
     AllocatedBuffer indexData;
+    AllocatedBuffer materialData;
     uint32_t indexCount;
     AllocatedImage texture;
     VkImageView textureView;
+    PhongMaterial material;
     std::vector<CharacterObjectUniformBuffer> characterUniformBuffers;
-    static std::array<VkDescriptorSetLayoutBinding, 3> getDescriptorSetLayoutBindings();
+    static std::array<VkDescriptorSetLayoutBinding, 4> getDescriptorSetLayoutBindings();
 };
 
 struct GameObject
 {
     AllocatedBuffer vertexData;
     AllocatedBuffer indexData;
+    AllocatedBuffer materialData;
     uint32_t indexCount;
     AllocatedImage texture;
     VkImageView textureView;
+    PhongMaterial material;
     std::vector<GameObjectUniformBuffer> uniformBuffers;
-    static std::array<VkDescriptorSetLayoutBinding, 2> getDescriptorSetLayoutBindings();
+    static std::array<VkDescriptorSetLayoutBinding, 3> getDescriptorSetLayoutBindings();
 };
 
 struct AreaObject
@@ -94,7 +98,16 @@ struct TestObject
     AllocatedBuffer vertexData;
     AllocatedBuffer indexData;
     uint32_t indexCount;
-    std::vector<TestObjectUniformBuffer> uniformBuffers;
+    std::vector<SimpleUniformBuffer> uniformBuffers;
+    static std::array<VkDescriptorSetLayoutBinding, 1> getDescriptorSetLayoutBindings();
+};
+
+/**
+ * @brief Simple light object that contains a list of uniform buffers.
+ */
+struct LightObject
+{
+    std::vector<SimpleUniformBuffer> uniformBuffers; // List of light data along with their descriptor sets
     static std::array<VkDescriptorSetLayoutBinding, 1> getDescriptorSetLayoutBindings();
 };
 

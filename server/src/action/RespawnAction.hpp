@@ -13,7 +13,8 @@ public:
     ~RespawnAction() = default;
 
     /**
-     * @brief After time indicated by actionTimeM has passed, moves pEntity to its respawn location and changes hp back to maximum
+     * @brief After time indicated by actionTimeM has passed, moves pEntity to its respawn location and changes hp back to maximum.
+     * Implementation of pure virtual method act() of the base class
      */
     void act();
 

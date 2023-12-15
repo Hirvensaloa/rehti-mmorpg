@@ -1,0 +1,8 @@
+<map id="GraphicsObjectManager::transitionDepthImageLayout" name="GraphicsObjectManager::transitionDepthImageLayout">
+<area shape="rect" id="node1" title="Transitions the given image to the given layout using graphics queue." alt="" coords="5,71,221,112"/>
+<area shape="rect" id="node2" href="$classGraphicsObjectManager.html#a8db31ba380265e1794f57cc65962f58b" title="Submits the given command buffer to be executed on the gpu." alt="" coords="269,5,448,47"/>
+<area shape="rect" id="node3" href="$classGraphicsObjectManager.html#a6245170a0f8269dc6bea1edcda0ac60c" title="Allocates and begins a command buffer." alt="" coords="269,71,448,112"/>
+<area shape="rect" id="node5" href="$classGraphicsObjectManager.html#ae498965da68ae9ead548d9c32aab4368" title="Records image layout transition barrier to the given command buffer." alt="" coords="269,137,448,179"/>
+<area shape="rect" id="node4" href="$structGraphicsObjectManager_1_1CommandUnit.html#a062348d8349e31388763a6a7e6ed5148" title=" " alt="" coords="496,61,725,117"/>
+<area shape="rect" id="node6" href="$classGraphicsObjectManager.html#a120007297e679f8ef7555f8acd312dd6" title="Fills access masks and pipeline stages when given source and destination layouts for an image." alt="" coords="507,141,715,183"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="NPCData" name="NPCData">
+<area shape="rect" id="node1" title="Contains all the NPCData data. This is used to load NPCData assets into memory and spawn NPCs on the ..." alt="" coords="233,373,313,451"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,189,164,267"/>
+<area shape="rect" id="node3" title=" " alt="" coords="220,5,259,83"/>
+<area shape="rect" id="node5" href="$structSpawnCoordinateBounds.html" title="Contains the spawn coordinate bounds for a character." alt="" coords="362,189,546,267"/>
+<area shape="rect" id="node4" title=" " alt="" coords="570,189,629,267"/>
+</map>

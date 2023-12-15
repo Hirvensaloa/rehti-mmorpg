@@ -1,0 +1,20 @@
+digraph "Entity::attack"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Entity::attack",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Perform an attack on target entity."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Entity::changeHp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html#a4dcd9a474663f507da7243dbb7c0a5e6",tooltip="Change the hp of this entity by amount."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Entity::respawn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html#a076c4f2138c24a11ed279370a99bb976",tooltip="Pure virtual function that child classes need to implement. Performs entity's respawning."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Entity::getEquipment",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html#ac98d1f3267fa19476913d3744efba910",tooltip="Get the Equipment object of this entity."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Equipment::getEquipmentStats",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEquipment.html#a3a0856f2c28cc76096b0556faa859eff",tooltip="Get combined stats of equipped items."];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Entity::getHp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html#a3581642dc6f9cb80fe4d9fdc98f7c80d",tooltip="Get the current hp of this entity."];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="Entity::getName",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html#ab824e4f163924eb4f136d3e2ff759897",tooltip="Get the name of this entity."];
+}

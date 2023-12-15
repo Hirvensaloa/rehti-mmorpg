@@ -1,0 +1,4 @@
+<map id="LootObject::canInteract" name="LootObject::canInteract">
+<area shape="rect" id="node1" title="Check if the entity can interact with the object." alt="" coords="204,5,377,32"/>
+<area shape="rect" id="node2" href="$classLootObject.html#a4ef8634a19756ec50a158923bab05fc7" title="Interact with the object." alt="" coords="5,5,156,32"/>
+</map>

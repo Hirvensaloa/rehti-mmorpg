@@ -1,0 +1,12 @@
+<map id="CharacterObject" name="CharacterObject">
+<area shape="rect" id="node1" title=" " alt="" coords="327,315,583,392"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,145,241,237"/>
+<area shape="rect" id="node3" title=" " alt="" coords="274,153,386,230"/>
+<area shape="rect" id="node4" title=" " alt="" coords="417,153,491,230"/>
+<area shape="rect" id="node5" href="$structAllocatedBuffer.html" title=" " alt="" coords="682,153,805,230"/>
+<area shape="rect" id="node6" title=" " alt="" coords="509,5,626,83"/>
+<area shape="rect" id="node9" href="$structAllocatedImage.html" title=" " alt="" coords="516,153,640,230"/>
+<area shape="rect" id="node7" title=" " alt="" coords="687,5,797,83"/>
+<area shape="rect" id="node8" title=" " alt="" coords="840,5,919,83"/>
+<area shape="rect" id="node10" title=" " alt="" coords="386,5,466,83"/>
+</map>

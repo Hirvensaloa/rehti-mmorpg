@@ -1,0 +1,7 @@
+<map id="RehtiGraphics::addGameObject" name="RehtiGraphics::addGameObject">
+<area shape="rect" id="node1" title="Adds a game object with the given id to the graphics backend. Also creates a bounding box for the obj..." alt="" coords="513,42,740,69"/>
+<area shape="rect" id="node2" href="$classRehtiGraphics.html#a287719d07b5c76970ffa6f6eca9bdf09" title="Adds a test game object with a test texture for testing purposes." alt="" coords="255,5,465,47"/>
+<area shape="rect" id="node3" href="$classClient.html#afebeedfe876105645a3937b4ee2058df" title="Processes messages from the server." alt="" coords="269,71,451,98"/>
+<area shape="rect" id="node4" href="$classClient.html#a742373e08a80d993d2651b6fff76f5b9" title="Starts the client." alt="" coords="108,71,207,98"/>
+<area shape="rect" id="node5" href="$client_2src_2Main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,71,60,98"/>
+</map>

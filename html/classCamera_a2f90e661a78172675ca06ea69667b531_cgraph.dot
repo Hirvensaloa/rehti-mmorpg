@@ -1,0 +1,12 @@
+digraph "Camera::getViewMatrix"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Camera::getViewMatrix",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Returns the view matrix of the camera, which is the inverse of the model matrix of the camera...."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Camera::getLocation",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1",tooltip="Returns the location of the camera."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="POSITIVE_Y_AXIS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748",tooltip=" "];
+}

@@ -1,0 +1,6 @@
+<map id="Map::findPath" name="Map::findPath">
+<area shape="rect" id="node1" title="Finds a path from start to end." alt="" coords="5,31,116,57"/>
+<area shape="rect" id="node2" href="$server_2src_2world_2Utils_8cpp.html#ac2a70af5436b8b68792d3d467a42cc98" title="A&#45;star algorithm made to work with the access map format. Allows diagonal movement and has a heuristi..." alt="" coords="164,31,219,57"/>
+<area shape="rect" id="node3" href="$server_2src_2world_2Utils_8cpp.html#a301851ebbe7e47130cde965d54a9b220" title="Calculate the euclidean distance between two points." alt="" coords="267,5,409,32"/>
+<area shape="rect" id="node4" href="$server_2src_2world_2Utils_8cpp.html#a1e58627f4f02de892dd1d1931b08243f" title="Check if cell is valid and accessible from given direction." alt="" coords="293,56,383,83"/>
+</map>

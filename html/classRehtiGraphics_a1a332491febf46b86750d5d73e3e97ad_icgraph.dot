@@ -1,0 +1,26 @@
+digraph "RehtiGraphics::moveBoundingBox"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="RehtiGraphics::moveBoundingBox",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Helper function to move a bounding box."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="RehtiGraphics::forceCharacterMove",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#aa0fe4714ffc957fc647c4e392397e3f5",tooltip="Forces character to the given location, cancelling any remaining movement callbacks and animations."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Client::processMessages",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#afebeedfe876105645a3937b4ee2058df",tooltip="Processes messages from the server."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Client::start",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#a742373e08a80d993d2651b6fff76f5b9",tooltip="Starts the client."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_2src_2Main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="RehtiGraphics::forceGame\lObjectMove",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a3445d3e9f5e90a1a23bea394666d2ad7",tooltip="Forces the game object to move to the given location, quitting any remaining movement callbacks."];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="RehtiGraphics::moveCharacter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ac24939dc0395b9a5c70eb35d3fd3947f",tooltip="Moves character to the given location in the given time. Automatically sets the running animation and..."];
+  Node7 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="RehtiGraphics::moveGameObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a6604a046175b11fff262f9ec8a802ec3",tooltip="Moves a game object to the given location in the given time."];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="RehtiGraphics::movePlayer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5",tooltip="Moves the player to the given location in the given time. Also automatically rotates the player to fa..."];
+  Node9 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

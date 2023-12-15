@@ -1,0 +1,5 @@
+<map id="Server::savePlayer" name="Server::savePlayer">
+<area shape="rect" id="node1" title="Saves a player&#39;s data to the database." alt="" coords="5,31,149,57"/>
+<area shape="rect" id="node2" href="$classGameWorld.html#a477715a67955886d0076cec9fe72ba4e" title=" " alt="" coords="240,5,408,32"/>
+<area shape="rect" id="node3" href="$classDatabaseManager.html#a2074813855734007c9ac259a848f9314" title="Save player&#39;s basic data, items and skills to the database." alt="" coords="197,56,451,83"/>
+</map>

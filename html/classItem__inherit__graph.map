@@ -1,0 +1,5 @@
+<map id="Item" name="Item">
+<area shape="rect" id="node1" title="Base class for items." alt="" coords="106,5,251,259"/>
+<area shape="rect" id="node2" href="$classEquippableItem.html" title="Represents an item that can be equipped." alt="" coords="5,307,171,457"/>
+<area shape="rect" id="node3" href="$classFoodItem.html" title="Represents an item that can be eaten." alt="" coords="195,321,344,443"/>
+</map>

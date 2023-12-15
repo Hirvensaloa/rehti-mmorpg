@@ -1,0 +1,6 @@
+<map id="Server::savePlayer" name="Server::savePlayer">
+<area shape="rect" id="node1" title="Saves a player&#39;s data to the database." alt="" coords="468,5,612,32"/>
+<area shape="rect" id="node2" href="$classServer.html#a2dd422dc25689dc106a6d5fe1d3b3298" title="Function that updates the gamestate on each server tick, called by ticker()" alt="" coords="324,5,420,32"/>
+<area shape="rect" id="node3" href="$classServer.html#a68a715891c8ac1659bf27c3796c12052" title="Timer function that is used to start server ticks, runs on a separate thread." alt="" coords="168,5,276,32"/>
+<area shape="rect" id="node4" href="$classServer.html#ad5ec9462b520e59f7ea831e157ee5e59" title=" " alt="" coords="5,5,120,32"/>
+</map>

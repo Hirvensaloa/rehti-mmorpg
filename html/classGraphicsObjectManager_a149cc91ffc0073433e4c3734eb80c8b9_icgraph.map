@@ -1,0 +1,7 @@
+<map id="GraphicsObjectManager::copyBuffer" name="GraphicsObjectManager::copyBuffer">
+<area shape="rect" id="node1" title="Copies the given data to the given buffer." alt="" coords="232,104,411,145"/>
+<area shape="rect" id="node2" href="$classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf" title="Adds an area object to the buffer manager." alt="" coords="5,5,184,47"/>
+<area shape="rect" id="node3" href="$classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
+<area shape="rect" id="node4" href="$classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
+<area shape="rect" id="node5" href="$classGraphicsObjectManager.html#a8f8086ab3f1129a2a4ff1435ed5b1c72" title="Adds a test object to the buffer manager." alt="" coords="5,201,184,243"/>
+</map>

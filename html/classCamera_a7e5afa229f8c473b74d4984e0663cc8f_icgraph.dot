@@ -1,0 +1,21 @@
+digraph "Camera::setTargetAndCamera"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="Camera::setTargetAndCamera",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Sets the camera target to the given location and moves camera by the same amount."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="RehtiGraphics::addCharacter\lObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ac817516ac285d8b37e44ed594a903bd1",tooltip="Adds a character object with the given id to the graphics backend. Also creates a bounding box for th..."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Client::processMessages",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#afebeedfe876105645a3937b4ee2058df",tooltip="Processes messages from the server."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Client::start",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#a742373e08a80d993d2651b6fff76f5b9",tooltip="Starts the client."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_2src_2Main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="RehtiGraphics::forcePlayerMove",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a6e2e9da4d7d742bda2d1232e27c8df8e",tooltip="Forces player to move to the location given, cancelling any remaining movement callbacks and animatio..."];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="RehtiGraphics::movePlayer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5",tooltip="Moves the player to the given location in the given time. Also automatically rotates the player to fa..."];
+  Node7 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

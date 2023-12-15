@@ -1,0 +1,9 @@
+<map id="SkillSet::addSkillXp" name="SkillSet::addSkillXp">
+<area shape="rect" id="node1" title="Adds the given amount of xp to the skill with the given id. Returns false if the addition failed,..." alt="" coords="796,56,944,83"/>
+<area shape="rect" id="node2" href="$classPlayerCharacter.html#a48c9398c4d91b8adb78a7fe2a8ad9ddf" title="Performs player&#39;s attack on target entity. Calculates hit chance and damage, and on succesful hit app..." alt="" coords="569,5,744,32"/>
+<area shape="rect" id="node3" href="$classResourceObject.html#aaee08d1b37836242c2ede45abbf7df71" title="Interact with the object." alt="" coords="565,56,748,83"/>
+<area shape="rect" id="node4" href="$classServer.html#ae66426d3906c2a9e5b217c65c4ce5db3" title="Loads a player&#39;s data from the database and adds the player to the game." alt="" coords="586,107,727,133"/>
+<area shape="rect" id="node5" href="$classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413" title="Function to parse and act upon messages received from clients." alt="" coords="343,107,517,133"/>
+<area shape="rect" id="node6" href="$classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c" title="Server&#39;s main loop for processing messages." alt="" coords="108,107,295,133"/>
+<area shape="rect" id="node7" href="$server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,107,60,133"/>
+</map>

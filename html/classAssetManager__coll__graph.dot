@@ -1,0 +1,40 @@
+digraph "AssetManager"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{AssetManager\n||+ loadAssets()\l+ getObjectLocations()\l+ getSkills()\l+ getObjects()\l+ getItems()\l+ getGameCharacters()\l+ createItemInstance()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Holds definitions to all the items, objects and skills in the game. This class is used to fetch the d..."];
+  Node2 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -objectLocationsM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node2 [label="{vector\< ObjectLocation \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node3 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -gameCharactersM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node3 [label="{GameCharacters\n||}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structGameCharacters.html",tooltip="Contains all the character data. This is used to load character assets into memory and spawn characte..."];
+  Node4 -> Node3 [color="grey25",fontsize="10",style="solid",label=" +player" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node4 [label="{PlayerData\n||}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structPlayerData.html",tooltip="Contains all the player data. This is used to load player assets into memory and spawn players on the..."];
+  Node5 -> Node4 [color="grey25",fontsize="10",style="solid",label=" +baseAccuracy\n+baseDamage\n+id" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 [label="{int\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node6 -> Node4 [color="grey25",fontsize="10",style="solid",label=" +glTFFilename\n+textureFilename" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node6 [label="{string\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node7 -> Node4 [color="grey25",fontsize="10",style="solid",label=" +spawnCoordinateBounds" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node7 [label="{SpawnCoordinateBounds\n||}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structSpawnCoordinateBounds.html",tooltip="Contains the spawn coordinate bounds for a character."];
+  Node5 -> Node7 [color="grey25",fontsize="10",style="solid",label=" +xMax\n+xMin\n+yMax\n+yMin" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node8 -> Node3 [color="grey25",fontsize="10",style="solid",label=" +npcs" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node8 [label="{vector\< NPCData \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node9 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -itemsM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node9 [label="{GameItems\n||+ containsId()\l+ getAllIds()\l+ getItemType()\l+ getGeneralItem()\l+ getEquippableItem()\l+ getFoodItem()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structGameItems.html",tooltip="Contains all the item data in the game. This is used to load item assets into memory and create item ..."];
+  Node10 -> Node9 [color="grey25",fontsize="10",style="solid",label=" +equippableItems" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node10 [label="{map\< int, EquippableItem\lStruct \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node11 -> Node9 [color="grey25",fontsize="10",style="solid",label=" +generalItems" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node11 [label="{map\< int, GeneralItemStruct \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node12 -> Node9 [color="grey25",fontsize="10",style="solid",label=" +foodItems" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node12 [label="{map\< int, FoodItemStruct \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node13 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -objectsM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node13 [label="{GameObjects\n||+ containsId()\l+ getObjectType()\l+ getTileMap()\l+ getGeneralObject()\l+ getResourceObject()\l+ getLootObject()\l+ getObjectIds()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structGameObjects.html",tooltip="Contains all the objects defined in the objects.json file."];
+  Node14 -> Node13 [color="grey25",fontsize="10",style="solid",label=" +lootObjects" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node14 [label="{map\< int, LootObjectStruct \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node15 -> Node13 [color="grey25",fontsize="10",style="solid",label=" +generalObjects" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node15 [label="{map\< int, GeneralObjectStruct \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node16 -> Node13 [color="grey25",fontsize="10",style="solid",label=" +resourceObjects" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node16 [label="{map\< int, ResourceObject\lStruct \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node17 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -skillsM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node17 [label="{map\< int, GameSkill \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+}

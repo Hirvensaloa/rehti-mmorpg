@@ -1,0 +1,11 @@
+digraph "PlayerCharacter"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{PlayerCharacter\n||+ PlayerCharacter()\l+ ~PlayerCharacter()\l+ update()\l+ respawn()\l+ attack()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Class for a human player character."];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{Entity\n|# idM\l# instanceIdM\l# nameM\l# locationM\l# spawnCoordinateBoundsM\l# currentActionM\l# maxHpM\l# hpM\l# pGameWorldM\l# inventoryM\l# equipmentM\l# skillSetM\l# baseDamageM\l# baseAccuracyM\l# isDisconnectedM\l# respawnTimeM\l# moveSpeedM\l# nextInstanceIdM\l|+ Entity()\l+ ~Entity()\l+ getId()\l+ getInstanceId()\l+ getName()\l+ getLocation()\l+ setLocation()\l+ getRespawnLocation()\l+ getCurrentAction()\l+ getHp()\l+ getMaxHp()\l+ getInventory()\l+ getEquipment()\l+ getRange()\l+ getAttackSpeed()\l+ getMoveSpeed()\l+ getGameWorld()\l+ changeHp()\l+ setAction()\l+ move()\l+ attack()\l+ getSkillSet()\l+ update()\l+ respawn()\l+ isDisconnected()\l+ setDisconnected()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html",tooltip="Base pure virtual Entity class. Different types of enities inherit this."];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node3 [label="{std::enable_shared\l_from_this\< Entity \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+}

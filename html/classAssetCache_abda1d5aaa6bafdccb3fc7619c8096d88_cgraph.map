@@ -1,0 +1,9 @@
+<map id="AssetCache::loadItemAssetData" name="AssetCache::loadItemAssetData">
+<area shape="rect" id="node1" title="Loads the item assets data." alt="" coords="5,93,236,120"/>
+<area shape="rect" id="node2" href="$Assimp_8cpp.html#aaab18d6f2188530eb4622a96323262f0" title="Convert vector of aiFace to vector of RehtiGraphics Faces." alt="" coords="285,5,473,32"/>
+<area shape="rect" id="node4" href="$Assimp_8cpp.html#a9ddad02911e2eec37c2ade7bb7d97e3d" title="Convert vector of aiVector3D to vector of Vertex." alt="" coords="284,57,475,98"/>
+<area shape="rect" id="node6" href="$TextureReader_8cpp.html#aab95b589b7d0b99042485c8496696635" title="Reads all the item object textures and item icons into a map (key=filename, value=ImageData)" alt="" coords="312,123,447,149"/>
+<area shape="rect" id="node7" href="$Assimp_8cpp.html#ad1fec01f0d6059e5e66dcf2bd0840137" title="Loads the object from the given path." alt="" coords="331,173,427,200"/>
+<area shape="rect" id="node3" href="$Assimp_8cpp.html#a7cbf60c3304e9dd0f4aa2171ec35c28f" title="Convert aiFace to RehtiGraphics Face." alt="" coords="544,5,651,32"/>
+<area shape="rect" id="node5" href="$Assimp_8cpp.html#ad5612bf8567030f4f54822987bc925c4" title="Convert aiVector3D to Vertex." alt="" coords="523,64,672,91"/>
+</map>

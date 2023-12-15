@@ -1,0 +1,7 @@
+<map id="RehtiGraphics::createInstance" name="RehtiGraphics::createInstance">
+<area shape="rect" id="node1" title="Creates vulkan instance." alt="" coords="5,78,223,105"/>
+<area shape="rect" id="node2" href="$classRehtiGraphics.html#ac589482bb07e8473c46cbb6fc67a3740" title="Checks whether the given device supports the required layers." alt="" coords="271,5,495,47"/>
+<area shape="rect" id="node3" href="$classRehtiGraphics.html#a732a16966142700e2323acc6007286a1" title="Returns the required extensions as c strings." alt="" coords="283,71,483,112"/>
+<area shape="rect" id="node4" href="$classRehtiGraphics.html#a48c28ff35dd115c2deb3ee8cc99490c6" title="Populates the debug messenger info." alt="" coords="273,136,493,177"/>
+<area shape="rect" id="node5" href="$classRehtiGraphics.html#afc773ddc6b8f3d70bf0a8031577f3ceb" title=" " alt="" coords="543,143,760,170"/>
+</map>

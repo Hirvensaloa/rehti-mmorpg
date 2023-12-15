@@ -1,0 +1,21 @@
+digraph "Camera"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Camera\n||+ Camera()\l+ getViewMatrix()\l+ getOrientation()\l+ getProjectionMatrix()\l+ getCameraRay()\l+ getWorldToScreenMatrix()\l+ getUboSize()\l+ orbitRotate()\l+ zoom()\l+ registerCameraControls()\l+ setSensitivity()\l+ moveLocation()\l+ move()\l+ setLocation()\l+ setTargetAndCamera()\l+ getLocation()\l+ getForward()\l+ getRight()\l+ getUp()\l+ getSensitivities()\l- getCameraMatrixOrigon()\l- cursorPosCallback()\l- scrollCallback()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -mouseX\n-mouseY" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node2 [label="{double\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node3 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -cameraZoomCallback" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node3 [label="{function\< void(float)\>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node4 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -cameraUpdateCallback" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node4 [label="{function\< void(glm\l::vec2)\>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node5 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -heightM\n-sensitivityM\n-widthM\n-zoomM\n-zoomSensitivityM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 [label="{float\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node6 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -cameraMatrixM\n-projectionM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node6 [label="{mat4\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node7 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +canMove" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node7 [label="{bool\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node8 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -targetM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node8 [label="{vec3\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+}

@@ -1,0 +1,11 @@
+<map id="RehtiGraphics::cleanupSwapChain" name="RehtiGraphics::cleanupSwapChain">
+<area shape="rect" id="node1" title="Cleans up swapchain related resources. This function is used for easier recreation of the swap chain." alt="" coords="1388,27,1595,69"/>
+<area shape="rect" id="node2" href="$classRehtiGraphics.html#ad3df13b713fcfc461d206a323a5657dd" title="Cleans up used resources." alt="" coords="1149,5,1321,32"/>
+<area shape="rect" id="node4" href="$classRehtiGraphics.html#a203320e8973b2886132afadb3e2dd7f9" title="Recreates the swapchain." alt="" coords="1129,57,1340,98"/>
+<area shape="rect" id="node3" href="$classRehtiGraphics.html#ac5a68f1877be335b148ce98837402530" title="Cleans up all the resources used by vulkan." alt="" coords="859,5,1081,32"/>
+<area shape="rect" id="node5" href="$classRehtiGraphics.html#ac049915f0d6b38117ece68d74eaec027" title="Draws a frame and records the previous frame time." alt="" coords="873,64,1067,91"/>
+<area shape="rect" id="node6" href="$classRehtiGraphics.html#a82d71e93dd76cde425cc34df93cf4723" title="Loops, polls events and draws frames." alt="" coords="625,64,811,91"/>
+<area shape="rect" id="node7" href="$classRehtiGraphics.html#aba5f89e9dc6f91cfef79f525151a067d" title="Starts a rendering loop until the window is closed." alt="" coords="363,64,577,91"/>
+<area shape="rect" id="node8" href="$classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,64,315,91"/>
+<area shape="rect" id="node9" href="$classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="5,64,112,91"/>
+</map>

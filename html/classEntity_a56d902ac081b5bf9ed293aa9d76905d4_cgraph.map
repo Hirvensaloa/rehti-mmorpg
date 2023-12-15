@@ -1,0 +1,4 @@
+<map id="Entity::getAttackSpeed" name="Entity::getAttackSpeed">
+<area shape="rect" id="node1" title="Get the attack speed of this entity in milliseconds." alt="" coords="5,5,176,32"/>
+<area shape="rect" id="node2" href="$classEquipment.html#a3a0856f2c28cc76096b0556faa859eff" title="Get combined stats of equipped items." alt="" coords="224,5,448,32"/>
+</map>

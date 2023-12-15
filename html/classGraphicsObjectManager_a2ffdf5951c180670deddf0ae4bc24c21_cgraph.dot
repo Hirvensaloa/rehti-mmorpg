@@ -1,0 +1,12 @@
+digraph "GraphicsObjectManager::createBuffer"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="GraphicsObjectManager\l::createBuffer",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="GraphicsObjectManager\l::getQueueFamilyCount",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#a48087fcc6c8ff32a160ff8105240538d",tooltip="Returns number of queue families."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="GraphicsObjectManager\l::getSharingMode",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#a1f57aa379d9151b4dcb74622f011e008",tooltip="Returns the sharing mode of created resources."];
+}

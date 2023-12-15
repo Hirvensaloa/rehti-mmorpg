@@ -1,0 +1,6 @@
+<map id="Animation" name="Animation">
+<area shape="rect" id="node1" title="Immutable animation data. Animations should be stored somewhere and requested when needed to be store..." alt="" coords="213,160,302,237"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,200,83"/>
+<area shape="rect" id="node3" title=" " alt="" coords="224,5,291,83"/>
+<area shape="rect" id="node4" title=" " alt="" coords="377,5,428,83"/>
+</map>

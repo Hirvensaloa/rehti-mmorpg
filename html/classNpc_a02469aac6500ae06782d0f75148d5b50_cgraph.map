@@ -1,0 +1,6 @@
+<map id="Npc::update" name="Npc::update">
+<area shape="rect" id="node1" title="Updates the NPC." alt="" coords="5,31,105,57"/>
+<area shape="rect" id="node2" href="$classMap.html#aa2714237c8af3b86a11dcebc6d944145" title="Gets a random coordinate within the given bounds." alt="" coords="153,5,364,32"/>
+<area shape="rect" id="node4" href="$classEntity.html#ae00ca26a951f822510d3d93e4c42dce3" title="Set the current action to parameter action." alt="" coords="195,56,323,83"/>
+<area shape="rect" id="node3" href="$classMap.html#a3a7c641cd6c7281013272940d0613d90" title="Get the access map." alt="" coords="412,5,564,32"/>
+</map>

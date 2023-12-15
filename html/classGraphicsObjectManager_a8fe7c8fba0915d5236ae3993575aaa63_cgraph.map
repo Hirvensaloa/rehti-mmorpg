@@ -1,0 +1,5 @@
+<map id="GraphicsObjectManager::createCombinedImage" name="GraphicsObjectManager::createCombinedImage">
+<area shape="rect" id="node1" title="Creates an image for the given data and stores the memory to this class." alt="" coords="5,39,184,80"/>
+<area shape="rect" id="node2" href="$classGraphicsObjectManager.html#a66285158960fc1f0c9bf7524597148da" title="Creates an allocated image. The standard parameters make it easy to create a texture image on the GPU..." alt="" coords="232,5,411,47"/>
+<area shape="rect" id="node3" href="$classGraphicsObjectManager.html#aa7ea92ddcf8c00c47420e545fe08b7be" title="Creates an image view for the given image and format." alt="" coords="232,71,411,112"/>
+</map>

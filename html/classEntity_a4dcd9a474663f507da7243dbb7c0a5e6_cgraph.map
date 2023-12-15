@@ -1,0 +1,4 @@
+<map id="Entity::changeHp" name="Entity::changeHp">
+<area shape="rect" id="node1" title="Change the hp of this entity by amount." alt="" coords="5,5,137,32"/>
+<area shape="rect" id="node2" href="$classEntity.html#a076c4f2138c24a11ed279370a99bb976" title="Pure virtual function that child classes need to implement. Performs entity&#39;s respawning." alt="" coords="185,5,308,32"/>
+</map>

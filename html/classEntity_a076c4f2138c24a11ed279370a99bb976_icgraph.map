@@ -1,0 +1,7 @@
+<map id="Entity::respawn" name="Entity::respawn">
+<area shape="rect" id="node1" title="Pure virtual function that child classes need to implement. Performs entity&#39;s respawning." alt="" coords="408,56,531,83"/>
+<area shape="rect" id="node2" href="$classEntity.html#a4dcd9a474663f507da7243dbb7c0a5e6" title="Change the hp of this entity by amount." alt="" coords="228,56,360,83"/>
+<area shape="rect" id="node3" href="$classEntity.html#a47790391860583a3c1c41dd5f8e532e6" title="Perform an attack on target entity." alt="" coords="39,5,147,32"/>
+<area shape="rect" id="node4" href="$classPlayerCharacter.html#a48c9398c4d91b8adb78a7fe2a8ad9ddf" title="Performs player&#39;s attack on target entity. Calculates hit chance and damage, and on succesful hit app..." alt="" coords="5,56,180,83"/>
+<area shape="rect" id="node5" href="$classFoodItem.html#aa973b99f39c57b819fdbf638aa676e11" title="Eats the item." alt="" coords="35,107,150,133"/>
+</map>

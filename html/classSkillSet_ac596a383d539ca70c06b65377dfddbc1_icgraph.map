@@ -1,0 +1,4 @@
+<map id="SkillSet::getSkillLevel" name="SkillSet::getSkillLevel">
+<area shape="rect" id="node1" title="Returns the level of the skill calculated based on the current xp in the skill. Returns nullopt if th..." alt="" coords="228,5,391,32"/>
+<area shape="rect" id="node2" href="$classPlayerCharacter.html#a48c9398c4d91b8adb78a7fe2a8ad9ddf" title="Performs player&#39;s attack on target entity. Calculates hit chance and damage, and on succesful hit app..." alt="" coords="5,5,180,32"/>
+</map>

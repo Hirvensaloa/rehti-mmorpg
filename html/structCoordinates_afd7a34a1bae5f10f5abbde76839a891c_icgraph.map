@@ -1,0 +1,6 @@
+<map id="Coordinates::distance" name="Coordinates::distance">
+<area shape="rect" id="node1" title="Calculate the euclidean distance between two Coordinates." alt="" coords="472,42,635,69"/>
+<area shape="rect" id="node2" href="$classAggressiveNpc.html#a37453d355991dae967fcea1baafb72e3" title="Finds the closest player to the AggressiveNpc." alt="" coords="225,5,424,47"/>
+<area shape="rect" id="node4" href="$classEntity.html#a5caa4b296d74f99e2b203677877b8e63" title="Move to a neighboring tile." alt="" coords="273,71,377,98"/>
+<area shape="rect" id="node3" href="$classAggressiveNpc.html#ac9bad388273f1b1f1ab9ba59b83f089f" title="Updates the AggressiveNpc." alt="" coords="5,13,177,39"/>
+</map>

@@ -1,0 +1,15 @@
+digraph "Map::loadMap"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Map::loadMap",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Loads the map information from generated assets. Currently loads the access map and height map inform..."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="fetchAccessMatrix",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$MapReader_8cpp.html#a54309908b24ddb8124bb51147ed4ce35",tooltip="Loads the access map from the given path."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="readMatrixFromFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rehtiLib_2assets_2reader_2src_2Utils_8cpp.html#aabe32cf7f7f2a7f7154cbceaeafb49a6",tooltip="Reads a matrix from a text file. Values should be separated by commas and rows by newlines."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="fetchHeightMatrix",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$MapReader_8cpp.html#a2ac7fa2ac999e004c723cd45b861c13c",tooltip="Loads the height map from the given path."];
+  Node4 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

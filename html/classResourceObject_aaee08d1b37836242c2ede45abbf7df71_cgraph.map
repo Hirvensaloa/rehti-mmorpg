@@ -1,0 +1,21 @@
+<map id="ResourceObject::interact" name="ResourceObject::interact">
+<area shape="rect" id="node1" title="Interact with the object." alt="" coords="5,284,188,311"/>
+<area shape="rect" id="node2" href="$classInventory.html#a9e1fad5a5f8ef1d2aec5ba9d86531d0d" title="Adds item to the inventory." alt="" coords="266,5,411,32"/>
+<area shape="rect" id="node3" href="$classSkillSet.html#a0e9dc971244988ca5f8aa14a37ec4193" title="Adds the given amount of xp to the skill with the given id. Returns false if the addition failed,..." alt="" coords="265,56,413,83"/>
+<area shape="rect" id="node4" href="$classResourceObject.html#aef108c1b74c650c9a0c0bfcb5d25d8c5" title="Check if the entity can interact with the object." alt="" coords="236,208,441,235"/>
+<area shape="rect" id="node5" href="$classEntity.html#a1f1ef1b13908ffef9f2c4f2f455fdb71" title="Get the Inventory object of this entity." alt="" coords="529,56,679,83"/>
+<area shape="rect" id="node6" href="$classInventory.html#aef99806828639fb74770654b3ccba845" title="Returns the items that the inventory contains." alt="" coords="529,107,679,133"/>
+<area shape="rect" id="node7" href="$classEntity.html#ab824e4f163924eb4f136d3e2ff759897" title="Get the name of this entity." alt="" coords="541,259,667,285"/>
+<area shape="rect" id="node8" href="$classObject.html#aa957bd6b49bc3034489df9ff0e844e3c" title="Get the name of the object." alt="" coords="538,309,670,336"/>
+<area shape="rect" id="node10" href="$classEntity.html#a0c09474372581ad190e31725dee0fccf" title="Get the SkillSet of this entity." alt="" coords="535,360,673,387"/>
+<area shape="rect" id="node12" href="$structGameItems.html#aa28c24034d12b17b9f85d9c46d9cb9a1" title=" " alt="" coords="517,411,691,437"/>
+<area shape="rect" id="node13" href="$classAssetManager.html#a7112131ee4657d508b2029eebb3975f6" title="Creates an instance of an item." alt="" coords="241,462,436,503"/>
+<area shape="rect" id="node18" href="$classAssetManager.html#a5964947567c6cd30b292b25510830123" title="Get the GameItems object." alt="" coords="248,528,429,555"/>
+<area shape="rect" id="node19" href="$classInventory.html#a3c71646f0161c3e0b96a73cbf804c8f6" title="Removes item from the inventory." alt="" coords="253,579,424,605"/>
+<area shape="rect" id="node9" href="$classSkillSet.html#a0f3b00c08b7353db5b61b06223f187d0" title="Returns map with skill id keys and SkillInfo values." alt="" coords="537,157,671,184"/>
+<area shape="rect" id="node11" href="$classInventory.html#ae64c114e81d5ee14653161f425510a26" title="Checks if inventory is full." alt="" coords="541,208,667,235"/>
+<area shape="rect" id="node14" href="$structGameItems.html#a12d353035869abb44b959b2fd56dc320" title=" " alt="" coords="489,461,719,488"/>
+<area shape="rect" id="node15" href="$structGameItems.html#a5525518c6b68815489b0453e43da1024" title=" " alt="" coords="510,512,698,539"/>
+<area shape="rect" id="node16" href="$structGameItems.html#a0947ecd8654943fb367afd0bcb0d37b4" title=" " alt="" coords="500,563,708,589"/>
+<area shape="rect" id="node17" href="$structGameItems.html#af9a7b3d5920e2b356499038c77ff4498" title=" " alt="" coords="511,613,697,640"/>
+</map>

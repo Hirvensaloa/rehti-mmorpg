@@ -1,0 +1,16 @@
+digraph "Equipment::getEquipmentStats"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="Equipment::getEquipmentStats",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Get combined stats of equipped items."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Entity::attack",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html#a47790391860583a3c1c41dd5f8e532e6",tooltip="Perform an attack on target entity."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="PlayerCharacter::attack",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPlayerCharacter.html#a48c9398c4d91b8adb78a7fe2a8ad9ddf",tooltip="Performs player's attack on target entity. Calculates hit chance and damage, and on succesful hit app..."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Entity::getAttackSpeed",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html#a56d902ac081b5bf9ed293aa9d76905d4",tooltip="Get the attack speed of this entity in milliseconds."];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Entity::getRange",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html#a3ab8d86a7d7e0516fc4659f7513cc934",tooltip="Get tha attack range of this entity."];
+}

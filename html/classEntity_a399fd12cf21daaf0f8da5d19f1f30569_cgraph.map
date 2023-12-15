@@ -1,0 +1,5 @@
+<map id="Entity::getRespawnLocation" name="Entity::getRespawnLocation">
+<area shape="rect" id="node1" title="Returns a random location within the spawn bounds." alt="" coords="5,5,208,32"/>
+<area shape="rect" id="node2" href="$classMap.html#aa2714237c8af3b86a11dcebc6d944145" title="Gets a random coordinate within the given bounds." alt="" coords="256,5,467,32"/>
+<area shape="rect" id="node3" href="$classMap.html#a3a7c641cd6c7281013272940d0613d90" title="Get the access map." alt="" coords="515,5,667,32"/>
+</map>

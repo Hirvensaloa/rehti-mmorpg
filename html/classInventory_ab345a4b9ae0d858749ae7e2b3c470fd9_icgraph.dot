@@ -1,0 +1,12 @@
+digraph "Inventory::removeAllItems"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="Inventory::removeAllItems",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Removes all items from the inventory."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Npc::respawn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNpc.html#afe61dddbd28da6f559a5a6c6b760c81d",tooltip="Respawn the NPC."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="PlayerCharacter::respawn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPlayerCharacter.html#a5ab0ca121121136eb108cb2d5113aaab",tooltip="Function that drops player's items and sets an active RespawnAction. Called when player dies."];
+}

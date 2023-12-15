@@ -1,0 +1,4 @@
+<map id="ResourceObject" name="ResourceObject">
+<area shape="rect" id="node1" title="Represents and object that can be interacted with to gain resources and train skills." alt="" coords="5,351,167,545"/>
+<area shape="rect" id="node2" href="$classObject.html" title="Represents generic object in the game world." alt="" coords="16,5,156,303"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="Npc" name="Npc">
+<area shape="rect" id="node1" title="Base NPC class. It represents a peaceful NPC that does not attack the player under any circumstances." alt="" coords="94,887,255,1023"/>
+<area shape="rect" id="node4" href="$classAggressiveNpc.html" title="AggressiveNpc is a type of Npc that attacks the player within its aggression range." alt="" coords="5,1071,160,1192"/>
+<area shape="rect" id="node5" href="$classPassiveNpc.html" title="PassiveNpc is a type of Npc that attacks only if provoked." alt="" coords="184,1071,352,1192"/>
+<area shape="rect" id="node2" href="$classEntity.html" title="Base pure virtual Entity class. Different types of enities inherit this." alt="" coords="69,145,280,839"/>
+<area shape="rect" id="node3" title=" " alt="" coords="95,5,254,97"/>
+</map>

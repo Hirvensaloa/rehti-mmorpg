@@ -1,0 +1,12 @@
+digraph "populateMatrix"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="populateMatrix",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Populates a matrix with a default value. The matrix is all the areas combined and expanded e...."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="createObjectBlockMap",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$MapLoader_8hpp.html#a92b85c2d8b6ae5061af00c879b873c19",tooltip="Generate the object block map. The map defines how the objects block the tiles around itself."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="loadHeightAndTextureMap",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$MapLoader_8hpp.html#a40e0538b150e65b8ba2e089a514fcc2c",tooltip="Loads a height map and map's texture map into given parameters. Loads them together to avoid reading ..."];
+}

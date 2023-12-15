@@ -1,0 +1,4 @@
+<map id="Map::getHeight" name="Map::getHeight">
+<area shape="rect" id="node1" title="Gives the height for the given (x, y) coordinates." alt="" coords="240,5,363,32"/>
+<area shape="rect" id="node2" href="$structCoordinates.html#a3d79b4962100639ab60c2e6a56d0ea76" title="Construct a new Coordinates object. Z value is fetched based on the x and y values." alt="" coords="5,5,192,32"/>
+</map>

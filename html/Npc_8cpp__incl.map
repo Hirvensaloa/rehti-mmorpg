@@ -1,0 +1,29 @@
+<map id="Npc.cpp" name="Npc.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="816,5,891,32"/>
+<area shape="rect" id="node2" href="$Npc_8hpp.html" title=" " alt="" coords="231,80,305,107"/>
+<area shape="rect" id="node24" href="$AssetManager_8hpp.html" title=" " alt="" coords="93,304,280,331"/>
+<area shape="rect" id="node25" href="$Map_8hpp.html" title=" " alt="" coords="1351,304,1481,331"/>
+<area shape="rect" id="node27" title=" " alt="" coords="1544,379,1624,405"/>
+<area shape="rect" id="node3" title=" " alt="" coords="397,453,456,480"/>
+<area shape="rect" id="node4" href="$Entity_8hpp.html" title=" " alt="" coords="715,155,802,181"/>
+<area shape="rect" id="node5" href="$AttackAction_8hpp.html" title=" " alt="" coords="855,229,1044,256"/>
+<area shape="rect" id="node7" href="$Coordinates_8hpp.html" title=" " alt="" coords="1198,379,1378,405"/>
+<area shape="rect" id="node13" href="$MoveAction_8hpp.html" title=" " alt="" coords="986,304,1113,331"/>
+<area shape="rect" id="node15" href="$RespawnAction_8hpp.html" title=" " alt="" coords="1069,229,1275,256"/>
+<area shape="rect" id="node16" href="$Equipment_8hpp.html" title=" " alt="" coords="381,229,547,256"/>
+<area shape="rect" id="node21" href="$Inventory_8hpp.html" title=" " alt="" coords="623,229,779,256"/>
+<area shape="rect" id="node23" href="$SkillSet_8hpp.html" title=" " alt="" coords="355,304,498,331"/>
+<area shape="rect" id="node6" title=" " alt="" coords="896,379,971,405"/>
+<area shape="rect" id="node8" href="$Action_8hpp.html" title=" " alt="" coords="1083,379,1173,405"/>
+<area shape="rect" id="node9" title=" " alt="" coords="1008,453,1075,480"/>
+<area shape="rect" id="node10" title=" " alt="" coords="1099,453,1157,480"/>
+<area shape="rect" id="node11" title=" " alt="" coords="692,453,769,480"/>
+<area shape="rect" id="node12" title=" " alt="" coords="1182,453,1269,480"/>
+<area shape="rect" id="node14" title=" " alt="" coords="995,379,1058,405"/>
+<area shape="rect" id="node17" href="$EquippableItem_8hpp.html" title=" " alt="" coords="657,304,809,331"/>
+<area shape="rect" id="node20" title=" " alt="" coords="292,379,343,405"/>
+<area shape="rect" id="node18" href="$Item_8hpp.html" title=" " alt="" coords="537,379,617,405"/>
+<area shape="rect" id="node19" title=" " alt="" coords="794,453,923,480"/>
+<area shape="rect" id="node22" href="$FoodItem_8hpp.html" title=" " alt="" coords="522,304,633,331"/>
+<area shape="rect" id="node26" title=" " alt="" coords="1453,379,1520,405"/>
+</map>

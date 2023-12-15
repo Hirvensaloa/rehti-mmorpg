@@ -1,0 +1,8 @@
+<map id="RehtiGraphics::traceClick" name="RehtiGraphics::traceClick">
+<area shape="rect" id="node1" title="Traces a ray against all bounding boxes, starting with objects, then characters and lastly the map." alt="" coords="5,56,192,83"/>
+<area shape="rect" id="node2" href="$classCamera.html#a36cab1c476d0ebaeb8c9a1f29625345b" title="Returns the camera ray in world space." alt="" coords="240,5,419,32"/>
+<area shape="rect" id="node3" href="$classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="467,19,624,45"/>
+<area shape="rect" id="node4" href="$classRehtiGraphics.html#ad5a1186324dbd1b964c27f8d5397d716" title="Traces a given ray against a given bounding box." alt="" coords="252,107,407,133"/>
+<area shape="rect" id="node5" href="$classRehtiGraphics.html#a4446a14b74fa9d30451ed3136b5b966c" title="Checks whether the given bounding box is hit by the given ray." alt="" coords="467,81,623,108"/>
+<area shape="rect" id="node6" href="$structAABB.html#a9ce7b09812f868b80a37f6a7b6c6c899" title=" " alt="" coords="493,132,598,159"/>
+</map>

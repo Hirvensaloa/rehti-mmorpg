@@ -1,0 +1,10 @@
+<map id="EquippableItem" name="EquippableItem">
+<area shape="rect" id="node1" title="Represents an item that can be equipped." alt="" coords="326,461,491,597"/>
+<area shape="rect" id="node2" href="$classItem.html" title="Base class for items." alt="" coords="189,219,324,399"/>
+<area shape="rect" id="node3" title=" " alt="" coords="57,5,96,83"/>
+<area shape="rect" id="node8" href="$structItemStats.html" title=" " alt="" coords="20,263,133,355"/>
+<area shape="rect" id="node4" title=" " alt="" coords="263,5,314,83"/>
+<area shape="rect" id="node5" title=" " alt="" coords="391,5,450,83"/>
+<area shape="rect" id="node6" title=" " alt="" coords="348,263,570,355"/>
+<area shape="rect" id="node7" title=" " alt="" coords="594,270,641,347"/>
+</map>

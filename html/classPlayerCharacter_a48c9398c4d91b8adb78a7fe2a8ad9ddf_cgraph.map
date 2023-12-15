@@ -1,0 +1,13 @@
+<map id="PlayerCharacter::attack" name="PlayerCharacter::attack">
+<area shape="rect" id="node1" title="Performs player&#39;s attack on target entity. Calculates hit chance and damage, and on succesful hit app..." alt="" coords="5,183,180,209"/>
+<area shape="rect" id="node2" href="$classSkillSet.html#a0e9dc971244988ca5f8aa14a37ec4193" title="Adds the given amount of xp to the skill with the given id. Returns false if the addition failed,..." alt="" coords="266,5,414,32"/>
+<area shape="rect" id="node3" href="$classEntity.html#a4dcd9a474663f507da7243dbb7c0a5e6" title="Change the hp of this entity by amount." alt="" coords="274,56,406,83"/>
+<area shape="rect" id="node5" href="$classEntity.html#ac98d1f3267fa19476913d3744efba910" title="Get the Equipment object of this entity." alt="" coords="261,107,419,133"/>
+<area shape="rect" id="node6" href="$classEquipment.html#a3a0856f2c28cc76096b0556faa859eff" title="Get combined stats of equipped items." alt="" coords="228,157,452,184"/>
+<area shape="rect" id="node7" href="$classEntity.html#a3581642dc6f9cb80fe4d9fdc98f7c80d" title="Get the current hp of this entity." alt="" coords="287,208,393,235"/>
+<area shape="rect" id="node8" href="$classEntity.html#ab824e4f163924eb4f136d3e2ff759897" title="Get the name of this entity." alt="" coords="277,259,403,285"/>
+<area shape="rect" id="node9" href="$classSkillSet.html#ac596a383d539ca70c06b65377dfddbc1" title="Returns the level of the skill calculated based on the current xp in the skill. Returns nullopt if th..." alt="" coords="259,309,421,336"/>
+<area shape="rect" id="node11" href="$classEntity.html#a0c09474372581ad190e31725dee0fccf" title="Get the SkillSet of this entity." alt="" coords="271,360,409,387"/>
+<area shape="rect" id="node4" href="$classEntity.html#a076c4f2138c24a11ed279370a99bb976" title="Pure virtual function that child classes need to implement. Performs entity&#39;s respawning." alt="" coords="511,56,634,83"/>
+<area shape="rect" id="node10" href="$classSkillSet.html#aea74c96514c507368bce6769ffbdc6f9" title="Returns the current xp of the skill with the given id. Returns nullopt if the skill doesn&#39;t exist." alt="" coords="500,309,645,336"/>
+</map>

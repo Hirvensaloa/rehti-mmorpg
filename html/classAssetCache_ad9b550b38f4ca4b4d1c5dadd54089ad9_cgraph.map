@@ -1,0 +1,20 @@
+<map id="AssetCache::loadCharacterAssetData" name="AssetCache::loadCharacterAssetData">
+<area shape="rect" id="node1" title="Loads the character assets data." alt="" coords="5,125,203,166"/>
+<area shape="rect" id="node2" href="$TextureReader_8cpp.html#ae3be27d093f96a2f64474704500ae822" title="Reads all the character&#39;s textures into a map (key=filename, value=ImageData)" alt="" coords="251,107,419,133"/>
+<area shape="rect" id="node3" href="$Assimp_8cpp.html#a815da1a9fca11840a96af6ddd1fafafc" title="Loads the object from the given path." alt="" coords="283,157,386,184"/>
+<area shape="rect" id="node4" href="$Assimp_8cpp.html#a7cbf60c3304e9dd0f4aa2171ec35c28f" title="Convert aiFace to RehtiGraphics Face." alt="" coords="502,5,609,32"/>
+<area shape="rect" id="node5" href="$Assimp_8cpp.html#aec04d4c1442d730b5dd16bce0b52a876" title="Convert aiMatrix4x4 to glm::mat4." alt="" coords="710,56,851,83"/>
+<area shape="rect" id="node6" href="$Assimp_8cpp.html#af714162056ba854a84fa8ff6ee9ff516" title="Convert aiVector3D to glm::vec3." alt="" coords="937,183,1071,209"/>
+<area shape="rect" id="node7" href="$Assimp_8cpp.html#ac7d1323db3bfb183d6e70fab3f431ed6" title="Prints out faulty vertices." alt="" coords="467,259,644,285"/>
+<area shape="rect" id="node8" href="$Assimp_8cpp.html#a34a35189f1598429dc9003c820683963" title=" " alt="" coords="522,309,589,336"/>
+<area shape="rect" id="node9" href="$Assimp_8cpp.html#af47dad6267e81004b88347e762a705e6" title="Fills the given vectors with hierarchy and bone data." alt="" coords="508,107,603,133"/>
+<area shape="rect" id="node11" href="$Assimp_8cpp.html#acb65074d785be3958ddb16a3865228d3" title="Loads animations from the given scene." alt="" coords="493,208,617,235"/>
+<area shape="rect" id="node10" href="$Assimp_8cpp.html#a2053055d0e1b287a09d0bd479030df01" title=" " alt="" coords="711,107,850,133"/>
+<area shape="rect" id="node12" href="$Assimp_8cpp.html#a49f04ae968a1677ced2c91be115ea8dc" title=" " alt="" coords="970,259,1038,285"/>
+<area shape="rect" id="node13" href="$BasicTypes_8hpp.html#abeaa9e402d6a6f63c932da7fa203c38c" title=" " alt="" coords="724,208,837,235"/>
+<area shape="rect" id="node14" href="$Assimp_8cpp.html#ab9ddfd5d96ddb6ab2180134628abcf3b" title=" " alt="" coords="697,360,864,387"/>
+<area shape="rect" id="node18" href="$Assimp_8cpp.html#ab1d32709e6bd0b18a804efcc942fea3c" title=" " alt="" coords="692,309,869,336"/>
+<area shape="rect" id="node15" href="$Assimp_8cpp.html#a82d60c84bd6e80bf366a651cd18fb805" title="Convert aiQuaternion to glm::quat." alt="" coords="931,411,1077,437"/>
+<area shape="rect" id="node16" href="$Assimp_8cpp.html#a3cf31b63f2461c3970db4c1977c7d4bc" title=" " alt="" coords="917,309,1091,336"/>
+<area shape="rect" id="node17" href="$Assimp_8cpp.html#a83b6795b8d851b9bee5e289c2759b108" title=" " alt="" coords="937,360,1071,387"/>
+</map>

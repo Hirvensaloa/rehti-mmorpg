@@ -1,0 +1,5 @@
+<map id="Camera::setTargetAndCamera" name="Camera::setTargetAndCamera">
+<area shape="rect" id="node1" title="Sets the camera target to the given location and moves camera by the same amount." alt="" coords="5,31,223,57"/>
+<area shape="rect" id="node2" href="$classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="271,5,428,32"/>
+<area shape="rect" id="node3" href="$classCamera.html#a4e5c1cba3172130eaff779eca5ff5af9" title="Sets the camera location to the given location." alt="" coords="271,56,427,83"/>
+</map>

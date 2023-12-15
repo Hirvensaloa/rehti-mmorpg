@@ -1,0 +1,6 @@
+<map id="fetchObjects" name="fetchObjects">
+<area shape="rect" id="node1" title="Reads objects defined in the objects.json file and returns them as a GameObjects struct." alt="" coords="5,31,109,57"/>
+<area shape="rect" id="node2" href="$structGameItems.html#aa28c24034d12b17b9f85d9c46d9cb9a1" title=" " alt="" coords="373,5,547,32"/>
+<area shape="rect" id="node3" href="$ObjectReader_8cpp.html#a6bc2060dc73242d4623b68ae3dd96205" title=" " alt="" coords="157,31,325,57"/>
+<area shape="rect" id="node4" href="$AnimationReader_8cpp.html#acf7a424ee8d40510f3a350fbfa9f282e" title="Reads animations described in JSON file." alt="" coords="179,81,304,108"/>
+</map>

@@ -11,7 +11,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  deploy:
+  Generate-Doxygen-Pages:
     runs-on: ubuntu-latest
     steps:
       - uses: DenverCoder1/doxygen-github-pages-action@v1.3.0
@@ -21,3 +21,15 @@ jobs:
           target_folder: .
           branch: gh-pages
           config_file: docs/Doxyfile
+  Generate-Collaboration-Graph:
+    runs-on: ubuntu-latest
+    steps:
+      - name: add submodules
+        run: git submodule add git@github.com:Makistos/dotcomb.git
+      - name: generate image
+        run: python3 dotcomb/dotcomb.py --output collaboration-graph.png
+  Add-Awesome-Css:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add Doxygen Awesome CSS as submodule
+        run: git submodule add https://github.com/jothepro/doxygen-awesome-css.git

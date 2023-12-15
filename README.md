@@ -78,7 +78,7 @@ conan profile detect --force
 
 ### Running
 
-The command below will build and open the client. On start client will connect to the given ip.
+The command below will build and open the client. On start client will connect to the given ip. For the official production address, ask one of the collaborators. 
 
 ```sh
 ./scripts/run-client.sh <server-ip>

@@ -1,8 +1,0 @@
-<map id="RehtiGraphics::recordCommandBuffer" name="RehtiGraphics::recordCommandBuffer">
-<area shape="rect" id="node1" title="Records the command buffer." alt="" coords="5,27,235,69"/>
-<area shape="rect" id="node2" href="$d3/d58/BasicTypes_8hpp.html#ad436010e95d51ba6cac7b17355b1f26b" title=" " alt="" coords="320,5,443,32"/>
-<area shape="rect" id="node3" href="$d1/df0/classCamera.html#a1d263c318c088257b74934d93b9e3a78" title="Returns the world to screen matrix." alt="" coords="283,57,480,98"/>
-<area shape="rect" id="node4" href="$d1/df0/classCamera.html#a2f90e661a78172675ca06ea69667b531" title="Returns the view matrix of the camera, which is the inverse of the model matrix of the camera...." alt="" coords="528,64,704,91"/>
-<area shape="rect" id="node5" href="$d1/df0/classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="752,39,909,65"/>
-<area shape="rect" id="node6" href="$d6/d80/Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="764,89,897,116"/>
-</map>

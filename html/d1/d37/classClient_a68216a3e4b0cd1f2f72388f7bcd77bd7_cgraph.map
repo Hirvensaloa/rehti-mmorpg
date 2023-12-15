@@ -1,6 +1,0 @@
-<map id="Client::move" name="Client::move">
-<area shape="rect" id="node1" title="Sends a move message to the server." alt="" coords="5,31,111,57"/>
-<area shape="rect" id="node2" href="$d9/d32/classMessageApi.html#a64f3f558fb913e9c3f10227b1124d9c9" title="Create a MessageStruct for move action." alt="" coords="159,31,345,57"/>
-<area shape="rect" id="node3" href="$df/db0/RapidjsonHelpers_8cpp.html#a59f6cf501e740544668f6340bb64d99a" title="Creates rapidjson document *." alt="" coords="393,5,524,32"/>
-<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a7d05a2aa9e4c418be1b3a18cd4190b83" title="Creates a string from a rapidjson document." alt="" coords="408,56,509,83"/>
-</map>

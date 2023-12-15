@@ -1,7 +1,0 @@
-<map id="fetchItems" name="fetchItems">
-<area shape="rect" id="node1" title="Reads items defined in the items.json file and returns them as a GameItems struct...." alt="" coords="5,56,97,83"/>
-<area shape="rect" id="node2" href="$dd/db4/structGameItems.html#aa28c24034d12b17b9f85d9c46d9cb9a1" title=" " alt="" coords="145,5,319,32"/>
-<area shape="rect" id="node3" href="$df/db0/RapidjsonHelpers_8cpp.html#a96a8e9ed25c4d2e4b36389bc82050d5c" title="Reads JSON file to rapidjson document." alt="" coords="193,56,271,83"/>
-<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a06910a135e488eced76c3354fb3a2a7e" title="Check if rapidjson value contains a member with the given name AND check that the type matches the gi..." alt="" coords="178,107,286,133"/>
-<area shape="rect" id="node5" href="$df/db0/RapidjsonHelpers_8cpp.html#a2e43a36fa8b3b1eb37ddf7059e6d6db8" title="Convertes ValueType to string." alt="" coords="367,107,507,133"/>
-</map>

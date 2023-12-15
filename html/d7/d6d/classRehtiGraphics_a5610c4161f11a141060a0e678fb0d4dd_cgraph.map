@@ -1,6 +1,0 @@
-<map id="RehtiGraphics::createObjectManager" name="RehtiGraphics::createObjectManager">
-<area shape="rect" id="node1" title="Creates the graphics object manager." alt="" coords="5,35,209,76"/>
-<area shape="rect" id="node2" href="$d7/d6d/classRehtiGraphics.html#a4153cb9e66212ea84f6e702fc1a331fc" title="Looks for queue families." alt="" coords="257,64,444,105"/>
-<area shape="rect" id="node3" href="$d4/d3c/structQueueFamilyIndices.html#a9ea89d103d736bcfbfde0cb19d973e4a" title=" " alt="" coords="492,5,669,47"/>
-<area shape="rect" id="node4" href="$d4/d3c/structQueueFamilyIndices.html#a652cdfabe4719ae21a701e77d57e7899" title=" " alt="" coords="504,71,657,112"/>
-</map>

@@ -1,4 +1,0 @@
-<map id="loadCharacterTextures" name="loadCharacterTextures">
-<area shape="rect" id="node1" title="Reads all the character&#39;s textures into a map (key=filename, value=ImageData)" alt="" coords="5,5,173,32"/>
-<area shape="rect" id="node2" href="$d6/d40/stb__image_8h.html#aefdc7387857a14894bbf321e9ea4f048" title=" " alt="" coords="221,5,303,32"/>
-</map>

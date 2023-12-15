@@ -1,4 +1,0 @@
-<map id="Coordinates::Coordinates" name="Coordinates::Coordinates">
-<area shape="rect" id="node1" title="Construct a new Coordinates object. Z value is fetched based on the x and y values." alt="" coords="5,5,192,32"/>
-<area shape="rect" id="node2" href="$d7/db0/classMap.html#a3e59ab91ee02868654a3e22a9c8d2d07" title="Gives the height for the given (x, y) coordinates." alt="" coords="240,5,363,32"/>
-</map>

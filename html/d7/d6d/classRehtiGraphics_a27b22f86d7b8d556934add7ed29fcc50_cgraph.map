@@ -1,6 +1,0 @@
-<map id="RehtiGraphics::createCommandPool" name="RehtiGraphics::createCommandPool">
-<area shape="rect" id="node1" title="Creates the command pool." alt="" coords="5,46,263,73"/>
-<area shape="rect" id="node2" href="$d7/d6d/classRehtiGraphics.html#a4153cb9e66212ea84f6e702fc1a331fc" title="Looks for queue families." alt="" coords="311,39,497,80"/>
-<area shape="rect" id="node3" href="$d4/d3c/structQueueFamilyIndices.html#a9ea89d103d736bcfbfde0cb19d973e4a" title=" " alt="" coords="545,5,723,47"/>
-<area shape="rect" id="node4" href="$d4/d3c/structQueueFamilyIndices.html#a652cdfabe4719ae21a701e77d57e7899" title=" " alt="" coords="557,71,711,112"/>
-</map>

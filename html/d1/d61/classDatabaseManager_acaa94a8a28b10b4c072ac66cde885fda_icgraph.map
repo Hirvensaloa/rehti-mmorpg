@@ -1,7 +1,0 @@
-<map id="DatabaseManager::loadPlayerDataFromDb" name="DatabaseManager::loadPlayerDataFromDb">
-<area shape="rect" id="node1" title="Fetches player basic data from the database (table player) by username. Creates a new player with giv..." alt="" coords="755,5,973,47"/>
-<area shape="rect" id="node2" href="$db/d00/classServer.html#ae66426d3906c2a9e5b217c65c4ce5db3" title="Loads a player&#39;s data from the database and adds the player to the game." alt="" coords="565,13,707,39"/>
-<area shape="rect" id="node3" href="$db/d00/classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413" title="Function to parse and act upon messages received from clients." alt="" coords="343,13,517,39"/>
-<area shape="rect" id="node4" href="$db/d00/classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c" title="Server&#39;s main loop for processing messages." alt="" coords="108,13,295,39"/>
-<area shape="rect" id="node5" href="$dc/d17/server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,13,60,39"/>
-</map>

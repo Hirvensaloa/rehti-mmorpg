@@ -1,4 +1,0 @@
-<map id="SkillSet::getSkillLevel" name="SkillSet::getSkillLevel">
-<area shape="rect" id="node1" title="Returns the level of the skill calculated based on the current xp in the skill. Returns nullopt if th..." alt="" coords="5,5,168,32"/>
-<area shape="rect" id="node2" href="$d1/df3/classSkillSet.html#aea74c96514c507368bce6769ffbdc6f9" title="Returns the current xp of the skill with the given id. Returns nullopt if the skill doesn&#39;t exist." alt="" coords="216,5,361,32"/>
-</map>

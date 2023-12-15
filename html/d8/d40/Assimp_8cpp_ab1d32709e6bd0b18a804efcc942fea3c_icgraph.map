@@ -1,9 +1,0 @@
-<map id="interpolateAIVectorkeys" name="interpolateAIVectorkeys">
-<area shape="rect" id="node1" title=" " alt="" coords="1156,13,1333,39"/>
-<area shape="rect" id="node2" href="$d8/d40/Assimp_8cpp.html#acb65074d785be3958ddb16a3865228d3" title="Loads animations from the given scene." alt="" coords="984,13,1108,39"/>
-<area shape="rect" id="node3" href="$d8/d40/Assimp_8cpp.html#a815da1a9fca11840a96af6ddd1fafafc" title="Loads the object from the given path." alt="" coords="833,13,936,39"/>
-<area shape="rect" id="node4" href="$dd/d17/classAssetCache.html#ad9b550b38f4ca4b4d1c5dadd54089ad9" title="Loads the character assets data." alt="" coords="588,5,785,47"/>
-<area shape="rect" id="node5" href="$dd/d17/classAssetCache.html#a65f5a313ec992e8d4fd1212272f404d0" title="Loads all the assets into memory." alt="" coords="363,13,540,39"/>
-<area shape="rect" id="node6" href="$d1/d37/classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,13,315,39"/>
-<area shape="rect" id="node7" href="$d1/d37/classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="5,13,112,39"/>
-</map>

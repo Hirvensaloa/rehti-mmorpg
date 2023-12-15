@@ -1,4 +1,0 @@
-<map id="Server::acceptConnections" name="Server::acceptConnections">
-<area shape="rect" id="node1" title="Function to accept new connections from clients, runs on a seperate thread." alt="" coords="168,5,363,32"/>
-<area shape="rect" id="node2" href="$db/d00/classServer.html#ad5ec9462b520e59f7ea831e157ee5e59" title=" " alt="" coords="5,5,120,32"/>
-</map>

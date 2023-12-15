@@ -1,7 +1,0 @@
-<map id="Camera::zoom" name="Camera::zoom">
-<area shape="rect" id="node1" title="Zooms the camera by the given amount." alt="" coords="5,81,123,108"/>
-<area shape="rect" id="node2" href="$d1/df0/classCamera.html#ae44d552243a7b430e94ed9e70adcf07b" title="Returns the forward direction of the camera." alt="" coords="171,5,326,32"/>
-<area shape="rect" id="node3" href="$d6/d80/Camera_8hpp.html#a9aa49a596ee3c1727433dbdb9e88ee11" title=" " alt="" coords="199,56,299,83"/>
-<area shape="rect" id="node4" href="$d6/d80/Camera_8hpp.html#a36e54119227d0fd2ae43b7b7c8e04e53" title=" " alt="" coords="201,107,297,133"/>
-<area shape="rect" id="node5" href="$d1/df0/classCamera.html#a4e5c1cba3172130eaff779eca5ff5af9" title="Sets the camera location to the given location." alt="" coords="171,157,327,184"/>
-</map>

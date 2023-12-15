@@ -1,6 +1,0 @@
-<map id="TEST" name="TEST">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,60,57"/>
-<area shape="rect" id="node2" href="$d9/de9/server_2src_2world_2Utils_8cpp.html#ac2a70af5436b8b68792d3d467a42cc98" title="A&#45;star algorithm made to work with the access map format. Allows diagonal movement and has a heuristi..." alt="" coords="108,31,163,57"/>
-<area shape="rect" id="node3" href="$d9/de9/server_2src_2world_2Utils_8cpp.html#a301851ebbe7e47130cde965d54a9b220" title="Calculate the euclidean distance between two points." alt="" coords="211,5,353,32"/>
-<area shape="rect" id="node4" href="$d9/de9/server_2src_2world_2Utils_8cpp.html#a1e58627f4f02de892dd1d1931b08243f" title="Check if cell is valid and accessible from given direction." alt="" coords="237,56,327,83"/>
-</map>

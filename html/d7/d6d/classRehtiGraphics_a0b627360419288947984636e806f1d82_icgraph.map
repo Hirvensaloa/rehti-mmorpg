@@ -1,8 +1,0 @@
-<map id="RehtiGraphics::getGui" name="RehtiGraphics::getGui">
-<area shape="rect" id="node1" title=" " alt="" coords="493,31,657,57"/>
-<area shape="rect" id="node2" href="$d1/d37/classClient.html#afebeedfe876105645a3937b4ee2058df" title="Processes messages from the server." alt="" coords="263,5,445,32"/>
-<area shape="rect" id="node5" href="$d1/d37/classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="277,56,431,83"/>
-<area shape="rect" id="node3" href="$d1/d37/classClient.html#a742373e08a80d993d2651b6fff76f5b9" title="Starts the client." alt="" coords="112,5,211,32"/>
-<area shape="rect" id="node4" href="$dc/dad/client_2src_2Main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
-<area shape="rect" id="node6" href="$d1/d37/classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="108,56,215,83"/>
-</map>

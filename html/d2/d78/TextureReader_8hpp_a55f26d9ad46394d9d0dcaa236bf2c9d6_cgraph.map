@@ -1,7 +1,0 @@
-<map id="loadMapTextures" name="loadMapTextures">
-<area shape="rect" id="node1" title="Reads all different the map texture files." alt="" coords="5,56,139,83"/>
-<area shape="rect" id="node2" href="$df/db0/RapidjsonHelpers_8cpp.html#a96a8e9ed25c4d2e4b36389bc82050d5c" title="Reads JSON file to rapidjson document." alt="" coords="201,5,280,32"/>
-<area shape="rect" id="node3" href="$d6/d40/stb__image_8h.html#aefdc7387857a14894bbf321e9ea4f048" title=" " alt="" coords="200,56,281,83"/>
-<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a06910a135e488eced76c3354fb3a2a7e" title="Check if rapidjson value contains a member with the given name AND check that the type matches the gi..." alt="" coords="187,107,295,133"/>
-<area shape="rect" id="node5" href="$df/db0/RapidjsonHelpers_8cpp.html#a2e43a36fa8b3b1eb37ddf7059e6d6db8" title="Convertes ValueType to string." alt="" coords="343,107,483,133"/>
-</map>

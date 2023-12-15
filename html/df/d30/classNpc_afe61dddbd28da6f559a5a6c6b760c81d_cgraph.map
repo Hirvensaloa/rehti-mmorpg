@@ -1,6 +1,0 @@
-<map id="Npc::respawn" name="Npc::respawn">
-<area shape="rect" id="node1" title="Respawn the NPC." alt="" coords="5,56,116,83"/>
-<area shape="rect" id="node2" href="$da/d61/classEntity.html#a1f1ef1b13908ffef9f2c4f2f455fdb71" title="Get the Inventory object of this entity." alt="" coords="186,5,337,32"/>
-<area shape="rect" id="node3" href="$dd/d7a/classInventory.html#ab345a4b9ae0d858749ae7e2b3c470fd9" title=" " alt="" coords="164,56,359,83"/>
-<area shape="rect" id="node4" href="$da/d61/classEntity.html#ae00ca26a951f822510d3d93e4c42dce3" title="Set the current action to parameter action." alt="" coords="197,107,325,133"/>
-</map>

@@ -1,8 +1,0 @@
-<map id="RehtiGraphics::debugCallback" name="RehtiGraphics::debugCallback">
-<area shape="rect" id="node1" title=" " alt="" coords="1032,35,1249,61"/>
-<area shape="rect" id="node2" href="$d7/d6d/classRehtiGraphics.html#a48c28ff35dd115c2deb3ee8cc99490c6" title="Populates the debug messenger info." alt="" coords="764,27,984,69"/>
-<area shape="rect" id="node3" href="$d7/d6d/classRehtiGraphics.html#a281bdb83fa8180537a192e5e6aecf3a3" title="Creates vulkan instance." alt="" coords="499,5,716,32"/>
-<area shape="rect" id="node6" href="$d7/d6d/classRehtiGraphics.html#a81b186cd55dd95c15e20e474b9dfd26c" title="Setups the debug messenger." alt="" coords="508,57,707,98"/>
-<area shape="rect" id="node4" href="$d7/d6d/classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3" title="Initializes vulkan instance." alt="" coords="265,35,451,61"/>
-<area shape="rect" id="node5" href="$d7/d6d/classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469" title="Initializes the graphics backend." alt="" coords="5,35,217,61"/>
-</map>

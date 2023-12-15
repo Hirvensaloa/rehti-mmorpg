@@ -1,9 +1,0 @@
-<map id="readCharacterData" name="readCharacterData">
-<area shape="rect" id="node1" title="Reads the character data from JSON file." alt="" coords="5,81,151,108"/>
-<area shape="rect" id="node2" href="$d7/d31/MapReader_8cpp.html#a54309908b24ddb8124bb51147ed4ce35" title="Loads the access map from the given path." alt="" coords="235,5,378,32"/>
-<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a96a8e9ed25c4d2e4b36389bc82050d5c" title="Reads JSON file to rapidjson document." alt="" coords="267,56,346,83"/>
-<area shape="rect" id="node5" href="$df/db0/RapidjsonHelpers_8cpp.html#a06910a135e488eced76c3354fb3a2a7e" title="Check if rapidjson value contains a member with the given name AND check that the type matches the gi..." alt="" coords="253,107,361,133"/>
-<area shape="rect" id="node7" href="$dd/d41/CharacterReader_8cpp.html#a56581b803e4cb4205c729df269203a3f" title="Check if SpawnCoordinateBounds is valid. Throws error if not." alt="" coords="199,157,415,184"/>
-<area shape="rect" id="node3" href="$d3/da8/rehtiLib_2assets_2reader_2src_2Utils_8cpp.html#aabe32cf7f7f2a7f7154cbceaeafb49a6" title="Reads a matrix from a text file. Values should be separated by commas and rows by newlines." alt="" coords="463,5,612,32"/>
-<area shape="rect" id="node6" href="$df/db0/RapidjsonHelpers_8cpp.html#a2e43a36fa8b3b1eb37ddf7059e6d6db8" title="Convertes ValueType to string." alt="" coords="467,107,607,133"/>
-</map>

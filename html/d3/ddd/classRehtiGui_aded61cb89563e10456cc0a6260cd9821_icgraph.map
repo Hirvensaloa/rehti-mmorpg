@@ -1,4 +1,0 @@
-<map id="RehtiGui::LoadTextureFromFile" name="RehtiGui::LoadTextureFromFile">
-<area shape="rect" id="node1" title="Load texture from file and save it to member map guiIconsM with key id." alt="" coords="196,5,417,32"/>
-<area shape="rect" id="node2" href="$d3/ddd/classRehtiGui.html#afd1e4db4700f15d5db18dae885925a11" title=" " alt="" coords="5,5,148,32"/>
-</map>

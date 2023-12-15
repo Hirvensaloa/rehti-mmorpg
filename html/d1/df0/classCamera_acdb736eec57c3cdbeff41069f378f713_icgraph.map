@@ -1,7 +1,0 @@
-<map id="Camera::getCameraMatrixOrigon" name="Camera::getCameraMatrixOrigon">
-<area shape="rect" id="node1" title="returns the camera matrix with the target as the origon." alt="" coords="752,31,991,57"/>
-<area shape="rect" id="node2" href="$d1/df0/classCamera.html#adad2ddd78627a085dfb4f00b0add991f" title="rotates the camera around the target." alt="" coords="549,31,704,57"/>
-<area shape="rect" id="node3" href="$d1/df0/classCamera.html#a1f4afe22efd7c7d274391e4703387f78" title="Constructor for the camera." alt="" coords="317,5,449,32"/>
-<area shape="rect" id="node4" href="$d1/df0/classCamera.html#a7a11d366f18cc5f2ad7183bb8792e7c9" title="Registers the camera controls to the given window." alt="" coords="265,56,501,83"/>
-<area shape="rect" id="node5" href="$d7/d6d/classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469" title="Initializes the graphics backend." alt="" coords="5,56,217,83"/>
-</map>

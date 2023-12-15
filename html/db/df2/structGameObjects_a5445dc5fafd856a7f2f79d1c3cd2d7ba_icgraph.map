@@ -1,9 +1,0 @@
-<map id="GameObjects::getObjectType" name="GameObjects::getObjectType">
-<area shape="rect" id="node1" title=" " alt="" coords="624,31,835,57"/>
-<area shape="rect" id="node2" href="$db/df2/structGameObjects.html#a26dd57fd4610aa82d98fc5d10d9ca166" title=" " alt="" coords="385,5,576,32"/>
-<area shape="rect" id="node5" href="$d5/d78/classGameWorld.html#ab78e304a7c2babd4addacd751b56c98c" title="Initializes the game world. Loads assets and map. Adds npcs and objects to the world." alt="" coords="399,56,563,83"/>
-<area shape="rect" id="node3" href="$dc/df7/MapLoader_8hpp.html#a92b85c2d8b6ae5061af00c879b873c19" title="Generate the object block map. The map defines how the objects block the tiles around itself." alt="" coords="168,5,337,32"/>
-<area shape="rect" id="node4" href="$d5/da8/rehtiLib_2assets_2loader_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="35,5,90,32"/>
-<area shape="rect" id="node6" href="$db/d00/classServer.html#a50304dfbea44f60fb1da1f4754d582dd" title="Initializes the gamestate and gameworld." alt="" coords="169,56,336,83"/>
-<area shape="rect" id="node7" href="$db/d00/classServer.html#ad5ec9462b520e59f7ea831e157ee5e59" title=" " alt="" coords="5,56,120,83"/>
-</map>

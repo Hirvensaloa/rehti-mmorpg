@@ -1,4 +1,0 @@
-<map id="CurrentPlayer" name="CurrentPlayer">
-<area shape="rect" id="node1" title="Current player (The player who receives the message). Contains more info which is not exposed to othe..." alt="" coords="17,80,127,107"/>
-<area shape="rect" id="node2" href="$db/de6/structGameStateEntity.html" title=" " alt="" coords="5,5,139,32"/>
-</map>

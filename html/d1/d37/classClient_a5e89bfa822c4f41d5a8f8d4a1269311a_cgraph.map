@@ -1,6 +1,0 @@
-<map id="Client::unequipItem" name="Client::unequipItem">
-<area shape="rect" id="node1" title="Send a UnequipMessage for item with given instance id." alt="" coords="5,31,156,57"/>
-<area shape="rect" id="node2" href="$d9/d32/classMessageApi.html#ab839ba188388a55ccc17f9b15df1a333" title="Create a MessageStruct for unequipping item." alt="" coords="204,31,408,57"/>
-<area shape="rect" id="node3" href="$df/db0/RapidjsonHelpers_8cpp.html#a59f6cf501e740544668f6340bb64d99a" title="Creates rapidjson document *." alt="" coords="456,5,587,32"/>
-<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a7d05a2aa9e4c418be1b3a18cd4190b83" title="Creates a string from a rapidjson document." alt="" coords="471,56,572,83"/>
-</map>

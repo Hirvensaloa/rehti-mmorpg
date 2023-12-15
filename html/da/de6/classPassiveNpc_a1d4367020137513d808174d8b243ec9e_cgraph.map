@@ -1,4 +1,0 @@
-<map id="PassiveNpc::findAttackingPlayer" name="PassiveNpc::findAttackingPlayer">
-<area shape="rect" id="node1" title="Finds out if there is a player attacking the PassiveNpc." alt="" coords="5,5,196,47"/>
-<area shape="rect" id="node2" href="$d5/d78/classGameWorld.html#acd967a70218090ebcb533b851375e5e1" title=" " alt="" coords="244,13,419,39"/>
-</map>

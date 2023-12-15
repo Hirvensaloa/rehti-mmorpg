@@ -1,4 +1,0 @@
-<map id="MessageApi::createTalk" name="MessageApi::createTalk">
-<area shape="rect" id="node1" title="Create a MessageStruct for talking to NPC." alt="" coords="147,5,323,32"/>
-<area shape="rect" id="node2" href="$d1/d37/classClient.html#a1bd5853aea615d870a314ef884d8d5a5" title="Send talk message to the server." alt="" coords="5,5,99,32"/>
-</map>

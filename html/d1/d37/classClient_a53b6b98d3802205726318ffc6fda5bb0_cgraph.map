@@ -1,6 +1,0 @@
-<map id="Client::login" name="Client::login">
-<area shape="rect" id="node1" title="Prompts user for login information and sends a LoginMessage with that information...." alt="" coords="5,31,105,57"/>
-<area shape="rect" id="node2" href="$d9/d32/classMessageApi.html#a8a8d0f21b20e0d8f528765807a80be15" title="Create a MessageStruct for login." alt="" coords="153,31,339,57"/>
-<area shape="rect" id="node3" href="$df/db0/RapidjsonHelpers_8cpp.html#a59f6cf501e740544668f6340bb64d99a" title="Creates rapidjson document *." alt="" coords="387,5,517,32"/>
-<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a7d05a2aa9e4c418be1b3a18cd4190b83" title="Creates a string from a rapidjson document." alt="" coords="401,56,503,83"/>
-</map>

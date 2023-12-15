@@ -1,6 +1,0 @@
-var searchData=
-[
-  ['num_5fcode_5flength_5fcodes_3530',['NUM_CODE_LENGTH_CODES',['../dd/dc0/lodepng_8cpp.html#a22ed04d49e008cb4295a8b366c4f2f3b',1,'lodepng.cpp']]],
-  ['num_5fdeflate_5fcode_5fsymbols_3531',['NUM_DEFLATE_CODE_SYMBOLS',['../dd/dc0/lodepng_8cpp.html#a58feace6a0d109fc6bb2161504a3011e',1,'lodepng.cpp']]],
-  ['num_5fdistance_5fsymbols_3532',['NUM_DISTANCE_SYMBOLS',['../dd/dc0/lodepng_8cpp.html#a5b48becc8f2653ba2bb90858d38fc9ec',1,'lodepng.cpp']]]
-];

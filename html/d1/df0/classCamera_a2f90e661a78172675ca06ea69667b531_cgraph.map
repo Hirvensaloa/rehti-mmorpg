@@ -1,5 +1,0 @@
-<map id="Camera::getViewMatrix" name="Camera::getViewMatrix">
-<area shape="rect" id="node1" title="Returns the view matrix of the camera, which is the inverse of the model matrix of the camera...." alt="" coords="5,31,181,57"/>
-<area shape="rect" id="node2" href="$d1/df0/classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="229,5,387,32"/>
-<area shape="rect" id="node3" href="$d6/d80/Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="241,56,375,83"/>
-</map>

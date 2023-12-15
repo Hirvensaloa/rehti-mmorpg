@@ -1,9 +1,0 @@
-<map id="Camera::setTargetAndCamera" name="Camera::setTargetAndCamera">
-<area shape="rect" id="node1" title="Sets the camera target to the given location and moves camera by the same amount." alt="" coords="764,71,981,98"/>
-<area shape="rect" id="node2" href="$d7/d6d/classRehtiGraphics.html#ac817516ac285d8b37e44ed594a903bd1" title="Adds a character object with the given id to the graphics backend. Also creates a bounding box for th..." alt="" coords="497,5,705,47"/>
-<area shape="rect" id="node6" href="$d7/d6d/classRehtiGraphics.html#a6e2e9da4d7d742bda2d1232e27c8df8e" title="Forces player to move to the location given, cancelling any remaining movement callbacks and animatio..." alt="" coords="485,71,716,98"/>
-<area shape="rect" id="node7" href="$d7/d6d/classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5" title="Moves the player to the given location in the given time. Also automatically rotates the player to fa..." alt="" coords="501,122,700,149"/>
-<area shape="rect" id="node3" href="$d1/d37/classClient.html#afebeedfe876105645a3937b4ee2058df" title="Processes messages from the server." alt="" coords="255,67,437,94"/>
-<area shape="rect" id="node4" href="$d1/d37/classClient.html#a742373e08a80d993d2651b6fff76f5b9" title="Starts the client." alt="" coords="108,67,207,94"/>
-<area shape="rect" id="node5" href="$dc/dad/client_2src_2Main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,67,60,94"/>
-</map>

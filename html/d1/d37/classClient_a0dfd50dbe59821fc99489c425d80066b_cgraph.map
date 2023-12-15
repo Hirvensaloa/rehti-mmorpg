@@ -1,6 +1,0 @@
-<map id="Client::interactWithObject" name="Client::interactWithObject">
-<area shape="rect" id="node1" title="Sends an object interaction message to the server." alt="" coords="5,31,196,57"/>
-<area shape="rect" id="node2" href="$d9/d32/classMessageApi.html#a7c5a161c979c74767105414ff5387f1e" title="Create a MessageStruct for object interaction." alt="" coords="244,23,436,65"/>
-<area shape="rect" id="node3" href="$df/db0/RapidjsonHelpers_8cpp.html#a59f6cf501e740544668f6340bb64d99a" title="Creates rapidjson document *." alt="" coords="484,5,615,32"/>
-<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a7d05a2aa9e4c418be1b3a18cd4190b83" title="Creates a string from a rapidjson document." alt="" coords="499,56,600,83"/>
-</map>

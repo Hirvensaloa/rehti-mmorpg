@@ -1,8 +1,0 @@
-<map id="Entity::setAction" name="Entity::setAction">
-<area shape="rect" id="node1" title="Set the current action to parameter action." alt="" coords="243,107,371,133"/>
-<area shape="rect" id="node2" href="$df/d30/classNpc.html#afe61dddbd28da6f559a5a6c6b760c81d" title="Respawn the NPC." alt="" coords="45,5,155,32"/>
-<area shape="rect" id="node3" href="$d8/d9c/classPlayerCharacter.html#a5ab0ca121121136eb108cb2d5113aaab" title="Function that drops player&#39;s items and sets an active RespawnAction. Called when player dies." alt="" coords="5,56,195,83"/>
-<area shape="rect" id="node4" href="$df/d30/classNpc.html#a02469aac6500ae06782d0f75148d5b50" title="Updates the NPC." alt="" coords="50,107,150,133"/>
-<area shape="rect" id="node5" href="$dd/d9d/classAggressiveNpc.html#ac9bad388273f1b1f1ab9ba59b83f089f" title="Updates the AggressiveNpc." alt="" coords="14,157,186,184"/>
-<area shape="rect" id="node6" href="$da/de6/classPassiveNpc.html#a09827b4717c77c7cbe16665ac954168d" title="Updates the PassiveNpc." alt="" coords="25,208,175,235"/>
-</map>

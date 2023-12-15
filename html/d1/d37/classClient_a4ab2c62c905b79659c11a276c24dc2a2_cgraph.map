@@ -1,6 +1,0 @@
-<map id="Client::useItem" name="Client::useItem">
-<area shape="rect" id="node1" title="Send a UseItemMessage for item with given instance id." alt="" coords="5,31,127,57"/>
-<area shape="rect" id="node2" href="$d9/d32/classMessageApi.html#a2a8bbb300b26f88f399df1e6bf86dc01" title="Create a MessageStruct for using item." alt="" coords="175,31,380,57"/>
-<area shape="rect" id="node3" href="$df/db0/RapidjsonHelpers_8cpp.html#a59f6cf501e740544668f6340bb64d99a" title="Creates rapidjson document *." alt="" coords="428,5,559,32"/>
-<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a7d05a2aa9e4c418be1b3a18cd4190b83" title="Creates a string from a rapidjson document." alt="" coords="443,56,544,83"/>
-</map>

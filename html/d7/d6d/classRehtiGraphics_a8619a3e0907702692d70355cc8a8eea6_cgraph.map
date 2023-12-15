@@ -1,6 +1,0 @@
-<map id="RehtiGraphics::playAnimation" name="RehtiGraphics::playAnimation">
-<area shape="rect" id="node1" title="Plays an animation for the given character." alt="" coords="5,78,221,105"/>
-<area shape="rect" id="node2" href="$dd/d85/classTimerCallbackSystem.html#af8ea3ade97f14ca226c625ad4d70f90b" title="Adds a new timer callback for the given id." alt="" coords="269,5,435,47"/>
-<area shape="rect" id="node3" href="$dd/d85/classTimerCallbackSystem.html#add46c4d14ad6d925b927c7d5720f5e6d" title="Forces the callback to be completed with the time left in the timer and removes it from the system." alt="" coords="269,71,435,112"/>
-<area shape="rect" id="node4" href="$d3/d58/BasicTypes_8hpp.html#abeaa9e402d6a6f63c932da7fa203c38c" title=" " alt="" coords="295,137,409,163"/>
-</map>

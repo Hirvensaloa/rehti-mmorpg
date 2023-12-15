@@ -1,7 +1,0 @@
-<map id="loadMapTextures" name="loadMapTextures">
-<area shape="rect" id="node1" title="Reads all different the map texture files." alt="" coords="867,5,1000,32"/>
-<area shape="rect" id="node2" href="$dd/d17/classAssetCache.html#a48a445aae3950de86b925f1c560236cc" title="Loads the map area assets data." alt="" coords="588,5,819,32"/>
-<area shape="rect" id="node3" href="$dd/d17/classAssetCache.html#a65f5a313ec992e8d4fd1212272f404d0" title="Loads all the assets into memory." alt="" coords="363,5,540,32"/>
-<area shape="rect" id="node4" href="$d1/d37/classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,5,315,32"/>
-<area shape="rect" id="node5" href="$d1/d37/classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="5,5,112,32"/>
-</map>

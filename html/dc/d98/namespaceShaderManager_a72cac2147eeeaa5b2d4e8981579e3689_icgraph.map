@@ -1,8 +1,0 @@
-<map id="ShaderManager::createShaderModule" name="ShaderManager::createShaderModule">
-<area shape="rect" id="node1" title="Creates a shader module from a file." alt="" coords="1048,39,1267,80"/>
-<area shape="rect" id="node2" href="$dc/d98/namespaceShaderManager.html#abfd9bcbabdfe3ea9c2341eff7fbb23e4" title="Creates a fragment shader info to be used in pipeline creation." alt="" coords="765,5,1000,47"/>
-<area shape="rect" id="node6" href="$dc/d98/namespaceShaderManager.html#ab64875c63a588c002e5f9f6b11faee1a" title="Creates a vertex shader info to be used in pipeline creation." alt="" coords="775,71,990,112"/>
-<area shape="rect" id="node3" href="$d7/d6d/classRehtiGraphics.html#ac307d6b1b052e5e07374056e833e01de" title="Creates the graphics pipeline." alt="" coords="499,39,717,80"/>
-<area shape="rect" id="node4" href="$d7/d6d/classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3" title="Initializes vulkan instance." alt="" coords="265,46,451,73"/>
-<area shape="rect" id="node5" href="$d7/d6d/classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469" title="Initializes the graphics backend." alt="" coords="5,46,217,73"/>
-</map>

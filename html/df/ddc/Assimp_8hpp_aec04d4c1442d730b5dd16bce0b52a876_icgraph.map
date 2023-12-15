@@ -1,9 +1,0 @@
-<map id="aiMatrix4x4ToGlm" name="aiMatrix4x4ToGlm">
-<area shape="rect" id="node1" title="Convert aiMatrix4x4 to glm::mat4." alt="" coords="1127,31,1268,57"/>
-<area shape="rect" id="node2" href="$d8/d40/Assimp_8cpp.html#af47dad6267e81004b88347e762a705e6" title="Fills the given vectors with hierarchy and bone data." alt="" coords="984,5,1079,32"/>
-<area shape="rect" id="node3" href="$d8/d40/Assimp_8cpp.html#a815da1a9fca11840a96af6ddd1fafafc" title="Loads the object from the given path." alt="" coords="833,31,936,57"/>
-<area shape="rect" id="node4" href="$dd/d17/classAssetCache.html#ad9b550b38f4ca4b4d1c5dadd54089ad9" title="Loads the character assets data." alt="" coords="588,23,785,65"/>
-<area shape="rect" id="node5" href="$dd/d17/classAssetCache.html#a65f5a313ec992e8d4fd1212272f404d0" title="Loads all the assets into memory." alt="" coords="363,31,540,57"/>
-<area shape="rect" id="node6" href="$d1/d37/classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,31,315,57"/>
-<area shape="rect" id="node7" href="$d1/d37/classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="5,31,112,57"/>
-</map>

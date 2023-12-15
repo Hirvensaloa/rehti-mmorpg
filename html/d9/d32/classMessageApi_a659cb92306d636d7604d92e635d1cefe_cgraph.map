@@ -1,4 +1,0 @@
-<map id="MessageApi::parseGameState" name="MessageApi::parseGameState">
-<area shape="rect" id="node1" title="Parse received game state message body." alt="" coords="5,5,224,32"/>
-<area shape="rect" id="node2" href="$df/db0/RapidjsonHelpers_8cpp.html#adc78d48752aefea8c5cc4045bac1a55f" title="Parses a string into a rapidjson document." alt="" coords="272,5,397,32"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="MessageApi::createTalk" name="MessageApi::createTalk">
-<area shape="rect" id="node1" title="Create a MessageStruct for talking to NPC." alt="" coords="5,31,181,57"/>
-<area shape="rect" id="node2" href="$df/db0/RapidjsonHelpers_8cpp.html#a59f6cf501e740544668f6340bb64d99a" title="Creates rapidjson document *." alt="" coords="229,5,360,32"/>
-<area shape="rect" id="node3" href="$df/db0/RapidjsonHelpers_8cpp.html#a7d05a2aa9e4c418be1b3a18cd4190b83" title="Creates a string from a rapidjson document." alt="" coords="244,56,345,83"/>
-</map>

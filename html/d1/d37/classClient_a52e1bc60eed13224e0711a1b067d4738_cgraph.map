@@ -1,7 +1,0 @@
-<map id="Client::handleMouseClick" name="Client::handleMouseClick">
-<area shape="rect" id="node1" title="Handles a mouse click hit on the graphics window." alt="" coords="5,31,192,57"/>
-<area shape="rect" id="node2" href="$d1/d37/classClient.html#a0dfd50dbe59821fc99489c425d80066b" title="Sends an object interaction message to the server." alt="" coords="240,31,431,57"/>
-<area shape="rect" id="node3" href="$d9/d32/classMessageApi.html#a7c5a161c979c74767105414ff5387f1e" title="Create a MessageStruct for object interaction." alt="" coords="479,23,671,65"/>
-<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a59f6cf501e740544668f6340bb64d99a" title="Creates rapidjson document *." alt="" coords="719,5,849,32"/>
-<area shape="rect" id="node5" href="$df/db0/RapidjsonHelpers_8cpp.html#a7d05a2aa9e4c418be1b3a18cd4190b83" title="Creates a string from a rapidjson document." alt="" coords="733,56,835,83"/>
-</map>

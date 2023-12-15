@@ -1,6 +1,0 @@
-<map id="GraphicsObjectManager::createStagingBuffer" name="GraphicsObjectManager::createStagingBuffer">
-<area shape="rect" id="node1" title="Helper for creating a staging buffer." alt="" coords="5,39,184,80"/>
-<area shape="rect" id="node2" href="$d2/d70/classGraphicsObjectManager.html#acaa2f62a870f1426abe523acb1d8ef6f" title="Creates a buffer with the given parameters." alt="" coords="232,39,411,80"/>
-<area shape="rect" id="node3" href="$d2/d70/classGraphicsObjectManager.html#a48087fcc6c8ff32a160ff8105240538d" title="Returns number of queue families." alt="" coords="459,5,637,47"/>
-<area shape="rect" id="node4" href="$d2/d70/classGraphicsObjectManager.html#a1f57aa379d9151b4dcb74622f011e008" title="Returns the sharing mode of created resources." alt="" coords="459,71,637,112"/>
-</map>

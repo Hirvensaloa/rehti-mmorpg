@@ -1,4 +1,0 @@
-<map id="aiVector3DVectorToVertexVector" name="aiVector3DVectorToVertexVector">
-<area shape="rect" id="node1" title="Convert vector of aiVector3D to vector of Vertex." alt="" coords="5,5,196,47"/>
-<area shape="rect" id="node2" href="$d8/d40/Assimp_8cpp.html#ad5612bf8567030f4f54822987bc925c4" title="Convert aiVector3D to Vertex." alt="" coords="244,13,393,39"/>
-</map>

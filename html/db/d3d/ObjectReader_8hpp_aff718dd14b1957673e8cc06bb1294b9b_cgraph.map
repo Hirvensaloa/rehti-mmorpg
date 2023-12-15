@@ -1,7 +1,0 @@
-<map id="readObjectLocations" name="readObjectLocations">
-<area shape="rect" id="node1" title="Reads all the objects on the map. Server can use this to spawn objects on the map." alt="" coords="5,56,160,83"/>
-<area shape="rect" id="node2" href="$d4/d44/ObjectReader_8cpp.html#afb0e5d4cc4396f61761ac27e98f7c252" title="Generates a unique id for an object instance." alt="" coords="208,5,397,32"/>
-<area shape="rect" id="node3" href="$df/db0/RapidjsonHelpers_8cpp.html#a96a8e9ed25c4d2e4b36389bc82050d5c" title="Reads JSON file to rapidjson document." alt="" coords="263,56,342,83"/>
-<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a06910a135e488eced76c3354fb3a2a7e" title="Check if rapidjson value contains a member with the given name AND check that the type matches the gi..." alt="" coords="249,107,357,133"/>
-<area shape="rect" id="node5" href="$df/db0/RapidjsonHelpers_8cpp.html#a2e43a36fa8b3b1eb37ddf7059e6d6db8" title="Convertes ValueType to string." alt="" coords="445,107,585,133"/>
-</map>

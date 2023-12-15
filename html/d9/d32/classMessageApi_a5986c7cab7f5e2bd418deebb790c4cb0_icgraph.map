@@ -1,7 +1,0 @@
-<map id="MessageApi::createGameState" name="MessageApi::createGameState">
-<area shape="rect" id="node1" title="Create a MessageStruct for game state." alt="" coords="692,5,915,32"/>
-<area shape="rect" id="node2" href="$db/d00/classServer.html#a2252e5384a7a5e755c200c104d745fcb" title="Sends the current gamestate to connected clients." alt="" coords="468,5,644,32"/>
-<area shape="rect" id="node3" href="$db/d00/classServer.html#a2dd422dc25689dc106a6d5fe1d3b3298" title="Function that updates the gamestate on each server tick, called by ticker()" alt="" coords="324,5,420,32"/>
-<area shape="rect" id="node4" href="$db/d00/classServer.html#a68a715891c8ac1659bf27c3796c12052" title="Timer function that is used to start server ticks, runs on a separate thread." alt="" coords="168,5,276,32"/>
-<area shape="rect" id="node5" href="$db/d00/classServer.html#ad5ec9462b520e59f7ea831e157ee5e59" title=" " alt="" coords="5,5,120,32"/>
-</map>

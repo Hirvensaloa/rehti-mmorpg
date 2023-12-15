@@ -1,6 +1,0 @@
-<map id="fetchSkills" name="fetchSkills">
-<area shape="rect" id="node1" title="Fetches the skills from the skills.json file and returns them as a map." alt="" coords="5,31,96,57"/>
-<area shape="rect" id="node2" href="$df/db0/RapidjsonHelpers_8cpp.html#a96a8e9ed25c4d2e4b36389bc82050d5c" title="Reads JSON file to rapidjson document." alt="" coords="159,5,237,32"/>
-<area shape="rect" id="node3" href="$df/db0/RapidjsonHelpers_8cpp.html#a06910a135e488eced76c3354fb3a2a7e" title="Check if rapidjson value contains a member with the given name AND check that the type matches the gi..." alt="" coords="144,56,252,83"/>
-<area shape="rect" id="node4" href="$df/db0/RapidjsonHelpers_8cpp.html#a2e43a36fa8b3b1eb37ddf7059e6d6db8" title="Convertes ValueType to string." alt="" coords="300,56,440,83"/>
-</map>

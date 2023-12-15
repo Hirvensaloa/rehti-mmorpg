@@ -1,6 +1,0 @@
-<map id="Object::getName" name="Object::getName">
-<area shape="rect" id="node1" title="Get the name of the object." alt="" coords="489,56,621,83"/>
-<area shape="rect" id="node2" href="$da/d47/classResourceObject.html#aef108c1b74c650c9a0c0bfcb5d25d8c5" title="Check if the entity can interact with the object." alt="" coords="236,5,441,32"/>
-<area shape="rect" id="node3" href="$da/d47/classResourceObject.html#aaee08d1b37836242c2ede45abbf7df71" title="Interact with the object." alt="" coords="5,31,188,57"/>
-<area shape="rect" id="node4" href="$d7/d3a/classLootObject.html#a4ef8634a19756ec50a158923bab05fc7" title="Interact with the object." alt="" coords="263,107,414,133"/>
-</map>

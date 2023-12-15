@@ -1,5 +1,0 @@
-<map id="insertObjectTileMap" name="insertObjectTileMap">
-<area shape="rect" id="node1" title="Inserts the object tile map to the map." alt="" coords="325,5,479,32"/>
-<area shape="rect" id="node2" href="$dc/df7/MapLoader_8hpp.html#a92b85c2d8b6ae5061af00c879b873c19" title="Generate the object block map. The map defines how the objects block the tiles around itself." alt="" coords="108,5,277,32"/>
-<area shape="rect" id="node3" href="$d5/da8/rehtiLib_2assets_2loader_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
-</map>

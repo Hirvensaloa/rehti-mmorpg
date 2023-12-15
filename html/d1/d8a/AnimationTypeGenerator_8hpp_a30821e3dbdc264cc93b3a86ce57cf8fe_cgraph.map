@@ -1,5 +1,0 @@
-<map id="generateAnimationHppFile" name="generateAnimationHppFile">
-<area shape="rect" id="node1" title="Generate GeneratedAnimations.hpp file." alt="" coords="5,5,201,32"/>
-<area shape="rect" id="node2" href="$d8/d8b/AnimationReader_8cpp.html#acf7a424ee8d40510f3a350fbfa9f282e" title="Reads animations described in JSON file." alt="" coords="249,5,375,32"/>
-<area shape="rect" id="node3" href="$df/db0/RapidjsonHelpers_8cpp.html#a96a8e9ed25c4d2e4b36389bc82050d5c" title="Reads JSON file to rapidjson document." alt="" coords="423,5,501,32"/>
-</map>

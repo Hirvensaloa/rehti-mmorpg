@@ -1,6 +1,0 @@
-<map id="RehtiGraphics::setEngineFlags" name="RehtiGraphics::setEngineFlags">
-<area shape="rect" id="node1" title="Sets flags for engine. Flags can only be set by this interface, not unset." alt="" coords="755,5,940,47"/>
-<area shape="rect" id="node2" href="$d7/d6d/classRehtiGraphics.html#a96fd7733c1e323b33b2056eac187f9b4" title=" " alt="" coords="508,5,707,47"/>
-<area shape="rect" id="node3" href="$d7/d6d/classRehtiGraphics.html#a96267e98fd6a5d496e7b918abe3b97fa" title="Initializes the window." alt="" coords="265,13,460,39"/>
-<area shape="rect" id="node4" href="$d7/d6d/classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469" title="Initializes the graphics backend." alt="" coords="5,13,217,39"/>
-</map>

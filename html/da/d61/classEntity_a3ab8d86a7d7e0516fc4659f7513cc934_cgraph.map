@@ -1,4 +1,0 @@
-<map id="Entity::getRange" name="Entity::getRange">
-<area shape="rect" id="node1" title="Get tha attack range of this entity." alt="" coords="5,5,135,32"/>
-<area shape="rect" id="node2" href="$d1/d42/classEquipment.html#a3a0856f2c28cc76096b0556faa859eff" title="Get combined stats of equipped items." alt="" coords="183,5,407,32"/>
-</map>

@@ -1,0 +1,10 @@
+<map id="RehtiGraphics::movePlayer" name="RehtiGraphics::movePlayer">
+<area shape="rect" id="node1" title="Moves the player to the given location in the given time. Also automatically rotates the player to fa..." alt="" coords="5,137,204,163"/>
+<area shape="rect" id="node2" href="$classTimerCallbackSystem.html#af8ea3ade97f14ca226c625ad4d70f90b" title="Adds a new timer callback for the given id." alt="" coords="291,5,457,47"/>
+<area shape="rect" id="node3" href="$classTimerCallbackSystem.html#add46c4d14ad6d925b927c7d5720f5e6d" title="Forces the callback to be completed with the time left in the timer and removes it from the system." alt="" coords="291,71,457,112"/>
+<area shape="rect" id="node4" href="$classRehtiGraphics.html#a1a332491febf46b86750d5d73e3e97ad" title="Helper function to move a bounding box." alt="" coords="252,137,496,163"/>
+<area shape="rect" id="node5" href="$Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="307,187,441,214"/>
+<area shape="rect" id="node6" href="$classCamera.html#a7e5afa229f8c473b74d4984e0663cc8f" title="Sets the camera target to the given location and moves camera by the same amount." alt="" coords="265,238,483,265"/>
+<area shape="rect" id="node7" href="$classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="544,213,701,239"/>
+<area shape="rect" id="node8" href="$classCamera.html#a4e5c1cba3172130eaff779eca5ff5af9" title="Sets the camera location to the given location." alt="" coords="545,263,701,290"/>
+</map>

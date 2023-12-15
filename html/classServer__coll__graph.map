@@ -1,0 +1,6 @@
+<map id="Server" name="Server">
+<area shape="rect" id="node1" title="Main class for the server." alt="" coords="105,184,169,211"/>
+<area shape="rect" id="node2" href="$classGameWorld.html" title=" " alt="" coords="5,95,104,121"/>
+<area shape="rect" id="node3" href="$classMap.html" title="Static class representing the map of the game world. Map contains information about which tiles are a..." alt="" coords="29,5,80,32"/>
+<area shape="rect" id="node4" href="$classDatabaseManager.html" title="Class for handling database queries." alt="" coords="128,95,269,121"/>
+</map>

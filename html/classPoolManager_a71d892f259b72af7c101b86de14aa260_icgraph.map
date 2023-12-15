@@ -1,0 +1,4 @@
+<map id="PoolManager::grabPool" name="PoolManager::grabPool">
+<area shape="rect" id="node1" title="Returns a pool from free pools or creates a new one. Does not push the returned pool to used pools." alt="" coords="308,5,480,32"/>
+<area shape="rect" id="node2" href="$classPoolManager.html#ad373530a239dd87ce078864a710561b0" title="Allocates a descriptor set from the pool" alt="" coords="5,5,260,32"/>
+</map>

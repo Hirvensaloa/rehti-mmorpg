@@ -1,0 +1,4 @@
+<map id="RehtiGui::drawSkills" name="RehtiGui::drawSkills">
+<area shape="rect" id="node1" title="Draws skills tab to GUI window." alt="" coords="208,5,361,32"/>
+<area shape="rect" id="node2" href="$classRehtiGui.html#a5cff62a80fd8c20208c9d6319f8ed2d5" title=" " alt="" coords="5,5,160,32"/>
+</map>

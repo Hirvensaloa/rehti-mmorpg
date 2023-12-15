@@ -1,0 +1,12 @@
+<map id="Npc" name="Npc">
+<area shape="rect" id="node1" title="Base NPC class. It represents a peaceful NPC that does not attack the player under any circumstances." alt="" coords="776,42,823,69"/>
+<area shape="rect" id="node2" href="$classEntity.html" title="Base pure virtual Entity class. Different types of enities inherit this." alt="" coords="559,122,619,149"/>
+<area shape="rect" id="node6" href="$classInventory.html" title="Represents the items that an entity can carry." alt="" coords="757,110,841,137"/>
+<area shape="rect" id="node8" href="$classEquipment.html" title="Class for representing the items an entity has equipped." alt="" coords="753,181,845,207"/>
+<area shape="rect" id="node3" title=" " alt="" coords="162,5,321,47"/>
+<area shape="rect" id="node4" href="$classGameWorld.html" title=" " alt="" coords="192,71,291,98"/>
+<area shape="rect" id="node5" href="$classMap.html" title="Static class representing the map of the game world. Map contains information about which tiles are a..." alt="" coords="5,71,56,98"/>
+<area shape="rect" id="node7" href="$structCoordinates.html" title="Struct for coordinates." alt="" coords="191,122,291,149"/>
+<area shape="rect" id="node9" href="$classSkillSet.html" title="Contains all the skills that a character has." alt="" coords="206,173,277,199"/>
+<area shape="rect" id="node10" href="$structSpawnCoordinateBounds.html" title=" " alt="" coords="149,223,333,250"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="Client::handleMouseClick" name="Client::handleMouseClick">
+<area shape="rect" id="node1" title="Handles a mouse click hit on the graphics window." alt="" coords="5,5,192,32"/>
+<area shape="rect" id="node2" href="$classClient.html#a0dfd50dbe59821fc99489c425d80066b" title="Sends an object interaction message to the server." alt="" coords="240,5,431,32"/>
+</map>

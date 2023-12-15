@@ -1,0 +1,5 @@
+<map id="Equipment::unequip" name="Equipment::unequip">
+<area shape="rect" id="node1" title="Unequip item from slot." alt="" coords="5,31,157,57"/>
+<area shape="rect" id="node2" href="$classInventory.html#a9e1fad5a5f8ef1d2aec5ba9d86531d0d" title="Adds item to the inventory." alt="" coords="208,5,353,32"/>
+<area shape="rect" id="node3" href="$classEntity.html#a1f1ef1b13908ffef9f2c4f2f455fdb71" title="Get the Inventory object of this entity." alt="" coords="205,56,356,83"/>
+</map>

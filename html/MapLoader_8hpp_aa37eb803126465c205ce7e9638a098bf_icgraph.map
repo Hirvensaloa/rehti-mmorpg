@@ -1,0 +1,4 @@
+<map id="insertObjectTileMap" name="insertObjectTileMap">
+<area shape="rect" id="node1" title="Inserts the object tile map to the map." alt="" coords="223,5,376,32"/>
+<area shape="rect" id="node2" href="$MapLoader_8hpp.html#a92b85c2d8b6ae5061af00c879b873c19" title="Generate the object block map. The map defines how the objects block the tiles around itself." alt="" coords="5,5,175,32"/>
+</map>

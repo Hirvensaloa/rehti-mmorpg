@@ -1,0 +1,5 @@
+<map id="Inventory::removeAllItems" name="Inventory::removeAllItems">
+<area shape="rect" id="node1" title="Removes all items from the inventory." alt="" coords="243,31,437,57"/>
+<area shape="rect" id="node2" href="$classNpc.html#afe61dddbd28da6f559a5a6c6b760c81d" title="Respawn the NPC." alt="" coords="45,5,155,32"/>
+<area shape="rect" id="node3" href="$classPlayerCharacter.html#a5ab0ca121121136eb108cb2d5113aaab" title="Function that drops player&#39;s items and sets an active RespawnAction. Called when player dies." alt="" coords="5,56,195,83"/>
+</map>

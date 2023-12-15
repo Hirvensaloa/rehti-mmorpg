@@ -1,0 +1,11 @@
+<map id="GameWorld::getPlayers" name="GameWorld::getPlayers">
+<area shape="rect" id="node1" title=" " alt="" coords="791,78,965,105"/>
+<area shape="rect" id="node2" href="$classPassiveNpc.html#a1d4367020137513d808174d8b243ec9e" title="Finds out if there is a player attacking the PassiveNpc." alt="" coords="548,5,739,47"/>
+<area shape="rect" id="node4" href="$classAggressiveNpc.html#a37453d355991dae967fcea1baafb72e3" title="Finds the closest player to the AggressiveNpc." alt="" coords="544,71,743,112"/>
+<area shape="rect" id="node6" href="$classServer.html#a2252e5384a7a5e755c200c104d745fcb" title="Sends the current gamestate to connected clients." alt="" coords="555,137,731,163"/>
+<area shape="rect" id="node3" href="$classPassiveNpc.html#a09827b4717c77c7cbe16665ac954168d" title="Updates the PassiveNpc." alt="" coords="335,13,485,39"/>
+<area shape="rect" id="node5" href="$classAggressiveNpc.html#ac9bad388273f1b1f1ab9ba59b83f089f" title="Updates the AggressiveNpc." alt="" coords="324,78,496,105"/>
+<area shape="rect" id="node7" href="$classServer.html#a2dd422dc25689dc106a6d5fe1d3b3298" title="Function that updates the gamestate on each server tick, called by ticker()" alt="" coords="362,137,458,163"/>
+<area shape="rect" id="node8" href="$classServer.html#a68a715891c8ac1659bf27c3796c12052" title="Timer function that is used to start server ticks, runs on a separate thread." alt="" coords="168,137,276,163"/>
+<area shape="rect" id="node9" href="$classServer.html#ad5ec9462b520e59f7ea831e157ee5e59" title=" " alt="" coords="5,137,120,163"/>
+</map>

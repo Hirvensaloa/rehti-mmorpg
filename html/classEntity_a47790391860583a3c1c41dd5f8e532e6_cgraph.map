@@ -1,0 +1,9 @@
+<map id="Entity::attack" name="Entity::attack">
+<area shape="rect" id="node1" title="Perform an attack on target entity." alt="" coords="5,107,113,133"/>
+<area shape="rect" id="node2" href="$classEntity.html#a4dcd9a474663f507da7243dbb7c0a5e6" title="Change the hp of this entity by amount." alt="" coords="207,5,339,32"/>
+<area shape="rect" id="node4" href="$classEntity.html#ac98d1f3267fa19476913d3744efba910" title="Get the Equipment object of this entity." alt="" coords="194,56,353,83"/>
+<area shape="rect" id="node5" href="$classEquipment.html#a3a0856f2c28cc76096b0556faa859eff" title="Get combined stats of equipped items." alt="" coords="161,107,385,133"/>
+<area shape="rect" id="node6" href="$classEntity.html#a3581642dc6f9cb80fe4d9fdc98f7c80d" title="Get the current hp of this entity." alt="" coords="220,157,327,184"/>
+<area shape="rect" id="node7" href="$classEntity.html#ab824e4f163924eb4f136d3e2ff759897" title="Get the name of this entity." alt="" coords="210,208,337,235"/>
+<area shape="rect" id="node3" href="$classEntity.html#a076c4f2138c24a11ed279370a99bb976" title="Pure virtual function that child classes need to implement. Performs entity&#39;s respawning." alt="" coords="433,5,556,32"/>
+</map>

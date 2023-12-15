@@ -1,0 +1,10 @@
+<map id="Camera::Camera" name="Camera::Camera">
+<area shape="rect" id="node1" title="Constructor for the camera." alt="" coords="5,56,137,83"/>
+<area shape="rect" id="node2" href="$classCamera.html#ae44d552243a7b430e94ed9e70adcf07b" title="Returns the forward direction of the camera." alt="" coords="195,5,349,32"/>
+<area shape="rect" id="node3" href="$classCamera.html#a9cdd547b79e817e68bf62f2bc256ee02" title="Moves the camera by the given vector." alt="" coords="185,56,359,83"/>
+<area shape="rect" id="node4" href="$classCamera.html#adad2ddd78627a085dfb4f00b0add991f" title="rotates the camera around the target." alt="" coords="195,107,349,133"/>
+<area shape="rect" id="node5" href="$classCamera.html#acdb736eec57c3cdbeff41069f378f713" title="returns the camera matrix with the target as the origon." alt="" coords="407,56,645,83"/>
+<area shape="rect" id="node7" href="$classCamera.html#aa21e94d4bfd57c15897a8a2948d6356c" title="Returns the right direction of the camera." alt="" coords="458,107,594,133"/>
+<area shape="rect" id="node8" href="$Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="459,157,593,184"/>
+<area shape="rect" id="node6" href="$classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="693,56,851,83"/>
+</map>

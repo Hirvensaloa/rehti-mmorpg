@@ -1,0 +1,4 @@
+<map id="readObjectLocations" name="readObjectLocations">
+<area shape="rect" id="node1" title="Reads all the objects on the map. Server can use this to spawn objects on the map." alt="" coords="5,5,160,32"/>
+<area shape="rect" id="node2" href="$ObjectReader_8cpp.html#afb0e5d4cc4396f61761ac27e98f7c252" title="Generates a unique id for an object instance." alt="" coords="208,5,397,32"/>
+</map>

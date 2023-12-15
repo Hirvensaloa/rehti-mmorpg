@@ -1,0 +1,7 @@
+<map id="RehtiGraphics::playAnimation" name="RehtiGraphics::playAnimation">
+<area shape="rect" id="node1" title="Plays an animation for the given character." alt="" coords="741,42,957,69"/>
+<area shape="rect" id="node2" href="$classRehtiGraphics.html#ac817516ac285d8b37e44ed594a903bd1" title="Adds a character object with the given id to the graphics backend. Also creates a bounding box for th..." alt="" coords="485,5,693,47"/>
+<area shape="rect" id="node3" href="$classClient.html#afebeedfe876105645a3937b4ee2058df" title="Processes messages from the server." alt="" coords="255,42,437,69"/>
+<area shape="rect" id="node4" href="$classClient.html#a742373e08a80d993d2651b6fff76f5b9" title="Starts the client." alt="" coords="108,42,207,69"/>
+<area shape="rect" id="node5" href="$client_2src_2Main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,42,60,69"/>
+</map>

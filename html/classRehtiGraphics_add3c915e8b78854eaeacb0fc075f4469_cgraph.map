@@ -1,0 +1,70 @@
+<map id="RehtiGraphics::RehtiGraphics" name="RehtiGraphics::RehtiGraphics">
+<area shape="rect" id="node1" title="Initializes the graphics backend." alt="" coords="5,1259,217,1286"/>
+<area shape="rect" id="node2" href="$classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3" title="Initializes vulkan instance." alt="" coords="291,715,476,742"/>
+<area shape="rect" id="node53" href="$classRehtiGraphics.html#a96267e98fd6a5d496e7b918abe3b97fa" title="Initializes the window." alt="" coords="286,1259,481,1286"/>
+<area shape="rect" id="node56" href="$classCamera.html#a7a11d366f18cc5f2ad7183bb8792e7c9" title="Registers the camera controls to the given window." alt="" coords="265,1369,501,1395"/>
+<area shape="rect" id="node3" href="$classRehtiGraphics.html#ace85ddc8e0587ede8f39c55ac28ab160" title="Creates the command buffers." alt="" coords="568,803,797,844"/>
+<area shape="rect" id="node4" href="$classRehtiGraphics.html#a27b22f86d7b8d556934add7ed29fcc50" title="Creates the command pool." alt="" coords="554,999,811,1026"/>
+<area shape="rect" id="node8" href="$classRehtiGraphics.html#ae719f3de565aef0ebfef42d291d8be95" title="Creates resources required for a depth buffer." alt="" coords="582,1171,783,1212"/>
+<area shape="rect" id="node10" href="$classRehtiGraphics.html#a7713292234071d8a2ce195f75fb04cd8" title="Creates the framebuffers." alt="" coords="559,202,807,229"/>
+<area shape="rect" id="node11" href="$classRehtiGraphics.html#ac307d6b1b052e5e07374056e833e01de" title="Creates the graphics pipeline." alt="" coords="573,253,792,295"/>
+<area shape="rect" id="node29" href="$classRehtiGraphics.html#a7776bb91d4c8d1a9ef56e36bd61a8633" title="Creates RehtiGui member and initializes it." alt="" coords="591,366,775,393"/>
+<area shape="rect" id="node31" href="$classRehtiGraphics.html#a627450c10409454e21a1e5c7ce28130d" title="Creates the image views." alt="" coords="581,417,784,459"/>
+<area shape="rect" id="node32" href="$classRehtiGraphics.html#a281bdb83fa8180537a192e5e6aecf3a3" title="Creates vulkan instance." alt="" coords="574,483,791,510"/>
+<area shape="rect" id="node37" href="$classRehtiGraphics.html#a9e6162c6b0d28ff6b141d4fa0318751b" title="Creates the interactable logical device." alt="" coords="579,933,787,975"/>
+<area shape="rect" id="node38" href="$classRehtiGraphics.html#a5610c4161f11a141060a0e678fb0d4dd" title="Creates the graphics object manager." alt="" coords="881,803,1085,844"/>
+<area shape="rect" id="node39" href="$classRehtiGraphics.html#aaaed2a5358820b97592f6425cd329b72" title="Creates the render pass." alt="" coords="564,585,801,611"/>
+<area shape="rect" id="node40" href="$classRehtiGraphics.html#abd3ac67bb60c484ffc0955993da53b7a" title="Creates a surface to draw on." alt="" coords="577,635,788,662"/>
+<area shape="rect" id="node41" href="$classRehtiGraphics.html#a2c18492cbece076acf3d35ddd1b5d7cb" title="Creates the swapchain." alt="" coords="885,1109,1082,1151"/>
+<area shape="rect" id="node46" href="$classRehtiGraphics.html#ad364278ed3fce1c1847c836f2b6a7558" title="Initializes the appropriate semaphores and fences." alt="" coords="549,686,816,713"/>
+<area shape="rect" id="node47" href="$classRehtiGraphics.html#a4ead1c85a1cc4289d6bfcf896454232e" title="Creates a texture sampler." alt="" coords="577,737,788,779"/>
+<area shape="rect" id="node48" href="$classRehtiGraphics.html#aa22ca7610c8b7bbef6825db97feb4b8c" title="Chooses an appropriate gpu." alt="" coords="581,1051,784,1092"/>
+<area shape="rect" id="node51" href="$classRehtiGraphics.html#a81b186cd55dd95c15e20e474b9dfd26c" title="Setups the debug messenger." alt="" coords="583,868,782,909"/>
+<area shape="rect" id="node5" href="$classRehtiGraphics.html#a4153cb9e66212ea84f6e702fc1a331fc" title="Looks for queue families." alt="" coords="1184,884,1371,925"/>
+<area shape="rect" id="node6" href="$structQueueFamilyIndices.html#a9ea89d103d736bcfbfde0cb19d973e4a" title=" " alt="" coords="1478,828,1655,869"/>
+<area shape="rect" id="node7" href="$structQueueFamilyIndices.html#a652cdfabe4719ae21a701e77d57e7899" title=" " alt="" coords="1490,907,1643,948"/>
+<area shape="rect" id="node9" href="$classRehtiGraphics.html#a5b0af8d71acd97adc7264acab4ee7ed5" title="Looks for a suitable format from given candidates." alt="" coords="878,1175,1089,1216"/>
+<area shape="rect" id="node12" href="$namespaceShaderManager.html#abfd9bcbabdfe3ea9c2341eff7fbb23e4" title="Creates a fragment shader info to be used in pipeline creation." alt="" coords="866,123,1101,164"/>
+<area shape="rect" id="node16" href="$namespaceShaderManager.html#ab64875c63a588c002e5f9f6b11faee1a" title="Creates a vertex shader info to be used in pipeline creation." alt="" coords="876,188,1091,229"/>
+<area shape="rect" id="node17" href="$namespaceShaderManager.html#a02a208f45a128b627abdff6e82e421a0" title="Destroys created shader modules. This function can be called after pipeline creation." alt="" coords="870,253,1097,295"/>
+<area shape="rect" id="node18" href="$GraphicsTypes_8cpp.html#ae0d47a3d5f817a21814d359bf09a6e8e" title="Returns a vector of VkVertexInputAttributeDescription for the given object type." alt="" coords="896,319,1071,346"/>
+<area shape="rect" id="node22" href="$GraphicsTypes_8cpp.html#a7ba8e166543eb669a4714dbdc68accd0" title="Returns the vertex binding description for the given object type." alt="" coords="900,374,1067,401"/>
+<area shape="rect" id="node26" href="$classRehtiGraphics.html#affb0483295aa80648144ecdb82f6a3b2" title="Returns the size of the camera matrix." alt="" coords="887,5,1080,47"/>
+<area shape="rect" id="node28" href="$BasicTypes_8hpp.html#ad436010e95d51ba6cac7b17355b1f26b" title=" " alt="" coords="922,71,1045,98"/>
+<area shape="rect" id="node13" href="$namespaceShaderManager.html#a72cac2147eeeaa5b2d4e8981579e3689" title="Creates a shader module from a file." alt="" coords="1168,123,1387,164"/>
+<area shape="rect" id="node14" href="$namespaceShaderManager.html#a7b7005ce467ff4cb0465418eeae09c55" title="Compiles a given GLSL code to SPIRV." alt="" coords="1452,123,1681,164"/>
+<area shape="rect" id="node15" href="$namespaceShaderManager.html#a7290d17f0cfbec86001a9299d7dfbfc6" title="Returns the shader code as a string corresponding to the given stage and object type." alt="" coords="1729,130,1960,157"/>
+<area shape="rect" id="node19" href="$GraphicsTypes_8cpp.html#a61b2c21259fb6b05ff574a27954cb6c6" title=" " alt="" coords="1175,188,1380,229"/>
+<area shape="rect" id="node20" href="$GraphicsTypes_8cpp.html#a14038fb86979b563ecf2249d10d274e6" title=" " alt="" coords="1184,253,1371,295"/>
+<area shape="rect" id="node21" href="$GraphicsTypes_8cpp.html#a0d13e158265eb7ef848be49f9dbac689" title=" " alt="" coords="1166,319,1389,346"/>
+<area shape="rect" id="node23" href="$GraphicsTypes_8cpp.html#a8e9b584aad384b8a9e159124172dcaea" title=" " alt="" coords="1179,371,1376,412"/>
+<area shape="rect" id="node24" href="$GraphicsTypes_8cpp.html#aeee734b844699ea7f04afb42ffef5768" title=" " alt="" coords="1151,437,1404,463"/>
+<area shape="rect" id="node25" href="$GraphicsTypes_8cpp.html#a4ace64fbd2d42a899038930a28b3dd8e" title=" " alt="" coords="1173,487,1381,514"/>
+<area shape="rect" id="node27" href="$classCamera.html#a9f5741607bb6b27d2fb130247cd26b95" title="Returns the size of the camera&#39;s UBO." alt="" coords="1200,13,1355,39"/>
+<area shape="rect" id="node30" href="$DescriptorBuilder_8hpp.html#ab0e0a2749cf04df77c564f3ca6aa6dc4" title=" " alt="" coords="893,425,1073,451"/>
+<area shape="rect" id="node33" href="$classRehtiGraphics.html#ac589482bb07e8473c46cbb6fc67a3740" title="Checks whether the given device supports the required layers." alt="" coords="871,476,1095,517"/>
+<area shape="rect" id="node34" href="$classRehtiGraphics.html#a732a16966142700e2323acc6007286a1" title="Returns the required extensions as c strings." alt="" coords="883,541,1083,583"/>
+<area shape="rect" id="node35" href="$classRehtiGraphics.html#a48c28ff35dd115c2deb3ee8cc99490c6" title="Populates the debug messenger info." alt="" coords="873,672,1093,713"/>
+<area shape="rect" id="node36" href="$classRehtiGraphics.html#afc773ddc6b8f3d70bf0a8031577f3ceb" title=" " alt="" coords="1169,679,1386,706"/>
+<area shape="rect" id="node42" href="$classRehtiGraphics.html#a75ec64c97d7fe08381b9afc797a0e250" title="Chooses a swap extent based on the provided capabilities." alt="" coords="1176,1197,1379,1239"/>
+<area shape="rect" id="node43" href="$classRehtiGraphics.html#af2d71b2ee66f2987bed675ca104cf7e0" title="Chooses a present mode." alt="" coords="1176,1263,1379,1304"/>
+<area shape="rect" id="node44" href="$classRehtiGraphics.html#ac81329a7ed71287a2632b0a17667938c" title="Chooses a surface format." alt="" coords="1176,1132,1379,1173"/>
+<area shape="rect" id="node45" href="$classRehtiGraphics.html#a24a0247a5de37828a58de2cc93f27fb0" title="Looks for swapchain support." alt="" coords="1181,1067,1374,1108"/>
+<area shape="rect" id="node49" href="$classRehtiGraphics.html#a036508e20175a1b0ca0fa06aa6a792b3" title="Checks whether the given device supports the required features." alt="" coords="868,1035,1099,1062"/>
+<area shape="rect" id="node50" href="$classRehtiGraphics.html#a214e3327349d6861ef4b206374c9fe02" title="Checks whether the given device supports the required extensions." alt="" coords="1175,1001,1379,1043"/>
+<area shape="rect" id="node52" href="$classRehtiGraphics.html#a5b80c99481f7462cdaf8eaaaaeb69902" title=" " alt="" coords="880,868,1087,909"/>
+<area shape="rect" id="node54" href="$classRehtiGraphics.html#a96fd7733c1e323b33b2056eac187f9b4" title=" " alt="" coords="583,1252,782,1293"/>
+<area shape="rect" id="node55" href="$classRehtiGraphics.html#a60240fd89a5ffd5899ed7b82eb2b9a84" title="Sets flags for engine. Flags can only be set by this interface, not unset." alt="" coords="891,1252,1076,1293"/>
+<area shape="rect" id="node57" href="$classCamera.html#a181c120dfb345250af184b22ba225887" title="Callback for registering mouse movement." alt="" coords="583,1318,783,1345"/>
+<area shape="rect" id="node58" href="$classCamera.html#adad2ddd78627a085dfb4f00b0add991f" title="rotates the camera around the target." alt="" coords="605,1369,760,1395"/>
+<area shape="rect" id="node63" href="$classCamera.html#a3fd0454142eb9ec06bd4268fa4b8043f" title="callback for registering mouse scroll" alt="" coords="597,1470,769,1497"/>
+<area shape="rect" id="node64" href="$classCamera.html#af6dc1153bcd85dcb5f4c2c551e3a09b0" title="Zooms the camera by the given amount." alt="" coords="925,1470,1042,1497"/>
+<area shape="rect" id="node59" href="$classCamera.html#acdb736eec57c3cdbeff41069f378f713" title="returns the camera matrix with the target as the origon." alt="" coords="864,1318,1103,1345"/>
+<area shape="rect" id="node61" href="$classCamera.html#aa21e94d4bfd57c15897a8a2948d6356c" title="Returns the right direction of the camera." alt="" coords="915,1369,1051,1395"/>
+<area shape="rect" id="node62" href="$Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="917,1419,1050,1446"/>
+<area shape="rect" id="node60" href="$classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="1199,1329,1356,1355"/>
+<area shape="rect" id="node65" href="$classCamera.html#ae44d552243a7b430e94ed9e70adcf07b" title="Returns the forward direction of the camera." alt="" coords="1200,1557,1355,1583"/>
+<area shape="rect" id="node66" href="$Camera_8hpp.html#a9aa49a596ee3c1727433dbdb9e88ee11" title=" " alt="" coords="1227,1405,1327,1431"/>
+<area shape="rect" id="node67" href="$Camera_8hpp.html#a36e54119227d0fd2ae43b7b7c8e04e53" title=" " alt="" coords="1229,1455,1325,1482"/>
+<area shape="rect" id="node68" href="$classCamera.html#a4e5c1cba3172130eaff779eca5ff5af9" title="Sets the camera location to the given location." alt="" coords="1199,1506,1355,1533"/>
+</map>

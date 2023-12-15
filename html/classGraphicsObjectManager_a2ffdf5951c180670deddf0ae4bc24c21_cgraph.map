@@ -1,0 +1,5 @@
+<map id="GraphicsObjectManager::createBuffer" name="GraphicsObjectManager::createBuffer">
+<area shape="rect" id="node1" title=" " alt="" coords="5,39,184,80"/>
+<area shape="rect" id="node2" href="$classGraphicsObjectManager.html#a48087fcc6c8ff32a160ff8105240538d" title="Returns number of queue families." alt="" coords="232,5,411,47"/>
+<area shape="rect" id="node3" href="$classGraphicsObjectManager.html#a1f57aa379d9151b4dcb74622f011e008" title="Returns the sharing mode of created resources." alt="" coords="232,71,411,112"/>
+</map>

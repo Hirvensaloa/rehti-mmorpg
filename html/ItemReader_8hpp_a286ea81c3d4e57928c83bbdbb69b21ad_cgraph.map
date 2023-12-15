@@ -1,0 +1,4 @@
+<map id="fetchItems" name="fetchItems">
+<area shape="rect" id="node1" title="Reads items defined in the items.json file and returns them as a GameItems struct...." alt="" coords="5,5,97,32"/>
+<area shape="rect" id="node2" href="$structGameItems.html#aa28c24034d12b17b9f85d9c46d9cb9a1" title=" " alt="" coords="145,5,319,32"/>
+</map>

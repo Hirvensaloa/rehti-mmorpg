@@ -1,0 +1,4 @@
+<map id="RehtiGraphics::getCameraRange" name="RehtiGraphics::getCameraRange">
+<area shape="rect" id="node1" title="Returns the size of the camera matrix." alt="" coords="5,5,199,47"/>
+<area shape="rect" id="node2" href="$classCamera.html#a9f5741607bb6b27d2fb130247cd26b95" title="Returns the size of the camera&#39;s UBO." alt="" coords="247,13,401,39"/>
+</map>

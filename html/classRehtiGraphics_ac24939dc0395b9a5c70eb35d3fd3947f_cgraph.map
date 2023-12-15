@@ -1,0 +1,7 @@
+<map id="RehtiGraphics::moveCharacter" name="RehtiGraphics::moveCharacter">
+<area shape="rect" id="node1" title="Moves character to the given location in the given time. Automatically sets the running animation and..." alt="" coords="5,107,227,134"/>
+<area shape="rect" id="node2" href="$classTimerCallbackSystem.html#af8ea3ade97f14ca226c625ad4d70f90b" title="Adds a new timer callback for the given id." alt="" coords="314,5,479,47"/>
+<area shape="rect" id="node3" href="$classTimerCallbackSystem.html#add46c4d14ad6d925b927c7d5720f5e6d" title="Forces the callback to be completed with the time left in the timer and removes it from the system." alt="" coords="314,71,479,112"/>
+<area shape="rect" id="node4" href="$classRehtiGraphics.html#a1a332491febf46b86750d5d73e3e97ad" title="Helper function to move a bounding box." alt="" coords="275,137,519,163"/>
+<area shape="rect" id="node5" href="$Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="330,187,463,214"/>
+</map>

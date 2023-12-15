@@ -1,0 +1,7 @@
+<map id="Equipment::getEquipmentStats" name="Equipment::getEquipmentStats">
+<area shape="rect" id="node1" title="Get combined stats of equipped items." alt="" coords="228,81,452,108"/>
+<area shape="rect" id="node2" href="$classEntity.html#a47790391860583a3c1c41dd5f8e532e6" title="Perform an attack on target entity." alt="" coords="39,5,147,32"/>
+<area shape="rect" id="node3" href="$classPlayerCharacter.html#a48c9398c4d91b8adb78a7fe2a8ad9ddf" title="Performs player&#39;s attack on target entity. Calculates hit chance and damage, and on succesful hit app..." alt="" coords="5,56,180,83"/>
+<area shape="rect" id="node4" href="$classEntity.html#a56d902ac081b5bf9ed293aa9d76905d4" title="Get the attack speed of this entity in milliseconds." alt="" coords="7,107,178,133"/>
+<area shape="rect" id="node5" href="$classEntity.html#a3ab8d86a7d7e0516fc4659f7513cc934" title="Get tha attack range of this entity." alt="" coords="28,157,157,184"/>
+</map>

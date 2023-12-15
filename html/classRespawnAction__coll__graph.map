@@ -1,0 +1,4 @@
+<map id="RespawnAction" name="RespawnAction">
+<area shape="rect" id="node1" title="Action used for respawning entities." alt="" coords="5,80,128,107"/>
+<area shape="rect" id="node2" href="$classAction.html" title="Represents an action that an entity can perform." alt="" coords="35,5,98,32"/>
+</map>

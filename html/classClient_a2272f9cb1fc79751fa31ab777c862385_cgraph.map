@@ -1,0 +1,4 @@
+<map id="Client::connect" name="Client::connect">
+<area shape="rect" id="node1" title="Connects to the server." alt="" coords="5,5,124,32"/>
+<area shape="rect" id="node2" href="$classClient.html#a53b6b98d3802205726318ffc6fda5bb0" title="Prompts user for login information and sends a LoginMessage with that information...." alt="" coords="172,5,272,32"/>
+</map>

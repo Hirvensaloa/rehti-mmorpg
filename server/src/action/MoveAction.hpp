@@ -28,6 +28,13 @@ public:
     void act();
 
     /**
+     * @brief Get the Move Time object
+     *
+     * @return const std::chrono::milliseconds
+     */
+    static const std::chrono::milliseconds getMoveTime();
+
+    /**
      * @brief Returns information about the current action
      *
      * @return CurrentAction

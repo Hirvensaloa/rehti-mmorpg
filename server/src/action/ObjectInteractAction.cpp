@@ -89,6 +89,7 @@ CurrentAction ObjectInteractAction::getActionInfo()
             actionInfo.durationMs = 1000;
             actionInfo.looping = true;
             actionInfo.targetId = pTargetM->getId();
+            actionInfo.targetCoordinate = pTargetM->getLocation();
             return actionInfo;
         }
     }
@@ -98,6 +99,7 @@ CurrentAction ObjectInteractAction::getActionInfo()
         actionInfo.durationMs = actionTimeM.count();
         actionInfo.looping = true;
         actionInfo.targetId = pTargetM->getId();
+        actionInfo.targetCoordinate = pTargetM->getLocation();
         return actionInfo;
     }
 }

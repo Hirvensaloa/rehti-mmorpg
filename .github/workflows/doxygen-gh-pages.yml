@@ -3,7 +3,7 @@ name: Doxygen GitHub Pages Deploy Action
 on:
   push:
     branches:
-      - chore/docs
+      - dev
   workflow_dispatch:
 
 permissions:

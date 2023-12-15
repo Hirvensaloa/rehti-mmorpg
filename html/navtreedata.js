@@ -37,12 +37,12 @@ var NAVTREE =
     ] ],
     [ "Development", "index.html#autotoc_md9", [
       [ "Client", "index.html#autotoc_md10", [
-        [ "<a name=\"client-pre\"></a>Prerequisites", "index.html#autotoc_md11", null ],
+        [ "<A name=\"client-pre\"></A>Prerequisites", "index.html#autotoc_md11", null ],
         [ "Running", "index.html#autotoc_md12", null ]
       ] ]
     ] ],
     [ "Server & Database", "index.html#autotoc_md13", [
-      [ "<a name=\"server-pre\"></a>Prerequisites", "index.html#autotoc_md14", null ],
+      [ "A name=\"server-pre\"></A>Prerequisites", "index.html#autotoc_md14", null ],
       [ "Running", "index.html#autotoc_md15", [
         [ "Running with Conan", "index.html#autotoc_md16", null ],
         [ "Hot reload", "index.html#autotoc_md17", null ]

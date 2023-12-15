@@ -10,6 +10,9 @@
 
 class GameWorld;
 
+/**
+ * @brief Base pure virtual Entity class. Different types of enities inherit this.
+ */
 class Entity : public std::enable_shared_from_this<Entity>
 {
 public:

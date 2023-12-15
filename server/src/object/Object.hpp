@@ -5,6 +5,9 @@
 #include "../entity/Entity.hpp"
 #include "RehtiReader.hpp"
 
+/**
+ * @brief Represents generic object in the game world
+ */
 class Object
 {
 public:

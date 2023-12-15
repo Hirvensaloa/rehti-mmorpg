@@ -32,12 +32,6 @@ jobs:
           ref: gh-pages
           clean: false
 
-      - name: Add Doxygen Awesome CSS as submodule
-        run: git submodule add https://github.com/jothepro/doxygen-awesome-css.git
-
-      - name: Add dotcomb as submodule
-        run: git submodule add https://github.com/Makistos/dotcomb.git
-
       - name: commit and push
         run: |
           git config --global user.name "github-actions[bot]"

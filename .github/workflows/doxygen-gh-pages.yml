@@ -15,12 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.10
+        uses: actions/checkout@v2
 
       - name: Install doxygen
         run: sudo apt-get install doxygen graphviz -y
@@ -36,9 +31,6 @@ jobs:
 
       - name: Add dotcomb as submodule
         run: git submodule add https://github.com/Makistos/dotcomb.git
-
-      - name: generate image
-        run: cd dotcomb && pip3 install antlr4-python3-runtime PyYAML && python3 ./dotcomb.py -f -d /tmp/project/ > output.dot && dot -Tpng -o collaboration.png output.dot
 
       - name: commit and push
         run: |

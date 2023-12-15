@@ -15,6 +15,13 @@ fi
 
 if [ -f "$EXECUTABLE_PATH" ]; then
     echo "Executing $EXECUTABLE_PATH"
+    # If there is a command line argument, use it as the server address
+    if [ $# -eq 1 ]; then
+        "$EXECUTABLE_PATH" "$1"
+        exit 0
+    fi
+
+    # Otherwise, use the local address
     "$EXECUTABLE_PATH" 127.0.0.1
 else
     echo "Executable not found at $EXECUTABLE_PATH"

@@ -5,6 +5,9 @@
 
 #include <vector>
 
+/**
+ * @brief Action used for moving
+ */
 class MoveAction : public Action
 {
 public:
@@ -12,8 +15,16 @@ public:
 
     ~MoveAction() = default;
 
+    /**
+     * @brief Returns the target location of the action
+     * @return Coordinates
+     */
     Coordinates getTarget();
 
+    /**
+     * @brief Movement functionality, which finds the shortest path to target location and performs the movement there.
+     * Implementation of pure virtual method act() of the base class
+     */
     void act();
 
     /**

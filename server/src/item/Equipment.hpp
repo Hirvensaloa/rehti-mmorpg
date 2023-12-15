@@ -41,6 +41,10 @@ public:
      */
     std::vector<std::shared_ptr<EquippableItem>> getAllEquipment();
 
+    /**
+     * @brief Get the slot map which maps item slots to the items that are equipped in the slots
+     * @return std::map<Slot, std::shared_ptr<EquippableItem>>&
+     */
     std::map<Slot, std::shared_ptr<EquippableItem>>& getSlotMap();
 
 private:

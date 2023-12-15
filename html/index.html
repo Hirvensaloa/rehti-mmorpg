@@ -153,13 +153,13 @@ Running</h2>
 Development</h1>
 <p>Instructions to launch and run the client and server for local development:</p>
 <ul>
-<li><a href="#client-pre">The client</a></li>
-<li><a href="#server-pre">The server</a></li>
+<li><a href="#client">The client</a></li>
+<li><a href="#server-and-database">The server</a></li>
 </ul>
 <h2><a class="anchor" id="autotoc_md10"></a>
 Client</h2>
 <h3><a class="anchor" id="autotoc_md11"></a>
-&lt;A name="client-pre"&gt;&lt;/A&gt;Prerequisites</h3>
+Prerequisites</h3>
 <ul>
 <li>(Optional) Add an environment variable called VK_LAYER_PATH and point it to the vulkan-validationlayers bin/json path. (Conan library directory)</li>
 </ul>
@@ -168,10 +168,10 @@ Running</h3>
 <p>Start the client</p>
 <div class="fragment"><div class="line">./scripts/run-client.sh</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md13"></a>
-Server &amp; Database</h1>
+Server and Database</h1>
 <p><a class="el" href="classServer.html" title="Main class for the server.">Server</a> runs on C++ and uses Boost.Asio for networking. Database is made with PostgreSQL. <a class="el" href="classServer.html" title="Main class for the server.">Server</a> and database have been containerized using Docker.</p>
 <h2><a class="anchor" id="autotoc_md14"></a>
-A name="server-pre"&gt;&lt;/A&gt;Prerequisites</h2>
+Prerequisites</h2>
 <p>To run the server and database, make sure you have <code>docker-compose</code> and <code>docker</code> installed. Docker-compose installation also instructs or automagically installs Docker, depending what you choose.</p>
 <ul>
 <li>Install docker-compose <a href="https://docs.docker.com/compose/install/">here</a>.</li>

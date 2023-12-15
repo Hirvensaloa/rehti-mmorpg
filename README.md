@@ -88,13 +88,13 @@ The command below will build and open the client. On start client will connect t
 
 Instructions to launch and run the client and server for local development:
 
-- [The client](#client-pre)
+- [The client](#client)
 
-- [The server](#server-pre)
+- [The server](#server-and-database)
 
 ### Client
 
-#### <A name="client-pre"></A>Prerequisites
+#### Prerequisites
 
 - (Optional) Add an environment variable called VK_LAYER_PATH and point it to the vulkan-validationlayers bin/json path. (Conan library directory)
 
@@ -106,11 +106,11 @@ Start the client
 ./scripts/run-client.sh
 ```
 
-## Server & Database
+## Server and Database
 
 Server runs on C++ and uses Boost.Asio for networking. Database is made with PostgreSQL. Server and database have been containerized using Docker.
 
-### A name="server-pre"></A>Prerequisites
+### Prerequisites
 
 To run the server and database, make sure you have `docker-compose` and `docker` installed. Docker-compose installation also instructs or automagically installs Docker, depending what you choose.
 

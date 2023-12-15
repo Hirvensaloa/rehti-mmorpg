@@ -26,7 +26,7 @@ In the game, the player controls their own character in a 3D game world. Players
 
 Resource gathering skills include woodcutting, mining, and fishing. The commonality among these is that by developing these skills, players acquire resources. In woodcutting, players can interact with the game world's trees to obtain wood resources. In mining, players can interact with the game world's ore rocks to obtain ore resources. In fishing, players can interact with the game world's bodies of water to obtain raw fish.
 
-Resource processing skills include forging and cooking. In forging, players can utilize the ore resources obtained through mining to craft various equipment that the player can wear and use in combat. With cooking, players can use the raw fish obtained through fishing to cook edible fish. These food resources allow players to recover from combat injuries.
+Resource processing skills include smithing and cooking. In smithing, players can utilize the ore resources obtained through mining to smith various equipment that the player can wear and use in combat. With cooking, players can use the raw fish obtained through fishing to cook edible fish. These food resources allow players to recover from combat injuries.
 
 Combat skills include accuracy, strength, and defense. The purpose of these skills is to improve the player's ability to succeed in combat against other characters. Accuracy enhances the likelihood of the character's attacks hitting (with additional considerations for equipment). Strength affects the amount of damage the player deals, and defense increases the likelihood of the player evading attacks. Players utilize combat skills by either attacking other characters or defending against attacks from other characters. Combat can be initiated by clicking on another character, causing the player's character to commence attacking the target.
 
@@ -54,7 +54,7 @@ All the controls happen with the mouse.
 
 **Moving the camera** You can move the camera by holding down the scroll wheel and moving the mouse. You can zoom in and out by scrolling the scroll wheel.
 
-**Managing items** Items are managed from the inventory tab in the bottom right corner. A dropdown menu opens when clicking on the item.
+**Managing items** Items are managed from the inventory tab in the bottom right corner. A dropdown context menu opens when right-clicking on the item.
 
 **Managing equipment** Equipment can be equiped from the inventory. You can unequip items by clicking on the item in the equipment tab.
 

@@ -124,8 +124,8 @@ Login/Signup</h2>
 Controls</h2>
 <p>All the controls happen with the mouse.</p>
 <p><b>Moving</b> You can move your character by clicking on the ground (Both left and right click work). You can interact with objects by clicking on them.</p>
-<p><b>Attacking</b> You can attack characters (Players and <a class="el" href="structNPC.html">NPC</a>'s) by left-clicking on them.</p>
-<p><b>Talking</b> You can talk to <a class="el" href="structNPC.html">NPC</a>'s by right-clicking on them.</p>
+<p><b>Attacking</b> You can attack characters (Players and NPC's) by left-clicking on them.</p>
+<p><b>Talking</b> You can talk to NPC's by right-clicking on them.</p>
 <p><b>Interacting with objects</b> You can interact with objects by clicking on them (Both left and right click work).</p>
 <p><b>Moving the camera</b> You can move the camera by holding down the scroll wheel and moving the mouse. You can zoom in and out by scrolling the scroll wheel.</p>
 <p><b>Managing items</b> Items are managed from the inventory tab in the bottom right corner. A dropdown context menu opens when right-clicking on the item.</p>
@@ -199,6 +199,7 @@ Troubleshooting</h2>
 Technical overview</h1>
 <p>The project is divided into three main parts: the client, the server and the database. The client is responsible for rendering the game and sending user input to the server. The server is responsible for handling the game logic and sending the game state to the client. The database is responsible for storing the game state.</p>
 <p><img src="/docs/images/architecture_overview.png" alt="Technical overview" class="inline"/></p>
+<p>Detailed documentation of the source code can be found <a href="https://hirvensaloa.github.io/rehti-mmorpg/html/">here</a>.</p>
 <h2><a class="anchor" id="autotoc_md20"></a>
 Client</h2>
 <p>The client program is implemented in C++ and follows the object-oriented programming paradigm. Its task is to receive and parse messages coming from the server. The client program directs the graphics library based on these messages.</p>
@@ -409,7 +410,7 @@ General</h2>
 <p>If you wish to develop this project, please follow these basic guidelines.</p>
 <ul>
 <li>Code needs to be documented. The goal is that by reading the docs, a user can start the program and gain a technical overview of the project.</li>
-<li>Use Doxygen format to document every function, class and struct in hpp files. See Doxygen documentation <a href="/docs/html/index.html">here</a></li>
+<li>Use Doxygen format to document every function, class and struct in hpp files. See Doxygen documentation <a href="https://hirvensaloa.github.io/rehti-mmorpg/html/">here</a></li>
 <li>Changes are implemented through pull requests</li>
 <li>Change pattern: your own branch -&gt; dev -&gt; main</li>
 </ul>

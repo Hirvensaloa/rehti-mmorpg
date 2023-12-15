@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['baseaccuracy_89',['baseAccuracy',['../structPlayer.html#a8df6d9362f6761a538132e1a50ebfe30',1,'Player::baseAccuracy()'],['../structNPC.html#a266c90ec2fd463e83fd8d06edd9e0e0d',1,'NPC::baseAccuracy()']]],
+  ['baseaccuracy_89',['baseAccuracy',['../structPlayerData.html#a6065f54bdd2ca49c5adfbcb852abefdc',1,'PlayerData::baseAccuracy()'],['../structNPCData.html#adee0fc31cdecc8f16ef21b8ec2b56a8f',1,'NPCData::baseAccuracy()']]],
   ['baseaccuracym_90',['baseAccuracyM',['../classEntity.html#ad35d7f5e111da9c9bf77d2cf0d19df7e',1,'Entity']]],
-  ['basedamage_91',['baseDamage',['../structPlayer.html#a174632f32507404d0f5ba85b9a88ff25',1,'Player::baseDamage()'],['../structNPC.html#a66d5d6f69ec9cafb83c768eb9b68d638',1,'NPC::baseDamage()']]],
+  ['basedamage_91',['baseDamage',['../structPlayerData.html#a4173f942fe494469a8e7f77c872b55c0',1,'PlayerData::baseDamage()'],['../structNPCData.html#a55ee524aa99eee3d33b5f457c9e29379',1,'NPCData::baseDamage()']]],
   ['basedamagem_92',['baseDamageM',['../classEntity.html#a0dfce0d57bb000953add17d5884d025f',1,'Entity']]],
   ['basictypes_2ehpp_93',['BasicTypes.hpp',['../BasicTypes_8hpp.html',1,'']]],
   ['bbhit_94',['bbHit',['../classRehtiGraphics.html#a4446a14b74fa9d30451ed3136b5b966c',1,'RehtiGraphics']]],

@@ -1,4 +1,11 @@
 <map id="AssetCache" name="AssetCache">
-<area shape="rect" id="node1" title="Loads all of the assets into memory (objects, textures, etc.)." alt="" coords="5,95,104,121"/>
-<area shape="rect" id="node2" href="$structImageData.html" title=" " alt="" coords="7,5,102,32"/>
+<area shape="rect" id="node1" title="Loads all of the assets into memory (objects, textures, etc.)." alt="" coords="510,315,737,597"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,160,196,252"/>
+<area shape="rect" id="node3" title=" " alt="" coords="221,160,418,252"/>
+<area shape="rect" id="node4" title=" " alt="" coords="442,167,645,245"/>
+<area shape="rect" id="node5" href="$structImageData.html" title=" " alt="" coords="669,167,764,245"/>
+<area shape="rect" id="node6" title=" " alt="" coords="644,5,683,83"/>
+<area shape="rect" id="node7" title=" " alt="" coords="707,5,831,83"/>
+<area shape="rect" id="node8" title=" " alt="" coords="788,167,1003,245"/>
+<area shape="rect" id="node9" title=" " alt="" coords="1027,167,1254,245"/>
 </map>

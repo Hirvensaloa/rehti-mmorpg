@@ -146,6 +146,8 @@ The project is divided into three main parts: the client, the server and the dat
 
 ![Technical overview](/docs/images/architecture_overview.png)
 
+Detailed documentation of the source code can be found [here](https://hirvensaloa.github.io/rehti-mmorpg/html/).
+
 ### Client
 
 The client program is implemented in C++ and follows the object-oriented programming paradigm. Its task is to receive and parse messages coming from the server. The client program directs the graphics library based on these messages.
@@ -398,7 +400,7 @@ If you wish to develop this project, please follow these basic guidelines.
 
 - Code needs to be documented. The goal is that by reading the docs, a user can start the program and gain a technical overview of the project.
 
-- Use Doxygen format to document every function, class and struct in hpp files. See Doxygen documentation [here](/docs/html/index.html)
+- Use Doxygen format to document every function, class and struct in hpp files. See Doxygen documentation [here](https://hirvensaloa.github.io/rehti-mmorpg/html/)
 
 - Changes are implemented through pull requests
 

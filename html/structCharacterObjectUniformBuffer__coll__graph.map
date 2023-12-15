@@ -1,4 +1,8 @@
 <map id="CharacterObjectUniformBuffer" name="CharacterObjectUniformBuffer">
-<area shape="rect" id="node1" title=" " alt="" coords="5,109,224,136"/>
-<area shape="rect" id="node2" href="$structAllocatedBuffer.html" title=" " alt="" coords="53,5,176,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="25,300,243,377"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,145,132,223"/>
+<area shape="rect" id="node3" href="$structAllocatedBuffer.html" title=" " alt="" coords="157,145,279,223"/>
+<area shape="rect" id="node4" title=" " alt="" coords="21,5,138,83"/>
+<area shape="rect" id="node5" title=" " alt="" coords="163,5,273,83"/>
+<area shape="rect" id="node6" title=" " alt="" coords="297,5,376,83"/>
 </map>

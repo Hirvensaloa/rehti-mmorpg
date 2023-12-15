@@ -1,4 +1,4 @@
 <map id="ObjectInteractAction" name="ObjectInteractAction">
-<area shape="rect" id="node1" title="Actions used for interacting with objects." alt="" coords="5,80,160,107"/>
-<area shape="rect" id="node2" href="$classAction.html" title="Represents an action that an entity can perform." alt="" coords="51,5,114,32"/>
+<area shape="rect" id="node1" title="Actions used for interacting with objects." alt="" coords="5,292,196,501"/>
+<area shape="rect" id="node2" href="$classAction.html" title="Represents an action that an entity can perform." alt="" coords="29,5,172,244"/>
 </map>

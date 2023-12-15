@@ -1,4 +1,9 @@
 <map id="MapAreaAssetData" name="MapAreaAssetData">
-<area shape="rect" id="node1" title="Contains asset data loaded into memory for a specific area." alt="" coords="5,95,152,121"/>
-<area shape="rect" id="node2" href="$structImageData.html" title=" " alt="" coords="31,5,126,32"/>
+<area shape="rect" id="node1" title="Contains asset data loaded into memory for a specific area." alt="" coords="248,300,395,377"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,160,171,237"/>
+<area shape="rect" id="node3" title=" " alt="" coords="195,160,330,237"/>
+<area shape="rect" id="node4" href="$structImageData.html" title=" " alt="" coords="354,160,449,237"/>
+<area shape="rect" id="node5" title=" " alt="" coords="329,5,367,83"/>
+<area shape="rect" id="node6" title=" " alt="" coords="391,5,515,83"/>
+<area shape="rect" id="node7" title=" " alt="" coords="473,160,620,237"/>
 </map>

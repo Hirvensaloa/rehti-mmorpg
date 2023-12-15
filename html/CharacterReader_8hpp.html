@@ -123,10 +123,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSpawnCoordinateBounds.html">SpawnCoordinateBounds</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the spawn coordinate bounds for a character.  <a href="structSpawnCoordinateBounds.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPlayer.html">Player</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPlayerData.html">PlayerData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains all the player data. This is used to load player assets into memory and spawn players on the map.  <a href="structPlayerData.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structNPC.html">NPC</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structNPCData.html">NPCData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains all the <a class="el" href="structNPCData.html" title="Contains all the NPCData data. This is used to load NPCData assets into memory and spawn NPCs on the ...">NPCData</a> data. This is used to load <a class="el" href="structNPCData.html" title="Contains all the NPCData data. This is used to load NPCData assets into memory and spawn NPCs on the ...">NPCData</a> assets into memory and spawn NPCs on the map.  <a href="structNPCData.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGameCharacters.html">GameCharacters</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains all the character data. This is used to load character assets into memory and spawn characters on the map.  <a href="structGameCharacters.html#details">More...</a><br /></td></tr>
@@ -138,7 +141,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a30723b62eb00af0495c7e19e633d9b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the character data from JSON file.  <a href="CharacterReader_8hpp.html#a30723b62eb00af0495c7e19e633d9b5a">More...</a><br /></td></tr>
 <tr class="separator:a30723b62eb00af0495c7e19e633d9b5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56581b803e4cb4205c729df269203a3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CharacterReader_8hpp.html#a56581b803e4cb4205c729df269203a3f">validSpawnCoordinateBounds</a> (<a class="el" href="structSpawnCoordinateBounds.html">SpawnCoordinateBounds</a> spawnCoordinateBounds, int worldWidth, int worldHeight)</td></tr>
-<tr class="memdesc:a56581b803e4cb4205c729df269203a3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if <a class="el" href="structSpawnCoordinateBounds.html">SpawnCoordinateBounds</a> is valid. Throws error if not.  <a href="CharacterReader_8hpp.html#a56581b803e4cb4205c729df269203a3f">More...</a><br /></td></tr>
+<tr class="memdesc:a56581b803e4cb4205c729df269203a3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if <a class="el" href="structSpawnCoordinateBounds.html" title="Contains the spawn coordinate bounds for a character.">SpawnCoordinateBounds</a> is valid. Throws error if not.  <a href="CharacterReader_8hpp.html#a56581b803e4cb4205c729df269203a3f">More...</a><br /></td></tr>
 <tr class="separator:a56581b803e4cb4205c729df269203a3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -151,6 +154,7 @@ Variables</h2></td></tr>
 <tr class="memitem:a2acf575b9f495491c12c2b1be4b19651"><td class="memItemLeft" >&#160;&#160;&#160;const std::string&#160;&#160;&#160;<a class="el" href="CharacterReader_8hpp.html#a84f22b79fbae77a0f0bee53fbaf1122f">Peaceful</a> = &quot;PEACEFUL&quot;</td></tr>
 <tr class="separator:a2acf575b9f495491c12c2b1be4b19651"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a890da001f3f8c6eeab22cb77bb2a1e7f"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CharacterReader_8hpp.html#a890da001f3f8c6eeab22cb77bb2a1e7f">AggressionType</a></td></tr>
+<tr class="memdesc:a890da001f3f8c6eeab22cb77bb2a1e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Has all the possible <a class="el" href="structNPCData.html" title="Contains all the NPCData data. This is used to load NPCData assets into memory and spawn NPCs on the ...">NPCData</a> aggression types as strings.  <a href="CharacterReader_8hpp.html#a890da001f3f8c6eeab22cb77bb2a1e7f">More...</a><br /></td></tr>
 <tr class="separator:a890da001f3f8c6eeab22cb77bb2a1e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -232,10 +236,10 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Check if <a class="el" href="structSpawnCoordinateBounds.html">SpawnCoordinateBounds</a> is valid. Throws error if not. </p>
+<p>Check if <a class="el" href="structSpawnCoordinateBounds.html" title="Contains the spawn coordinate bounds for a character.">SpawnCoordinateBounds</a> is valid. Throws error if not. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">spawnCoordinateBounds</td><td><a class="el" href="structSpawnCoordinateBounds.html">SpawnCoordinateBounds</a> </td></tr>
+    <tr><td class="paramname">spawnCoordinateBounds</td><td><a class="el" href="structSpawnCoordinateBounds.html" title="Contains the spawn coordinate bounds for a character.">SpawnCoordinateBounds</a> </td></tr>
     <tr><td class="paramname">worldWidth</td><td>in tiles </td></tr>
     <tr><td class="paramname">worldHeight</td><td>in tiles </td></tr>
   </table>
@@ -272,6 +276,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Has all the possible <a class="el" href="structNPCData.html" title="Contains all the NPCData data. This is used to load NPCData assets into memory and spawn NPCs on the ...">NPCData</a> aggression types as strings. </p>
 
 </div>
 </div>

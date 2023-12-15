@@ -74,14 +74,11 @@ var NAVTREE =
       [ "General", "index.html#autotoc_md50", null ],
       [ "Testing", "index.html#autotoc_md51", null ]
     ] ],
-    [ "Namespaces", "namespaces.html", [
-      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
-      [ "Namespace Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", null ],
-        [ "Functions", "namespacemembers_func.html", null ],
-        [ "Variables", "namespacemembers_vars.html", null ],
-        [ "Enumerations", "namespacemembers_enum.html", null ]
-      ] ]
+    [ "Namespace Members", "namespacemembers.html", [
+      [ "All", "namespacemembers.html", null ],
+      [ "Functions", "namespacemembers_func.html", null ],
+      [ "Variables", "namespacemembers_vars.html", null ],
+      [ "Enumerations", "namespacemembers_enum.html", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -116,8 +113,8 @@ var NAVTREEINDEX =
 "classDatabaseManager.html#ae11904659d2dc9caa3eb7ccf47f8aeab",
 "classObjectInteractAction.html#a0e6af61bde8e445631d60027bd1ce6b9",
 "classTimerCallbackSystem.html#a887d675b42267d0775fa9ac6121191d6",
-"structAnimationConfig.html#a9a698064de63e29932a27a7a83e7e337",
-"structQueueFamilyIndices.html#a1e525a27a080ff5b5a4e545bdbc4da09"
+"structCharacterAssetData.html#a0c42ca99e550144f681f91b1af42e8c2",
+"structTarget.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

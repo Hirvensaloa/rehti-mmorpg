@@ -1,0 +1,6 @@
+<map id="GameItems" name="GameItems">
+<area shape="rect" id="node1" title="Contains all the item data in the game. This is used to load item assets into memory and create item ..." alt="" coords="250,160,421,311"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,199,97"/>
+<area shape="rect" id="node3" title=" " alt="" coords="223,13,448,90"/>
+<area shape="rect" id="node4" title=" " alt="" coords="473,13,678,90"/>
+</map>

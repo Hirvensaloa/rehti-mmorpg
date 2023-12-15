@@ -1,7 +1,7 @@
 <map id="Action" name="Action">
-<area shape="rect" id="node1" title="Represents an action that an entity can perform." alt="" coords="228,5,291,32"/>
-<area shape="rect" id="node2" href="$classAttackAction.html" title="Action used for attacks." alt="" coords="5,80,111,107"/>
-<area shape="rect" id="node3" href="$classMoveAction.html" title="Action used for moving." alt="" coords="135,80,234,107"/>
-<area shape="rect" id="node4" href="$classObjectInteractAction.html" title="Actions used for interacting with objects." alt="" coords="258,80,413,107"/>
-<area shape="rect" id="node5" href="$classRespawnAction.html" title="Action used for respawning entities." alt="" coords="437,80,559,107"/>
+<area shape="rect" id="node1" title="Represents an action that an entity can perform." alt="" coords="267,5,410,244"/>
+<area shape="rect" id="node2" href="$classAttackAction.html" title="Action used for attacks." alt="" coords="5,292,152,531"/>
+<area shape="rect" id="node3" href="$classMoveAction.html" title="Action used for moving." alt="" coords="177,307,314,516"/>
+<area shape="rect" id="node4" href="$classObjectInteractAction.html" title="Actions used for interacting with objects." alt="" coords="338,307,529,516"/>
+<area shape="rect" id="node5" href="$classRespawnAction.html" title="Action used for respawning entities." alt="" coords="553,343,711,479"/>
 </map>

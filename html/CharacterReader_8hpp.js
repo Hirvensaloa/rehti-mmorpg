@@ -1,8 +1,8 @@
 var CharacterReader_8hpp =
 [
     [ "SpawnCoordinateBounds", "structSpawnCoordinateBounds.html", "structSpawnCoordinateBounds" ],
-    [ "Player", "structPlayer.html", "structPlayer" ],
-    [ "NPC", "structNPC.html", "structNPC" ],
+    [ "PlayerData", "structPlayerData.html", "structPlayerData" ],
+    [ "NPCData", "structNPCData.html", "structNPCData" ],
     [ "GameCharacters", "structGameCharacters.html", "structGameCharacters" ],
     [ "readCharacterData", "CharacterReader_8hpp.html#a30723b62eb00af0495c7e19e633d9b5a", null ],
     [ "validSpawnCoordinateBounds", "CharacterReader_8hpp.html#a56581b803e4cb4205c729df269203a3f", null ],

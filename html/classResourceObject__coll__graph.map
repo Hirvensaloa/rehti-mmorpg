@@ -1,5 +1,11 @@
 <map id="ResourceObject" name="ResourceObject">
-<area shape="rect" id="node1" title="Represents and object that can be interacted with to gain resources and train skills." alt="" coords="5,171,129,197"/>
-<area shape="rect" id="node2" href="$classObject.html" title="Represents generic object in the game world." alt="" coords="35,95,99,121"/>
-<area shape="rect" id="node3" href="$structCoordinates.html" title="Struct for coordinates." alt="" coords="17,5,117,32"/>
+<area shape="rect" id="node1" title="Represents and object that can be interacted with to gain resources and train skills." alt="" coords="353,675,502,796"/>
+<area shape="rect" id="node2" href="$classObject.html" title="Represents generic object in the game world." alt="" coords="217,388,357,612"/>
+<area shape="rect" id="node3" href="$structCoordinates.html" title="Struct for coordinates." alt="" coords="173,175,298,281"/>
+<area shape="rect" id="node4" title=" " alt="" coords="96,5,135,83"/>
+<area shape="rect" id="node5" title=" " alt="" coords="322,189,381,267"/>
+<area shape="rect" id="node6" title=" " alt="" coords="424,189,519,267"/>
+<area shape="rect" id="node7" title=" " alt="" coords="553,189,635,267"/>
+<area shape="rect" id="node8" title=" " alt="" coords="381,461,569,539"/>
+<area shape="rect" id="node9" title=" " alt="" coords="593,461,776,539"/>
 </map>

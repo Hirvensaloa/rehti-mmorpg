@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['fooditem_1074',['FoodItem',['../classFoodItem.html',1,'']]],
-  ['fooditemstruct_1075',['FoodItemStruct',['../structFoodItemStruct.html',1,'']]]
+  ['fooditem_1073',['FoodItem',['../classFoodItem.html',1,'']]],
+  ['fooditemstruct_1074',['FoodItemStruct',['../structFoodItemStruct.html',1,'']]]
 ];

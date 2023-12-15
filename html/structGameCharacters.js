@@ -1,5 +1,5 @@
 var structGameCharacters =
 [
-    [ "npcs", "structGameCharacters.html#ab2cdee73f32dd849e9a34895d4d2641c", null ],
-    [ "player", "structGameCharacters.html#a09ff3e75a4348577dd56d68ffbc57101", null ]
+    [ "npcs", "structGameCharacters.html#a9ec19978d9ce98b535221d9b9a49f86c", null ],
+    [ "player", "structGameCharacters.html#a9aac2419780afef7bc4642804f982289", null ]
 ];

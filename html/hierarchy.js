@@ -78,7 +78,7 @@ var hierarchy =
     [ "MapAreaAssetData", "structMapAreaAssetData.html", null ],
     [ "Node", "structNode.html", null ],
     [ "nodeCompare", "structnodeCompare.html", null ],
-    [ "NPC", "structNPC.html", null ],
+    [ "NPCData", "structNPCData.html", null ],
     [ "Object", "classObject.html", [
       [ "LootObject", "classLootObject.html", null ],
       [ "ResourceObject", "classResourceObject.html", null ]
@@ -86,7 +86,7 @@ var hierarchy =
     [ "ObjectAssetData", "structObjectAssetData.html", null ],
     [ "ObjectLocation", "structObjectLocation.html", null ],
     [ "ObjectWithFileinfo", "structObjectWithFileinfo.html", null ],
-    [ "Player", "structPlayer.html", null ],
+    [ "PlayerData", "structPlayerData.html", null ],
     [ "PlayerTable", "structPlayerTable.html", null ],
     [ "PoolManager", "classPoolManager.html", null ],
     [ "QueueFamilyIndices", "structQueueFamilyIndices.html", null ],

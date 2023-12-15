@@ -40,7 +40,7 @@ GameCharacters readCharacterData()
         !validMember(player, "baseDamage", ValueType::INT) ||
         !validMember(player, "baseAccuracy", ValueType::INT))
     {
-        throw std::runtime_error("Invalid JSON structure. Player JSON object is malformed.");
+        throw std::runtime_error("Invalid JSON structure. PlayerData JSON object is malformed.");
     }
 
     gameCharacters.player.id = player["id"].GetInt();
@@ -75,15 +75,15 @@ GameCharacters readCharacterData()
             !validMember(npc, "baseAccuracy", ValueType::INT) ||
             !validMember(npc, "chatResponses", ValueType::ARRAY))
         {
-            throw std::runtime_error("Invalid JSON structure. NPC JSON object is malformed.");
+            throw std::runtime_error("Invalid JSON structure. NPCData JSON object is malformed.");
         }
         // Check if agressionType is valid
         if (npc["agressionType"].GetString() != AggressionType.Passive && npc["agressionType"].GetString() != AggressionType.Aggressive && npc["agressionType"].GetString() != AggressionType.Peaceful)
         {
-            throw std::runtime_error("Invalid JSON structure. NPC agressionType is invalid. Received: " + static_cast<std::string>(npc["agressionType"].GetString()) + ". Expected: " + AggressionType.Passive + ", " + AggressionType.Aggressive + " or " + AggressionType.Peaceful + ".");
+            throw std::runtime_error("Invalid JSON structure. NPCData agressionType is invalid. Received: " + static_cast<std::string>(npc["agressionType"].GetString()) + ". Expected: " + AggressionType.Passive + ", " + AggressionType.Aggressive + " or " + AggressionType.Peaceful + ".");
         }
 
-        NPC npcData;
+        NPCData npcData;
         npcData.id = npc["id"].GetInt();
         npcData.name = npc["name"].GetString();
         npcData.textureFilename = npc["textureFilename"].GetString();
@@ -104,7 +104,7 @@ GameCharacters readCharacterData()
         {
             if (!chatResponse.IsString())
             {
-                throw std::runtime_error("Invalid JSON structure. NPC chat response is malformed.");
+                throw std::runtime_error("Invalid JSON structure. NPCData chat response is malformed.");
             }
 
             npcData.chatResponses.push_back(chatResponse.GetString());

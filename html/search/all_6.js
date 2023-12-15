@@ -135,7 +135,7 @@ var searchData=
   ['glm_5fforce_5fdepth_5fzero_5fto_5fone_481',['GLM_FORCE_DEPTH_ZERO_TO_ONE',['../BasicTypes_8hpp.html#aa53e0967978ad7a8792f6961156ec968',1,'GLM_FORCE_DEPTH_ZERO_TO_ONE():&#160;BasicTypes.hpp'],['../Camera_8hpp.html#aa53e0967978ad7a8792f6961156ec968',1,'GLM_FORCE_DEPTH_ZERO_TO_ONE():&#160;Camera.hpp']]],
   ['gloves_482',['GLOVES',['../ItemReader_8hpp.html#ad4a01c7a209d816f94f4864b76f8087fa8b8c9ad860469964e36cf0f0f61559ae',1,'ItemReader.hpp']]],
   ['glovesslotm_483',['glovesSlotM',['../classEquipment.html#ae4f7eb793a05a67bdf3391cee3a7d6e5',1,'Equipment']]],
-  ['gltffilename_484',['glTFFilename',['../structPlayer.html#a877460225eaa89d75d6100909fe78001',1,'Player::glTFFilename()'],['../structNPC.html#ae4884ec1173f57961bb7267ee4538d5d',1,'NPC::glTFFilename()']]],
+  ['gltffilename_484',['glTFFilename',['../structPlayerData.html#ac6b67e6a5cc2dff96fccd35681af8097',1,'PlayerData::glTFFilename()'],['../structNPCData.html#af6d3305baad6c177048c94e803c04a93',1,'NPCData::glTFFilename()']]],
   ['gpum_485',['gpuM',['../classRehtiGraphics.html#a6340888f3536c73beab10096d93418fa',1,'RehtiGraphics']]],
   ['grabpool_486',['grabPool',['../classPoolManager.html#a71d892f259b72af7c101b86de14aa260',1,'PoolManager']]],
   ['graphics_2eh_487',['graphics.h',['../graphics_8h.html',1,'']]],

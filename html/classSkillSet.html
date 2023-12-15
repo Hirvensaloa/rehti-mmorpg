@@ -96,13 +96,22 @@ $(document).ready(function(){initNavTree('classSkillSet.html',''); initResizable
  <a href="classSkillSet.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="SkillSet_8hpp_source.html">SkillSet.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for SkillSet:</div>
+<div class="dyncontent">
+<div class="center"><img src="classSkillSet__coll__graph.png" border="0" usemap="#aSkillSet_coll__map" alt="Collaboration graph"/></div>
+<map name="aSkillSet_coll__map" id="aSkillSet_coll__map">
+<area shape="rect" title="Contains all the skills that a character has." alt="" coords="19,145,150,281"/>
+<area shape="rect" title=" " alt="" coords="5,5,164,83"/>
+</map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aec5c43c5878c3bd938af94678f8509c8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSkillSet.html#aec5c43c5878c3bd938af94678f8509c8">SkillSet</a> ()</td></tr>
 <tr class="separator:aec5c43c5878c3bd938af94678f8509c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f3b00c08b7353db5b61b06223f187d0"><td class="memItemLeft" align="right" valign="top">const std::map&lt; int, <a class="el" href="structSkillInfo.html">SkillInfo</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSkillSet.html#a0f3b00c08b7353db5b61b06223f187d0">getSkills</a> ()</td></tr>
-<tr class="memdesc:a0f3b00c08b7353db5b61b06223f187d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns map with skill id keys and <a class="el" href="structSkillInfo.html">SkillInfo</a> values.  <a href="classSkillSet.html#a0f3b00c08b7353db5b61b06223f187d0">More...</a><br /></td></tr>
+<tr class="memdesc:a0f3b00c08b7353db5b61b06223f187d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns map with skill id keys and <a class="el" href="structSkillInfo.html" title="Each player has a set of skills. This struct contains the name of the skill and the current xp in the...">SkillInfo</a> values.  <a href="classSkillSet.html#a0f3b00c08b7353db5b61b06223f187d0">More...</a><br /></td></tr>
 <tr class="separator:a0f3b00c08b7353db5b61b06223f187d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea74c96514c507368bce6769ffbdc6f9"><td class="memItemLeft" align="right" valign="top">std::optional&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSkillSet.html#aea74c96514c507368bce6769ffbdc6f9">getSkillXp</a> (int <a class="el" href="Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>)</td></tr>
 <tr class="memdesc:aea74c96514c507368bce6769ffbdc6f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current xp of the skill with the given id. Returns nullopt if the skill doesn't exist.  <a href="classSkillSet.html#aea74c96514c507368bce6769ffbdc6f9">More...</a><br /></td></tr>
@@ -117,7 +126,7 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:af525d629d39252d491ba9b6f5ce13fe3"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="structSkillInfo.html">SkillInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSkillSet.html#af525d629d39252d491ba9b6f5ce13fe3">skillsM</a></td></tr>
-<tr class="memdesc:af525d629d39252d491ba9b6f5ce13fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Key = skill id, Value = <a class="el" href="structSkillInfo.html">SkillInfo</a>.  <a href="classSkillSet.html#af525d629d39252d491ba9b6f5ce13fe3">More...</a><br /></td></tr>
+<tr class="memdesc:af525d629d39252d491ba9b6f5ce13fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Key = skill id, Value = <a class="el" href="structSkillInfo.html" title="Each player has a set of skills. This struct contains the name of the skill and the current xp in the...">SkillInfo</a>.  <a href="classSkillSet.html#af525d629d39252d491ba9b6f5ce13fe3">More...</a><br /></td></tr>
 <tr class="separator:af525d629d39252d491ba9b6f5ce13fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -262,7 +271,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Returns map with skill id keys and <a class="el" href="structSkillInfo.html">SkillInfo</a> values. </p>
+<p>Returns map with skill id keys and <a class="el" href="structSkillInfo.html" title="Each player has a set of skills. This struct contains the name of the skill and the current xp in the...">SkillInfo</a> values. </p>
 <dl class="section return"><dt>Returns</dt><dd>const std::map&lt;int, SkillInfo&gt;&amp; </dd></dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -335,7 +344,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Key = skill id, Value = <a class="el" href="structSkillInfo.html">SkillInfo</a>. </p>
+<p>Key = skill id, Value = <a class="el" href="structSkillInfo.html" title="Each player has a set of skills. This struct contains the name of the skill and the current xp in the...">SkillInfo</a>. </p>
 
 </div>
 </div>

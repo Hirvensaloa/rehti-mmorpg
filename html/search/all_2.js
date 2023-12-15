@@ -31,7 +31,7 @@ var searchData=
   ['characterreader_2ehpp_144',['CharacterReader.hpp',['../CharacterReader_8hpp.html',1,'']]],
   ['characteruniformbuffers_145',['characterUniformBuffers',['../structCharacterObject.html#aa3b1036fc55ae26704f33b809e0cd9f4',1,'CharacterObject']]],
   ['charactervertex_146',['CharacterVertex',['../structCharacterVertex.html',1,'']]],
-  ['chatresponses_147',['chatResponses',['../structNPC.html#aa48d418328504e713dd5fa63592ce386',1,'NPC']]],
+  ['chatresponses_147',['chatResponses',['../structNPCData.html#a228901c257f92e676f4f6c9b3b11bb07',1,'NPCData']]],
   ['chatresponsesm_148',['chatResponsesM',['../classNpc.html#a83b8cfb5be0dc57d4ff8458f1b2eea14',1,'Npc']]],
   ['checkdeviceextensionsupport_149',['checkDeviceExtensionSupport',['../classRehtiGraphics.html#a214e3327349d6861ef4b206374c9fe02',1,'RehtiGraphics']]],
   ['checkvalidationlayersupport_150',['checkValidationLayerSupport',['../classRehtiGraphics.html#ac589482bb07e8473c46cbb6fc67a3740',1,'RehtiGraphics']]],

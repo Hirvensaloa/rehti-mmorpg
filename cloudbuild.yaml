@@ -1,6 +1,6 @@
 steps:
   # Deploy everything to the GKE
-  - name: "gcr.io/cloud-bulders/gke-deploy"
+  - name: "gcr.io/cloud-builders/gke-deploy"
     args:
       - run
       - --filename=kube.yaml

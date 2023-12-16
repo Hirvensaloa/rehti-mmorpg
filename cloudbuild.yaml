@@ -1,0 +1,8 @@
+steps:
+  # Deploy everything to the GKE
+  - name: "gcr.io/cloud-bulders/gke-deploy"
+    args:
+      - run
+      - --filename=kube.yaml
+      - --location=eu-north1
+      - --cluster=mmorpg-dev

@@ -4,5 +4,5 @@ steps:
     args:
       - run
       - --filename=kube.yaml
-      - --location=eu-north1
+      - --location=europe-north1
       - --cluster=mmorpg-dev

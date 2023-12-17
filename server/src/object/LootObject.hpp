@@ -5,6 +5,9 @@
 
 #include "Object.hpp"
 
+/**
+ * @brief Represents an object that can be looted
+ */
 class LootObject : public Object
 {
 public:

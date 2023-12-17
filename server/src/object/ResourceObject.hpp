@@ -7,6 +7,9 @@
 #include "../entity/Entity.hpp"
 #include "Object.hpp"
 
+/**
+ * @brief Represents and object that can be interacted with to gain resources and train skills
+ */
 class ResourceObject : public Object
 {
 public:
@@ -30,7 +33,7 @@ public:
 private:
     std::vector<YieldableItem> yieldableItemListM;
     int xpPerYieldM;
-    int depleteChanceM; // TODO: Deplete functionality
+    int depleteChanceM; ///< TODO: Deplete functionality
     std::vector<ItemTransform> itemTransformListM;
     int relatedSkillIdM;
     int xpRequirementM;

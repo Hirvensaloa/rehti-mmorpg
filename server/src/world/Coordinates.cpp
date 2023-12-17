@@ -9,12 +9,10 @@ Coordinates::Coordinates(int x0, int y0) : x(x0), y(y0)
 {
     std::optional<int> height = Map::getHeight(x, y);
 
-    if (!height.has_value())
+    if (height.has_value())
     {
-        throw std::runtime_error("Coordinates out of bounds: x: " + std::to_string(x) + " y: " + std::to_string(y));
+        z = height.value();
     }
-
-    z = height.value();
 }
 
 bool Coordinates::operator==(Coordinates& other)

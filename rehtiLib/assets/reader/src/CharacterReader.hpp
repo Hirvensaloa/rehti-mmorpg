@@ -3,6 +3,9 @@
 #include <string>
 #include <vector>
 
+/**
+ * @brief Contains the spawn coordinate bounds for a character.
+ */
 struct SpawnCoordinateBounds
 {
     int xMin;
@@ -11,6 +14,9 @@ struct SpawnCoordinateBounds
     int yMax;
 };
 
+/**
+ * @brief Has all the possible NPCData aggression types as strings.
+ */
 const struct
 {
     const std::string Passive = "PASSIVE";
@@ -18,7 +24,10 @@ const struct
     const std::string Peaceful = "PEACEFUL";
 } AggressionType;
 
-struct Player
+/**
+ * @brief Contains all the player data. This is used to load player assets into memory and spawn players on the map.
+ */
+struct PlayerData
 {
     int id;
     std::string textureFilename;
@@ -28,7 +37,10 @@ struct Player
     int baseAccuracy;
 };
 
-struct NPC
+/**
+ * @brief Contains all the NPCData data. This is used to load NPCData assets into memory and spawn NPCs on the map.
+ */
+struct NPCData
 {
     int id;
     std::string name;
@@ -48,8 +60,8 @@ struct NPC
  */
 struct GameCharacters
 {
-    Player player;
-    std::vector<NPC> npcs;
+    PlayerData player;
+    std::vector<NPCData> npcs;
 };
 
 /**

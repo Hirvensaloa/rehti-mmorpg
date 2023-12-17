@@ -46,8 +46,17 @@ public:
      */
     virtual CurrentAction getActionInfo();
 
+    /**
+     * @brief Returns true if the action is completed
+     *
+     * @return boolean
+     */
     bool isCompleted();
 
+    /**
+     * @brief Functionality for the action, pure virtual function that needs to be implemented by derived classes.
+     * Gets called on every server tick.
+     */
     virtual void act() = 0;
 
 protected:

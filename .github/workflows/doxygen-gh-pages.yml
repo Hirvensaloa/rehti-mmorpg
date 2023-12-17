@@ -3,8 +3,12 @@ name: Doxygen GitHub Pages Deploy Action
 on:
   push:
     branches:
-      - gh-pages
+      - dev
   workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   deploy:
@@ -13,7 +17,7 @@ jobs:
       - uses: DenverCoder1/doxygen-github-pages-action@v1.3.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          folder: .
+          target_folder: .
           branch: gh-pages
-          folder: docs/html
           config_file: docs/Doxyfile
-          target_folder: docs/generated

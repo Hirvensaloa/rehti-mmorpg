@@ -10,6 +10,9 @@
 
 class GameWorld;
 
+/**
+ * @brief Base pure virtual Entity class. Different types of enities inherit this.
+ */
 class Entity : public std::enable_shared_from_this<Entity>
 {
 public:
@@ -96,6 +99,12 @@ public:
      * @return int
      */
     int getAttackSpeed();
+
+    /**
+     * @brief Get the movement speed of this entity
+     * @return std::chrono::milliseconds
+     */
+    std::chrono::milliseconds getMoveSpeed();
 
     /**
      * @brief Get pointer to the GameWorld that this entity resides in
@@ -186,4 +195,6 @@ protected:
     bool isDisconnectedM = false; // for players only, but defined for entity for polymorphism reaons
 
     std::chrono::milliseconds respawnTimeM{10000};
+
+    std::chrono::milliseconds moveSpeedM{1000};
 };

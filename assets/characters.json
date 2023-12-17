@@ -5,9 +5,9 @@
     "glTFFilename": "ukko.glb",
     "spawnCoordinateBounds": {
       "xMin": 1,
-      "xMax": 10,
-      "yMin": 1,
-      "yMax": 10
+      "xMax": 64,
+      "yMin": 0,
+      "yMax": 64
     },
     "baseDamage": 15,
     "baseAccuracy": 10
@@ -20,9 +20,9 @@
       "glTFFilename": "simplecharacter.glb",
       "spawnCoordinateBounds": {
         "xMin": 1,
-        "xMax": 10,
+        "xMax": 64,
         "yMin": 1,
-        "yMax": 10
+        "yMax": 64
       },
       "spawnAmount": 2,
       "agressionType": "PEACEFUL",
@@ -38,9 +38,9 @@
       "glTFFilename": "simplecharacter.glb",
       "spawnCoordinateBounds": {
         "xMin": 1,
-        "xMax": 10,
+        "xMax": 64,
         "yMin": 1,
-        "yMax": 10
+        "yMax": 64
       },
       "spawnAmount": 2,
       "agressionType": "PASSIVE",

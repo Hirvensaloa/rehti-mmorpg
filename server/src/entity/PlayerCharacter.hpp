@@ -5,6 +5,9 @@
 #include "../skill/SkillSet.hpp"
 #include "Entity.hpp"
 
+/**
+ * @brief Class for a human player character
+ */
 class PlayerCharacter : public Entity
 {
 public:

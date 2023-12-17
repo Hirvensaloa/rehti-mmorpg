@@ -6,6 +6,9 @@
 #include "Action.hpp"
 #include "MoveAction.hpp"
 
+/**
+ * @brief Action used for attacks
+ */
 class AttackAction : public Action
 {
 public:
@@ -13,8 +16,17 @@ public:
 
     ~AttackAction() = default;
 
+    /**
+     * @brief Get the target Entity of the action
+     *
+     * @return std::shared_ptr<Entity>
+     */
     std::shared_ptr<Entity>& getTarget();
 
+    /**
+     * @brief Attack functionality, which performs attacks against target and moves closer to the target if not in range.
+     * Implementation of pure virtual method act() of the base class.
+     */
     void act();
 
     /**
@@ -36,7 +48,7 @@ private:
 
     std::chrono::milliseconds actionTimeM;
 
-    std::chrono::milliseconds moveTimeM = MoveAction::getMoveTime();
+    std::chrono::milliseconds moveTimeM;
 
     ActionType actionTypeM = ActionType::Attack;
 

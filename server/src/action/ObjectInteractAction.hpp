@@ -5,6 +5,9 @@
 #include "Action.hpp"
 #include "MoveAction.hpp"
 
+/**
+ * @brief Actions used for interacting with objects
+ */
 class ObjectInteractAction : public Action
 {
 public:
@@ -13,7 +16,8 @@ public:
     ~ObjectInteractAction() = default;
 
     /**
-     * @brief Runs one iteration of the action
+     * @brief Objecct interact functionality, which performs target object's interact functionality, and moves entity next to the object if not already.
+     * Implementation of pure virtual method act() of the base class
      */
     void act();
 
@@ -28,7 +32,7 @@ private:
     std::shared_ptr<Object> pTargetM;
 
     std::chrono::milliseconds actionTimeM = std::chrono::milliseconds(3000);
-    std::chrono::milliseconds moveTimeM = MoveAction::getMoveTime();
+    std::chrono::milliseconds moveTimeM;
 
     const ActionType actionTypeM = ActionType::ObjectInteract;
 

@@ -75,7 +75,7 @@ inline bool containsSubString(const std::string& str, const std::string& subStr)
 bool loadOBJFile(const std::string& path, std::vector<aiVector3D>& vertices, std::vector<aiFace>& faces, const float scalingFactor)
 {
     Assimp::Importer importer;
-    const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
+    const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals | aiProcess_FlipWindingOrder);
 
     if (!scene)
     {
@@ -158,6 +158,8 @@ bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertice
         aiMesh* mesh = scene->mMeshes[meshI];
         bool normals = mesh->HasNormals();
         bool texCoords = mesh->HasTextureCoords(0);
+        bool tex1 = mesh->HasTextureCoords(1);
+
         for (unsigned int j = 0; j < mesh->mNumVertices; j++)
         {
             CharacterVertex charVert{};

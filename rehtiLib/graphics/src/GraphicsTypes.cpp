@@ -268,7 +268,7 @@ std::array<VkVertexInputAttributeDescription, 5> getCharacterVertexAttributeDesc
     attributeDescs[4].binding = 0;
     attributeDescs[4].location = 4;
     attributeDescs[4].format = VK_FORMAT_R32G32_SFLOAT; // 2 floats
-    attributeDescs[4].offset = offsetof(Vertex, texCoord);
+    attributeDescs[4].offset = offsetof(CharacterVertex, texCoord);
 
     return attributeDescs;
 }

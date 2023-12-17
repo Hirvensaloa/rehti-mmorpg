@@ -11,6 +11,11 @@ steps:
       - -f
       - "./server/Dockerfile"
       - "."
+  # Push the server Docker image to the GCR
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - push
+      - "gcr.io/$PROJECT_ID/mmorpg-server"
   # Deploy everything to the GKE
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
@@ -21,4 +26,3 @@ steps:
       - --cluster=mmorpg-dev
       - --timeout=10m0s
 timeout: 1600s
-images: ["gcr.io/$PROJECT_ID/mmorpg-server"]

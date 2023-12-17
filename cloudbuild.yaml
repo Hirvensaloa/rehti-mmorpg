@@ -1,4 +1,11 @@
 steps:
+  # Build the server Docker image
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - build
+      - -t
+      - "gcr.io/$PROJECT_ID/mmorpg-server"
+      - "./server"
   # Deploy everything to the GKE
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
@@ -6,5 +13,4 @@ steps:
       - --filename=kube.yaml
       - --location=europe-north1
       - --cluster=mmorpg-dev
-      - --timeout=20m0s
-timeout: 1200s
+timeout: 1600s

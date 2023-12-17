@@ -6,7 +6,6 @@ steps:
       - -t
       - "gcr.io/$PROJECT_ID/mmorpg-server"
       - "-f server"
-    images: ["gcr.io/$PROJECT_ID/mmorpg-server"]
   # Deploy everything to the GKE
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
@@ -15,3 +14,4 @@ steps:
       - --location=europe-north1
       - --cluster=mmorpg-dev
 timeout: 1600s
+images: ["gcr.io/$PROJECT_ID/mmorpg-server"]

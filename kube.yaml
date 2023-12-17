@@ -38,7 +38,6 @@ spec:
           ports:
             - containerPort: 5432
               hostIP: 127.0.0.1
-              hostPort: 6543
               protocol: TCP
           resources: {}
           volumeMounts:
@@ -127,7 +126,6 @@ spec:
           ports:
             - containerPort: 9999
               hostIP: 127.0.0.1
-              hostPort: 9999
               protocol: TCP
           resources: {}
       restartPolicy: Always

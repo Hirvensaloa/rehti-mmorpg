@@ -270,7 +270,7 @@ ImageData createAreaBlendMap(const std::vector<std::vector<int>>& mapTexturePosi
     {
         for (int k = columnOffset; k < columnOffset + Config.AREA_HEIGHT; k++)
         {
-            int blendMapIndex = j * width * 4 + k * 4;
+            int blendMapIndex = (j - rowOffset) * width * 4 + (k - columnOffset) * 4;
 
             data[blendMapIndex] = textureIds.size() > 1 && mapTexturePositionMatrix[j][k] == textureIds[1] ? 255 : 0;
             data[blendMapIndex + 1] = textureIds.size() > 2 && mapTexturePositionMatrix[j][k] == textureIds[2] ? 255 : 0;

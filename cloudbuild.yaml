@@ -1,4 +1,7 @@
 steps:
+  # Fetch submodules
+  - name: "gcr.io/cloud-builders/git"
+    args: ["submodule", "update", "--init", "--recursive"]
   # Build the server Docker image
   - name: "gcr.io/cloud-builders/docker"
     args:

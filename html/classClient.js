@@ -15,6 +15,7 @@ var classClient =
     [ "unequipItem", "classClient.html#a5e89bfa822c4f41d5a8f8d4a1269311a", null ],
     [ "useItem", "classClient.html#a4ab2c62c905b79659c11a276c24dc2a2", null ],
     [ "assetCacheM", "classClient.html#ab990e6a2334cdf911f3adf27d7533f8f", null ],
+    [ "audioLibM", "classClient.html#aeb286da366d3104c2d19cc431959ac33", null ],
     [ "connectionM", "classClient.html#aefa429ef39bfa1ee67010f59284b66f2", null ],
     [ "connectionThreadM", "classClient.html#ad16161e3c9c63e60d19db79d19830578", null ],
     [ "endpointsM", "classClient.html#acdff7c202d16f242060113b6002ec79d", null ],

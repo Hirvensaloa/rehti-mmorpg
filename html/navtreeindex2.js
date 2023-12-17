@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"classDatabaseManager.html#aa162d97472e6c31a4e873adda435dbb6":[9,0,25,0],
 "classDatabaseManager.html#aa4f19ca30119a8e9858080136ecb1084":[9,0,25,4],
 "classDatabaseManager.html#ac19b7e6c9c8c4d153d9a9eb53447324e":[9,0,25,3],
 "classDatabaseManager.html#acaa94a8a28b10b4c072ac66cde885fda":[9,0,25,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "classObject.html#a16ab41964edfe53fb57bfab0af096932":[9,0,66,13],
 "classObject.html#a226f2ae2af766b77d83c09a4d766b725":[9,0,66,2],
 "classObject.html#a3a3ffab970dc76a4f0ff474f59051bfa":[9,0,66,5],
-"classObject.html#a40bf224c70db62e60bcb49aeb5dcb3f0":[9,0,66,14],
-"classObject.html#a451052054258dae1c274a2d36afe7eef":[9,0,66,8]
+"classObject.html#a40bf224c70db62e60bcb49aeb5dcb3f0":[9,0,66,14]
 };

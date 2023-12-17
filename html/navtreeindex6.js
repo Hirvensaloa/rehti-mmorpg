@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"structPlayerTable.html#a3c6c5ed3f682d40df1fc01b91a422e56":[9,0,75,0],
 "structPlayerTable.html#a5203fa9bc351cf958a20443943aa9183":[9,0,75,5],
 "structPlayerTable.html#a564fa87e2cbba4111ae3647c2b15bbe7":[9,0,75,2],
 "structPlayerTable.html#a998e7e0cc34457eb1e40438090d651c1":[9,0,75,4],

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['lightobject_1121',['LightObject',['../structLightObject.html',1,'']]],
-  ['lootobject_1122',['LootObject',['../classLootObject.html',1,'']]],
-  ['lootobjectstruct_1123',['LootObjectStruct',['../structLootObjectStruct.html',1,'']]]
+  ['lightobject_1122',['LightObject',['../structLightObject.html',1,'']]],
+  ['lootobject_1123',['LootObject',['../classLootObject.html',1,'']]],
+  ['lootobjectstruct_1124',['LootObjectStruct',['../structLootObjectStruct.html',1,'']]]
 ];

@@ -1,5 +1,6 @@
 var NAVTREEINDEX5 =
 {
+"structBoneNode.html":[9,0,12],
 "structBoneNode.html#a03e9cbb6d4bc957c70ef8f7715e386b5":[9,0,12,1],
 "structBoneNode.html#a5bda20858eec5e87c230f89c0e4d553e":[9,0,12,2],
 "structBoneNode.html#aa8af8ea5c79952b0171360a3d450741c":[9,0,12,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX5 =
 "structPlayerData.html#ac6b67e6a5cc2dff96fccd35681af8097":[9,0,74,2],
 "structPlayerData.html#ad848f39a6e2412daefb6bb9894e14b1b":[9,0,74,4],
 "structPlayerTable.html":[9,0,75],
-"structPlayerTable.html#a329df8d5d0fb032aee3b49638e0333e6":[9,0,75,1],
-"structPlayerTable.html#a3c6c5ed3f682d40df1fc01b91a422e56":[9,0,75,0]
+"structPlayerTable.html#a329df8d5d0fb032aee3b49638e0333e6":[9,0,75,1]
 };

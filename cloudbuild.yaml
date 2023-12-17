@@ -2,20 +2,26 @@ steps:
   # Fetch submodules
   - name: "gcr.io/cloud-builders/git"
     args: ["submodule", "update", "--init", "--recursive"]
+  # Fetch the latest server Docker image from the GCR
+  - name: "gcr.io/cloud-builders/docker"
+    entrypoint: "bash"
+    args: ["-c", "docker pull gcr.io/$PROJECT_ID/mmorpg:latest || exit 0"]
   # Build the server Docker image
   - name: "gcr.io/cloud-builders/docker"
     args:
       - build
       - -t
-      - "gcr.io/$PROJECT_ID/mmorpg-server:latest"
+      - "gcr.io/$PROJECT_ID/mmorpg-server"
       - -f
       - "./server/Dockerfile"
+      - --cache-from
+      - "gcr.io/$PROJECT_ID/mmorpg-server:latest"
       - "."
   # Push the server Docker image to the GCR
   - name: "gcr.io/cloud-builders/docker"
     args:
       - push
-      - "gcr.io/$PROJECT_ID/mmorpg-server:latest"
+      - "gcr.io/$PROJECT_ID/mmorpg-server"
   # Deploy database to the GKE
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
@@ -28,6 +34,6 @@ steps:
     args:
       - run
       - --filename=kube-server.yaml
-      - --image=gcr.io/$PROJECT_ID/mmorpg-server:latest
+      - --image=gcr.io/$PROJECT_ID/mmorpg-server
       - --location=europe-north1
       - --cluster=mmorpg-dev

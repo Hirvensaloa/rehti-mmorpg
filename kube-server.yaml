@@ -34,7 +34,6 @@ spec:
               value: mypassword
             - name: POSTGRES_USER
               value: myuser
-          image: mmorpg-server:latest
           name: mmorpg-server
           ports:
             - containerPort: 9999

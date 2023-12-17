@@ -5,7 +5,8 @@ steps:
   # Fetch the latest server Docker image from the GCR
   - name: "gcr.io/cloud-builders/docker"
     entrypoint: "bash"
-    args: ["-c", "docker pull gcr.io/$PROJECT_ID/mmorpg:latest || exit 0"]
+    args:
+      ["-c", "docker pull gcr.io/$PROJECT_ID/mmorpg-server:latest || exit 0"]
   # Build the server Docker image
   - name: "gcr.io/cloud-builders/docker"
     args:

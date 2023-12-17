@@ -5,7 +5,8 @@ steps:
       - build
       - -t
       - "gcr.io/$PROJECT_ID/mmorpg-server"
-      - "-f server"
+      - -f server/Dockerfile
+      - .
   # Deploy everything to the GKE
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:

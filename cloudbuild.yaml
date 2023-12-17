@@ -6,4 +6,5 @@ steps:
       - --filename=kube.yaml
       - --location=europe-north1
       - --cluster=mmorpg-dev
-    timeout: 1600s
+      - --timeout=20m0s
+timeout: 1200s

@@ -14,9 +14,9 @@ std::array<VkDescriptorSetLayoutBinding, 1> TestObject::getDescriptorSetLayoutBi
     return bindings;
 }
 
-std::array<VkDescriptorSetLayoutBinding, 3> CharacterObject::getDescriptorSetLayoutBindings()
+std::array<VkDescriptorSetLayoutBinding, 4> CharacterObject::getDescriptorSetLayoutBindings()
 {
-    std::array<VkDescriptorSetLayoutBinding, 3> array;
+    std::array<VkDescriptorSetLayoutBinding, 4> array;
     // basic transformation
     array[0].binding = 0;
     array[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
@@ -37,12 +37,18 @@ std::array<VkDescriptorSetLayoutBinding, 3> CharacterObject::getDescriptorSetLay
     array[2].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
     array[2].pImmutableSamplers = nullptr;
 
+    array[3].binding = 3;
+    array[3].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    array[3].descriptorCount = 1;
+    array[3].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+    array[3].pImmutableSamplers = nullptr;
+
     return array;
 }
 
-std::array<VkDescriptorSetLayoutBinding, 2> GameObject::getDescriptorSetLayoutBindings()
+std::array<VkDescriptorSetLayoutBinding, 3> GameObject::getDescriptorSetLayoutBindings()
 {
-    std::array<VkDescriptorSetLayoutBinding, 2> array;
+    std::array<VkDescriptorSetLayoutBinding, 3> array;
     array[0].binding = 0;
     array[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
     array[0].descriptorCount = 1;
@@ -54,6 +60,12 @@ std::array<VkDescriptorSetLayoutBinding, 2> GameObject::getDescriptorSetLayoutBi
     array[1].descriptorCount = 1;
     array[1].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
     array[1].pImmutableSamplers = nullptr;
+
+    array[2].binding = 2;
+    array[2].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    array[2].descriptorCount = 1;
+    array[2].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+    array[2].pImmutableSamplers = nullptr;
 
     return array;
 }
@@ -256,7 +268,7 @@ std::array<VkVertexInputAttributeDescription, 5> getCharacterVertexAttributeDesc
     attributeDescs[4].binding = 0;
     attributeDescs[4].location = 4;
     attributeDescs[4].format = VK_FORMAT_R32G32_SFLOAT; // 2 floats
-    attributeDescs[4].offset = offsetof(Vertex, texCoord);
+    attributeDescs[4].offset = offsetof(CharacterVertex, texCoord);
 
     return attributeDescs;
 }
@@ -318,4 +330,25 @@ VkVertexInputBindingDescription getBindingDescription(ObjectType objectType)
         break;
     }
     return desc;
+}
+
+std::array<VkDescriptorSetLayoutBinding, 1> LightObject::getDescriptorSetLayoutBindings()
+{
+    std::array<VkDescriptorSetLayoutBinding, 1> bindings = {};
+    bindings[0].binding = 0;
+    bindings[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    bindings[0].descriptorCount = 1;
+    bindings[0].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT; // light is only used in fragment shader, so far.
+    bindings[0].pImmutableSamplers = nullptr;
+    return bindings;
+}
+
+PhongMaterial PhongMaterial::getDefaultMaterial()
+{
+    PhongMaterial newMaterial{};
+    newMaterial.ambient = glm::vec3(0.1f, 0.1f, 0.1f);
+    newMaterial.diffuse = glm::vec3(0.7f, 0.7f, 0.7f);
+    newMaterial.specular = glm::vec3(1.0f, 1.0f, 1.0f);
+    newMaterial.shininess = 32.0f;
+    return newMaterial;
 }

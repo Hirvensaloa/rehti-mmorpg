@@ -32,6 +32,7 @@ std::map<std::string, ImageData> loadObjectTextures(const GameObjects& gameObjec
         textureFilenames.push_back(object.second.textureFilename);
     }
 
+    stbi_set_flip_vertically_on_load(true);
     // Read all the textures
     for (const auto& filename : textureFilenames)
     {
@@ -40,7 +41,6 @@ std::map<std::string, ImageData> loadObjectTextures(const GameObjects& gameObjec
         {
             continue;
         }
-
         data = stbi_load((Config.TEXTURE_PATH + filename).c_str(), &width, &height, &channels, 4);
         if (data)
         {
@@ -53,6 +53,7 @@ std::map<std::string, ImageData> loadObjectTextures(const GameObjects& gameObjec
         }
     }
 
+    stbi_set_flip_vertically_on_load(false);
     return textures;
 }
 
@@ -78,7 +79,7 @@ std::map<std::string, ImageData> loadCharacterTextures(const GameCharacters& gam
         {
             continue;
         }
-
+        stbi_set_flip_vertically_on_load(false);
         data = stbi_load((Config.TEXTURE_PATH + filename).c_str(), &width, &height, &channels, 4);
         if (data)
         {
@@ -131,7 +132,6 @@ std::map<std::string, ImageData> loadItemTextures(const GameItems& gameItems)
         {
             continue;
         }
-
         data = stbi_load((Config.TEXTURE_PATH + filename).c_str(), &width, &height, &channels, 4);
         if (data)
         {
@@ -151,7 +151,7 @@ std::map<std::string, ImageData> loadItemTextures(const GameItems& gameItems)
         {
             continue;
         }
-
+        stbi_set_flip_vertically_on_load(false);
         data = stbi_load((Config.ITEM_ICON_PATH + filename).c_str(), &width, &height, &channels, 4);
         if (data)
         {

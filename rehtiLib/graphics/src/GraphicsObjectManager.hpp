@@ -52,7 +52,7 @@ public:
      * @param imgSampler is the sampler for the texture of the character
      * @return boolean indicating success of the operation
      */
-    bool addCharacter(int characterID, const std::vector<CharacterVertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, glm::mat4 bindPose[MAX_BONES], VkSampler imgSampler);
+    bool addCharacter(int characterID, const std::vector<CharacterVertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, glm::mat4 bindPose[MAX_BONES], VkSampler imgSampler, PhongMaterial material = PhongMaterial::getDefaultMaterial());
 
     /**
      * @brief Adds a game object to the buffer manager
@@ -64,7 +64,7 @@ public:
      * @param imgSampler is the sampler for the texture of the gameobject
      * @return boolean indicating success of the operation
      */
-    bool addGameObject(int objectId, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, VkSampler imgSampler);
+    bool addGameObject(int objectId, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, VkSampler imgSampler, PhongMaterial material = PhongMaterial::getDefaultMaterial());
 
     /**
      * @brief Adds a test object to the buffer manager
@@ -117,6 +117,33 @@ public:
      * @param frame is the frame of the update
      */
     void updateCharacterDescriptor(int id, const void* transformSrcData, const void* boneSrcData, uint32_t frame);
+
+    /**
+     * @brief Returns the descriptor set of the sun for the given frame.
+     * @param frame to get the descriptor set for.
+     * @return VkDescriptorSet of the sun.
+     */
+    VkDescriptorSet getSunDescriptorSet(uint32_t frame) const;
+
+    /**
+     * @brief Returns the descriptor set layout of the sun.
+     * @return
+     */
+    VkDescriptorSetLayout getSunLayout() const;
+
+    /**
+     * @brief Updates the sun descriptor with the given data.
+     * @param srcData is the data to be copied
+     * @param frame is the frame of the update
+     */
+    void updateSunDescriptor(const void* srcData, uint32_t frame);
+
+    /**
+     * @brief Updates the camera descriptor with the given data.
+     * @param srcData is the data to be copied
+     * @param frame is the frame of the update
+     */
+    void updateCameraDescriptor(const void* srcData, uint32_t frame);
 
     /**
      * @brief Creates a depth image.
@@ -305,9 +332,15 @@ private:
      */
     AllocatedBuffer createStagingBuffer(VkDeviceSize size, VmaAllocationInfo& allocInfo);
 
+    /**
+     * @brief Creates necessary memory allocations and mappings for a sun.
+     */
+    void createSun();
+
     // Required Vulkan handles
     VkDevice logDeviceM;
     VmaAllocator allocatorM;
+    VkDeviceSize minOffsetM; ///< Minimum offset alignment for uniform buffers
 
     std::shared_mutex& graphicsQueueMutexM;
     CommandUnit graphicsCommandUnitM;
@@ -321,6 +354,8 @@ private:
     std::unordered_map<int, GameObject> gameObjectsM;
     std::unordered_map<int, TestObject> testObjectsM;
     std::vector<AreaObject> areaObjectsM;
+    LightObject sunM;
+    VkDescriptorSetLayout sunLayoutM;
 
     std::vector<CombinedImage> allocatedImagesM;
 

@@ -39,8 +39,6 @@ set(GRAPHICS_SOURCES
 	DescriptorBuilder.cpp
 	Camera.hpp
 	Camera.cpp
-	Mesh.hpp
-	Mesh.cpp
 	BasicTypes.hpp
 	GraphicsTypes.hpp
 	GraphicsTypes.cpp

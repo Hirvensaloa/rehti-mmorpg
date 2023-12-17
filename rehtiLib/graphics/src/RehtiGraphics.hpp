@@ -77,18 +77,6 @@ public:
     ~RehtiGraphics();
 
     /**
-     * @brief Adds a test cube for testing purposes.
-     * @param id of the test object.
-     */
-    void addTestObject(int id);
-
-    /**
-     * @brief Adds a test game object with a test texture for testing purposes.
-     * @param id of the test game object.
-     */
-    void addTestGameObject(int id);
-
-    /**
      * @brief Adds a character object with the given id to the graphics backend. Also creates a bounding box for the object.
      * @param characterID of the character object.
      * @param vertices of the model
@@ -596,6 +584,8 @@ private:
     // Location and animation storage
     std::map<int, GfxOrientation> gameObjectOrientationsM;
     std::map<int, CharacterData> characterOrientationsM;
+
+    DirectionalLight sunM;
 
     // timer callback system
     TimerCallbackSystem timersM;

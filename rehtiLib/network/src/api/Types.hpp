@@ -63,7 +63,7 @@ struct CurrentAction
     int durationMs;              ///< How long one iteration of the action takes
     bool looping;                ///< Whether the action should be looped or not
     unsigned int targetId;       ///< The action target id. This differs depending on the action type. For example, if the action type is attack, this is the id of the target entity. If it is move then this is undefined.
-    Coordinate targetCoordinate; ///< The action target coordinate. This differs depending on the action type. For example, if the action type is move, this is the coordinate where the entity is moving to. If it is attack then this is undefined.
+    Coordinate targetCoordinate; ///< The action target coordinate. Can be used to define the action direction (with the current coordinate of the entity).
 
     /**
      * @brief Check if two CurrentActions are exactly the same

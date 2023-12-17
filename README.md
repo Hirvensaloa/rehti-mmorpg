@@ -195,11 +195,13 @@ Sent by: Server
   - **hp**: Health points.
   - **rotation**: Rotation angle. 0-4 (North-South)
   - **currentAction**: Current action
+
     - **id**: action id (For example, move or attack). -1 means no action
     - **durationMs**: duration for one action iteration
     - **looping**: boolean indicating if the action should loop or not
     - **targetId**: action target id. Interpretation depends on the action id. For example, if attack -> targetId is entityId. If move -> targetId is not defined
-    - **targetCoordinate**: target coordinates. Defined if action id is move.
+
+    - **targetCoordinate**: target coordinates. If action is move, can be used to determine the target coordinates. Can also be used to determine the direction of the action.
       - **x**: x-coordinate
       - **y**: y-coordinate
       - **z**: z-coordinate

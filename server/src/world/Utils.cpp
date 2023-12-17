@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <array>
 #include <cmath>
 #include <iostream>
 #include <queue>
@@ -40,9 +41,9 @@ bool isValidCell(const std::vector<std::vector<uint8_t>>& map, std::pair<int, in
 
 unsigned int euclideanDistance(std::pair<int, int> start, std::pair<int, int> end)
 {
-    int firstDiff= end.first - start.first;
+    int firstDiff = end.first - start.first;
     int secondDiff = end.second - start.second;
-    return std::sqrt( firstDiff * firstDiff + secondDiff * secondDiff );
+    return std::sqrt(firstDiff * firstDiff + secondDiff * secondDiff);
 }
 
 struct nodeCompare
@@ -108,7 +109,6 @@ std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& 
 
         // Add the current node to the closed set
         closed[current->coords.first][current->coords.second][current->dirFromParent].first = true;
-
         // Check all the neighbours
         for (int i = 0; i < 8; i++)
         {

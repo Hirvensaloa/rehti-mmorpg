@@ -110,7 +110,8 @@ CurrentAction AttackAction::getActionInfo()
             actionInfo.id = ActionType::None;
             actionInfo.durationMs = 1000;
             actionInfo.looping = true;
-            actionInfo.targetCoordinate = pEntityM->getLocation();
+            Coordinates& coords = pEntityM->getLocation();
+            actionInfo.targetCoordinate = {coords.x, coords.y, coords.z};
         }
         return actionInfo;
     }
@@ -120,7 +121,8 @@ CurrentAction AttackAction::getActionInfo()
         actionInfo.durationMs = actionTimeM.count();
         actionInfo.looping = true;
         actionInfo.targetId = pTargetM->getInstanceId();
-        actionInfo.targetCoordinate = pTargetM->getLocation();
+        Coordinates& coords = pEntityM->getLocation();
+        actionInfo.targetCoordinate = {coords.x, coords.y, coords.z};
         return actionInfo;
     }
 }

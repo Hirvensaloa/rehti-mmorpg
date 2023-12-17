@@ -1,6 +1,6 @@
 #include "Utils.hpp"
 
-AnimationConfig actionToAnimationConfig(CurrentAction action, Coordinates entityLocation)
+AnimationConfig actionToAnimationConfig(CurrentAction action, Coordinate entityLocation)
 {
     glm::vec3 targetDirection = glm::vec3(action.targetCoordinate.x - entityLocation.x, action.targetCoordinate.y - entityLocation.y, action.targetCoordinate.z - entityLocation.z);
 

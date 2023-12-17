@@ -215,8 +215,11 @@ void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
     dataMutexM.lock();
     characterOrientationsM[characterID].animationData.currentAnimation = cfg.animType;
     characterOrientationsM[characterID].animationData.currentTicks = 0;
-    glm::vec3 direction = glm::normalize(cfg.animationDirection);
-    characterOrientationsM[characterID].characterOrientation.rotation = glm::quatLookAt(direction, POSITIVE_Y_AXIS);
+    if (!glm::length(cfg.animationDirection) < 0.001f) // if the direction is set, use it
+    {
+        glm::vec3 direction = -glm::normalize(cfg.animationDirection);
+        characterOrientationsM[characterID].characterOrientation.rotation = glm::quatLookAt(direction, POSITIVE_Y_AXIS);
+    }
     //  add new callback to play the animation
     float factor = 1.0f;
     if (cfg.looping || cfg.animType == AnimationType::IDLE)

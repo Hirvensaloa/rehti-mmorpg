@@ -10,4 +10,4 @@
  * @param entityLocation Coordinates
  * @return AnimationConfig
  */
-AnimationConfig actionToAnimationConfig(CurrentAction action, Coordinates entityLocation);
+AnimationConfig actionToAnimationConfig(CurrentAction action, Coordinate entityLocation);

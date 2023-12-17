@@ -7,7 +7,7 @@ steps:
     args:
       - build
       - -t
-      - "mmorpg-server"
+      - "gcr.io/$PROJECT_ID/mmorpg-server"
       - -f
       - "./server/Dockerfile"
       - "."
@@ -16,7 +16,9 @@ steps:
     args:
       - run
       - --filename=kube.yaml
+      - --image=gcr.io/$PROJECT_ID/mmorpg-server
       - --location=europe-north1
       - --cluster=mmorpg-dev
+      - --timeout=10m0s
 timeout: 1600s
-images: ["mmorpg-server"]
+images: ["gcr.io/$PROJECT_ID/mmorpg-server"]

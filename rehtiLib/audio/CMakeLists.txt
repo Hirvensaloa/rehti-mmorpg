@@ -26,8 +26,5 @@ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../../third_party/soloud/contrib ${CM
 
 target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/../../third_party/soloud/include)
 target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include)
-
-target_include_directories(${TARGET} PUBLIC ${SDL2_INCLUDE_DIRS})
-target_link_libraries(${TARGET} PUBLIC ${SDL2_LIBRARIES})
-
 target_link_libraries(${TARGET} PUBLIC soloud)
+target_link_libraries(${TARGET} PUBLIC SDL2::SDL2)

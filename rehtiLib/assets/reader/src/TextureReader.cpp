@@ -229,7 +229,7 @@ std::vector<std::vector<int>> loadMapTexturePositions()
     return mapTexturePositionMatrix;
 }
 
-ImageData createAreaBlendMap(const std::vector<std::vector<int>>& mapTexturePositionMatrix, int columnOffset, int rowOffset)
+ImageData createAreaBlendMap(const std::vector<std::vector<int>>& mapTexturePositionMatrix, int rowOffset, int columnOffset)
 {
     std::vector<int> textureIds;
     for (int i = rowOffset; i < rowOffset + Config.AREA_WIDTH; i++)

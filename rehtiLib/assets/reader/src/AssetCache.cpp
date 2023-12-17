@@ -166,7 +166,7 @@ std::map<std::string, MapAreaAssetData> AssetCache::loadAreaAssetData(const std:
             bool success = loadOBJFile(Config.GENERATED_AREA_OBJ_PATH + key + ".obj", vertices, faces);
             if (success)
             {
-                const ImageData blendMap = createAreaBlendMap(texturePositionMatrix, i * Config.AREA_WIDTH, j * Config.AREA_HEIGHT);
+                const ImageData blendMap = createAreaBlendMap(texturePositionMatrix, i * Config.AREA_HEIGHT, j * Config.AREA_WIDTH);
                 // Find all the different texture ids in the area
                 MapAreaAssetData assetData = {
                     aiVector3DVectorToVertexVector(vertices),

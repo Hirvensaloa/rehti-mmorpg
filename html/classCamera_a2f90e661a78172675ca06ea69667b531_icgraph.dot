@@ -6,19 +6,17 @@ digraph "Camera::getViewMatrix"
   rankdir="RL";
   Node1 [label="Camera::getViewMatrix",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Returns the view matrix of the camera, which is the inverse of the model matrix of the camera...."];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="RehtiGraphics::addTestObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#aee9717d7bdb276ed3b0be0775c00e24c",tooltip="Adds a test cube for testing purposes."];
-  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="Camera::getWorldToScreen\lMatrix",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCamera.html#a1d263c318c088257b74934d93b9e3a78",tooltip="Returns the world to screen matrix."];
+  Node2 [label="Camera::getWorldToScreen\lMatrix",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCamera.html#a1d263c318c088257b74934d93b9e3a78",tooltip="Returns the world to screen matrix."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="RehtiGraphics::recordCommand\lBuffer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a6ce071a893e0edc43841a8d0c01700ed",tooltip="Records the command buffer."];
   Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="RehtiGraphics::recordCommand\lBuffer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a6ce071a893e0edc43841a8d0c01700ed",tooltip="Records the command buffer."];
+  Node4 [label="RehtiGraphics::drawFrame",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ac049915f0d6b38117ece68d74eaec027",tooltip="Draws a frame and records the previous frame time."];
   Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="RehtiGraphics::drawFrame",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ac049915f0d6b38117ece68d74eaec027",tooltip="Draws a frame and records the previous frame time."];
+  Node5 [label="RehtiGraphics::mainLoop",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a82d71e93dd76cde425cc34df93cf4723",tooltip="Loops, polls events and draws frames."];
   Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="RehtiGraphics::mainLoop",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a82d71e93dd76cde425cc34df93cf4723",tooltip="Loops, polls events and draws frames."];
+  Node6 [label="RehtiGraphics::startMainLoop",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#aba5f89e9dc6f91cfef79f525151a067d",tooltip="Starts a rendering loop until the window is closed."];
   Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node7 [label="RehtiGraphics::startMainLoop",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#aba5f89e9dc6f91cfef79f525151a067d",tooltip="Starts a rendering loop until the window is closed."];
+  Node7 [label="Client::startGraphics",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#a7b7406bdc248547627fd669a92b86d6c",tooltip="Starts the graphics library."];
   Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node8 [label="Client::startGraphics",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#a7b7406bdc248547627fd669a92b86d6c",tooltip="Starts the graphics library."];
-  Node8 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node9 [label="Client::Client",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#ad3e41ed92e71d5c3717db96e68b9541b",tooltip=" "];
+  Node8 [label="Client::Client",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#ad3e41ed92e71d5c3717db96e68b9541b",tooltip=" "];
 }

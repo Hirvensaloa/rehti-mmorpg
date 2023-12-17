@@ -12,9 +12,9 @@ digraph "GraphicsObjectManager::getPipelineAndAccessFlags"
   Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node4 [label="GraphicsObjectManager\l::addArea",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf",tooltip="Adds an area object to the buffer manager."];
   Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="GraphicsObjectManager\l::addCharacter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d",tooltip="Adds a character to the buffer manager with the given parameters."];
+  Node5 [label="GraphicsObjectManager\l::addCharacter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0",tooltip="Adds a character to the buffer manager with the given parameters."];
   Node3 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="GraphicsObjectManager\l::addGameObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8",tooltip="Adds a game object to the buffer manager."];
+  Node6 [label="GraphicsObjectManager\l::addGameObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183",tooltip="Adds a game object to the buffer manager."];
   Node2 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node7 [label="GraphicsObjectManager\l::transitionDepthImageLayout",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsObjectManager.html#a9b1f91690fd93e7d7d34d4a6ec8585a7",tooltip="Transitions the given image to the given layout using graphics queue."];
 }

@@ -211,7 +211,7 @@ void Client::processMessages()
                             }
                             else
                             {
-                                pGraphLibM->playAnimation(currentPlayer.instanceId, actionToAnimationConfig(currentPlayer.currentAction));
+                                pGraphLibM->playAnimation(currentPlayer.instanceId, actionToAnimationConfig(currentPlayer.currentAction, {currentPlayer.x, currentPlayer.y, currentPlayer.z}));
                             }
                         }
 
@@ -284,7 +284,7 @@ void Client::processMessages()
                                 }
                                 else
                                 {
-                                    pGraphLibM->playAnimation(entity.instanceId, actionToAnimationConfig(entity.currentAction));
+                                    pGraphLibM->playAnimation(entity.instanceId, actionToAnimationConfig(entity.currentAction, {entity.x, entity.y, entity.z}));
                                 }
                             }
                         }

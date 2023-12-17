@@ -33,7 +33,10 @@ GraphicsObjectManager::GraphicsObjectManager(VkInstance instance, VkPhysicalDevi
     {
         throw std::runtime_error("Failed to create VMA allocator");
     }
-
+    // Get required limits
+    VkPhysicalDeviceProperties gpuProps{};
+    vkGetPhysicalDeviceProperties(gpu, &gpuProps);
+    minOffsetM = gpuProps.limits.minUniformBufferOffsetAlignment;
     // Create layouts for all object types
     createDescriptorBuilder();
     auto characterBindings = CharacterObject::getDescriptorSetLayoutBindings();
@@ -44,6 +47,7 @@ GraphicsObjectManager::GraphicsObjectManager(VkInstance instance, VkPhysicalDevi
     pBuilderM->setDescriptorSetLayout(gameObjectBindings.data(), gameObjectBindings.size(), descriptorSetLayoutsM[ObjectType::GAMEOBJECT]);
     pBuilderM->setDescriptorSetLayout(testBindings.data(), testBindings.size(), descriptorSetLayoutsM[ObjectType::TESTOBJECT]);
     pBuilderM->setDescriptorSetLayout(areaBindings.data(), areaBindings.size(), descriptorSetLayoutsM[ObjectType::AREA]);
+    createSun();
 }
 
 GraphicsObjectManager::~GraphicsObjectManager()
@@ -84,7 +88,7 @@ GraphicsObjectManager::~GraphicsObjectManager()
         vmaDestroyBuffer(allocatorM, test.indexData.buffer, test.indexData.allocation);
         for (auto& bufObject : test.uniformBuffers)
         {
-            vmaDestroyBuffer(allocatorM, bufObject.transformBuffer.buffer, bufObject.transformBuffer.allocation);
+            vmaDestroyBuffer(allocatorM, bufObject.buffer.buffer, bufObject.buffer.allocation);
         }
     }
     // area objects
@@ -133,7 +137,7 @@ void GraphicsObjectManager::addTransferQueueFamilyAccess(const uint32_t transfer
     }
 }
 
-bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<CharacterVertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, glm::mat4 bindPose[MAX_BONES], VkSampler imgSampler)
+bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<CharacterVertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, glm::mat4 bindPose[MAX_BONES], VkSampler imgSampler, PhongMaterial material)
 {
     if (characterObjectsM.contains(characterID))
     {
@@ -146,6 +150,7 @@ bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<Char
     VkDeviceSize tSize = sizeof(glm::mat4);
     VkDeviceSize imgSize = texture.width * texture.height * 4;
     VkDeviceSize boneSize = sizeof(glm::mat4) * MAX_BONES;
+    VkDeviceSize mSize = sizeof(PhongMaterial);
     character.indexCount = indices.size();
 
     // Create buffers
@@ -154,6 +159,9 @@ bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<Char
     // image data
     character.texture = createImage(texture.width, texture.height, VK_FORMAT_R8G8B8A8_SRGB);
     character.textureView = createImageView(character.texture.image, VK_FORMAT_R8G8B8A8_SRGB);
+    // material data
+    character.materialData = createBuffer(mSize, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VMA_MEMORY_USAGE_AUTO,
+                                          VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT | VMA_ALLOCATION_CREATE_MAPPED_BIT);
     // Create descriptor set data
     for (uint32_t i = 0; i < frameCountM; i++)
     {
@@ -175,10 +183,15 @@ bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<Char
         descImageInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
         descImageInfo.imageView = character.textureView;
         descImageInfo.sampler = imgSampler;
+        VkDescriptorBufferInfo materialBufferInfo{};
+        materialBufferInfo.buffer = character.materialData.buffer;
+        materialBufferInfo.offset = 0;
+        materialBufferInfo.range = mSize;
         // Try creating descriptor set
         if (pBuilderM->bindBuffer(transformBufferInfo, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT) // Transform
                 .bindBuffer(boneBufferInfo, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT)            // Bones
                 .bindImage(descImageInfo, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT)    // Texture
+                .bindBuffer(materialBufferInfo, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_FRAGMENT_BIT)      // Material
                 .build(cBuffer.descriptorSet))
         {
             character.characterUniformBuffers.push_back(cBuffer);
@@ -196,12 +209,12 @@ bool GraphicsObjectManager::addCharacter(int characterID, const std::vector<Char
     copyBuffer(character.vertexData, vertices.data());
     copyBuffer(character.indexData, indices.data());
     copyImage(character.texture, texture);
-
+    memcpy(character.materialData.allocation->GetMappedData(), &material, mSize);
     characterObjectsM[characterID] = character;
     return true;
 }
 
-bool GraphicsObjectManager::addGameObject(int id, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, VkSampler imgSampler)
+bool GraphicsObjectManager::addGameObject(int id, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, ImageData& texture, glm::mat4 transformation, VkSampler imgSampler, PhongMaterial material)
 {
     if (gameObjectsM.contains(id))
     {
@@ -212,6 +225,7 @@ bool GraphicsObjectManager::addGameObject(int id, const std::vector<Vertex>& ver
     VkDeviceSize vSize = vertices.size() * sizeof(Vertex);
     VkDeviceSize iSize = indices.size() * sizeof(uint32_t);
     VkDeviceSize tSize = sizeof(glm::mat4);
+    VkDeviceSize mSize = sizeof(PhongMaterial);
     VkDeviceSize imgSize = texture.width * texture.height * 4;
     gameObject.indexCount = indices.size();
     // Create buffers
@@ -220,6 +234,9 @@ bool GraphicsObjectManager::addGameObject(int id, const std::vector<Vertex>& ver
     // image data
     gameObject.texture = createImage(texture.width, texture.height, VK_FORMAT_R8G8B8A8_SRGB);
     gameObject.textureView = createImageView(gameObject.texture.image, VK_FORMAT_R8G8B8A8_SRGB);
+    // material data
+    gameObject.materialData = createBuffer(mSize, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VMA_MEMORY_USAGE_AUTO,
+                                           VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT | VMA_ALLOCATION_CREATE_MAPPED_BIT);
     // Create descriptor set data
     for (uint32_t i = 0; i < frameCountM; i++)
     {
@@ -227,6 +244,7 @@ bool GraphicsObjectManager::addGameObject(int id, const std::vector<Vertex>& ver
         // We want uniform memory to be host coherent, and persistently mapped
         uBuffer.transformBuffer = createBuffer(tSize, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VMA_MEMORY_USAGE_AUTO,
                                                VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT | VMA_ALLOCATION_CREATE_MAPPED_BIT); // These two flags set memory to be persistently mapped.
+
         VkDescriptorBufferInfo descBufferInfo{};
         descBufferInfo.buffer = uBuffer.transformBuffer.buffer;
         descBufferInfo.offset = 0;
@@ -236,9 +254,15 @@ bool GraphicsObjectManager::addGameObject(int id, const std::vector<Vertex>& ver
         descImageInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
         descImageInfo.imageView = gameObject.textureView;
         descImageInfo.sampler = imgSampler;
+        // material buffer info
+        VkDescriptorBufferInfo materialBufferInfo{};
+        materialBufferInfo.buffer = gameObject.materialData.buffer;
+        materialBufferInfo.offset = 0;
+        materialBufferInfo.range = mSize;
         // Try creating descriptor set
         if (pBuilderM->bindBuffer(descBufferInfo, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT)   // Buffer
                 .bindImage(descImageInfo, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT) // Texture
+                .bindBuffer(materialBufferInfo, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_FRAGMENT_BIT)   // Material
                 .build(uBuffer.descriptorSet))
         {
             gameObject.uniformBuffers.push_back(uBuffer);
@@ -255,6 +279,7 @@ bool GraphicsObjectManager::addGameObject(int id, const std::vector<Vertex>& ver
     copyBuffer(gameObject.vertexData, vertices.data());
     copyBuffer(gameObject.indexData, indices.data());
     copyImage(gameObject.texture, texture);
+    memcpy(gameObject.materialData.allocation->GetMappedData(), &material, mSize);
     // Now the game object data should be available for the gpu.
     gameObjectsM[id] = gameObject;
     return true;
@@ -536,6 +561,43 @@ AllocatedBuffer GraphicsObjectManager::createStagingBuffer(VkDeviceSize size, Vm
     return stagingBuffer;
 }
 
+void GraphicsObjectManager::createSun()
+{
+    LightObject sun{};
+    VkDeviceSize lSize = sizeof(DirectionalLight);
+    VkDeviceSize offsetSize = lSize / minOffsetM;
+    offsetSize = minOffsetM * (offsetSize + 1);
+    VkDeviceSize viewDirSize = sizeof(CameraData);
+    for (uint32_t i = 0; i < frameCountM; i++)
+    {
+        SimpleUniformBuffer uBuffer{};
+        uBuffer.buffer = createBuffer(offsetSize + viewDirSize, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VMA_MEMORY_USAGE_AUTO,
+                                      VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT | VMA_ALLOCATION_CREATE_MAPPED_BIT); // These two flags set memory to be persistently mapped.
+        uBuffer.buffer.size = offsetSize + viewDirSize;
+        VkDescriptorBufferInfo descBufferInfo{};
+        descBufferInfo.buffer = uBuffer.buffer.buffer;
+        descBufferInfo.offset = 0;
+        descBufferInfo.range = lSize;
+        VkDescriptorBufferInfo viewDirBufferInfo{};
+        viewDirBufferInfo.buffer = uBuffer.buffer.buffer;
+        viewDirBufferInfo.offset = offsetSize;
+        viewDirBufferInfo.range = viewDirSize;
+        // Try creating descriptor set
+        if (pBuilderM->bindBuffer(descBufferInfo, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_FRAGMENT_BIT)
+                .bindBuffer(viewDirBufferInfo, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_FRAGMENT_BIT)
+                .build(uBuffer.descriptorSet, sunLayoutM))
+        {
+            sun.uniformBuffers.push_back(uBuffer);
+        }
+        else
+        {
+            throw std::runtime_error("Failed to create descriptor set for sun");
+        }
+    }
+
+    sunM = sun;
+}
+
 bool GraphicsObjectManager::addTestObject(int id, const std::vector<SimpleVertex>& vertices, const std::vector<uint32_t>& indices, glm::mat4 transformation)
 {
     if (testObjectsM.contains(id))
@@ -556,12 +618,12 @@ bool GraphicsObjectManager::addTestObject(int id, const std::vector<SimpleVertex
     // Create descriptor set data
     for (uint32_t i = 0; i < frameCountM; i++)
     {
-        TestObjectUniformBuffer uBuffer{};
+        SimpleUniformBuffer uBuffer{};
         // We want uniform memory to be host coherent, and persistently mapped
-        uBuffer.transformBuffer = createBuffer(transformBufferSize, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VMA_MEMORY_USAGE_AUTO,
-                                               VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT | VMA_ALLOCATION_CREATE_MAPPED_BIT); // These two flags set memory to be persistently mapped.
+        uBuffer.buffer = createBuffer(transformBufferSize, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VMA_MEMORY_USAGE_AUTO,
+                                      VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT | VMA_ALLOCATION_CREATE_MAPPED_BIT); // These two flags set memory to be persistently mapped.
         VkDescriptorBufferInfo descBufferInfo{};
-        descBufferInfo.buffer = uBuffer.transformBuffer.buffer;
+        descBufferInfo.buffer = uBuffer.buffer.buffer;
         descBufferInfo.offset = 0;
         descBufferInfo.range = transformBufferSize;
         // Try creating descriptor set
@@ -569,7 +631,7 @@ bool GraphicsObjectManager::addTestObject(int id, const std::vector<SimpleVertex
         {
             newObject.uniformBuffers.push_back(uBuffer);
             // Uniforms are persistently mapped, so we can just memcpy to them
-            memcpy(uBuffer.transformBuffer.allocation->GetMappedData(), &transformation, transformBufferSize);
+            memcpy(uBuffer.buffer.allocation->GetMappedData(), &transformation, transformBufferSize);
         }
         else
         {
@@ -664,7 +726,7 @@ bool GraphicsObjectManager::cleanResources(int id, ObjectType type)
         vmaDestroyBuffer(allocatorM, test.indexData.buffer, test.indexData.allocation);
         for (auto& bufObject : test.uniformBuffers)
         {
-            vmaDestroyBuffer(allocatorM, bufObject.transformBuffer.buffer, bufObject.transformBuffer.allocation);
+            vmaDestroyBuffer(allocatorM, bufObject.buffer.buffer, bufObject.buffer.allocation);
         }
         testObjectsM.erase(id);
         return true;
@@ -693,7 +755,7 @@ bool GraphicsObjectManager::cleanResources(int id, ObjectType type)
 void GraphicsObjectManager::updateTestObject(int id, const void* srcData, uint32_t frame)
 {
     auto& object = testObjectsM[id];
-    auto& buffer = object.uniformBuffers[frame].transformBuffer;
+    auto& buffer = object.uniformBuffers[frame].buffer;
     memcpy(buffer.allocation->GetMappedData(), srcData, buffer.size);
 }
 
@@ -711,6 +773,35 @@ void GraphicsObjectManager::updateCharacterDescriptor(int id, const void* transf
     auto& boneBuffer = character.characterUniformBuffers[frame].boneTransformations;
     memcpy(transformBuffer.allocation->GetMappedData(), transformSrcData, transformBuffer.size);
     memcpy(boneBuffer.allocation->GetMappedData(), boneSrcData, boneBuffer.size);
+}
+
+VkDescriptorSet GraphicsObjectManager::getSunDescriptorSet(uint32_t frame) const
+{
+    if (frame < sunM.uniformBuffers.size())
+    {
+        return sunM.uniformBuffers[frame].descriptorSet;
+    }
+    return VkDescriptorSet();
+}
+
+VkDescriptorSetLayout GraphicsObjectManager::getSunLayout() const
+{
+    return sunLayoutM;
+}
+
+void GraphicsObjectManager::updateSunDescriptor(const void* srcData, uint32_t frame)
+{
+    auto& buffer = sunM.uniformBuffers[frame].buffer;
+    memcpy(buffer.allocation->GetMappedData(), srcData, buffer.size);
+}
+
+void GraphicsObjectManager::updateCameraDescriptor(const void* srcData, uint32_t frame)
+{
+    auto& buffer = sunM.uniformBuffers[frame].buffer;
+    VkDeviceSize offSet = buffer.size - sizeof(CameraData);
+    char* mappedData = (char*)buffer.allocation->GetMappedData();
+    void* dstData = mappedData + offSet;
+    memcpy(dstData, srcData, sizeof(CameraData));
 }
 
 AllocatedImage GraphicsObjectManager::createDepthImage(uint32_t width, uint32_t height, VkFormat depthFormat)

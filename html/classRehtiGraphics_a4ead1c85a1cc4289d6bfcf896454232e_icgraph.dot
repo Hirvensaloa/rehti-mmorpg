@@ -7,6 +7,4 @@ digraph "RehtiGraphics::createTextureSampler"
   Node1 [label="RehtiGraphics::createTexture\lSampler",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Creates a texture sampler."];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="RehtiGraphics::initVulkan",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3",tooltip="Initializes vulkan instance."];
-  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="RehtiGraphics::RehtiGraphics",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469",tooltip="Initializes the graphics backend."];
 }

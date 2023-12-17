@@ -4,5 +4,9 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node0 [label="ObjectWithFileinfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structObjectWithFileinfo.html",tooltip=" "];
+  Node0 [label="Object",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classObject.html",tooltip="Represents generic object in the game world."];
+  Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 [label="LootObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classLootObject.html",tooltip="Represents an object that can be looted."];
+  Node0 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="ResourceObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classResourceObject.html",tooltip="Represents and object that can be interacted with to gain resources and train skills."];
 }

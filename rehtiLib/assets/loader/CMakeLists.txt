@@ -9,6 +9,7 @@ set(TARGET asset_loader)
 add_executable(${TARGET} 
   Main.cpp 
   src/MapLoader.hpp 
+  src/MapObjLoader.hpp
   src/Utils.hpp 
   src/AnimationTypeGenerator.hpp
   lodepng/lodepng.cpp 

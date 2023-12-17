@@ -86,7 +86,6 @@ $(document).ready(function(){initNavTree('BasicTypes_8hpp.html',''); initResizab
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
@@ -165,6 +164,17 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCharacterData.html">CharacterData</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDirectionalLight.html">DirectionalLight</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Directional light struct representing a directional light.  <a href="structDirectionalLight.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPointLight.html">PointLight</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Point light struct representing a point that shines light in all directions.  <a href="structPointLight.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPhongMaterial.html">PhongMaterial</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCameraData.html">CameraData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCamera.html">Camera</a> data used for shading.  <a href="structCameraData.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structHit.html">Hit</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structImageData.html">ImageData</a></td></tr>
@@ -182,11 +192,6 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:aa53e0967978ad7a8792f6961156ec968"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="BasicTypes_8hpp.html#aa53e0967978ad7a8792f6961156ec968">GLM_FORCE_DEPTH_ZERO_TO_ONE</a></td></tr>
 <tr class="separator:aa53e0967978ad7a8792f6961156ec968"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a13c6eed912838fe6dd08f6affb13e393"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structAnimationNode.html">AnimationNode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="BasicTypes_8hpp.html#a13c6eed912838fe6dd08f6affb13e393">ObjOrientation</a></td></tr>
-<tr class="separator:a13c6eed912838fe6dd08f6affb13e393"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -236,21 +241,6 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define GLM_FORCE_DEPTH_ZERO_TO_ONE</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="a13c6eed912838fe6dd08f6affb13e393"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13c6eed912838fe6dd08f6affb13e393">&#9670;&nbsp;</a></span>ObjOrientation</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="structAnimationNode.html">AnimationNode</a> <a class="el" href="BasicTypes_8hpp.html#a13c6eed912838fe6dd08f6affb13e393">ObjOrientation</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -353,15 +343,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="BasicTypes_8hpp_ad436010e95d51ba6cac7b17355b1f26b_icgraph.png" border="0" usemap="#aBasicTypes_8hpp_ad436010e95d51ba6cac7b17355b1f26b_icgraph" alt=""/></div>
 <map name="aBasicTypes_8hpp_ad436010e95d51ba6cac7b17355b1f26b_icgraph" id="aBasicTypes_8hpp_ad436010e95d51ba6cac7b17355b1f26b_icgraph">
-<area shape="rect" title=" " alt="" coords="1433,64,1556,91"/>
-<area shape="rect" href="classRehtiGraphics.html#ad3df13b713fcfc461d206a323a5657dd" title="Cleans up used resources." alt="" coords="1185,5,1357,32"/>
-<area shape="rect" href="classRehtiGraphics.html#ac307d6b1b052e5e07374056e833e01de" title="Creates the graphics pipeline." alt="" coords="1161,57,1380,98"/>
-<area shape="rect" href="classRehtiGraphics.html#a6ce071a893e0edc43841a8d0c01700ed" title="Records the command buffer." alt="" coords="1156,122,1385,163"/>
-<area shape="rect" href="classRehtiGraphics.html#ac5a68f1877be335b148ce98837402530" title="Cleans up all the resources used by vulkan." alt="" coords="885,5,1108,32"/>
-<area shape="rect" href="classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3" title="Initializes vulkan instance." alt="" coords="904,64,1089,91"/>
-<area shape="rect" href="classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469" title="Initializes the graphics backend." alt="" coords="625,64,837,91"/>
-<area shape="rect" href="classRehtiGraphics.html#ac049915f0d6b38117ece68d74eaec027" title="Draws a frame and records the previous frame time." alt="" coords="899,129,1094,156"/>
-<area shape="rect" href="classRehtiGraphics.html#a82d71e93dd76cde425cc34df93cf4723" title="Loops, polls events and draws frames." alt="" coords="639,129,824,156"/>
+<area shape="rect" title=" " alt="" coords="1407,64,1529,91"/>
+<area shape="rect" href="classRehtiGraphics.html#ad3df13b713fcfc461d206a323a5657dd" title="Cleans up used resources." alt="" coords="1158,5,1330,32"/>
+<area shape="rect" href="classRehtiGraphics.html#ac307d6b1b052e5e07374056e833e01de" title="Creates the graphics pipeline." alt="" coords="1135,57,1353,98"/>
+<area shape="rect" href="classRehtiGraphics.html#a6ce071a893e0edc43841a8d0c01700ed" title="Records the command buffer." alt="" coords="1129,122,1359,163"/>
+<area shape="rect" href="classRehtiGraphics.html#ac5a68f1877be335b148ce98837402530" title="Cleans up all the resources used by vulkan." alt="" coords="859,5,1081,32"/>
+<area shape="rect" href="classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3" title="Initializes vulkan instance." alt="" coords="877,64,1063,91"/>
+<area shape="rect" href="classRehtiGraphics.html#ac049915f0d6b38117ece68d74eaec027" title="Draws a frame and records the previous frame time." alt="" coords="873,129,1067,156"/>
+<area shape="rect" href="classRehtiGraphics.html#a82d71e93dd76cde425cc34df93cf4723" title="Loops, polls events and draws frames." alt="" coords="625,129,811,156"/>
 <area shape="rect" href="classRehtiGraphics.html#aba5f89e9dc6f91cfef79f525151a067d" title="Starts a rendering loop until the window is closed." alt="" coords="363,129,577,156"/>
 <area shape="rect" href="classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,129,315,156"/>
 <area shape="rect" href="classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="5,129,112,156"/>

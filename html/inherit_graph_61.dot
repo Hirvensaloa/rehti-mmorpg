@@ -4,5 +4,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node0 [label="PoolManager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPoolManager.html",tooltip="This class manages descriptor pools, and allows for the allocation of descriptor sets."];
+  Node0 [label="ObjectWithFileinfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structObjectWithFileinfo.html",tooltip=" "];
 }

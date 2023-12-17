@@ -11,9 +11,7 @@ digraph "ShaderManager::createShaderModule"
   Node3 [label="RehtiGraphics::createGraphics\lPipeline",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ac307d6b1b052e5e07374056e833e01de",tooltip="Creates the graphics pipeline."];
   Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node4 [label="RehtiGraphics::initVulkan",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3",tooltip="Initializes vulkan instance."];
-  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="RehtiGraphics::RehtiGraphics",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469",tooltip="Initializes the graphics backend."];
-  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="ShaderManager::createVertex\lShaderInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceShaderManager.html#ab64875c63a588c002e5f9f6b11faee1a",tooltip="Creates a vertex shader info to be used in pipeline creation."];
-  Node6 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="ShaderManager::createVertex\lShaderInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceShaderManager.html#ab64875c63a588c002e5f9f6b11faee1a",tooltip="Creates a vertex shader info to be used in pipeline creation."];
+  Node5 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

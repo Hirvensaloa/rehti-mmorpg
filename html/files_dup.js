@@ -35,6 +35,7 @@ var files_dup =
     [ "AttackAction.hpp", "AttackAction_8hpp.html", [
       [ "AttackAction", "classAttackAction.html", "classAttackAction" ]
     ] ],
+    [ "BasicTypes.cpp", "BasicTypes_8cpp.html", null ],
     [ "BasicTypes.hpp", "BasicTypes_8hpp.html", "BasicTypes_8hpp" ],
     [ "Camera.cpp", "Camera_8cpp.html", "Camera_8cpp" ],
     [ "Camera.hpp", "Camera_8hpp.html", "Camera_8hpp" ],

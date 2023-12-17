@@ -117,7 +117,8 @@ CurrentAction AttackAction::getActionInfo()
             actionInfo.id = ActionType::None;
             actionInfo.durationMs = 1000;
             actionInfo.looping = true;
-            actionInfo.targetCoordinate = {pEntityM->getLocation().x, pEntityM->getLocation().y, pEntityM->getLocation().z};
+            Coordinates& coords = pEntityM->getLocation();
+            actionInfo.targetCoordinate = {coords.x, coords.y, coords.z};
         }
 
         // Even though we are moving, we still want to inform the other entities about the target we are trying to attack
@@ -131,6 +132,8 @@ CurrentAction AttackAction::getActionInfo()
         actionInfo.durationMs = actionTimeM.count();
         actionInfo.looping = true;
         actionInfo.targetId = pTargetM->getInstanceId();
+        Coordinates& coords = pEntityM->getLocation();
+        actionInfo.targetCoordinate = {coords.x, coords.y, coords.z};
         return actionInfo;
     }
 }

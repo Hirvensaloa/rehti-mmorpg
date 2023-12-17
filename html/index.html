@@ -240,7 +240,7 @@ GameStateMessage</h3>
 <li><b>durationMs</b>: duration for one action iteration</li>
 <li><b>looping</b>: boolean indicating if the action should loop or not</li>
 <li><b>targetId</b>: action target id. Interpretation depends on the action id. For example, if attack -&gt; targetId is entityId. If move -&gt; targetId is not defined</li>
-<li><b>targetCoordinate</b>: target coordinates. Defined if action id is move.<ul>
+<li><b>targetCoordinate</b>: target coordinates. If action is move, can be used to determine the target coordinates. Can also be used to determine the direction of the action.<ul>
 <li><b>x</b>: x-coordinate</li>
 <li><b>y</b>: y-coordinate</li>
 <li><b>z</b>: z-coordinate</li>

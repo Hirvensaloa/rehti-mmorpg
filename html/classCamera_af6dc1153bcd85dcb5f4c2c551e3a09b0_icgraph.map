@@ -1,6 +1,5 @@
 <map id="Camera::zoom" name="Camera::zoom">
-<area shape="rect" id="node1" title="Zooms the camera by the given amount." alt="" coords="769,5,887,32"/>
-<area shape="rect" id="node2" href="$classCamera.html#a7a11d366f18cc5f2ad7183bb8792e7c9" title="Registers the camera controls to the given window." alt="" coords="265,5,501,32"/>
-<area shape="rect" id="node4" href="$classCamera.html#a3fd0454142eb9ec06bd4268fa4b8043f" title="callback for registering mouse scroll" alt="" coords="549,31,721,57"/>
-<area shape="rect" id="node3" href="$classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469" title="Initializes the graphics backend." alt="" coords="5,5,217,32"/>
+<area shape="rect" id="node1" title="Zooms the camera by the given amount." alt="" coords="509,5,627,32"/>
+<area shape="rect" id="node2" href="$classCamera.html#a7a11d366f18cc5f2ad7183bb8792e7c9" title="Registers the camera controls to the given window." alt="" coords="5,5,241,32"/>
+<area shape="rect" id="node3" href="$classCamera.html#a3fd0454142eb9ec06bd4268fa4b8043f" title="callback for registering mouse scroll" alt="" coords="289,31,461,57"/>
 </map>

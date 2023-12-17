@@ -1,7 +1,6 @@
 <map id="RehtiGraphics::checkDeviceExtensionSupport" name="RehtiGraphics::checkDeviceExtensionSupport">
-<area shape="rect" id="node1" title="Checks whether the given device supports the required extensions." alt="" coords="1028,5,1232,47"/>
-<area shape="rect" id="node2" href="$classRehtiGraphics.html#a036508e20175a1b0ca0fa06aa6a792b3" title="Checks whether the given device supports the required features." alt="" coords="749,13,980,39"/>
-<area shape="rect" id="node3" href="$classRehtiGraphics.html#aa22ca7610c8b7bbef6825db97feb4b8c" title="Chooses an appropriate gpu." alt="" coords="499,5,701,47"/>
-<area shape="rect" id="node4" href="$classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3" title="Initializes vulkan instance." alt="" coords="265,13,451,39"/>
-<area shape="rect" id="node5" href="$classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469" title="Initializes the graphics backend." alt="" coords="5,13,217,39"/>
+<area shape="rect" id="node1" title="Checks whether the given device supports the required extensions." alt="" coords="768,5,972,47"/>
+<area shape="rect" id="node2" href="$classRehtiGraphics.html#a036508e20175a1b0ca0fa06aa6a792b3" title="Checks whether the given device supports the required features." alt="" coords="489,13,720,39"/>
+<area shape="rect" id="node3" href="$classRehtiGraphics.html#aa22ca7610c8b7bbef6825db97feb4b8c" title="Chooses an appropriate gpu." alt="" coords="239,5,441,47"/>
+<area shape="rect" id="node4" href="$classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3" title="Initializes vulkan instance." alt="" coords="5,13,191,39"/>
 </map>

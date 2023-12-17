@@ -4,21 +4,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node34 [label="std::enable_shared\l_from_this",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
-  Node34 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node0 [label="Entity",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html",tooltip="Base pure virtual Entity class. Different types of enities inherit this."];
-  Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node1 [label="Npc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNpc.html",tooltip="Base NPC class. It represents a peaceful NPC that does not attack the player under any circumstances."];
-  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="AggressiveNpc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAggressiveNpc.html",tooltip="AggressiveNpc is a type of Npc that attacks the player within its aggression range."];
-  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="PassiveNpc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPassiveNpc.html",tooltip="PassiveNpc is a type of Npc that attacks only if provoked."];
-  Node0 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="PlayerCharacter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPlayerCharacter.html",tooltip="Class for a human player character."];
-  Node34 -> Node40 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node40 [label="EquippableItem",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEquippableItem.html",tooltip="Represents an item that can be equipped."];
-  Node61 [label="Item",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classItem.html",tooltip="Base class for items."];
-  Node61 -> Node40 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node61 -> Node62 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node62 [label="FoodItem",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classFoodItem.html",tooltip="Represents an item that can be eaten."];
+  Node0 [label="DrawableObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structDrawableObject.html",tooltip=" "];
 }

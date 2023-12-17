@@ -4,5 +4,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node0 [label="DescriptorBuilder",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classDescriptorBuilder.html",tooltip="DescriptorBuilder uses PoolManager and DescriptorLayoutCache to manage and create descriptor sets."];
+  Node0 [label="DatabaseManager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classDatabaseManager.html",tooltip="Class for handling database queries."];
 }

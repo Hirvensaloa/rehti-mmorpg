@@ -6,6 +6,10 @@ var BasicTypes_8hpp =
     [ "CharacterAnimationData", "structCharacterAnimationData.html", "structCharacterAnimationData" ],
     [ "BoneNode", "structBoneNode.html", "structBoneNode" ],
     [ "CharacterData", "structCharacterData.html", "structCharacterData" ],
+    [ "DirectionalLight", "structDirectionalLight.html", "structDirectionalLight" ],
+    [ "PointLight", "structPointLight.html", "structPointLight" ],
+    [ "PhongMaterial", "structPhongMaterial.html", "structPhongMaterial" ],
+    [ "CameraData", "structCameraData.html", "structCameraData" ],
     [ "Hit", "structHit.html", "structHit" ],
     [ "ImageData", "structImageData.html", "structImageData" ],
     [ "CharacterVertex", "structCharacterVertex.html", "structCharacterVertex" ],
@@ -13,7 +17,6 @@ var BasicTypes_8hpp =
     [ "SimpleVertex", "structSimpleVertex.html", "structSimpleVertex" ],
     [ "AnimationConfig", "structAnimationConfig.html", "structAnimationConfig" ],
     [ "GLM_FORCE_DEPTH_ZERO_TO_ONE", "BasicTypes_8hpp.html#aa53e0967978ad7a8792f6961156ec968", null ],
-    [ "ObjOrientation", "BasicTypes_8hpp.html#a13c6eed912838fe6dd08f6affb13e393", null ],
     [ "ObjectType", "BasicTypes_8hpp.html#a2c0ee4eb5bed32d6fb8358d113995aa4", [
       [ "CHARACTER", "BasicTypes_8hpp.html#a2c0ee4eb5bed32d6fb8358d113995aa4a762041e95dc7b081aaf6b0019dca8586", null ],
       [ "GAMEOBJECT", "BasicTypes_8hpp.html#a2c0ee4eb5bed32d6fb8358d113995aa4a6b047533015a7fef54211117473756f4", null ],

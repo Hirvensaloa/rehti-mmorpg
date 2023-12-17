@@ -103,7 +103,7 @@ Collaboration diagram for GraphicsObjectManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classGraphicsObjectManager__coll__graph.png" border="0" usemap="#aGraphicsObjectManager_coll__map" alt="Collaboration graph"/></div>
 <map name="aGraphicsObjectManager_coll__map" id="aGraphicsObjectManager_coll__map">
-<area shape="rect" title="Graphics object manager manages different types of objects that have memory and can be drawn." alt="" coords="1131,329,1385,876"/>
+<area shape="rect" title="Graphics object manager manages different types of objects that have memory and can be drawn." alt="" coords="1507,329,1761,949"/>
 <area shape="rect" title=" " alt="" coords="5,153,201,245"/>
 <area shape="rect" title=" " alt="" coords="226,160,426,237"/>
 <area shape="rect" title=" " alt="" coords="450,153,610,245"/>
@@ -113,12 +113,16 @@ Collaboration diagram for GraphicsObjectManager:</div>
 <area shape="rect" title=" " alt="" coords="936,5,1071,83"/>
 <area shape="rect" title=" " alt="" coords="989,160,1154,237"/>
 <area shape="rect" title=" " alt="" coords="1178,153,1338,245"/>
-<area shape="rect" title=" " alt="" coords="1362,153,1522,245"/>
-<area shape="rect" title=" " alt="" coords="1547,160,1676,237"/>
-<area shape="rect" title=" " alt="" coords="1701,160,1935,237"/>
-<area shape="rect" title=" " alt="" coords="1960,160,2071,237"/>
-<area shape="rect" title=" " alt="" coords="2095,160,2179,237"/>
-<area shape="rect" title=" " alt="" coords="2203,153,2427,245"/>
+<area shape="rect" href="structLightObject.html" title="Simple light object that contains a list of uniform buffers." alt="" coords="1362,160,1618,237"/>
+<area shape="rect" title=" " alt="" coords="1375,5,1605,83"/>
+<area shape="rect" title=" " alt="" coords="1642,153,1802,245"/>
+<area shape="rect" title=" " alt="" coords="1827,160,1956,237"/>
+<area shape="rect" title=" " alt="" coords="1980,160,2091,237"/>
+<area shape="rect" title=" " alt="" coords="2115,160,2350,237"/>
+<area shape="rect" title=" " alt="" coords="2375,160,2485,237"/>
+<area shape="rect" title=" " alt="" coords="2509,160,2593,237"/>
+<area shape="rect" title=" " alt="" coords="2618,153,2842,245"/>
+<area shape="rect" title=" " alt="" coords="2866,160,3037,237"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -139,12 +143,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7754dedf128378b44f148834adf63cb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a7754dedf128378b44f148834adf63cb9">addTransferQueueFamilyAccess</a> (const uint32_t transferQueueFamily, VkQueue transferQueue)</td></tr>
 <tr class="memdesc:a7754dedf128378b44f148834adf63cb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the given transfer queue to the manager.  <a href="classGraphicsObjectManager.html#a7754dedf128378b44f148834adf63cb9">More...</a><br /></td></tr>
 <tr class="separator:a7754dedf128378b44f148834adf63cb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff8acb0cefae98462ce06501c1d9fa3d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d">addCharacter</a> (int characterID, const std::vector&lt; <a class="el" href="structCharacterVertex.html">CharacterVertex</a> &gt; &amp;vertices, const std::vector&lt; uint32_t &gt; &amp;indices, <a class="el" href="structImageData.html">ImageData</a> &amp;texture, glm::mat4 transformation, glm::mat4 bindPose[<a class="el" href="BasicTypes_8hpp.html#a8f66feb97fa756af54339820c6f3bc79">MAX_BONES</a>], VkSampler imgSampler)</td></tr>
-<tr class="memdesc:aff8acb0cefae98462ce06501c1d9fa3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a character to the buffer manager with the given parameters.  <a href="classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d">More...</a><br /></td></tr>
-<tr class="separator:aff8acb0cefae98462ce06501c1d9fa3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace6f78f0097abfb40a8c1957058792e8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8">addGameObject</a> (int objectId, const std::vector&lt; <a class="el" href="structVertex.html">Vertex</a> &gt; &amp;vertices, const std::vector&lt; uint32_t &gt; &amp;indices, <a class="el" href="structImageData.html">ImageData</a> &amp;texture, glm::mat4 transformation, VkSampler imgSampler)</td></tr>
-<tr class="memdesc:ace6f78f0097abfb40a8c1957058792e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a game object to the buffer manager.  <a href="classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8">More...</a><br /></td></tr>
-<tr class="separator:ace6f78f0097abfb40a8c1957058792e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb250c237a565acb49d401ddb811e6d0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0">addCharacter</a> (int characterID, const std::vector&lt; <a class="el" href="structCharacterVertex.html">CharacterVertex</a> &gt; &amp;vertices, const std::vector&lt; uint32_t &gt; &amp;indices, <a class="el" href="structImageData.html">ImageData</a> &amp;texture, glm::mat4 transformation, glm::mat4 bindPose[<a class="el" href="BasicTypes_8hpp.html#a8f66feb97fa756af54339820c6f3bc79">MAX_BONES</a>], VkSampler imgSampler, <a class="el" href="structPhongMaterial.html">PhongMaterial</a> material=<a class="el" href="structPhongMaterial.html#a2157f867821cfd8e82bc073e72da97f1">PhongMaterial::getDefaultMaterial</a>())</td></tr>
+<tr class="memdesc:adb250c237a565acb49d401ddb811e6d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a character to the buffer manager with the given parameters.  <a href="classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0">More...</a><br /></td></tr>
+<tr class="separator:adb250c237a565acb49d401ddb811e6d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf41fa0d8bada4f83df3ab554c4d8183"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183">addGameObject</a> (int objectId, const std::vector&lt; <a class="el" href="structVertex.html">Vertex</a> &gt; &amp;vertices, const std::vector&lt; uint32_t &gt; &amp;indices, <a class="el" href="structImageData.html">ImageData</a> &amp;texture, glm::mat4 transformation, VkSampler imgSampler, <a class="el" href="structPhongMaterial.html">PhongMaterial</a> material=<a class="el" href="structPhongMaterial.html#a2157f867821cfd8e82bc073e72da97f1">PhongMaterial::getDefaultMaterial</a>())</td></tr>
+<tr class="memdesc:acf41fa0d8bada4f83df3ab554c4d8183"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a game object to the buffer manager.  <a href="classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183">More...</a><br /></td></tr>
+<tr class="separator:acf41fa0d8bada4f83df3ab554c4d8183"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f8086ab3f1129a2a4ff1435ed5b1c72"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a8f8086ab3f1129a2a4ff1435ed5b1c72">addTestObject</a> (int <a class="el" href="Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>, const std::vector&lt; <a class="el" href="structSimpleVertex.html">SimpleVertex</a> &gt; &amp;vertices, const std::vector&lt; uint32_t &gt; &amp;indices, glm::mat4 transformation)</td></tr>
 <tr class="memdesc:a8f8086ab3f1129a2a4ff1435ed5b1c72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a test object to the buffer manager.  <a href="classGraphicsObjectManager.html#a8f8086ab3f1129a2a4ff1435ed5b1c72">More...</a><br /></td></tr>
 <tr class="separator:a8f8086ab3f1129a2a4ff1435ed5b1c72"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,6 +166,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8acb83e2be6ac72bc4a3123dc0111b68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a910dd51e70870f3722929248389d2e5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a910dd51e70870f3722929248389d2e5f">updateCharacterDescriptor</a> (int <a class="el" href="Server_8cpp.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>, const void *transformSrcData, const void *boneSrcData, uint32_t frame)</td></tr>
 <tr class="separator:a910dd51e70870f3722929248389d2e5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98d16cc88460ed6c16d551c28109d602"><td class="memItemLeft" align="right" valign="top">VkDescriptorSet&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a98d16cc88460ed6c16d551c28109d602">getSunDescriptorSet</a> (uint32_t frame) const</td></tr>
+<tr class="memdesc:a98d16cc88460ed6c16d551c28109d602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the descriptor set of the sun for the given frame.  <a href="classGraphicsObjectManager.html#a98d16cc88460ed6c16d551c28109d602">More...</a><br /></td></tr>
+<tr class="separator:a98d16cc88460ed6c16d551c28109d602"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c27d819041b06e786ec06ce8a4d3f36"><td class="memItemLeft" align="right" valign="top">VkDescriptorSetLayout&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a7c27d819041b06e786ec06ce8a4d3f36">getSunLayout</a> () const</td></tr>
+<tr class="memdesc:a7c27d819041b06e786ec06ce8a4d3f36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the descriptor set layout of the sun.  <a href="classGraphicsObjectManager.html#a7c27d819041b06e786ec06ce8a4d3f36">More...</a><br /></td></tr>
+<tr class="separator:a7c27d819041b06e786ec06ce8a4d3f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26d74b45e7f1928316a9e5cfe921a21a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a26d74b45e7f1928316a9e5cfe921a21a">updateSunDescriptor</a> (const void *srcData, uint32_t frame)</td></tr>
+<tr class="memdesc:a26d74b45e7f1928316a9e5cfe921a21a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the sun descriptor with the given data.  <a href="classGraphicsObjectManager.html#a26d74b45e7f1928316a9e5cfe921a21a">More...</a><br /></td></tr>
+<tr class="separator:a26d74b45e7f1928316a9e5cfe921a21a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0589234dd3be1081746e9b2f69e71d0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a0589234dd3be1081746e9b2f69e71d0f">updateCameraDescriptor</a> (const void *srcData, uint32_t frame)</td></tr>
+<tr class="memdesc:a0589234dd3be1081746e9b2f69e71d0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the camera descriptor with the given data.  <a href="classGraphicsObjectManager.html#a0589234dd3be1081746e9b2f69e71d0f">More...</a><br /></td></tr>
+<tr class="separator:a0589234dd3be1081746e9b2f69e71d0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01ba2c0aa133c283558bc9a6d1f81db2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structAllocatedImage.html">AllocatedImage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a01ba2c0aa133c283558bc9a6d1f81db2">createDepthImage</a> (uint32_t width, uint32_t height, VkFormat depthFormat)</td></tr>
 <tr class="memdesc:a01ba2c0aa133c283558bc9a6d1f81db2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a depth image.  <a href="classGraphicsObjectManager.html#a01ba2c0aa133c283558bc9a6d1f81db2">More...</a><br /></td></tr>
 <tr class="separator:a01ba2c0aa133c283558bc9a6d1f81db2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -230,6 +246,9 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a0f54e4c067ab0dea4897191617d9a722"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structAllocatedBuffer.html">AllocatedBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a0f54e4c067ab0dea4897191617d9a722">createStagingBuffer</a> (VkDeviceSize size, VmaAllocationInfo &amp;allocInfo)</td></tr>
 <tr class="memdesc:a0f54e4c067ab0dea4897191617d9a722"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper for creating a staging buffer.  <a href="classGraphicsObjectManager.html#a0f54e4c067ab0dea4897191617d9a722">More...</a><br /></td></tr>
 <tr class="separator:a0f54e4c067ab0dea4897191617d9a722"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dcb55ccf344461110abba45241817fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a4dcb55ccf344461110abba45241817fb">createSun</a> ()</td></tr>
+<tr class="memdesc:a4dcb55ccf344461110abba45241817fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates necessary memory allocations and mappings for a sun.  <a href="classGraphicsObjectManager.html#a4dcb55ccf344461110abba45241817fb">More...</a><br /></td></tr>
+<tr class="separator:a4dcb55ccf344461110abba45241817fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -237,6 +256,9 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a4ed27971be1c3672f0a5cae2b170b837"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a572ab0c14e8de291d3f33475cee5dc59"><td class="memItemLeft" align="right" valign="top">VmaAllocator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a572ab0c14e8de291d3f33475cee5dc59">allocatorM</a></td></tr>
 <tr class="separator:a572ab0c14e8de291d3f33475cee5dc59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c852f99797c6b7536e99614bf7acbd0"><td class="memItemLeft" align="right" valign="top">VkDeviceSize&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a6c852f99797c6b7536e99614bf7acbd0">minOffsetM</a></td></tr>
+<tr class="memdesc:a6c852f99797c6b7536e99614bf7acbd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum offset alignment for uniform buffers.  <a href="classGraphicsObjectManager.html#a6c852f99797c6b7536e99614bf7acbd0">More...</a><br /></td></tr>
+<tr class="separator:a6c852f99797c6b7536e99614bf7acbd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2721d9ef6496c9929988c4a08c7fd752"><td class="memItemLeft" align="right" valign="top">std::shared_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a2721d9ef6496c9929988c4a08c7fd752">graphicsQueueMutexM</a></td></tr>
 <tr class="separator:a2721d9ef6496c9929988c4a08c7fd752"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7c7892d79e1647bdbb33e979e4e7992"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGraphicsObjectManager_1_1CommandUnit.html">CommandUnit</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#af7c7892d79e1647bdbb33e979e4e7992">graphicsCommandUnitM</a></td></tr>
@@ -255,6 +277,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a93a2e9f851cbf7ba007d8ebdf6a3e14d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d3a2af8b99e5ac19bdd59e390c247cd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structAreaObject.html">AreaObject</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a0d3a2af8b99e5ac19bdd59e390c247cd">areaObjectsM</a></td></tr>
 <tr class="separator:a0d3a2af8b99e5ac19bdd59e390c247cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35596efea72106a464b7092839def508"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structLightObject.html">LightObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a35596efea72106a464b7092839def508">sunM</a></td></tr>
+<tr class="separator:a35596efea72106a464b7092839def508"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08418bb4527bf8641b433e14026390d1"><td class="memItemLeft" align="right" valign="top">VkDescriptorSetLayout&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a08418bb4527bf8641b433e14026390d1">sunLayoutM</a></td></tr>
+<tr class="separator:a08418bb4527bf8641b433e14026390d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57735980539aa5e054535d3bf1f420ff"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structCombinedImage.html">CombinedImage</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a57735980539aa5e054535d3bf1f420ff">allocatedImagesM</a></td></tr>
 <tr class="separator:a57735980539aa5e054535d3bf1f420ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25acab7ee6bb706be56f3846013eb700"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphicsObjectManager.html#a25acab7ee6bb706be56f3846013eb700">frameCountM</a></td></tr>
@@ -429,8 +455,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="aff8acb0cefae98462ce06501c1d9fa3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff8acb0cefae98462ce06501c1d9fa3d">&#9670;&nbsp;</a></span>addCharacter()</h2>
+<a id="adb250c237a565acb49d401ddb811e6d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb250c237a565acb49d401ddb811e6d0">&#9670;&nbsp;</a></span>addCharacter()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -475,7 +501,13 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">VkSampler&#160;</td>
-          <td class="paramname"><em>imgSampler</em>&#160;</td>
+          <td class="paramname"><em>imgSampler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structPhongMaterial.html">PhongMaterial</a>&#160;</td>
+          <td class="paramname"><em>material</em> = <code><a class="el" href="structPhongMaterial.html#a2157f867821cfd8e82bc073e72da97f1">PhongMaterial::getDefaultMaterial</a>()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -502,8 +534,8 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classGraphicsObjectManager_aff8acb0cefae98462ce06501c1d9fa3d_cgraph.png" border="0" usemap="#aclassGraphicsObjectManager_aff8acb0cefae98462ce06501c1d9fa3d_cgraph" alt=""/></div>
-<map name="aclassGraphicsObjectManager_aff8acb0cefae98462ce06501c1d9fa3d_cgraph" id="aclassGraphicsObjectManager_aff8acb0cefae98462ce06501c1d9fa3d_cgraph">
+<div class="center"><img src="classGraphicsObjectManager_adb250c237a565acb49d401ddb811e6d0_cgraph.png" border="0" usemap="#aclassGraphicsObjectManager_adb250c237a565acb49d401ddb811e6d0_cgraph" alt=""/></div>
+<map name="aclassGraphicsObjectManager_adb250c237a565acb49d401ddb811e6d0_cgraph" id="aclassGraphicsObjectManager_adb250c237a565acb49d401ddb811e6d0_cgraph">
 <area shape="rect" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,137,184,179"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a149cc91ffc0073433e4c3734eb80c8b9" title="Copies the given data to the given buffer." alt="" coords="232,72,411,113"/>
 <area shape="rect" href="classGraphicsObjectManager.html#acaa2f62a870f1426abe523acb1d8ef6f" title="Creates a buffer with the given parameters." alt="" coords="711,37,889,79"/>
@@ -523,8 +555,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="ace6f78f0097abfb40a8c1957058792e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace6f78f0097abfb40a8c1957058792e8">&#9670;&nbsp;</a></span>addGameObject()</h2>
+<a id="acf41fa0d8bada4f83df3ab554c4d8183"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf41fa0d8bada4f83df3ab554c4d8183">&#9670;&nbsp;</a></span>addGameObject()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -563,7 +595,13 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">VkSampler&#160;</td>
-          <td class="paramname"><em>imgSampler</em>&#160;</td>
+          <td class="paramname"><em>imgSampler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structPhongMaterial.html">PhongMaterial</a>&#160;</td>
+          <td class="paramname"><em>material</em> = <code><a class="el" href="structPhongMaterial.html#a2157f867821cfd8e82bc073e72da97f1">PhongMaterial::getDefaultMaterial</a>()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -589,8 +627,8 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classGraphicsObjectManager_ace6f78f0097abfb40a8c1957058792e8_cgraph.png" border="0" usemap="#aclassGraphicsObjectManager_ace6f78f0097abfb40a8c1957058792e8_cgraph" alt=""/></div>
-<map name="aclassGraphicsObjectManager_ace6f78f0097abfb40a8c1957058792e8_cgraph" id="aclassGraphicsObjectManager_ace6f78f0097abfb40a8c1957058792e8_cgraph">
+<div class="center"><img src="classGraphicsObjectManager_acf41fa0d8bada4f83df3ab554c4d8183_cgraph.png" border="0" usemap="#aclassGraphicsObjectManager_acf41fa0d8bada4f83df3ab554c4d8183_cgraph" alt=""/></div>
+<map name="aclassGraphicsObjectManager_acf41fa0d8bada4f83df3ab554c4d8183_cgraph" id="aclassGraphicsObjectManager_acf41fa0d8bada4f83df3ab554c4d8183_cgraph">
 <area shape="rect" title="Adds a game object to the buffer manager." alt="" coords="5,137,184,179"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a149cc91ffc0073433e4c3734eb80c8b9" title="Copies the given data to the given buffer." alt="" coords="232,72,411,113"/>
 <area shape="rect" href="classGraphicsObjectManager.html#acaa2f62a870f1426abe523acb1d8ef6f" title="Creates a buffer with the given parameters." alt="" coords="711,37,889,79"/>
@@ -809,8 +847,8 @@ Here is the caller graph for this function:</div>
 <map name="aclassGraphicsObjectManager_a149cc91ffc0073433e4c3734eb80c8b9_icgraph" id="aclassGraphicsObjectManager_a149cc91ffc0073433e4c3734eb80c8b9_icgraph">
 <area shape="rect" title="Copies the given data to the given buffer." alt="" coords="232,104,411,145"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf" title="Adds an area object to the buffer manager." alt="" coords="5,5,184,47"/>
-<area shape="rect" href="classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
-<area shape="rect" href="classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a8f8086ab3f1129a2a4ff1435ed5b1c72" title="Adds a test object to the buffer manager." alt="" coords="5,201,184,243"/>
 </map>
 </div>
@@ -875,8 +913,8 @@ Here is the caller graph for this function:</div>
 <map name="aclassGraphicsObjectManager_a9d3d8755593f5f4cd26ba45c689e31ee_icgraph" id="aclassGraphicsObjectManager_a9d3d8755593f5f4cd26ba45c689e31ee_icgraph">
 <area shape="rect" title="Copies the given data to the given image." alt="" coords="232,71,411,112"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf" title="Adds an area object to the buffer manager." alt="" coords="5,5,184,47"/>
-<area shape="rect" href="classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
-<area shape="rect" href="classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
 </map>
 </div>
 
@@ -975,12 +1013,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classGraphicsObjectManager_acaa2f62a870f1426abe523acb1d8ef6f_icgraph.png" border="0" usemap="#aclassGraphicsObjectManager_acaa2f62a870f1426abe523acb1d8ef6f_icgraph" alt=""/></div>
 <map name="aclassGraphicsObjectManager_acaa2f62a870f1426abe523acb1d8ef6f_icgraph" id="aclassGraphicsObjectManager_acaa2f62a870f1426abe523acb1d8ef6f_icgraph">
-<area shape="rect" title="Creates a buffer with the given parameters." alt="" coords="685,104,864,145"/>
+<area shape="rect" title="Creates a buffer with the given parameters." alt="" coords="685,165,864,207"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf" title="Adds an area object to the buffer manager." alt="" coords="5,5,184,47"/>
-<area shape="rect" href="classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
-<area shape="rect" href="classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a8f8086ab3f1129a2a4ff1435ed5b1c72" title="Adds a test object to the buffer manager." alt="" coords="5,223,184,264"/>
-<area shape="rect" href="classGraphicsObjectManager.html#a0f54e4c067ab0dea4897191617d9a722" title="Helper for creating a staging buffer." alt="" coords="459,104,637,145"/>
+<area shape="rect" href="classGraphicsObjectManager.html#a0f54e4c067ab0dea4897191617d9a722" title="Helper for creating a staging buffer." alt="" coords="459,136,637,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#a4dcb55ccf344461110abba45241817fb" title="Creates necessary memory allocations and mappings for a sun." alt="" coords="459,304,637,345"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a149cc91ffc0073433e4c3734eb80c8b9" title="Copies the given data to the given buffer." alt="" coords="232,136,411,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a9d3d8755593f5f4cd26ba45c689e31ee" title="Copies the given data to the given image." alt="" coords="232,71,411,112"/>
 </map>
@@ -1291,8 +1330,8 @@ Here is the caller graph for this function:</div>
 <map name="aclassGraphicsObjectManager_a66285158960fc1f0c9bf7524597148da_icgraph" id="aclassGraphicsObjectManager_a66285158960fc1f0c9bf7524597148da_icgraph">
 <area shape="rect" title="Creates an allocated image. The standard parameters make it easy to create a texture image on the GPU..." alt="" coords="232,136,411,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf" title="Adds an area object to the buffer manager." alt="" coords="5,5,184,47"/>
-<area shape="rect" href="classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
-<area shape="rect" href="classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a8fe7c8fba0915d5236ae3993575aaa63" title="Creates an image for the given data and stores the memory to this class." alt="" coords="5,201,184,243"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a01ba2c0aa133c283558bc9a6d1f81db2" title="Creates a depth image." alt="" coords="5,267,184,308"/>
 </map>
@@ -1348,8 +1387,8 @@ Here is the caller graph for this function:</div>
 <map name="aclassGraphicsObjectManager_aa7ea92ddcf8c00c47420e545fe08b7be_icgraph" id="aclassGraphicsObjectManager_aa7ea92ddcf8c00c47420e545fe08b7be_icgraph">
 <area shape="rect" title="Creates an image view for the given image and format." alt="" coords="232,104,411,145"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf" title="Adds an area object to the buffer manager." alt="" coords="5,5,184,47"/>
-<area shape="rect" href="classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
-<area shape="rect" href="classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a8fe7c8fba0915d5236ae3993575aaa63" title="Creates an image for the given data and stores the memory to this class." alt="" coords="5,201,184,243"/>
 </map>
 </div>
@@ -1419,9 +1458,47 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="classGraphicsObjectManager.html#a149cc91ffc0073433e4c3734eb80c8b9" title="Copies the given data to the given buffer." alt="" coords="232,136,411,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a9d3d8755593f5f4cd26ba45c689e31ee" title="Copies the given data to the given image." alt="" coords="232,71,411,112"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf" title="Adds an area object to the buffer manager." alt="" coords="5,5,184,47"/>
-<area shape="rect" href="classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
-<area shape="rect" href="classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a8f8086ab3f1129a2a4ff1435ed5b1c72" title="Adds a test object to the buffer manager." alt="" coords="5,201,184,243"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4dcb55ccf344461110abba45241817fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dcb55ccf344461110abba45241817fb">&#9670;&nbsp;</a></span>createSun()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GraphicsObjectManager::createSun </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates necessary memory allocations and mappings for a sun. </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classGraphicsObjectManager_a4dcb55ccf344461110abba45241817fb_cgraph.png" border="0" usemap="#aclassGraphicsObjectManager_a4dcb55ccf344461110abba45241817fb_cgraph" alt=""/></div>
+<map name="aclassGraphicsObjectManager_a4dcb55ccf344461110abba45241817fb_cgraph" id="aclassGraphicsObjectManager_a4dcb55ccf344461110abba45241817fb_cgraph">
+<area shape="rect" title="Creates necessary memory allocations and mappings for a sun." alt="" coords="5,39,184,80"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acaa2f62a870f1426abe523acb1d8ef6f" title="Creates a buffer with the given parameters." alt="" coords="232,39,411,80"/>
+<area shape="rect" href="classGraphicsObjectManager.html#a48087fcc6c8ff32a160ff8105240538d" title="Returns number of queue families." alt="" coords="459,5,637,47"/>
+<area shape="rect" href="classGraphicsObjectManager.html#a1f57aa379d9151b4dcb74622f011e008" title="Returns the sharing mode of created resources." alt="" coords="459,71,637,112"/>
 </map>
 </div>
 
@@ -1506,8 +1583,8 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="classGraphicsObjectManager.html#a9d3d8755593f5f4cd26ba45c689e31ee" title="Copies the given data to the given image." alt="" coords="251,71,429,112"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a9b1f91690fd93e7d7d34d4a6ec8585a7" title="Transitions the given image to the given layout using graphics queue." alt="" coords="232,201,448,243"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf" title="Adds an area object to the buffer manager." alt="" coords="5,5,184,47"/>
-<area shape="rect" href="classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
-<area shape="rect" href="classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a8f8086ab3f1129a2a4ff1435ed5b1c72" title="Adds a test object to the buffer manager." alt="" coords="5,201,184,243"/>
 </map>
 </div>
@@ -1672,8 +1749,8 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="classGraphicsObjectManager.html#a9d3d8755593f5f4cd26ba45c689e31ee" title="Copies the given data to the given image." alt="" coords="251,71,429,112"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a9b1f91690fd93e7d7d34d4a6ec8585a7" title="Transitions the given image to the given layout using graphics queue." alt="" coords="232,136,448,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf" title="Adds an area object to the buffer manager." alt="" coords="5,5,184,47"/>
-<area shape="rect" href="classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
-<area shape="rect" href="classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
 </map>
 </div>
 
@@ -1709,13 +1786,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classGraphicsObjectManager_a48087fcc6c8ff32a160ff8105240538d_icgraph.png" border="0" usemap="#aclassGraphicsObjectManager_a48087fcc6c8ff32a160ff8105240538d_icgraph" alt=""/></div>
 <map name="aclassGraphicsObjectManager_a48087fcc6c8ff32a160ff8105240538d_icgraph" id="aclassGraphicsObjectManager_a48087fcc6c8ff32a160ff8105240538d_icgraph">
-<area shape="rect" title="Returns number of queue families." alt="" coords="912,104,1091,145"/>
-<area shape="rect" href="classGraphicsObjectManager.html#acaa2f62a870f1426abe523acb1d8ef6f" title="Creates a buffer with the given parameters." alt="" coords="685,104,864,145"/>
+<area shape="rect" title="Returns number of queue families." alt="" coords="912,165,1091,207"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acaa2f62a870f1426abe523acb1d8ef6f" title="Creates a buffer with the given parameters." alt="" coords="685,165,864,207"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf" title="Adds an area object to the buffer manager." alt="" coords="5,5,184,47"/>
-<area shape="rect" href="classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
-<area shape="rect" href="classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a8f8086ab3f1129a2a4ff1435ed5b1c72" title="Adds a test object to the buffer manager." alt="" coords="5,223,184,264"/>
-<area shape="rect" href="classGraphicsObjectManager.html#a0f54e4c067ab0dea4897191617d9a722" title="Helper for creating a staging buffer." alt="" coords="459,104,637,145"/>
+<area shape="rect" href="classGraphicsObjectManager.html#a0f54e4c067ab0dea4897191617d9a722" title="Helper for creating a staging buffer." alt="" coords="459,136,637,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#a4dcb55ccf344461110abba45241817fb" title="Creates necessary memory allocations and mappings for a sun." alt="" coords="459,304,637,345"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a149cc91ffc0073433e4c3734eb80c8b9" title="Copies the given data to the given buffer." alt="" coords="232,136,411,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a9d3d8755593f5f4cd26ba45c689e31ee" title="Copies the given data to the given image." alt="" coords="232,71,411,112"/>
 </map>
@@ -1788,17 +1866,65 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classGraphicsObjectManager_a1f57aa379d9151b4dcb74622f011e008_icgraph.png" border="0" usemap="#aclassGraphicsObjectManager_a1f57aa379d9151b4dcb74622f011e008_icgraph" alt=""/></div>
 <map name="aclassGraphicsObjectManager_a1f57aa379d9151b4dcb74622f011e008_icgraph" id="aclassGraphicsObjectManager_a1f57aa379d9151b4dcb74622f011e008_icgraph">
-<area shape="rect" title="Returns the sharing mode of created resources." alt="" coords="912,104,1091,145"/>
-<area shape="rect" href="classGraphicsObjectManager.html#acaa2f62a870f1426abe523acb1d8ef6f" title="Creates a buffer with the given parameters." alt="" coords="685,104,864,145"/>
+<area shape="rect" title="Returns the sharing mode of created resources." alt="" coords="912,165,1091,207"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acaa2f62a870f1426abe523acb1d8ef6f" title="Creates a buffer with the given parameters." alt="" coords="685,165,864,207"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf" title="Adds an area object to the buffer manager." alt="" coords="5,5,184,47"/>
-<area shape="rect" href="classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
-<area shape="rect" href="classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a8f8086ab3f1129a2a4ff1435ed5b1c72" title="Adds a test object to the buffer manager." alt="" coords="5,223,184,264"/>
-<area shape="rect" href="classGraphicsObjectManager.html#a0f54e4c067ab0dea4897191617d9a722" title="Helper for creating a staging buffer." alt="" coords="459,104,637,145"/>
+<area shape="rect" href="classGraphicsObjectManager.html#a0f54e4c067ab0dea4897191617d9a722" title="Helper for creating a staging buffer." alt="" coords="459,136,637,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#a4dcb55ccf344461110abba45241817fb" title="Creates necessary memory allocations and mappings for a sun." alt="" coords="459,304,637,345"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a149cc91ffc0073433e4c3734eb80c8b9" title="Copies the given data to the given buffer." alt="" coords="232,136,411,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a9d3d8755593f5f4cd26ba45c689e31ee" title="Copies the given data to the given image." alt="" coords="232,71,411,112"/>
 </map>
 </div>
+
+</div>
+</div>
+<a id="a98d16cc88460ed6c16d551c28109d602"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98d16cc88460ed6c16d551c28109d602">&#9670;&nbsp;</a></span>getSunDescriptorSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VkDescriptorSet GraphicsObjectManager::getSunDescriptorSet </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>frame</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the descriptor set of the sun for the given frame. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frame</td><td>to get the descriptor set for. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>VkDescriptorSet of the sun. </dd></dl>
+
+</div>
+</div>
+<a id="a7c27d819041b06e786ec06ce8a4d3f36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c27d819041b06e786ec06ce8a4d3f36">&#9670;&nbsp;</a></span>getSunLayout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VkDescriptorSetLayout GraphicsObjectManager::getSunLayout </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the descriptor set layout of the sun. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>
@@ -1853,8 +1979,8 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="classGraphicsObjectManager.html#a9d3d8755593f5f4cd26ba45c689e31ee" title="Copies the given data to the given image." alt="" coords="251,71,429,112"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a9b1f91690fd93e7d7d34d4a6ec8585a7" title="Transitions the given image to the given layout using graphics queue." alt="" coords="232,201,448,243"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf" title="Adds an area object to the buffer manager." alt="" coords="5,5,184,47"/>
-<area shape="rect" href="classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
-<area shape="rect" href="classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a8f8086ab3f1129a2a4ff1435ed5b1c72" title="Adds a test object to the buffer manager." alt="" coords="5,201,184,243"/>
 </map>
 </div>
@@ -2019,10 +2145,47 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="classGraphicsObjectManager.html#a9d3d8755593f5f4cd26ba45c689e31ee" title="Copies the given data to the given image." alt="" coords="251,71,429,112"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a9b1f91690fd93e7d7d34d4a6ec8585a7" title="Transitions the given image to the given layout using graphics queue." alt="" coords="232,136,448,177"/>
 <area shape="rect" href="classGraphicsObjectManager.html#a210353a39eb66174b93611070a440fdf" title="Adds an area object to the buffer manager." alt="" coords="5,5,184,47"/>
-<area shape="rect" href="classGraphicsObjectManager.html#aff8acb0cefae98462ce06501c1d9fa3d" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
-<area shape="rect" href="classGraphicsObjectManager.html#ace6f78f0097abfb40a8c1957058792e8" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
+<area shape="rect" href="classGraphicsObjectManager.html#adb250c237a565acb49d401ddb811e6d0" title="Adds a character to the buffer manager with the given parameters." alt="" coords="5,71,184,112"/>
+<area shape="rect" href="classGraphicsObjectManager.html#acf41fa0d8bada4f83df3ab554c4d8183" title="Adds a game object to the buffer manager." alt="" coords="5,136,184,177"/>
 </map>
 </div>
+
+</div>
+</div>
+<a id="a0589234dd3be1081746e9b2f69e71d0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0589234dd3be1081746e9b2f69e71d0f">&#9670;&nbsp;</a></span>updateCameraDescriptor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GraphicsObjectManager::updateCameraDescriptor </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>srcData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>frame</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the camera descriptor with the given data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">srcData</td><td>is the data to be copied </td></tr>
+    <tr><td class="paramname">frame</td><td>is the frame of the update </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -2112,6 +2275,43 @@ Here is the caller graph for this function:</div>
   <table class="params">
     <tr><td class="paramname">id</td><td>of the object to update </td></tr>
     <tr><td class="paramname">srcData</td><td>is the data to be copied to the buffer (4x4 matrix) </td></tr>
+    <tr><td class="paramname">frame</td><td>is the frame of the update </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a26d74b45e7f1928316a9e5cfe921a21a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26d74b45e7f1928316a9e5cfe921a21a">&#9670;&nbsp;</a></span>updateSunDescriptor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GraphicsObjectManager::updateSunDescriptor </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>srcData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>frame</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the sun descriptor with the given data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">srcData</td><td>is the data to be copied </td></tr>
     <tr><td class="paramname">frame</td><td>is the frame of the update </td></tr>
   </table>
   </dd>
@@ -2406,6 +2606,30 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a6c852f99797c6b7536e99614bf7acbd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c852f99797c6b7536e99614bf7acbd0">&#9670;&nbsp;</a></span>minOffsetM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">VkDeviceSize GraphicsObjectManager::minOffsetM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Minimum offset alignment for uniform buffers. </p>
+
+</div>
+</div>
 <a id="ab99e5e7d30c5ea1e7ca3867641f562f3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab99e5e7d30c5ea1e7ca3867641f562f3">&#9670;&nbsp;</a></span>pBuilderM</h2>
 
@@ -2417,6 +2641,50 @@ Here is the caller graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">std::unique_ptr&lt;<a class="el" href="classDescriptorBuilder.html">DescriptorBuilder</a>&gt; GraphicsObjectManager::pBuilderM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a08418bb4527bf8641b433e14026390d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08418bb4527bf8641b433e14026390d1">&#9670;&nbsp;</a></span>sunLayoutM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">VkDescriptorSetLayout GraphicsObjectManager::sunLayoutM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a35596efea72106a464b7092839def508"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35596efea72106a464b7092839def508">&#9670;&nbsp;</a></span>sunM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structLightObject.html">LightObject</a> GraphicsObjectManager::sunM</td>
         </tr>
       </table>
   </td>

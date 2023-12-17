@@ -85,7 +85,9 @@ $(document).ready(function(){initNavTree('MapObjLoader_8hpp.html',''); initResiz
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">MapObjLoader.hpp File Reference</div>  </div>
 </div><!--header-->
@@ -119,6 +121,13 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVertex.html">Vertex</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ae541d8d198e9a5a7d42de6b51c917770"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MapObjLoader_8hpp.html#ae541d8d198e9a5a7d42de6b51c917770">WINDING_ORDER</a> : bool { <a class="el" href="MapObjLoader_8hpp.html#ae541d8d198e9a5a7d42de6b51c917770a436e34ac11f92a71ed5b0c06a6cba180">CLOCKWISE</a>
+, <a class="el" href="MapObjLoader_8hpp.html#ae541d8d198e9a5a7d42de6b51c917770a6afc03b68174f14642be3753f1c7edca">COUNTER_CLOCKWISE</a>
+ }</td></tr>
+<tr class="separator:ae541d8d198e9a5a7d42de6b51c917770"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a167afe55692731c9613180a95c04c56c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MapObjLoader_8hpp.html#a167afe55692731c9613180a95c04c56c">writeVertex</a> (std::ofstream &amp;objFile, const <a class="el" href="structVertex.html">Vertex</a> &amp;vertex)</td></tr>
@@ -130,7 +139,31 @@ Functions</h2></td></tr>
 <tr class="memitem:aa24debb42ae6c2b03c7d57bc053b0efb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MapObjLoader_8hpp.html#aa24debb42ae6c2b03c7d57bc053b0efb">generateAreaObjs</a> (const std::vector&lt; std::vector&lt; int &gt;&gt; &amp;heightMap, const std::vector&lt; std::vector&lt; std::string &gt;&gt; &amp;areaMap)</td></tr>
 <tr class="memdesc:aa24debb42ae6c2b03c7d57bc053b0efb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates obj map for each area of the map.  <a href="MapObjLoader_8hpp.html#aa24debb42ae6c2b03c7d57bc053b0efb">More...</a><br /></td></tr>
 <tr class="separator:aa24debb42ae6c2b03c7d57bc053b0efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ab036b9647086ff2dd8f55c705a2ff608"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MapObjLoader_8hpp.html#ab036b9647086ff2dd8f55c705a2ff608">WINDING_ORDER</a> = <a class="el" href="MapObjLoader_8hpp.html#ae541d8d198e9a5a7d42de6b51c917770a6afc03b68174f14642be3753f1c7edca">COUNTER_CLOCKWISE</a></td></tr>
+<tr class="separator:ab036b9647086ff2dd8f55c705a2ff608"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ae541d8d198e9a5a7d42de6b51c917770"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae541d8d198e9a5a7d42de6b51c917770">&#9670;&nbsp;</a></span>WINDING_ORDER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="MapObjLoader_8hpp.html#ae541d8d198e9a5a7d42de6b51c917770">WINDING_ORDER</a> : bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae541d8d198e9a5a7d42de6b51c917770a436e34ac11f92a71ed5b0c06a6cba180"></a>CLOCKWISE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae541d8d198e9a5a7d42de6b51c917770a6afc03b68174f14642be3753f1c7edca"></a>COUNTER_CLOCKWISE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="aa24debb42ae6c2b03c7d57bc053b0efb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa24debb42ae6c2b03c7d57bc053b0efb">&#9670;&nbsp;</a></span>generateAreaObjs()</h2>
@@ -282,6 +315,29 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="MapObjLoader_8hpp.html#aa24debb42ae6c2b03c7d57bc053b0efb" title="Generates obj map for each area of the map." alt="" coords="5,5,144,32"/>
 </map>
 </div>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ab036b9647086ff2dd8f55c705a2ff608"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab036b9647086ff2dd8f55c705a2ff608">&#9670;&nbsp;</a></span>WINDING_ORDER</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="MapObjLoader_8hpp.html#ae541d8d198e9a5a7d42de6b51c917770">WINDING_ORDER</a> = <a class="el" href="MapObjLoader_8hpp.html#ae541d8d198e9a5a7d42de6b51c917770a6afc03b68174f14642be3753f1c7edca">COUNTER_CLOCKWISE</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

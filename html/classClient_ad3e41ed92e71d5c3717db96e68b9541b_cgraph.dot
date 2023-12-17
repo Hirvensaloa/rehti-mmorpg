@@ -199,12 +199,10 @@ digraph "Client::Client"
   Node67 -> Node87 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node87 [label="TimerCallbackSystem\l::elapseTime",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classTimerCallbackSystem.html#a887d675b42267d0775fa9ac6121191d6",tooltip="Elapses time by the given delta time, meaning calling the callbacks with the given delta time."];
   Node67 -> Node88 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node88 [label="POSITIVE_X_AXIS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Camera_8hpp.html#a139a997d06bd43f993fc788e5050ed60",tooltip=" "];
-  Node67 -> Node74 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node67 -> Node89 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node89 [label="POSITIVE_Z_AXIS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Camera_8hpp.html#ac57ad755be51ffc9cc41b032426ba68b",tooltip=" "];
+  Node88 [label="Camera::getForward",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCamera.html#ae44d552243a7b430e94ed9e70adcf07b",tooltip="Returns the forward direction of the camera."];
+  Node67 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node89 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node89 [label="Client::unequipItem",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#a5e89bfa822c4f41d5a8f8d4a1269311a",tooltip="Send a UnequipMessage for item with given instance id."];
   Node2 -> Node90 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node90 [label="Client::unequipItem",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#a5e89bfa822c4f41d5a8f8d4a1269311a",tooltip="Send a UnequipMessage for item with given instance id."];
-  Node2 -> Node91 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node91 [label="Client::useItem",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#a4ab2c62c905b79659c11a276c24dc2a2",tooltip="Send a UseItemMessage for item with given instance id."];
+  Node90 [label="Client::useItem",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#a4ab2c62c905b79659c11a276c24dc2a2",tooltip="Send a UseItemMessage for item with given instance id."];
 }

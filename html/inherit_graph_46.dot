@@ -4,5 +4,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node0 [label="ItemAssetData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structItemAssetData.html",tooltip="Contains asset data loaded into memory for a specific item."];
+  Node0 [label="ImageData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structImageData.html",tooltip=" "];
 }

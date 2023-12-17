@@ -1,5 +1,4 @@
 <map id="RehtiGraphics::createSurface" name="RehtiGraphics::createSurface">
-<area shape="rect" id="node1" title="Creates a surface to draw on." alt="" coords="499,5,709,32"/>
-<area shape="rect" id="node2" href="$classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3" title="Initializes vulkan instance." alt="" coords="265,5,451,32"/>
-<area shape="rect" id="node3" href="$classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469" title="Initializes the graphics backend." alt="" coords="5,5,217,32"/>
+<area shape="rect" id="node1" title="Creates a surface to draw on." alt="" coords="239,5,449,32"/>
+<area shape="rect" id="node2" href="$classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3" title="Initializes vulkan instance." alt="" coords="5,5,191,32"/>
 </map>

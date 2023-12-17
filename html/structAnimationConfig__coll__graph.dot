@@ -10,4 +10,6 @@ digraph "AnimationConfig"
   Node3 [label="{AnimationType\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node4 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +looping" ,arrowhead="odiamond",fontname="Helvetica"];
   Node4 [label="{bool\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node5 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +animationDirection" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 [label="{vec3\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
 }

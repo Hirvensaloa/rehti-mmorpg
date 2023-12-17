@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structGfxOrientation.html" title=" " alt="" coords="5,5,124,32"/>
+<area shape="rect" id="node1" href="$structGeneralItemStruct.html" title=" " alt="" coords="5,31,147,57"/>
+<area shape="rect" id="node2" href="$structEquippableItemStruct.html" title=" " alt="" coords="195,5,357,32"/>
+<area shape="rect" id="node3" href="$structFoodItemStruct.html" title=" " alt="" coords="215,56,337,83"/>
 </map>

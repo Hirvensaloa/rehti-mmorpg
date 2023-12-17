@@ -6,7 +6,7 @@ digraph "AssetCache::getInstance"
   rankdir="RL";
   Node1 [label="AssetCache::getInstance",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Returns the singleton instance of the AssetCache."];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="actionToAnimationConfig",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_2src_2Utils_8cpp.html#a75a5ed3112df6517fcfa0cecf9b68592",tooltip="Convert action to animation config."];
+  Node2 [label="actionToAnimationConfig",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_2src_2Utils_8cpp.html#a8ef2bf38324ca6a2089bd5306b4c671b",tooltip="Convert action to animation config."];
   Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="Client::processMessages",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#afebeedfe876105645a3937b4ee2058df",tooltip="Processes messages from the server."];
   Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

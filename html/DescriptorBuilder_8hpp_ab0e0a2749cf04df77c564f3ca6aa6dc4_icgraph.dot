@@ -9,10 +9,8 @@ digraph "STANDARD_POOL_SIZES"
   Node2 [label="RehtiGraphics::createGui",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a7776bb91d4c8d1a9ef56e36bd61a8633",tooltip="Creates RehtiGui member and initializes it."];
   Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="RehtiGraphics::initVulkan",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3",tooltip="Initializes vulkan instance."];
-  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="RehtiGraphics::RehtiGraphics",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469",tooltip="Initializes the graphics backend."];
-  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="PoolManager::grabPool",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPoolManager.html#a71d892f259b72af7c101b86de14aa260",tooltip="Returns a pool from free pools or creates a new one. Does not push the returned pool to used pools."];
-  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="PoolManager::allocateDescriptorSet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPoolManager.html#ad373530a239dd87ce078864a710561b0",tooltip="Allocates a descriptor set from the pool"];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="PoolManager::grabPool",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPoolManager.html#a71d892f259b72af7c101b86de14aa260",tooltip="Returns a pool from free pools or creates a new one. Does not push the returned pool to used pools."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="PoolManager::allocateDescriptorSet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPoolManager.html#ad373530a239dd87ce078864a710561b0",tooltip="Allocates a descriptor set from the pool"];
 }

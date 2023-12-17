@@ -1,6 +1,5 @@
 <map id="ShaderManager::destroyShaderModules" name="ShaderManager::destroyShaderModules">
-<area shape="rect" id="node1" title="Destroys created shader modules. This function can be called after pipeline creation." alt="" coords="765,5,992,47"/>
-<area shape="rect" id="node2" href="$classRehtiGraphics.html#ac307d6b1b052e5e07374056e833e01de" title="Creates the graphics pipeline." alt="" coords="499,5,717,47"/>
-<area shape="rect" id="node3" href="$classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3" title="Initializes vulkan instance." alt="" coords="265,13,451,39"/>
-<area shape="rect" id="node4" href="$classRehtiGraphics.html#add3c915e8b78854eaeacb0fc075f4469" title="Initializes the graphics backend." alt="" coords="5,13,217,39"/>
+<area shape="rect" id="node1" title="Destroys created shader modules. This function can be called after pipeline creation." alt="" coords="505,5,732,47"/>
+<area shape="rect" id="node2" href="$classRehtiGraphics.html#ac307d6b1b052e5e07374056e833e01de" title="Creates the graphics pipeline." alt="" coords="239,5,457,47"/>
+<area shape="rect" id="node3" href="$classRehtiGraphics.html#ae16a48c5465c048b9ca5c253506d25b3" title="Initializes vulkan instance." alt="" coords="5,13,191,39"/>
 </map>

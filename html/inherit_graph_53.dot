@@ -4,5 +4,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node0 [label="nodeCompare",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structnodeCompare.html",tooltip=" "];
+  Node0 [label="MapAABBData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structMapAABBData.html",tooltip="Helper struct to store all the data necessary for creating a map AABB tree."];
 }

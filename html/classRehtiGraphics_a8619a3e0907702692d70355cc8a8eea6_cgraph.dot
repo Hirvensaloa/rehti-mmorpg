@@ -11,4 +11,6 @@ digraph "RehtiGraphics::playAnimation"
   Node3 [label="TimerCallbackSystem\l::finishCallback",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classTimerCallbackSystem.html#add46c4d14ad6d925b927c7d5720f5e6d",tooltip="Forces the callback to be completed with the time left in the timer and removes it from the system."];
   Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node4 [label="getAnimIndex",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$BasicTypes_8hpp.html#abeaa9e402d6a6f63c932da7fa203c38c",tooltip=" "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="POSITIVE_Y_AXIS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748",tooltip=" "];
 }

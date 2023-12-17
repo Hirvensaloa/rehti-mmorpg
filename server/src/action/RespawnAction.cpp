@@ -28,5 +28,6 @@ CurrentAction RespawnAction::getActionInfo()
     actionInfo.durationMs = actionTimeM.count();
     actionInfo.looping = true;
     actionInfo.targetId = pEntityM->getInstanceId();
+    actionInfo.targetCoordinate = pEntityM->getLocation();
     return actionInfo;
 }

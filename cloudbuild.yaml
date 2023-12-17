@@ -7,7 +7,7 @@ steps:
     args:
       - build
       - -t
-      - "gcr.io/$PROJECT_ID/mmorpg-server"
+      - "gcr.io/$PROJECT_ID/mmorpg-server:latest"
       - -f
       - "./server/Dockerfile"
       - "."
@@ -15,14 +15,19 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     args:
       - push
-      - "gcr.io/$PROJECT_ID/mmorpg-server"
-  # Deploy everything to the GKE
+      - "gcr.io/$PROJECT_ID/mmorpg-server:latest"
+  # Deploy database to the GKE
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
       - run
-      - --filename=kube.yaml
+      - --filename=kube-db.yaml
+      - --location=europe-north1
+      - --cluster=mmorpg-dev
+  # Deploy server to the GKE
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+      - run
+      - --filename=kube-server.yaml
       - --image=gcr.io/$PROJECT_ID/mmorpg-server:latest
       - --location=europe-north1
       - --cluster=mmorpg-dev
-      - --timeout=10m0s
-timeout: 1600s

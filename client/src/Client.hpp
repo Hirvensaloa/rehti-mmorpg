@@ -4,6 +4,7 @@
 
 #include "RehtiReader.hpp"
 #include "graphics.h"
+#include <audio.h>
 #include <network.h>
 
 class Client
@@ -109,6 +110,8 @@ private:
     std::condition_variable graphLibReadyM; ///< GraphLib ready lock
     bool graphLibReadyFlagM = false;        ///< GraphLib ready flag
     std::mutex graphLibMutexM;
+
+    RehtiAudio audioLibM;
 
     Hit lastHitM; ///< Last detected hit from a mouse click
 

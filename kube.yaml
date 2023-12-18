@@ -51,7 +51,7 @@ spec:
           image: postgres:16rc1-alpine3.17
           name: mmorpg-database
           ports:
-            - containerPort: 6543
+            - containerPort: 5432
               hostIP: 127.0.0.1
               protocol: TCP
           resources: {}

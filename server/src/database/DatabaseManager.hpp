@@ -70,5 +70,11 @@ public:
     bool savePlayerToDb(std::shared_ptr<PlayerCharacter> player);
 
 private:
+    /**
+     * @brief Get a transaction object
+     * @return pqxx::work
+     */
+    pqxx::work getTransaction();
+
     std::unique_ptr<pqxx::connection> pConnectionM;
 };

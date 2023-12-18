@@ -13,18 +13,6 @@ spec:
       storage: 100Mi
 status: {}
 ---
-kind: ConfigMap
-apiVersion: apps/v1
-metadata:
-  name: db-init
-data: CREATE TABLE IF NOT EXISTS users (
-  id SERIAL PRIMARY KEY,
-  username VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  created_at TIMESTAMP NOT NULL DEFAULT NOW()
-  );
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -70,16 +58,11 @@ spec:
           volumeMounts:
             - mountPath: var/lib/postgresql/data
               name: mmorpg-database-claim0
-            - mountPath: /docker-entrypoint-initdb.d
-              name: postgresdb-loadsql
       restartPolicy: Always
       volumes:
         - name: mmorpg-database-claim0
           persistentVolumeClaim:
             claimName: mmorpg-database-claim0
-        - name: postgresdb-loadsql
-          configMap:
-            name: db-init
 status: {}
 ---
 apiVersion: v1

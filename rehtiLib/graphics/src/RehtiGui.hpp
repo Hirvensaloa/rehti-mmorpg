@@ -1,4 +1,5 @@
 #pragma once
+#include "../../assets/reader/src/AssetCache.hpp"
 #include "../../network/src/api/Types.hpp"
 #include "../bindings/imgui_impl_glfw.h"
 #include "../bindings/imgui_impl_vulkan.h"
@@ -100,6 +101,14 @@ public:
      */
     bool LoadTextureFromFile(const char* filename, const int id);
 
+    /**
+     * @brief Load texture from ImageData and save it to member map guiIconsM with key id
+     * @param id
+     * @param imgData
+     * @return success
+     */
+    bool LoadTextureFromImageData(const int id, ImageData& imgData);
+
 private:
     /**
      * @brief Draws inventory tab to GUI window
@@ -149,6 +158,8 @@ private:
     int windowWidthM = 300;
     int windowHeightM = 500;
     ImVec2 iconSizeM = ImVec2(windowWidthM * 0.8 / 4, windowWidthM * 0.8 / 4);
+
+    AssetCache& assetCacheM;
 
     // map from id to descriptor set required for drawing.
     // GraphicsObjectManager will clean up the resources created.

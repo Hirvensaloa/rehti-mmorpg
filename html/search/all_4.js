@@ -29,6 +29,6 @@ var searchData=
   ['equippableitems_315',['equippableItems',['../structGameItems.html#a3fdd477f437544f041c445ed4bf48d3a',1,'GameItems']]],
   ['equippableitemstruct_316',['EquippableItemStruct',['../structEquippableItemStruct.html',1,'']]],
   ['equippabletoslotm_317',['equippableToSlotM',['../classEquippableItem.html#a42b66b6d73ec008ef154aa67a2a8ff86',1,'EquippableItem']]],
-  ['estimatedcosttogoal_318',['estimatedCostToGoal',['../structNode.html#a51cc1daec5665ba9eaa05409df42c8b8',1,'Node']]],
+  ['estimatedcosttogoal_318',['estimatedCostToGoal',['../structNode.html#a9a18c173d63c77e2d49062dc97450f55',1,'Node']]],
   ['euclideandistance_319',['euclideanDistance',['../server_2src_2world_2Utils_8cpp.html#a301851ebbe7e47130cde965d54a9b220',1,'euclideanDistance(std::pair&lt; int, int &gt; start, std::pair&lt; int, int &gt; end):&#160;Utils.cpp'],['../server_2src_2world_2Utils_8hpp.html#a301851ebbe7e47130cde965d54a9b220',1,'euclideanDistance(std::pair&lt; int, int &gt; start, std::pair&lt; int, int &gt; end):&#160;Utils.cpp']]]
 ];

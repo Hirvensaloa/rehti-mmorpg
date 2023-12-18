@@ -64,5 +64,5 @@ var NAVTREEINDEX6 =
 "structYieldableItems.html#a01ff1ef5263feaef4d109adf7f6c8f14":[9,0,97,0],
 "structYieldableItems.html#acb5033e5c0768923ee8f87549bf29210":[9,0,97,1],
 "structnodeCompare.html":[9,0,63],
-"structnodeCompare.html#a5537fa4fd1bc4a7eb6711c9385c39176":[9,0,63,0]
+"structnodeCompare.html#a898c64c620d67dd8f4804be2b4ef9e55":[9,0,63,0]
 };

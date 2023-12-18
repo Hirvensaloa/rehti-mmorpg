@@ -119,6 +119,7 @@ digraph "GameWorld.cpp"
   Node35 [label="Utils.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$server_2src_2world_2Utils_8hpp.html",tooltip=" "];
   Node35 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node35 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node35 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node35 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node34 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

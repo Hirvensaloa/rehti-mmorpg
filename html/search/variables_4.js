@@ -10,5 +10,5 @@ var searchData=
   ['equipmentmutexm_1839',['equipmentMutexM',['../classRehtiGui.html#a90b2e0348f01374607f43c7b16666ab8',1,'RehtiGui']]],
   ['equippableitems_1840',['equippableItems',['../structGameItems.html#a3fdd477f437544f041c445ed4bf48d3a',1,'GameItems']]],
   ['equippabletoslotm_1841',['equippableToSlotM',['../classEquippableItem.html#a42b66b6d73ec008ef154aa67a2a8ff86',1,'EquippableItem']]],
-  ['estimatedcosttogoal_1842',['estimatedCostToGoal',['../structNode.html#a51cc1daec5665ba9eaa05409df42c8b8',1,'Node']]]
+  ['estimatedcosttogoal_1842',['estimatedCostToGoal',['../structNode.html#a9a18c173d63c77e2d49062dc97450f55',1,'Node']]]
 ];

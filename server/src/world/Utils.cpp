@@ -48,7 +48,7 @@ unsigned int euclideanDistance(std::pair<int, int> start, std::pair<int, int> en
 
 struct nodeCompare
 {
-    bool operator()(Node* a, Node* b)
+    bool operator()(std::shared_ptr<Node> a, std::shared_ptr<Node> b)
     {
         return a->totalCost() > b->totalCost();
     }
@@ -76,20 +76,20 @@ std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& 
     unsigned mapWidth = std::max(map[start.first].size(), map[end.first].size()); // Map might not be a square, so we need to get the maximum width
 
     // Create the start and end nodes
-    Node startNode = {start, 0, euclideanDistance(start, end)};
+    std::shared_ptr<Node> startNode = std::make_shared<Node>(start, 0, euclideanDistance(start, end));
     Node endNode = {end, 0, 0};
 
     // Create the open priority queue and add the start node
-    std::priority_queue<Node*, std::vector<Node*>, nodeCompare> open;
-    open.push(&startNode);
+    std::priority_queue<std::shared_ptr<Node>, std::vector<std::shared_ptr<Node>>, nodeCompare> open;
+    open.push(startNode);
 
     // Create the closed set, which contains all the nodes (with direction) that have been visited. ALSO contains a pointer to the open set node, if the node is in the open set (This is because prio queue access is O(n))
-    std::vector<std::vector<std::array<std::pair<bool, Node*>, 8>>> closed(mapHeight, std::vector<std::array<std::pair<bool, Node*>, 8>>(mapWidth));
+    std::vector<std::vector<std::array<std::pair<bool, std::shared_ptr<Node>>, 8>>> closed(mapHeight, std::vector<std::array<std::pair<bool, std::shared_ptr<Node>>, 8>>(mapWidth));
 
     while (!open.empty())
     {
         // Get the node with the lowest total cost
-        Node* current = open.top();
+        std::shared_ptr<Node> current = open.top();
         open.pop();
         closed[current->coords.first][current->coords.second][current->dirFromParent].second = nullptr;
 
@@ -97,7 +97,7 @@ std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& 
         if (current->coords == endNode.coords)
         {
             // Reconstruct the path
-            Node* node = current;
+            std::shared_ptr<Node> node = current;
             while (node->parent != nullptr)
             {
                 path.push_back(node->coords);
@@ -168,15 +168,19 @@ std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& 
             }
 
             // Calculate the cost from start to the neighbour
-            unsigned int costFromStart = current->costFromStart + 1;
+            float costFromStart = current->costFromStart + 1;
+            if (checkDir == SOUTH_EAST || checkDir == SOUTH_WEST || checkDir == NORTH_EAST || checkDir == NORTH_WEST) // Add 0.5 cost for diagonal movement to prevent unnecessary zigzagging
+            {
+                costFromStart += 0.5;
+            }
 
             // Check if the neighbour is in the open set
-            Node* neighbour = closed[neighbourCoords.first][neighbourCoords.second][checkDir].second;
+            std::shared_ptr<Node> neighbour = closed[neighbourCoords.first][neighbourCoords.second][checkDir].second;
 
             if (neighbour == nullptr)
             {
                 // Create the neighbour node
-                neighbour = new Node{neighbourCoords, costFromStart, euclideanDistance(neighbourCoords, endNode.coords), current, checkDir};
+                neighbour = std::make_shared<Node>(neighbourCoords, costFromStart, static_cast<float>(euclideanDistance(neighbourCoords, endNode.coords)), current, checkDir);
 
                 // Add the neighbour to the open set
                 open.push(neighbour);

@@ -1,10 +1,9 @@
 <map id="LootObject" name="LootObject">
-<area shape="rect" id="node1" title="Represents an object that can be looted." alt="" coords="285,645,405,767"/>
-<area shape="rect" id="node2" href="$classObject.html" title="Represents generic object in the game world." alt="" coords="183,359,323,583"/>
-<area shape="rect" id="node3" href="$structCoordinates.html" title="Struct for coordinates." alt="" coords="69,175,194,281"/>
-<area shape="rect" id="node4" title=" " alt="" coords="14,5,52,83"/>
-<area shape="rect" id="node5" title=" " alt="" coords="224,189,282,267"/>
-<area shape="rect" id="node6" title=" " alt="" coords="326,189,420,267"/>
-<area shape="rect" id="node7" title=" " alt="" coords="455,189,536,267"/>
-<area shape="rect" id="node8" title=" " alt="" coords="347,432,530,509"/>
+<area shape="rect" id="node1" title="Represents an object that can be looted." alt="" coords="256,645,376,767"/>
+<area shape="rect" id="node2" href="$classObject.html" title="Represents generic object in the game world." alt="" coords="154,359,294,583"/>
+<area shape="rect" id="node3" href="$structCoordinates.html" title="Struct for coordinates." alt="" coords="104,175,229,281"/>
+<area shape="rect" id="node4" title=" " alt="" coords="12,5,51,83"/>
+<area shape="rect" id="node5" title=" " alt="" coords="258,189,317,267"/>
+<area shape="rect" id="node6" title=" " alt="" coords="360,189,455,267"/>
+<area shape="rect" id="node7" title=" " alt="" coords="318,432,500,509"/>
 </map>

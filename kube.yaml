@@ -14,7 +14,7 @@ spec:
 status: {}
 ---
 kind: ConfigMap
-apiVersion: v1
+apiVersion: apps/v1
 metadata:
   name: db-init
 data: CREATE TABLE IF NOT EXISTS users (

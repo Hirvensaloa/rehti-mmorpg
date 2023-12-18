@@ -81,7 +81,6 @@ spec:
   ports:
     - name: "6543"
       port: 6543
-      targetPort: 5432
   selector:
     io.kompose.service: mmorpg-database
 status:
@@ -117,6 +116,8 @@ spec:
         - env:
             - name: DB_HOST
               value: mmorpg-database
+            - name: DB_PORT
+              value: 6543
             - name: POSTGRES_DB
               value: mmorpg-database
             - name: POSTGRES_PASSWORD

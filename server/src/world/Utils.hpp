@@ -3,6 +3,7 @@
 #include "Coordinates.hpp"
 #include "RehtiReader.hpp"
 
+#include <memory>
 #include <vector>
 
 enum Direction
@@ -22,7 +23,7 @@ struct Node
     std::pair<int, int> coords;
     float costFromStart;       ///< Number of steps from the start
     float estimatedCostToGoal; ///< Estimated number of steps to the goal, in our case the euclidean distance
-    Node* parent = nullptr;
+    std::shared_ptr<Node> parent = nullptr;
     Direction dirFromParent; ///< Direction from the parent to this node
 
     float totalCost()

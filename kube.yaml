@@ -77,10 +77,10 @@ metadata:
     io.kompose.service: mmorpg-database
   name: mmorpg-database
 spec:
-  type: LoadBalancer
   ports:
     - name: "6543"
       port: 6543
+      targetPort: 5432
   selector:
     io.kompose.service: mmorpg-database
 status:
@@ -117,7 +117,7 @@ spec:
             - name: DB_HOST
               value: mmorpg-database
             - name: DB_PORT
-              value: "6543"
+              value: "5432"
             - name: POSTGRES_DB
               value: mmorpg-database
             - name: POSTGRES_PASSWORD

@@ -7,6 +7,7 @@
 /**
  * @brief Convert action to animation config
  * @param action CurrentAction
+ * @param entityLocation Coordinates
  * @return AnimationConfig
  */
-AnimationConfig actionToAnimationConfig(CurrentAction action);
+AnimationConfig actionToAnimationConfig(CurrentAction action, Coordinate entityLocation);

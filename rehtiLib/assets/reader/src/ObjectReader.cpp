@@ -21,7 +21,7 @@ std::string generateObjectInstanceId(ObjectLocation objectLocation)
     std::string zStr = std::to_string(objectLocation.z);
 
     // Todo: Add - between id and location to ensure that this is unique
-    std::string id = idStr + xStr + yStr + zStr;
+    std::string id = xStr + yStr + zStr;
 
     return id;
 };

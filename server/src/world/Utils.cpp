@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <array>
 #include <cmath>
 #include <iostream>
 #include <queue>
@@ -108,7 +109,6 @@ std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& 
 
         // Add the current node to the closed set
         closed[current->coords.first][current->coords.second][current->dirFromParent].first = true;
-
         // Check all the neighbours
         for (int i = 0; i < 8; i++)
         {

@@ -11,7 +11,8 @@ void RehtiGraphics::startMainLoop()
 }
 
 RehtiGraphics::RehtiGraphics(uint32_t width, uint32_t height, glm::vec3 cameraLocation)
-    : widthM(width), heightM(height), anisotropyM(1.f), cameraM(Camera(cameraLocation, static_cast<float>(width), static_cast<float>(height)))
+    : widthM(width), heightM(height), anisotropyM(1.f), cameraM(Camera(cameraLocation, static_cast<float>(width), static_cast<float>(height))),
+      sunM({glm::vec3(1.f), glm::vec3(1.f), 1.f})
 {
     initWindow();
     cameraM.registerCameraControls(pWindowM);
@@ -21,27 +22,6 @@ RehtiGraphics::RehtiGraphics(uint32_t width, uint32_t height, glm::vec3 cameraLo
 RehtiGraphics::~RehtiGraphics()
 {
     cleanup();
-}
-
-void RehtiGraphics::addTestObject(int id)
-{
-    std::vector<SimpleVertex> vertices = TestValues::kSimpleCubeVertices;
-    std::vector<uint32_t> indices = TestValues::kSimpleCubeIndices;
-    glm::mat4 transformation = glm::translate(glm::mat4(1.f), 1.5f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS));
-    pObjectManagerM->addTestObject(id, vertices, indices, transformation);
-    std::cout << "Camera orientation, view and projection matrices:" << std::endl;
-    debugMatrix(cameraM.getOrientation());
-    debugMatrix(cameraM.getViewMatrix());
-    debugMatrix(cameraM.getProjectionMatrix());
-}
-
-void RehtiGraphics::addTestGameObject(int id)
-{
-    std::vector<Vertex> vertices = TestValues::GetTestVertices();
-    std::vector<uint32_t> indices = TestValues::GetTestIndices();
-    ImageData texture = TestValues::GetTestTexture();
-    glm::mat4 transformation = glm::translate(glm::mat4(1.f), 1.5f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS));
-    addGameObject(id, vertices, indices, texture, glm::vec3(transformation[3]));
 }
 
 bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVertex> vertices, std::vector<uint32_t> indices, ImageData texture, std::array<Animation, ANIMATION_TYPE_COUNT> animations, std::vector<BoneNode> bones, std::vector<glm::mat4> transformations, glm::vec3 location, float rotation, bool isPlayer)
@@ -65,7 +45,13 @@ bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVer
         charData.boneTransformations[i] = glm::mat4(1.f); // transformations[i + 1];
     }
 
-    bool res = pObjectManagerM->addCharacter(characterID, vertices, indices, texture, characterOrientation.getTransformationMatrix(), charData.boneTransformations.data(), textureSamplerM);
+    PhongMaterial characterMaterial{};
+    characterMaterial.ambient = glm::vec3(0.1f);
+    characterMaterial.diffuse = glm::vec3(0.5f);
+    characterMaterial.specular = glm::vec3(0.5f);
+    characterMaterial.shininess = 10.f;
+
+    bool res = pObjectManagerM->addCharacter(characterID, vertices, indices, texture, characterOrientation.getTransformationMatrix(), charData.boneTransformations.data(), textureSamplerM, characterMaterial);
     if (!res)
         return false;
 
@@ -82,8 +68,8 @@ bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVer
         cameraM.setTargetAndCamera(location);
     }
 
-    // Set animation to idle
-    playAnimation(characterID, AnimationConfig{AnimationType::IDLE, 1.0f, true});
+    // Set animation to idle to north
+    playAnimation(characterID, AnimationConfig{-POSITIVE_Z_AXIS, AnimationType::IDLE, 1.0f, true});
 
     return true;
 }
@@ -204,16 +190,14 @@ void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSec
     }
 
     glm::vec3 delta = diff * timeInv;
-    glm::vec3 dir = glm::normalize(diff);
-    constexpr float smallIncrementInRadians = 1.f * glm::half_pi<float>();
+    glm::vec3 dir = -glm::normalize(diff);
     characterOrientationsM[playerID].characterOrientation.rotation = glm::quatLookAt(dir, POSITIVE_Y_AXIS);
     characterOrientationsM[playerID].animationData.currentAnimation = AnimationType::WALK;
     // characterOrientationsM[playerID].animationData.currentTicks = 0;
-    std::function<void(float)> callback = [playerID, delta, dir, smallIncrementInRadians, this](float dt)
+    std::function<void(float)> callback = [playerID, delta, dir, this](float dt)
     {
         std::unique_lock lock(dataMutexM);
         characterOrientationsM[playerID].characterOrientation.position += delta * dt;
-        // characterOrientationsM[playerID].characterOrientation.rotation *= glm::angleAxis(smallIncrementInRadians, POSITIVE_Y_AXIS);
         moveBoundingBox(playerID, ObjectType::CHARACTER, characterOrientationsM[playerID].characterOrientation.position);
         characterOrientationsM[playerID].advanceAnimation(dt);
         glm::mat4 currentMatrix = characterOrientationsM[playerID].characterOrientation.getTransformationMatrix();
@@ -231,7 +215,12 @@ void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
     dataMutexM.lock();
     characterOrientationsM[characterID].animationData.currentAnimation = cfg.animType;
     characterOrientationsM[characterID].animationData.currentTicks = 0;
-    // add new callback to play the animation
+    if (!glm::length(cfg.animationDirection) < 0.001f) // if the direction is set, use it
+    {
+        glm::vec3 direction = -glm::normalize(cfg.animationDirection);
+        characterOrientationsM[characterID].characterOrientation.rotation = glm::quatLookAt(direction, POSITIVE_Y_AXIS);
+    }
+    //  add new callback to play the animation
     float factor = 1.0f;
     if (cfg.looping || cfg.animType == AnimationType::IDLE)
     {
@@ -563,6 +552,11 @@ void RehtiGraphics::createObjectManager()
         transferQueueFamily = indices.transferFamily.value();
         pObjectManagerM->addTransferQueueFamilyAccess(transferQueueFamily, transferQueue);
     }
+    // update sun right away
+    for (uint32_t frame = 0; frame < kConcurrentFramesM; frame++)
+    {
+        pObjectManagerM->updateSunDescriptor(&sunM, frame);
+    }
 }
 
 void RehtiGraphics::createSwapChain()
@@ -815,9 +809,9 @@ void RehtiGraphics::createGraphicsPipeline()
         // Pipelineinfo for pipelinelayout stuff, uniforms
         VkPipelineLayoutCreateInfo pipelinelayoutInfo{};
         pipelinelayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-        VkDescriptorSetLayout objectSetLayout = pObjectManagerM->getLayout(objectType);
-        pipelinelayoutInfo.setLayoutCount = pObjectManagerM->getLayoutCount(objectType);
-        pipelinelayoutInfo.pSetLayouts = &objectSetLayout;
+        std::array<VkDescriptorSetLayout, 2> descLayouts = {pObjectManagerM->getSunLayout(), pObjectManagerM->getLayout(objectType)};
+        pipelinelayoutInfo.setLayoutCount = static_cast<uint32_t>(descLayouts.size());
+        pipelinelayoutInfo.pSetLayouts = descLayouts.data();
 
         VkPushConstantRange cameraRange = getCameraRange();
         pipelinelayoutInfo.pushConstantRangeCount = 1;
@@ -953,7 +947,8 @@ void RehtiGraphics::recordCommandBuffer(VkCommandBuffer cmdBuffer, uint32_t imag
         vkCmdBindPipeline(cmdBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelinesM[objectType]);
         // Push constant is the same for all pipelines
         vkCmdPushConstants(cmdBuffer, pipelineLayoutsM[objectType], VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(glm::mat4), &renderMat);
-
+        VkDescriptorSet sunDescriptor = pObjectManagerM->getSunDescriptorSet(currentFrameM);
+        vkCmdBindDescriptorSets(cmdBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayoutsM[objectType], 0, 1, &sunDescriptor, 0, nullptr);
         for (DrawableObject obj : pObjectManagerM->getDrawableObjects(objectType, currentFrameM))
         {
             // Fetch object data
@@ -964,7 +959,7 @@ void RehtiGraphics::recordCommandBuffer(VkCommandBuffer cmdBuffer, uint32_t imag
             VkDeviceSize offsets[] = {0};
             vkCmdBindVertexBuffers(cmdBuffer, 0, 1, &vertexBuffer, offsets);
             vkCmdBindIndexBuffer(cmdBuffer, indexBuffer, 0, VK_INDEX_TYPE_UINT32);
-            vkCmdBindDescriptorSets(cmdBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayoutsM[objectType], 0, 1, &descSet, 0, nullptr);
+            vkCmdBindDescriptorSets(cmdBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayoutsM[objectType], 1, 1, &descSet, 0, nullptr);
 
             vkCmdDrawIndexed(cmdBuffer, obj.indexCount, 1, 0, 0, 0);
         }
@@ -1069,8 +1064,9 @@ void RehtiGraphics::mainLoop()
     statsM.frameTime = 0;
     float frameCount = 0.f;
     auto applicationStart = std::chrono::high_resolution_clock::now();
-    glm::mat4 translation = glm::translate(glm::mat4(1.f), 1.5f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS));
-    // moveGameObject(0, 5.f * (POSITIVE_Z_AXIS + POSITIVE_Y_AXIS + POSITIVE_X_AXIS), 5);
+    CameraData camData{};
+    camData.position = cameraM.getLocation();
+    camData.direction = cameraM.getForward();
     while (!glfwWindowShouldClose(pWindowM))
     {
         auto start = std::chrono::high_resolution_clock::now();
@@ -1081,6 +1077,9 @@ void RehtiGraphics::mainLoop()
         auto mus = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
         statsM.frameTime = static_cast<uint64_t>(mus);
         statsM.ftPerSec = mus * invMicro;
+        camData.position = cameraM.getLocation();
+        camData.direction = cameraM.getForward();
+        pObjectManagerM->updateCameraDescriptor(&camData, currentFrameM);
         timersM.elapseTime(static_cast<float>(statsM.ftPerSec));
     }
 

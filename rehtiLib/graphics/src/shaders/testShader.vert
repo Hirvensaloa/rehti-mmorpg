@@ -11,7 +11,7 @@ layout(push_constant) uniform SingleMatrix
 	mat4 viewmat;
 } cameraData;
 
-layout(set = 0, binding = 0) uniform SingleMatrix2
+layout(set = 1, binding = 0) uniform SingleMatrix2
 {
 	mat4 modelmat;
 } modelData;

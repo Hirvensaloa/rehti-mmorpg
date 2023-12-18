@@ -11,12 +11,12 @@
  * @file Reads the texture files
  */
 
- /**
-  * @brief Reads all the object's textures + character textures into a map (key=filename, value=ImageData)
-  *
-  * @param gameObjects GameObjects
-  * @return Map of texture filename and its corresponding ImageData
-  */
+/**
+ * @brief Reads all the object's textures + character textures into a map (key=filename, value=ImageData)
+ *
+ * @param gameObjects GameObjects
+ * @return Map of texture filename and its corresponding ImageData
+ */
 std::map<std::string, ImageData> loadObjectTextures(const GameObjects& gameObjects);
 
 /**
@@ -54,12 +54,12 @@ std::vector<std::vector<int>> loadMapTexturePositions();
  * @note Supports only 5 different textures per area
  *
  * @param mapTexturePositionMatrix Matrix of texture positions with the corresponding texture id
- * @param columnOffset Areas column offset in the mapTexturePositionMatrix
  * @param rowOffset Areas row offset in the mapTexturePositionMatrix
+ * @param columnOffset Areas column offset in the mapTexturePositionMatrix
  *
  * @return Blend map image data
  */
-ImageData createAreaBlendMap(const std::vector<std::vector<int>>& mapTexturePositionMatrix, int columnOffset, int rowOffset);
+ImageData createAreaBlendMap(const std::vector<std::vector<int>>& mapTexturePositionMatrix, int rowOffset, int columnOffset);
 
 /**
  * @brief Loads default texture into memory

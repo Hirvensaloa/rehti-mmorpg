@@ -8,20 +8,21 @@ layout(location = 2) in uvec4 boneIndices;
 layout(location = 3) in vec4 boneWeights;
 layout(location = 4) in vec2 texCoords;
 // out
-layout(location = 0) out vec2 fragTexCoords;
+layout(location = 0) out vec3 fragPos;
 layout(location = 1) out vec3 fragNormal;
+layout(location = 2) out vec2 fragTexCoord;
 // uniforms
 layout(push_constant) uniform SingleMatrix
 { 
 	mat4 viewmat;
 } cameraData;
 
-layout(set = 0, binding = 0) uniform SingleMatrix2
+layout(set = 1, binding = 0) uniform SingleMatrix2
 {
 	mat4 modelmat;
 } modelData;
 
-layout(set = 0, binding = 1) uniform BoneUniform
+layout(set = 1, binding = 1) uniform BoneUniform
 {
 	mat4 boneMatrices[50];
 } boneData;
@@ -35,11 +36,11 @@ void main() {
 	vec4 modelvertex = vec4(position, 1.f);
 	// Combine both animation matrix and model matrix
 	mat4 localToWorld = modelData.modelmat * boneMatrix;
-	// vec4 posed = boneMatrix * modelvertex;
+	vec4 worldSpaceFrag = localToWorld * modelvertex;
     gl_Position = cameraData.viewmat * localToWorld * modelvertex;
-
+	fragPos = worldSpaceFrag.xyz;
 	fragNormal = vec3(transpose(inverse(localToWorld)) * vec4(normal, 0.f) );
-	fragTexCoords = texCoords;
+	fragTexCoord = texCoords;
 }
 
 )";

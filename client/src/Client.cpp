@@ -16,7 +16,8 @@ Client::Client(std::string ip, std::string port)
       workGuardM(boost::asio::make_work_guard(ioContextM)),
       messagesM(MessageQueue()),
       connectionM(std::make_unique<Connection>(
-          Connection::owner::client, ioContextM, std::move(boost::asio::ip::tcp::socket(ioContextM)), messagesM))
+          Connection::owner::client, ioContextM, std::move(boost::asio::ip::tcp::socket(ioContextM)), messagesM)),
+      audioLibM{}
 {
     graphicsThreadM = std::thread([this]()
                                   { startGraphics(); });
@@ -58,7 +59,7 @@ boost::asio::awaitable<bool> Client::login()
             msg.password = pwd;
             co_await connectionM->send(MessageApi::createLogin(msg));
             boost::asio::co_spawn(ioContextM, connectionM->listenForMessages(), boost::asio::detached);
-
+            audioLibM.playMusic();
             co_return true;
         }
         else
@@ -211,7 +212,7 @@ void Client::processMessages()
                             }
                             else
                             {
-                                pGraphLibM->playAnimation(currentPlayer.instanceId, actionToAnimationConfig(currentPlayer.currentAction));
+                                pGraphLibM->playAnimation(currentPlayer.instanceId, actionToAnimationConfig(currentPlayer.currentAction, {currentPlayer.x, currentPlayer.y, currentPlayer.z}));
                             }
                         }
 
@@ -284,7 +285,7 @@ void Client::processMessages()
                                 }
                                 else
                                 {
-                                    pGraphLibM->playAnimation(entity.instanceId, actionToAnimationConfig(entity.currentAction));
+                                    pGraphLibM->playAnimation(entity.instanceId, actionToAnimationConfig(entity.currentAction, {entity.x, entity.y, entity.z}));
                                 }
                             }
                         }

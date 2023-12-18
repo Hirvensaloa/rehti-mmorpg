@@ -20,12 +20,12 @@ enum Direction
 struct Node
 {
     std::pair<int, int> coords;
-    unsigned costFromStart;       ///< Number of steps from the start
-    unsigned estimatedCostToGoal; ///< Estimated number of steps to the goal, in our case the euclidean distance
+    float costFromStart;       ///< Number of steps from the start
+    float estimatedCostToGoal; ///< Estimated number of steps to the goal, in our case the euclidean distance
     Node* parent = nullptr;
     Direction dirFromParent; ///< Direction from the parent to this node
 
-    unsigned totalCost()
+    float totalCost()
     {
         return costFromStart + estimatedCostToGoal;
     };

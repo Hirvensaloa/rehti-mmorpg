@@ -168,7 +168,11 @@ std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& 
             }
 
             // Calculate the cost from start to the neighbour
-            unsigned int costFromStart = current->costFromStart + 1;
+            float costFromStart = current->costFromStart + 1;
+            if (checkDir == SOUTH_EAST || checkDir == SOUTH_WEST || checkDir == NORTH_EAST || checkDir == NORTH_WEST)
+            {
+                costFromStart += 0.5;
+            }
 
             // Check if the neighbour is in the open set
             Node* neighbour = closed[neighbourCoords.first][neighbourCoords.second][checkDir].second;
@@ -176,7 +180,7 @@ std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& 
             if (neighbour == nullptr)
             {
                 // Create the neighbour node
-                neighbour = new Node{neighbourCoords, costFromStart, euclideanDistance(neighbourCoords, endNode.coords), current, checkDir};
+                neighbour = new Node{neighbourCoords, costFromStart, static_cast<float>(euclideanDistance(neighbourCoords, endNode.coords)), current, checkDir};
 
                 // Add the neighbour to the open set
                 open.push(neighbour);

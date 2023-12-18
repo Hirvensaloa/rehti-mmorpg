@@ -30,5 +30,5 @@ steps:
       - --filename=kube.yaml
       - --image=gcr.io/$PROJECT_ID/mmorpg-server
       - --location=europe-north1
-      - --cluster=mmorpg-dev
-      - --timeout=40m0s
+      - --cluster=mmorpg-dev-test
+      - --timeout=60m0s

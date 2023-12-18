@@ -36,11 +36,6 @@ int DatabaseManager::createConnection()
 
 PlayerTable DatabaseManager::loadPlayerDataFromDb(std::string username, std::string password, Coordinates spawnCoordinate)
 {
-    if (pConnectionM == nullptr || !pConnectionM->is_open())
-    {
-        createConnection();
-    }
-
     pqxx::work txn{*pConnectionM};
     const std::string sanitizedUsername = txn.esc(username);
     pqxx::result r{txn.exec("SELECT id, username, password, position_x, position_y, hp FROM player WHERE username='" + sanitizedUsername + "'")};
@@ -85,11 +80,6 @@ PlayerTable DatabaseManager::loadPlayerDataFromDb(std::string username, std::str
 
 std::vector<int> DatabaseManager::loadInventoryDataFromDb(int playerId)
 {
-    if (pConnectionM == nullptr || !pConnectionM->is_open())
-    {
-        createConnection();
-    }
-
     pqxx::work txn{*pConnectionM};
     pqxx::result r{txn.exec("SELECT id, amount FROM item WHERE player_id=" + std::to_string(playerId) + " AND is_equipped=false")};
     txn.commit();
@@ -106,11 +96,6 @@ std::vector<int> DatabaseManager::loadInventoryDataFromDb(int playerId)
 
 std::vector<int> DatabaseManager::loadEquipmentDataFromDb(int playerId)
 {
-    if (pConnectionM == nullptr || !pConnectionM->is_open())
-    {
-        createConnection();
-    }
-
     pqxx::work txn{*pConnectionM};
     pqxx::result r{txn.exec("SELECT id FROM item WHERE player_id=" + std::to_string(playerId) + " AND is_equipped=true")};
     txn.commit();
@@ -124,11 +109,6 @@ std::vector<int> DatabaseManager::loadEquipmentDataFromDb(int playerId)
 
 std::vector<std::pair<int, int>> DatabaseManager::loadSkillDataFromDb(int playerId)
 {
-    if (pConnectionM == nullptr || !pConnectionM->is_open())
-    {
-        createConnection();
-    }
-
     pqxx::work txn{*pConnectionM};
     pqxx::result r{txn.exec("SELECT id, exp FROM skill WHERE player_id=" + std::to_string(playerId))};
     txn.commit();
@@ -142,11 +122,6 @@ std::vector<std::pair<int, int>> DatabaseManager::loadSkillDataFromDb(int player
 
 bool DatabaseManager::savePlayerToDb(std::shared_ptr<PlayerCharacter> player)
 {
-    if (pConnectionM == nullptr || !pConnectionM->is_open())
-    {
-        createConnection();
-    }
-
     pqxx::nontransaction txn{*pConnectionM};
     auto loc = player->getLocation();
     auto id = player->getId();

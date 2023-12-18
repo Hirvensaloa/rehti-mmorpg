@@ -117,7 +117,7 @@ spec:
             - name: DB_HOST
               value: mmorpg-database
             - name: DB_PORT
-              value: 6543
+              value: "6543"
             - name: POSTGRES_DB
               value: mmorpg-database
             - name: POSTGRES_PASSWORD

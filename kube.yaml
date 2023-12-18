@@ -1,20 +1,4 @@
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  creationTimestamp: null
-  labels:
-    type: local
-  name: mmorpg-database-volume
-spec:
-  accessModes:
-    - ReadWriteOnce
-  capacity:
-    storage: 500Mi
-  hostPath:
-    path: /mnt/data
-  storageClassName: manual
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
@@ -74,6 +58,7 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: mmorpg-database-storage
+              subPath: mmorpg-database
       restartPolicy: Always
       volumes:
         - name: mmorpg-database-storage

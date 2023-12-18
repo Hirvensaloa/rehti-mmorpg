@@ -31,4 +31,4 @@ steps:
       - --image=gcr.io/$PROJECT_ID/mmorpg-server
       - --location=europe-north1
       - --cluster=mmorpg-dev
-      - --timeout=15m0s
+      - --timeout=40m0s

@@ -142,10 +142,12 @@ metadata:
     io.kompose.service: mmorpg-server
   name: mmorpg-server
 spec:
+  type: LoadBalancer
   ports:
     - name: "9999"
       port: 9999
       targetPort: 9999
+      protocol: TCP
   selector:
     io.kompose.service: mmorpg-server
 status:

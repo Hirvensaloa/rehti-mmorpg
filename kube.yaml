@@ -77,6 +77,7 @@ metadata:
     io.kompose.service: mmorpg-database
   name: mmorpg-database
 spec:
+  type: LoadBalancer
   ports:
     - name: "6543"
       port: 6543

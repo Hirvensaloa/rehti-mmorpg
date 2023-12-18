@@ -23,19 +23,11 @@ steps:
     args:
       - push
       - "gcr.io/$PROJECT_ID/mmorpg-server"
-  # Deploy database to the GKE
+  # Deploy database and server to the GKE
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
       - run
-      - --filename=kube-db.yaml
-      - --location=europe-north1
-      - --cluster=mmorpg-dev
-      - --timeout=10m0s
-  # Deploy server to the GKE
-  - name: "gcr.io/cloud-builders/gke-deploy"
-    args:
-      - run
-      - --filename=kube-server.yaml
+      - --filename=kube.yaml
       - --image=gcr.io/$PROJECT_ID/mmorpg-server
       - --location=europe-north1
       - --cluster=mmorpg-dev

@@ -1,0 +1,152 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.version: 1.31.2 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mmorpg-database
+  name: mmorpg-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mmorpg-database
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yaml
+        kompose.version: 1.31.2 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/rehti-mmorpg-default: "true"
+        io.kompose.service: mmorpg-database
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              value: mmorpg-database
+            - name: POSTGRES_PASSWORD
+              value: mypassword
+            - name: POSTGRES_USER
+              value: myuser
+          image: postgres:16rc1-alpine3.17
+          name: mmorpg-database
+          ports:
+            - containerPort: 5432
+              hostIP: 127.0.0.1
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - mountPath: /docker-entrypoint-initdb.d/deploy.sql
+              name: mmorpg-database-claim0
+      restartPolicy: Always
+      volumes:
+        - name: mmorpg-database-claim0
+          persistentVolumeClaim:
+            claimName: mmorpg-database-claim0
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.version: 1.31.2 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mmorpg-database
+  name: mmorpg-database
+spec:
+  ports:
+    - name: "6543"
+      port: 6543
+      targetPort: 5432
+  selector:
+    io.kompose.service: mmorpg-database
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mmorpg-database-claim0
+  name: mmorpg-database-claim0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.version: 1.31.2 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mmorpg-server
+  name: mmorpg-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mmorpg-server
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yaml
+        kompose.version: 1.31.2 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/rehti-mmorpg-default: "true"
+        io.kompose.service: mmorpg-server
+    spec:
+      containers:
+        - env:
+            - name: DB_HOST
+              value: mmorpg-database
+            - name: POSTGRES_DB
+              value: mmorpg-database
+            - name: POSTGRES_PASSWORD
+              value: mypassword
+            - name: POSTGRES_USER
+              value: myuser
+          image: mmorpg-server
+          name: mmorpg-server
+          ports:
+            - containerPort: 9999
+              hostIP: 127.0.0.1
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.version: 1.31.2 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mmorpg-server
+  name: mmorpg-server
+spec:
+  ports:
+    - name: "9999"
+      port: 9999
+      targetPort: 9999
+  selector:
+    io.kompose.service: mmorpg-server
+status:
+  loadBalancer: {}

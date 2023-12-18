@@ -51,7 +51,7 @@ spec:
           image: postgres:16rc1-alpine3.17
           name: mmorpg-database
           ports:
-            - containerPort: 5432
+            - containerPort: 6543
               hostIP: 127.0.0.1
               protocol: TCP
           resources: {}
@@ -80,7 +80,7 @@ spec:
   ports:
     - name: "6543"
       port: 6543
-      targetPort: 5432
+      targetPort: 6543
   selector:
     io.kompose.service: mmorpg-database
 status:
@@ -117,7 +117,7 @@ spec:
             - name: DB_HOST
               value: mmorpg-database
             - name: DB_PORT
-              value: "5432"
+              value: "6543"
             - name: POSTGRES_DB
               value: mmorpg-database
             - name: POSTGRES_PASSWORD

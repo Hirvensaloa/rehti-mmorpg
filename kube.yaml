@@ -1,3 +1,30 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mmorpg-database-claim0
+  name: mmorpg-database-claim0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: db-init
+data: CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW()
+  );
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -41,13 +68,18 @@ spec:
               protocol: TCP
           resources: {}
           volumeMounts:
-            - mountPath: /docker-entrypoint-initdb.d/deploy.sql
+            - mountPath: var/lib/postgresql/data
               name: mmorpg-database-claim0
+            - mountPath: /docker-entrypoint-initdb.d
+              name: postgresdb-loadsql
       restartPolicy: Always
       volumes:
         - name: mmorpg-database-claim0
           persistentVolumeClaim:
             claimName: mmorpg-database-claim0
+        - name: postgresdb-loadsql
+          configMap:
+            name: db-init
 status: {}
 ---
 apiVersion: v1
@@ -69,21 +101,6 @@ spec:
     io.kompose.service: mmorpg-database
 status:
   loadBalancer: {}
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  creationTimestamp: null
-  labels:
-    io.kompose.service: mmorpg-database-claim0
-  name: mmorpg-database-claim0
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
-status: {}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -121,7 +138,7 @@ spec:
               value: mypassword
             - name: POSTGRES_USER
               value: myuser
-          image: mmorpg-server
+          image: gcr.io/keen-surfer-407713/mmorpg-server:latest
           name: mmorpg-server
           ports:
             - containerPort: 9999

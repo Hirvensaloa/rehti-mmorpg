@@ -19,7 +19,7 @@ PlayerCharacter::PlayerCharacter(
              location)
 {
     respawnTimeM = std::chrono::milliseconds(2000);
-    moveSpeedM = std::chrono::milliseconds(500);
+    moveSpeedM = std::chrono::milliseconds(300);
 };
 
 void PlayerCharacter::update()

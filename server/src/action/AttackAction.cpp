@@ -4,7 +4,8 @@
 
 #include <iostream>
 
-AttackAction::AttackAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Entity> target, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), pTargetM(target), actionTimeM(pEntityM->getAttackSpeed()), moveTimeM(pEntityM->getMoveSpeed()) {}
+AttackAction::AttackAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Entity> target, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), pTargetM(target), actionTimeM(pEntityM->getAttackSpeed()), moveTimeM(pEntityM->getMoveSpeed()) {
+}
 
 std::shared_ptr<Entity>& AttackAction::getTarget()
 {

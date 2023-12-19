@@ -134,6 +134,12 @@ void Server::handleMessage(const Message& msg)
                 const AttackMessage attackMsg = MessageApi::parseAttack(body);
                 std::shared_ptr<PlayerCharacter> gamer = gameWorldM.getPlayer(connId);
                 std::shared_ptr<Entity> target = gameWorldM.getEntity(attackMsg.targetId);
+                if (target->getInstanceId() == gamer->getInstanceId())
+                {
+                    // Cannot attack self
+                    break;
+                }
+
                 gamer->setAction(std::make_shared<AttackAction>(std::chrono::system_clock::now(), target, gamer));
                 break;
             }

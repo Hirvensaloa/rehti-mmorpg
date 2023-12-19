@@ -25,12 +25,12 @@ inline float interpolatedTimeFactor(const double now, const double prevTimeFrame
 
 inline bool equalD(const double a, const double b)
 {
-    return abs(a - b) < EPSILON;
+    return std::abs(a - b) < EPSILON;
 }
 
 inline bool equalF(const float a, const float b)
 {
-    return abs(a - b) < EPSILON_F;
+    return std::abs(a - b) < EPSILON_F;
 }
 
 inline glm::vec3 interpolateLinear(const glm::vec3& start, const glm::vec3& end, float timeFactor)
@@ -213,7 +213,6 @@ bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertice
                 }
                 else
                 {
-                    std::cout << "Vertex " << vertexIndex << " has more than 4 bones" << std::endl;
                     float boneSum = vertices[vertexIndex].boneWeights.x + vertices[vertexIndex].boneWeights.y + vertices[vertexIndex].boneWeights.z + vertices[vertexIndex].boneWeights.w;
 
                     vertices[vertexIndex].boneWeights /= boneSum;
@@ -435,7 +434,7 @@ void debugCharacterVertices(const std::vector<CharacterVertex>& vertices)
         }
         i++;
     }
-    std::cout << "Found " << faultyVertices << " faulty vertices" << std::endl;
+    std::cout << "Found " << faultyVertices << " faulty vertices of " << vertices.size() << " correct vertices" << std::endl;
 }
 
 Vertex aiVector3DToVertex(const aiVector3D& vector)

@@ -10,7 +10,7 @@ void TimerCallbackSystem::elapseTime(float dt)
         float elapsedTime = std::min(timer.time, deltaTime);
         timer.callback(elapsedTime);
         timer.time -= elapsedTime * timer.factor;
-        if (abs(timer.time) < EPSILON)
+        if (std::abs(timer.time) < EPSILON)
         {
             // erase moves the iterator to the next element
             it = timersM.erase(it);

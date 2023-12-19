@@ -4,6 +4,7 @@
 #include "rapidjson/prettywriter.h"
 #include <exception>
 #include <filesystem>
+#include <stdlib.h>
 
 #include "RehtiUtils.hpp"
 #include "Utils.hpp"
@@ -380,28 +381,28 @@ static const std::vector<std::vector<unsigned>> generateAccessMap(const std::vec
             unsigned& access = accessMap[i][j];
 
             // Check North
-            if (i <= 0 || heightMap[i - 1].size() <= j || height - heightMap[i - 1][j] > Config.MAX_PASSABLE_HEIGHT || objectBlockMap[i][j].find("N") != std::string::npos)
+            if (i <= 0 || heightMap[i - 1].size() <= j || std::abs(height - heightMap[i - 1][j]) > Config.MAX_PASSABLE_HEIGHT || objectBlockMap[i][j].find("N") != std::string::npos)
             {
                 // Block the north bit
                 access = access & 0b1110;
             }
 
             // Check East
-            if (heightMap[i].size() <= j + 1 || height - heightMap[i][j + 1] > Config.MAX_PASSABLE_HEIGHT || objectBlockMap[i][j].find("E") != std::string::npos)
+            if (heightMap[i].size() <= j + 1 || std::abs(height - heightMap[i][j + 1]) > Config.MAX_PASSABLE_HEIGHT || objectBlockMap[i][j].find("E") != std::string::npos)
             {
                 // Block the east bit
                 access = access & 0b1101;
             }
 
             // Check South
-            if (heightMap.size() <= i + 1 || heightMap[i + 1].size() <= j || height - heightMap[i + 1][j] > Config.MAX_PASSABLE_HEIGHT || objectBlockMap[i][j].find("S") != std::string::npos)
+            if (heightMap.size() <= i + 1 || std::abs(heightMap[i + 1].size() <= j || height - heightMap[i + 1][j]) > Config.MAX_PASSABLE_HEIGHT || objectBlockMap[i][j].find("S") != std::string::npos)
             {
                 // Block the south bit
                 access = access & 0b1011;
             }
 
             // Check West
-            if (j <= 0 || height - heightMap[i][j - 1] > Config.MAX_PASSABLE_HEIGHT || objectBlockMap[i][j].find("W") != std::string::npos)
+            if (j <= 0 || std::abs(height - heightMap[i][j - 1]) > Config.MAX_PASSABLE_HEIGHT || objectBlockMap[i][j].find("W") != std::string::npos)
             {
                 // Block the west bit
                 access = access & 0b0111;

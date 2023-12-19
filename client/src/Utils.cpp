@@ -4,6 +4,8 @@ AnimationConfig actionToAnimationConfig(CurrentAction action, Coordinate entityL
 {
     glm::vec3 targetDirection = glm::vec3(action.targetCoordinate.x - entityLocation.x, action.targetCoordinate.y - entityLocation.y, action.targetCoordinate.z - entityLocation.z);
 
+    std::cout << "Target direction: " << targetDirection.x << ", " << targetDirection.y << ", " << targetDirection.z << " Current location: " << entityLocation.x << ", " << entityLocation.y << ", " << entityLocation.z << std::endl;
+
     switch (action.id)
     {
     case ActionType::Move:

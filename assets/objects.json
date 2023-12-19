@@ -19,7 +19,7 @@
       "description": "A tree. It is a tree.",
       "tileMap": [["XB"]],
       "textureFilename": "treetexture.png",
-      "objFilename": "tree.obj",
+      "objFilename": "tree1.obj",
       "characterInteractAnimation": "woodcutting"
     },
     {

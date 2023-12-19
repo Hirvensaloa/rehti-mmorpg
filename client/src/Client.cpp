@@ -36,8 +36,13 @@ void Client::start()
     }
     connectionThreadM = std::thread([this]()
                                     { boost::asio::co_spawn(ioContextM, connect(), boost::asio::detached); });
-    std::cout << "Starting to process messages..." << std::endl;
-    processMessages();
+
+    std::thread messageThread([this]()
+                              { processMessages(); });
+    // Cleanup after graphics thread has exited
+    graphicsThreadM.join();
+    connectionM->disconnect();
+    ioContextM.stop();
 }
 
 boost::asio::awaitable<bool> Client::login()
@@ -273,6 +278,8 @@ void Client::processMessages()
                             // If the entity is found, check if it has changed action
                             if (!entity.hasSameActionAs(*prevEntity))
                             {
+                                pGraphLibM->playAnimation(entity.instanceId, actionToAnimationConfig(entity.currentAction, {entity.x, entity.y, entity.z}));
+
                                 // Move action is special case as we need to animate and move the entity at the same time
                                 if (entity.currentAction.id == ActionType::Move)
                                 {
@@ -282,10 +289,6 @@ void Client::processMessages()
                                 else if (entity.currentAction.id == ActionType::Respawn)
                                 {
                                     pGraphLibM->forceCharacterMove(entity.instanceId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
-                                }
-                                else
-                                {
-                                    pGraphLibM->playAnimation(entity.instanceId, actionToAnimationConfig(entity.currentAction, {entity.x, entity.y, entity.z}));
                                 }
                             }
                         }

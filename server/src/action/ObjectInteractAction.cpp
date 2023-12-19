@@ -40,14 +40,14 @@ void ObjectInteractAction::act()
 
         targetInRangeM = true;
     }
-    else if (std::chrono::system_clock::now() > startTimeM + moveTimeM)
+    else
     {
         targetInRangeM = false;
 
         // If there is no path to the target or the target has changed location, we will try to find one
         if (pathToTargetM.size() == 0 || (pathToTargetM.back().first != pTargetM->getLocation().x || pathToTargetM.back().second != pTargetM->getLocation().y))
         {
-            pathToTargetM = pEntityM->getGameWorld()->getMap().findPath(pEntityM->getLocation(), pTargetM->getLocation());
+            pathToTargetM = pEntityM->getGameWorld()->getMap().findPathToRange(pEntityM->getLocation(), pTargetM->getLocation(), pEntityM->getRange());
 
             // If we cannot find a path to the target, we will just stop the action
             if (pathToTargetM.size() == 0)
@@ -55,16 +55,34 @@ void ObjectInteractAction::act()
                 nextMoveM = std::nullopt;
                 completedM = true;
                 return;
-            };
+            }
+            else
+            {
+                nextMoveM = Coordinates(pathToTargetM.front().first, pathToTargetM.front().second);
+            }
         }
 
-        auto next = pathToTargetM.front();
-        nextMoveM = Coordinates(next.first, next.second);
+        // If the time since the last move is greater than the move time, we will move to the next location in the path. NOTE: We end up here only if the path is found.
+        if (std::chrono::system_clock::now() > startTimeM + moveTimeM)
+        {
+            auto next = pathToTargetM.front();
+            nextMoveM = Coordinates(next.first, next.second);
 
-        pEntityM->move(nextMoveM.value());
+            pEntityM->move(nextMoveM.value());
 
-        pathToTargetM.erase(pathToTargetM.begin());
-        startTimeM = std::chrono::system_clock::now();
+            pathToTargetM.erase(pathToTargetM.begin());
+            startTimeM = std::chrono::system_clock::now();
+
+            if (pathToTargetM.size() == 0)
+            {
+                nextMoveM = std::nullopt;
+            }
+            else
+            {
+                next = pathToTargetM.front();
+                nextMoveM = Coordinates(next.first, next.second);
+            }
+        }
     }
 }
 
@@ -102,7 +120,7 @@ CurrentAction ObjectInteractAction::getActionInfo()
         actionInfo.durationMs = actionTimeM.count();
         actionInfo.looping = true;
         actionInfo.targetId = pTargetM->getId();
-        Coordinates& coords = pEntityM->getLocation();
+        const Coordinates& coords = pTargetM->getLocation();
         actionInfo.targetCoordinate = {coords.x,
                                        coords.y,
                                        coords.z};

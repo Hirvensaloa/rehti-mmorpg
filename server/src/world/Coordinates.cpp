@@ -25,7 +25,7 @@ bool operator<(const Coordinates& l, const Coordinates& r)
     return std::tie(l.x, l.y, l.z) < std::tie(r.x, r.y, r.z);
 }
 
-unsigned int Coordinates::distance(const Coordinates& other)
+unsigned int Coordinates::distance(const Coordinates& other) const
 {
     return std::sqrt(std::pow(x - other.x, 2) + std::pow(y - other.y, 2));
 }

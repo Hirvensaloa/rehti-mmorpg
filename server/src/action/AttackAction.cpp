@@ -4,7 +4,8 @@
 
 #include <iostream>
 
-AttackAction::AttackAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Entity> target, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), pTargetM(target), actionTimeM(pEntityM->getAttackSpeed()), moveTimeM(pEntityM->getMoveSpeed()) {
+AttackAction::AttackAction(std::chrono::system_clock::time_point startTime, std::shared_ptr<Entity> target, std::shared_ptr<Entity> pEntity) : Action(startTime, pEntity), pTargetM(target), actionTimeM(pEntityM->getAttackSpeed()), moveTimeM(pEntityM->getMoveSpeed())
+{
 }
 
 std::shared_ptr<Entity>& AttackAction::getTarget()
@@ -77,26 +78,7 @@ std::vector<std::pair<int, int>> AttackAction::findPathToTarget()
     Coordinates tLocation = pTargetM->getLocation();
     Map& map = pEntityM->getGameWorld()->getMap();
 
-    // If we are on the same tile as the target, we will try to find a path to a neighbor tile
-    if (pEntityM->getLocation() == pTargetM->getLocation())
-    {
-        for (int i = -1; i < 2; i++)
-        {
-            for (int j = -1; j < 2; j++)
-            {
-                auto pathToNeighbor = map.findPath(pLocation, Coordinates(tLocation.x + i, tLocation.y + j));
-                if (pathToNeighbor.size() != 0)
-                {
-                    return pathToNeighbor;
-                }
-            }
-        }
-        return {};
-    }
-    else
-    {
-        return map.findPath(pLocation, tLocation);
-    }
+    return map.findPathToRange(pLocation, tLocation, pEntityM->getRange());
 }
 
 CurrentAction AttackAction::getActionInfo()
@@ -133,7 +115,7 @@ CurrentAction AttackAction::getActionInfo()
         actionInfo.durationMs = actionTimeM.count();
         actionInfo.looping = true;
         actionInfo.targetId = pTargetM->getInstanceId();
-        Coordinates& coords = pEntityM->getLocation();
+        Coordinates& coords = pTargetM->getLocation();
         actionInfo.targetCoordinate = {coords.x, coords.y, coords.z};
         return actionInfo;
     }

@@ -34,7 +34,7 @@ void MoveAction::act()
     if (std::chrono::system_clock::now() > startTimeM + actionTimeM)
     {
         auto next = pathM.front();
-        if (pEntityM->move(nextMoveM.value()))
+        if (pEntityM->move(Coordinates(next.first, next.second)))
         {
             pathM.erase(pathM.begin());
         }

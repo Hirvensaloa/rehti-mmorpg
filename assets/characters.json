@@ -34,8 +34,8 @@
     {
       "id": 2,
       "name": "Goblin",
-      "textureFilename": "ukkotextuuri_original.png",
-      "glTFFilename": "simplecharacter.glb",
+      "textureFilename": "goblintexture1.png",
+      "glTFFilename": "goblin.glb",
       "spawnCoordinateBounds": {
         "xMin": 1,
         "xMax": 64,

@@ -69,7 +69,7 @@ void generateAnimationHppFile()
         hppFile << "inline AnimationType getAnimationType(const std::string animationName) {\n";
         hppFile << "    std::string lowercaseName(animationName);\n";
         hppFile << "    std::transform(lowercaseName.begin(), lowercaseName.end(), lowercaseName.begin(), ::tolower);\n\n";
-        hppFile << "    for (size_t i = 0; i < ANIMATION_TYPE_COUNT - 1; ++i) {\n";
+        hppFile << "    for (size_t i = 0; i < ANIMATION_TYPE_COUNT; ++i) {\n";
         hppFile << "        if (lowercaseName.find(AnimationTypeStrings[i]) != std::string::npos) {\n";
         hppFile << "            return static_cast<AnimationType>(i);\n";
         hppFile << "        }\n";

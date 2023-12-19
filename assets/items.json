@@ -2,11 +2,11 @@
   "items": [
     {
       "id": 0,
-      "name": "Oak Wood",
+      "name": "Oak wood",
       "description": "A piece of oak wood, yum yum!",
       "type": "General",
-      "isStackable": true,
-      "iconFilename": "lobster.png",
+      "isStackable": false,
+      "iconFilename": "oak_logs.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
@@ -40,28 +40,28 @@
         "dodge": 3
       },
       "isStackable": false,
-      "iconFilename": "no-icon.png",
+      "iconFilename": "wooden_shield.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 3,
       "name": "Steel Helmet",
-      "description": "A protective steel helmet for the head slot.",
+      "description": "A protective steel helmet fit for a proper knight.",
       "type": "Equippable",
       "slot": "Head",
       "stats": {
         "armor": 20
       },
       "isStackable": false,
-      "iconFilename": "no-icon.png",
+      "iconFilename": "steel_full_helm.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 4,
-      "name": "Leather Vest",
-      "description": "A comfortable leather vest for the top slot.",
+      "name": "Leather body",
+      "description": "A comfortable leather body suitable for adventuring.",
       "type": "Equippable",
       "slot": "Top",
       "stats": {
@@ -74,36 +74,36 @@
     },
     {
       "id": 5,
-      "name": "Iron Leggings",
-      "description": "Sturdy iron leggings for the bottom slot.",
+      "name": "Iron platelegs",
+      "description": "Sturdy iron platelegs.",
       "type": "Equippable",
       "slot": "Bottom",
       "stats": {
-        "armor": 15
+        "armor": 25
       },
       "isStackable": false,
-      "iconFilename": "no-icon.png",
+      "iconFilename": "iron_platelegs.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 6,
-      "name": "Steel Boots",
-      "description": "Heavy steel boots for the boots slot.",
+      "name": "Steel boots",
+      "description": "Heavy steel boots to keep one's feet warm.",
       "type": "Equippable",
       "slot": "Boots",
       "stats": {
-        "armor": 15
+        "armor": 10
       },
       "isStackable": false,
-      "iconFilename": "no-icon.png",
+      "iconFilename": "steel_boots.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 7,
-      "name": "Iron Gauntlets",
-      "description": "Iron gauntlets for the gloves slot.",
+      "name": "Iron gauntlets",
+      "description": "A pair of iron gauntlets.",
       "type": "Equippable",
       "slot": "Gloves",
       "stats": {
@@ -117,7 +117,7 @@
     {
       "id": 8,
       "name": "Necklace of Wisdom",
-      "description": "A wise necklace for the neck slot.",
+      "description": "A wise necklace for a dumb adventurer.",
       "type": "Equippable",
       "slot": "Neck",
       "stats": {
@@ -125,14 +125,14 @@
         "dodge": 5
       },
       "isStackable": false,
-      "iconFilename": "no-icon.png",
+      "iconFilename": "necklace_of_wisdom.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 9,
       "name": "Ring of Power",
-      "description": "A powerful ring for the ring slot.",
+      "description": "A powerful ring, but not the one to rule them all.",
       "type": "Equippable",
       "slot": "Ring",
       "stats": {
@@ -140,29 +140,27 @@
         "armor": 5
       },
       "isStackable": false,
-      "iconFilename": "no-icon.png",
+      "iconFilename": "ring_of_power.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 10,
-      "name": "Fish",
-      "description": "A delicious fish that heals wounds.",
-      "type": "Food",
-      "healAmount": 20,
+      "name": "Diamond",
+      "description": "A rare and valuable diamond.",
+      "type": "General",
       "isStackable": false,
-      "iconFilename": "no-icon.png",
+      "iconFilename": "diamond.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 11,
-      "name": "Bread",
-      "description": "Freshly baked bread for a quick snack.",
-      "type": "Food",
-      "healAmount": 30,
+      "name": "Easter egg",
+      "description": "Something eggs-traordinary.",
+      "type": "General",
       "isStackable": false,
-      "iconFilename": "no-icon.png",
+      "iconFilename": "easter_egg.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
@@ -173,18 +171,122 @@
       "type": "Food",
       "healAmount": -5,
       "isStackable": false,
-      "iconFilename": "lobster.png",
+      "iconFilename": "raw_lobster.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     },
     {
       "id": 13,
-      "name": "Cooked lobster",
+      "name": "Lobster",
       "description": "A cooked lobster that heals wounds.",
       "type": "Food",
       "healAmount": 50,
       "isStackable": false,
       "iconFilename": "lobster.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
+    },
+    {
+      "id": 14,
+      "name": "Willow wood",
+      "description": "A piece of willow wood.",
+      "type": "General",
+      "isStackable": false,
+      "iconFilename": "willow_logs.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
+    },
+    {
+      "id": 15,
+      "name": "Mahogany wood",
+      "description": "A piece of mahogany wood.",
+      "type": "General",
+      "isStackable": false,
+      "iconFilename": "mahogany_logs.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
+    },
+    {
+      "id": 16,
+      "name": "Raw salmon",
+      "description": "A raw salmon that can be cooked.",
+      "type": "Food",
+      "healAmount": -5,
+      "isStackable": false,
+      "iconFilename": "raw_salmon.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
+    },
+    {
+      "id": 17,
+      "name": "Salmon",
+      "description": "A cooked salmon that heals wounds.",
+      "type": "Food",
+      "healAmount": 50,
+      "isStackable": false,
+      "iconFilename": "salmon.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
+    },
+    {
+      "id": 18,
+      "name": "Raw shark",
+      "description": "A raw shark that can be cooked.",
+      "type": "Food",
+      "healAmount": -5,
+      "isStackable": false,
+      "iconFilename": "raw_shark.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
+    },
+    {
+      "id": 19,
+      "name": "Shark",
+      "description": "A cooked shark that heals wounds.",
+      "type": "Food",
+      "healAmount": 50,
+      "isStackable": false,
+      "iconFilename": "shark.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
+    },
+    {
+      "id": 20,
+      "name": "Iron ore",
+      "description": "A chunk of iron ore that can be refined into something more useful.",
+      "type": "General",
+      "isStackable": false,
+      "iconFilename": "iron_ore.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
+    },
+    {
+      "id": 21,
+      "name": "Mithril ore",
+      "description": "A chunk of mithril ore that can be refined into something more useful.",
+      "type": "General",
+      "isStackable": false,
+      "iconFilename": "mithril_ore.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
+    },
+    {
+      "id": 22,
+      "name": "Adamantite ore",
+      "description": "A chunk of adamantite ore that can be refined into something more useful.",
+      "type": "General",
+      "isStackable": false,
+      "iconFilename": "adamantite_ore.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
+    },
+    {
+      "id": 23,
+      "name": "Green toad",
+      "description": "Unroll the tadpole, unclog the frog, unload the toad, uninhibit the ribbit, unstick the lick, unimprison the amphibian, unmute the newt, unbench the kench, permit the kermit, defog the polliwog.",
+      "type": "General",
+      "isStackable": false,
+      "iconFilename": "green_toad.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     }

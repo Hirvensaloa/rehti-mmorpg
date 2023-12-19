@@ -82,6 +82,7 @@ target_link_libraries(rehtiGraphics
  	glm::glm
 	rehtiUtils
 	imgui::imgui
+	assimp::assimp
 	)
 
 target_include_directories(rehtiGraphics PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/shaders/)

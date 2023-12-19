@@ -5,9 +5,6 @@
 [submodule "third_party/rapidjson"]
 	path = third_party/rapidjson
 	url = https://github.com/Tencent/rapidjson.git
-[submodule "third_party/assimp"]
-	path = third_party/assimp
-	url = https://github.com/assimp/assimp
 [submodule "third_party/bcrypt"]
 	path = third_party/bcrypt
 	url = https://github.com/hilch/Bcrypt.cpp.git

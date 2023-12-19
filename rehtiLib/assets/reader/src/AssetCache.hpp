@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <map>
 #include <string>
 #include <vector>
@@ -20,6 +21,7 @@ public:
      */
     static AssetCache& getInstance()
     {
+        std::cout << "AssetCache getInstance()" << std::endl;
         static AssetCache instance;
         return instance;
     }
@@ -67,6 +69,12 @@ public:
      * @return ImageData
      */
     ImageData getDefaultTexture();
+
+    /**
+     * @brief Get item asset data map
+     * @return std::map<int, ItemAssetData>&
+     */
+    std::map<int, ItemAssetData>& getItemAssetData();
 
 private:
     AssetCache() {}

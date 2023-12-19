@@ -422,6 +422,8 @@ void debugCharacterVertices(const std::vector<CharacterVertex>& vertices)
 {
     uint32_t i = 0;
     uint32_t faultyVertices = 0;
+    glm::vec3 mins = glm::vec3(1000000.f);
+    glm::vec3 maxs = glm::vec3(-1000000.f);
     for (const auto& vertex : vertices)
     {
         glm::vec4 w = vertex.boneWeights;
@@ -433,9 +435,14 @@ void debugCharacterVertices(const std::vector<CharacterVertex>& vertices)
             std::cout << "Bone IDs: " << vertex.boneIDs.x << ", " << vertex.boneIDs.y << ", " << vertex.boneIDs.z << ", " << vertex.boneIDs.w << std::endl;
             faultyVertices++;
         }
+        mins = glm::min(mins, vertex.pos);
+        maxs = glm::max(maxs, vertex.pos);
         i++;
     }
     std::cout << "Found " << faultyVertices << " faulty vertices" << std::endl;
+    glm::vec3 diff = maxs - mins;
+    std::cout << "Model dimensions are: " << diff.x
+              << ", " << diff.y << ", " << diff.z << std::endl;
 }
 
 Vertex aiVector3DToVertex(const aiVector3D& vector)

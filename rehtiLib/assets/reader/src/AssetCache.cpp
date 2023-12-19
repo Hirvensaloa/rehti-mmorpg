@@ -36,6 +36,11 @@ std::map<std::string, MapAreaAssetData>& AssetCache::getAreaAssetData()
     return areaAssetDataM;
 }
 
+std::map<int, ItemAssetData>& AssetCache::getItemAssetData()
+{
+    return itemAssetDataM;
+}
+
 const ObjectAssetData& AssetCache::getObjectAssetDataById(int id)
 {
     return objectAssetDataM.at(id);

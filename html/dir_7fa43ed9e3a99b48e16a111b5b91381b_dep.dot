@@ -8,5 +8,6 @@ digraph "rehtiLib" {
   dir_c06811b8199beb4c697950829a4c58ec [shape=box label="assets" fillcolor="white" style="filled" color="red" URL="dir_c06811b8199beb4c697950829a4c58ec.html"];
   dir_5311ac799357c12e8d6677b53f5ac4d2 [shape=box label="graphics" fillcolor="white" style="filled" color="red" URL="dir_5311ac799357c12e8d6677b53f5ac4d2.html"];
   }
+  dir_5311ac799357c12e8d6677b53f5ac4d2->dir_c06811b8199beb4c697950829a4c58ec [headlabel="1", labeldistance=1.5 headhref="dir_000001_000007.html"];
   dir_c06811b8199beb4c697950829a4c58ec->dir_5311ac799357c12e8d6677b53f5ac4d2 [headlabel="1", labeldistance=1.5 headhref="dir_000007_000001.html"];
 }

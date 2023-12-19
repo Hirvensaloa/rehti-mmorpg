@@ -6,6 +6,7 @@ var classAssetCache =
     [ "getCharacterAssetDataById", "classAssetCache.html#acd735b6ac54f7994b6092eb88f4e56d9", null ],
     [ "getDefaultTexture", "classAssetCache.html#a68fafbfe086f297006e3ea6fe3def49f", null ],
     [ "getInstance", "classAssetCache.html#ad31c13741259ce09f6bd7fe8a8ba083b", null ],
+    [ "getItemAssetData", "classAssetCache.html#a25d2f8a742d643a7733a9c40cee5f52d", null ],
     [ "getItemAssetDataById", "classAssetCache.html#a5df0f44a704c56a67d6fda012ce7e033", null ],
     [ "getObjectAssetDataById", "classAssetCache.html#a68b5da460af29dca4e38a17772d7bc9d", null ],
     [ "getTextureAssetData", "classAssetCache.html#a5ed26db8c9a44169199e9cc6f89b7b81", null ],

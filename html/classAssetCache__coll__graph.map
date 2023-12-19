@@ -1,5 +1,5 @@
 <map id="AssetCache" name="AssetCache">
-<area shape="rect" id="node1" title="Loads all of the assets into memory (objects, textures, etc.)." alt="" coords="510,315,737,597"/>
+<area shape="rect" id="node1" title="Loads all of the assets into memory (objects, textures, etc.)." alt="" coords="510,315,737,612"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,160,196,252"/>
 <area shape="rect" id="node3" title=" " alt="" coords="221,160,418,252"/>
 <area shape="rect" id="node4" title=" " alt="" coords="442,167,645,245"/>

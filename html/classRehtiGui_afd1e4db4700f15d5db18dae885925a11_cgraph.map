@@ -1,4 +1,6 @@
 <map id="RehtiGui::RehtiGui" name="RehtiGui::RehtiGui">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,148,32"/>
-<area shape="rect" id="node2" href="$classRehtiGui.html#aded61cb89563e10456cc0a6260cd9821" title="Load texture from file and save it to member map guiIconsM with key id." alt="" coords="196,5,417,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,148,83"/>
+<area shape="rect" id="node2" href="$classAssetCache.html#a25d2f8a742d643a7733a9c40cee5f52d" title="Get item asset data map." alt="" coords="196,5,420,32"/>
+<area shape="rect" id="node3" href="$classRehtiGui.html#aded61cb89563e10456cc0a6260cd9821" title="Load texture from file and save it to member map guiIconsM with key id." alt="" coords="197,56,419,83"/>
+<area shape="rect" id="node4" href="$classRehtiGui.html#a3e6fed677bd8576c1e51d9e11be59a5c" title="Load texture from ImageData and save it to member map guiIconsM with key id." alt="" coords="209,107,407,149"/>
 </map>

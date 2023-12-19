@@ -215,7 +215,7 @@ void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
     dataMutexM.lock();
     characterOrientationsM[characterID].animationData.currentAnimation = cfg.animType;
     characterOrientationsM[characterID].animationData.currentTicks = 0;
-    if (!glm::length(cfg.animationDirection) < 0.001f) // if the direction is set, use it
+    if (!(glm::length(cfg.animationDirection) < 0.001f)) // if the direction is set, use it
     {
         glm::vec3 direction = -glm::normalize(cfg.animationDirection);
         characterOrientationsM[characterID].characterOrientation.rotation = glm::quatLookAt(direction, POSITIVE_Y_AXIS);

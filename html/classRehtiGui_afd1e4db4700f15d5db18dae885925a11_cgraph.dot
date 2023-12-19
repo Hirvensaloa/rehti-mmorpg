@@ -6,5 +6,9 @@ digraph "RehtiGui::RehtiGui"
   rankdir="LR";
   Node1 [label="RehtiGui::RehtiGui",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="RehtiGui::LoadTextureFromFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGui.html#aded61cb89563e10456cc0a6260cd9821",tooltip="Load texture from file and save it to member map guiIconsM with key id."];
+  Node2 [label="AssetCache::getItemAssetData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAssetCache.html#a25d2f8a742d643a7733a9c40cee5f52d",tooltip="Get item asset data map."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="RehtiGui::LoadTextureFromFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGui.html#aded61cb89563e10456cc0a6260cd9821",tooltip="Load texture from file and save it to member map guiIconsM with key id."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="RehtiGui::LoadTextureFrom\lImageData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGui.html#a3e6fed677bd8576c1e51d9e11be59a5c",tooltip="Load texture from ImageData and save it to member map guiIconsM with key id."];
 }

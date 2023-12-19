@@ -1,5 +1,8 @@
 var NAVTREEINDEX5 =
 {
+"structAreaObject.html#ae2fc1571533313c42420d6c5a33d7704":[9,0,8,0],
+"structAreaObject.html#aeab43038b69d5b74e98d48425b4198a5":[9,0,8,2],
+"structAreaObject.html#afccb800be7ca37690340003b37e19290":[9,0,8,3],
 "structBoneNode.html":[9,0,12],
 "structBoneNode.html#a03e9cbb6d4bc957c70ef8f7715e386b5":[9,0,12,1],
 "structBoneNode.html#a5bda20858eec5e87c230f89c0e4d553e":[9,0,12,2],
@@ -246,8 +249,5 @@ var NAVTREEINDEX5 =
 "structPlayerData.html#a4173f942fe494469a8e7f77c872b55c0":[9,0,74,1],
 "structPlayerData.html#a6065f54bdd2ca49c5adfbcb852abefdc":[9,0,74,0],
 "structPlayerData.html#a9844b02c7c26a385b8bb586a17c5998e":[9,0,74,5],
-"structPlayerData.html#ac6b67e6a5cc2dff96fccd35681af8097":[9,0,74,2],
-"structPlayerData.html#ad848f39a6e2412daefb6bb9894e14b1b":[9,0,74,4],
-"structPlayerTable.html":[9,0,75],
-"structPlayerTable.html#a329df8d5d0fb032aee3b49638e0333e6":[9,0,75,1]
+"structPlayerData.html#ac6b67e6a5cc2dff96fccd35681af8097":[9,0,74,2]
 };

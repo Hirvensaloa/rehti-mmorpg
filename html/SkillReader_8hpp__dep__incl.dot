@@ -16,9 +16,23 @@ digraph "SkillReader.hpp"
   Node6 [label="AssetCache.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$AssetCache_8hpp.html",tooltip=" "];
   Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node7 [label="AssetCache.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$AssetCache_8cpp.html",tooltip=" "];
+  Node6 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="RehtiGui.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$RehtiGui_8hpp.html",tooltip=" "];
+  Node8 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="graphics.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$graphics_8h.html",tooltip=" "];
+  Node9 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="Client.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Client_8hpp.html",tooltip=" "];
+  Node10 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="Client.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Client_8cpp.html",tooltip=" "];
+  Node10 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="Main.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_2src_2Main_8cpp.html",tooltip=" "];
+  Node8 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="RehtiGraphics.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$RehtiGraphics_8cpp.html",tooltip=" "];
+  Node8 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="RehtiGui.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$RehtiGui_8cpp.html",tooltip=" "];
   Node5 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node8 [label="TextureReader.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$TextureReader_8cpp.html",tooltip=" "];
-  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node9 [label="SkillReader.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$SkillReader_8cpp.html",tooltip=" "];
+  Node5 -> Node15 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="TextureReader.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$TextureReader_8cpp.html",tooltip=" "];
+  Node1 -> Node16 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="SkillReader.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$SkillReader_8cpp.html",tooltip=" "];
 }

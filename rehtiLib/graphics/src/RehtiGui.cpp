@@ -30,8 +30,22 @@ bool RehtiGui::LoadTextureFromFile(const char* filename, const int id)
     return true;
 }
 
+bool RehtiGui::LoadTextureFromImageData(const int id, ImageData& imgData)
+{
+    CombinedImage img = pGraphicsObjectManagerM->createCombinedImage(static_cast<uint32_t>(imgData.width), static_cast<uint32_t>(imgData.height), VK_FORMAT_R8G8B8A8_UNORM);
+
+    // Create Descriptor Set using ImGUI's implementation
+    VkDescriptorSet imageSet = ImGui_ImplVulkan_AddTexture(samplerM, img.imageView, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    // copy to gpu and transition the image layout
+    pGraphicsObjectManagerM->copyImage(img.imageAllocation, imgData);
+    // set icon to id
+    guiIconsM[id] = imageSet;
+
+    return true;
+}
+
 RehtiGui::RehtiGui(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice, GLFWwindow* pWindow, VkQueue graphicsQueue, VkDescriptorPool descPool, uint32_t imageCount, VkRenderPass renderPass, std::shared_ptr<GraphicsObjectManager> pGfxManager)
-    : logDeviceM(logDevice), descPoolM(descPool), pGraphicsObjectManagerM(pGfxManager)
+    : logDeviceM(logDevice), descPoolM(descPool), pGraphicsObjectManagerM(pGfxManager), assetCacheM(AssetCache::getInstance())
 {
     ImGui::CreateContext();
     ImGui_ImplGlfw_InitForVulkan(pWindow, true);
@@ -63,12 +77,16 @@ RehtiGui::RehtiGui(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice
     {
         throw std::runtime_error("failed to create texture sampler for gui system.");
     }
-    // check_vk_result(err);
-    // TODO: Load the files in asset cache
-    bool ret = LoadTextureFromFile("./assets/item/lobster.png", 10);
-    IM_ASSERT(ret);
-    ret = LoadTextureFromFile("./assets/item/iron_sword.png", 1);
-    IM_ASSERT(ret);
+
+    bool ret;
+    std::map<int, ItemAssetData>& itemAssetData = assetCacheM.getItemAssetData();
+    for (auto itemEntry : itemAssetData)
+    {
+        ret = LoadTextureFromImageData(itemEntry.first, itemEntry.second.icon);
+        IM_ASSERT(ret);
+    }
+
+    // TODO: Add Skill icons and maybe GUI slot icons also to AssetCache
     ret = LoadTextureFromFile("./assets/gui/headslot.png", -1);
     IM_ASSERT(ret);
     ret = LoadTextureFromFile("./assets/gui/neckslot.png", -2);
@@ -246,7 +264,7 @@ void RehtiGui::drawInventory()
 
         if (ImGui::BeginPopupContextItem())
         {
-            if (ImGui::BeginListBox("##listbox1", ImVec2(90, 60)))
+            if (ImGui::BeginListBox("##listbox1", ImVec2((inventoryM[i].name.size() + 4) * 8, 60)))
             {
                 if (ImGui::Selectable(("Use " + inventoryM[i].name).c_str()))
                 {

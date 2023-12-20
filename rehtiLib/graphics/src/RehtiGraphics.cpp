@@ -91,7 +91,12 @@ bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, st
     glm::mat4 transformation = glm::translate(glm::mat4(1.f), location);
     glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.f), rotation, POSITIVE_Y_AXIS);
     transformation = transformation * rotationMatrix;
-    bool res = pObjectManagerM->addGameObject(objectID, vertices, indices, img, transformation, textureSamplerM);
+    PhongMaterial gameObjectMaterial{};
+    gameObjectMaterial.ambient = glm::vec3(0.1f);
+    gameObjectMaterial.diffuse = glm::vec3(0.6f);
+    gameObjectMaterial.specular = glm::vec3(0.2f);
+    gameObjectMaterial.shininess = 10.f;
+    bool res = pObjectManagerM->addGameObject(objectID, vertices, indices, img, transformation, textureSamplerM, gameObjectMaterial);
     if (!res)
         return false;
     AABB bb;
@@ -150,7 +155,7 @@ void RehtiGraphics::moveGameObject(int objectID, glm::vec3 location, float timeI
 }
 
 void RehtiGraphics::rotateGameObject(int objectID, float radians, float timeInSeconds)
-{
+{ //
     float timeInv = 1.f / timeInSeconds;
     timersM.finishCallback(objectID);
     glm::quat currentRotation = gameObjectOrientationsM[objectID].rotation;
@@ -648,7 +653,7 @@ void RehtiGraphics::createImageViews()
         imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
         imageInfo.image = swapChainImagesM[i];
         imageInfo.viewType = VK_IMAGE_VIEW_TYPE_2D; // how image should be interpreted, for example you might use images as 2d textures.
-        imageInfo.format = swapChainImageFormatM;   // how image should be interpreted
+        imageInfo.format = swapChainImageFormatM;   // how image should be interpreted.
 
         imageInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
         imageInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;

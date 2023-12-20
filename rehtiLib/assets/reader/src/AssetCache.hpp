@@ -100,7 +100,7 @@ private:
      * @brief Loads the map area assets data
      *
      * @param areaMap The area map
-     * @return Map of area name and its corresponding asset data (MapAreaAssetData)
+     * @return Map of area name and its corresponding asset data (MapAreaAssetData )
      */
     std::map<std::string, MapAreaAssetData> loadAreaAssetData(const std::vector<std::vector<std::string>>& areaMap);
 

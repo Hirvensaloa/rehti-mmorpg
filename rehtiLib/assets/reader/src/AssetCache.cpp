@@ -93,11 +93,20 @@ std::map<int, ObjectAssetData> AssetCache::loadGameObjectAssetData(const GameObj
 
     for (const auto& object : objectsWithFilenames)
     {
+
         const std::string objFilepath = Config.OBJECT_OBJ_PATH + object.objFilename;
         std::vector<Vertex> vertices;
         std::vector<uint32_t> faces;
+        bool success = false;
+        if (object.objFilename == "defaultmodel")
+        {
+            success = loadOBJTile(vertices, faces); //
+        }
+        else
+        {
+            success = loadOBJFile(objFilepath, vertices, faces);
+        }
 
-        bool success = loadOBJFile(objFilepath, vertices, faces);
         if (success)
         {
             objectAssetDataMap[object.id] = {vertices, faces, textureDataMap[object.textureFilename], object.characterInteractAnimation};

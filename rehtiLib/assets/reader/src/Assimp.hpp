@@ -14,9 +14,17 @@
  * @param vertices Empty vector of float that will be filled with the vertices.
  * @param indices Empty vector of unsigned int that will be filled with the indices.
  * @param scalingFactor The scaling factor for the vertices
- * @return True if the object was loaded successfully, false otherwise.
+ * @return True if the object was loaded successfully, false otherwise
  */
 bool loadOBJFile(const std::string& path, std::vector<Vertex>& vertices, std::vector<uint32_t>& faces, const float scalingFactor = 1.0f);
+
+/**
+ * @brief Loads a double sided tile object.
+ * @param vertices to be filled.
+ * @param faces to be filled.
+ * @return boolean indicating success (always true)
+ */
+bool loadOBJTile(std::vector<Vertex>& vertices, std::vector<uint32_t>& faces);
 
 /**
  * @brief Loads the object from the given path.

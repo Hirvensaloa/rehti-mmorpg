@@ -30,5 +30,9 @@
   {
     "id": 6,
     "filename": "forest_grass.png"
+  },
+  {
+    "id": 7,
+    "filename": "rock.png"
   }
 ]

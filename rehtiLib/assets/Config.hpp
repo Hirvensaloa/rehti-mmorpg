@@ -13,7 +13,7 @@ const std::string ROOT_PATH = "./";
  */
 static struct
 {
-    const unsigned AREA_WIDTH = 64;          ///< Width of the area in tiles
+    const unsigned AREA_WIDTH = 192;         ///< Width of the area in tiles
     const unsigned AREA_HEIGHT = AREA_WIDTH; ///< The height is the same as the width
 
     // Paths
@@ -42,9 +42,9 @@ static struct
     const std::string GENERATED_MAP_TEXTURE_MAP_PATH = GENERATED_ASSETS_PATH + "map_texture_map.txt";
     const std::string GENERATED_ANIMATIONS_HPP_PATH = GENERATED_ASSETS_PATH + "GeneratedAnimations.hpp";
 
-    const float HEIGHT_MAP_SCALE = 0.15;        ///< Percentage value of how much the height is scaled from the original unit.
+    const float HEIGHT_MAP_SCALE = 0.3;         ///< Percentage value of how much the height is scaled from the original unit.
     const float TILE_SIDE_SCALE = 1.0;          ///< Percentage value of how much the side is scaled from the original unit.
     const float TILE_SIDE_UNIT = 1.0;           ///< The size of the side of a tile in the original unit.
     const unsigned int MAX_MAP_TEXTURES = 5;    ///< Maximum amount of different textures in the map.
-    const unsigned int MAX_PASSABLE_HEIGHT = 5; ///< Maximum height difference between two tiles that is still passable by entities.
+    const unsigned int MAX_PASSABLE_HEIGHT = 3; ///< Maximum height difference between two tiles that is still passable by entities.
 } Config;

@@ -72,8 +72,8 @@
       "xpRequirement": 0,
       "description": "A fishing spot. It is a fishing spot.",
       "tileMap": [["XB"]],
-      "textureFilename": "defaultTexture.jpg",
-      "objFilename": "basictreestump.obj",
+      "textureFilename": "fishingSpot.png",
+      "objFilename": "defaultmodel",
       "characterInteractAnimation": "fishing"
     },
     {
@@ -170,8 +170,8 @@
       "xpRequirement": 150,
       "description": "A fishing spot. It is a fishing spot.",
       "tileMap": [["XB"]],
-      "textureFilename": "defaultTexture.jpg",
-      "objFilename": "basictreestump.obj",
+      "textureFilename": "fishingSpot.png",
+      "objFilename": "defaultmodel",
       "characterInteractAnimation": "fishing"
     },
     {
@@ -192,8 +192,8 @@
       "xpRequirement": 1000,
       "description": "A fishing spot. It is a fishing spot.",
       "tileMap": [["XB"]],
-      "textureFilename": "defaultTexture.jpg",
-      "objFilename": "basictreestump.obj",
+      "textureFilename": "fishingSpot.png",
+      "objFilename": "defaultmodel",
       "characterInteractAnimation": "fishing"
     },
     {

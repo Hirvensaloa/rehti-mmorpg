@@ -87,7 +87,7 @@ std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& 
     std::vector<std::vector<std::array<std::pair<bool, std::shared_ptr<Node>>, 8>>> closed(mapWidth, std::vector<std::array<std::pair<bool, std::shared_ptr<Node>>, 8>>(mapHeight));
 
     // Set some max limit for the number of iterations
-    int maxIterations = Config.AREA_WIDTH * Config.AREA_HEIGHT * 2;
+    int maxIterations = 64 * 64 * 2;
     int iterations = 0;
     while (!open.empty())
     {

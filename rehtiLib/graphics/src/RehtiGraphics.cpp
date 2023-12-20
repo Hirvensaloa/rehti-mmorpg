@@ -91,7 +91,12 @@ bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, st
     glm::mat4 transformation = glm::translate(glm::mat4(1.f), location);
     glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.f), rotation, POSITIVE_Y_AXIS);
     transformation = transformation * rotationMatrix;
-    bool res = pObjectManagerM->addGameObject(objectID, vertices, indices, img, transformation, textureSamplerM);
+    PhongMaterial gameObjectMaterial{};
+    gameObjectMaterial.ambient = glm::vec3(0.1f);
+    gameObjectMaterial.diffuse = glm::vec3(0.6f);
+    gameObjectMaterial.specular = glm::vec3(0.2f);
+    gameObjectMaterial.shininess = 10.f;
+    bool res = pObjectManagerM->addGameObject(objectID, vertices, indices, img, transformation, textureSamplerM, gameObjectMaterial);
     if (!res)
         return false;
     AABB bb;

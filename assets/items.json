@@ -1,16 +1,6 @@
 {
   "items": [
     {
-      "id": 0,
-      "name": "Oak wood",
-      "description": "A piece of oak wood, yum yum!",
-      "type": "General",
-      "isStackable": false,
-      "iconFilename": "oak_logs.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
-    },
-    {
       "id": 1,
       "name": "Iron Sword",
       "description": "A sturdy iron sword for close combat.",
@@ -287,6 +277,16 @@
       "type": "General",
       "isStackable": false,
       "iconFilename": "green_toad.png",
+      "objFilename": "basictreestump.obj",
+      "textureFilename": "defaultTexture.jpg"
+    },
+    {
+      "id": 24,
+      "name": "Oak wood",
+      "description": "A piece of oak wood, yum yum!",
+      "type": "General",
+      "isStackable": false,
+      "iconFilename": "oak_logs.png",
       "objFilename": "basictreestump.obj",
       "textureFilename": "defaultTexture.jpg"
     }

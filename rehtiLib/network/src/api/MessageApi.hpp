@@ -4,6 +4,7 @@
 #include "rapidjson/prettywriter.h"
 #include <cstdio>
 #include <iostream>
+#include <map>
 #include <optional>
 #include <vector>
 
@@ -35,6 +36,7 @@ struct GameStateMessage
     const MessageId id = MessageId::GameState;
     std::vector<GameStateEntity> entities;
     std::vector<GameStateObject> objects;
+    std::map<Coordinate, std::vector<GameItem>> items;
     CurrentPlayer currentPlayer;
 
     GameStateMessage& operator=(const GameStateMessage& other)
@@ -94,6 +96,14 @@ struct TalkMessage
 {
     const MessageId id = MessageId::Talk;
     int npcId;
+};
+
+struct PickUpItemMessage
+{
+    const MessageId id = MessageId::PickUpItem;
+    int itemId;
+    int x;
+    int y;
 };
 
 /**
@@ -266,4 +276,19 @@ public:
      * @return InformativeMessage
      */
     static InformativeMessage parseInformative(std::string msgBody);
+
+    /**
+     * @brief Create a MessageStruct for PickUpItem message
+     *
+     * @param pickUp PickUpItemMessage
+     * @return MessageStruct
+     */
+    static MessageStruct createPickUpItem(const PickUpItemMessage& pickUp);
+    /**
+     * @brief Parse received PickUpItem message body
+     *
+     * @param msgBody
+     * @return PickUpItemMessage
+     */
+    static PickUpItemMessage parsePickUpItem(std::string msgBody);
 };

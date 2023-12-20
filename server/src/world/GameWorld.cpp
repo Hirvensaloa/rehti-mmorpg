@@ -20,6 +20,7 @@ void GameWorld::addPlayer(std::string playerName, unsigned int playerId, int bas
 
 bool GameWorld::removePlayer(unsigned int playerId)
 {
+    std::unique_lock<std::mutex> lck(playersMutexM);
     for (auto it = playersM.begin(); it != playersM.end(); it++)
     {
         if ((*it)->getId() == playerId)
@@ -32,7 +33,7 @@ bool GameWorld::removePlayer(unsigned int playerId)
     return false;
 }
 
-std::vector<std::shared_ptr<PlayerCharacter>>& GameWorld::getPlayers()
+std::vector<std::shared_ptr<PlayerCharacter>> GameWorld::getPlayers()
 {
     return playersM;
 }
@@ -60,7 +61,7 @@ void GameWorld::addNpc(Npc npc)
     npcsM.push_back(std::make_shared<Npc>(npc));
 }
 
-std::vector<std::shared_ptr<Npc>>& GameWorld::getNpcs()
+std::vector<std::shared_ptr<Npc>> GameWorld::getNpcs()
 {
     return npcsM;
 }
@@ -78,7 +79,7 @@ std::shared_ptr<Npc> GameWorld::getNpc(unsigned int npcId)
     throw std::runtime_error("NPC not found");
 }
 
-std::map<std::string, std::shared_ptr<Object>>& GameWorld::getObjects()
+std::map<std::string, std::shared_ptr<Object>> GameWorld::getObjects()
 {
     return objectsM;
 }
@@ -99,6 +100,24 @@ void GameWorld::addItem(Coordinates location, std::shared_ptr<Item> item)
 
         itemsM[location] = std::vector<std::shared_ptr<Item>>{std::move(item)};
     }
+}
+
+std::shared_ptr<Item> GameWorld::removeItem(Coordinates location, int itemId)
+{
+    std::unique_lock<std::mutex> lck(itemsMutexM);
+    if (itemsM.contains(location))
+    {
+        for (auto it = itemsM[location].begin(); it != itemsM[location].end(); it++)
+        {
+            if ((*it)->getInstanceId() == itemId)
+            {
+                std::shared_ptr<Item> removedItem = std::move(*it);
+                itemsM[location].erase(it);
+                return removedItem;
+            }
+        }
+    }
+    return std::shared_ptr<Item>();
 }
 
 void GameWorld::updateGameWorld()
@@ -204,4 +223,14 @@ std::shared_ptr<Entity> GameWorld::getEntity(unsigned int entityId)
         }
     }
     throw std::runtime_error("Entity not found");
+}
+
+std::mutex& GameWorld::getPlayersMutex()
+{
+    return playersMutexM;
+}
+
+std::mutex& GameWorld::getItemsMutex()
+{
+    return itemsMutexM;
 }

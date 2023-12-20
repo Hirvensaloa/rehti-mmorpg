@@ -137,6 +137,19 @@ boost::asio::awaitable<void> Client::interactWithObject(const int& objectId)
     }
 }
 
+boost::asio::awaitable<void> Client::pickUpItem(const int& itemId, const int& x, const int& y)
+{
+    if (connectionM->isConnected())
+    {
+
+        PickUpItemMessage msg;
+        msg.itemId = (-itemId);
+        msg.x = x;
+        msg.y = y;
+        co_await connectionM->send(MessageApi::createPickUpItem(msg));
+    }
+}
+
 boost::asio::awaitable<void> Client::useItem(const int itemInstanceId)
 {
     if (connectionM->isConnected())
@@ -237,8 +250,39 @@ void Client::processMessages()
                         }
                     }
 
+                    std::set<int> itemIdsToRemove;
+                    for (const auto& itemEntry : prevGameStateMsgM.items)
+                    {
+                        for (const auto& item : itemEntry.second)
+                        {
+                            itemIdsToRemove.insert(item.instanceId);
+                        }
+                    }
+
+                    for (const auto& itemEntry : gameStateMsg.items)
+                    {
+                        for (const auto& item : itemEntry.second)
+                        {
+                            // If previous message didn't have this item, draw it
+                            if (!itemIdsToRemove.contains(item.instanceId))
+                            {
+                                const auto itemAsset = assetCacheM.getItemAssetDataById(item.id);
+                                pGraphLibM->addGameObject(-item.instanceId, itemAsset.vertices, itemAsset.indices, itemAsset.texture, {itemEntry.first.x, Config.HEIGHT_MAP_SCALE * itemEntry.first.z, itemEntry.first.y}, 0);
+                            }
+
+                            // Do not remove item as it is in the current gamestate message
+                            itemIdsToRemove.erase(item.instanceId);
+                        }
+                    }
+
+                    // Remove all the leftover items from the graphics backend
+                    for (const auto& itemId : itemIdsToRemove)
+                    {
+                        pGraphLibM->removeGameObject(itemId);
+                    }
+
                     std::set<int> entityIdsToRemove;
-                    for (const auto& entity : gameStateMsg.entities)
+                    for (const auto& entity : prevGameStateMsgM.entities)
                     {
                         // Do not remove the current player
                         if (entity.instanceId == currentPlayer.instanceId)
@@ -354,8 +398,16 @@ void Client::handleMouseClick(const Hit& hit)
 					}
 					break;
 				case ObjectType::GAMEOBJECT:
-					co_await interactWithObject(hit.id);
-					std::cout << "Game object" << std::endl;
+                    if (hit.id >= 0)
+                    {
+                        co_await interactWithObject(hit.id);
+                        std::cout << "Game object" << std::endl;
+                    }
+                    else 
+                    {
+                        co_await pickUpItem(hit.id, hit.hitPoint.x, hit.hitPoint.z);
+                        std::cout << "Item" << std::endl;
+                    }
 					break;
 				case ObjectType::UNDEFINED:
 					std::cout << "Miss" << std::endl;

@@ -5,8 +5,6 @@
 #include <memory>
 #include <vector>
 
-const int INVENTORY_SIZE = 28;
-
 /**
  * @brief Represents the items that an entity can carry
  */
@@ -19,7 +17,7 @@ public:
      * @brief Returns the items that the inventory contains
      * @return const std::vector<std::shared_ptr<Item>>&
      */
-    const std::vector<std::shared_ptr<Item>>& getItems() const;
+    const std::vector<std::shared_ptr<Item>> getItems() const;
 
     /**
      * @brief Adds item to the inventory.
@@ -65,7 +63,7 @@ public:
 private:
     Entity* ownerM;
 
-    const int inventorySizeM = INVENTORY_SIZE;
+    const int inventorySizeM = 28;
 
     std::vector<std::shared_ptr<Item>> itemsM = {};
 };

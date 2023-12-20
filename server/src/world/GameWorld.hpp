@@ -20,7 +20,7 @@ public:
 
     ~GameWorld() = default;
 
-    std::vector<std::shared_ptr<PlayerCharacter>>& getPlayers();
+    std::vector<std::shared_ptr<PlayerCharacter>> getPlayers();
 
     std::shared_ptr<PlayerCharacter> getPlayer(unsigned int playerId);
 
@@ -58,7 +58,7 @@ public:
      *
      * @return std::vector<std::shared_ptr<Npc>>
      */
-    std::vector<std::shared_ptr<Npc>>& getNpcs();
+    std::vector<std::shared_ptr<Npc>> getNpcs();
 
     /**
      * @brief Get npc by id
@@ -81,7 +81,7 @@ public:
      *
      * @return std::map<std::string, std::shared_ptr<Object>>&
      */
-    std::map<std::string, std::shared_ptr<Object>>& getObjects();
+    std::map<std::string, std::shared_ptr<Object>> getObjects();
 
     /**
      * @brief Get all items
@@ -99,6 +99,13 @@ public:
     void addItem(Coordinates location, std::shared_ptr<Item>);
 
     /**
+     * @brief Remove item from the game world
+     * @param itemId Instance id of item to be removed
+     * @return std::shared_ptr<Item>
+     */
+    std::shared_ptr<Item> removeItem(Coordinates location, int itemId);
+
+    /**
      * @brief Updates the game world. Updates all the npcs and players.
      */
     void updateGameWorld();
@@ -108,14 +115,20 @@ public:
      */
     void initWorld();
 
+    std::mutex& getPlayersMutex();
+
+    std::mutex& getItemsMutex();
+
 private:
     std::vector<std::shared_ptr<PlayerCharacter>> playersM;
+    std::mutex playersMutexM;
 
     std::vector<std::shared_ptr<Npc>> npcsM;
 
     std::map<std::string, std::shared_ptr<Object>> objectsM;
 
     std::map<Coordinates, std::vector<std::shared_ptr<Item>>> itemsM;
+    std::mutex itemsMutexM;
 
     Map mapM;
 };

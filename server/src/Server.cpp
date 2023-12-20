@@ -187,7 +187,7 @@ void Server::handleMessage(const Message& msg)
                     {
                         for (auto& item : entry.second)
                         {
-                            std::cout << "Item at: " << entry.first.x << "," << entry.first.y << ", of name: " << item->getName() << std::endl;
+                            std::cout << "Item at: " << entry.first.x << "," << entry.first.y << " , " << entry.first.z << ", of name: " << item->getName() << std::endl;
                         }
                     }
                 }
@@ -203,6 +203,32 @@ void Server::handleMessage(const Message& msg)
                 InformativeMessage infoMsg;
                 infoMsg.message = response;
                 boost::asio::co_spawn(ioContextM, msg.getConn()->send(MessageApi::createInformative(infoMsg)), boost::asio::detached);
+                break;
+            }
+            case MessageId::PickUpItem:
+            {
+                std::cout << connId << "PickUpItem message received." << std::endl;
+
+                const PickUpItemMessage pickUpItemMsg = MessageApi::parsePickUpItem(body);
+                std::shared_ptr<PlayerCharacter> gamer = gameWorldM.getPlayer(connId);
+
+                auto coord = Coordinates(pickUpItemMsg.x, pickUpItemMsg.y);
+                auto playerLoc = gamer->getLocation();
+
+                std::cout << "MSG LOCATION: x: " << coord.x << ", y: " << coord.y << ", " << coord.z << std::endl;
+                std::cout << "PLAYER LOCATION: x: " << playerLoc.x << ", y: " << playerLoc.y << ", " << playerLoc.z << std::endl;
+
+                if (!gamer->getInventory().isFull())
+                {
+                    std::cout << "before removeitem" << std::endl;
+                    std::shared_ptr<Item> pickedUpItem = gameWorldM.removeItem(Coordinates(pickUpItemMsg.x, pickUpItemMsg.y), pickUpItemMsg.itemId);
+                    if (pickedUpItem != nullptr)
+                    {
+                        std::cout << "before additem" << std::endl;
+                        gamer->getInventory().addItem(std::move(pickedUpItem));
+                        std::cout << "after additem" << std::endl;
+                    }
+                }
                 break;
             }
             default:
@@ -289,6 +315,7 @@ void Server::sendGameState()
         entityVector.push_back(entity);
     }
 
+    std::unique_lock<std::mutex> playerLock(gameWorldM.getItemsMutex());
     for (auto& player : gameWorldM.getPlayers())
     {
         GameStateEntity entity;
@@ -324,6 +351,7 @@ void Server::sendGameState()
 
         entityVector.push_back(entity);
     }
+    playerLock.unlock();
     msg.entities = entityVector;
 
     for (auto& object : gameWorldM.getObjects())
@@ -338,6 +366,18 @@ void Server::sendGameState()
         gameStateObject.rotation = object.second->getRotation();
         msg.objects.push_back(gameStateObject);
     }
+
+    std::unique_lock<std::mutex> itemLock(gameWorldM.getItemsMutex());
+    for (auto itemEntry : gameWorldM.getItems())
+    {
+        Coordinate key = {itemEntry.first.x, itemEntry.first.y, itemEntry.first.z};
+        msg.items[key] = std::vector<GameItem>();
+        for (auto item : itemEntry.second)
+        {
+            msg.items[key].push_back({item->getId(), item->getInstanceId(), item->getName(), item->getStackSize()});
+        }
+    }
+    itemLock.unlock();
 
     for (auto& conn : connectionsM)
     {

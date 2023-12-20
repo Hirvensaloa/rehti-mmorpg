@@ -14,7 +14,7 @@
  * @param vertices Empty vector of float that will be filled with the vertices.
  * @param indices Empty vector of unsigned int that will be filled with the indices.
  * @param scalingFactor The scaling factor for the vertices
- * @return True if the object was loaded successfully, false otherwise.
+ * @return True if the object was loaded successfully, false otherwise
  */
 bool loadOBJFile(const std::string& path, std::vector<Vertex>& vertices, std::vector<uint32_t>& faces, const float scalingFactor = 1.0f);
 

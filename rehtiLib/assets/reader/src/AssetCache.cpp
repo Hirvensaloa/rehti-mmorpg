@@ -100,7 +100,7 @@ std::map<int, ObjectAssetData> AssetCache::loadGameObjectAssetData(const GameObj
         bool success = false;
         if (object.objFilename == "defaultmodel")
         {
-            success = loadOBJTile(vertices, faces);
+            success = loadOBJTile(vertices, faces); //
         }
         else
         {

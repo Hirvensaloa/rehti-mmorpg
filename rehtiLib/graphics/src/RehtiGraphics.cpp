@@ -657,7 +657,7 @@ void RehtiGraphics::createImageViews()
         imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
         imageInfo.image = swapChainImagesM[i];
         imageInfo.viewType = VK_IMAGE_VIEW_TYPE_2D; // how image should be interpreted, for example you might use images as 2d textures.
-        imageInfo.format = swapChainImageFormatM;   // how image should be interpreted
+        imageInfo.format = swapChainImageFormatM;   // how image should be interpreted.
 
         imageInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
         imageInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;

@@ -134,7 +134,7 @@ bool loadOBJTile(std::vector<Vertex>& vertices, std::vector<uint32_t>& faces)
     faces.push_back(0);
     faces.push_back(3);
     faces.push_back(1);
-    faces.push_back(0);*/
+    faces.push_back(0); */
     return true;
 }
 

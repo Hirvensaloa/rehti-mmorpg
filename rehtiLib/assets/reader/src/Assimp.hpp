@@ -19,6 +19,14 @@
 bool loadOBJFile(const std::string& path, std::vector<Vertex>& vertices, std::vector<uint32_t>& faces, const float scalingFactor = 1.0f);
 
 /**
+ * @brief Loads a double sided tile object.
+ * @param vertices to be filled.
+ * @param faces to be filled.
+ * @return boolean indicating success (always true)
+ */
+bool loadOBJTile(std::vector<Vertex>& vertices, std::vector<uint32_t>& faces);
+
+/**
  * @brief Loads the object from the given path.
  * @param path to the object file.
  * @param vertices Empty vector of float that will be filled with the vertices.

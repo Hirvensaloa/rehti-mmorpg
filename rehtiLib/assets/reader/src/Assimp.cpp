@@ -109,6 +109,35 @@ bool loadOBJFile(const std::string& path, std::vector<Vertex>& vertices, std::ve
     return true;
 }
 
+bool loadOBJTile(std::vector<Vertex>& vertices, std::vector<uint32_t>& faces)
+{
+    float smallY = 0.01f;
+    glm::vec3 botLeft = glm::vec3(-0.5f, smallY, -0.5f);
+    glm::vec3 botRight = glm::vec3(0.5f, smallY, -0.5f);
+    glm::vec3 topLeft = glm::vec3(-0.5f, smallY, 0.5f);
+    glm::vec3 topRight = glm::vec3(0.5f, smallY, 0.5f);
+    glm::vec3 normal = glm::vec3(0.0f, 1.0f, 0.0f);
+    vertices.push_back(Vertex{botLeft, normal, glm::vec2(0.0f, 1.0f)});
+    vertices.push_back(Vertex{botRight, normal, glm::vec2(1.0f, 1.0f)});
+    vertices.push_back(Vertex{topLeft, normal, glm::vec2(0.0f, 0.0f)});
+    vertices.push_back(Vertex{topRight, normal, glm::vec2(1.0f, 0.0f)});
+    // front face
+    faces.push_back(0);
+    faces.push_back(1);
+    faces.push_back(2);
+    faces.push_back(1);
+    faces.push_back(3);
+    faces.push_back(2);
+    // backface (commented out for now)
+    /*faces.push_back(2);
+    faces.push_back(3);
+    faces.push_back(0);
+    faces.push_back(3);
+    faces.push_back(1);
+    faces.push_back(0);*/
+    return true;
+}
+
 /**
  * @brief Loads the object from the given path.
  * @param path to the object file.

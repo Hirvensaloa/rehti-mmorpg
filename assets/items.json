@@ -188,8 +188,8 @@
     },
     {
       "id": 14,
-      "name": "Willow wood",
-      "description": "A piece of willow wood.",
+      "name": "Pine wood",
+      "description": "A piece of pine wood.",
       "type": "General",
       "isStackable": false,
       "iconFilename": "willow_logs.png",
@@ -198,8 +198,8 @@
     },
     {
       "id": 15,
-      "name": "Mahogany wood",
-      "description": "A piece of mahogany wood.",
+      "name": "Spruce wood",
+      "description": "A piece of spruce wood.",
       "type": "General",
       "isStackable": false,
       "iconFilename": "mahogany_logs.png",

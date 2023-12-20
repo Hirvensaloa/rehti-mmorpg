@@ -9,12 +9,12 @@
 
 bool isValidCell(const std::vector<std::vector<uint8_t>>& map, std::pair<int, int> coords, Direction dir)
 {
-    if (coords.first >= map.size() || coords.second >= map[coords.first].size() || coords.first < 0 || coords.second < 0)
+    if (coords.second >= map.size() || coords.first >= map[coords.second].size() || coords.second < 0 || coords.first < 0)
     {
         return false;
     }
 
-    const uint8_t& cell = map[coords.first][coords.second];
+    const uint8_t& cell = map[coords.second][coords.first];
 
     switch (dir)
     {
@@ -57,14 +57,14 @@ struct nodeCompare
 std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& map, std::pair<int, int> start, std::pair<int, int> end)
 {
     // Check that the start and end are within the map
-    if (start.first >= map.size() || start.second >= map[start.first].size() || end.first >= map.size() || end.second >= map[end.first].size())
+    if (start.second >= map.size() || start.first >= map[start.second].size() || end.second >= map.size() || end.first >= map[end.second].size())
     {
         return std::vector<std::pair<int, int>>();
     }
 
     // Check if the start and end are accessible
-    const int& startCell = map[start.first][start.second];
-    const int& endCell = map[end.first][end.second];
+    const int& startCell = map[start.second][start.first];
+    const int& endCell = map[end.second][end.first];
 
     if (startCell == 0 || endCell == 0)
     {
@@ -73,7 +73,7 @@ std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& 
 
     std::vector<std::pair<int, int>> path;
     unsigned mapHeight = map.size();
-    unsigned mapWidth = std::max(map[start.first].size(), map[end.first].size()); // Map might not be a square, so we need to get the maximum width
+    unsigned mapWidth = std::max(map[start.second].size(), map[end.second].size()); // Map might not be a square, so we need to get the maximum width
 
     // Create the start and end nodes
     std::shared_ptr<Node> startNode = std::make_shared<Node>(start, 0, euclideanDistance(start, end));
@@ -84,10 +84,18 @@ std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& 
     open.push(startNode);
 
     // Create the closed set, which contains all the nodes (with direction) that have been visited. ALSO contains a pointer to the open set node, if the node is in the open set (This is because prio queue access is O(n))
-    std::vector<std::vector<std::array<std::pair<bool, std::shared_ptr<Node>>, 8>>> closed(mapHeight, std::vector<std::array<std::pair<bool, std::shared_ptr<Node>>, 8>>(mapWidth));
+    std::vector<std::vector<std::array<std::pair<bool, std::shared_ptr<Node>>, 8>>> closed(mapWidth, std::vector<std::array<std::pair<bool, std::shared_ptr<Node>>, 8>>(mapHeight));
 
+    // Set some max limit for the number of iterations
+    int maxIterations = Config.AREA_WIDTH * Config.AREA_HEIGHT * 2;
+    int iterations = 0;
     while (!open.empty())
     {
+        iterations++;
+        if (iterations > maxIterations)
+        {
+            break;
+        }
         // Get the node with the lowest total cost
         std::shared_ptr<Node> current = open.top();
         open.pop();
@@ -155,14 +163,8 @@ std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& 
                 break;
             }
 
-            // Check if the neighbour is valid and accessible from OUR direction
-            if (!isValidCell(map, neighbourCoords, checkDir))
-            {
-                continue;
-            }
-
-            // Check if the neighbour is in the closed set
-            if (closed[neighbourCoords.first][neighbourCoords.second][checkDir].first)
+            // Check if the neighbour is valid and accessible from OUR direction or is in the closed set
+            if (!isValidCell(map, neighbourCoords, checkDir) || neighbourCoords.first > mapWidth || neighbourCoords.second > mapHeight || closed[neighbourCoords.first][neighbourCoords.second][checkDir].first)
             {
                 continue;
             }

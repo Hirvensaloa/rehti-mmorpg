@@ -16,7 +16,7 @@
  * @param scalingFactor The scaling factor for the vertices
  * @return True if the object was loaded successfully, false otherwise.
  */
-bool loadOBJFile(const std::string& path, std::vector<aiVector3D>& vertices, std::vector<aiFace>& faces, const float scalingFactor = 1.0f);
+bool loadOBJFile(const std::string& path, std::vector<Vertex>& vertices, std::vector<uint32_t>& faces, const float scalingFactor = 1.0f);
 
 /**
  * @brief Loads the object from the given path.

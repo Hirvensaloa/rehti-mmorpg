@@ -32,7 +32,7 @@ std::map<std::string, ImageData> loadObjectTextures(const GameObjects& gameObjec
         textureFilenames.push_back(object.second.textureFilename);
     }
 
-    stbi_set_flip_vertically_on_load(true);
+    stbi_set_flip_vertically_on_load(false);
     // Read all the textures
     for (const auto& filename : textureFilenames)
     {

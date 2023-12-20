@@ -72,7 +72,7 @@ inline bool containsSubString(const std::string& str, const std::string& subStr)
 
 #pragma endregion
 
-bool loadOBJFile(const std::string& path, std::vector<aiVector3D>& vertices, std::vector<aiFace>& faces, const float scalingFactor)
+bool loadOBJFile(const std::string& path, std::vector<Vertex>& vertices, std::vector<uint32_t>& faces, const float scalingFactor)
 {
     Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals | aiProcess_FlipWindingOrder);
@@ -86,16 +86,23 @@ bool loadOBJFile(const std::string& path, std::vector<aiVector3D>& vertices, std
     for (unsigned int i = 0; i < scene->mNumMeshes; i++)
     {
         aiMesh* mesh = scene->mMeshes[i];
+        bool hasNormals = mesh->HasNormals();
+        bool hasTexCoords = mesh->HasTextureCoords(0);
+
         for (unsigned int j = 0; j < mesh->mNumVertices; j++)
         {
-            mesh->mVertices[j].x *= scalingFactor;
-            mesh->mVertices[j].y *= scalingFactor;
-            mesh->mVertices[j].z *= scalingFactor;
-            vertices.push_back(mesh->mVertices[j]);
+            Vertex vertex{};
+            vertex.pos = aiVector3DToGlm(mesh->mVertices[j]) * scalingFactor;
+            if (hasNormals)
+                vertex.normal = aiVector3DToGlm(mesh->mNormals[j]);
+            if (hasTexCoords)
+                vertex.texCoord = glm::vec2(mesh->mTextureCoords[0][j].x, mesh->mTextureCoords[0][j].y);
+            vertices.push_back(vertex);
         }
         for (unsigned int j = 0; j < mesh->mNumFaces; j++)
         {
-            faces.push_back(mesh->mFaces[j]);
+            std::vector<uint32_t> faceIndices = aiFaceToFace(mesh->mFaces[j]);
+            faces.insert(faces.end(), faceIndices.begin(), faceIndices.end());
         }
     }
 

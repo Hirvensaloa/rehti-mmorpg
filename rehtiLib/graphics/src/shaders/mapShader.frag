@@ -16,6 +16,7 @@ layout(set = 1, binding = 0) uniform sampler2D tex[6]; // blend, black, r, g, b,
 layout(location = 0) out vec4 outColor;
 
 void main(){
+vec3 mapAmbient = vec3(0.1, 0.1, 0.1);
 	vec3 normal = normalize(fragNormal);
 	float light = dot(normal, sun.dir);
 	vec3 lightCol = sun.color * sun.intensity * light;
@@ -27,6 +28,7 @@ void main(){
   vec4 gCol = texture(tex[3], tiled) * blendCol.g;
   vec4 bCol = texture(tex[4], tiled) * blendCol.b;
   vec4 aCol = texture(tex[5], tiled) * blendCol.a;
+  vec4 amount = vec4(mapAmbient * lightCol, 1.f);
  outColor = (blackCol + rCol + gCol + bCol + aCol);
 }
 

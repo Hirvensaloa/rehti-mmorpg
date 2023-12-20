@@ -12,7 +12,7 @@ void RehtiGraphics::startMainLoop()
 
 RehtiGraphics::RehtiGraphics(uint32_t width, uint32_t height, glm::vec3 cameraLocation)
     : widthM(width), heightM(height), anisotropyM(1.f), cameraM(Camera(cameraLocation, static_cast<float>(width), static_cast<float>(height))),
-      sunM({glm::vec3(1.f), glm::vec3(1.f), 1.f})
+      sunM({glm::vec3(1.f, -1.f, 1.f), glm::vec3(1.f), 1.f})
 {
     initWindow();
     cameraM.registerCameraControls(pWindowM);

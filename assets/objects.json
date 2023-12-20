@@ -19,7 +19,7 @@
       "description": "A tree. It is a tree.",
       "tileMap": [["XB"]],
       "textureFilename": "treetexture.png",
-      "objFilename": "tree.obj",
+      "objFilename": "tree1.obj",
       "characterInteractAnimation": "woodcutting"
     },
     {
@@ -38,8 +38,8 @@
       "xpRequirement": 0,
       "description": "A cooking fire. It is a cooking fire.",
       "tileMap": [["XB"]],
-      "textureFilename": "defaultTexture.jpg",
-      "objFilename": "basictreestump.obj",
+      "textureFilename": "cookpotTexture.png",
+      "objFilename": "cookpot.obj",
       "characterInteractAnimation": "cooking"
     },
     {
@@ -105,7 +105,7 @@
       ],
       "description": "Contains a treasure (If you consider dirty, rotten shield a treasure)",
       "tileMap": [["XB"]],
-      "textureFilename": "defaultTexture.jpg",
+      "textureFilename": "chestTexture.png",
       "objFilename": "treasure_chest.obj",
       "characterInteractAnimation": "loot"
     }

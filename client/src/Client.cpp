@@ -380,14 +380,18 @@ void Client::handleMouseClick(const Hit& hit)
         ioContextM, [this]() -> boost::asio::awaitable<void>
         {
 			const Hit& hit = this->lastHitM;
+            const int hitX = std::roundf(hit.hitPoint.x);
+            const int hitZ = std::roundf(hit.hitPoint.z);
+
+			std::cout << "Hit at " << hitX << " " << hitZ << std::endl;
 			switch (hit.objectType)
 			{
 				case ObjectType::AREA:
-					std::cout << "Hit tile on " << hit.hitPoint.x << " " << hit.hitPoint.z << std::endl;
-					co_await move(hit.hitPoint.x, hit.hitPoint.z);
+					std::cout << "Area: " << std::endl;
+                    co_await move(hitX, hitZ);
 					break;
 				case ObjectType::CHARACTER:
-					std::cout << "Character" << std::endl;
+					std::cout << "Character: " << hit.id << std::endl;
 					if (hit.button == GLFW_MOUSE_BUTTON_LEFT)
 					{
 						co_await attack(hit.id);
@@ -401,12 +405,12 @@ void Client::handleMouseClick(const Hit& hit)
                     if (hit.id >= 0)
                     {
                         co_await interactWithObject(hit.id);
-                        std::cout << "Game object" << std::endl;
+                        std::cout << "Game object: " << hit.id << std::endl;
                     }
                     else 
                     {
-                        co_await pickUpItem(hit.id, hit.hitPoint.x, hit.hitPoint.z);
-                        std::cout << "Item" << std::endl;
+                        co_await pickUpItem(hit.id, hitX, hitZ);
+                        std::cout << "Item: " << hit.id << std::endl;
                     }
 					break;
 				case ObjectType::UNDEFINED:

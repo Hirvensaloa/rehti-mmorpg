@@ -79,6 +79,7 @@ bool RehtiGraphics::removeCharacterObject(int characterID)
     if (!characterOrientationsM.contains(characterID))
         return false;
 
+    std::unique_lock(dataMutexM);
     pObjectManagerM->cleanResources(characterID, ObjectType::CHARACTER);
     characterOrientationsM.erase(characterID);
     boundingBoxesM[ObjectType::CHARACTER].erase(characterID);
@@ -95,8 +96,8 @@ bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, st
     if (!res)
         return false;
     AABB bb;
-    bb.max = location + glm::vec3(0.5f, 0.5f, 0.5f); // Game objects have 1 unit bounding boxes
-    bb.min = location - glm::vec3(0.5f, 0.5f, 0.5f);
+    bb.min = location + GAMEOBJECT_MIN;
+    bb.max = location + GAMEOBJECT_MAX; // Game objects have 1 unit bounding boxes
     bb.pLeft = nullptr;
     bb.pRight = nullptr;
     boundingBoxesM[ObjectType::GAMEOBJECT][objectID] = bb;
@@ -111,6 +112,7 @@ bool RehtiGraphics::removeGameObject(int objectID)
     if (!gameObjectOrientationsM.contains(objectID))
         return false;
 
+    std::unique_lock(dataMutexM);
     pObjectManagerM->cleanResources(objectID, ObjectType::GAMEOBJECT);
     gameObjectOrientationsM.erase(objectID);
     boundingBoxesM[ObjectType::GAMEOBJECT].erase(objectID);

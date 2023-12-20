@@ -216,7 +216,7 @@
       "tileMap": [["XB"]],
       "textureFilename": "ore_iron.png",
       "objFilename": "ore.obj",
-      "characterInteractAnimation": "mining"
+      "characterInteractAnimation": "smithing"
     },
     {
       "id": 10,
@@ -238,7 +238,7 @@
       "tileMap": [["XB"]],
       "textureFilename": "ore_gold.png",
       "objFilename": "ore.obj",
-      "characterInteractAnimation": "mining"
+      "characterInteractAnimation": "smithing"
     },
     {
       "id": 11,
@@ -260,7 +260,7 @@
       "tileMap": [["XB"]],
       "textureFilename": "ore_mithril.png",
       "objFilename": "ore.obj",
-      "characterInteractAnimation": "mining"
+      "characterInteractAnimation": "smithing"
     },
     {
       "id": 12,
@@ -282,7 +282,7 @@
       "tileMap": [["XB"]],
       "textureFilename": "ore_adamantite.png",
       "objFilename": "ore.obj",
-      "characterInteractAnimation": "mining"
+      "characterInteractAnimation": "smithing"
     },
     {
       "id": 30,

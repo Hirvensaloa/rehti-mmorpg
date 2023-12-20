@@ -279,7 +279,7 @@ void Client::processMessages()
                     for (const auto& itemId : itemIdsToRemove)
                     {
                         std::cout << "removing item object@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << std::endl;
-                        pGraphLibM->removeGameObject(itemId);
+                        pGraphLibM->removeGameObject(-itemId);
                     }
 
                     std::set<int> entityIdsToRemove;

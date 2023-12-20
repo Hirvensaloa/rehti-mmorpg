@@ -706,7 +706,6 @@ bool GraphicsObjectManager::cleanResources(int id, ObjectType type)
         if (!gameObjectsM.contains(id))
             return false;
         auto& object = gameObjectsM[id];
-        std::cout << "destroying stuff" << std::endl;
         vmaDestroyBuffer(allocatorM, object.vertexData.buffer, object.vertexData.allocation);
         vmaDestroyBuffer(allocatorM, object.indexData.buffer, object.indexData.allocation);
         vmaDestroyImage(allocatorM, object.texture.image, object.texture.allocation);

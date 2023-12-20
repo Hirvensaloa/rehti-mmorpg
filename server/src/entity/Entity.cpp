@@ -158,9 +158,7 @@ void Entity::pickUpItem(int itemId, Coordinates itemLocation)
         std::shared_ptr<Item> pickedUpItem = pGameWorldM->removeItem(itemLocation, itemId);
         if (pickedUpItem != nullptr)
         {
-            std::cout << "before additem" << std::endl;
             getInventory().addItem(std::move(pickedUpItem));
-            std::cout << "after additem" << std::endl;
         }
     }
 }

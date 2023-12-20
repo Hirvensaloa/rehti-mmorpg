@@ -33,7 +33,7 @@ bool GameWorld::removePlayer(unsigned int playerId)
     return false;
 }
 
-std::vector<std::shared_ptr<PlayerCharacter>> GameWorld::getPlayers()
+std::vector<std::shared_ptr<PlayerCharacter>>& GameWorld::getPlayers()
 {
     return playersM;
 }
@@ -61,7 +61,7 @@ void GameWorld::addNpc(Npc npc)
     npcsM.push_back(std::make_shared<Npc>(npc));
 }
 
-std::vector<std::shared_ptr<Npc>> GameWorld::getNpcs()
+std::vector<std::shared_ptr<Npc>>& GameWorld::getNpcs()
 {
     return npcsM;
 }
@@ -79,12 +79,12 @@ std::shared_ptr<Npc> GameWorld::getNpc(unsigned int npcId)
     throw std::runtime_error("NPC not found");
 }
 
-std::map<std::string, std::shared_ptr<Object>> GameWorld::getObjects()
+std::map<std::string, std::shared_ptr<Object>>& GameWorld::getObjects()
 {
     return objectsM;
 }
 
-std::map<Coordinates, std::vector<std::shared_ptr<Item>>> GameWorld::getItems()
+std::map<Coordinates, std::vector<std::shared_ptr<Item>>>& GameWorld::getItems()
 {
     return itemsM;
 }

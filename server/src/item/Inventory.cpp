@@ -37,7 +37,7 @@ bool Inventory::isFull() const
     return itemsM.size() == inventorySizeM;
 }
 
-const std::vector<std::shared_ptr<Item>> Inventory::getItems() const
+const std::vector<std::shared_ptr<Item>>& Inventory::getItems() const
 {
     return itemsM;
 }

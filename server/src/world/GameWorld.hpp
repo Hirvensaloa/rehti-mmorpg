@@ -20,7 +20,7 @@ public:
 
     ~GameWorld() = default;
 
-    std::vector<std::shared_ptr<PlayerCharacter>> getPlayers();
+    std::vector<std::shared_ptr<PlayerCharacter>>& getPlayers();
 
     std::shared_ptr<PlayerCharacter> getPlayer(unsigned int playerId);
 
@@ -58,7 +58,7 @@ public:
      *
      * @return std::vector<std::shared_ptr<Npc>>
      */
-    std::vector<std::shared_ptr<Npc>> getNpcs();
+    std::vector<std::shared_ptr<Npc>>& getNpcs();
 
     /**
      * @brief Get npc by id
@@ -81,14 +81,14 @@ public:
      *
      * @return std::map<std::string, std::shared_ptr<Object>>&
      */
-    std::map<std::string, std::shared_ptr<Object>> getObjects();
+    std::map<std::string, std::shared_ptr<Object>>& getObjects();
 
     /**
      * @brief Get all items
      *
      * @return std::map<Coordinates, std::vector<std::shared_ptr<Item>>>&
      */
-    std::map<Coordinates, std::vector<std::shared_ptr<Item>>> getItems();
+    std::map<Coordinates, std::vector<std::shared_ptr<Item>>>& getItems();
 
     /**
      * @brief Add item to the game world

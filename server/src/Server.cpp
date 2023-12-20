@@ -9,6 +9,7 @@
 
 #include "Server.hpp"
 #include "action/ObjectInteractAction.hpp"
+#include "action/PickUpAction.hpp"
 #include "utils/AssetManager.hpp"
 #include "world/Utils.hpp"
 
@@ -208,27 +209,9 @@ void Server::handleMessage(const Message& msg)
             case MessageId::PickUpItem:
             {
                 std::cout << connId << "PickUpItem message received." << std::endl;
-
                 const PickUpItemMessage pickUpItemMsg = MessageApi::parsePickUpItem(body);
                 std::shared_ptr<PlayerCharacter> gamer = gameWorldM.getPlayer(connId);
-
-                auto coord = Coordinates(pickUpItemMsg.x, pickUpItemMsg.y);
-                auto playerLoc = gamer->getLocation();
-
-                std::cout << "MSG LOCATION: x: " << coord.x << ", y: " << coord.y << ", " << coord.z << std::endl;
-                std::cout << "PLAYER LOCATION: x: " << playerLoc.x << ", y: " << playerLoc.y << ", " << playerLoc.z << std::endl;
-
-                if (!gamer->getInventory().isFull())
-                {
-                    std::cout << "before removeitem" << std::endl;
-                    std::shared_ptr<Item> pickedUpItem = gameWorldM.removeItem(Coordinates(pickUpItemMsg.x, pickUpItemMsg.y), pickUpItemMsg.itemId);
-                    if (pickedUpItem != nullptr)
-                    {
-                        std::cout << "before additem" << std::endl;
-                        gamer->getInventory().addItem(std::move(pickedUpItem));
-                        std::cout << "after additem" << std::endl;
-                    }
-                }
+                gamer->setAction(std::make_shared<PickUpAction>(std::chrono::system_clock::now(), Coordinates(pickUpItemMsg.x, pickUpItemMsg.y), gamer, pickUpItemMsg.itemId));
                 break;
             }
             default:

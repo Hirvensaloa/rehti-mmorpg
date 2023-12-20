@@ -138,6 +138,12 @@ public:
     virtual void attack(Entity& target);
 
     /**
+     * @brief Pick up an item
+     * @param itemId instance id of item to be picked up
+     */
+    void pickUpItem(int itemId, Coordinates itemLocation);
+
+    /**
      * @brief Get the SkillSet of this entity
      * @return SkillSet&
      */

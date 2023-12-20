@@ -43,6 +43,7 @@ struct GameStateMessage
     {
         entities = other.entities;
         objects = other.objects;
+        items = other.items;
         currentPlayer = other.currentPlayer;
         return *this;
     }

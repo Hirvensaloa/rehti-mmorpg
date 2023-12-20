@@ -79,7 +79,7 @@ bool RehtiGraphics::removeCharacterObject(int characterID)
     if (!characterOrientationsM.contains(characterID))
         return false;
 
-    std::unique_lock(dataMutexM);
+    std::unique_lock dataLock(dataMutexM);
     pObjectManagerM->cleanResources(characterID, ObjectType::CHARACTER);
     characterOrientationsM.erase(characterID);
     boundingBoxesM[ObjectType::CHARACTER].erase(characterID);
@@ -112,7 +112,7 @@ bool RehtiGraphics::removeGameObject(int objectID)
     if (!gameObjectOrientationsM.contains(objectID))
         return false;
 
-    std::unique_lock(dataMutexM);
+    std::unique_lock dataLock(dataMutexM);
     pObjectManagerM->cleanResources(objectID, ObjectType::GAMEOBJECT);
     gameObjectOrientationsM.erase(objectID);
     boundingBoxesM[ObjectType::GAMEOBJECT].erase(objectID);

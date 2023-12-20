@@ -278,6 +278,7 @@ void Client::processMessages()
                     // Remove all the leftover items from the graphics backend
                     for (const auto& itemId : itemIdsToRemove)
                     {
+                        std::cout << "removing item object@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << std::endl;
                         pGraphLibM->removeGameObject(itemId);
                     }
 

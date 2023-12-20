@@ -2,8 +2,11 @@
 
 AnimationConfig actionToAnimationConfig(CurrentAction action, Coordinate entityLocation)
 {
-    glm::vec3 targetDirection = glm::vec3(action.targetCoordinate.x - entityLocation.x, action.targetCoordinate.y - entityLocation.y, action.targetCoordinate.z - entityLocation.z);
-
+    glm::vec3 targetVec = glm::vec3(action.targetCoordinate.x, Config.HEIGHT_MAP_SCALE * action.targetCoordinate.z, action.targetCoordinate.y);
+    glm::vec3 entityVec = glm::vec3(entityLocation.x, Config.HEIGHT_MAP_SCALE * entityLocation.z, entityLocation.y);
+    glm::vec3 targetDirection = targetVec - entityVec;
+    // Keep the y axis between -0.2 and 0.2. This is to avoid the character from looking up or down too much
+    targetDirection.y = std::min(std::max(targetDirection.y, -0.2f), 0.2f);
     switch (action.id)
     {
     case ActionType::Move:

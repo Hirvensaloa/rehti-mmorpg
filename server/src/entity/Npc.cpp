@@ -42,7 +42,7 @@ void Npc::update()
         const int notWalk = rand() % 10;
         if (!notWalk)
         {
-            setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), Map::getRandomCoordinates(this->spawnCoordinateBoundsM), this->shared_from_this()));
+            setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), Map::getRandomNeighbour(this->locationM, this->spawnCoordinateBoundsM), this->shared_from_this()));
         }
     }
 }

@@ -205,7 +205,15 @@ void Client::processMessages()
                     {
                         if (!currentPlayer.hasSameActionAs(prevCurrentPlayer))
                         {
-                            // Move action is special case as we need to animate and move the entity at the same time
+                            AnimationConfig prevAnimationConfig = actionToAnimationConfig(prevCurrentPlayer.currentAction, {prevCurrentPlayer.x, prevCurrentPlayer.y, prevCurrentPlayer.z});
+                            AnimationConfig currentAnimationConfig = actionToAnimationConfig(currentPlayer.currentAction, {currentPlayer.x, currentPlayer.y, currentPlayer.z});
+
+                            if (prevAnimationConfig != currentAnimationConfig)
+                            {
+                                pGraphLibM->playAnimation(currentPlayer.instanceId, currentAnimationConfig);
+                            }
+
+                            // If the new animation is move or the coordinates have changed, we move the player
                             if (currentPlayer.currentAction.id == ActionType::Move)
                             {
                                 const auto& coords = currentPlayer.currentAction.targetCoordinate;
@@ -214,10 +222,6 @@ void Client::processMessages()
                             else if (currentPlayer.currentAction.id == ActionType::Respawn)
                             {
                                 pGraphLibM->forceCharacterMove(currentPlayer.instanceId, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y});
-                            }
-                            else
-                            {
-                                pGraphLibM->playAnimation(currentPlayer.instanceId, actionToAnimationConfig(currentPlayer.currentAction, {currentPlayer.x, currentPlayer.y, currentPlayer.z}));
                             }
                         }
 
@@ -278,7 +282,13 @@ void Client::processMessages()
                             // If the entity is found, check if it has changed action
                             if (!entity.hasSameActionAs(*prevEntity))
                             {
-                                pGraphLibM->playAnimation(entity.instanceId, actionToAnimationConfig(entity.currentAction, {entity.x, entity.y, entity.z}));
+                                AnimationConfig prevAnimationConfig = actionToAnimationConfig(prevEntity->currentAction, {prevEntity->x, prevEntity->y, prevEntity->z});
+                                AnimationConfig currentAnimationConfig = actionToAnimationConfig(entity.currentAction, {entity.x, entity.y, entity.z});
+
+                                if (prevAnimationConfig != currentAnimationConfig)
+                                {
+                                    pGraphLibM->playAnimation(entity.instanceId, currentAnimationConfig);
+                                }
 
                                 // Move action is special case as we need to animate and move the entity at the same time
                                 if (entity.currentAction.id == ActionType::Move)

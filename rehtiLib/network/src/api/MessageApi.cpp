@@ -173,7 +173,7 @@ DropItemMessage MessageApi::parseDropItem(std::string msgBody)
     return dropItemMsg;
 };
 
-MessageStruct MessageApi::createGameState(const GameStateMessage& gameState)
+MessageStruct MessageApi::createGameState(const GameStateMessage gameState)
 {
     rapidjson::Document document = createDocument();
     rapidjson::Document::AllocatorType& allocator = document.GetAllocator();

@@ -395,7 +395,7 @@ static const std::vector<std::vector<unsigned>> generateAccessMap(const std::vec
             }
 
             // Check South
-            if (heightMap.size() <= i + 1 || std::abs(heightMap[i + 1].size() <= j || height - heightMap[i + 1][j]) > Config.MAX_PASSABLE_HEIGHT || objectBlockMap[i][j].find("S") != std::string::npos)
+            if (heightMap.size() <= i + 1 || heightMap[i + 1].size() <= j || std::abs(height - heightMap[i + 1][j]) > Config.MAX_PASSABLE_HEIGHT || objectBlockMap[i][j].find("S") != std::string::npos)
             {
                 // Block the south bit
                 access = access & 0b1011;

@@ -226,7 +226,7 @@ public:
      * @param gameState GameStateMessage
      * @return MessageStruct
      */
-    static MessageStruct createGameState(const GameStateMessage& gameState);
+    static MessageStruct createGameState(const GameStateMessage gameState);
 
     /**
      * @brief Parse received game state message body

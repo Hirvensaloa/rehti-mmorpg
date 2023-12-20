@@ -100,3 +100,26 @@ Coordinates Map::getRandomCoordinates(const SpawnCoordinateBounds& coordinateBou
 
     return Coordinates(x, y);
 }
+
+Coordinates Map::getRandomNeighbour(Coordinates coordinates, const SpawnCoordinateBounds& coordinateBounds)
+{
+    const std::vector<std::vector<uint8_t>>& accessMatrix = Map::getAccessMap();
+    std::vector<Coordinates> neighbours;
+    for (int i = coordinates.y - 1; i <= coordinates.y + 1; i++)
+    {
+        for (int j = coordinates.x - 1; j <= coordinates.x + 1; j++)
+        {
+            if (i >= 0 && j >= 0 && i < accessMatrix.size() && j < accessMatrix[i].size() && accessMatrix[i][j] != 0 && coordinateBounds.xMin <= j && j <= coordinateBounds.xMax && coordinateBounds.yMin <= i && i <= coordinateBounds.yMax)
+            {
+                neighbours.push_back(Coordinates(j, i));
+            }
+        }
+    }
+
+    if (neighbours.size() == 0)
+    {
+        return coordinates;
+    }
+
+    return neighbours[rand() % neighbours.size()];
+}

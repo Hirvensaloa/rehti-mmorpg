@@ -192,4 +192,13 @@ struct AnimationConfig
     AnimationType animType;
     float duration;
     bool looping;
+
+    bool operator==(const AnimationConfig& other) const
+    {
+        return animationDirection == other.animationDirection && animType == other.animType && duration == other.duration && looping == other.looping;
+    }
+    bool operator!=(const AnimationConfig& other) const
+    {
+        return !(*this == other);
+    }
 };

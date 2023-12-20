@@ -191,9 +191,6 @@ void RehtiGraphics::movePlayer(int playerID, glm::vec3 location, float timeInSec
 
     glm::vec3 delta = diff * timeInv;
     glm::vec3 dir = -glm::normalize(diff);
-    characterOrientationsM[playerID].characterOrientation.rotation = glm::quatLookAt(dir, POSITIVE_Y_AXIS);
-    characterOrientationsM[playerID].animationData.currentAnimation = AnimationType::WALK;
-    // characterOrientationsM[playerID].animationData.currentTicks = 0;
     std::function<void(float)> callback = [playerID, delta, dir, this](float dt)
     {
         std::unique_lock lock(dataMutexM);
@@ -264,7 +261,6 @@ void RehtiGraphics::moveCharacter(int characterID, glm::vec3 location, float tim
     glm::vec3 diff = (location - currentLocation);
     glm::vec3 delta = diff * timeInv;
     glm::vec3 dir = glm::normalize(diff);
-    characterOrientationsM[characterID].characterOrientation.rotation = glm::quatLookAt(dir, POSITIVE_Y_AXIS);
     std::function<void(float)> callback = [characterID, delta, dir, this](float dt)
     {
         std::unique_lock lock(dataMutexM);

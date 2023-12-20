@@ -63,6 +63,15 @@ public:
      */
     static Coordinates getRandomCoordinates(const SpawnCoordinateBounds& coordinateBounds);
 
+    /**
+     * @brief Gets a random neighbour of the given coordinates.
+     *
+     * @param coordinates
+     * @param coordinateBounds Bounds for the coordinates
+     * @return Coordinates (Returns the given coordinates if no neighbours found/accessible)
+     */
+    static Coordinates getRandomNeighbour(Coordinates coordinates, const SpawnCoordinateBounds& coordinateBounds);
+
 private:
     inline static std::vector<std::vector<uint8_t>> accessMapM = {};
     inline static std::vector<std::vector<int>> heightMapM = {};

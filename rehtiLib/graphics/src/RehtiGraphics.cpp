@@ -155,7 +155,7 @@ void RehtiGraphics::moveGameObject(int objectID, glm::vec3 location, float timeI
 }
 
 void RehtiGraphics::rotateGameObject(int objectID, float radians, float timeInSeconds)
-{
+{ //
     float timeInv = 1.f / timeInSeconds;
     timersM.finishCallback(objectID);
     glm::quat currentRotation = gameObjectOrientationsM[objectID].rotation;

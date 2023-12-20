@@ -126,16 +126,16 @@ std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& 
             switch (i)
             {
             case NORTH:
-                neighbourCoords.first--;
+                neighbourCoords.second--;
                 checkDir = SOUTH;
                 break;
             case NORTH_EAST:
-                neighbourCoords.first--;
-                neighbourCoords.second++;
+                neighbourCoords.second--;
+                neighbourCoords.first++;
                 checkDir = SOUTH_WEST;
                 break;
             case EAST:
-                neighbourCoords.second++;
+                neighbourCoords.first++;
                 checkDir = WEST;
                 break;
             case SOUTH_EAST:
@@ -144,16 +144,16 @@ std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& 
                 checkDir = NORTH_WEST;
                 break;
             case SOUTH:
-                neighbourCoords.first++;
+                neighbourCoords.second++;
                 checkDir = NORTH;
                 break;
             case SOUTH_WEST:
-                neighbourCoords.first++;
-                neighbourCoords.second--;
+                neighbourCoords.second++;
+                neighbourCoords.first--;
                 checkDir = NORTH_EAST;
                 break;
             case WEST:
-                neighbourCoords.second--;
+                neighbourCoords.first--;
                 checkDir = EAST;
                 break;
             case NORTH_WEST:
@@ -163,8 +163,8 @@ std::vector<std::pair<int, int>> astar(const std::vector<std::vector<uint8_t>>& 
                 break;
             }
 
-            // Check if the neighbour is valid and accessible from OUR direction or is in the closed set
-            if (!isValidCell(map, neighbourCoords, checkDir) || neighbourCoords.first > mapWidth || neighbourCoords.second > mapHeight || closed[neighbourCoords.first][neighbourCoords.second][checkDir].first)
+            // Check if the neighbour is valid and accessible from ITS AND OUR direction or is in the closed set
+            if (!isValidCell(map, current->coords, static_cast<Direction>(i)) || !isValidCell(map, neighbourCoords, checkDir) || neighbourCoords.first > mapWidth || neighbourCoords.second > mapHeight || closed[neighbourCoords.first][neighbourCoords.second][checkDir].first)
             {
                 continue;
             }

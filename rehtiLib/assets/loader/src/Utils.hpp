@@ -52,7 +52,7 @@ void readPng(std::vector<unsigned char>& image, unsigned& width, unsigned& heigh
 }
 
 /**
- * @brief Rotates the matrix 90 degrees clockwise. Rotation is calculated by rotation-param * 90 degrees.
+ * @brief Rotates the matrix 90 degrees counter-clockwise. Rotation is calculated by rotation-param * 90 degrees.
  *
  * @param matrix Matrix to rotate
  * @param rotation Number of 90 degree rotations
@@ -60,30 +60,26 @@ void readPng(std::vector<unsigned char>& image, unsigned& width, unsigned& heigh
 template <typename T>
 void rotateMatrix(std::vector<std::vector<T>>& matrix, uint8_t rotation)
 {
-    int maxRotation = 4;
-    rotation = rotation % maxRotation;
-
-    int rows = matrix.size();
-    int cols = matrix[0].size();
-
-    for (int r = 0; r < rotation; r++)
+    if (rotation == 0)
     {
-        std::vector<std::vector<T>> rotatedMatrix(cols, std::vector<T>(rows));
-
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < cols; j++)
-            {
-                int newRow = j;
-                int newCol = rows - 1 - i;
-
-                rotatedMatrix[newRow][newCol] = matrix[i][j];
-            }
-        }
-
-        matrix = rotatedMatrix;
-        std::swap(rows, cols); // Update rows and cols for the next rotation
+        return;
     }
+
+    std::vector<std::vector<T>> rotatedMatrix;
+
+    for (unsigned i = 0; i < matrix[0].size(); i++)
+    {
+        std::vector<T> row;
+        for (int j = matrix.size() - 1; j >= 0; j--)
+        {
+            row.push_back(matrix[j][i]);
+        }
+        rotatedMatrix.push_back(row);
+    }
+
+    matrix = rotatedMatrix;
+
+    rotateMatrix(matrix, rotation - 1);
 }
 
 /**

@@ -49,7 +49,10 @@ void Npc::update()
 
 void Npc::respawn()
 {
-    getInventory().removeAllItems(); // TODO: drop them on the ground
+    for (auto item : getInventory().getItems())
+    {
+        dropItem(item->getInstanceId());
+    }
     setAction(std::make_shared<RespawnAction>(std::chrono::system_clock::now(), respawnTimeM, this->shared_from_this()));
 }
 

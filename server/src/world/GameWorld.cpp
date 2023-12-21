@@ -20,6 +20,7 @@ void GameWorld::addPlayer(std::string playerName, unsigned int playerId, int bas
 
 bool GameWorld::removePlayer(unsigned int playerId)
 {
+    std::unique_lock<std::mutex> lck(playersMutexM);
     for (auto it = playersM.begin(); it != playersM.end(); it++)
     {
         if ((*it)->getId() == playerId)
@@ -83,7 +84,7 @@ std::map<std::string, std::shared_ptr<Object>>& GameWorld::getObjects()
     return objectsM;
 }
 
-std::map<Coordinates, std::vector<std::shared_ptr<Item>>> GameWorld::getItems()
+std::map<Coordinates, std::vector<std::shared_ptr<Item>>>& GameWorld::getItems()
 {
     return itemsM;
 }
@@ -99,6 +100,24 @@ void GameWorld::addItem(Coordinates location, std::shared_ptr<Item> item)
 
         itemsM[location] = std::vector<std::shared_ptr<Item>>{std::move(item)};
     }
+}
+
+std::shared_ptr<Item> GameWorld::removeItem(Coordinates location, int itemId)
+{
+    std::unique_lock<std::mutex> lck(itemsMutexM);
+    if (itemsM.contains(location))
+    {
+        for (auto it = itemsM[location].begin(); it != itemsM[location].end(); it++)
+        {
+            if ((*it)->getInstanceId() == itemId)
+            {
+                std::shared_ptr<Item> removedItem = std::move(*it);
+                itemsM[location].erase(it);
+                return removedItem;
+            }
+        }
+    }
+    return std::shared_ptr<Item>();
 }
 
 void GameWorld::updateGameWorld()
@@ -204,4 +223,14 @@ std::shared_ptr<Entity> GameWorld::getEntity(unsigned int entityId)
         }
     }
     throw std::runtime_error("Entity not found");
+}
+
+std::mutex& GameWorld::getPlayersMutex()
+{
+    return playersMutexM;
+}
+
+std::mutex& GameWorld::getItemsMutex()
+{
+    return itemsMutexM;
 }

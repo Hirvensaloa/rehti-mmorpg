@@ -23,7 +23,8 @@ enum class MessageId
     UseItem,
     Unequip,
     DropItem,
-    Talk
+    Talk,
+    PickUpItem
 };
 
 enum class ActionType
@@ -53,6 +54,11 @@ struct Coordinate
     int y;
     int z;
 };
+
+inline bool operator<(const Coordinate& l, const Coordinate& r)
+{
+    return std::tie(l.x, l.y, l.z) < std::tie(r.x, r.y, r.z);
+}
 
 /**
  * @brief CurrentAction struct representing an action that can be performed by an entity.

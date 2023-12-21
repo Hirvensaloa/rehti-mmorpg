@@ -151,6 +151,27 @@ void Entity::attack(Entity& target)
     }
 }
 
+void Entity::pickUpItem(int itemId, Coordinates itemLocation)
+{
+    if (!getInventory().isFull())
+    {
+        std::shared_ptr<Item> pickedUpItem = pGameWorldM->removeItem(itemLocation, itemId);
+        if (pickedUpItem != nullptr)
+        {
+            getInventory().addItem(std::move(pickedUpItem));
+        }
+    }
+}
+
+void Entity::dropItem(int itemId)
+{
+    std::shared_ptr<Item> droppedItem = getInventory().removeItem(itemId);
+    if (droppedItem != nullptr)
+    {
+        pGameWorldM->addItem(getLocation(), std::move(droppedItem));
+    }
+}
+
 SkillSet& Entity::getSkillSet()
 {
     return skillSetM;

@@ -31,6 +31,8 @@ set(SOURCES
         action/MoveAction.hpp
         action/ObjectInteractAction.cpp
         action/ObjectInteractAction.hpp
+        action/PickUpAction.hpp
+        action/PickUpAction.cpp
         action/RespawnAction.cpp
         action/RespawnAction.hpp
 

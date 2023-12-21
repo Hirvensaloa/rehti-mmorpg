@@ -79,6 +79,7 @@ bool RehtiGraphics::removeCharacterObject(int characterID)
     if (!characterOrientationsM.contains(characterID))
         return false;
 
+    std::unique_lock dataLock(dataMutexM);
     pObjectManagerM->cleanResources(characterID, ObjectType::CHARACTER);
     characterOrientationsM.erase(characterID);
     boundingBoxesM[ObjectType::CHARACTER].erase(characterID);
@@ -100,8 +101,8 @@ bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, st
     if (!res)
         return false;
     AABB bb;
-    bb.max = location + glm::vec3(0.5f, 0.5f, 0.5f); // Game objects have 1 unit bounding boxes
-    bb.min = location - glm::vec3(0.5f, 0.5f, 0.5f);
+    bb.min = location + GAMEOBJECT_MIN;
+    bb.max = location + GAMEOBJECT_MAX; // Game objects have 1 unit bounding boxes
     bb.pLeft = nullptr;
     bb.pRight = nullptr;
     boundingBoxesM[ObjectType::GAMEOBJECT][objectID] = bb;
@@ -113,10 +114,16 @@ bool RehtiGraphics::addGameObject(int objectID, std::vector<Vertex> vertices, st
 
 bool RehtiGraphics::removeGameObject(int objectID)
 {
+    vkWaitForFences(logDeviceM, 1, &frameFencesM[currentFrameM], VK_TRUE, UINT64_MAX);
+    std::unique_lock gameObjectLock(dataMutexM);
     if (!gameObjectOrientationsM.contains(objectID))
         return false;
 
-    pObjectManagerM->cleanResources(objectID, ObjectType::GAMEOBJECT);
+    bool success = pObjectManagerM->cleanResources(objectID, ObjectType::GAMEOBJECT);
+    if (!success)
+    {
+        std::cout << "Failed to clean resources" << std::endl;
+    }
     gameObjectOrientationsM.erase(objectID);
     boundingBoxesM[ObjectType::GAMEOBJECT].erase(objectID);
 
@@ -217,7 +224,7 @@ void RehtiGraphics::playAnimation(int characterID, AnimationConfig cfg)
     dataMutexM.lock();
     characterOrientationsM[characterID].animationData.currentAnimation = cfg.animType;
     characterOrientationsM[characterID].animationData.currentTicks = 0;
-    if (0.001f < glm ::length(cfg.animationDirection)) // if the direction is set, use it
+    if (0.001f < glm::length(cfg.animationDirection)) // if the direction is set, use it
     {
         glm::vec3 direction = -glm::normalize(cfg.animationDirection);
         characterOrientationsM[characterID].characterOrientation.rotation = glm::quatLookAt(direction, POSITIVE_Y_AXIS);
@@ -941,7 +948,6 @@ void RehtiGraphics::recordCommandBuffer(VkCommandBuffer cmdBuffer, uint32_t imag
     vkCmdBeginRenderPass(cmdBuffer, &renderInfo, VK_SUBPASS_CONTENTS_INLINE);
 
     glm::mat4 renderMat = cameraM.getWorldToScreenMatrix();
-
     for (ObjectType objectType : getObjectTypes())
     {
         // Bind correct pipeline for object type
@@ -950,7 +956,9 @@ void RehtiGraphics::recordCommandBuffer(VkCommandBuffer cmdBuffer, uint32_t imag
         vkCmdPushConstants(cmdBuffer, pipelineLayoutsM[objectType], VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(glm::mat4), &renderMat);
         VkDescriptorSet sunDescriptor = pObjectManagerM->getSunDescriptorSet(currentFrameM);
         vkCmdBindDescriptorSets(cmdBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayoutsM[objectType], 0, 1, &sunDescriptor, 0, nullptr);
-        for (DrawableObject obj : pObjectManagerM->getDrawableObjects(objectType, currentFrameM))
+        std::vector<DrawableObject> drawables = pObjectManagerM->getDrawableObjects(objectType, currentFrameM);
+
+        for (DrawableObject obj : drawables)
         {
             // Fetch object data
             VkBuffer vertexBuffer = obj.vertexBuffer;
@@ -965,7 +973,6 @@ void RehtiGraphics::recordCommandBuffer(VkCommandBuffer cmdBuffer, uint32_t imag
             vkCmdDrawIndexed(cmdBuffer, obj.indexCount, 1, 0, 0, 0);
         }
     }
-
     // record gui data
     pGuiM->recordGuiData(cmdBuffer);
 
@@ -1020,6 +1027,8 @@ void RehtiGraphics::drawFrame()
     vkResetFences(logDeviceM, 1, &frameFencesM[currentFrameM]);
 
     vkResetCommandBuffer(commandBuffersM[currentFrameM], 0);
+
+    dataMutexM.lock();
     recordCommandBuffer(commandBuffersM[currentFrameM], imageIndex);
 
     VkSubmitInfo submitInfo{};
@@ -1043,6 +1052,7 @@ void RehtiGraphics::drawFrame()
     if (vkQueueSubmit(graphicsQueueM, 1, &submitInfo, frameFencesM[currentFrameM]) != VK_SUCCESS)
         throw std::runtime_error("Failed to submit draw command buffer");
     graphicsQueueMutexM.unlock();
+    dataMutexM.unlock();
     VkPresentInfoKHR presInfo{};
     presInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
     presInfo.waitSemaphoreCount = 1;
@@ -1074,13 +1084,13 @@ void RehtiGraphics::mainLoop()
         glfwPollEvents();
         pGuiM->newFrame();
         drawFrame();
+        camData.position = cameraM.getLocation();
+        camData.direction = cameraM.getForward();
+        pObjectManagerM->updateCameraDescriptor(&camData, currentFrameM);
         auto elapsed = std::chrono::high_resolution_clock::now() - start;
         auto mus = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
         statsM.frameTime = static_cast<uint64_t>(mus);
         statsM.ftPerSec = mus * invMicro;
-        camData.position = cameraM.getLocation();
-        camData.direction = cameraM.getForward();
-        pObjectManagerM->updateCameraDescriptor(&camData, currentFrameM);
         timersM.elapseTime(static_cast<float>(statsM.ftPerSec));
     }
 
@@ -1689,26 +1699,26 @@ void RehtiGraphics::addMouseClickCallback(std::function<void(const Hit&)> callba
     glfwSetWindowUserPointer(this->pWindowM, this);
     glfwSetMouseButtonCallback(this->pWindowM, [](GLFWwindow* window, int button, int action, int mods)
                                {
-        ImGuiIO& io = ImGui::GetIO();
-        io.AddMouseButtonEvent(button, action);
-        if (!io.WantCaptureMouse)
-        {
-            if ((button == GLFW_MOUSE_BUTTON_LEFT || button == GLFW_MOUSE_BUTTON_RIGHT) && action == GLFW_PRESS)
-            {
-                RehtiGraphics* pGraphics = reinterpret_cast<RehtiGraphics*>(glfwGetWindowUserPointer(window));
-                Hit hit = pGraphics->traceClick();
-                hit.button = button;
-                pGraphics->mouseClickCallbackM(hit);
-            }
-            else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_PRESS)
-            {
-                Camera::canMove = true;
-            }
-            else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_RELEASE)
-            {
-                Camera::canMove = false;
-            }
-        } });
+			ImGuiIO& io = ImGui::GetIO();
+			io.AddMouseButtonEvent(button, action);
+			if (!io.WantCaptureMouse)
+			{
+				if ((button == GLFW_MOUSE_BUTTON_LEFT || button == GLFW_MOUSE_BUTTON_RIGHT) && action == GLFW_PRESS)
+				{
+					RehtiGraphics* pGraphics = reinterpret_cast<RehtiGraphics*>(glfwGetWindowUserPointer(window));
+					Hit hit = pGraphics->traceClick();
+					hit.button = button;
+					pGraphics->mouseClickCallbackM(hit);
+				}
+				else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_PRESS)
+				{
+					Camera::canMove = true;
+				}
+				else if (button == GLFW_MOUSE_BUTTON_3 && action == GLFW_RELEASE)
+				{
+					Camera::canMove = false;
+				}
+			} });
 }
 
 std::shared_ptr<RehtiGui> RehtiGraphics::getGui()

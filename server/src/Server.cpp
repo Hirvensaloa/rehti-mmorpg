@@ -180,18 +180,7 @@ void Server::handleMessage(const Message& msg)
                 std::cout << connId << "DropItem message received." << std::endl;
                 const DropItemMessage dropItemMsg = MessageApi::parseDropItem(body);
                 std::shared_ptr<PlayerCharacter> gamer = gameWorldM.getPlayer(connId);
-                std::shared_ptr<Item> droppedItem = gamer->getInventory().removeItem(dropItemMsg.itemId);
-                if (droppedItem != nullptr)
-                {
-                    gameWorldM.addItem(gamer->getLocation(), std::move(droppedItem));
-                    for (auto& entry : gameWorldM.getItems())
-                    {
-                        for (auto& item : entry.second)
-                        {
-                            std::cout << "Item at: " << entry.first.x << "," << entry.first.y << " , " << entry.first.z << ", of name: " << item->getName() << std::endl;
-                        }
-                    }
-                }
+                gamer->dropItem(dropItemMsg.itemId);
             }
             break;
             case MessageId::Talk:

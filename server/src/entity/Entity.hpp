@@ -144,6 +144,12 @@ public:
     void pickUpItem(int itemId, Coordinates itemLocation);
 
     /**
+     * @brief Drop an item
+     * @param itemId instance id of item to be dropped
+     */
+    void dropItem(int itemId);
+
+    /**
      * @brief Get the SkillSet of this entity
      * @return SkillSet&
      */

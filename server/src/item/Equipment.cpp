@@ -67,9 +67,12 @@ bool Equipment::equip(std::shared_ptr<EquippableItem> item)
 
 void Equipment::unequip(Slot slotToUnequip)
 {
-    auto& currentItem = slotMapM[slotToUnequip];
-    if (ownerM->getInventory().addItem(currentItem))
+    if (slotMapM.contains(slotToUnequip))
     {
-        currentItem = nullptr;
+        auto& currentItem = slotMapM[slotToUnequip];
+        if (ownerM->getInventory().addItem(currentItem))
+        {
+            currentItem = nullptr;
+        }
     }
 }

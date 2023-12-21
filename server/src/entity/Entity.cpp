@@ -163,6 +163,15 @@ void Entity::pickUpItem(int itemId, Coordinates itemLocation)
     }
 }
 
+void Entity::dropItem(int itemId)
+{
+    std::shared_ptr<Item> droppedItem = getInventory().removeItem(itemId);
+    if (droppedItem != nullptr)
+    {
+        pGameWorldM->addItem(getLocation(), std::move(droppedItem));
+    }
+}
+
 SkillSet& Entity::getSkillSet()
 {
     return skillSetM;

@@ -13,7 +13,7 @@ const std::string ROOT_PATH = "./";
  */
 static struct
 {
-    const unsigned AREA_WIDTH = 192;         ///< Width of the area in tiles
+    const unsigned AREA_WIDTH = 64;          ///< Width of the area in tiles
     const unsigned AREA_HEIGHT = AREA_WIDTH; ///< The height is the same as the width
 
     // Paths

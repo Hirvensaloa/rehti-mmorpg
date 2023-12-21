@@ -40,6 +40,7 @@ std::vector<std::shared_ptr<PlayerCharacter>>& GameWorld::getPlayers()
 
 std::shared_ptr<PlayerCharacter> GameWorld::getPlayer(unsigned int playerId)
 {
+    std::unique_lock<std::mutex> lck(playersMutexM);
     for (auto it = playersM.begin(); it != playersM.end(); it++)
     {
         if ((*it)->getId() == playerId)

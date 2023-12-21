@@ -1083,13 +1083,13 @@ void RehtiGraphics::mainLoop()
         glfwPollEvents();
         pGuiM->newFrame();
         drawFrame();
+        camData.position = cameraM.getLocation();
+        camData.direction = cameraM.getForward();
+        pObjectManagerM->updateCameraDescriptor(&camData, currentFrameM);
         auto elapsed = std::chrono::high_resolution_clock::now() - start;
         auto mus = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
         statsM.frameTime = static_cast<uint64_t>(mus);
         statsM.ftPerSec = mus * invMicro;
-        camData.position = cameraM.getLocation();
-        camData.direction = cameraM.getForward();
-        pObjectManagerM->updateCameraDescriptor(&camData, currentFrameM);
         timersM.elapseTime(static_cast<float>(statsM.ftPerSec));
     }
 

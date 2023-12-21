@@ -17,11 +17,7 @@
       "relatedSkillId": 0,
       "xpRequirement": 0,
       "description": "A tree. It is a tree.",
-      "tileMap": [
-        [
-          "XB"
-        ]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "treetexture.png",
       "objFilename": "tree1.obj",
       "characterInteractAnimation": "woodcutting"
@@ -53,11 +49,7 @@
       "relatedSkillId": 3,
       "xpRequirement": 0,
       "description": "A cooking fire. It is a cooking fire.",
-      "tileMap": [
-        [
-          "XB"
-        ]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "cookpotTexture.png",
       "objFilename": "cookpot.obj",
       "characterInteractAnimation": "cooking"
@@ -79,11 +71,7 @@
       "relatedSkillId": 2,
       "xpRequirement": 0,
       "description": "A fishing spot. It is a fishing spot.",
-      "tileMap": [
-        [
-          "XB"
-        ]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "fishingSpot.png",
       "objFilename": "defaultmodel",
       "characterInteractAnimation": "fishing"
@@ -105,11 +93,7 @@
       "relatedSkillId": 0,
       "xpRequirement": 1000,
       "description": "A tree. It is a tree.",
-      "tileMap": [
-        [
-          "XB"
-        ]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "pineTextureWarm.png",
       "objFilename": "pine.obj",
       "characterInteractAnimation": "woodcutting"
@@ -131,11 +115,7 @@
       "relatedSkillId": 0,
       "xpRequirement": 2000,
       "description": "A tree. It is a tree.",
-      "tileMap": [
-        [
-          "XB"
-        ]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "pineTextureCold.png",
       "objFilename": "pine.obj",
       "characterInteractAnimation": "woodcutting"
@@ -167,11 +147,7 @@
       "relatedSkillId": 7,
       "xpRequirement": 0,
       "description": "An anvil. It is an anvil.",
-      "tileMap": [
-        [
-          "XB"
-        ]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "anvilTexture.png",
       "objFilename": "anvil.obj",
       "characterInteractAnimation": "smithing"
@@ -193,11 +169,7 @@
       "relatedSkillId": 2,
       "xpRequirement": 150,
       "description": "A fishing spot. It is a fishing spot.",
-      "tileMap": [
-        [
-          "XB"
-        ]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "fishingSpot.png",
       "objFilename": "defaultmodel",
       "characterInteractAnimation": "fishing"
@@ -219,11 +191,7 @@
       "relatedSkillId": 2,
       "xpRequirement": 1000,
       "description": "A fishing spot. It is a fishing spot.",
-      "tileMap": [
-        [
-          "XB"
-        ]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "fishingSpot.png",
       "objFilename": "defaultmodel",
       "characterInteractAnimation": "fishing"
@@ -245,11 +213,7 @@
       "relatedSkillId": 1,
       "xpRequirement": 0,
       "description": "An iron rock. It is an iron rock.",
-      "tileMap": [
-        [
-          "XB"
-        ]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "ore_iron.png",
       "objFilename": "ore.obj",
       "characterInteractAnimation": "smithing"
@@ -271,11 +235,7 @@
       "relatedSkillId": 1,
       "xpRequirement": 1000,
       "description": "A gold rock. It is a gold rock.",
-      "tileMap": [
-        [
-          "XB"
-        ]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "ore_gold.png",
       "objFilename": "ore.obj",
       "characterInteractAnimation": "smithing"
@@ -297,11 +257,7 @@
       "relatedSkillId": 1,
       "xpRequirement": 2000,
       "description": "A mithril rock. It is a mithril rock.",
-      "tileMap": [
-        [
-          "XB"
-        ]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "ore_mithril.png",
       "objFilename": "ore.obj",
       "characterInteractAnimation": "smithing"
@@ -323,11 +279,7 @@
       "relatedSkillId": 1,
       "xpRequirement": 0,
       "description": "A adamantite rock. It is a adamantite rock.",
-      "tileMap": [
-        [
-          "XB"
-        ]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "ore_adamantite.png",
       "objFilename": "ore.obj",
       "characterInteractAnimation": "smithing"
@@ -337,13 +289,7 @@
       "type": "General",
       "name": "Fence",
       "description": "A sturdy fence.",
-      "tileMap": [
-        [
-          "S",
-          "XS",
-          "S"
-        ]
-      ],
+      "tileMap": [["XS"]],
       "textureFilename": "fencetexture.png",
       "objFilename": "fence.obj"
     },
@@ -353,60 +299,12 @@
       "name": "House",
       "description": "It is just a house, nothing to see here",
       "tileMap": [
-        [
-          "B",
-          "B",
-          "B",
-          "B",
-          "B",
-          "B",
-          "B"
-        ],
-        [
-          "B",
-          " ",
-          " ",
-          " ",
-          " ",
-          " ",
-          "B"
-        ],
-        [
-          "B",
-          " ",
-          " ",
-          "X",
-          " ",
-          " ",
-          "B"
-        ],
-        [
-          "B",
-          " ",
-          " ",
-          " ",
-          " ",
-          " ",
-          "B"
-        ],
-        [
-          "B",
-          " ",
-          " ",
-          " ",
-          " ",
-          " ",
-          "B"
-        ],
-        [
-          "B",
-          " ",
-          "B",
-          "B",
-          "B",
-          "B",
-          "B"
-        ]
+        ["B", "B", "B", "B", "B", "B", "B"],
+        ["B", " ", " ", " ", " ", " ", "B"],
+        ["B", " ", " ", "X", " ", " ", "B"],
+        ["B", " ", " ", " ", " ", " ", "B"],
+        ["B", " ", " ", " ", " ", " ", "B"],
+        ["B", " ", "B", "B", "B", "B", "B"]
       ],
       "textureFilename": "housetexture.png",
       "objFilename": "house.obj"
@@ -470,11 +368,7 @@
         }
       ],
       "description": "Contains a treasure (If you consider dirty, rotten shield a treasure)",
-      "tileMap": [
-        [
-          "XB"
-        ]
-      ],
+      "tileMap": [["XB"]],
       "textureFilename": "chestTexture.png",
       "objFilename": "treasure_chest.obj",
       "characterInteractAnimation": "loot"

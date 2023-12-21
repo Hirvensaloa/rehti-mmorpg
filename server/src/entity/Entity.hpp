@@ -206,7 +206,7 @@ protected:
 
     bool isDisconnectedM = false; // for players only, but defined for entity for polymorphism reaons
 
-    std::chrono::milliseconds respawnTimeM{10000};
+    std::chrono::milliseconds respawnTimeM{2000};
 
     std::chrono::milliseconds moveSpeedM{1000};
 };

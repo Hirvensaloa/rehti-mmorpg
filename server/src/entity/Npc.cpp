@@ -22,12 +22,7 @@ Npc::Npc(
              location),
       chatResponsesM(chatResponses)
 {
-    // Add a random item to the NPC's inventory
-    const GameItems& gameItems = AssetManager::getItems();
-    const std::vector<int> ids = gameItems.getAllIds();
-    const int randomId = ids[rand() % ids.size()];
-    const std::shared_ptr<Item> item = AssetManager::createItemInstance(randomId);
-    getInventory().addItem(item);
+    addRandomItemToInventory();
 };
 
 void Npc::update()
@@ -54,6 +49,7 @@ void Npc::respawn()
         dropItem(item->getInstanceId());
     }
     setAction(std::make_shared<RespawnAction>(std::chrono::system_clock::now(), respawnTimeM, this->shared_from_this()));
+    addRandomItemToInventory();
 }
 
 std::string Npc::getChatResponse()
@@ -64,4 +60,13 @@ std::string Npc::getChatResponse()
     }
 
     return chatResponsesM[rand() % chatResponsesM.size()];
+}
+
+void Npc::addRandomItemToInventory()
+{
+    const GameItems& gameItems = AssetManager::getItems();
+    const std::vector<int> ids = gameItems.getAllIds();
+    const int randomId = ids[rand() % ids.size()];
+    const std::shared_ptr<Item> item = AssetManager::createItemInstance(randomId);
+    getInventory().addItem(item);
 }

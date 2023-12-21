@@ -316,47 +316,55 @@
       "yieldableItemList": [
         {
           "itemId": 1,
-          "yieldPercentage": 10
+          "yieldPercentage": 8
         },
         {
           "itemId": 2,
-          "yieldPercentage": 10
+          "yieldPercentage": 8
         },
         {
           "itemId": 3,
-          "yieldPercentage": 10
+          "yieldPercentage": 8
         },
         {
           "itemId": 4,
-          "yieldPercentage": 10
+          "yieldPercentage": 8
         },
         {
           "itemId": 5,
-          "yieldPercentage": 10
+          "yieldPercentage": 8
         },
         {
           "itemId": 6,
-          "yieldPercentage": 10
+          "yieldPercentage": 8
         },
         {
           "itemId": 7,
-          "yieldPercentage": 10
+          "yieldPercentage": 8
         },
         {
           "itemId": 8,
-          "yieldPercentage": 10
+          "yieldPercentage": 8
         },
         {
           "itemId": 9,
-          "yieldPercentage": 10
+          "yieldPercentage": 8
         },
         {
           "itemId": 10,
-          "yieldPercentage": 10
+          "yieldPercentage": 8
         },
         {
           "itemId": 11,
-          "yieldPercentage": 10
+          "yieldPercentage": 8
+        },
+        {
+          "itemId": 25,
+          "yieldPercentage": 8
+        },
+        {
+          "itemId": 26,
+          "yieldPercentage": 8
         }
       ],
       "description": "Contains a treasure (If you consider dirty, rotten shield a treasure)",

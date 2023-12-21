@@ -17,7 +17,7 @@ public:
      * @brief Returns the items that the inventory contains
      * @return const std::vector<std::shared_ptr<Item>>&
      */
-    const std::vector<std::shared_ptr<Item>> getItems() const;
+    const std::vector<std::shared_ptr<Item>>& getItems() const;
 
     /**
      * @brief Adds item to the inventory.

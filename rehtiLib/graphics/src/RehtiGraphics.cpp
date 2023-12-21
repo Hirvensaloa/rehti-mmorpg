@@ -76,10 +76,11 @@ bool RehtiGraphics::addCharacterObject(int characterID, std::vector<CharacterVer
 
 bool RehtiGraphics::removeCharacterObject(int characterID)
 {
+    vkWaitForFences(logDeviceM, 1, &frameFencesM[currentFrameM], VK_TRUE, UINT64_MAX);
+    std::unique_lock gameObjectLock(dataMutexM);
     if (!characterOrientationsM.contains(characterID))
         return false;
 
-    std::unique_lock dataLock(dataMutexM);
     pObjectManagerM->cleanResources(characterID, ObjectType::CHARACTER);
     characterOrientationsM.erase(characterID);
     boundingBoxesM[ObjectType::CHARACTER].erase(characterID);

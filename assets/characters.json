@@ -17,7 +17,7 @@
       "id": 1,
       "name": "Ogre",
       "textureFilename": "ogretexture.png",
-      "glTFFilename": "simplecharacter.glb",
+      "glTFFilename": "ogre.glb",
       "spawnCoordinateBounds": {
         "xMin": 64,
         "xMax": 128,

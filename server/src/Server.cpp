@@ -357,7 +357,7 @@ void Server::sendGameState()
         {
             // Add the current player to the message e.g. the player that is connected to this connection
             std::shared_ptr<PlayerCharacter> player = gameWorldM.getPlayer(conn->getID());
-            msg.currentPlayer.id = AssetManager::getGameCharacters().player.id; // This is not unique, it is used to identify the type of entity. This case the type of entity is player.;
+            msg.currentPlayer.id = AssetManager::getGameCharacters().player.id; // This is not unique, it is used to identify the type of entity. This case the type of entity is player.
             msg.currentPlayer.instanceId = player->getInstanceId();
             msg.currentPlayer.name = player->getName();
             const Coordinates location = player->getLocation();
@@ -368,6 +368,10 @@ void Server::sendGameState()
             if (player->getCurrentAction() != nullptr && !player->getCurrentAction()->isCompleted())
             {
                 msg.currentPlayer.currentAction = player->getCurrentAction()->getActionInfo();
+            }
+            else
+            {
+                msg.currentPlayer.currentAction = {ActionType::None};
             }
 
             const auto skills = player->getSkillSet().getSkills();

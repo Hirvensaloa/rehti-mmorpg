@@ -497,7 +497,11 @@ void RehtiGraphics::createLogicalDevice()
     QueueFamilyIndices indice = findQueueFamilies(gpuM);
 
     std::vector<VkDeviceQueueCreateInfo> queueCreateInfos{};
-    std::set<uint32_t> uniqueQueueFamilies = {indice.graphicsFamily.value(), indice.presentFamily.value(), indice.transferFamily.value()};
+    std::set<uint32_t> uniqueQueueFamilies = {indice.graphicsFamily.value(), indice.presentFamily.value()};
+    if (indice.transferFamily.has_value())
+    {
+        uniqueQueueFamilies.insert(indice.transferFamily.value());
+    }
 
     float queuePriority = 1.0f;
     for (uint32_t queueFamily : uniqueQueueFamilies)

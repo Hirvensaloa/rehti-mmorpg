@@ -289,7 +289,7 @@
       "type": "General",
       "name": "Fence",
       "description": "A sturdy fence.",
-      "tileMap": [["S", "XS", "S"]],
+      "tileMap": [["XS"]],
       "textureFilename": "fencetexture.png",
       "objFilename": "fence.obj"
     },

@@ -27,7 +27,7 @@ CurrentAction RespawnAction::getActionInfo()
     CurrentAction actionInfo;
     actionInfo.id = actionTypeM;
     actionInfo.durationMs = actionTimeM.count();
-    actionInfo.looping = true;
+    actionInfo.looping = false;
     actionInfo.targetId = pEntityM->getInstanceId();
     Coordinates& coords = pEntityM->getLocation();
     actionInfo.targetCoordinate = {coords.x, coords.y, coords.z};

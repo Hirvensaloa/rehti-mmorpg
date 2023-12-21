@@ -21,7 +21,6 @@ public:
      */
     static AssetCache& getInstance()
     {
-        std::cout << "AssetCache getInstance()" << std::endl;
         static AssetCache instance;
         return instance;
     }

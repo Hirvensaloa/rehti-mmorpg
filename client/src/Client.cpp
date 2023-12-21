@@ -232,7 +232,8 @@ void Client::processMessages()
                                 const auto& coords = currentPlayer.currentAction.targetCoordinate;
                                 pGraphLibM->movePlayer(currentPlayer.instanceId, {coords.x, Config.HEIGHT_MAP_SCALE * coords.z, coords.y}, currentPlayer.currentAction.durationMs / 1000.0f);
                             }
-                            else if (currentPlayer.currentAction.id == ActionType::Respawn)
+                            // If the old animation is respawn and the new animation is something else, we force move the player to the current coordinates
+                            else if (prevCurrentPlayer.currentAction.id == ActionType::Respawn && currentPlayer.currentAction.id != ActionType::Respawn)
                             {
                                 pGraphLibM->forceCharacterMove(currentPlayer.instanceId, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y});
                             }
@@ -340,7 +341,8 @@ void Client::processMessages()
                                     const auto& coords = entity.currentAction.targetCoordinate;
                                     pGraphLibM->moveCharacter(entity.instanceId, {coords.x, Config.HEIGHT_MAP_SCALE * coords.z, coords.y}, entity.currentAction.durationMs / 1000.0f);
                                 }
-                                else if (entity.currentAction.id == ActionType::Respawn)
+                                // If the old animation is respawn and the new animation is something else, we force move the player to the current coordinates
+                                else if (prevEntity->currentAction.id == ActionType::Respawn && entity.currentAction.id != ActionType::Respawn)
                                 {
                                     pGraphLibM->forceCharacterMove(entity.instanceId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
                                 }

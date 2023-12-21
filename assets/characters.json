@@ -15,16 +15,16 @@
   "npcs": [
     {
       "id": 1,
-      "name": "Troll",
-      "textureFilename": "ukkotextuuri_original.png",
+      "name": "Ogre",
+      "textureFilename": "ogretexture.png",
       "glTFFilename": "simplecharacter.glb",
       "spawnCoordinateBounds": {
-        "xMin": 1,
-        "xMax": 64,
-        "yMin": 1,
-        "yMax": 64
+        "xMin": 64,
+        "xMax": 128,
+        "yMin": 64,
+        "yMax": 128
       },
-      "spawnAmount": 2,
+      "spawnAmount": 4,
       "agressionType": "PEACEFUL",
       "agressionRange": 40,
       "baseDamage": 10,
@@ -42,7 +42,7 @@
         "yMin": 1,
         "yMax": 64
       },
-      "spawnAmount": 2,
+      "spawnAmount": 6,
       "agressionType": "PASSIVE",
       "agressionRange": 40,
       "baseDamage": 10,
@@ -52,13 +52,13 @@
     {
       "id": 3,
       "name": "Bandit",
-      "textureFilename": "ukkotextuuri_original.png",
-      "glTFFilename": "simplecharacter.glb",
+      "textureFilename": "banditTexture.png",
+      "glTFFilename": "bandit.glb",
       "spawnCoordinateBounds": {
-        "xMin": 1,
-        "xMax": 30,
-        "yMin": 1,
-        "yMax": 30
+        "xMin": 128,
+        "xMax": 192,
+        "yMin": 128,
+        "yMax": 192
       },
       "spawnAmount": 2,
       "agressionType": "AGGRESSIVE",

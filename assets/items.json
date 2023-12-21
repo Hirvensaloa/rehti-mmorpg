@@ -58,7 +58,7 @@
         "armor": 10
       },
       "isStackable": false,
-      "iconFilename": "no-icon.png",
+      "iconFilename": "leather_body.png",
       "objFilename": "pouch.obj",
       "textureFilename": "pouchtexture_0.png"
     },
@@ -100,7 +100,7 @@
         "armor": 10
       },
       "isStackable": false,
-      "iconFilename": "no-icon.png",
+      "iconFilename": "iron_gauntlets.png",
       "objFilename": "pouch.obj",
       "textureFilename": "pouchtexture_0.png"
     },
@@ -287,6 +287,44 @@
       "type": "General",
       "isStackable": false,
       "iconFilename": "oak_logs.png",
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
+    },
+    {
+      "id": 25,
+      "name": "Mithril Sword",
+      "description": "A strong mithril sword for close combat.",
+      "type": "Equippable",
+      "slot": "MainHand",
+      "stats": {
+        "accuracy": 30,
+        "damage": 50,
+        "attackSpeed": 2000,
+        "range": 1,
+        "armor": 20,
+        "dodge": 10
+      },
+      "isStackable": false,
+      "iconFilename": "mithril_sword.png",
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
+    },
+    {
+      "id": 26,
+      "name": "Adamant Sword",
+      "description": "A legendary adamant sword used by the best of the best.",
+      "type": "Equippable",
+      "slot": "MainHand",
+      "stats": {
+        "accuracy": 50,
+        "damage": 100,
+        "attackSpeed": 2000,
+        "range": 1,
+        "armor": 30,
+        "dodge": 20
+      },
+      "isStackable": false,
+      "iconFilename": "adamant_sword.png",
       "objFilename": "pouch.obj",
       "textureFilename": "pouchtexture_0.png"
     }

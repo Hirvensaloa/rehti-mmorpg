@@ -121,6 +121,8 @@ RehtiGui::RehtiGui(VkInstance instance, VkPhysicalDevice gpu, VkDevice logDevice
     IM_ASSERT(ret);
     ret = LoadTextureFromFile("./assets/gui/defence.png", -17);
     IM_ASSERT(ret);
+    ret = LoadTextureFromFile("./assets/gui/smithing.png", -18);
+    IM_ASSERT(ret);
 }
 
 RehtiGui::~RehtiGui()

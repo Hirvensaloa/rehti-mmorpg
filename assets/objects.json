@@ -11,7 +11,7 @@
             "yieldPercentage": 100
           }
         ],
-        "xpPerYield": 10,
+        "xpPerYield": 400,
         "depleteChance": 20
       },
       "relatedSkillId": 0,
@@ -87,7 +87,7 @@
             "yieldPercentage": 100
           }
         ],
-        "xpPerYield": 10,
+        "xpPerYield": 500,
         "depleteChance": 20
       },
       "relatedSkillId": 0,
@@ -207,7 +207,7 @@
             "yieldPercentage": 100
           }
         ],
-        "xpPerYield": 50,
+        "xpPerYield": 500,
         "depleteChance": 20
       },
       "relatedSkillId": 1,
@@ -304,7 +304,7 @@
         ["B", " ", " ", "X", " ", " ", "B"],
         ["B", " ", " ", " ", " ", " ", "B"],
         ["B", " ", " ", " ", " ", " ", "B"],
-        ["B", " ", "B", "B", "B", "B", "B"]
+        ["B", "B", "B", "B", "B", "B", "B"]
       ],
       "textureFilename": "housetexture.png",
       "objFilename": "house.obj"

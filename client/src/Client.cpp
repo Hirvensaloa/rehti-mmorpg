@@ -36,8 +36,13 @@ void Client::start()
     }
     connectionThreadM = std::thread([this]()
                                     { boost::asio::co_spawn(ioContextM, connect(), boost::asio::detached); });
-    std::cout << "Starting to process messages..." << std::endl;
-    processMessages();
+
+    std::thread messageThread([this]()
+                              { processMessages(); });
+    // Cleanup after graphics thread has exited
+    graphicsThreadM.join();
+    connectionM->disconnect();
+    ioContextM.stop();
 }
 
 boost::asio::awaitable<bool> Client::login()
@@ -132,6 +137,19 @@ boost::asio::awaitable<void> Client::interactWithObject(const int& objectId)
     }
 }
 
+boost::asio::awaitable<void> Client::pickUpItem(const int& itemId, const int& x, const int& y)
+{
+    if (connectionM->isConnected())
+    {
+
+        PickUpItemMessage msg;
+        msg.itemId = (-itemId);
+        msg.x = x;
+        msg.y = y;
+        co_await connectionM->send(MessageApi::createPickUpItem(msg));
+    }
+}
+
 boost::asio::awaitable<void> Client::useItem(const int itemInstanceId)
 {
     if (connectionM->isConnected())
@@ -200,19 +218,24 @@ void Client::processMessages()
                     {
                         if (!currentPlayer.hasSameActionAs(prevCurrentPlayer))
                         {
-                            // Move action is special case as we need to animate and move the entity at the same time
+                            AnimationConfig prevAnimationConfig = actionToAnimationConfig(prevCurrentPlayer.currentAction, {prevCurrentPlayer.x, prevCurrentPlayer.y, prevCurrentPlayer.z});
+                            AnimationConfig currentAnimationConfig = actionToAnimationConfig(currentPlayer.currentAction, {currentPlayer.x, currentPlayer.y, currentPlayer.z});
+
+                            if (prevAnimationConfig != currentAnimationConfig)
+                            {
+                                pGraphLibM->playAnimation(currentPlayer.instanceId, currentAnimationConfig);
+                            }
+
+                            // If the new animation is move or the coordinates have changed, we move the player
                             if (currentPlayer.currentAction.id == ActionType::Move)
                             {
                                 const auto& coords = currentPlayer.currentAction.targetCoordinate;
                                 pGraphLibM->movePlayer(currentPlayer.instanceId, {coords.x, Config.HEIGHT_MAP_SCALE * coords.z, coords.y}, currentPlayer.currentAction.durationMs / 1000.0f);
                             }
-                            else if (currentPlayer.currentAction.id == ActionType::Respawn)
+                            // If the old animation is respawn and the new animation is something else, we force move the player to the current coordinates
+                            else if (prevCurrentPlayer.currentAction.id == ActionType::Respawn && currentPlayer.currentAction.id != ActionType::Respawn)
                             {
                                 pGraphLibM->forceCharacterMove(currentPlayer.instanceId, {currentPlayer.x, Config.HEIGHT_MAP_SCALE * currentPlayer.z, currentPlayer.y});
-                            }
-                            else
-                            {
-                                pGraphLibM->playAnimation(currentPlayer.instanceId, actionToAnimationConfig(currentPlayer.currentAction, {currentPlayer.x, currentPlayer.y, currentPlayer.z}));
                             }
                         }
 
@@ -232,8 +255,39 @@ void Client::processMessages()
                         }
                     }
 
+                    std::set<int> itemIdsToRemove;
+                    for (const auto& itemEntry : prevGameStateMsgM.items)
+                    {
+                        for (const auto& item : itemEntry.second)
+                        {
+                            itemIdsToRemove.insert(item.instanceId);
+                        }
+                    }
+
+                    for (const auto& itemEntry : gameStateMsg.items)
+                    {
+                        for (const auto& item : itemEntry.second)
+                        {
+                            // If previous message didn't have this item, draw it
+                            if (!itemIdsToRemove.contains(item.instanceId))
+                            {
+                                const auto itemAsset = assetCacheM.getItemAssetDataById(item.id);
+                                pGraphLibM->addGameObject(-item.instanceId, itemAsset.vertices, itemAsset.indices, itemAsset.texture, {itemEntry.first.x, Config.HEIGHT_MAP_SCALE * itemEntry.first.z, itemEntry.first.y}, 0);
+                            }
+
+                            // Do not remove item as it is in the current gamestate message
+                            itemIdsToRemove.erase(item.instanceId);
+                        }
+                    }
+
+                    // Remove all the leftover items from the graphics backend
+                    for (const auto& itemId : itemIdsToRemove)
+                    {
+                        pGraphLibM->removeGameObject(-itemId);
+                    }
+
                     std::set<int> entityIdsToRemove;
-                    for (const auto& entity : gameStateMsg.entities)
+                    for (const auto& entity : prevGameStateMsgM.entities)
                     {
                         // Do not remove the current player
                         if (entity.instanceId == currentPlayer.instanceId)
@@ -273,19 +327,24 @@ void Client::processMessages()
                             // If the entity is found, check if it has changed action
                             if (!entity.hasSameActionAs(*prevEntity))
                             {
+                                AnimationConfig prevAnimationConfig = actionToAnimationConfig(prevEntity->currentAction, {prevEntity->x, prevEntity->y, prevEntity->z});
+                                AnimationConfig currentAnimationConfig = actionToAnimationConfig(entity.currentAction, {entity.x, entity.y, entity.z});
+
+                                if (prevAnimationConfig != currentAnimationConfig)
+                                {
+                                    pGraphLibM->playAnimation(entity.instanceId, currentAnimationConfig);
+                                }
+
                                 // Move action is special case as we need to animate and move the entity at the same time
                                 if (entity.currentAction.id == ActionType::Move)
                                 {
                                     const auto& coords = entity.currentAction.targetCoordinate;
                                     pGraphLibM->moveCharacter(entity.instanceId, {coords.x, Config.HEIGHT_MAP_SCALE * coords.z, coords.y}, entity.currentAction.durationMs / 1000.0f);
                                 }
-                                else if (entity.currentAction.id == ActionType::Respawn)
+                                // If the old animation is respawn and the new animation is something else, we force move the player to the current coordinates
+                                else if (prevEntity->currentAction.id == ActionType::Respawn && entity.currentAction.id != ActionType::Respawn)
                                 {
                                     pGraphLibM->forceCharacterMove(entity.instanceId, {entity.x, Config.HEIGHT_MAP_SCALE * entity.z, entity.y});
-                                }
-                                else
-                                {
-                                    pGraphLibM->playAnimation(entity.instanceId, actionToAnimationConfig(entity.currentAction, {entity.x, entity.y, entity.z}));
                                 }
                             }
                         }
@@ -333,14 +392,18 @@ void Client::handleMouseClick(const Hit& hit)
         ioContextM, [this]() -> boost::asio::awaitable<void>
         {
 			const Hit& hit = this->lastHitM;
+            const int hitX = std::roundf(hit.hitPoint.x);
+            const int hitZ = std::roundf(hit.hitPoint.z);
+
+			std::cout << "Hit at " << hitX << " " << hitZ << std::endl;
 			switch (hit.objectType)
 			{
 				case ObjectType::AREA:
-					std::cout << "Hit tile on " << hit.hitPoint.x << " " << hit.hitPoint.z << std::endl;
-					co_await move(hit.hitPoint.x, hit.hitPoint.z);
+					std::cout << "Area: " << std::endl;
+                    co_await move(hitX, hitZ);
 					break;
 				case ObjectType::CHARACTER:
-					std::cout << "Character" << std::endl;
+					std::cout << "Character: " << hit.id << std::endl;
 					if (hit.button == GLFW_MOUSE_BUTTON_LEFT)
 					{
 						co_await attack(hit.id);
@@ -351,8 +414,16 @@ void Client::handleMouseClick(const Hit& hit)
 					}
 					break;
 				case ObjectType::GAMEOBJECT:
-					co_await interactWithObject(hit.id);
-					std::cout << "Game object" << std::endl;
+                    if (hit.id >= 0)
+                    {
+                        co_await interactWithObject(hit.id);
+                        std::cout << "Game object: " << hit.id << std::endl;
+                    }
+                    else 
+                    {
+                        co_await pickUpItem(hit.id, hitX, hitZ);
+                        std::cout << "Item: " << hit.id << std::endl;
+                    }
 					break;
 				case ObjectType::UNDEFINED:
 					std::cout << "Miss" << std::endl;

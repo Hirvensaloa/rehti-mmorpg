@@ -32,6 +32,15 @@ public:
     static std::vector<std::pair<int, int>> findPath(Coordinates start, Coordinates end);
 
     /**
+     * @brief Finds a path to some locations range. Can be used, for example, if the attack target is not in range, we can find a path to a location that is in range.
+     * @param start Starting coordinates
+     * @param end Ending coordinates
+     * @param range Range in tiles
+     * @returns Vector of coordinates (x,y) that form the path. Empty vector if no path found.
+     */
+    static std::vector<std::pair<int, int>> findPathToRange(Coordinates start, Coordinates end, int range);
+
+    /**
      * @brief Gives the height for the given (x, y) coordinates
      * @param x X-coordinate
      * @param y Y-coordinate
@@ -53,6 +62,15 @@ public:
      * @return Coordinates
      */
     static Coordinates getRandomCoordinates(const SpawnCoordinateBounds& coordinateBounds);
+
+    /**
+     * @brief Gets a random neighbour of the given coordinates.
+     *
+     * @param coordinates
+     * @param coordinateBounds Bounds for the coordinates
+     * @return Coordinates (Returns the given coordinates if no neighbours found/accessible)
+     */
+    static Coordinates getRandomNeighbour(Coordinates coordinates, const SpawnCoordinateBounds& coordinateBounds);
 
 private:
     inline static std::vector<std::vector<uint8_t>> accessMapM = {};

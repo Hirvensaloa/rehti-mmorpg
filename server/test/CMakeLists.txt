@@ -27,6 +27,11 @@ add_executable(
   ../src/world/Utils.cpp
 )
 
+target_include_directories(
+  ${TARGET}
+  PUBLIC
+  ../../rehtiLib/assets/reader/include)
+
 target_link_libraries(
   ${TARGET}
   GTest::gtest_main

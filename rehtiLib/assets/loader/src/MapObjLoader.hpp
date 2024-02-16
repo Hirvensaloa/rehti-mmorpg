@@ -9,8 +9,8 @@ constexpr bool WINDING_ORDER = COUNTER_CLOCKWISE;
 struct Vertex
 {
     float x, y, z;
-
-    Vertex(float x, float y, float z) : x(x), y(y), z(z) {}
+    float u, v;
+    Vertex(float x, float y, float z) : x(x), y(y), z(z), u(x / Config.AREA_WIDTH), v(1.f - z / Config.AREA_HEIGHT) {}
 };
 
 /**
@@ -22,6 +22,7 @@ struct Vertex
 void writeVertex(std::ofstream& objFile, const Vertex& vertex)
 {
     objFile << "v " << vertex.x * Config.TILE_SIDE_SCALE << " " << vertex.y * Config.HEIGHT_MAP_SCALE << " " << vertex.z * Config.TILE_SIDE_SCALE << std::endl;
+    objFile << "vt " << vertex.u << " " << vertex.v << std::endl;
 };
 
 /**
@@ -36,10 +37,10 @@ void writeFace(std::ofstream& objFile, const int corner1, const int corner2, con
 {
     if (WINDING_ORDER == WINDING_ORDER::COUNTER_CLOCKWISE)
     {
-        objFile << "f " << corner1 << " " << corner3 << " " << corner2 << std::endl;
+        objFile << "f " << corner1 << "/" << corner1 << " " << corner3 << "/" << corner3 << " " << corner2 << "/" << corner2 << std::endl;
     }
     else
-        objFile << "f " << corner1 << " " << corner2 << " " << corner3 << std::endl;
+        objFile << "f " << corner1 << "/" << corner1 << " " << corner2 << "/" << corner2 << " " << corner3 << "/" << corner3 << std::endl;
 };
 
 /**
@@ -65,20 +66,24 @@ void generateAreaObjs(const std::vector<std::vector<int>>& heightMap, const std:
             }
 
             int vertexCount = 0;
-            for (int row = i * Config.AREA_WIDTH; row < i * Config.AREA_WIDTH + Config.AREA_WIDTH; row++)
+            for (int row = i * Config.AREA_HEIGHT; row < i * Config.AREA_HEIGHT + Config.AREA_HEIGHT; row++) // for each row (y)
             {
-                for (int col = j * Config.AREA_HEIGHT; col < j * Config.AREA_HEIGHT + Config.AREA_HEIGHT; col++)
+                for (int col = j * Config.AREA_WIDTH; col < j * Config.AREA_WIDTH + Config.AREA_WIDTH; col++) // for each column (x)
                 {
                     // A cell is divided into inner square which is at the height of the cell and surrounding the inner square are 4 trapezoids which are at the middle of the cell's and it's neighbours height.
                     // The trapezoids are further broken down into two corners and a center rectancle. The trapezoids are used to create a "SSSmooth" transition between the cells.
 
                     float innerSquareRadius = Config.TILE_SIDE_UNIT / 4.0;
                     float squareRadius = Config.TILE_SIDE_UNIT / 2.0;
+                    float xPlus = col + innerSquareRadius;
+                    float xMinus = col - innerSquareRadius;
+                    float zPlus = row + innerSquareRadius;
+                    float zMinus = row - innerSquareRadius;
                     // The inner square
-                    writeVertex(objFile, Vertex(col + innerSquareRadius, heightMap[row][col], row - innerSquareRadius)); // Top right
-                    writeVertex(objFile, Vertex(col + innerSquareRadius, heightMap[row][col], row + innerSquareRadius)); // Bottom right
-                    writeVertex(objFile, Vertex(col - innerSquareRadius, heightMap[row][col], row + innerSquareRadius)); // Bottom left
-                    writeVertex(objFile, Vertex(col - innerSquareRadius, heightMap[row][col], row - innerSquareRadius)); // Top left
+                    writeVertex(objFile, Vertex(xPlus, heightMap[row][col], zMinus));  // Top right
+                    writeVertex(objFile, Vertex(xPlus, heightMap[row][col], zPlus));   // Bottom right
+                    writeVertex(objFile, Vertex(xMinus, heightMap[row][col], zPlus));  // Bottom left
+                    writeVertex(objFile, Vertex(xMinus, heightMap[row][col], zMinus)); // Top left
                     int innerTopRight = 1;
                     int innerBottomRight = 2;
                     int innerBottomLeft = 3;
@@ -87,35 +92,39 @@ void generateAreaObjs(const std::vector<std::vector<int>>& heightMap, const std:
                     // Next the trapezoids, two of the vertices are shared with the inner square
 
                     TileHeight tileHeight = calculateTileHeights(heightMap, row, col);
+                    float xPlusO = col + squareRadius;
+                    float xMinusO = col - squareRadius;
+                    float zPlusO = row + squareRadius;
+                    float zMinusO = row - squareRadius;
                     // The bottom trapezoid
-                    writeVertex(objFile, Vertex(col + squareRadius, tileHeight.bottomRight, row + squareRadius)); // Bottom right
-                    writeVertex(objFile, Vertex(col - squareRadius, tileHeight.bottomLeft, row + squareRadius));  // Bottom left
-                    writeVertex(objFile, Vertex(col - innerSquareRadius, tileHeight.bottom, row + squareRadius)); // Bottom center left
-                    writeVertex(objFile, Vertex(col + innerSquareRadius, tileHeight.bottom, row + squareRadius)); // Bottom center right
+                    writeVertex(objFile, Vertex(xPlusO, tileHeight.bottomRight, zPlusO)); // Bottom right
+                    writeVertex(objFile, Vertex(xMinusO, tileHeight.bottomLeft, zPlusO)); // Bottom left
+                    writeVertex(objFile, Vertex(xMinus, tileHeight.bottom, zPlusO));      // Bottom center left
+                    writeVertex(objFile, Vertex(xPlus, tileHeight.bottom, zPlusO));       // Bottom center right
                     int bottomRight = 5;
                     int bottomLeft = 6;
                     int bottomCenterLeft = 7;
                     int bottomCenterRight = 8;
 
                     // The left trapezoid
-                    writeVertex(objFile, Vertex(col - squareRadius, tileHeight.topLeft, row - squareRadius));   // Left top
-                    writeVertex(objFile, Vertex(col - squareRadius, tileHeight.left, row - innerSquareRadius)); // Left center top
-                    writeVertex(objFile, Vertex(col - squareRadius, tileHeight.left, row + innerSquareRadius)); // Left center bottom
+                    writeVertex(objFile, Vertex(xMinusO, tileHeight.topLeft, zMinusO)); // Left top
+                    writeVertex(objFile, Vertex(xMinusO, tileHeight.left, zMinus));     // Left center top
+                    writeVertex(objFile, Vertex(xMinusO, tileHeight.left, zPlus));      // Left center bottom
                     int leftTop = 9;
                     int leftCenterTop = 10;
                     int leftCenterBottom = 11;
 
                     // The top trapezoid
-                    writeVertex(objFile, Vertex(col + squareRadius, tileHeight.topRight, row - squareRadius)); // Top right
-                    writeVertex(objFile, Vertex(col - innerSquareRadius, tileHeight.top, row - squareRadius)); // Top center left
-                    writeVertex(objFile, Vertex(col + innerSquareRadius, tileHeight.top, row - squareRadius)); // Top center right
+                    writeVertex(objFile, Vertex(xPlusO, tileHeight.topRight, zMinusO)); // Top right
+                    writeVertex(objFile, Vertex(xMinus, tileHeight.top, zMinusO));      // Top center left
+                    writeVertex(objFile, Vertex(xPlus, tileHeight.top, zMinusO));       // Top center right
                     int topRight = 12;
                     int topCenterLeft = 13;
                     int topCenterRight = 14;
 
                     // The right trapezoid
-                    writeVertex(objFile, Vertex(col + squareRadius, tileHeight.right, row - innerSquareRadius)); // Right center top
-                    writeVertex(objFile, Vertex(col + squareRadius, tileHeight.right, row + innerSquareRadius)); // Right center bottom
+                    writeVertex(objFile, Vertex(xPlusO, tileHeight.right, zMinus)); // Right center top
+                    writeVertex(objFile, Vertex(xPlusO, tileHeight.right, zPlus));  // Right center bottom
                     int rightCenterTop = 15;
                     int rightCenterBottom = 16;
 

@@ -9,9 +9,14 @@
 
 int main()
 {
-    // Create generated folder if it does not exist
+    // Create generated folder if it does not exist. Else remove and create it again. (This is to ensure generated assets don't bloat)
     if (!std::filesystem::exists(Config.GENERATED_ASSETS_PATH))
     {
+        std::filesystem::create_directory(Config.GENERATED_ASSETS_PATH);
+    }
+    else
+    {
+        std::filesystem::remove_all(Config.GENERATED_ASSETS_PATH);
         std::filesystem::create_directory(Config.GENERATED_ASSETS_PATH);
     }
     // Create generated area obj folder if it does not exist

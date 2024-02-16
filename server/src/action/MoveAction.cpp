@@ -34,20 +34,20 @@ void MoveAction::act()
     if (std::chrono::system_clock::now() > startTimeM + actionTimeM)
     {
         auto next = pathM.front();
-        nextMoveM = Coordinates(next.first, next.second);
-        if (pEntityM->move(nextMoveM.value()))
+        if (pEntityM->move(Coordinates(next.first, next.second)))
         {
             pathM.erase(pathM.begin());
         }
 
-        else
-        {
-            std::cout << "illegal move" << std::endl;
-        }
         startTimeM = std::chrono::system_clock::now();
         if (pEntityM->getLocation() == targetM)
         {
             completedM = true;
+        }
+        else
+        {
+            auto next = pathM.front();
+            nextMoveM = Coordinates(next.first, next.second);
         }
     }
 }

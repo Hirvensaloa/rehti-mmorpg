@@ -17,8 +17,8 @@
 constexpr uint32_t BONES_PER_VERTEX = 4;
 constexpr uint32_t MAX_BONES = 50;
 
-constexpr glm::vec3 GAMEOBJECT_MIN = glm::vec3(-0.5f, -0.5f, -0.5f);
-constexpr glm::vec3 GAMEOBJECT_MAX = glm::vec3(0.5f, 0.5f, 0.5f);
+constexpr glm::vec3 GAMEOBJECT_MIN = glm::vec3(-0.5f, -0.1f, -0.5f);
+constexpr glm::vec3 GAMEOBJECT_MAX = glm::vec3(0.5f, 1.f, 0.5f);
 
 constexpr glm::vec3 CHARACTER_MIN = glm::vec3(-0.5f, 0.0f, -0.5f);
 constexpr glm::vec3 CHARACTER_MAX = glm::vec3(0.5f, 2.0f, 0.5f);
@@ -192,4 +192,13 @@ struct AnimationConfig
     AnimationType animType;
     float duration;
     bool looping;
+
+    bool operator==(const AnimationConfig& other) const
+    {
+        return animationDirection == other.animationDirection && animType == other.animType && duration == other.duration && looping == other.looping;
+    }
+    bool operator!=(const AnimationConfig& other) const
+    {
+        return !(*this == other);
+    }
 };

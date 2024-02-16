@@ -34,6 +34,11 @@
       "id": 6,
       "name": "Defence",
       "description": "Combat skill of defence."
+    },
+    {
+      "id": 7,
+      "name": "Smithing",
+      "description": "Useful for smithing."
     }
   ]
 }

@@ -25,12 +25,12 @@ inline float interpolatedTimeFactor(const double now, const double prevTimeFrame
 
 inline bool equalD(const double a, const double b)
 {
-    return abs(a - b) < EPSILON;
+    return std::abs(a - b) < EPSILON;
 }
 
 inline bool equalF(const float a, const float b)
 {
-    return abs(a - b) < EPSILON_F;
+    return std::abs(a - b) < EPSILON_F;
 }
 
 inline glm::vec3 interpolateLinear(const glm::vec3& start, const glm::vec3& end, float timeFactor)
@@ -72,7 +72,7 @@ inline bool containsSubString(const std::string& str, const std::string& subStr)
 
 #pragma endregion
 
-bool loadOBJFile(const std::string& path, std::vector<aiVector3D>& vertices, std::vector<aiFace>& faces, const float scalingFactor)
+bool loadOBJFile(const std::string& path, std::vector<Vertex>& vertices, std::vector<uint32_t>& faces, const float scalingFactor)
 {
     Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals | aiProcess_FlipWindingOrder);
@@ -86,19 +86,55 @@ bool loadOBJFile(const std::string& path, std::vector<aiVector3D>& vertices, std
     for (unsigned int i = 0; i < scene->mNumMeshes; i++)
     {
         aiMesh* mesh = scene->mMeshes[i];
+        bool hasNormals = mesh->HasNormals();
+        bool hasTexCoords = mesh->HasTextureCoords(0);
+
         for (unsigned int j = 0; j < mesh->mNumVertices; j++)
         {
-            mesh->mVertices[j].x *= scalingFactor;
-            mesh->mVertices[j].y *= scalingFactor;
-            mesh->mVertices[j].z *= scalingFactor;
-            vertices.push_back(mesh->mVertices[j]);
+            Vertex vertex{};
+            vertex.pos = aiVector3DToGlm(mesh->mVertices[j]) * scalingFactor;
+            if (hasNormals)
+                vertex.normal = aiVector3DToGlm(mesh->mNormals[j]);
+            if (hasTexCoords)
+                vertex.texCoord = glm::vec2(mesh->mTextureCoords[0][j].x, mesh->mTextureCoords[0][j].y);
+            vertices.push_back(vertex);
         }
         for (unsigned int j = 0; j < mesh->mNumFaces; j++)
         {
-            faces.push_back(mesh->mFaces[j]);
+            std::vector<uint32_t> faceIndices = aiFaceToFace(mesh->mFaces[j]);
+            faces.insert(faces.end(), faceIndices.begin(), faceIndices.end());
         }
     }
 
+    return true;
+}
+
+bool loadOBJTile(std::vector<Vertex>& vertices, std::vector<uint32_t>& faces)
+{
+    float smallY = 0.01f;
+    glm::vec3 botLeft = glm::vec3(-0.5f, smallY, -0.5f);
+    glm::vec3 botRight = glm::vec3(0.5f, smallY, -0.5f);
+    glm::vec3 topLeft = glm::vec3(-0.5f, smallY, 0.5f);
+    glm::vec3 topRight = glm::vec3(0.5f, smallY, 0.5f);
+    glm::vec3 normal = glm::vec3(0.0f, 1.0f, 0.0f);
+    vertices.push_back(Vertex{botLeft, normal, glm::vec2(0.0f, 1.0f)});
+    vertices.push_back(Vertex{botRight, normal, glm::vec2(1.0f, 1.0f)});
+    vertices.push_back(Vertex{topLeft, normal, glm::vec2(0.0f, 0.0f)});
+    vertices.push_back(Vertex{topRight, normal, glm::vec2(1.0f, 0.0f)});
+    // front face
+    faces.push_back(0);
+    faces.push_back(1);
+    faces.push_back(2);
+    faces.push_back(1);
+    faces.push_back(3);
+    faces.push_back(2);
+    // backface (commented out for now)
+    /*faces.push_back(2);
+    faces.push_back(3);
+    faces.push_back(0);
+    faces.push_back(3);
+    faces.push_back(1);
+    faces.push_back(0); */
     return true;
 }
 
@@ -213,7 +249,6 @@ bool loadGlTFFile(const std::string& path, std::vector<CharacterVertex>& vertice
                 }
                 else
                 {
-                    std::cout << "Vertex " << vertexIndex << " has more than 4 bones" << std::endl;
                     float boneSum = vertices[vertexIndex].boneWeights.x + vertices[vertexIndex].boneWeights.y + vertices[vertexIndex].boneWeights.z + vertices[vertexIndex].boneWeights.w;
 
                     vertices[vertexIndex].boneWeights /= boneSum;

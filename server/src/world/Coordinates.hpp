@@ -40,5 +40,5 @@ struct Coordinates
      * @param other Coordinates
      * @return distance in integers
      */
-    unsigned int distance(const Coordinates& other);
+    unsigned int distance(const Coordinates& other) const;
 };

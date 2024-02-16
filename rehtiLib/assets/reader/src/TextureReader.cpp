@@ -32,7 +32,7 @@ std::map<std::string, ImageData> loadObjectTextures(const GameObjects& gameObjec
         textureFilenames.push_back(object.second.textureFilename);
     }
 
-    stbi_set_flip_vertically_on_load(true);
+    stbi_set_flip_vertically_on_load(false);
     // Read all the textures
     for (const auto& filename : textureFilenames)
     {
@@ -229,7 +229,7 @@ std::vector<std::vector<int>> loadMapTexturePositions()
     return mapTexturePositionMatrix;
 }
 
-ImageData createAreaBlendMap(const std::vector<std::vector<int>>& mapTexturePositionMatrix, int columnOffset, int rowOffset)
+ImageData createAreaBlendMap(const std::vector<std::vector<int>>& mapTexturePositionMatrix, int rowOffset, int columnOffset)
 {
     std::vector<int> textureIds;
     for (int i = rowOffset; i < rowOffset + Config.AREA_WIDTH; i++)
@@ -270,7 +270,7 @@ ImageData createAreaBlendMap(const std::vector<std::vector<int>>& mapTexturePosi
     {
         for (int k = columnOffset; k < columnOffset + Config.AREA_HEIGHT; k++)
         {
-            int blendMapIndex = j * width * 4 + k * 4;
+            int blendMapIndex = (j - rowOffset) * width * 4 + (k - columnOffset) * 4;
 
             data[blendMapIndex] = textureIds.size() > 1 && mapTexturePositionMatrix[j][k] == textureIds[1] ? 255 : 0;
             data[blendMapIndex + 1] = textureIds.size() > 2 && mapTexturePositionMatrix[j][k] == textureIds[2] ? 255 : 0;

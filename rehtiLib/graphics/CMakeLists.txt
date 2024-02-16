@@ -69,6 +69,7 @@ target_sources(rehtiGraphics PRIVATE ${GRAPHICS_SOURCES})
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../utils ${CMAKE_CURRENT_BINARY_DIR}/build/rehtiutils)
 
+find_package(assimp REQUIRED)
 target_link_libraries(rehtiGraphics
 	Vulkan::Vulkan
 	Vulkan::Headers

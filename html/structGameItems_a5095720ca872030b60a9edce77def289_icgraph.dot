@@ -6,5 +6,9 @@ digraph "GameItems::getAllIds"
   rankdir="RL";
   Node1 [label="GameItems::getAllIds",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="Npc::Npc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNpc.html#acc6bbca4c1aac12599be12ffe7289ee4",tooltip=" "];
+  Node2 [label="Npc::addRandomItemToInventory",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNpc.html#a33d9a764e8ce548e9d2ec1f799cea7f5",tooltip=" "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Npc::Npc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNpc.html#acc6bbca4c1aac12599be12ffe7289ee4",tooltip=" "];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Npc::respawn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNpc.html#afe61dddbd28da6f559a5a6c6b760c81d",tooltip="Respawn the NPC."];
 }

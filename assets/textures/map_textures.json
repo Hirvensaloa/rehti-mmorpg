@@ -10,5 +10,29 @@
   {
     "id": 1,
     "filename": "low_res_stone.jpg"
+  },
+  {
+    "id": 2,
+    "filename": "snow.png"
+  },
+  {
+    "id": 3,
+    "filename": "ice.png"
+  },
+  {
+    "id": 4,
+    "filename": "sand.png"
+  },
+  {
+    "id": 5,
+    "filename": "dark_grass.png"
+  },
+  {
+    "id": 6,
+    "filename": "forest_grass.png"
+  },
+  {
+    "id": 7,
+    "filename": "rock.png"
   }
 ]

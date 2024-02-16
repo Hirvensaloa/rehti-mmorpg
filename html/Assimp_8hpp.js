@@ -11,5 +11,6 @@ var Assimp_8hpp =
     [ "fillSkeleton", "Assimp_8hpp.html#af47dad6267e81004b88347e762a705e6", null ],
     [ "loadAnimations", "Assimp_8hpp.html#a46c76f65ed19df8b3fe16d8a6d76ec3e", null ],
     [ "loadGlTFFile", "Assimp_8hpp.html#a815da1a9fca11840a96af6ddd1fafafc", null ],
-    [ "loadOBJFile", "Assimp_8hpp.html#abf683f1b58fcf8b3ff7af1ac336e7716", null ]
+    [ "loadOBJFile", "Assimp_8hpp.html#a33c660921b003beea8569bf1e78e35ff", null ],
+    [ "loadOBJTile", "Assimp_8hpp.html#a647777c148522f88db2c6cbb4a398039", null ]
 ];

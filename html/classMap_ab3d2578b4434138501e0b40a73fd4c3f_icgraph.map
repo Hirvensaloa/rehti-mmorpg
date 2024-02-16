@@ -1,0 +1,5 @@
+<map id="Map::getRandomNeighbour" name="Map::getRandomNeighbour">
+<area shape="rect" id="node1" title="Gets a random neighbour of the given coordinates." alt="" coords="203,31,403,57"/>
+<area shape="rect" id="node2" href="$classNpc.html#a02469aac6500ae06782d0f75148d5b50" title="Updates the NPC." alt="" coords="30,5,130,32"/>
+<area shape="rect" id="node3" href="$classPassiveNpc.html#a09827b4717c77c7cbe16665ac954168d" title="Updates the PassiveNpc." alt="" coords="5,56,155,83"/>
+</map>

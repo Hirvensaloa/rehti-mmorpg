@@ -1,6 +1,8 @@
 <map id="AssetManager::getItems" name="AssetManager::getItems">
-<area shape="rect" id="node1" title="Get the GameItems object." alt="" coords="236,56,417,83"/>
-<area shape="rect" id="node2" href="$classLootObject.html#a4ef8634a19756ec50a158923bab05fc7" title="Interact with the object." alt="" coords="21,5,172,32"/>
-<area shape="rect" id="node3" href="$classResourceObject.html#aaee08d1b37836242c2ede45abbf7df71" title="Interact with the object." alt="" coords="5,56,188,83"/>
-<area shape="rect" id="node4" href="$classNpc.html#acc6bbca4c1aac12599be12ffe7289ee4" title=" " alt="" coords="57,107,137,133"/>
+<area shape="rect" id="node1" title="Get the GameItems object." alt="" coords="451,81,632,108"/>
+<area shape="rect" id="node2" href="$classNpc.html#a33d9a764e8ce548e9d2ec1f799cea7f5" title=" " alt="" coords="164,31,403,57"/>
+<area shape="rect" id="node5" href="$classLootObject.html#a4ef8634a19756ec50a158923bab05fc7" title="Interact with the object." alt="" coords="208,81,359,108"/>
+<area shape="rect" id="node6" href="$classResourceObject.html#aaee08d1b37836242c2ede45abbf7df71" title="Interact with the object." alt="" coords="192,132,375,159"/>
+<area shape="rect" id="node3" href="$classNpc.html#acc6bbca4c1aac12599be12ffe7289ee4" title=" " alt="" coords="21,5,101,32"/>
+<area shape="rect" id="node4" href="$classNpc.html#afe61dddbd28da6f559a5a6c6b760c81d" title="Respawn the NPC." alt="" coords="5,56,116,83"/>
 </map>

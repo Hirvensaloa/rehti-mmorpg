@@ -1,0 +1,10 @@
+digraph "GameWorld::removeItem"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="GameWorld::removeItem",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Remove item from the game world."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Entity::pickUpItem",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html#a65a68f9fbf6a2c3ed501f6e381bb98b9",tooltip="Pick up an item."];
+}

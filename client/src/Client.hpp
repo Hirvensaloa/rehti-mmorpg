@@ -42,6 +42,14 @@ public:
     boost::asio::awaitable<void> interactWithObject(const int& objectId);
 
     /**
+     * @brief Sends a PickUpItemMessage to the server
+     * @param itemId instance id of the item to be picked up
+     * @param x x coordinate of the item
+     * @param y y coordinate of the item
+     */
+    boost::asio::awaitable<void> pickUpItem(const int& itemId, const int& x, const int& y);
+
+    /**
      * @brief Send a UseItemMessage for item with given instance id
      * @param itemInstanceId
      */

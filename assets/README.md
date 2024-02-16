@@ -459,7 +459,7 @@ For each area, there needs to be another drawing that shows where all the object
 | Object id | R x G | 255 x 255 = no object |
 | Rotation  |   B   |  B > 3 = no rotation  |
 
-R and G together indicate the object id, R x G, R x G = 65025, means no object (Basically color white). B indicates the rotation. Values 0-3 are reserved for that. 0 = North, 1 = East, 2 = South, 3 = West. If value > 3, default to 0 (== no rotation). Object tile maps default rotation is north.
+R and G together indicate the object id, R x G, R x G = 65025, means no object (Basically color white). B indicates the counter-clockwise rotation. Values 0-3 are reserved for that. 0 = North, 1 = West, 2 = South, 3 = East. If value > 3, default to 0 (== no rotation). Object tile maps default rotation is north.
 
 The drawings should be 128x128 and use the PNG-format. Name the drawings `<area name in json>-obj.png`, in our case `EG1-obj.png`, `EG2-obj.png`, `CC1-obj.png` and `CC2-obj.png`.
 

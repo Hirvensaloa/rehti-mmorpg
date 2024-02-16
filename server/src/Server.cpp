@@ -9,6 +9,7 @@
 
 #include "Server.hpp"
 #include "action/ObjectInteractAction.hpp"
+#include "action/PickUpAction.hpp"
 #include "utils/AssetManager.hpp"
 #include "world/Utils.hpp"
 
@@ -134,6 +135,12 @@ void Server::handleMessage(const Message& msg)
                 const AttackMessage attackMsg = MessageApi::parseAttack(body);
                 std::shared_ptr<PlayerCharacter> gamer = gameWorldM.getPlayer(connId);
                 std::shared_ptr<Entity> target = gameWorldM.getEntity(attackMsg.targetId);
+                if (target->getInstanceId() == gamer->getInstanceId())
+                {
+                    // Cannot attack self
+                    break;
+                }
+
                 gamer->setAction(std::make_shared<AttackAction>(std::chrono::system_clock::now(), target, gamer));
                 break;
             }
@@ -173,18 +180,7 @@ void Server::handleMessage(const Message& msg)
                 std::cout << connId << "DropItem message received." << std::endl;
                 const DropItemMessage dropItemMsg = MessageApi::parseDropItem(body);
                 std::shared_ptr<PlayerCharacter> gamer = gameWorldM.getPlayer(connId);
-                std::shared_ptr<Item> droppedItem = gamer->getInventory().removeItem(dropItemMsg.itemId);
-                if (droppedItem != nullptr)
-                {
-                    gameWorldM.addItem(gamer->getLocation(), std::move(droppedItem));
-                    for (auto& entry : gameWorldM.getItems())
-                    {
-                        for (auto& item : entry.second)
-                        {
-                            std::cout << "Item at: " << entry.first.x << "," << entry.first.y << ", of name: " << item->getName() << std::endl;
-                        }
-                    }
-                }
+                gamer->dropItem(dropItemMsg.itemId);
             }
             break;
             case MessageId::Talk:
@@ -197,6 +193,14 @@ void Server::handleMessage(const Message& msg)
                 InformativeMessage infoMsg;
                 infoMsg.message = response;
                 boost::asio::co_spawn(ioContextM, msg.getConn()->send(MessageApi::createInformative(infoMsg)), boost::asio::detached);
+                break;
+            }
+            case MessageId::PickUpItem:
+            {
+                std::cout << connId << "PickUpItem message received." << std::endl;
+                const PickUpItemMessage pickUpItemMsg = MessageApi::parsePickUpItem(body);
+                std::shared_ptr<PlayerCharacter> gamer = gameWorldM.getPlayer(connId);
+                gamer->setAction(std::make_shared<PickUpAction>(std::chrono::system_clock::now(), Coordinates(pickUpItemMsg.x, pickUpItemMsg.y), gamer, pickUpItemMsg.itemId));
                 break;
             }
             default:
@@ -283,6 +287,7 @@ void Server::sendGameState()
         entityVector.push_back(entity);
     }
 
+    std::unique_lock<std::mutex> playerLock(gameWorldM.getItemsMutex());
     for (auto& player : gameWorldM.getPlayers())
     {
         GameStateEntity entity;
@@ -318,6 +323,7 @@ void Server::sendGameState()
 
         entityVector.push_back(entity);
     }
+    playerLock.unlock();
     msg.entities = entityVector;
 
     for (auto& object : gameWorldM.getObjects())
@@ -333,13 +339,25 @@ void Server::sendGameState()
         msg.objects.push_back(gameStateObject);
     }
 
+    std::unique_lock<std::mutex> itemLock(gameWorldM.getItemsMutex());
+    for (auto itemEntry : gameWorldM.getItems())
+    {
+        Coordinate key = {itemEntry.first.x, itemEntry.first.y, itemEntry.first.z};
+        msg.items[key] = std::vector<GameItem>();
+        for (auto item : itemEntry.second)
+        {
+            msg.items[key].push_back({item->getId(), item->getInstanceId(), item->getName(), item->getStackSize()});
+        }
+    }
+    itemLock.unlock();
+
     for (auto& conn : connectionsM)
     {
         if (conn->isLoggedIn())
         {
             // Add the current player to the message e.g. the player that is connected to this connection
             std::shared_ptr<PlayerCharacter> player = gameWorldM.getPlayer(conn->getID());
-            msg.currentPlayer.id = AssetManager::getGameCharacters().player.id; // This is not unique, it is used to identify the type of entity. This case the type of entity is player.;
+            msg.currentPlayer.id = AssetManager::getGameCharacters().player.id; // This is not unique, it is used to identify the type of entity. This case the type of entity is player.
             msg.currentPlayer.instanceId = player->getInstanceId();
             msg.currentPlayer.name = player->getName();
             const Coordinates location = player->getLocation();
@@ -350,6 +368,10 @@ void Server::sendGameState()
             if (player->getCurrentAction() != nullptr && !player->getCurrentAction()->isCompleted())
             {
                 msg.currentPlayer.currentAction = player->getCurrentAction()->getActionInfo();
+            }
+            else
+            {
+                msg.currentPlayer.currentAction = {ActionType::None};
             }
 
             const auto skills = player->getSkillSet().getSkills();

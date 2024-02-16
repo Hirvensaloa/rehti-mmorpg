@@ -1,0 +1,7 @@
+<map id="Entity::dropItem" name="Entity::dropItem">
+<area shape="rect" id="node1" title="Drop an item." alt="" coords="5,81,132,108"/>
+<area shape="rect" id="node2" href="$classGameWorld.html#a75842f451773ce94e3a08473d785eeae" title="Add item to the game world." alt="" coords="185,5,345,32"/>
+<area shape="rect" id="node3" href="$classEntity.html#a1f1ef1b13908ffef9f2c4f2f455fdb71" title="Get the Inventory object of this entity." alt="" coords="190,56,341,83"/>
+<area shape="rect" id="node4" href="$classEntity.html#a5564e4c637a1e2826e2f4c04aefef265" title="Get the current location of this entity." alt="" coords="194,107,337,133"/>
+<area shape="rect" id="node5" href="$classInventory.html#a3c71646f0161c3e0b96a73cbf804c8f6" title="Removes item from the inventory." alt="" coords="180,157,351,184"/>
+</map>

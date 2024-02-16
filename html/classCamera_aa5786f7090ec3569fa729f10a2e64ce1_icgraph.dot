@@ -50,7 +50,7 @@ digraph "Camera::getLocation"
   Node17 -> Node22 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node22 [label="RehtiGraphics::forcePlayerMove",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#a6e2e9da4d7d742bda2d1232e27c8df8e",tooltip="Forces player to move to the location given, cancelling any remaining movement callbacks and animatio..."];
   Node17 -> Node23 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node23 [label="RehtiGraphics::movePlayer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5",tooltip="Moves the player to the given location in the given time. Also automatically rotates the player to fa..."];
+  Node23 [label="RehtiGraphics::movePlayer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5",tooltip="Moves the player smoothly (without animation) to the given location in the given time."];
   Node23 -> Node19 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

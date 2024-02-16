@@ -10,5 +10,7 @@ digraph "Entity::getEquipment"
   Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="PlayerCharacter::attack",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPlayerCharacter.html#a48c9398c4d91b8adb78a7fe2a8ad9ddf",tooltip="Performs player's attack on target entity. Calculates hit chance and damage, and on succesful hit app..."];
   Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="EquippableItem::use",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEquippableItem.html#ae31b6510e30e1bf80125e9821f40f7e3",tooltip="Equips the item."];
+  Node4 [label="PlayerCharacter::respawn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPlayerCharacter.html#a5ab0ca121121136eb108cb2d5113aaab",tooltip="Function that drops player's items and sets an active RespawnAction. Called when player dies."];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="EquippableItem::use",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEquippableItem.html#ae31b6510e30e1bf80125e9821f40f7e3",tooltip="Equips the item."];
 }

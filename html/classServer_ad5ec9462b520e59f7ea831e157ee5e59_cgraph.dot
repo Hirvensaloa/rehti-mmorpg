@@ -80,12 +80,16 @@ digraph "Server::Server"
   Node35 [label="Server::sendGameState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classServer.html#a2252e5384a7a5e755c200c104d745fcb",tooltip="Sends the current gamestate to connected clients."];
   Node35 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node35 -> Node36 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node36 [label="GameWorld::getNpcs",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameWorld.html#a3b6d4cac8cda722200ee3e72754ce8f1",tooltip="Get all npcs."];
+  Node36 [label="GameWorld::getItems",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameWorld.html#ae1ecdd047b917c8496ee5af6d8bd1d94",tooltip="Get all items."];
   Node35 -> Node37 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node37 [label="GameWorld::getObjects",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameWorld.html#ac53061b8a814e6228ac433cb91a1f511",tooltip="Get all objects."];
-  Node35 -> Node31 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node37 [label="GameWorld::getItemsMutex",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameWorld.html#a82ce4e57c3f041240c2c4a3e32eb4117",tooltip=" "];
   Node35 -> Node38 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node38 [label="GameWorld::getPlayers",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameWorld.html#acd967a70218090ebcb533b851375e5e1",tooltip=" "];
-  Node30 -> Node39 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node39 [label="GameWorld::updateGameWorld",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameWorld.html#af562a0de20546a4b69c309fa6a742d4a",tooltip="Updates the game world. Updates all the npcs and players."];
+  Node38 [label="GameWorld::getNpcs",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameWorld.html#a3b6d4cac8cda722200ee3e72754ce8f1",tooltip="Get all npcs."];
+  Node35 -> Node39 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node39 [label="GameWorld::getObjects",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameWorld.html#ac53061b8a814e6228ac433cb91a1f511",tooltip="Get all objects."];
+  Node35 -> Node31 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node35 -> Node40 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node40 [label="GameWorld::getPlayers",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameWorld.html#acd967a70218090ebcb533b851375e5e1",tooltip=" "];
+  Node30 -> Node41 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node41 [label="GameWorld::updateGameWorld",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameWorld.html#af562a0de20546a4b69c309fa6a742d4a",tooltip="Updates the game world. Updates all the npcs and players."];
 }

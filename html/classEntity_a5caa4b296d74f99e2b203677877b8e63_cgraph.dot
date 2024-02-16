@@ -6,5 +6,5 @@ digraph "Entity::move"
   rankdir="LR";
   Node1 [label="Entity::move",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Move to a neighboring tile."];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="Coordinates::distance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structCoordinates.html#afd7a34a1bae5f10f5abbde76839a891c",tooltip="Calculate the euclidean distance between two Coordinates."];
+  Node2 [label="Coordinates::distance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structCoordinates.html#aa7abe97b7be5415fa704e5af1b58677c",tooltip="Calculate the euclidean distance between two Coordinates."];
 }

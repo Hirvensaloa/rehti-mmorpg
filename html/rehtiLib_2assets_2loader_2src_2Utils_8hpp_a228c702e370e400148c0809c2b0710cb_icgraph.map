@@ -1,4 +1,4 @@
 <map id="rotateMatrix" name="rotateMatrix">
-<area shape="rect" id="node1" title="Rotates the matrix 90 degrees clockwise. Rotation is calculated by rotation&#45;param * 90 degrees." alt="" coords="223,5,325,32"/>
+<area shape="rect" id="node1" title="Rotates the matrix 90 degrees counter&#45;clockwise. Rotation is calculated by rotation&#45;param * 90 degree..." alt="" coords="223,5,325,32"/>
 <area shape="rect" id="node2" href="$MapLoader_8hpp.html#a92b85c2d8b6ae5061af00c879b873c19" title="Generate the object block map. The map defines how the objects block the tiles around itself." alt="" coords="5,5,175,32"/>
 </map>

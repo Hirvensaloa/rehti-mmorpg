@@ -1,13 +1,17 @@
 <map id="Inventory::addItem" name="Inventory::addItem">
-<area shape="rect" id="node1" title="Adds item to the inventory." alt="" coords="999,132,1144,159"/>
-<area shape="rect" id="node2" href="$classEquipment.html#abcb4a83de923ee879f7dd8d770844d50" title="Equip an EquippableItem to the proper slot." alt="" coords="791,56,927,83"/>
-<area shape="rect" id="node3" href="$classServer.html#ae66426d3906c2a9e5b217c65c4ce5db3" title="Loads a player&#39;s data from the database and adds the player to the game." alt="" coords="572,5,713,32"/>
-<area shape="rect" id="node8" href="$classLootObject.html#a4ef8634a19756ec50a158923bab05fc7" title="Interact with the object." alt="" coords="784,107,935,133"/>
-<area shape="rect" id="node9" href="$classResourceObject.html#aaee08d1b37836242c2ede45abbf7df71" title="Interact with the object." alt="" coords="768,157,951,184"/>
-<area shape="rect" id="node10" href="$classNpc.html#acc6bbca4c1aac12599be12ffe7289ee4" title=" " alt="" coords="819,208,899,235"/>
-<area shape="rect" id="node11" href="$classEquipment.html#a387a4ffde7aa0d0cf27612da45182cfe" title="Unequip item from slot." alt="" coords="783,259,935,285"/>
-<area shape="rect" id="node7" href="$classEquippableItem.html#ae31b6510e30e1bf80125e9821f40f7e3" title="Equips the item." alt="" coords="565,56,720,83"/>
-<area shape="rect" id="node4" href="$classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413" title="Function to parse and act upon messages received from clients." alt="" coords="343,5,517,32"/>
-<area shape="rect" id="node5" href="$classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c" title="Server&#39;s main loop for processing messages." alt="" coords="108,5,295,32"/>
-<area shape="rect" id="node6" href="$server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" id="node1" title="Adds item to the inventory." alt="" coords="1089,208,1235,235"/>
+<area shape="rect" id="node2" href="$classNpc.html#a33d9a764e8ce548e9d2ec1f799cea7f5" title=" " alt="" coords="803,56,1041,83"/>
+<area shape="rect" id="node5" href="$classEquipment.html#abcb4a83de923ee879f7dd8d770844d50" title="Equip an EquippableItem to the proper slot." alt="" coords="854,157,990,184"/>
+<area shape="rect" id="node6" href="$classServer.html#ae66426d3906c2a9e5b217c65c4ce5db3" title="Loads a player&#39;s data from the database and adds the player to the game." alt="" coords="589,107,731,133"/>
+<area shape="rect" id="node11" href="$classLootObject.html#a4ef8634a19756ec50a158923bab05fc7" title="Interact with the object." alt="" coords="847,208,997,235"/>
+<area shape="rect" id="node12" href="$classResourceObject.html#aaee08d1b37836242c2ede45abbf7df71" title="Interact with the object." alt="" coords="831,259,1013,285"/>
+<area shape="rect" id="node13" href="$classEntity.html#a65a68f9fbf6a2c3ed501f6e381bb98b9" title="Pick up an item." alt="" coords="851,309,993,336"/>
+<area shape="rect" id="node14" href="$classEquipment.html#a387a4ffde7aa0d0cf27612da45182cfe" title="Unequip item from slot." alt="" coords="846,360,998,387"/>
+<area shape="rect" id="node3" href="$classNpc.html#acc6bbca4c1aac12599be12ffe7289ee4" title=" " alt="" coords="620,5,700,32"/>
+<area shape="rect" id="node4" href="$classNpc.html#afe61dddbd28da6f559a5a6c6b760c81d" title="Respawn the NPC." alt="" coords="605,56,715,83"/>
+<area shape="rect" id="node10" href="$classEquippableItem.html#ae31b6510e30e1bf80125e9821f40f7e3" title="Equips the item." alt="" coords="583,157,737,184"/>
+<area shape="rect" id="node7" href="$classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413" title="Function to parse and act upon messages received from clients." alt="" coords="343,107,517,133"/>
+<area shape="rect" id="node8" href="$classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c" title="Server&#39;s main loop for processing messages." alt="" coords="108,107,295,133"/>
+<area shape="rect" id="node9" href="$server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,107,60,133"/>
+<area shape="rect" id="node15" href="$classPlayerCharacter.html#a5ab0ca121121136eb108cb2d5113aaab" title="Function that drops player&#39;s items and sets an active RespawnAction. Called when player dies." alt="" coords="565,360,755,387"/>
 </map>

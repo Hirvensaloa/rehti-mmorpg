@@ -3,7 +3,9 @@ var hierarchy =
     [ "AABB", "structAABB.html", null ],
     [ "Action", "classAction.html", [
       [ "AttackAction", "classAttackAction.html", null ],
-      [ "MoveAction", "classMoveAction.html", null ],
+      [ "MoveAction", "classMoveAction.html", [
+        [ "PickUpAction", "classPickUpAction.html", null ]
+      ] ],
       [ "ObjectInteractAction", "classObjectInteractAction.html", null ],
       [ "RespawnAction", "classRespawnAction.html", null ]
     ] ],

@@ -101,14 +101,15 @@ Collaboration diagram for GameWorld:</div>
 <div class="dyncontent">
 <div class="center"><img src="classGameWorld__coll__graph.png" border="0" usemap="#aGameWorld_coll__map" alt="Collaboration graph"/></div>
 <map name="aGameWorld_coll__map" id="aGameWorld_coll__map">
-<area shape="rect" title="GameWorld class. It contains all the player, npc, object and item instances." alt="" coords="418,359,586,656"/>
-<area shape="rect" title=" " alt="" coords="5,175,177,281"/>
-<area shape="rect" href="classMap.html" title="Static class representing the map of the game world. Map contains information about which tiles are a..." alt="" coords="202,160,402,296"/>
+<area shape="rect" title="GameWorld class. It contains all the player, npc, object and item instances." alt="" coords="441,403,609,744"/>
+<area shape="rect" title=" " alt="" coords="5,189,177,296"/>
+<area shape="rect" href="classMap.html" title="Static class representing the map of the game world. Map contains information about which tiles are a..." alt="" coords="202,160,402,325"/>
 <area shape="rect" title=" " alt="" coords="143,5,290,97"/>
 <area shape="rect" title=" " alt="" coords="314,5,461,97"/>
-<area shape="rect" title=" " alt="" coords="427,182,577,274"/>
-<area shape="rect" title=" " alt="" coords="601,182,797,274"/>
-<area shape="rect" title=" " alt="" coords="822,182,1009,274"/>
+<area shape="rect" title=" " alt="" coords="426,204,490,281"/>
+<area shape="rect" title=" " alt="" coords="517,197,668,289"/>
+<area shape="rect" title=" " alt="" coords="692,197,888,289"/>
+<area shape="rect" title=" " alt="" coords="913,197,1099,289"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -145,29 +146,40 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac53061b8a814e6228ac433cb91a1f511"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::shared_ptr&lt; <a class="el" href="classObject.html">Object</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#ac53061b8a814e6228ac433cb91a1f511">getObjects</a> ()</td></tr>
 <tr class="memdesc:ac53061b8a814e6228ac433cb91a1f511"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all objects.  <a href="classGameWorld.html#ac53061b8a814e6228ac433cb91a1f511">More...</a><br /></td></tr>
 <tr class="separator:ac53061b8a814e6228ac433cb91a1f511"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c0d8959fcfb176402e4390dcc6628cb"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="structCoordinates.html">Coordinates</a>, std::vector&lt; std::shared_ptr&lt; <a class="el" href="classItem.html">Item</a> &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#a8c0d8959fcfb176402e4390dcc6628cb">getItems</a> ()</td></tr>
-<tr class="memdesc:a8c0d8959fcfb176402e4390dcc6628cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all items.  <a href="classGameWorld.html#a8c0d8959fcfb176402e4390dcc6628cb">More...</a><br /></td></tr>
-<tr class="separator:a8c0d8959fcfb176402e4390dcc6628cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1ecdd047b917c8496ee5af6d8bd1d94"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="structCoordinates.html">Coordinates</a>, std::vector&lt; std::shared_ptr&lt; <a class="el" href="classItem.html">Item</a> &gt; &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#ae1ecdd047b917c8496ee5af6d8bd1d94">getItems</a> ()</td></tr>
+<tr class="memdesc:ae1ecdd047b917c8496ee5af6d8bd1d94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all items.  <a href="classGameWorld.html#ae1ecdd047b917c8496ee5af6d8bd1d94">More...</a><br /></td></tr>
+<tr class="separator:ae1ecdd047b917c8496ee5af6d8bd1d94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75842f451773ce94e3a08473d785eeae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#a75842f451773ce94e3a08473d785eeae">addItem</a> (<a class="el" href="structCoordinates.html">Coordinates</a> location, std::shared_ptr&lt; <a class="el" href="classItem.html">Item</a> &gt;)</td></tr>
 <tr class="memdesc:a75842f451773ce94e3a08473d785eeae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add item to the game world.  <a href="classGameWorld.html#a75842f451773ce94e3a08473d785eeae">More...</a><br /></td></tr>
 <tr class="separator:a75842f451773ce94e3a08473d785eeae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef778666c55b652650a3e3167c1495ea"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classItem.html">Item</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#aef778666c55b652650a3e3167c1495ea">removeItem</a> (<a class="el" href="structCoordinates.html">Coordinates</a> location, int itemId)</td></tr>
+<tr class="memdesc:aef778666c55b652650a3e3167c1495ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove item from the game world.  <a href="classGameWorld.html#aef778666c55b652650a3e3167c1495ea">More...</a><br /></td></tr>
+<tr class="separator:aef778666c55b652650a3e3167c1495ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af562a0de20546a4b69c309fa6a742d4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#af562a0de20546a4b69c309fa6a742d4a">updateGameWorld</a> ()</td></tr>
 <tr class="memdesc:af562a0de20546a4b69c309fa6a742d4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the game world. Updates all the npcs and players.  <a href="classGameWorld.html#af562a0de20546a4b69c309fa6a742d4a">More...</a><br /></td></tr>
 <tr class="separator:af562a0de20546a4b69c309fa6a742d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab78e304a7c2babd4addacd751b56c98c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#ab78e304a7c2babd4addacd751b56c98c">initWorld</a> ()</td></tr>
 <tr class="memdesc:ab78e304a7c2babd4addacd751b56c98c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the game world. Loads assets and map. Adds npcs and objects to the world.  <a href="classGameWorld.html#ab78e304a7c2babd4addacd751b56c98c">More...</a><br /></td></tr>
 <tr class="separator:ab78e304a7c2babd4addacd751b56c98c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e38f9465d4a0665729414e265561106"><td class="memItemLeft" align="right" valign="top">std::mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#a3e38f9465d4a0665729414e265561106">getPlayersMutex</a> ()</td></tr>
+<tr class="separator:a3e38f9465d4a0665729414e265561106"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82ce4e57c3f041240c2c4a3e32eb4117"><td class="memItemLeft" align="right" valign="top">std::mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#a82ce4e57c3f041240c2c4a3e32eb4117">getItemsMutex</a> ()</td></tr>
+<tr class="separator:a82ce4e57c3f041240c2c4a3e32eb4117"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a2917a43caa53dde07775081c41d2a02f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classPlayerCharacter.html">PlayerCharacter</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#a2917a43caa53dde07775081c41d2a02f">playersM</a></td></tr>
 <tr class="separator:a2917a43caa53dde07775081c41d2a02f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af957dbb0d8c7d20b9f832c216297d6b4"><td class="memItemLeft" align="right" valign="top">std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#af957dbb0d8c7d20b9f832c216297d6b4">playersMutexM</a></td></tr>
+<tr class="separator:af957dbb0d8c7d20b9f832c216297d6b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff324ee297243880e2acaf2dba5e2bc3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classNpc.html">Npc</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#aff324ee297243880e2acaf2dba5e2bc3">npcsM</a></td></tr>
 <tr class="separator:aff324ee297243880e2acaf2dba5e2bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9775ba9d5c4f59af0a035fe9fb035840"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::shared_ptr&lt; <a class="el" href="classObject.html">Object</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#a9775ba9d5c4f59af0a035fe9fb035840">objectsM</a></td></tr>
 <tr class="separator:a9775ba9d5c4f59af0a035fe9fb035840"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7cd00b015d9e894fea2fba0154a1997"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="structCoordinates.html">Coordinates</a>, std::vector&lt; std::shared_ptr&lt; <a class="el" href="classItem.html">Item</a> &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#ab7cd00b015d9e894fea2fba0154a1997">itemsM</a></td></tr>
 <tr class="separator:ab7cd00b015d9e894fea2fba0154a1997"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f76356dc7344fc9a8ff1fdfb1ca0c4d"><td class="memItemLeft" align="right" valign="top">std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#a3f76356dc7344fc9a8ff1fdfb1ca0c4d">itemsMutexM</a></td></tr>
+<tr class="separator:a3f76356dc7344fc9a8ff1fdfb1ca0c4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4e5ff3cc4d142962560ea339e97f56d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMap.html">Map</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameWorld.html#ad4e5ff3cc4d142962560ea339e97f56d">mapM</a></td></tr>
 <tr class="separator:ad4e5ff3cc4d142962560ea339e97f56d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -256,10 +268,10 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classGameWorld_a75842f451773ce94e3a08473d785eeae_icgraph.png" border="0" usemap="#aclassGameWorld_a75842f451773ce94e3a08473d785eeae_icgraph" alt=""/></div>
 <map name="aclassGameWorld_a75842f451773ce94e3a08473d785eeae_icgraph" id="aclassGameWorld_a75842f451773ce94e3a08473d785eeae_icgraph">
-<area shape="rect" title="Add item to the game world." alt="" coords="565,5,725,32"/>
-<area shape="rect" href="classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413" title="Function to parse and act upon messages received from clients." alt="" coords="343,5,517,32"/>
-<area shape="rect" href="classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c" title="Server&#39;s main loop for processing messages." alt="" coords="108,5,295,32"/>
-<area shape="rect" href="server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" title="Add item to the game world." alt="" coords="417,31,577,57"/>
+<area shape="rect" href="classEntity.html#aa9a8dc7cd62a7f088230051d677750c1" title="Drop an item." alt="" coords="243,31,369,57"/>
+<area shape="rect" href="classNpc.html#afe61dddbd28da6f559a5a6c6b760c81d" title="Respawn the NPC." alt="" coords="45,5,155,32"/>
+<area shape="rect" href="classPlayerCharacter.html#a5ab0ca121121136eb108cb2d5113aaab" title="Function that drops player&#39;s items and sets an active RespawnAction. Called when player dies." alt="" coords="5,56,195,83"/>
 </map>
 </div>
 
@@ -406,14 +418,14 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a8c0d8959fcfb176402e4390dcc6628cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c0d8959fcfb176402e4390dcc6628cb">&#9670;&nbsp;</a></span>getItems()</h2>
+<a id="ae1ecdd047b917c8496ee5af6d8bd1d94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1ecdd047b917c8496ee5af6d8bd1d94">&#9670;&nbsp;</a></span>getItems()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt; <a class="el" href="structCoordinates.html">Coordinates</a>, std::vector&lt; std::shared_ptr&lt; <a class="el" href="classItem.html">Item</a> &gt; &gt; &gt; GameWorld::getItems </td>
+          <td class="memname">std::map&lt; <a class="el" href="structCoordinates.html">Coordinates</a>, std::vector&lt; std::shared_ptr&lt; <a class="el" href="classItem.html">Item</a> &gt; &gt; &gt; &amp; GameWorld::getItems </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -426,12 +438,42 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classGameWorld_a8c0d8959fcfb176402e4390dcc6628cb_icgraph.png" border="0" usemap="#aclassGameWorld_a8c0d8959fcfb176402e4390dcc6628cb_icgraph" alt=""/></div>
-<map name="aclassGameWorld_a8c0d8959fcfb176402e4390dcc6628cb_icgraph" id="aclassGameWorld_a8c0d8959fcfb176402e4390dcc6628cb_icgraph">
-<area shape="rect" title="Get all items." alt="" coords="565,5,729,32"/>
-<area shape="rect" href="classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413" title="Function to parse and act upon messages received from clients." alt="" coords="343,5,517,32"/>
-<area shape="rect" href="classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c" title="Server&#39;s main loop for processing messages." alt="" coords="108,5,295,32"/>
-<area shape="rect" href="server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
+<div class="center"><img src="classGameWorld_ae1ecdd047b917c8496ee5af6d8bd1d94_icgraph.png" border="0" usemap="#aclassGameWorld_ae1ecdd047b917c8496ee5af6d8bd1d94_icgraph" alt=""/></div>
+<map name="aclassGameWorld_ae1ecdd047b917c8496ee5af6d8bd1d94_icgraph" id="aclassGameWorld_ae1ecdd047b917c8496ee5af6d8bd1d94_icgraph">
+<area shape="rect" title="Get all items." alt="" coords="692,5,856,32"/>
+<area shape="rect" href="classServer.html#a2252e5384a7a5e755c200c104d745fcb" title="Sends the current gamestate to connected clients." alt="" coords="468,5,644,32"/>
+<area shape="rect" href="classServer.html#a2dd422dc25689dc106a6d5fe1d3b3298" title="Function that updates the gamestate on each server tick, called by ticker()" alt="" coords="324,5,420,32"/>
+<area shape="rect" href="classServer.html#a68a715891c8ac1659bf27c3796c12052" title="Timer function that is used to start server ticks, runs on a separate thread." alt="" coords="168,5,276,32"/>
+<area shape="rect" href="classServer.html#ad5ec9462b520e59f7ea831e157ee5e59" title=" " alt="" coords="5,5,120,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a82ce4e57c3f041240c2c4a3e32eb4117"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82ce4e57c3f041240c2c4a3e32eb4117">&#9670;&nbsp;</a></span>getItemsMutex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex &amp; GameWorld::getItemsMutex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classGameWorld_a82ce4e57c3f041240c2c4a3e32eb4117_icgraph.png" border="0" usemap="#aclassGameWorld_a82ce4e57c3f041240c2c4a3e32eb4117_icgraph" alt=""/></div>
+<map name="aclassGameWorld_a82ce4e57c3f041240c2c4a3e32eb4117_icgraph" id="aclassGameWorld_a82ce4e57c3f041240c2c4a3e32eb4117_icgraph">
+<area shape="rect" title=" " alt="" coords="692,5,897,32"/>
+<area shape="rect" href="classServer.html#a2252e5384a7a5e755c200c104d745fcb" title="Sends the current gamestate to connected clients." alt="" coords="468,5,644,32"/>
+<area shape="rect" href="classServer.html#a2dd422dc25689dc106a6d5fe1d3b3298" title="Function that updates the gamestate on each server tick, called by ticker()" alt="" coords="324,5,420,32"/>
+<area shape="rect" href="classServer.html#a68a715891c8ac1659bf27c3796c12052" title="Timer function that is used to start server ticks, runs on a separate thread." alt="" coords="168,5,276,32"/>
+<area shape="rect" href="classServer.html#ad5ec9462b520e59f7ea831e157ee5e59" title=" " alt="" coords="5,5,120,32"/>
 </map>
 </div>
 
@@ -639,6 +681,23 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a3e38f9465d4a0665729414e265561106"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e38f9465d4a0665729414e265561106">&#9670;&nbsp;</a></span>getPlayersMutex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex &amp; GameWorld::getPlayersMutex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ab78e304a7c2babd4addacd751b56c98c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab78e304a7c2babd4addacd751b56c98c">&#9670;&nbsp;</a></span>initWorld()</h2>
 
@@ -695,6 +754,52 @@ Here is the caller graph for this function:</div>
 <area shape="rect" title="Initializes the game world. Loads assets and map. Adds npcs and objects to the world." alt="" coords="383,5,547,32"/>
 <area shape="rect" href="classServer.html#a50304dfbea44f60fb1da1f4754d582dd" title="Initializes the gamestate and gameworld." alt="" coords="168,5,335,32"/>
 <area shape="rect" href="classServer.html#ad5ec9462b520e59f7ea831e157ee5e59" title=" " alt="" coords="5,5,120,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aef778666c55b652650a3e3167c1495ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef778666c55b652650a3e3167c1495ea">&#9670;&nbsp;</a></span>removeItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classItem.html">Item</a> &gt; GameWorld::removeItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structCoordinates.html">Coordinates</a>&#160;</td>
+          <td class="paramname"><em>location</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>itemId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove item from the game world. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">itemId</td><td>Instance id of item to be removed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::shared_ptr&lt;Item&gt; </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classGameWorld_aef778666c55b652650a3e3167c1495ea_icgraph.png" border="0" usemap="#aclassGameWorld_aef778666c55b652650a3e3167c1495ea_icgraph" alt=""/></div>
+<map name="aclassGameWorld_aef778666c55b652650a3e3167c1495ea_icgraph" id="aclassGameWorld_aef778666c55b652650a3e3167c1495ea_icgraph">
+<area shape="rect" title="Remove item from the game world." alt="" coords="196,5,383,32"/>
+<area shape="rect" href="classEntity.html#a65a68f9fbf6a2c3ed501f6e381bb98b9" title="Pick up an item." alt="" coords="5,5,148,32"/>
 </map>
 </div>
 
@@ -791,6 +896,28 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a3f76356dc7344fc9a8ff1fdfb1ca0c4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f76356dc7344fc9a8ff1fdfb1ca0c4d">&#9670;&nbsp;</a></span>itemsMutexM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex GameWorld::itemsMutexM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad4e5ff3cc4d142962560ea339e97f56d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad4e5ff3cc4d142962560ea339e97f56d">&#9670;&nbsp;</a></span>mapM</h2>
 
@@ -868,6 +995,28 @@ Here is the caller graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classPlayerCharacter.html">PlayerCharacter</a>&gt; &gt; GameWorld::playersM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af957dbb0d8c7d20b9f832c216297d6b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af957dbb0d8c7d20b9f832c216297d6b4">&#9670;&nbsp;</a></span>playersMutexM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex GameWorld::playersMutexM</td>
         </tr>
       </table>
   </td>

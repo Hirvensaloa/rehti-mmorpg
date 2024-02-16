@@ -1,7 +1,7 @@
 <map id="TimerCallbackSystem::finishCallback" name="TimerCallbackSystem::finishCallback">
 <area shape="rect" id="node1" title="Forces the callback to be completed with the time left in the timer and removes it from the system." alt="" coords="1019,74,1184,115"/>
-<area shape="rect" id="node2" href="$classRehtiGraphics.html#ac24939dc0395b9a5c70eb35d3fd3947f" title="Moves character to the given location in the given time. Automatically sets the running animation and..." alt="" coords="485,5,707,32"/>
-<area shape="rect" id="node6" href="$classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5" title="Moves the player to the given location in the given time. Also automatically rotates the player to fa..." alt="" coords="497,56,695,83"/>
+<area shape="rect" id="node2" href="$classRehtiGraphics.html#ac24939dc0395b9a5c70eb35d3fd3947f" title="Moves character smoothly (without animation) to the given location in the given time." alt="" coords="485,5,707,32"/>
+<area shape="rect" id="node6" href="$classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5" title="Moves the player smoothly (without animation) to the given location in the given time." alt="" coords="497,56,695,83"/>
 <area shape="rect" id="node7" href="$classRehtiGraphics.html#a8619a3e0907702692d70355cc8a8eea6" title="Plays an animation for the given character." alt="" coords="755,107,971,133"/>
 <area shape="rect" id="node9" href="$classRehtiGraphics.html#a03df014e2398656e51798d562c30a934" title="Rotates a game object by given radian angle in the given time frame." alt="" coords="763,158,962,199"/>
 <area shape="rect" id="node3" href="$classClient.html#afebeedfe876105645a3937b4ee2058df" title="Processes messages from the server." alt="" coords="255,81,437,108"/>

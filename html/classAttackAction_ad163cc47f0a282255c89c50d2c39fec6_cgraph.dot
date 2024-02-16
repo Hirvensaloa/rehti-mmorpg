@@ -8,11 +8,13 @@ digraph "AttackAction::act"
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="AttackAction::findPathTo\lTarget",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAttackAction.html#ac867c6e8d4ce94d908fad8c80a13eb5a",tooltip="Finds a path to the target."];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="Map::findPath",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMap.html#a693fa7c9f08dfb26f74afce62d795b59",tooltip="Finds a path from start to end."];
+  Node3 [label="Map::findPathToRange",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMap.html#a48f0a9b97e0a95978934a0a99f63ee28",tooltip="Finds a path to some locations range. Can be used, for example, if the attack target is not in range,..."];
   Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="astar",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$server_2src_2world_2Utils_8cpp.html#ac2a70af5436b8b68792d3d467a42cc98",tooltip="A-star algorithm made to work with the access map format. Allows diagonal movement and has a heuristi..."];
+  Node4 [label="Map::findPath",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMap.html#a693fa7c9f08dfb26f74afce62d795b59",tooltip="Finds a path from start to end."];
   Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="euclideanDistance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$server_2src_2world_2Utils_8cpp.html#a301851ebbe7e47130cde965d54a9b220",tooltip="Calculate the euclidean distance between two points."];
-  Node4 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="isValidCell",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$server_2src_2world_2Utils_8cpp.html#a1e58627f4f02de892dd1d1931b08243f",tooltip="Check if cell is valid and accessible from given direction."];
+  Node5 [label="astar",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$server_2src_2world_2Utils_8cpp.html#ac2a70af5436b8b68792d3d467a42cc98",tooltip="A-star algorithm made to work with the access map format. Allows diagonal movement and has a heuristi..."];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="euclideanDistance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$server_2src_2world_2Utils_8cpp.html#a301851ebbe7e47130cde965d54a9b220",tooltip="Calculate the euclidean distance between two points."];
+  Node5 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="isValidCell",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$server_2src_2world_2Utils_8cpp.html#a1e58627f4f02de892dd1d1931b08243f",tooltip="Check if cell is valid and accessible from given direction."];
 }

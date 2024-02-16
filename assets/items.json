@@ -1,16 +1,6 @@
 {
   "items": [
     {
-      "id": 0,
-      "name": "Oak wood",
-      "description": "A piece of oak wood, yum yum!",
-      "type": "General",
-      "isStackable": false,
-      "iconFilename": "oak_logs.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
-    },
-    {
       "id": 1,
       "name": "Iron Sword",
       "description": "A sturdy iron sword for close combat.",
@@ -26,8 +16,8 @@
       },
       "isStackable": false,
       "iconFilename": "iron_sword.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 2,
@@ -41,8 +31,8 @@
       },
       "isStackable": false,
       "iconFilename": "wooden_shield.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 3,
@@ -55,8 +45,8 @@
       },
       "isStackable": false,
       "iconFilename": "steel_full_helm.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 4,
@@ -68,9 +58,9 @@
         "armor": 10
       },
       "isStackable": false,
-      "iconFilename": "no-icon.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "iconFilename": "leather_body.png",
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 5,
@@ -83,8 +73,8 @@
       },
       "isStackable": false,
       "iconFilename": "iron_platelegs.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 6,
@@ -97,8 +87,8 @@
       },
       "isStackable": false,
       "iconFilename": "steel_boots.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 7,
@@ -110,9 +100,9 @@
         "armor": 10
       },
       "isStackable": false,
-      "iconFilename": "no-icon.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "iconFilename": "iron_gauntlets.png",
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 8,
@@ -126,8 +116,8 @@
       },
       "isStackable": false,
       "iconFilename": "necklace_of_wisdom.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 9,
@@ -141,8 +131,8 @@
       },
       "isStackable": false,
       "iconFilename": "ring_of_power.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 10,
@@ -151,8 +141,8 @@
       "type": "General",
       "isStackable": false,
       "iconFilename": "diamond.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 11,
@@ -161,8 +151,8 @@
       "type": "General",
       "isStackable": false,
       "iconFilename": "easter_egg.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 12,
@@ -172,8 +162,8 @@
       "healAmount": -5,
       "isStackable": false,
       "iconFilename": "raw_lobster.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 13,
@@ -183,28 +173,28 @@
       "healAmount": 50,
       "isStackable": false,
       "iconFilename": "lobster.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 14,
-      "name": "Willow wood",
-      "description": "A piece of willow wood.",
+      "name": "Pine wood",
+      "description": "A piece of pine wood.",
       "type": "General",
       "isStackable": false,
       "iconFilename": "willow_logs.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 15,
-      "name": "Mahogany wood",
-      "description": "A piece of mahogany wood.",
+      "name": "Spruce wood",
+      "description": "A piece of spruce wood.",
       "type": "General",
       "isStackable": false,
       "iconFilename": "mahogany_logs.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 16,
@@ -214,8 +204,8 @@
       "healAmount": -5,
       "isStackable": false,
       "iconFilename": "raw_salmon.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 17,
@@ -225,8 +215,8 @@
       "healAmount": 50,
       "isStackable": false,
       "iconFilename": "salmon.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 18,
@@ -236,8 +226,8 @@
       "healAmount": -5,
       "isStackable": false,
       "iconFilename": "raw_shark.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 19,
@@ -247,8 +237,8 @@
       "healAmount": 50,
       "isStackable": false,
       "iconFilename": "shark.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 20,
@@ -257,8 +247,8 @@
       "type": "General",
       "isStackable": false,
       "iconFilename": "iron_ore.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 21,
@@ -267,8 +257,8 @@
       "type": "General",
       "isStackable": false,
       "iconFilename": "mithril_ore.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 22,
@@ -277,8 +267,8 @@
       "type": "General",
       "isStackable": false,
       "iconFilename": "adamantite_ore.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     },
     {
       "id": 23,
@@ -287,8 +277,56 @@
       "type": "General",
       "isStackable": false,
       "iconFilename": "green_toad.png",
-      "objFilename": "basictreestump.obj",
-      "textureFilename": "defaultTexture.jpg"
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
+    },
+    {
+      "id": 24,
+      "name": "Oak wood",
+      "description": "A piece of oak wood, yum yum!",
+      "type": "General",
+      "isStackable": false,
+      "iconFilename": "oak_logs.png",
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
+    },
+    {
+      "id": 25,
+      "name": "Mithril Sword",
+      "description": "A strong mithril sword for close combat.",
+      "type": "Equippable",
+      "slot": "MainHand",
+      "stats": {
+        "accuracy": 30,
+        "damage": 50,
+        "attackSpeed": 2000,
+        "range": 1,
+        "armor": 20,
+        "dodge": 10
+      },
+      "isStackable": false,
+      "iconFilename": "mithril_sword.png",
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
+    },
+    {
+      "id": 26,
+      "name": "Adamant Sword",
+      "description": "A legendary adamant sword used by the best of the best.",
+      "type": "Equippable",
+      "slot": "MainHand",
+      "stats": {
+        "accuracy": 50,
+        "damage": 100,
+        "attackSpeed": 2000,
+        "range": 1,
+        "armor": 30,
+        "dodge": 20
+      },
+      "isStackable": false,
+      "iconFilename": "adamant_sword.png",
+      "objFilename": "pouch.obj",
+      "textureFilename": "pouchtexture_0.png"
     }
   ]
 }

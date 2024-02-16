@@ -4,7 +4,7 @@
 <area shape="rect" id="node9" href="$classCamera.html#af6dc1153bcd85dcb5f4c2c551e3a09b0" title="Zooms the camera by the given amount." alt="" coords="867,173,985,199"/>
 <area shape="rect" id="node3" href="$classRehtiGraphics.html#ac817516ac285d8b37e44ed594a903bd1" title="Adds a character object with the given id to the graphics backend. Also creates a bounding box for th..." alt="" coords="550,5,758,47"/>
 <area shape="rect" id="node7" href="$classRehtiGraphics.html#a6e2e9da4d7d742bda2d1232e27c8df8e" title="Forces player to move to the location given, cancelling any remaining movement callbacks and animatio..." alt="" coords="539,71,769,98"/>
-<area shape="rect" id="node8" href="$classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5" title="Moves the player to the given location in the given time. Also automatically rotates the player to fa..." alt="" coords="555,122,753,149"/>
+<area shape="rect" id="node8" href="$classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5" title="Moves the player smoothly (without animation) to the given location in the given time." alt="" coords="555,122,753,149"/>
 <area shape="rect" id="node4" href="$classClient.html#afebeedfe876105645a3937b4ee2058df" title="Processes messages from the server." alt="" coords="281,110,464,137"/>
 <area shape="rect" id="node5" href="$classClient.html#a742373e08a80d993d2651b6fff76f5b9" title="Starts the client." alt="" coords="108,110,207,137"/>
 <area shape="rect" id="node6" href="$client_2src_2Main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,110,60,137"/>

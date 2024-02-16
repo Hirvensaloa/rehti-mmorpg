@@ -1,0 +1,14 @@
+<map id="PickUpAction" name="PickUpAction">
+<area shape="rect" id="node1" title="Special case of MoveAction where, at the end, the actor picks up an item." alt="" coords="765,617,909,724"/>
+<area shape="rect" id="node2" href="$classMoveAction.html" title="Action used for moving." alt="" coords="481,417,619,568"/>
+<area shape="rect" id="node3" href="$classAction.html" title="Represents an action that an entity can perform." alt="" coords="676,175,819,355"/>
+<area shape="rect" id="node4" title=" " alt="" coords="652,5,744,83"/>
+<area shape="rect" id="node5" title=" " alt="" coords="510,5,614,83"/>
+<area shape="rect" id="node6" title=" " alt="" coords="278,5,371,83"/>
+<area shape="rect" id="node7" title=" " alt="" coords="768,5,927,83"/>
+<area shape="rect" id="node8" title=" " alt="" coords="951,5,1002,83"/>
+<area shape="rect" id="node9" title=" " alt="" coords="5,219,148,311"/>
+<area shape="rect" id="node10" href="$structCoordinates.html" title="Struct for coordinates." alt="" coords="902,211,1027,318"/>
+<area shape="rect" id="node11" title=" " alt="" coords="1081,5,1120,83"/>
+<area shape="rect" id="node12" title=" " alt="" coords="319,226,501,303"/>
+</map>

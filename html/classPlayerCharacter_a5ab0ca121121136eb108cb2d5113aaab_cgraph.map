@@ -1,6 +1,12 @@
 <map id="PlayerCharacter::respawn" name="PlayerCharacter::respawn">
-<area shape="rect" id="node1" title="Function that drops player&#39;s items and sets an active RespawnAction. Called when player dies." alt="" coords="5,56,195,83"/>
-<area shape="rect" id="node2" href="$classEntity.html#a1f1ef1b13908ffef9f2c4f2f455fdb71" title="Get the Inventory object of this entity." alt="" coords="265,5,415,32"/>
-<area shape="rect" id="node3" href="$classInventory.html#ab345a4b9ae0d858749ae7e2b3c470fd9" title="Removes all items from the inventory." alt="" coords="243,56,437,83"/>
-<area shape="rect" id="node4" href="$classEntity.html#ae00ca26a951f822510d3d93e4c42dce3" title="Set the current action to parameter action." alt="" coords="276,107,404,133"/>
+<area shape="rect" id="node1" title="Function that drops player&#39;s items and sets an active RespawnAction. Called when player dies." alt="" coords="5,183,195,209"/>
+<area shape="rect" id="node2" href="$classEntity.html#aa9a8dc7cd62a7f088230051d677750c1" title="Drop an item." alt="" coords="259,81,385,108"/>
+<area shape="rect" id="node4" href="$classEntity.html#a1f1ef1b13908ffef9f2c4f2f455fdb71" title="Get the Inventory object of this entity." alt="" coords="459,157,610,184"/>
+<area shape="rect" id="node7" href="$classEntity.html#ac98d1f3267fa19476913d3744efba910" title="Get the Equipment object of this entity." alt="" coords="243,183,401,209"/>
+<area shape="rect" id="node8" href="$classEntity.html#ae00ca26a951f822510d3d93e4c42dce3" title="Set the current action to parameter action." alt="" coords="258,233,386,260"/>
+<area shape="rect" id="node9" href="$classEquipment.html#a387a4ffde7aa0d0cf27612da45182cfe" title="Unequip item from slot." alt="" coords="246,284,398,311"/>
+<area shape="rect" id="node3" href="$classGameWorld.html#a75842f451773ce94e3a08473d785eeae" title="Add item to the game world." alt="" coords="455,56,615,83"/>
+<area shape="rect" id="node5" href="$classEntity.html#a5564e4c637a1e2826e2f4c04aefef265" title="Get the current location of this entity." alt="" coords="463,107,606,133"/>
+<area shape="rect" id="node6" href="$classInventory.html#a3c71646f0161c3e0b96a73cbf804c8f6" title="Removes item from the inventory." alt="" coords="449,5,620,32"/>
+<area shape="rect" id="node10" href="$classInventory.html#a9e1fad5a5f8ef1d2aec5ba9d86531d0d" title="Adds item to the inventory." alt="" coords="462,284,607,311"/>
 </map>

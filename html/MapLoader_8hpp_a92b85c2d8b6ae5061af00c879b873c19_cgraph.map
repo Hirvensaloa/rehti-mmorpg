@@ -6,6 +6,6 @@
 <area shape="rect" id="node6" href="$MapLoader_8hpp.html#aa37eb803126465c205ce7e9638a098bf" title="Inserts the object tile map to the map." alt="" coords="241,157,395,184"/>
 <area shape="rect" id="node7" href="$rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#ad1be74eedb711007334181940ecab15e" title="Populates a matrix with a default value. The matrix is all the areas combined and expanded e...." alt="" coords="257,208,379,235"/>
 <area shape="rect" id="node8" href="$rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#a268e2459aa1a71ba1802287fa45a3124" title="Reads a PNG file and returns the image data, width and height." alt="" coords="281,259,355,285"/>
-<area shape="rect" id="node9" href="$rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#a228c702e370e400148c0809c2b0710cb" title="Rotates the matrix 90 degrees clockwise. Rotation is calculated by rotation&#45;param * 90 degrees." alt="" coords="267,309,369,336"/>
+<area shape="rect" id="node9" href="$rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#a228c702e370e400148c0809c2b0710cb" title="Rotates the matrix 90 degrees counter&#45;clockwise. Rotation is calculated by rotation&#45;param * 90 degree..." alt="" coords="267,309,369,336"/>
 <area shape="rect" id="node5" href="$structGameObjects.html#a5445dc5fafd856a7f2f79d1c3cd2d7ba" title=" " alt="" coords="461,107,672,133"/>
 </map>

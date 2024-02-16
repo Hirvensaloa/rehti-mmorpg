@@ -4,7 +4,7 @@ digraph "RehtiGraphics::moveCharacter"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="RL";
-  Node1 [label="RehtiGraphics::moveCharacter",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Moves character to the given location in the given time. Automatically sets the running animation and..."];
+  Node1 [label="RehtiGraphics::moveCharacter",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Moves character smoothly (without animation) to the given location in the given time."];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="Client::processMessages",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classClient.html#afebeedfe876105645a3937b4ee2058df",tooltip="Processes messages from the server."];
   Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

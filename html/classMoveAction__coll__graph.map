@@ -1,13 +1,13 @@
 <map id="MoveAction" name="MoveAction">
-<area shape="rect" id="node1" title="Action used for moving." alt="" coords="706,417,843,568"/>
+<area shape="rect" id="node1" title="Action used for moving." alt="" coords="709,417,846,568"/>
 <area shape="rect" id="node2" href="$classAction.html" title="Represents an action that an entity can perform." alt="" coords="327,175,470,355"/>
 <area shape="rect" id="node3" title=" " alt="" coords="278,5,370,83"/>
 <area shape="rect" id="node4" title=" " alt="" coords="5,5,109,83"/>
 <area shape="rect" id="node5" title=" " alt="" coords="600,5,693,83"/>
 <area shape="rect" id="node6" title=" " alt="" coords="394,5,553,83"/>
 <area shape="rect" id="node7" title=" " alt="" coords="185,5,236,83"/>
-<area shape="rect" id="node8" title=" " alt="" coords="798,219,941,311"/>
-<area shape="rect" id="node9" href="$structCoordinates.html" title="Struct for coordinates." alt="" coords="965,211,1091,318"/>
-<area shape="rect" id="node10" title=" " alt="" coords="1009,5,1047,83"/>
-<area shape="rect" id="node11" title=" " alt="" coords="1115,226,1298,303"/>
+<area shape="rect" id="node8" title=" " alt="" coords="803,219,946,311"/>
+<area shape="rect" id="node9" href="$structCoordinates.html" title="Struct for coordinates." alt="" coords="971,211,1096,318"/>
+<area shape="rect" id="node10" title=" " alt="" coords="1014,5,1053,83"/>
+<area shape="rect" id="node11" title=" " alt="" coords="1121,226,1303,303"/>
 </map>

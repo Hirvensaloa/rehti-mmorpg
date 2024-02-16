@@ -1,7 +1,8 @@
 <map id="isValidCell" name="isValidCell">
-<area shape="rect" id="node1" title="Check if cell is valid and accessible from given direction." alt="" coords="675,13,765,39"/>
-<area shape="rect" id="node2" href="$server_2src_2world_2Utils_8cpp.html#ac2a70af5436b8b68792d3d467a42cc98" title="A&#45;star algorithm made to work with the access map format. Allows diagonal movement and has a heuristi..." alt="" coords="572,13,627,39"/>
-<area shape="rect" id="node3" href="$classMap.html#a693fa7c9f08dfb26f74afce62d795b59" title="Finds a path from start to end." alt="" coords="413,13,524,39"/>
-<area shape="rect" id="node4" href="$classAttackAction.html#ac867c6e8d4ce94d908fad8c80a13eb5a" title="Finds a path to the target." alt="" coords="187,5,365,47"/>
-<area shape="rect" id="node5" href="$classAttackAction.html#ad163cc47f0a282255c89c50d2c39fec6" title="Attack functionality, which performs attacks against target and moves closer to the target if not in ..." alt="" coords="5,13,139,39"/>
+<area shape="rect" id="node1" title="Check if cell is valid and accessible from given direction." alt="" coords="888,13,979,39"/>
+<area shape="rect" id="node2" href="$server_2src_2world_2Utils_8cpp.html#ac2a70af5436b8b68792d3d467a42cc98" title="A&#45;star algorithm made to work with the access map format. Allows diagonal movement and has a heuristi..." alt="" coords="785,13,840,39"/>
+<area shape="rect" id="node3" href="$classMap.html#a693fa7c9f08dfb26f74afce62d795b59" title="Finds a path from start to end." alt="" coords="627,13,737,39"/>
+<area shape="rect" id="node4" href="$classMap.html#a48f0a9b97e0a95978934a0a99f63ee28" title="Finds a path to some locations range. Can be used, for example, if the attack target is not in range,..." alt="" coords="413,13,579,39"/>
+<area shape="rect" id="node5" href="$classAttackAction.html#ac867c6e8d4ce94d908fad8c80a13eb5a" title="Finds a path to the target." alt="" coords="187,5,365,47"/>
+<area shape="rect" id="node6" href="$classAttackAction.html#ad163cc47f0a282255c89c50d2c39fec6" title="Attack functionality, which performs attacks against target and moves closer to the target if not in ..." alt="" coords="5,13,139,39"/>
 </map>

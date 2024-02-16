@@ -1,3 +1,5 @@
 [
-  ["megapolis"]
+  ["forest", "hills", "winter-desert"],
+  ["minipolis", "tundra-village", "tundra-transfer"],
+  ["river", "tundra", "desert"]
 ]

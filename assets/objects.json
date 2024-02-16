@@ -3,15 +3,15 @@
     {
       "id": 1,
       "type": "Resource",
-      "name": "Tree",
+      "name": "Oak",
       "yieldableItems": {
         "yieldableItemList": [
           {
-            "itemId": 0,
+            "itemId": 24,
             "yieldPercentage": 100
           }
         ],
-        "xpPerYield": 10,
+        "xpPerYield": 400,
         "depleteChance": 20
       },
       "relatedSkillId": 0,
@@ -19,7 +19,7 @@
       "description": "A tree. It is a tree.",
       "tileMap": [["XB"]],
       "textureFilename": "treetexture.png",
-      "objFilename": "tree.obj",
+      "objFilename": "tree1.obj",
       "characterInteractAnimation": "woodcutting"
     },
     {
@@ -32,20 +32,32 @@
           "resultItemId": 13,
           "resultItemQuantity": 1,
           "xpPerTransform": 10
+        },
+        {
+          "itemId": 16,
+          "resultItemId": 17,
+          "resultItemQuantity": 1,
+          "xpPerTransform": 10
+        },
+        {
+          "itemId": 18,
+          "resultItemId": 19,
+          "resultItemQuantity": 1,
+          "xpPerTransform": 10
         }
       ],
       "relatedSkillId": 3,
       "xpRequirement": 0,
       "description": "A cooking fire. It is a cooking fire.",
       "tileMap": [["XB"]],
-      "textureFilename": "defaultTexture.jpg",
-      "objFilename": "basictreestump.obj",
+      "textureFilename": "cookpotTexture.png",
+      "objFilename": "cookpot.obj",
       "characterInteractAnimation": "cooking"
     },
     {
       "id": 3,
       "type": "Resource",
-      "name": "Fishing spot",
+      "name": "Lobster fishing spot",
       "yieldableItems": {
         "yieldableItemList": [
           {
@@ -60,17 +72,225 @@
       "xpRequirement": 0,
       "description": "A fishing spot. It is a fishing spot.",
       "tileMap": [["XB"]],
-      "textureFilename": "defaultTexture.jpg",
-      "objFilename": "basictreestump.obj",
+      "textureFilename": "fishingSpot.png",
+      "objFilename": "defaultmodel",
       "characterInteractAnimation": "fishing"
+    },
+    {
+      "id": 4,
+      "type": "Resource",
+      "name": "Pine",
+      "yieldableItems": {
+        "yieldableItemList": [
+          {
+            "itemId": 14,
+            "yieldPercentage": 100
+          }
+        ],
+        "xpPerYield": 500,
+        "depleteChance": 20
+      },
+      "relatedSkillId": 0,
+      "xpRequirement": 1000,
+      "description": "A tree. It is a tree.",
+      "tileMap": [["XB"]],
+      "textureFilename": "pineTextureWarm.png",
+      "objFilename": "pine.obj",
+      "characterInteractAnimation": "woodcutting"
+    },
+    {
+      "id": 5,
+      "type": "Resource",
+      "name": "Spruce",
+      "yieldableItems": {
+        "yieldableItemList": [
+          {
+            "itemId": 15,
+            "yieldPercentage": 100
+          }
+        ],
+        "xpPerYield": 10,
+        "depleteChance": 20
+      },
+      "relatedSkillId": 0,
+      "xpRequirement": 2000,
+      "description": "A tree. It is a tree.",
+      "tileMap": [["XB"]],
+      "textureFilename": "pineTextureCold.png",
+      "objFilename": "pine.obj",
+      "characterInteractAnimation": "woodcutting"
+    },
+    {
+      "id": 6,
+      "type": "Resource",
+      "name": "Anvil",
+      "itemTransformList": [
+        {
+          "itemId": 20,
+          "resultItemId": 1,
+          "resultItemQuantity": 1,
+          "xpPerTransform": 30
+        },
+        {
+          "itemId": 21,
+          "resultItemId": 3,
+          "resultItemQuantity": 1,
+          "xpPerTransform": 100
+        },
+        {
+          "itemId": 22,
+          "resultItemId": 9,
+          "resultItemQuantity": 1,
+          "xpPerTransform": 200
+        }
+      ],
+      "relatedSkillId": 7,
+      "xpRequirement": 0,
+      "description": "An anvil. It is an anvil.",
+      "tileMap": [["XB"]],
+      "textureFilename": "anvilTexture.png",
+      "objFilename": "anvil.obj",
+      "characterInteractAnimation": "smithing"
+    },
+    {
+      "id": 7,
+      "type": "Resource",
+      "name": "Salmon fishing spot",
+      "yieldableItems": {
+        "yieldableItemList": [
+          {
+            "itemId": 16,
+            "yieldPercentage": 100
+          }
+        ],
+        "xpPerYield": 50,
+        "depleteChance": 20
+      },
+      "relatedSkillId": 2,
+      "xpRequirement": 150,
+      "description": "A fishing spot. It is a fishing spot.",
+      "tileMap": [["XB"]],
+      "textureFilename": "fishingSpot.png",
+      "objFilename": "defaultmodel",
+      "characterInteractAnimation": "fishing"
+    },
+    {
+      "id": 8,
+      "type": "Resource",
+      "name": "Shark fishing spot",
+      "yieldableItems": {
+        "yieldableItemList": [
+          {
+            "itemId": 18,
+            "yieldPercentage": 100
+          }
+        ],
+        "xpPerYield": 150,
+        "depleteChance": 20
+      },
+      "relatedSkillId": 2,
+      "xpRequirement": 1000,
+      "description": "A fishing spot. It is a fishing spot.",
+      "tileMap": [["XB"]],
+      "textureFilename": "fishingSpot.png",
+      "objFilename": "defaultmodel",
+      "characterInteractAnimation": "fishing"
+    },
+    {
+      "id": 9,
+      "type": "Resource",
+      "name": "Iron rock",
+      "yieldableItems": {
+        "yieldableItemList": [
+          {
+            "itemId": 20,
+            "yieldPercentage": 100
+          }
+        ],
+        "xpPerYield": 500,
+        "depleteChance": 20
+      },
+      "relatedSkillId": 1,
+      "xpRequirement": 0,
+      "description": "An iron rock. It is an iron rock.",
+      "tileMap": [["XB"]],
+      "textureFilename": "ore_iron.png",
+      "objFilename": "ore.obj",
+      "characterInteractAnimation": "smithing"
+    },
+    {
+      "id": 10,
+      "type": "Resource",
+      "name": "Gold rock",
+      "yieldableItems": {
+        "yieldableItemList": [
+          {
+            "itemId": 21,
+            "yieldPercentage": 100
+          }
+        ],
+        "xpPerYield": 100,
+        "depleteChance": 20
+      },
+      "relatedSkillId": 1,
+      "xpRequirement": 1000,
+      "description": "A gold rock. It is a gold rock.",
+      "tileMap": [["XB"]],
+      "textureFilename": "ore_gold.png",
+      "objFilename": "ore.obj",
+      "characterInteractAnimation": "smithing"
+    },
+    {
+      "id": 11,
+      "type": "Resource",
+      "name": "Mithril rock",
+      "yieldableItems": {
+        "yieldableItemList": [
+          {
+            "itemId": 22,
+            "yieldPercentage": 100
+          }
+        ],
+        "xpPerYield": 200,
+        "depleteChance": 20
+      },
+      "relatedSkillId": 1,
+      "xpRequirement": 2000,
+      "description": "A mithril rock. It is a mithril rock.",
+      "tileMap": [["XB"]],
+      "textureFilename": "ore_mithril.png",
+      "objFilename": "ore.obj",
+      "characterInteractAnimation": "smithing"
+    },
+    {
+      "id": 12,
+      "type": "Resource",
+      "name": "Adamantite rock",
+      "yieldableItems": {
+        "yieldableItemList": [
+          {
+            "itemId": 22,
+            "yieldPercentage": 100
+          }
+        ],
+        "xpPerYield": 10,
+        "depleteChance": 20
+      },
+      "relatedSkillId": 1,
+      "xpRequirement": 0,
+      "description": "A adamantite rock. It is a adamantite rock.",
+      "tileMap": [["XB"]],
+      "textureFilename": "ore_adamantite.png",
+      "objFilename": "ore.obj",
+      "characterInteractAnimation": "smithing"
     },
     {
       "id": 30,
       "type": "General",
       "name": "Fence",
       "description": "A sturdy fence.",
-      "tileMap": [["S", "XS", "S"]],
-      "textureFilename": "defaultTexture.jpg",
+      "tileMap": [["XS"]],
+      "textureFilename": "fencetexture.png",
       "objFilename": "fence.obj"
     },
     {
@@ -84,7 +304,7 @@
         ["B", " ", " ", "X", " ", " ", "B"],
         ["B", " ", " ", " ", " ", " ", "B"],
         ["B", " ", " ", " ", " ", " ", "B"],
-        ["B", " ", "B", "B", "B", "B", "B"]
+        ["B", "B", "B", "B", "B", "B", "B"]
       ],
       "textureFilename": "housetexture.png",
       "objFilename": "house.obj"
@@ -96,16 +316,60 @@
       "yieldableItemList": [
         {
           "itemId": 1,
-          "yieldPercentage": 30
+          "yieldPercentage": 8
         },
         {
           "itemId": 2,
-          "yieldPercentage": 70
+          "yieldPercentage": 8
+        },
+        {
+          "itemId": 3,
+          "yieldPercentage": 8
+        },
+        {
+          "itemId": 4,
+          "yieldPercentage": 8
+        },
+        {
+          "itemId": 5,
+          "yieldPercentage": 8
+        },
+        {
+          "itemId": 6,
+          "yieldPercentage": 8
+        },
+        {
+          "itemId": 7,
+          "yieldPercentage": 8
+        },
+        {
+          "itemId": 8,
+          "yieldPercentage": 8
+        },
+        {
+          "itemId": 9,
+          "yieldPercentage": 8
+        },
+        {
+          "itemId": 10,
+          "yieldPercentage": 8
+        },
+        {
+          "itemId": 11,
+          "yieldPercentage": 8
+        },
+        {
+          "itemId": 25,
+          "yieldPercentage": 8
+        },
+        {
+          "itemId": 26,
+          "yieldPercentage": 8
         }
       ],
       "description": "Contains a treasure (If you consider dirty, rotten shield a treasure)",
       "tileMap": [["XB"]],
-      "textureFilename": "defaultTexture.jpg",
+      "textureFilename": "chestTexture.png",
       "objFilename": "treasure_chest.obj",
       "characterInteractAnimation": "loot"
     }

@@ -6,7 +6,7 @@ digraph "Npc::update"
   rankdir="LR";
   Node1 [label="Npc::update",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Updates the NPC."];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="Map::getRandomCoordinates",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMap.html#aa2714237c8af3b86a11dcebc6d944145",tooltip="Gets a random coordinate within the given bounds."];
+  Node2 [label="Map::getRandomNeighbour",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMap.html#ab3d2578b4434138501e0b40a73fd4c3f",tooltip="Gets a random neighbour of the given coordinates."];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="Map::getAccessMap",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMap.html#a3a7c641cd6c7281013272940d0613d90",tooltip="Get the access map."];
   Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

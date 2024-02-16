@@ -85,6 +85,7 @@ $(document).ready(function(){initNavTree('classDatabaseManager.html',''); initRe
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classDatabaseManager-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -101,7 +102,7 @@ Collaboration diagram for DatabaseManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classDatabaseManager__coll__graph.png" border="0" usemap="#aDatabaseManager_coll__map" alt="Collaboration graph"/></div>
 <map name="aDatabaseManager_coll__map" id="aDatabaseManager_coll__map">
-<area shape="rect" title="Class for handling database queries." alt="" coords="8,145,235,325"/>
+<area shape="rect" title="Class for handling database queries." alt="" coords="8,145,235,340"/>
 <area shape="rect" title=" " alt="" coords="5,5,237,83"/>
 </map>
 </div>
@@ -130,6 +131,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2074813855734007c9ac259a848f9314"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDatabaseManager.html#a2074813855734007c9ac259a848f9314">savePlayerToDb</a> (std::shared_ptr&lt; <a class="el" href="classPlayerCharacter.html">PlayerCharacter</a> &gt; player)</td></tr>
 <tr class="memdesc:a2074813855734007c9ac259a848f9314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save player's basic data, items and skills to the database.  <a href="classDatabaseManager.html#a2074813855734007c9ac259a848f9314">More...</a><br /></td></tr>
 <tr class="separator:a2074813855734007c9ac259a848f9314"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a625d74dbf212d4e21dc0ad017a17cdb9"><td class="memItemLeft" align="right" valign="top">pqxx::work&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDatabaseManager.html#a625d74dbf212d4e21dc0ad017a17cdb9">getTransaction</a> ()</td></tr>
+<tr class="memdesc:a625d74dbf212d4e21dc0ad017a17cdb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a transaction object.  <a href="classDatabaseManager.html#a625d74dbf212d4e21dc0ad017a17cdb9">More...</a><br /></td></tr>
+<tr class="separator:a625d74dbf212d4e21dc0ad017a17cdb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -217,6 +224,34 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="classDatabaseManager.html#aa162d97472e6c31a4e873adda435dbb6" title=" " alt="" coords="5,5,216,47"/>
 </map>
 </div>
+
+</div>
+</div>
+<a id="a625d74dbf212d4e21dc0ad017a17cdb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a625d74dbf212d4e21dc0ad017a17cdb9">&#9670;&nbsp;</a></span>getTransaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">pqxx::work DatabaseManager::getTransaction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a transaction object. </p>
+<dl class="section return"><dt>Returns</dt><dd>pqxx::work </dd></dl>
 
 </div>
 </div>

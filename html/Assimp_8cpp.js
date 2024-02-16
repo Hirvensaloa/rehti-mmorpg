@@ -19,7 +19,8 @@ var Assimp_8cpp =
     [ "interpolateLinear", "Assimp_8cpp.html#a83b6795b8d851b9bee5e289c2759b108", null ],
     [ "loadAnimations", "Assimp_8cpp.html#acb65074d785be3958ddb16a3865228d3", null ],
     [ "loadGlTFFile", "Assimp_8cpp.html#a815da1a9fca11840a96af6ddd1fafafc", null ],
-    [ "loadOBJFile", "Assimp_8cpp.html#ad1fec01f0d6059e5e66dcf2bd0840137", null ],
+    [ "loadOBJFile", "Assimp_8cpp.html#a6f1ebaee5863a79b370bbbeb6be919c5", null ],
+    [ "loadOBJTile", "Assimp_8cpp.html#a647777c148522f88db2c6cbb4a398039", null ],
     [ "EPSILON", "Assimp_8cpp.html#a75f355966e0a97665eaf5a4c79baa7af", null ],
     [ "EPSILON_F", "Assimp_8cpp.html#a52f896e0dcc05f88d320b43c365d93a7", null ]
 ];

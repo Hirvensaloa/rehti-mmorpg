@@ -1,10 +1,11 @@
 <map id="GameWorld" name="GameWorld">
-<area shape="rect" id="node1" title="GameWorld class. It contains all the player, npc, object and item instances." alt="" coords="418,359,586,656"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,175,177,281"/>
-<area shape="rect" id="node3" href="$classMap.html" title="Static class representing the map of the game world. Map contains information about which tiles are a..." alt="" coords="202,160,402,296"/>
+<area shape="rect" id="node1" title="GameWorld class. It contains all the player, npc, object and item instances." alt="" coords="441,403,609,744"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,189,177,296"/>
+<area shape="rect" id="node3" href="$classMap.html" title="Static class representing the map of the game world. Map contains information about which tiles are a..." alt="" coords="202,160,402,325"/>
 <area shape="rect" id="node4" title=" " alt="" coords="143,5,290,97"/>
 <area shape="rect" id="node5" title=" " alt="" coords="314,5,461,97"/>
-<area shape="rect" id="node6" title=" " alt="" coords="427,182,577,274"/>
-<area shape="rect" id="node7" title=" " alt="" coords="601,182,797,274"/>
-<area shape="rect" id="node8" title=" " alt="" coords="822,182,1009,274"/>
+<area shape="rect" id="node6" title=" " alt="" coords="426,204,490,281"/>
+<area shape="rect" id="node7" title=" " alt="" coords="517,197,668,289"/>
+<area shape="rect" id="node8" title=" " alt="" coords="692,197,888,289"/>
+<area shape="rect" id="node9" title=" " alt="" coords="913,197,1099,289"/>
 </map>

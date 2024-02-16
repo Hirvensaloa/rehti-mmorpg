@@ -20,5 +20,5 @@ digraph "createObjectBlockMap"
   Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node8 [label="readPng",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#a268e2459aa1a71ba1802287fa45a3124",tooltip="Reads a PNG file and returns the image data, width and height."];
   Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node9 [label="rotateMatrix",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#a228c702e370e400148c0809c2b0710cb",tooltip="Rotates the matrix 90 degrees clockwise. Rotation is calculated by rotation-param * 90 degrees."];
+  Node9 [label="rotateMatrix",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rehtiLib_2assets_2loader_2src_2Utils_8hpp.html#a228c702e370e400148c0809c2b0710cb",tooltip="Rotates the matrix 90 degrees counter-clockwise. Rotation is calculated by rotation-param * 90 degree..."];
 }

@@ -1,0 +1,13 @@
+<map id="Npc::addRandomItemToInventory" name="Npc::addRandomItemToInventory">
+<area shape="rect" id="node1" title=" " alt="" coords="5,165,244,192"/>
+<area shape="rect" id="node2" href="$classInventory.html#a9e1fad5a5f8ef1d2aec5ba9d86531d0d" title="Adds item to the inventory." alt="" coords="317,48,462,75"/>
+<area shape="rect" id="node3" href="$classAssetManager.html#a7112131ee4657d508b2029eebb3975f6" title="Creates an instance of an item." alt="" coords="292,99,487,141"/>
+<area shape="rect" id="node9" href="$structGameItems.html#a5095720ca872030b60a9edce77def289" title=" " alt="" coords="308,165,471,192"/>
+<area shape="rect" id="node10" href="$classEntity.html#a1f1ef1b13908ffef9f2c4f2f455fdb71" title="Get the Inventory object of this entity." alt="" coords="314,216,465,243"/>
+<area shape="rect" id="node11" href="$classAssetManager.html#a5964947567c6cd30b292b25510830123" title="Get the GameItems object." alt="" coords="299,267,480,293"/>
+<area shape="rect" id="node4" href="$structGameItems.html#aa28c24034d12b17b9f85d9c46d9cb9a1" title=" " alt="" coords="563,5,736,32"/>
+<area shape="rect" id="node5" href="$structGameItems.html#a12d353035869abb44b959b2fd56dc320" title=" " alt="" coords="535,56,764,83"/>
+<area shape="rect" id="node6" href="$structGameItems.html#a5525518c6b68815489b0453e43da1024" title=" " alt="" coords="555,107,743,133"/>
+<area shape="rect" id="node7" href="$structGameItems.html#a0947ecd8654943fb367afd0bcb0d37b4" title=" " alt="" coords="545,157,753,184"/>
+<area shape="rect" id="node8" href="$structGameItems.html#af9a7b3d5920e2b356499038c77ff4498" title=" " alt="" coords="556,208,743,235"/>
+</map>

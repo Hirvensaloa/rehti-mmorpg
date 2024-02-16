@@ -101,7 +101,7 @@ Collaboration diagram for Map:</div>
 <div class="dyncontent">
 <div class="center"><img src="classMap__coll__graph.png" border="0" usemap="#aMap_coll__map" alt="Collaboration graph"/></div>
 <map name="aMap_coll__map" id="aMap_coll__map">
-<area shape="rect" title="Static class representing the map of the game world. Map contains information about which tiles are a..." alt="" coords="64,160,264,296"/>
+<area shape="rect" title="Static class representing the map of the game world. Map contains information about which tiles are a..." alt="" coords="64,160,264,325"/>
 <area shape="rect" title=" " alt="" coords="5,5,152,97"/>
 <area shape="rect" title=" " alt="" coords="176,5,323,97"/>
 </map>
@@ -115,6 +115,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a693fa7c9f08dfb26f74afce62d795b59"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::pair&lt; int, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMap.html#a693fa7c9f08dfb26f74afce62d795b59">findPath</a> (<a class="el" href="structCoordinates.html">Coordinates</a> start, <a class="el" href="structCoordinates.html">Coordinates</a> end)</td></tr>
 <tr class="memdesc:a693fa7c9f08dfb26f74afce62d795b59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a path from start to end.  <a href="classMap.html#a693fa7c9f08dfb26f74afce62d795b59">More...</a><br /></td></tr>
 <tr class="separator:a693fa7c9f08dfb26f74afce62d795b59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48f0a9b97e0a95978934a0a99f63ee28"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::pair&lt; int, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMap.html#a48f0a9b97e0a95978934a0a99f63ee28">findPathToRange</a> (<a class="el" href="structCoordinates.html">Coordinates</a> start, <a class="el" href="structCoordinates.html">Coordinates</a> end, int range)</td></tr>
+<tr class="memdesc:a48f0a9b97e0a95978934a0a99f63ee28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a path to some locations range. Can be used, for example, if the attack target is not in range, we can find a path to a location that is in range.  <a href="classMap.html#a48f0a9b97e0a95978934a0a99f63ee28">More...</a><br /></td></tr>
+<tr class="separator:a48f0a9b97e0a95978934a0a99f63ee28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e59ab91ee02868654a3e22a9c8d2d07"><td class="memItemLeft" align="right" valign="top">static std::optional&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMap.html#a3e59ab91ee02868654a3e22a9c8d2d07">getHeight</a> (int x, int y)</td></tr>
 <tr class="memdesc:a3e59ab91ee02868654a3e22a9c8d2d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gives the height for the given (x, y) coordinates.  <a href="classMap.html#a3e59ab91ee02868654a3e22a9c8d2d07">More...</a><br /></td></tr>
 <tr class="separator:a3e59ab91ee02868654a3e22a9c8d2d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,6 +127,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aa2714237c8af3b86a11dcebc6d944145"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structCoordinates.html">Coordinates</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMap.html#aa2714237c8af3b86a11dcebc6d944145">getRandomCoordinates</a> (const <a class="el" href="structSpawnCoordinateBounds.html">SpawnCoordinateBounds</a> &amp;coordinateBounds)</td></tr>
 <tr class="memdesc:aa2714237c8af3b86a11dcebc6d944145"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a random coordinate within the given bounds.  <a href="classMap.html#aa2714237c8af3b86a11dcebc6d944145">More...</a><br /></td></tr>
 <tr class="separator:aa2714237c8af3b86a11dcebc6d944145"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3d2578b4434138501e0b40a73fd4c3f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structCoordinates.html">Coordinates</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMap.html#ab3d2578b4434138501e0b40a73fd4c3f">getRandomNeighbour</a> (<a class="el" href="structCoordinates.html">Coordinates</a> coordinates, const <a class="el" href="structSpawnCoordinateBounds.html">SpawnCoordinateBounds</a> &amp;coordinateBounds)</td></tr>
+<tr class="memdesc:ab3d2578b4434138501e0b40a73fd4c3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a random neighbour of the given coordinates.  <a href="classMap.html#ab3d2578b4434138501e0b40a73fd4c3f">More...</a><br /></td></tr>
+<tr class="separator:ab3d2578b4434138501e0b40a73fd4c3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
@@ -194,7 +200,83 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classMap_a693fa7c9f08dfb26f74afce62d795b59_icgraph.png" border="0" usemap="#aclassMap_a693fa7c9f08dfb26f74afce62d795b59_icgraph" alt=""/></div>
 <map name="aclassMap_a693fa7c9f08dfb26f74afce62d795b59_icgraph" id="aclassMap_a693fa7c9f08dfb26f74afce62d795b59_icgraph">
-<area shape="rect" title="Finds a path from start to end." alt="" coords="413,13,524,39"/>
+<area shape="rect" title="Finds a path from start to end." alt="" coords="627,13,737,39"/>
+<area shape="rect" href="classMap.html#a48f0a9b97e0a95978934a0a99f63ee28" title="Finds a path to some locations range. Can be used, for example, if the attack target is not in range,..." alt="" coords="413,13,579,39"/>
+<area shape="rect" href="classAttackAction.html#ac867c6e8d4ce94d908fad8c80a13eb5a" title="Finds a path to the target." alt="" coords="187,5,365,47"/>
+<area shape="rect" href="classAttackAction.html#ad163cc47f0a282255c89c50d2c39fec6" title="Attack functionality, which performs attacks against target and moves closer to the target if not in ..." alt="" coords="5,13,139,39"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a48f0a9b97e0a95978934a0a99f63ee28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48f0a9b97e0a95978934a0a99f63ee28">&#9670;&nbsp;</a></span>findPathToRange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::pair&lt; int, int &gt; &gt; Map::findPathToRange </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structCoordinates.html">Coordinates</a>&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structCoordinates.html">Coordinates</a>&#160;</td>
+          <td class="paramname"><em>end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>range</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finds a path to some locations range. Can be used, for example, if the attack target is not in range, we can find a path to a location that is in range. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start</td><td>Starting coordinates </td></tr>
+    <tr><td class="paramname">end</td><td>Ending coordinates </td></tr>
+    <tr><td class="paramname">range</td><td>Range in tiles </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector of coordinates (x,y) that form the path. Empty vector if no path found. </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classMap_a48f0a9b97e0a95978934a0a99f63ee28_cgraph.png" border="0" usemap="#aclassMap_a48f0a9b97e0a95978934a0a99f63ee28_cgraph" alt=""/></div>
+<map name="aclassMap_a48f0a9b97e0a95978934a0a99f63ee28_cgraph" id="aclassMap_a48f0a9b97e0a95978934a0a99f63ee28_cgraph">
+<area shape="rect" title="Finds a path to some locations range. Can be used, for example, if the attack target is not in range,..." alt="" coords="5,31,171,57"/>
+<area shape="rect" href="classMap.html#a693fa7c9f08dfb26f74afce62d795b59" title="Finds a path from start to end." alt="" coords="219,31,329,57"/>
+<area shape="rect" href="server_2src_2world_2Utils_8cpp.html#ac2a70af5436b8b68792d3d467a42cc98" title="A&#45;star algorithm made to work with the access map format. Allows diagonal movement and has a heuristi..." alt="" coords="377,31,432,57"/>
+<area shape="rect" href="server_2src_2world_2Utils_8cpp.html#a301851ebbe7e47130cde965d54a9b220" title="Calculate the euclidean distance between two points." alt="" coords="480,5,623,32"/>
+<area shape="rect" href="server_2src_2world_2Utils_8cpp.html#a1e58627f4f02de892dd1d1931b08243f" title="Check if cell is valid and accessible from given direction." alt="" coords="506,56,597,83"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classMap_a48f0a9b97e0a95978934a0a99f63ee28_icgraph.png" border="0" usemap="#aclassMap_a48f0a9b97e0a95978934a0a99f63ee28_icgraph" alt=""/></div>
+<map name="aclassMap_a48f0a9b97e0a95978934a0a99f63ee28_icgraph" id="aclassMap_a48f0a9b97e0a95978934a0a99f63ee28_icgraph">
+<area shape="rect" title="Finds a path to some locations range. Can be used, for example, if the attack target is not in range,..." alt="" coords="413,13,579,39"/>
 <area shape="rect" href="classAttackAction.html#ac867c6e8d4ce94d908fad8c80a13eb5a" title="Finds a path to the target." alt="" coords="187,5,365,47"/>
 <area shape="rect" href="classAttackAction.html#ad163cc47f0a282255c89c50d2c39fec6" title="Attack functionality, which performs attacks against target and moves closer to the target if not in ..." alt="" coords="5,13,139,39"/>
 </map>
@@ -232,18 +314,19 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classMap_a3a7c641cd6c7281013272940d0613d90_icgraph.png" border="0" usemap="#aclassMap_a3a7c641cd6c7281013272940d0613d90_icgraph" alt=""/></div>
 <map name="aclassMap_a3a7c641cd6c7281013272940d0613d90_icgraph" id="aclassMap_a3a7c641cd6c7281013272940d0613d90_icgraph">
-<area shape="rect" title="Get the access map." alt="" coords="1075,157,1227,184"/>
-<area shape="rect" href="classMap.html#aa2714237c8af3b86a11dcebc6d944145" title="Gets a random coordinate within the given bounds." alt="" coords="816,120,1027,147"/>
-<area shape="rect" href="classServer.html#ae66426d3906c2a9e5b217c65c4ce5db3" title="Loads a player&#39;s data from the database and adds the player to the game." alt="" coords="596,208,737,235"/>
+<area shape="rect" title="Get the access map." alt="" coords="1075,107,1227,133"/>
+<area shape="rect" href="classMap.html#aa2714237c8af3b86a11dcebc6d944145" title="Gets a random coordinate within the given bounds." alt="" coords="816,56,1027,83"/>
+<area shape="rect" href="classServer.html#ae66426d3906c2a9e5b217c65c4ce5db3" title="Loads a player&#39;s data from the database and adds the player to the game." alt="" coords="596,107,737,133"/>
+<area shape="rect" href="classMap.html#ab3d2578b4434138501e0b40a73fd4c3f" title="Gets a random neighbour of the given coordinates." alt="" coords="821,157,1021,184"/>
 <area shape="rect" href="classEntity.html#a399fd12cf21daaf0f8da5d19f1f30569" title="Returns a random location within the spawn bounds." alt="" coords="565,5,768,32"/>
 <area shape="rect" href="classGameWorld.html#ab78e304a7c2babd4addacd751b56c98c" title="Initializes the game world. Loads assets and map. Adds npcs and objects to the world." alt="" coords="585,56,749,83"/>
-<area shape="rect" href="classNpc.html#a02469aac6500ae06782d0f75148d5b50" title="Updates the NPC." alt="" coords="617,107,717,133"/>
-<area shape="rect" href="classPassiveNpc.html#a09827b4717c77c7cbe16665ac954168d" title="Updates the PassiveNpc." alt="" coords="592,157,741,184"/>
 <area shape="rect" href="classServer.html#a50304dfbea44f60fb1da1f4754d582dd" title="Initializes the gamestate and gameworld." alt="" coords="347,56,513,83"/>
 <area shape="rect" href="classServer.html#ad5ec9462b520e59f7ea831e157ee5e59" title=" " alt="" coords="144,56,259,83"/>
-<area shape="rect" href="classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413" title="Function to parse and act upon messages received from clients." alt="" coords="343,208,517,235"/>
-<area shape="rect" href="classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c" title="Server&#39;s main loop for processing messages." alt="" coords="108,208,295,235"/>
-<area shape="rect" href="server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,208,60,235"/>
+<area shape="rect" href="classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413" title="Function to parse and act upon messages received from clients." alt="" coords="343,107,517,133"/>
+<area shape="rect" href="classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c" title="Server&#39;s main loop for processing messages." alt="" coords="108,107,295,133"/>
+<area shape="rect" href="server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,107,60,133"/>
+<area shape="rect" href="classNpc.html#a02469aac6500ae06782d0f75148d5b50" title="Updates the NPC." alt="" coords="617,157,717,184"/>
+<area shape="rect" href="classPassiveNpc.html#a09827b4717c77c7cbe16665ac954168d" title="Updates the PassiveNpc." alt="" coords="592,208,741,235"/>
 </map>
 </div>
 
@@ -350,17 +433,80 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classMap_aa2714237c8af3b86a11dcebc6d944145_icgraph.png" border="0" usemap="#aclassMap_aa2714237c8af3b86a11dcebc6d944145_icgraph" alt=""/></div>
 <map name="aclassMap_aa2714237c8af3b86a11dcebc6d944145_icgraph" id="aclassMap_aa2714237c8af3b86a11dcebc6d944145_icgraph">
-<area shape="rect" title="Gets a random coordinate within the given bounds." alt="" coords="816,107,1027,133"/>
+<area shape="rect" title="Gets a random coordinate within the given bounds." alt="" coords="816,56,1027,83"/>
 <area shape="rect" href="classEntity.html#a399fd12cf21daaf0f8da5d19f1f30569" title="Returns a random location within the spawn bounds." alt="" coords="565,5,768,32"/>
 <area shape="rect" href="classGameWorld.html#ab78e304a7c2babd4addacd751b56c98c" title="Initializes the game world. Loads assets and map. Adds npcs and objects to the world." alt="" coords="585,56,749,83"/>
 <area shape="rect" href="classServer.html#ae66426d3906c2a9e5b217c65c4ce5db3" title="Loads a player&#39;s data from the database and adds the player to the game." alt="" coords="596,107,737,133"/>
-<area shape="rect" href="classNpc.html#a02469aac6500ae06782d0f75148d5b50" title="Updates the NPC." alt="" coords="617,157,717,184"/>
-<area shape="rect" href="classPassiveNpc.html#a09827b4717c77c7cbe16665ac954168d" title="Updates the PassiveNpc." alt="" coords="592,208,741,235"/>
 <area shape="rect" href="classServer.html#a50304dfbea44f60fb1da1f4754d582dd" title="Initializes the gamestate and gameworld." alt="" coords="347,56,513,83"/>
 <area shape="rect" href="classServer.html#ad5ec9462b520e59f7ea831e157ee5e59" title=" " alt="" coords="144,56,259,83"/>
 <area shape="rect" href="classServer.html#a18a8fea9b1688c806fa5be9b4d5ac413" title="Function to parse and act upon messages received from clients." alt="" coords="343,107,517,133"/>
 <area shape="rect" href="classServer.html#aee6c47f62d04cd4dcf435ccedfd05e2c" title="Server&#39;s main loop for processing messages." alt="" coords="108,107,295,133"/>
 <area shape="rect" href="server_2src_2Main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,107,60,133"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab3d2578b4434138501e0b40a73fd4c3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3d2578b4434138501e0b40a73fd4c3f">&#9670;&nbsp;</a></span>getRandomNeighbour()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structCoordinates.html">Coordinates</a> Map::getRandomNeighbour </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structCoordinates.html">Coordinates</a>&#160;</td>
+          <td class="paramname"><em>coordinates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structSpawnCoordinateBounds.html">SpawnCoordinateBounds</a> &amp;&#160;</td>
+          <td class="paramname"><em>coordinateBounds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets a random neighbour of the given coordinates. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">coordinates</td><td></td></tr>
+    <tr><td class="paramname">coordinateBounds</td><td>Bounds for the coordinates </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structCoordinates.html" title="Struct for coordinates.">Coordinates</a> (Returns the given coordinates if no neighbours found/accessible) </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classMap_ab3d2578b4434138501e0b40a73fd4c3f_cgraph.png" border="0" usemap="#aclassMap_ab3d2578b4434138501e0b40a73fd4c3f_cgraph" alt=""/></div>
+<map name="aclassMap_ab3d2578b4434138501e0b40a73fd4c3f_cgraph" id="aclassMap_ab3d2578b4434138501e0b40a73fd4c3f_cgraph">
+<area shape="rect" title="Gets a random neighbour of the given coordinates." alt="" coords="5,5,205,32"/>
+<area shape="rect" href="classMap.html#a3a7c641cd6c7281013272940d0613d90" title="Get the access map." alt="" coords="253,5,405,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classMap_ab3d2578b4434138501e0b40a73fd4c3f_icgraph.png" border="0" usemap="#aclassMap_ab3d2578b4434138501e0b40a73fd4c3f_icgraph" alt=""/></div>
+<map name="aclassMap_ab3d2578b4434138501e0b40a73fd4c3f_icgraph" id="aclassMap_ab3d2578b4434138501e0b40a73fd4c3f_icgraph">
+<area shape="rect" title="Gets a random neighbour of the given coordinates." alt="" coords="203,31,403,57"/>
+<area shape="rect" href="classNpc.html#a02469aac6500ae06782d0f75148d5b50" title="Updates the NPC." alt="" coords="30,5,130,32"/>
+<area shape="rect" href="classPassiveNpc.html#a09827b4717c77c7cbe16665ac954168d" title="Updates the PassiveNpc." alt="" coords="5,56,155,83"/>
 </map>
 </div>
 

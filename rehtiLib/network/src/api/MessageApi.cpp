@@ -173,7 +173,7 @@ DropItemMessage MessageApi::parseDropItem(std::string msgBody)
     return dropItemMsg;
 };
 
-MessageStruct MessageApi::createGameState(const GameStateMessage& gameState)
+MessageStruct MessageApi::createGameState(const GameStateMessage gameState)
 {
     rapidjson::Document document = createDocument();
     rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
@@ -233,6 +233,25 @@ MessageStruct MessageApi::createGameState(const GameStateMessage& gameState)
         objectArray.PushBack(objectObject, allocator);
     }
     document.AddMember("objects", objectArray, allocator);
+
+    // Add items
+    rapidjson::Value itemArray(rapidjson::kArrayType);
+    for (const auto& itemEntry : gameState.items)
+    {
+        for (const auto& item : itemEntry.second)
+        {
+            rapidjson::Value itemObject(rapidjson::kObjectType);
+            itemObject.AddMember("id", item.id, allocator);
+            itemObject.AddMember("instanceId", item.instanceId, allocator);
+            itemObject.AddMember("name", rapidjson::StringRef(item.name.c_str()), allocator);
+            itemObject.AddMember("stackSize", item.stackSize, allocator);
+            itemObject.AddMember("x", itemEntry.first.x, allocator);
+            itemObject.AddMember("y", itemEntry.first.y, allocator);
+            itemObject.AddMember("z", itemEntry.first.z, allocator);
+            itemArray.PushBack(itemObject, allocator);
+        }
+    }
+    document.AddMember("items", itemArray, allocator);
 
     // Add current player
     rapidjson::Value currentPlayer(rapidjson::kObjectType);
@@ -344,6 +363,22 @@ GameStateMessage MessageApi::parseGameState(std::string msgBody)
         gameState.objects.push_back(gameStateObject);
     }
 
+    gameState.items = std::map<Coordinate, std::vector<GameItem>>();
+    for (const auto& item : document["items"].GetArray())
+    {
+        Coordinate location = {item["x"].GetInt(), item["y"].GetInt(), item["z"].GetInt()};
+        if (!gameState.items.contains(location))
+        {
+            gameState.items[location] = std::vector<GameItem>();
+        }
+        GameItem gameItem;
+        gameItem.id = item["id"].GetInt();
+        gameItem.instanceId = item["instanceId"].GetInt();
+        gameItem.name = item["name"].GetString();
+        gameItem.stackSize = item["stackSize"].GetInt();
+        gameState.items[location].push_back(gameItem);
+    }
+
     gameState.currentPlayer.id = document["currentPlayer"]["id"].GetInt();
     gameState.currentPlayer.instanceId = document["currentPlayer"]["instanceId"].GetInt();
     gameState.currentPlayer.name = document["currentPlayer"]["name"].GetString();
@@ -435,4 +470,32 @@ InformativeMessage MessageApi::parseInformative(std::string msgBody)
     informative.message = document["message"].GetString();
 
     return informative;
+};
+
+MessageStruct MessageApi::createPickUpItem(const PickUpItemMessage& pickUpItemMsg)
+{
+    rapidjson::Document document = createDocument();
+    rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
+    document.AddMember("itemId", pickUpItemMsg.itemId, allocator);
+    document.AddMember("x", pickUpItemMsg.x, allocator);
+    document.AddMember("y", pickUpItemMsg.y, allocator);
+
+    return MessageStruct{pickUpItemMsg.id, createString(document)};
+};
+
+PickUpItemMessage MessageApi::parsePickUpItem(std::string msgBody)
+{
+    rapidjson::Document document = parseDocument(msgBody);
+
+    if (!validMember(document, "itemId", ValueType::INT))
+    {
+        throw std::runtime_error("Invalid talk message");
+    }
+
+    PickUpItemMessage pickUpItemMsg;
+    pickUpItemMsg.itemId = document["itemId"].GetInt();
+    pickUpItemMsg.x = document["x"].GetInt();
+    pickUpItemMsg.y = document["y"].GetInt();
+
+    return pickUpItemMsg;
 };

@@ -6,7 +6,9 @@ digraph "Map::findPath"
   rankdir="RL";
   Node1 [label="Map::findPath",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Finds a path from start to end."];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="AttackAction::findPathTo\lTarget",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAttackAction.html#ac867c6e8d4ce94d908fad8c80a13eb5a",tooltip="Finds a path to the target."];
+  Node2 [label="Map::findPathToRange",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMap.html#a48f0a9b97e0a95978934a0a99f63ee28",tooltip="Finds a path to some locations range. Can be used, for example, if the attack target is not in range,..."];
   Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="AttackAction::act",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAttackAction.html#ad163cc47f0a282255c89c50d2c39fec6",tooltip="Attack functionality, which performs attacks against target and moves closer to the target if not in ..."];
+  Node3 [label="AttackAction::findPathTo\lTarget",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAttackAction.html#ac867c6e8d4ce94d908fad8c80a13eb5a",tooltip="Finds a path to the target."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="AttackAction::act",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAttackAction.html#ad163cc47f0a282255c89c50d2c39fec6",tooltip="Attack functionality, which performs attacks against target and moves closer to the target if not in ..."];
 }

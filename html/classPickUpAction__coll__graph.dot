@@ -1,0 +1,32 @@
+digraph "PickUpAction"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{PickUpAction\n||+ PickUpAction()\l+ ~PickUpAction()\l+ act()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Special case of MoveAction where, at the end, the actor picks up an item."];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{MoveAction\n||+ MoveAction()\l+ ~MoveAction()\l+ getTarget()\l+ act()\l+ getActionInfo()\l+ getMoveTime()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMoveAction.html",tooltip="Action used for moving."];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node3 [label="{Action\n||+ Action()\l+ ~Action()\l+ getStartTime()\l+ getActionTime()\l+ getActionType()\l+ getActionInfo()\l+ isCompleted()\l+ act()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAction.html",tooltip="Represents an action that an entity can perform."];
+  Node4 -> Node3 [color="grey25",fontsize="10",style="solid",label=" #startTimeM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node4 [label="{time_point\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node5 -> Node3 [color="grey25",fontsize="10",style="solid",label=" #actionTimeM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 [label="{milliseconds\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node6 -> Node3 [color="grey25",fontsize="10",style="solid",label=" #actionTypeM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node6 [label="{ActionType\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node7 -> Node3 [color="grey25",fontsize="10",style="solid",label=" #pEntityM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node7 [label="{shared_ptr\< Entity \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node8 -> Node3 [color="grey25",fontsize="10",style="solid",label=" #completedM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node8 [label="{bool\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node9 -> Node2 [color="grey25",fontsize="10",style="solid",label=" #pathM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node9 [label="{vector\< std::pair\<\l int, int \> \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node5 -> Node2 [color="grey25",fontsize="10",style="solid",label=" #actionTimeM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node6 -> Node2 [color="grey25",fontsize="10",style="solid",label=" #actionTypeM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node10 -> Node2 [color="grey25",fontsize="10",style="solid",label=" #targetM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node10 [label="{Coordinates\n||+ Coordinates()\l+ operator==()\l+ distance()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structCoordinates.html",tooltip="Struct for coordinates."];
+  Node11 -> Node10 [color="grey25",fontsize="10",style="solid",label=" +x\n+y\n+z" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node11 [label="{int\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node12 -> Node2 [color="grey25",fontsize="10",style="solid",label=" #nextMoveM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node12 [label="{optional\< Coordinates \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node11 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -targetItemIdM" ,arrowhead="odiamond",fontname="Helvetica"];
+}

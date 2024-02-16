@@ -16,14 +16,14 @@ digraph "MoveAction"
   Node6 [label="{shared_ptr\< Entity \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node7 -> Node2 [color="grey25",fontsize="10",style="solid",label=" #completedM" ,arrowhead="odiamond",fontname="Helvetica"];
   Node7 [label="{bool\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
-  Node8 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -pathM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node8 -> Node1 [color="grey25",fontsize="10",style="solid",label=" #pathM" ,arrowhead="odiamond",fontname="Helvetica"];
   Node8 [label="{vector\< std::pair\<\l int, int \> \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
-  Node4 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -actionTimeM" ,arrowhead="odiamond",fontname="Helvetica"];
-  Node5 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -actionTypeM" ,arrowhead="odiamond",fontname="Helvetica"];
-  Node9 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -targetM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node4 -> Node1 [color="grey25",fontsize="10",style="solid",label=" #actionTimeM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 -> Node1 [color="grey25",fontsize="10",style="solid",label=" #actionTypeM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node9 -> Node1 [color="grey25",fontsize="10",style="solid",label=" #targetM" ,arrowhead="odiamond",fontname="Helvetica"];
   Node9 [label="{Coordinates\n||+ Coordinates()\l+ operator==()\l+ distance()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structCoordinates.html",tooltip="Struct for coordinates."];
   Node10 -> Node9 [color="grey25",fontsize="10",style="solid",label=" +x\n+y\n+z" ,arrowhead="odiamond",fontname="Helvetica"];
   Node10 [label="{int\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
-  Node11 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -nextMoveM" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node11 -> Node1 [color="grey25",fontsize="10",style="solid",label=" #nextMoveM" ,arrowhead="odiamond",fontname="Helvetica"];
   Node11 [label="{optional\< Coordinates \>\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
 }

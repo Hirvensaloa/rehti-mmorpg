@@ -36,6 +36,8 @@ public:
      */
     std::string getChatResponse();
 
+    void addRandomItemToInventory();
+
 private:
     std::vector<std::string> chatResponsesM;
 };

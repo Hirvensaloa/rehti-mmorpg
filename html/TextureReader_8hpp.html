@@ -164,16 +164,16 @@ Functions</h2></td></tr>
 <tr class="memitem:a7f962298cc265201d8af32486a80494a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="TextureReader_8hpp.html#a7f962298cc265201d8af32486a80494a">loadMapTexturePositions</a> ()</td></tr>
 <tr class="memdesc:a7f962298cc265201d8af32486a80494a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads map texture positions. E.g. which tile contains which texture.  <a href="TextureReader_8hpp.html#a7f962298cc265201d8af32486a80494a">More...</a><br /></td></tr>
 <tr class="separator:a7f962298cc265201d8af32486a80494a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a636fa7589e29d10011a40e3a81c7bca0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structImageData.html">ImageData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="TextureReader_8hpp.html#a636fa7589e29d10011a40e3a81c7bca0">createAreaBlendMap</a> (const std::vector&lt; std::vector&lt; int &gt;&gt; &amp;mapTexturePositionMatrix, int columnOffset, int rowOffset)</td></tr>
-<tr class="memdesc:a636fa7589e29d10011a40e3a81c7bca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a blend map for one area. Blend map shows which texture is used on each tile.  <a href="TextureReader_8hpp.html#a636fa7589e29d10011a40e3a81c7bca0">More...</a><br /></td></tr>
-<tr class="separator:a636fa7589e29d10011a40e3a81c7bca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71e8e76c67380577371c15e2a86506c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structImageData.html">ImageData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="TextureReader_8hpp.html#a71e8e76c67380577371c15e2a86506c9">createAreaBlendMap</a> (const std::vector&lt; std::vector&lt; int &gt;&gt; &amp;mapTexturePositionMatrix, int rowOffset, int columnOffset)</td></tr>
+<tr class="memdesc:a71e8e76c67380577371c15e2a86506c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a blend map for one area. Blend map shows which texture is used on each tile.  <a href="TextureReader_8hpp.html#a71e8e76c67380577371c15e2a86506c9">More...</a><br /></td></tr>
+<tr class="separator:a71e8e76c67380577371c15e2a86506c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22d2c1121be24c9a32b40cd08e13a1b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structImageData.html">ImageData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="TextureReader_8hpp.html#a22d2c1121be24c9a32b40cd08e13a1b2">loadDefaultTexture</a> ()</td></tr>
 <tr class="memdesc:a22d2c1121be24c9a32b40cd08e13a1b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads default texture into memory.  <a href="TextureReader_8hpp.html#a22d2c1121be24c9a32b40cd08e13a1b2">More...</a><br /></td></tr>
 <tr class="separator:a22d2c1121be24c9a32b40cd08e13a1b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a636fa7589e29d10011a40e3a81c7bca0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a636fa7589e29d10011a40e3a81c7bca0">&#9670;&nbsp;</a></span>createAreaBlendMap()</h2>
+<a id="a71e8e76c67380577371c15e2a86506c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71e8e76c67380577371c15e2a86506c9">&#9670;&nbsp;</a></span>createAreaBlendMap()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -188,13 +188,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>columnOffset</em>, </td>
+          <td class="paramname"><em>rowOffset</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>rowOffset</em>&#160;</td>
+          <td class="paramname"><em>columnOffset</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -209,8 +209,8 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mapTexturePositionMatrix</td><td>Matrix of texture positions with the corresponding texture id </td></tr>
-    <tr><td class="paramname">columnOffset</td><td>Areas column offset in the mapTexturePositionMatrix </td></tr>
-    <tr><td class="paramname">rowOffset</td><td>Areas row offset in the mapTexturePositionMatrix</td></tr>
+    <tr><td class="paramname">rowOffset</td><td>Areas row offset in the mapTexturePositionMatrix </td></tr>
+    <tr><td class="paramname">columnOffset</td><td>Areas column offset in the mapTexturePositionMatrix</td></tr>
   </table>
   </dd>
 </dl>
@@ -218,8 +218,8 @@ Functions</h2></td></tr>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="TextureReader_8hpp_a636fa7589e29d10011a40e3a81c7bca0_icgraph.png" border="0" usemap="#aTextureReader_8hpp_a636fa7589e29d10011a40e3a81c7bca0_icgraph" alt=""/></div>
-<map name="aTextureReader_8hpp_a636fa7589e29d10011a40e3a81c7bca0_icgraph" id="aTextureReader_8hpp_a636fa7589e29d10011a40e3a81c7bca0_icgraph">
+<div class="center"><img src="TextureReader_8hpp_a71e8e76c67380577371c15e2a86506c9_icgraph.png" border="0" usemap="#aTextureReader_8hpp_a71e8e76c67380577371c15e2a86506c9_icgraph" alt=""/></div>
+<map name="aTextureReader_8hpp_a71e8e76c67380577371c15e2a86506c9_icgraph" id="aTextureReader_8hpp_a71e8e76c67380577371c15e2a86506c9_icgraph">
 <area shape="rect" title="Creates a blend map for one area. Blend map shows which texture is used on each tile." alt="" coords="867,5,1025,32"/>
 <area shape="rect" href="classAssetCache.html#a48a445aae3950de86b925f1c560236cc" title="Loads the map area assets data." alt="" coords="588,5,819,32"/>
 <area shape="rect" href="classAssetCache.html#a65f5a313ec992e8d4fd1212272f404d0" title="Loads all the assets into memory." alt="" coords="363,5,540,32"/>

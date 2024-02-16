@@ -1,0 +1,5 @@
+<map id="Map::findPathToRange" name="Map::findPathToRange">
+<area shape="rect" id="node1" title="Finds a path to some locations range. Can be used, for example, if the attack target is not in range,..." alt="" coords="413,13,579,39"/>
+<area shape="rect" id="node2" href="$classAttackAction.html#ac867c6e8d4ce94d908fad8c80a13eb5a" title="Finds a path to the target." alt="" coords="187,5,365,47"/>
+<area shape="rect" id="node3" href="$classAttackAction.html#ad163cc47f0a282255c89c50d2c39fec6" title="Attack functionality, which performs attacks against target and moves closer to the target if not in ..." alt="" coords="5,13,139,39"/>
+</map>

@@ -35,10 +35,10 @@ void PassiveNpc::update()
         }
         else
         {
-            const int notWalk = rand() % 10;
+            const int notWalk = rand() % 20;
             if (!notWalk)
             {
-                setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), Map::getRandomCoordinates(spawnCoordinateBoundsM), this->shared_from_this()));
+                setAction(std::make_shared<MoveAction>(std::chrono::system_clock::now(), Map::getRandomNeighbour(locationM, spawnCoordinateBoundsM), this->shared_from_this()));
             }
         }
     }

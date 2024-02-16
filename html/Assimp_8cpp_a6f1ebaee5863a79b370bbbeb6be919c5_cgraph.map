@@ -1,0 +1,5 @@
+<map id="loadOBJFile" name="loadOBJFile">
+<area shape="rect" id="node1" title="Loads the object from the given path." alt="" coords="5,31,101,57"/>
+<area shape="rect" id="node2" href="$Assimp_8cpp.html#a7cbf60c3304e9dd0f4aa2171ec35c28f" title="Convert aiFace to RehtiGraphics Face." alt="" coords="163,5,270,32"/>
+<area shape="rect" id="node3" href="$Assimp_8cpp.html#af714162056ba854a84fa8ff6ee9ff516" title="Convert aiVector3D to glm::vec3." alt="" coords="149,56,284,83"/>
+</map>

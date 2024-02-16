@@ -6,15 +6,11 @@ digraph "AssetCache::loadItemAssetData"
   rankdir="LR";
   Node1 [label="AssetCache::loadItemAssetData",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Loads the item assets data."];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="aiFaceVectorToFaceVector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#aaab18d6f2188530eb4622a96323262f0",tooltip="Convert vector of aiFace to vector of RehtiGraphics Faces."];
-  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="aiFaceToFace",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#a7cbf60c3304e9dd0f4aa2171ec35c28f",tooltip="Convert aiFace to RehtiGraphics Face."];
-  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="aiVector3DVectorToVertex\lVector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#a9ddad02911e2eec37c2ade7bb7d97e3d",tooltip="Convert vector of aiVector3D to vector of Vertex."];
-  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="aiVector3DToVertex",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#ad5612bf8567030f4f54822987bc925c4",tooltip="Convert aiVector3D to Vertex."];
-  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="loadItemTextures",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$TextureReader_8cpp.html#aab95b589b7d0b99042485c8496696635",tooltip="Reads all the item object textures and item icons into a map (key=filename, value=ImageData)"];
-  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node7 [label="loadOBJFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#ad1fec01f0d6059e5e66dcf2bd0840137",tooltip="Loads the object from the given path."];
+  Node2 [label="loadItemTextures",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$TextureReader_8cpp.html#aab95b589b7d0b99042485c8496696635",tooltip="Reads all the item object textures and item icons into a map (key=filename, value=ImageData)"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="loadOBJFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#a6f1ebaee5863a79b370bbbeb6be919c5",tooltip="Loads the object from the given path."];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="aiFaceToFace",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#a7cbf60c3304e9dd0f4aa2171ec35c28f",tooltip="Convert aiFace to RehtiGraphics Face."];
+  Node3 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="aiVector3DToGlm",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Assimp_8cpp.html#af714162056ba854a84fa8ff6ee9ff516",tooltip="Convert aiVector3D to glm::vec3."];
 }

@@ -1,0 +1,4 @@
+<map id="Equipment::unequip" name="Equipment::unequip">
+<area shape="rect" id="node1" title="Unequip item from slot." alt="" coords="243,5,395,32"/>
+<area shape="rect" id="node2" href="$classPlayerCharacter.html#a5ab0ca121121136eb108cb2d5113aaab" title="Function that drops player&#39;s items and sets an active RespawnAction. Called when player dies." alt="" coords="5,5,195,32"/>
+</map>

@@ -98,7 +98,7 @@ Collaboration diagram for Client:</div>
 <div class="dyncontent">
 <div class="center"><img src="classClient__coll__graph.png" border="0" usemap="#aClient_coll__map" alt="Collaboration graph"/></div>
 <map name="aClient_coll__map" id="aClient_coll__map">
-<area shape="rect" title=" " alt="" coords="4845,1980,5014,2248"/>
+<area shape="rect" title=" " alt="" coords="4845,1980,5014,2263"/>
 <area shape="rect" title=" " alt="" coords="572,1253,695,1331"/>
 <area shape="rect" title=" " alt="" coords="719,1253,809,1331"/>
 <area shape="rect" title=" " alt="" coords="834,1253,977,1331"/>
@@ -191,6 +191,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0dfd50dbe59821fc99489c425d80066b"><td class="memItemLeft" align="right" valign="top">boost::asio::awaitable&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClient.html#a0dfd50dbe59821fc99489c425d80066b">interactWithObject</a> (const int &amp;objectId)</td></tr>
 <tr class="memdesc:a0dfd50dbe59821fc99489c425d80066b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends an object interaction message to the server.  <a href="classClient.html#a0dfd50dbe59821fc99489c425d80066b">More...</a><br /></td></tr>
 <tr class="separator:a0dfd50dbe59821fc99489c425d80066b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a488bdfe038fb7b96ce82da0081213f87"><td class="memItemLeft" align="right" valign="top">boost::asio::awaitable&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClient.html#a488bdfe038fb7b96ce82da0081213f87">pickUpItem</a> (const int &amp;itemId, const int &amp;x, const int &amp;y)</td></tr>
+<tr class="memdesc:a488bdfe038fb7b96ce82da0081213f87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a PickUpItemMessage to the server.  <a href="classClient.html#a488bdfe038fb7b96ce82da0081213f87">More...</a><br /></td></tr>
+<tr class="separator:a488bdfe038fb7b96ce82da0081213f87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ab2c62c905b79659c11a276c24dc2a2"><td class="memItemLeft" align="right" valign="top">boost::asio::awaitable&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClient.html#a4ab2c62c905b79659c11a276c24dc2a2">useItem</a> (const int itemInstanceId)</td></tr>
 <tr class="memdesc:a4ab2c62c905b79659c11a276c24dc2a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a UseItemMessage for item with given instance id.  <a href="classClient.html#a4ab2c62c905b79659c11a276c24dc2a2">More...</a><br /></td></tr>
 <tr class="separator:a4ab2c62c905b79659c11a276c24dc2a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -291,96 +294,98 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classClient_ad3e41ed92e71d5c3717db96e68b9541b_cgraph.png" border="0" usemap="#aclassClient_ad3e41ed92e71d5c3717db96e68b9541b_cgraph" alt=""/></div>
 <map name="aclassClient_ad3e41ed92e71d5c3717db96e68b9541b_cgraph" id="aclassClient_ad3e41ed92e71d5c3717db96e68b9541b_cgraph">
-<area shape="rect" title=" " alt="" coords="5,351,112,377"/>
-<area shape="rect" href="classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,351,315,377"/>
-<area shape="rect" href="classRehtiGraphics.html#a1312ef75a7be329c78ff37cd16e7826e" title="Adds an area to the game." alt="" coords="405,5,579,32"/>
-<area shape="rect" href="classRehtiGraphics.html#a2a9176b65dedb70b8fa94ce7aea8643a" title="Adds a bounding box for the world map." alt="" coords="363,56,621,83"/>
-<area shape="rect" href="classRehtiGraphics.html#a3e448f8ad5fd760e066f3be8fd627b48" title="Adds a mouse click callback." alt="" coords="382,107,602,149"/>
-<area shape="rect" href="classClient.html#a7883a1cd2003100d45eae6e670dd7990" title="Send a DropItemMessage for item with given instance id." alt="" coords="429,173,555,200"/>
-<area shape="rect" href="MapReader_8cpp.html#a5f9a1f6a673ebfb7b7fd44bc2e6ef733" title="Loads the area map from the given path." alt="" coords="721,309,848,336"/>
-<area shape="rect" href="MapReader_8cpp.html#a2ac7fa2ac999e004c723cd45b861c13c" title="Loads the height map from the given path." alt="" coords="422,224,562,251"/>
-<area shape="rect" href="classAssetCache.html#abdacc168c27b4b62310653593e3e5807" title="Returns the map of area asset data." alt="" coords="380,325,604,352"/>
-<area shape="rect" href="classAssetCache.html#a68fafbfe086f297006e3ea6fe3def49f" title="Get default texture." alt="" coords="381,376,603,403"/>
-<area shape="rect" href="classRehtiGraphics.html#a0b627360419288947984636e806f1d82" title=" " alt="" coords="410,427,574,453"/>
-<area shape="rect" href="classClient.html#a52e1bc60eed13224e0711a1b067d4738" title="Handles a mouse click hit on the graphics window." alt="" coords="399,275,585,301"/>
-<area shape="rect" href="classAssetCache.html#a65f5a313ec992e8d4fd1212272f404d0" title="Loads all the assets into memory." alt="" coords="403,528,581,555"/>
-<area shape="rect" href="classRehtiGraphics.html#aba5f89e9dc6f91cfef79f525151a067d" title="Starts a rendering loop until the window is closed." alt="" coords="385,579,599,605"/>
-<area shape="rect" href="classClient.html#a5e89bfa822c4f41d5a8f8d4a1269311a" title="Send a UnequipMessage for item with given instance id." alt="" coords="417,629,567,656"/>
-<area shape="rect" href="classClient.html#a4ab2c62c905b79659c11a276c24dc2a2" title="Send a UseItemMessage for item with given instance id." alt="" coords="431,680,553,707"/>
+<area shape="rect" title=" " alt="" coords="5,436,112,463"/>
+<area shape="rect" href="classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,436,315,463"/>
+<area shape="rect" href="classRehtiGraphics.html#a1312ef75a7be329c78ff37cd16e7826e" title="Adds an area to the game." alt="" coords="405,91,579,117"/>
+<area shape="rect" href="classRehtiGraphics.html#a2a9176b65dedb70b8fa94ce7aea8643a" title="Adds a bounding box for the world map." alt="" coords="363,141,621,168"/>
+<area shape="rect" href="classRehtiGraphics.html#a3e448f8ad5fd760e066f3be8fd627b48" title="Adds a mouse click callback." alt="" coords="382,193,602,234"/>
+<area shape="rect" href="classClient.html#a7883a1cd2003100d45eae6e670dd7990" title="Send a DropItemMessage for item with given instance id." alt="" coords="429,259,555,285"/>
+<area shape="rect" href="MapReader_8cpp.html#a5f9a1f6a673ebfb7b7fd44bc2e6ef733" title="Loads the area map from the given path." alt="" coords="721,411,848,437"/>
+<area shape="rect" href="MapReader_8cpp.html#a2ac7fa2ac999e004c723cd45b861c13c" title="Loads the height map from the given path." alt="" coords="422,563,562,589"/>
+<area shape="rect" href="classAssetCache.html#abdacc168c27b4b62310653593e3e5807" title="Returns the map of area asset data." alt="" coords="380,411,604,437"/>
+<area shape="rect" href="classAssetCache.html#a68fafbfe086f297006e3ea6fe3def49f" title="Get default texture." alt="" coords="381,461,603,488"/>
+<area shape="rect" href="classRehtiGraphics.html#a0b627360419288947984636e806f1d82" title=" " alt="" coords="410,512,574,539"/>
+<area shape="rect" href="classClient.html#a52e1bc60eed13224e0711a1b067d4738" title="Handles a mouse click hit on the graphics window." alt="" coords="399,309,585,336"/>
+<area shape="rect" href="classAssetCache.html#a65f5a313ec992e8d4fd1212272f404d0" title="Loads all the assets into memory." alt="" coords="403,651,581,677"/>
+<area shape="rect" href="classRehtiGraphics.html#aba5f89e9dc6f91cfef79f525151a067d" title="Starts a rendering loop until the window is closed." alt="" coords="385,701,599,728"/>
+<area shape="rect" href="classClient.html#a5e89bfa822c4f41d5a8f8d4a1269311a" title="Send a UnequipMessage for item with given instance id." alt="" coords="417,752,567,779"/>
+<area shape="rect" href="classClient.html#a4ab2c62c905b79659c11a276c24dc2a2" title="Send a UseItemMessage for item with given instance id." alt="" coords="431,803,553,829"/>
 <area shape="rect" href="AABB_8cpp.html#a84f9fe626856f524cb482bca08c4f2f2" title="Creates a list of AABBs trees for each area in the areaMatrix." alt="" coords="721,56,848,83"/>
 <area shape="rect" href="AABB_8cpp.html#a8673fc5f0b3d4ca8745793df1c907d7e" title="Recursively creates an AABB tree for a single area." alt="" coords="991,56,1121,83"/>
-<area shape="rect" href="AABB_8cpp.html#a445c2c3a703ab69e974859af3682b1a5" title="Constructs a maximum vector from two vectors." alt="" coords="1281,9,1373,36"/>
-<area shape="rect" href="AABB_8cpp.html#abc4a6a4eceb21ddd3da0192c2953f865" title="Constructs a minimum vector from two vectors." alt="" coords="1283,60,1371,87"/>
-<area shape="rect" href="classRehtiGraphics.html#a1cfaaeadfe98542d6819596175eac875" title="Traces a ray against all bounding boxes, starting with objects, then characters and lastly the map." alt="" coords="1520,153,1707,180"/>
-<area shape="rect" href="classCamera.html#a36cab1c476d0ebaeb8c9a1f29625345b" title="Returns the camera ray in world space." alt="" coords="1797,179,1976,205"/>
-<area shape="rect" href="classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="2046,589,2203,616"/>
-<area shape="rect" href="classRehtiGraphics.html#ad5a1186324dbd1b964c27f8d5397d716" title="Traces a given ray against a given bounding box." alt="" coords="1809,128,1964,155"/>
-<area shape="rect" href="classRehtiGraphics.html#a4446a14b74fa9d30451ed3136b5b966c" title="Checks whether the given bounding box is hit by the given ray." alt="" coords="2047,103,2203,129"/>
-<area shape="rect" href="structAABB.html#a9ce7b09812f868b80a37f6a7b6c6c899" title=" " alt="" coords="2072,153,2177,180"/>
-<area shape="rect" href="rehtiLib_2assets_2reader_2src_2Utils_8cpp.html#aabe32cf7f7f2a7f7154cbceaeafb49a6" title="Reads a matrix from a text file. Values should be separated by commas and rows by newlines." alt="" coords="1252,241,1401,268"/>
-<area shape="rect" href="classClient.html#a0dfd50dbe59821fc99489c425d80066b" title="Sends an object interaction message to the server." alt="" coords="689,259,880,285"/>
-<area shape="rect" href="ItemReader_8cpp.html#a286ea81c3d4e57928c83bbdbb69b21ad" title="Reads items defined in the items.json file and returns them as a GameItems struct...." alt="" coords="739,1017,831,1044"/>
-<area shape="rect" href="ObjectReader_8cpp.html#ad6b3fd19ac4147a4760304254626b9fb" title="Reads objects defined in the objects.json file and returns them as a GameObjects struct." alt="" coords="733,916,837,943"/>
-<area shape="rect" href="SkillReader_8cpp.html#a91ba713ab4fead50c273429c4901350a" title="Fetches the skills from the skills.json file and returns them as a map." alt="" coords="739,360,830,387"/>
-<area shape="rect" href="classAssetCache.html#a48a445aae3950de86b925f1c560236cc" title="Loads the map area assets data." alt="" coords="669,579,900,605"/>
-<area shape="rect" href="classAssetCache.html#ad9b550b38f4ca4b4d1c5dadd54089ad9" title="Loads the character assets data." alt="" coords="686,411,883,453"/>
-<area shape="rect" href="TextureReader_8cpp.html#a22d2c1121be24c9a32b40cd08e13a1b2" title="Loads default texture into memory." alt="" coords="711,477,858,504"/>
-<area shape="rect" href="classAssetCache.html#acd699db149530b94fd54b52cc9047967" title="Loads the game object assets data." alt="" coords="677,647,892,689"/>
-<area shape="rect" href="classAssetCache.html#abda1d5aaa6bafdccb3fc7619c8096d88" title="Loads the item assets data." alt="" coords="669,713,900,740"/>
-<area shape="rect" href="CharacterReader_8cpp.html#a30723b62eb00af0495c7e19e633d9b5a" title="Reads the character data from JSON file." alt="" coords="712,528,857,555"/>
-<area shape="rect" href="structGameItems.html#aa28c24034d12b17b9f85d9c46d9cb9a1" title=" " alt="" coords="1240,941,1413,968"/>
-<area shape="rect" href="ObjectReader_8cpp.html#a6bc2060dc73242d4623b68ae3dd96205" title=" " alt="" coords="972,891,1140,917"/>
-<area shape="rect" href="AnimationReader_8cpp.html#acf7a424ee8d40510f3a350fbfa9f282e" title="Reads animations described in JSON file." alt="" coords="993,992,1119,1019"/>
-<area shape="rect" href="Assimp_8cpp.html#aaab18d6f2188530eb4622a96323262f0" title="Convert vector of aiFace to vector of RehtiGraphics Faces." alt="" coords="962,672,1150,699"/>
-<area shape="rect" href="Assimp_8cpp.html#a9ddad02911e2eec37c2ade7bb7d97e3d" title="Convert vector of aiVector3D to vector of Vertex." alt="" coords="961,774,1151,815"/>
-<area shape="rect" href="TextureReader_8cpp.html#a636fa7589e29d10011a40e3a81c7bca0" title="Creates a blend map for one area. Blend map shows which texture is used on each tile." alt="" coords="977,520,1135,547"/>
-<area shape="rect" href="TextureReader_8cpp.html#a7f962298cc265201d8af32486a80494a" title="Loads map texture positions. E.g. which tile contains which texture." alt="" coords="963,368,1149,395"/>
-<area shape="rect" href="TextureReader_8cpp.html#a55f26d9ad46394d9d0dcaa236bf2c9d6" title="Reads all different the map texture files." alt="" coords="989,571,1123,597"/>
-<area shape="rect" href="Assimp_8cpp.html#ad1fec01f0d6059e5e66dcf2bd0840137" title="Loads the object from the given path." alt="" coords="1008,621,1104,648"/>
-<area shape="rect" href="Assimp_8cpp.html#a7cbf60c3304e9dd0f4aa2171ec35c28f" title="Convert aiFace to RehtiGraphics Face." alt="" coords="1273,660,1380,687"/>
-<area shape="rect" href="Assimp_8cpp.html#ad5612bf8567030f4f54822987bc925c4" title="Convert aiVector3D to Vertex." alt="" coords="1252,781,1401,808"/>
-<area shape="rect" href="TextureReader_8cpp.html#ae3be27d093f96a2f64474704500ae822" title="Reads all the character&#39;s textures into a map (key=filename, value=ImageData)" alt="" coords="972,267,1140,293"/>
-<area shape="rect" href="Assimp_8cpp.html#a815da1a9fca11840a96af6ddd1fafafc" title="Loads the object from the given path." alt="" coords="1005,419,1107,445"/>
-<area shape="rect" href="Assimp_8cpp.html#aec04d4c1442d730b5dd16bce0b52a876" title="Convert aiMatrix4x4 to glm::mat4." alt="" coords="1543,533,1684,560"/>
-<area shape="rect" href="Assimp_8cpp.html#af714162056ba854a84fa8ff6ee9ff516" title="Convert aiVector3D to glm::vec3." alt="" coords="1819,533,1954,560"/>
-<area shape="rect" href="Assimp_8cpp.html#ac7d1323db3bfb183d6e70fab3f431ed6" title="Prints out faulty vertices." alt="" coords="1238,317,1415,344"/>
-<area shape="rect" href="Assimp_8cpp.html#a34a35189f1598429dc9003c820683963" title=" " alt="" coords="1293,368,1360,395"/>
-<area shape="rect" href="Assimp_8cpp.html#af47dad6267e81004b88347e762a705e6" title="Fills the given vectors with hierarchy and bone data." alt="" coords="1279,483,1374,509"/>
-<area shape="rect" href="Assimp_8cpp.html#acb65074d785be3958ddb16a3865228d3" title="Loads animations from the given scene." alt="" coords="1265,419,1389,445"/>
-<area shape="rect" href="Assimp_8cpp.html#a2053055d0e1b287a09d0bd479030df01" title=" " alt="" coords="1544,483,1683,509"/>
-<area shape="rect" href="Assimp_8cpp.html#a49f04ae968a1677ced2c91be115ea8dc" title=" " alt="" coords="1853,280,1921,307"/>
-<area shape="rect" href="BasicTypes_8hpp.html#abeaa9e402d6a6f63c932da7fa203c38c" title=" " alt="" coords="1557,381,1670,408"/>
-<area shape="rect" href="Assimp_8cpp.html#ab9ddfd5d96ddb6ab2180134628abcf3b" title=" " alt="" coords="1530,331,1697,357"/>
-<area shape="rect" href="Assimp_8cpp.html#ab1d32709e6bd0b18a804efcc942fea3c" title=" " alt="" coords="1525,432,1702,459"/>
-<area shape="rect" href="Assimp_8cpp.html#a82d60c84bd6e80bf366a651cd18fb805" title="Convert aiQuaternion to glm::quat." alt="" coords="1813,331,1960,357"/>
-<area shape="rect" href="Assimp_8cpp.html#a3cf31b63f2461c3970db4c1977c7d4bc" title=" " alt="" coords="1800,432,1973,459"/>
-<area shape="rect" href="Assimp_8cpp.html#a83b6795b8d851b9bee5e289c2759b108" title=" " alt="" coords="1820,381,1953,408"/>
-<area shape="rect" href="TextureReader_8cpp.html#adb1dab8a49890c1b2f5a9284ce96cf1e" title="Reads all the object&#39;s textures + character textures into a map (key=filename, value=ImageData)" alt="" coords="983,723,1129,749"/>
-<area shape="rect" href="TextureReader_8cpp.html#aab95b589b7d0b99042485c8496696635" title="Reads all the item object textures and item icons into a map (key=filename, value=ImageData)" alt="" coords="989,840,1123,867"/>
-<area shape="rect" href="MapReader_8cpp.html#a54309908b24ddb8124bb51147ed4ce35" title="Loads the access map from the given path." alt="" coords="985,317,1127,344"/>
-<area shape="rect" href="CharacterReader_8cpp.html#a56581b803e4cb4205c729df269203a3f" title="Check if SpawnCoordinateBounds is valid. Throws error if not." alt="" coords="948,469,1164,496"/>
-<area shape="rect" href="classRehtiGraphics.html#a82d71e93dd76cde425cc34df93cf4723" title="Loops, polls events and draws frames." alt="" coords="692,1148,877,1175"/>
-<area shape="rect" href="classRehtiGraphics.html#ac049915f0d6b38117ece68d74eaec027" title="Draws a frame and records the previous frame time." alt="" coords="959,1148,1153,1175"/>
-<area shape="rect" href="classTimerCallbackSystem.html#a887d675b42267d0775fa9ac6121191d6" title="Elapses time by the given delta time, meaning calling the callbacks with the given delta time." alt="" coords="973,1199,1139,1241"/>
-<area shape="rect" href="classCamera.html#ae44d552243a7b430e94ed9e70adcf07b" title="Returns the forward direction of the camera." alt="" coords="979,1265,1133,1292"/>
-<area shape="rect" href="classRehtiGraphics.html#a06f4b52d37e0e9b7adb86d8e724ba1f0" title="Returns the index of the next frame." alt="" coords="1219,1316,1434,1343"/>
-<area shape="rect" href="classRehtiGraphics.html#a6ce071a893e0edc43841a8d0c01700ed" title="Records the command buffer." alt="" coords="1212,1141,1441,1182"/>
-<area shape="rect" href="classRehtiGraphics.html#a203320e8973b2886132afadb3e2dd7f9" title="Recreates the swapchain." alt="" coords="1221,1250,1432,1291"/>
-<area shape="rect" href="BasicTypes_8hpp.html#ad436010e95d51ba6cac7b17355b1f26b" title=" " alt="" coords="1552,1101,1675,1128"/>
-<area shape="rect" href="classCamera.html#a1d263c318c088257b74934d93b9e3a78" title="Returns the world to screen matrix." alt="" coords="1515,1153,1712,1194"/>
-<area shape="rect" href="classCamera.html#a2f90e661a78172675ca06ea69667b531" title="Returns the view matrix of the camera, which is the inverse of the model matrix of the camera...." alt="" coords="1799,1101,1975,1128"/>
-<area shape="rect" href="Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="2058,1101,2191,1128"/>
-<area shape="rect" href="classRehtiGraphics.html#a1cd5f2629ff675d6c0596aef87192fab" title="Cleans up swapchain related resources. This function is used for easier recreation of the swap chain." alt="" coords="1510,1349,1717,1390"/>
-<area shape="rect" href="classRehtiGraphics.html#a7713292234071d8a2ce195f75fb04cd8" title="Creates the framebuffers." alt="" coords="1489,1415,1737,1441"/>
-<area shape="rect" href="classRehtiGraphics.html#a627450c10409454e21a1e5c7ce28130d" title="Creates the image views." alt="" coords="1512,1218,1715,1259"/>
-<area shape="rect" href="classRehtiGraphics.html#a2c18492cbece076acf3d35ddd1b5d7cb" title="Creates the swapchain." alt="" coords="1515,1283,1712,1325"/>
-<area shape="rect" href="classRehtiGraphics.html#a75ec64c97d7fe08381b9afc797a0e250" title="Chooses a swap extent based on the provided capabilities." alt="" coords="1785,1414,1988,1455"/>
-<area shape="rect" href="classRehtiGraphics.html#af2d71b2ee66f2987bed675ca104cf7e0" title="Chooses a present mode." alt="" coords="1785,1153,1988,1194"/>
-<area shape="rect" href="classRehtiGraphics.html#ac81329a7ed71287a2632b0a17667938c" title="Chooses a surface format." alt="" coords="1785,1218,1988,1259"/>
-<area shape="rect" href="classRehtiGraphics.html#a4153cb9e66212ea84f6e702fc1a331fc" title="Looks for queue families." alt="" coords="1793,1349,1980,1390"/>
-<area shape="rect" href="classRehtiGraphics.html#a24a0247a5de37828a58de2cc93f27fb0" title="Looks for swapchain support." alt="" coords="1790,1283,1983,1325"/>
-<area shape="rect" href="structQueueFamilyIndices.html#a9ea89d103d736bcfbfde0cb19d973e4a" title=" " alt="" coords="2036,1381,2213,1422"/>
-<area shape="rect" href="structQueueFamilyIndices.html#a652cdfabe4719ae21a701e77d57e7899" title=" " alt="" coords="2048,1315,2201,1357"/>
+<area shape="rect" href="AABB_8cpp.html#a445c2c3a703ab69e974859af3682b1a5" title="Constructs a maximum vector from two vectors." alt="" coords="1281,56,1373,83"/>
+<area shape="rect" href="AABB_8cpp.html#abc4a6a4eceb21ddd3da0192c2953f865" title="Constructs a minimum vector from two vectors." alt="" coords="1283,5,1371,32"/>
+<area shape="rect" href="classRehtiGraphics.html#a1cfaaeadfe98542d6819596175eac875" title="Traces a ray against all bounding boxes, starting with objects, then characters and lastly the map." alt="" coords="1520,708,1707,735"/>
+<area shape="rect" href="classCamera.html#a36cab1c476d0ebaeb8c9a1f29625345b" title="Returns the camera ray in world space." alt="" coords="1797,771,1976,797"/>
+<area shape="rect" href="classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="2046,987,2203,1013"/>
+<area shape="rect" href="classRehtiGraphics.html#ad5a1186324dbd1b964c27f8d5397d716" title="Traces a given ray against a given bounding box." alt="" coords="1809,708,1964,735"/>
+<area shape="rect" href="classRehtiGraphics.html#a4446a14b74fa9d30451ed3136b5b966c" title="Checks whether the given bounding box is hit by the given ray." alt="" coords="2047,683,2203,709"/>
+<area shape="rect" href="structAABB.html#a9ce7b09812f868b80a37f6a7b6c6c899" title=" " alt="" coords="2072,733,2177,760"/>
+<area shape="rect" href="rehtiLib_2assets_2reader_2src_2Utils_8cpp.html#aabe32cf7f7f2a7f7154cbceaeafb49a6" title="Reads a matrix from a text file. Values should be separated by commas and rows by newlines." alt="" coords="1252,429,1401,456"/>
+<area shape="rect" href="classClient.html#a4803a7c5331ade167dbea71c01dfe7fb" title="Sends an attack message to the server." alt="" coords="730,360,839,387"/>
+<area shape="rect" href="classClient.html#a0dfd50dbe59821fc99489c425d80066b" title="Sends an object interaction message to the server." alt="" coords="689,157,880,184"/>
+<area shape="rect" href="classClient.html#a68216a3e4b0cd1f2f72388f7bcd77bd7" title="Sends a move message to the server." alt="" coords="732,208,837,235"/>
+<area shape="rect" href="classClient.html#a488bdfe038fb7b96ce82da0081213f87" title="Sends a PickUpItemMessage to the server." alt="" coords="713,259,856,285"/>
+<area shape="rect" href="classClient.html#a1bd5853aea615d870a314ef884d8d5a5" title="Send talk message to the server." alt="" coords="738,309,831,336"/>
+<area shape="rect" href="ItemReader_8cpp.html#a286ea81c3d4e57928c83bbdbb69b21ad" title="Reads items defined in the items.json file and returns them as a GameItems struct...." alt="" coords="739,575,831,601"/>
+<area shape="rect" href="ObjectReader_8cpp.html#ad6b3fd19ac4147a4760304254626b9fb" title="Reads objects defined in the objects.json file and returns them as a GameObjects struct." alt="" coords="733,651,837,677"/>
+<area shape="rect" href="SkillReader_8cpp.html#a91ba713ab4fead50c273429c4901350a" title="Fetches the skills from the skills.json file and returns them as a map." alt="" coords="739,701,830,728"/>
+<area shape="rect" href="classAssetCache.html#a48a445aae3950de86b925f1c560236cc" title="Loads the map area assets data." alt="" coords="669,809,900,836"/>
+<area shape="rect" href="classAssetCache.html#ad9b550b38f4ca4b4d1c5dadd54089ad9" title="Loads the character assets data." alt="" coords="686,874,883,915"/>
+<area shape="rect" href="TextureReader_8cpp.html#a22d2c1121be24c9a32b40cd08e13a1b2" title="Loads default texture into memory." alt="" coords="711,940,858,967"/>
+<area shape="rect" href="classAssetCache.html#acd699db149530b94fd54b52cc9047967" title="Loads the game object assets data." alt="" coords="677,1005,892,1046"/>
+<area shape="rect" href="classAssetCache.html#abda1d5aaa6bafdccb3fc7619c8096d88" title="Loads the item assets data." alt="" coords="669,1071,900,1097"/>
+<area shape="rect" href="CharacterReader_8cpp.html#a30723b62eb00af0495c7e19e633d9b5a" title="Reads the character data from JSON file." alt="" coords="712,512,857,539"/>
+<area shape="rect" href="structGameItems.html#aa28c24034d12b17b9f85d9c46d9cb9a1" title=" " alt="" coords="1240,607,1413,633"/>
+<area shape="rect" href="ObjectReader_8cpp.html#a6bc2060dc73242d4623b68ae3dd96205" title=" " alt="" coords="972,607,1140,633"/>
+<area shape="rect" href="AnimationReader_8cpp.html#acf7a424ee8d40510f3a350fbfa9f282e" title="Reads animations described in JSON file." alt="" coords="993,657,1119,684"/>
+<area shape="rect" href="TextureReader_8cpp.html#a71e8e76c67380577371c15e2a86506c9" title="Creates a blend map for one area. Blend map shows which texture is used on each tile." alt="" coords="977,809,1135,836"/>
+<area shape="rect" href="TextureReader_8cpp.html#a7f962298cc265201d8af32486a80494a" title="Loads map texture positions. E.g. which tile contains which texture." alt="" coords="963,759,1149,785"/>
+<area shape="rect" href="TextureReader_8cpp.html#a55f26d9ad46394d9d0dcaa236bf2c9d6" title="Reads all different the map texture files." alt="" coords="989,860,1123,887"/>
+<area shape="rect" href="Assimp_8cpp.html#a6f1ebaee5863a79b370bbbeb6be919c5" title="Loads the object from the given path." alt="" coords="1008,1063,1104,1089"/>
+<area shape="rect" href="Assimp_8cpp.html#a7cbf60c3304e9dd0f4aa2171ec35c28f" title="Convert aiFace to RehtiGraphics Face." alt="" coords="1273,1063,1380,1089"/>
+<area shape="rect" href="Assimp_8cpp.html#af714162056ba854a84fa8ff6ee9ff516" title="Convert aiVector3D to glm::vec3." alt="" coords="1819,1113,1954,1140"/>
+<area shape="rect" href="TextureReader_8cpp.html#ae3be27d093f96a2f64474704500ae822" title="Reads all the character&#39;s textures into a map (key=filename, value=ImageData)" alt="" coords="972,961,1140,988"/>
+<area shape="rect" href="Assimp_8cpp.html#a815da1a9fca11840a96af6ddd1fafafc" title="Loads the object from the given path." alt="" coords="1005,911,1107,937"/>
+<area shape="rect" href="Assimp_8cpp.html#aec04d4c1442d730b5dd16bce0b52a876" title="Convert aiMatrix4x4 to glm::mat4." alt="" coords="1543,759,1684,785"/>
+<area shape="rect" href="Assimp_8cpp.html#ac7d1323db3bfb183d6e70fab3f431ed6" title="Prints out faulty vertices." alt="" coords="1238,809,1415,836"/>
+<area shape="rect" href="Assimp_8cpp.html#a34a35189f1598429dc9003c820683963" title=" " alt="" coords="1293,860,1360,887"/>
+<area shape="rect" href="Assimp_8cpp.html#af47dad6267e81004b88347e762a705e6" title="Fills the given vectors with hierarchy and bone data." alt="" coords="1279,911,1374,937"/>
+<area shape="rect" href="Assimp_8cpp.html#acb65074d785be3958ddb16a3865228d3" title="Loads animations from the given scene." alt="" coords="1265,961,1389,988"/>
+<area shape="rect" href="Assimp_8cpp.html#a2053055d0e1b287a09d0bd479030df01" title=" " alt="" coords="1544,809,1683,836"/>
+<area shape="rect" href="Assimp_8cpp.html#a49f04ae968a1677ced2c91be115ea8dc" title=" " alt="" coords="1853,911,1921,937"/>
+<area shape="rect" href="BasicTypes_8hpp.html#abeaa9e402d6a6f63c932da7fa203c38c" title=" " alt="" coords="1557,860,1670,887"/>
+<area shape="rect" href="Assimp_8cpp.html#ab9ddfd5d96ddb6ab2180134628abcf3b" title=" " alt="" coords="1530,961,1697,988"/>
+<area shape="rect" href="Assimp_8cpp.html#ab1d32709e6bd0b18a804efcc942fea3c" title=" " alt="" coords="1525,1012,1702,1039"/>
+<area shape="rect" href="Assimp_8cpp.html#a82d60c84bd6e80bf366a651cd18fb805" title="Convert aiQuaternion to glm::quat." alt="" coords="1813,961,1960,988"/>
+<area shape="rect" href="Assimp_8cpp.html#a3cf31b63f2461c3970db4c1977c7d4bc" title=" " alt="" coords="1800,1063,1973,1089"/>
+<area shape="rect" href="Assimp_8cpp.html#a83b6795b8d851b9bee5e289c2759b108" title=" " alt="" coords="1820,1012,1953,1039"/>
+<area shape="rect" href="TextureReader_8cpp.html#adb1dab8a49890c1b2f5a9284ce96cf1e" title="Reads all the object&#39;s textures + character textures into a map (key=filename, value=ImageData)" alt="" coords="983,1113,1129,1140"/>
+<area shape="rect" href="Assimp_8cpp.html#a647777c148522f88db2c6cbb4a398039" title="Loads a double sided tile object." alt="" coords="1007,1012,1105,1039"/>
+<area shape="rect" href="TextureReader_8cpp.html#aab95b589b7d0b99042485c8496696635" title="Reads all the item object textures and item icons into a map (key=filename, value=ImageData)" alt="" coords="989,1164,1123,1191"/>
+<area shape="rect" href="MapReader_8cpp.html#a54309908b24ddb8124bb51147ed4ce35" title="Loads the access map from the given path." alt="" coords="985,455,1127,481"/>
+<area shape="rect" href="CharacterReader_8cpp.html#a56581b803e4cb4205c729df269203a3f" title="Check if SpawnCoordinateBounds is valid. Throws error if not." alt="" coords="948,505,1164,532"/>
+<area shape="rect" href="classRehtiGraphics.html#a82d71e93dd76cde425cc34df93cf4723" title="Loops, polls events and draws frames." alt="" coords="692,1273,877,1300"/>
+<area shape="rect" href="classRehtiGraphics.html#ac049915f0d6b38117ece68d74eaec027" title="Draws a frame and records the previous frame time." alt="" coords="959,1383,1153,1409"/>
+<area shape="rect" href="classTimerCallbackSystem.html#a887d675b42267d0775fa9ac6121191d6" title="Elapses time by the given delta time, meaning calling the callbacks with the given delta time." alt="" coords="973,1266,1139,1307"/>
+<area shape="rect" href="classCamera.html#ae44d552243a7b430e94ed9e70adcf07b" title="Returns the forward direction of the camera." alt="" coords="979,1332,1133,1359"/>
+<area shape="rect" href="classRehtiGraphics.html#a06f4b52d37e0e9b7adb86d8e724ba1f0" title="Returns the index of the next frame." alt="" coords="1219,1383,1434,1409"/>
+<area shape="rect" href="classRehtiGraphics.html#a6ce071a893e0edc43841a8d0c01700ed" title="Records the command buffer." alt="" coords="1212,1317,1441,1358"/>
+<area shape="rect" href="classRehtiGraphics.html#a203320e8973b2886132afadb3e2dd7f9" title="Recreates the swapchain." alt="" coords="1221,1441,1432,1482"/>
+<area shape="rect" href="BasicTypes_8hpp.html#ad436010e95d51ba6cac7b17355b1f26b" title=" " alt="" coords="1552,1265,1675,1292"/>
+<area shape="rect" href="classCamera.html#a1d263c318c088257b74934d93b9e3a78" title="Returns the world to screen matrix." alt="" coords="1515,1317,1712,1358"/>
+<area shape="rect" href="classCamera.html#a2f90e661a78172675ca06ea69667b531" title="Returns the view matrix of the camera, which is the inverse of the model matrix of the camera...." alt="" coords="1799,1295,1975,1321"/>
+<area shape="rect" href="Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="2058,1295,2191,1321"/>
+<area shape="rect" href="classRehtiGraphics.html#a1cd5f2629ff675d6c0596aef87192fab" title="Cleans up swapchain related resources. This function is used for easier recreation of the swap chain." alt="" coords="1510,1382,1717,1423"/>
+<area shape="rect" href="classRehtiGraphics.html#a7713292234071d8a2ce195f75fb04cd8" title="Creates the framebuffers." alt="" coords="1489,1448,1737,1475"/>
+<area shape="rect" href="classRehtiGraphics.html#a627450c10409454e21a1e5c7ce28130d" title="Creates the image views." alt="" coords="1512,1499,1715,1541"/>
+<area shape="rect" href="classRehtiGraphics.html#a2c18492cbece076acf3d35ddd1b5d7cb" title="Creates the swapchain." alt="" coords="1515,1565,1712,1606"/>
+<area shape="rect" href="classRehtiGraphics.html#a75ec64c97d7fe08381b9afc797a0e250" title="Chooses a swap extent based on the provided capabilities." alt="" coords="1785,1434,1988,1475"/>
+<area shape="rect" href="classRehtiGraphics.html#af2d71b2ee66f2987bed675ca104cf7e0" title="Chooses a present mode." alt="" coords="1785,1499,1988,1541"/>
+<area shape="rect" href="classRehtiGraphics.html#ac81329a7ed71287a2632b0a17667938c" title="Chooses a surface format." alt="" coords="1785,1565,1988,1606"/>
+<area shape="rect" href="classRehtiGraphics.html#a4153cb9e66212ea84f6e702fc1a331fc" title="Looks for queue families." alt="" coords="1793,1695,1980,1737"/>
+<area shape="rect" href="classRehtiGraphics.html#a24a0247a5de37828a58de2cc93f27fb0" title="Looks for swapchain support." alt="" coords="1790,1630,1983,1671"/>
+<area shape="rect" href="structQueueFamilyIndices.html#a9ea89d103d736bcfbfde0cb19d973e4a" title=" " alt="" coords="2036,1662,2213,1703"/>
+<area shape="rect" href="structQueueFamilyIndices.html#a652cdfabe4719ae21a701e77d57e7899" title=" " alt="" coords="2048,1727,2201,1769"/>
 </map>
 </div>
 
@@ -410,6 +415,17 @@ Here is the call graph for this function:</div>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classClient_a4803a7c5331ade167dbea71c01dfe7fb_icgraph.png" border="0" usemap="#aclassClient_a4803a7c5331ade167dbea71c01dfe7fb_icgraph" alt=""/></div>
+<map name="aclassClient_a4803a7c5331ade167dbea71c01dfe7fb_icgraph" id="aclassClient_a4803a7c5331ade167dbea71c01dfe7fb_icgraph">
+<area shape="rect" title="Sends an attack message to the server." alt="" coords="597,5,707,32"/>
+<area shape="rect" href="classClient.html#a52e1bc60eed13224e0711a1b067d4738" title="Handles a mouse click hit on the graphics window." alt="" coords="363,5,549,32"/>
+<area shape="rect" href="classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,5,315,32"/>
+<area shape="rect" href="classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="5,5,112,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -516,8 +532,12 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classClient_a52e1bc60eed13224e0711a1b067d4738_cgraph.png" border="0" usemap="#aclassClient_a52e1bc60eed13224e0711a1b067d4738_cgraph" alt=""/></div>
 <map name="aclassClient_a52e1bc60eed13224e0711a1b067d4738_cgraph" id="aclassClient_a52e1bc60eed13224e0711a1b067d4738_cgraph">
-<area shape="rect" title="Handles a mouse click hit on the graphics window." alt="" coords="5,5,192,32"/>
-<area shape="rect" href="classClient.html#a0dfd50dbe59821fc99489c425d80066b" title="Sends an object interaction message to the server." alt="" coords="240,5,431,32"/>
+<area shape="rect" title="Handles a mouse click hit on the graphics window." alt="" coords="5,107,192,133"/>
+<area shape="rect" href="classClient.html#a4803a7c5331ade167dbea71c01dfe7fb" title="Sends an attack message to the server." alt="" coords="281,5,390,32"/>
+<area shape="rect" href="classClient.html#a0dfd50dbe59821fc99489c425d80066b" title="Sends an object interaction message to the server." alt="" coords="240,56,431,83"/>
+<area shape="rect" href="classClient.html#a68216a3e4b0cd1f2f72388f7bcd77bd7" title="Sends a move message to the server." alt="" coords="283,107,388,133"/>
+<area shape="rect" href="classClient.html#a488bdfe038fb7b96ce82da0081213f87" title="Sends a PickUpItemMessage to the server." alt="" coords="264,157,407,184"/>
+<area shape="rect" href="classClient.html#a1bd5853aea615d870a314ef884d8d5a5" title="Send talk message to the server." alt="" coords="289,208,382,235"/>
 </map>
 </div>
 <div class="dynheader">
@@ -635,6 +655,72 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classClient_a68216a3e4b0cd1f2f72388f7bcd77bd7_icgraph.png" border="0" usemap="#aclassClient_a68216a3e4b0cd1f2f72388f7bcd77bd7_icgraph" alt=""/></div>
+<map name="aclassClient_a68216a3e4b0cd1f2f72388f7bcd77bd7_icgraph" id="aclassClient_a68216a3e4b0cd1f2f72388f7bcd77bd7_icgraph">
+<area shape="rect" title="Sends a move message to the server." alt="" coords="597,5,703,32"/>
+<area shape="rect" href="classClient.html#a52e1bc60eed13224e0711a1b067d4738" title="Handles a mouse click hit on the graphics window." alt="" coords="363,5,549,32"/>
+<area shape="rect" href="classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,5,315,32"/>
+<area shape="rect" href="classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="5,5,112,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a488bdfe038fb7b96ce82da0081213f87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a488bdfe038fb7b96ce82da0081213f87">&#9670;&nbsp;</a></span>pickUpItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boost::asio::awaitable&lt; void &gt; Client::pickUpItem </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>itemId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sends a PickUpItemMessage to the server. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">itemId</td><td>instance id of the item to be picked up </td></tr>
+    <tr><td class="paramname">x</td><td>x coordinate of the item </td></tr>
+    <tr><td class="paramname">y</td><td>y coordinate of the item </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classClient_a488bdfe038fb7b96ce82da0081213f87_icgraph.png" border="0" usemap="#aclassClient_a488bdfe038fb7b96ce82da0081213f87_icgraph" alt=""/></div>
+<map name="aclassClient_a488bdfe038fb7b96ce82da0081213f87_icgraph" id="aclassClient_a488bdfe038fb7b96ce82da0081213f87_icgraph">
+<area shape="rect" title="Sends a PickUpItemMessage to the server." alt="" coords="597,5,740,32"/>
+<area shape="rect" href="classClient.html#a52e1bc60eed13224e0711a1b067d4738" title="Handles a mouse click hit on the graphics window." alt="" coords="363,5,549,32"/>
+<area shape="rect" href="classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,5,315,32"/>
+<area shape="rect" href="classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="5,5,112,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -659,29 +745,31 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classClient_afebeedfe876105645a3937b4ee2058df_cgraph.png" border="0" usemap="#aclassClient_afebeedfe876105645a3937b4ee2058df_cgraph" alt=""/></div>
 <map name="aclassClient_afebeedfe876105645a3937b4ee2058df_cgraph" id="aclassClient_afebeedfe876105645a3937b4ee2058df_cgraph">
-<area shape="rect" title="Processes messages from the server." alt="" coords="5,317,188,344"/>
-<area shape="rect" href="client_2src_2Utils_8cpp.html#a8ef2bf38324ca6a2089bd5306b4c671b" title="Convert action to animation config." alt="" coords="261,23,445,49"/>
-<area shape="rect" href="classRehtiGraphics.html#ac817516ac285d8b37e44ed594a903bd1" title="Adds a character object with the given id to the graphics backend. Also creates a bounding box for th..." alt="" coords="249,91,457,133"/>
-<area shape="rect" href="classRehtiGraphics.html#a8619a3e0907702692d70355cc8a8eea6" title="Plays an animation for the given character." alt="" coords="537,208,753,235"/>
-<area shape="rect" href="classRehtiGraphics.html#aea4a763d818fd3095763798d5b4b0c24" title="Adds a game object with the given id to the graphics backend. Also creates a bounding box for the obj..." alt="" coords="532,157,759,184"/>
-<area shape="rect" href="classRehtiGraphics.html#aa0fe4714ffc957fc647c4e392397e3f5" title="Forces character to the given location, cancelling any remaining movement callbacks and animations." alt="" coords="519,492,772,519"/>
-<area shape="rect" href="classAssetCache.html#acd735b6ac54f7994b6092eb88f4e56d9" title="Returns the character asset data by type id." alt="" coords="258,310,449,351"/>
-<area shape="rect" href="classRehtiGraphics.html#a0b627360419288947984636e806f1d82" title=" " alt="" coords="271,376,435,403"/>
-<area shape="rect" href="classAssetCache.html#a68b5da460af29dca4e38a17772d7bc9d" title="Returns the object asset data by type id." alt="" coords="251,427,456,469"/>
-<area shape="rect" href="classRehtiGraphics.html#ac24939dc0395b9a5c70eb35d3fd3947f" title="Moves character to the given location in the given time. Automatically sets the running animation and..." alt="" coords="535,324,756,351"/>
-<area shape="rect" href="classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5" title="Moves the player to the given location in the given time. Also automatically rotates the player to fa..." alt="" coords="546,259,745,285"/>
-<area shape="rect" href="classRehtiGraphics.html#aa13261cd00ba944bb91da701e74fadfa" title="Removes a character object with the given id from the graphics backend." alt="" coords="236,595,471,637"/>
-<area shape="rect" href="classAssetCache.html#ad31c13741259ce09f6bd7fe8a8ba083b" title="Returns the singleton instance of the AssetCache." alt="" coords="554,5,737,32"/>
-<area shape="rect" href="Camera_8hpp.html#ac57ad755be51ffc9cc41b032426ba68b" title=" " alt="" coords="578,107,713,133"/>
-<area shape="rect" href="classCamera.html#a7e5afa229f8c473b74d4984e0663cc8f" title="Sets the camera target to the given location and moves camera by the same amount." alt="" coords="833,77,1051,104"/>
-<area shape="rect" href="classTimerCallbackSystem.html#af8ea3ade97f14ca226c625ad4d70f90b" title="Adds a new timer callback for the given id." alt="" coords="859,317,1025,358"/>
-<area shape="rect" href="classTimerCallbackSystem.html#add46c4d14ad6d925b927c7d5720f5e6d" title="Forces the callback to be completed with the time left in the timer and removes it from the system." alt="" coords="859,251,1025,293"/>
-<area shape="rect" href="BasicTypes_8hpp.html#abeaa9e402d6a6f63c932da7fa203c38c" title=" " alt="" coords="885,149,999,176"/>
-<area shape="rect" href="Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="875,200,1009,227"/>
-<area shape="rect" href="classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="1112,52,1269,79"/>
-<area shape="rect" href="classCamera.html#a4e5c1cba3172130eaff779eca5ff5af9" title="Sets the camera location to the given location." alt="" coords="1113,103,1269,129"/>
-<area shape="rect" href="classTimerCallbackSystem.html#abbe5757fb1797f2e2bb229a28023201f" title="Immediately forces the removal of the callback with the given id, without finishing the remaining tim..." alt="" coords="859,485,1025,526"/>
-<area shape="rect" href="classRehtiGraphics.html#a1a332491febf46b86750d5d73e3e97ad" title="Helper function to move a bounding box." alt="" coords="820,383,1064,409"/>
+<area shape="rect" title="Processes messages from the server." alt="" coords="5,436,188,463"/>
+<area shape="rect" href="client_2src_2Utils_8cpp.html#a8ef2bf38324ca6a2089bd5306b4c671b" title="Convert action to animation config." alt="" coords="271,27,455,53"/>
+<area shape="rect" href="classRehtiGraphics.html#ac817516ac285d8b37e44ed594a903bd1" title="Adds a character object with the given id to the graphics backend. Also creates a bounding box for th..." alt="" coords="259,110,467,151"/>
+<area shape="rect" href="classRehtiGraphics.html#a8619a3e0907702692d70355cc8a8eea6" title="Plays an animation for the given character." alt="" coords="551,157,767,184"/>
+<area shape="rect" href="classRehtiGraphics.html#aea4a763d818fd3095763798d5b4b0c24" title="Adds a game object with the given id to the graphics backend. Also creates a bounding box for the obj..." alt="" coords="546,528,773,555"/>
+<area shape="rect" href="classRehtiGraphics.html#aa0fe4714ffc957fc647c4e392397e3f5" title="Forces character to the given location, cancelling any remaining movement callbacks and animations." alt="" coords="236,385,489,412"/>
+<area shape="rect" href="classAssetCache.html#acd735b6ac54f7994b6092eb88f4e56d9" title="Returns the character asset data by type id." alt="" coords="267,487,458,529"/>
+<area shape="rect" href="classRehtiGraphics.html#a0b627360419288947984636e806f1d82" title=" " alt="" coords="281,553,445,580"/>
+<area shape="rect" href="classAssetCache.html#a5df0f44a704c56a67d6fda012ce7e033" title="Returns the item asset data by type id." alt="" coords="266,605,459,646"/>
+<area shape="rect" href="classAssetCache.html#a68b5da460af29dca4e38a17772d7bc9d" title="Returns the object asset data by type id." alt="" coords="260,670,465,711"/>
+<area shape="rect" href="classRehtiGraphics.html#ac24939dc0395b9a5c70eb35d3fd3947f" title="Moves character smoothly (without animation) to the given location in the given time." alt="" coords="252,335,473,361"/>
+<area shape="rect" href="classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5" title="Moves the player smoothly (without animation) to the given location in the given time." alt="" coords="263,259,462,285"/>
+<area shape="rect" href="classRehtiGraphics.html#aa13261cd00ba944bb91da701e74fadfa" title="Removes a character object with the given id from the graphics backend." alt="" coords="245,735,480,777"/>
+<area shape="rect" href="classRehtiGraphics.html#a502e80a4a1160728cd5a38b3bccc3900" title="Removes a game object with the given id from the graphics backend." alt="" coords="257,801,468,842"/>
+<area shape="rect" href="classAssetCache.html#ad31c13741259ce09f6bd7fe8a8ba083b" title="Returns the singleton instance of the AssetCache." alt="" coords="568,5,751,32"/>
+<area shape="rect" href="Camera_8hpp.html#ac57ad755be51ffc9cc41b032426ba68b" title=" " alt="" coords="592,56,727,83"/>
+<area shape="rect" href="classCamera.html#a7e5afa229f8c473b74d4984e0663cc8f" title="Sets the camera target to the given location and moves camera by the same amount." alt="" coords="551,107,768,133"/>
+<area shape="rect" href="classTimerCallbackSystem.html#af8ea3ade97f14ca226c625ad4d70f90b" title="Adds a new timer callback for the given id." alt="" coords="829,209,995,250"/>
+<area shape="rect" href="classTimerCallbackSystem.html#add46c4d14ad6d925b927c7d5720f5e6d" title="Forces the callback to be completed with the time left in the timer and removes it from the system." alt="" coords="829,274,995,315"/>
+<area shape="rect" href="BasicTypes_8hpp.html#abeaa9e402d6a6f63c932da7fa203c38c" title=" " alt="" coords="855,157,969,184"/>
+<area shape="rect" href="Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="845,433,979,460"/>
+<area shape="rect" href="classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="833,56,991,83"/>
+<area shape="rect" href="classCamera.html#a4e5c1cba3172130eaff779eca5ff5af9" title="Sets the camera location to the given location." alt="" coords="834,107,990,133"/>
+<area shape="rect" href="classTimerCallbackSystem.html#abbe5757fb1797f2e2bb229a28023201f" title="Immediately forces the removal of the callback with the given id, without finishing the remaining tim..." alt="" coords="577,462,742,503"/>
+<area shape="rect" href="classRehtiGraphics.html#a1a332491febf46b86750d5d73e3e97ad" title="Helper function to move a bounding box." alt="" coords="537,411,781,437"/>
 </map>
 </div>
 <div class="dynheader">
@@ -718,32 +806,34 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classClient_a742373e08a80d993d2651b6fff76f5b9_cgraph.png" border="0" usemap="#aclassClient_a742373e08a80d993d2651b6fff76f5b9_cgraph" alt=""/></div>
 <map name="aclassClient_a742373e08a80d993d2651b6fff76f5b9_cgraph" id="aclassClient_a742373e08a80d993d2651b6fff76f5b9_cgraph">
-<area shape="rect" title="Starts the client." alt="" coords="5,291,104,317"/>
-<area shape="rect" href="classClient.html#a2272f9cb1fc79751fa31ab777c862385" title="Connects to the server." alt="" coords="184,136,303,163"/>
-<area shape="rect" href="classClient.html#afebeedfe876105645a3937b4ee2058df" title="Processes messages from the server." alt="" coords="152,316,335,343"/>
-<area shape="rect" href="classClient.html#a53b6b98d3802205726318ffc6fda5bb0" title="Prompts user for login information and sends a LoginMessage with that information...." alt="" coords="450,5,550,32"/>
-<area shape="rect" href="client_2src_2Utils_8cpp.html#a8ef2bf38324ca6a2089bd5306b4c671b" title="Convert action to animation config." alt="" coords="408,123,592,149"/>
-<area shape="rect" href="classRehtiGraphics.html#ac817516ac285d8b37e44ed594a903bd1" title="Adds a character object with the given id to the graphics backend. Also creates a bounding box for th..." alt="" coords="396,174,604,215"/>
-<area shape="rect" href="classRehtiGraphics.html#a8619a3e0907702692d70355cc8a8eea6" title="Plays an animation for the given character." alt="" coords="684,291,900,317"/>
-<area shape="rect" href="classRehtiGraphics.html#aea4a763d818fd3095763798d5b4b0c24" title="Adds a game object with the given id to the graphics backend. Also creates a bounding box for the obj..." alt="" coords="679,240,905,267"/>
-<area shape="rect" href="classRehtiGraphics.html#aa0fe4714ffc957fc647c4e392397e3f5" title="Forces character to the given location, cancelling any remaining movement callbacks and animations." alt="" coords="665,575,919,601"/>
-<area shape="rect" href="classAssetCache.html#acd735b6ac54f7994b6092eb88f4e56d9" title="Returns the character asset data by type id." alt="" coords="405,393,595,434"/>
-<area shape="rect" href="classRehtiGraphics.html#a0b627360419288947984636e806f1d82" title=" " alt="" coords="418,459,582,485"/>
-<area shape="rect" href="classAssetCache.html#a68b5da460af29dca4e38a17772d7bc9d" title="Returns the object asset data by type id." alt="" coords="397,510,603,551"/>
-<area shape="rect" href="classRehtiGraphics.html#ac24939dc0395b9a5c70eb35d3fd3947f" title="Moves character to the given location in the given time. Automatically sets the running animation and..." alt="" coords="681,407,903,433"/>
-<area shape="rect" href="classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5" title="Moves the player to the given location in the given time. Also automatically rotates the player to fa..." alt="" coords="693,341,891,368"/>
-<area shape="rect" href="classRehtiGraphics.html#aa13261cd00ba944bb91da701e74fadfa" title="Removes a character object with the given id from the graphics backend." alt="" coords="383,57,617,98"/>
-<area shape="rect" href="classAssetCache.html#ad31c13741259ce09f6bd7fe8a8ba083b" title="Returns the singleton instance of the AssetCache." alt="" coords="701,88,883,115"/>
-<area shape="rect" href="Camera_8hpp.html#ac57ad755be51ffc9cc41b032426ba68b" title=" " alt="" coords="725,189,859,216"/>
-<area shape="rect" href="classCamera.html#a7e5afa229f8c473b74d4984e0663cc8f" title="Sets the camera target to the given location and moves camera by the same amount." alt="" coords="980,160,1197,187"/>
-<area shape="rect" href="classTimerCallbackSystem.html#af8ea3ade97f14ca226c625ad4d70f90b" title="Adds a new timer callback for the given id." alt="" coords="1006,399,1171,441"/>
-<area shape="rect" href="classTimerCallbackSystem.html#add46c4d14ad6d925b927c7d5720f5e6d" title="Forces the callback to be completed with the time left in the timer and removes it from the system." alt="" coords="1006,334,1171,375"/>
-<area shape="rect" href="BasicTypes_8hpp.html#abeaa9e402d6a6f63c932da7fa203c38c" title=" " alt="" coords="1032,232,1145,259"/>
-<area shape="rect" href="Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="1022,283,1155,309"/>
-<area shape="rect" href="classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="1259,135,1416,161"/>
-<area shape="rect" href="classCamera.html#a4e5c1cba3172130eaff779eca5ff5af9" title="Sets the camera location to the given location." alt="" coords="1259,185,1415,212"/>
-<area shape="rect" href="classTimerCallbackSystem.html#abbe5757fb1797f2e2bb229a28023201f" title="Immediately forces the removal of the callback with the given id, without finishing the remaining tim..." alt="" coords="1006,567,1171,609"/>
-<area shape="rect" href="classRehtiGraphics.html#a1a332491febf46b86750d5d73e3e97ad" title="Helper function to move a bounding box." alt="" coords="967,465,1211,492"/>
+<area shape="rect" title="Starts the client." alt="" coords="5,352,104,379"/>
+<area shape="rect" href="classClient.html#a2272f9cb1fc79751fa31ab777c862385" title="Connects to the server." alt="" coords="184,167,303,193"/>
+<area shape="rect" href="classClient.html#afebeedfe876105645a3937b4ee2058df" title="Processes messages from the server." alt="" coords="152,377,335,404"/>
+<area shape="rect" href="classClient.html#a53b6b98d3802205726318ffc6fda5bb0" title="Prompts user for login information and sends a LoginMessage with that information...." alt="" coords="459,5,559,32"/>
+<area shape="rect" href="client_2src_2Utils_8cpp.html#a8ef2bf38324ca6a2089bd5306b4c671b" title="Convert action to animation config." alt="" coords="417,188,601,215"/>
+<area shape="rect" href="classRehtiGraphics.html#ac817516ac285d8b37e44ed594a903bd1" title="Adds a character object with the given id to the graphics backend. Also creates a bounding box for th..." alt="" coords="405,341,613,382"/>
+<area shape="rect" href="classRehtiGraphics.html#a8619a3e0907702692d70355cc8a8eea6" title="Plays an animation for the given character." alt="" coords="698,297,914,324"/>
+<area shape="rect" href="classRehtiGraphics.html#aea4a763d818fd3095763798d5b4b0c24" title="Adds a game object with the given id to the graphics backend. Also creates a bounding box for the obj..." alt="" coords="693,243,919,269"/>
+<area shape="rect" href="classRehtiGraphics.html#aa0fe4714ffc957fc647c4e392397e3f5" title="Forces character to the given location, cancelling any remaining movement callbacks and animations." alt="" coords="383,407,636,433"/>
+<area shape="rect" href="classAssetCache.html#acd735b6ac54f7994b6092eb88f4e56d9" title="Returns the character asset data by type id." alt="" coords="414,458,605,499"/>
+<area shape="rect" href="classRehtiGraphics.html#a0b627360419288947984636e806f1d82" title=" " alt="" coords="427,524,591,551"/>
+<area shape="rect" href="classAssetCache.html#a5df0f44a704c56a67d6fda012ce7e033" title="Returns the item asset data by type id." alt="" coords="413,575,606,617"/>
+<area shape="rect" href="classAssetCache.html#a68b5da460af29dca4e38a17772d7bc9d" title="Returns the object asset data by type id." alt="" coords="407,641,612,682"/>
+<area shape="rect" href="classRehtiGraphics.html#ac24939dc0395b9a5c70eb35d3fd3947f" title="Moves character smoothly (without animation) to the given location in the given time." alt="" coords="399,757,620,784"/>
+<area shape="rect" href="classRehtiGraphics.html#ad09a8e4ec5d0f6e8d48159c30430ffd5" title="Moves the player smoothly (without animation) to the given location in the given time." alt="" coords="410,707,609,733"/>
+<area shape="rect" href="classRehtiGraphics.html#aa13261cd00ba944bb91da701e74fadfa" title="Removes a character object with the given id from the graphics backend." alt="" coords="392,57,627,98"/>
+<area shape="rect" href="classRehtiGraphics.html#a502e80a4a1160728cd5a38b3bccc3900" title="Removes a game object with the given id from the graphics backend." alt="" coords="404,122,615,163"/>
+<area shape="rect" href="classAssetCache.html#ad31c13741259ce09f6bd7fe8a8ba083b" title="Returns the singleton instance of the AssetCache." alt="" coords="715,188,897,215"/>
+<area shape="rect" href="Camera_8hpp.html#ac57ad755be51ffc9cc41b032426ba68b" title=" " alt="" coords="739,348,873,375"/>
+<area shape="rect" href="classCamera.html#a7e5afa229f8c473b74d4984e0663cc8f" title="Sets the camera target to the given location and moves camera by the same amount." alt="" coords="697,484,915,511"/>
+<area shape="rect" href="classTimerCallbackSystem.html#af8ea3ade97f14ca226c625ad4d70f90b" title="Adds a new timer callback for the given id." alt="" coords="976,655,1141,697"/>
+<area shape="rect" href="classTimerCallbackSystem.html#add46c4d14ad6d925b927c7d5720f5e6d" title="Forces the callback to be completed with the time left in the timer and removes it from the system." alt="" coords="976,590,1141,631"/>
+<area shape="rect" href="BasicTypes_8hpp.html#abeaa9e402d6a6f63c932da7fa203c38c" title=" " alt="" coords="1002,297,1115,324"/>
+<area shape="rect" href="Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="992,245,1125,272"/>
+<area shape="rect" href="classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="980,452,1137,479"/>
+<area shape="rect" href="classCamera.html#a4e5c1cba3172130eaff779eca5ff5af9" title="Sets the camera location to the given location." alt="" coords="981,503,1137,529"/>
+<area shape="rect" href="classTimerCallbackSystem.html#abbe5757fb1797f2e2bb229a28023201f" title="Immediately forces the removal of the callback with the given id, without finishing the remaining tim..." alt="" coords="723,399,889,441"/>
+<area shape="rect" href="classRehtiGraphics.html#a1a332491febf46b86750d5d73e3e97ad" title="Helper function to move a bounding box." alt="" coords="684,707,928,733"/>
 </map>
 </div>
 <div class="dynheader">
@@ -779,95 +869,97 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classClient_a7b7406bdc248547627fd669a92b86d6c_cgraph.png" border="0" usemap="#aclassClient_a7b7406bdc248547627fd669a92b86d6c_cgraph" alt=""/></div>
 <map name="aclassClient_a7b7406bdc248547627fd669a92b86d6c_cgraph" id="aclassClient_a7b7406bdc248547627fd669a92b86d6c_cgraph">
-<area shape="rect" title="Starts the graphics library." alt="" coords="5,351,160,377"/>
-<area shape="rect" href="classRehtiGraphics.html#a1312ef75a7be329c78ff37cd16e7826e" title="Adds an area to the game." alt="" coords="250,5,425,32"/>
-<area shape="rect" href="classRehtiGraphics.html#a2a9176b65dedb70b8fa94ce7aea8643a" title="Adds a bounding box for the world map." alt="" coords="208,56,467,83"/>
-<area shape="rect" href="classRehtiGraphics.html#a3e448f8ad5fd760e066f3be8fd627b48" title="Adds a mouse click callback." alt="" coords="227,107,447,149"/>
-<area shape="rect" href="classClient.html#a7883a1cd2003100d45eae6e670dd7990" title="Send a DropItemMessage for item with given instance id." alt="" coords="274,173,401,200"/>
-<area shape="rect" href="MapReader_8cpp.html#a5f9a1f6a673ebfb7b7fd44bc2e6ef733" title="Loads the area map from the given path." alt="" coords="567,309,693,336"/>
-<area shape="rect" href="MapReader_8cpp.html#a2ac7fa2ac999e004c723cd45b861c13c" title="Loads the height map from the given path." alt="" coords="267,224,407,251"/>
-<area shape="rect" href="classAssetCache.html#abdacc168c27b4b62310653593e3e5807" title="Returns the map of area asset data." alt="" coords="225,325,449,352"/>
-<area shape="rect" href="classAssetCache.html#a68fafbfe086f297006e3ea6fe3def49f" title="Get default texture." alt="" coords="226,376,449,403"/>
-<area shape="rect" href="classRehtiGraphics.html#a0b627360419288947984636e806f1d82" title=" " alt="" coords="255,427,419,453"/>
-<area shape="rect" href="classClient.html#a52e1bc60eed13224e0711a1b067d4738" title="Handles a mouse click hit on the graphics window." alt="" coords="244,275,431,301"/>
-<area shape="rect" href="classAssetCache.html#a65f5a313ec992e8d4fd1212272f404d0" title="Loads all the assets into memory." alt="" coords="249,528,426,555"/>
-<area shape="rect" href="classRehtiGraphics.html#aba5f89e9dc6f91cfef79f525151a067d" title="Starts a rendering loop until the window is closed." alt="" coords="230,579,445,605"/>
-<area shape="rect" href="classClient.html#a5e89bfa822c4f41d5a8f8d4a1269311a" title="Send a UnequipMessage for item with given instance id." alt="" coords="262,629,413,656"/>
-<area shape="rect" href="classClient.html#a4ab2c62c905b79659c11a276c24dc2a2" title="Send a UseItemMessage for item with given instance id." alt="" coords="277,680,398,707"/>
+<area shape="rect" title="Starts the graphics library." alt="" coords="5,436,160,463"/>
+<area shape="rect" href="classRehtiGraphics.html#a1312ef75a7be329c78ff37cd16e7826e" title="Adds an area to the game." alt="" coords="250,91,425,117"/>
+<area shape="rect" href="classRehtiGraphics.html#a2a9176b65dedb70b8fa94ce7aea8643a" title="Adds a bounding box for the world map." alt="" coords="208,141,467,168"/>
+<area shape="rect" href="classRehtiGraphics.html#a3e448f8ad5fd760e066f3be8fd627b48" title="Adds a mouse click callback." alt="" coords="227,193,447,234"/>
+<area shape="rect" href="classClient.html#a7883a1cd2003100d45eae6e670dd7990" title="Send a DropItemMessage for item with given instance id." alt="" coords="274,259,401,285"/>
+<area shape="rect" href="MapReader_8cpp.html#a5f9a1f6a673ebfb7b7fd44bc2e6ef733" title="Loads the area map from the given path." alt="" coords="567,411,693,437"/>
+<area shape="rect" href="MapReader_8cpp.html#a2ac7fa2ac999e004c723cd45b861c13c" title="Loads the height map from the given path." alt="" coords="267,563,407,589"/>
+<area shape="rect" href="classAssetCache.html#abdacc168c27b4b62310653593e3e5807" title="Returns the map of area asset data." alt="" coords="225,411,449,437"/>
+<area shape="rect" href="classAssetCache.html#a68fafbfe086f297006e3ea6fe3def49f" title="Get default texture." alt="" coords="226,461,449,488"/>
+<area shape="rect" href="classRehtiGraphics.html#a0b627360419288947984636e806f1d82" title=" " alt="" coords="255,512,419,539"/>
+<area shape="rect" href="classClient.html#a52e1bc60eed13224e0711a1b067d4738" title="Handles a mouse click hit on the graphics window." alt="" coords="244,309,431,336"/>
+<area shape="rect" href="classAssetCache.html#a65f5a313ec992e8d4fd1212272f404d0" title="Loads all the assets into memory." alt="" coords="249,651,426,677"/>
+<area shape="rect" href="classRehtiGraphics.html#aba5f89e9dc6f91cfef79f525151a067d" title="Starts a rendering loop until the window is closed." alt="" coords="230,701,445,728"/>
+<area shape="rect" href="classClient.html#a5e89bfa822c4f41d5a8f8d4a1269311a" title="Send a UnequipMessage for item with given instance id." alt="" coords="262,752,413,779"/>
+<area shape="rect" href="classClient.html#a4ab2c62c905b79659c11a276c24dc2a2" title="Send a UseItemMessage for item with given instance id." alt="" coords="277,803,398,829"/>
 <area shape="rect" href="AABB_8cpp.html#a84f9fe626856f524cb482bca08c4f2f2" title="Creates a list of AABBs trees for each area in the areaMatrix." alt="" coords="567,56,693,83"/>
 <area shape="rect" href="AABB_8cpp.html#a8673fc5f0b3d4ca8745793df1c907d7e" title="Recursively creates an AABB tree for a single area." alt="" coords="837,56,966,83"/>
-<area shape="rect" href="AABB_8cpp.html#a445c2c3a703ab69e974859af3682b1a5" title="Constructs a maximum vector from two vectors." alt="" coords="1126,9,1218,36"/>
-<area shape="rect" href="AABB_8cpp.html#abc4a6a4eceb21ddd3da0192c2953f865" title="Constructs a minimum vector from two vectors." alt="" coords="1128,60,1216,87"/>
-<area shape="rect" href="classRehtiGraphics.html#a1cfaaeadfe98542d6819596175eac875" title="Traces a ray against all bounding boxes, starting with objects, then characters and lastly the map." alt="" coords="1365,153,1552,180"/>
-<area shape="rect" href="classCamera.html#a36cab1c476d0ebaeb8c9a1f29625345b" title="Returns the camera ray in world space." alt="" coords="1643,179,1821,205"/>
-<area shape="rect" href="classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="1891,589,2049,616"/>
-<area shape="rect" href="classRehtiGraphics.html#ad5a1186324dbd1b964c27f8d5397d716" title="Traces a given ray against a given bounding box." alt="" coords="1655,128,1809,155"/>
-<area shape="rect" href="classRehtiGraphics.html#a4446a14b74fa9d30451ed3136b5b966c" title="Checks whether the given bounding box is hit by the given ray." alt="" coords="1892,103,2048,129"/>
-<area shape="rect" href="structAABB.html#a9ce7b09812f868b80a37f6a7b6c6c899" title=" " alt="" coords="1917,153,2023,180"/>
-<area shape="rect" href="rehtiLib_2assets_2reader_2src_2Utils_8cpp.html#aabe32cf7f7f2a7f7154cbceaeafb49a6" title="Reads a matrix from a text file. Values should be separated by commas and rows by newlines." alt="" coords="1097,241,1247,268"/>
-<area shape="rect" href="classClient.html#a0dfd50dbe59821fc99489c425d80066b" title="Sends an object interaction message to the server." alt="" coords="535,259,725,285"/>
-<area shape="rect" href="ItemReader_8cpp.html#a286ea81c3d4e57928c83bbdbb69b21ad" title="Reads items defined in the items.json file and returns them as a GameItems struct...." alt="" coords="584,1017,676,1044"/>
-<area shape="rect" href="ObjectReader_8cpp.html#ad6b3fd19ac4147a4760304254626b9fb" title="Reads objects defined in the objects.json file and returns them as a GameObjects struct." alt="" coords="578,916,682,943"/>
-<area shape="rect" href="SkillReader_8cpp.html#a91ba713ab4fead50c273429c4901350a" title="Fetches the skills from the skills.json file and returns them as a map." alt="" coords="585,360,675,387"/>
-<area shape="rect" href="classAssetCache.html#a48a445aae3950de86b925f1c560236cc" title="Loads the map area assets data." alt="" coords="515,579,745,605"/>
-<area shape="rect" href="classAssetCache.html#ad9b550b38f4ca4b4d1c5dadd54089ad9" title="Loads the character assets data." alt="" coords="531,411,729,453"/>
-<area shape="rect" href="TextureReader_8cpp.html#a22d2c1121be24c9a32b40cd08e13a1b2" title="Loads default texture into memory." alt="" coords="557,477,703,504"/>
-<area shape="rect" href="classAssetCache.html#acd699db149530b94fd54b52cc9047967" title="Loads the game object assets data." alt="" coords="523,647,737,689"/>
-<area shape="rect" href="classAssetCache.html#abda1d5aaa6bafdccb3fc7619c8096d88" title="Loads the item assets data." alt="" coords="515,713,745,740"/>
-<area shape="rect" href="CharacterReader_8cpp.html#a30723b62eb00af0495c7e19e633d9b5a" title="Reads the character data from JSON file." alt="" coords="557,528,703,555"/>
-<area shape="rect" href="structGameItems.html#aa28c24034d12b17b9f85d9c46d9cb9a1" title=" " alt="" coords="1085,941,1259,968"/>
-<area shape="rect" href="ObjectReader_8cpp.html#a6bc2060dc73242d4623b68ae3dd96205" title=" " alt="" coords="817,891,985,917"/>
-<area shape="rect" href="AnimationReader_8cpp.html#acf7a424ee8d40510f3a350fbfa9f282e" title="Reads animations described in JSON file." alt="" coords="839,992,964,1019"/>
-<area shape="rect" href="Assimp_8cpp.html#aaab18d6f2188530eb4622a96323262f0" title="Convert vector of aiFace to vector of RehtiGraphics Faces." alt="" coords="807,672,995,699"/>
-<area shape="rect" href="Assimp_8cpp.html#a9ddad02911e2eec37c2ade7bb7d97e3d" title="Convert vector of aiVector3D to vector of Vertex." alt="" coords="806,774,997,815"/>
-<area shape="rect" href="TextureReader_8cpp.html#a636fa7589e29d10011a40e3a81c7bca0" title="Creates a blend map for one area. Blend map shows which texture is used on each tile." alt="" coords="822,520,981,547"/>
-<area shape="rect" href="TextureReader_8cpp.html#a7f962298cc265201d8af32486a80494a" title="Loads map texture positions. E.g. which tile contains which texture." alt="" coords="809,368,994,395"/>
-<area shape="rect" href="TextureReader_8cpp.html#a55f26d9ad46394d9d0dcaa236bf2c9d6" title="Reads all different the map texture files." alt="" coords="835,571,968,597"/>
-<area shape="rect" href="Assimp_8cpp.html#ad1fec01f0d6059e5e66dcf2bd0840137" title="Loads the object from the given path." alt="" coords="853,621,949,648"/>
-<area shape="rect" href="Assimp_8cpp.html#a7cbf60c3304e9dd0f4aa2171ec35c28f" title="Convert aiFace to RehtiGraphics Face." alt="" coords="1119,660,1225,687"/>
-<area shape="rect" href="Assimp_8cpp.html#ad5612bf8567030f4f54822987bc925c4" title="Convert aiVector3D to Vertex." alt="" coords="1097,781,1247,808"/>
-<area shape="rect" href="TextureReader_8cpp.html#ae3be27d093f96a2f64474704500ae822" title="Reads all the character&#39;s textures into a map (key=filename, value=ImageData)" alt="" coords="817,267,985,293"/>
-<area shape="rect" href="Assimp_8cpp.html#a815da1a9fca11840a96af6ddd1fafafc" title="Loads the object from the given path." alt="" coords="850,419,953,445"/>
-<area shape="rect" href="Assimp_8cpp.html#aec04d4c1442d730b5dd16bce0b52a876" title="Convert aiMatrix4x4 to glm::mat4." alt="" coords="1388,533,1529,560"/>
-<area shape="rect" href="Assimp_8cpp.html#af714162056ba854a84fa8ff6ee9ff516" title="Convert aiVector3D to glm::vec3." alt="" coords="1665,533,1799,560"/>
-<area shape="rect" href="Assimp_8cpp.html#ac7d1323db3bfb183d6e70fab3f431ed6" title="Prints out faulty vertices." alt="" coords="1083,317,1261,344"/>
-<area shape="rect" href="Assimp_8cpp.html#a34a35189f1598429dc9003c820683963" title=" " alt="" coords="1139,368,1205,395"/>
-<area shape="rect" href="Assimp_8cpp.html#af47dad6267e81004b88347e762a705e6" title="Fills the given vectors with hierarchy and bone data." alt="" coords="1125,483,1219,509"/>
-<area shape="rect" href="Assimp_8cpp.html#acb65074d785be3958ddb16a3865228d3" title="Loads animations from the given scene." alt="" coords="1110,419,1234,445"/>
-<area shape="rect" href="Assimp_8cpp.html#a2053055d0e1b287a09d0bd479030df01" title=" " alt="" coords="1389,483,1528,509"/>
-<area shape="rect" href="Assimp_8cpp.html#a49f04ae968a1677ced2c91be115ea8dc" title=" " alt="" coords="1698,280,1766,307"/>
-<area shape="rect" href="BasicTypes_8hpp.html#abeaa9e402d6a6f63c932da7fa203c38c" title=" " alt="" coords="1402,381,1515,408"/>
-<area shape="rect" href="Assimp_8cpp.html#ab9ddfd5d96ddb6ab2180134628abcf3b" title=" " alt="" coords="1375,331,1542,357"/>
-<area shape="rect" href="Assimp_8cpp.html#ab1d32709e6bd0b18a804efcc942fea3c" title=" " alt="" coords="1370,432,1547,459"/>
-<area shape="rect" href="Assimp_8cpp.html#a82d60c84bd6e80bf366a651cd18fb805" title="Convert aiQuaternion to glm::quat." alt="" coords="1659,331,1805,357"/>
-<area shape="rect" href="Assimp_8cpp.html#a3cf31b63f2461c3970db4c1977c7d4bc" title=" " alt="" coords="1645,432,1819,459"/>
-<area shape="rect" href="Assimp_8cpp.html#a83b6795b8d851b9bee5e289c2759b108" title=" " alt="" coords="1665,381,1799,408"/>
-<area shape="rect" href="TextureReader_8cpp.html#adb1dab8a49890c1b2f5a9284ce96cf1e" title="Reads all the object&#39;s textures + character textures into a map (key=filename, value=ImageData)" alt="" coords="828,723,975,749"/>
-<area shape="rect" href="TextureReader_8cpp.html#aab95b589b7d0b99042485c8496696635" title="Reads all the item object textures and item icons into a map (key=filename, value=ImageData)" alt="" coords="834,840,969,867"/>
-<area shape="rect" href="MapReader_8cpp.html#a54309908b24ddb8124bb51147ed4ce35" title="Loads the access map from the given path." alt="" coords="830,317,973,344"/>
-<area shape="rect" href="CharacterReader_8cpp.html#a56581b803e4cb4205c729df269203a3f" title="Check if SpawnCoordinateBounds is valid. Throws error if not." alt="" coords="793,469,1009,496"/>
-<area shape="rect" href="classRehtiGraphics.html#a82d71e93dd76cde425cc34df93cf4723" title="Loops, polls events and draws frames." alt="" coords="537,1148,723,1175"/>
-<area shape="rect" href="classRehtiGraphics.html#ac049915f0d6b38117ece68d74eaec027" title="Draws a frame and records the previous frame time." alt="" coords="804,1148,999,1175"/>
-<area shape="rect" href="classTimerCallbackSystem.html#a887d675b42267d0775fa9ac6121191d6" title="Elapses time by the given delta time, meaning calling the callbacks with the given delta time." alt="" coords="819,1199,984,1241"/>
-<area shape="rect" href="classCamera.html#ae44d552243a7b430e94ed9e70adcf07b" title="Returns the forward direction of the camera." alt="" coords="824,1265,979,1292"/>
-<area shape="rect" href="classRehtiGraphics.html#a06f4b52d37e0e9b7adb86d8e724ba1f0" title="Returns the index of the next frame." alt="" coords="1065,1316,1279,1343"/>
-<area shape="rect" href="classRehtiGraphics.html#a6ce071a893e0edc43841a8d0c01700ed" title="Records the command buffer." alt="" coords="1057,1141,1287,1182"/>
-<area shape="rect" href="classRehtiGraphics.html#a203320e8973b2886132afadb3e2dd7f9" title="Recreates the swapchain." alt="" coords="1067,1250,1277,1291"/>
-<area shape="rect" href="BasicTypes_8hpp.html#ad436010e95d51ba6cac7b17355b1f26b" title=" " alt="" coords="1397,1101,1520,1128"/>
-<area shape="rect" href="classCamera.html#a1d263c318c088257b74934d93b9e3a78" title="Returns the world to screen matrix." alt="" coords="1360,1153,1557,1194"/>
-<area shape="rect" href="classCamera.html#a2f90e661a78172675ca06ea69667b531" title="Returns the view matrix of the camera, which is the inverse of the model matrix of the camera...." alt="" coords="1644,1101,1820,1128"/>
-<area shape="rect" href="Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="1903,1101,2037,1128"/>
-<area shape="rect" href="classRehtiGraphics.html#a1cd5f2629ff675d6c0596aef87192fab" title="Cleans up swapchain related resources. This function is used for easier recreation of the swap chain." alt="" coords="1355,1349,1562,1390"/>
-<area shape="rect" href="classRehtiGraphics.html#a7713292234071d8a2ce195f75fb04cd8" title="Creates the framebuffers." alt="" coords="1335,1415,1583,1441"/>
-<area shape="rect" href="classRehtiGraphics.html#a627450c10409454e21a1e5c7ce28130d" title="Creates the image views." alt="" coords="1357,1218,1560,1259"/>
-<area shape="rect" href="classRehtiGraphics.html#a2c18492cbece076acf3d35ddd1b5d7cb" title="Creates the swapchain." alt="" coords="1360,1283,1557,1325"/>
-<area shape="rect" href="classRehtiGraphics.html#a75ec64c97d7fe08381b9afc797a0e250" title="Chooses a swap extent based on the provided capabilities." alt="" coords="1631,1414,1833,1455"/>
-<area shape="rect" href="classRehtiGraphics.html#af2d71b2ee66f2987bed675ca104cf7e0" title="Chooses a present mode." alt="" coords="1631,1153,1833,1194"/>
-<area shape="rect" href="classRehtiGraphics.html#ac81329a7ed71287a2632b0a17667938c" title="Chooses a surface format." alt="" coords="1631,1218,1833,1259"/>
-<area shape="rect" href="classRehtiGraphics.html#a4153cb9e66212ea84f6e702fc1a331fc" title="Looks for queue families." alt="" coords="1639,1349,1825,1390"/>
-<area shape="rect" href="classRehtiGraphics.html#a24a0247a5de37828a58de2cc93f27fb0" title="Looks for swapchain support." alt="" coords="1635,1283,1829,1325"/>
-<area shape="rect" href="structQueueFamilyIndices.html#a9ea89d103d736bcfbfde0cb19d973e4a" title=" " alt="" coords="1881,1381,2059,1422"/>
-<area shape="rect" href="structQueueFamilyIndices.html#a652cdfabe4719ae21a701e77d57e7899" title=" " alt="" coords="1893,1315,2047,1357"/>
+<area shape="rect" href="AABB_8cpp.html#a445c2c3a703ab69e974859af3682b1a5" title="Constructs a maximum vector from two vectors." alt="" coords="1126,56,1218,83"/>
+<area shape="rect" href="AABB_8cpp.html#abc4a6a4eceb21ddd3da0192c2953f865" title="Constructs a minimum vector from two vectors." alt="" coords="1128,5,1216,32"/>
+<area shape="rect" href="classRehtiGraphics.html#a1cfaaeadfe98542d6819596175eac875" title="Traces a ray against all bounding boxes, starting with objects, then characters and lastly the map." alt="" coords="1365,708,1552,735"/>
+<area shape="rect" href="classCamera.html#a36cab1c476d0ebaeb8c9a1f29625345b" title="Returns the camera ray in world space." alt="" coords="1643,771,1821,797"/>
+<area shape="rect" href="classCamera.html#aa5786f7090ec3569fa729f10a2e64ce1" title="Returns the location of the camera." alt="" coords="1891,987,2049,1013"/>
+<area shape="rect" href="classRehtiGraphics.html#ad5a1186324dbd1b964c27f8d5397d716" title="Traces a given ray against a given bounding box." alt="" coords="1655,708,1809,735"/>
+<area shape="rect" href="classRehtiGraphics.html#a4446a14b74fa9d30451ed3136b5b966c" title="Checks whether the given bounding box is hit by the given ray." alt="" coords="1892,683,2048,709"/>
+<area shape="rect" href="structAABB.html#a9ce7b09812f868b80a37f6a7b6c6c899" title=" " alt="" coords="1917,733,2023,760"/>
+<area shape="rect" href="rehtiLib_2assets_2reader_2src_2Utils_8cpp.html#aabe32cf7f7f2a7f7154cbceaeafb49a6" title="Reads a matrix from a text file. Values should be separated by commas and rows by newlines." alt="" coords="1097,429,1247,456"/>
+<area shape="rect" href="classClient.html#a4803a7c5331ade167dbea71c01dfe7fb" title="Sends an attack message to the server." alt="" coords="575,360,685,387"/>
+<area shape="rect" href="classClient.html#a0dfd50dbe59821fc99489c425d80066b" title="Sends an object interaction message to the server." alt="" coords="535,157,725,184"/>
+<area shape="rect" href="classClient.html#a68216a3e4b0cd1f2f72388f7bcd77bd7" title="Sends a move message to the server." alt="" coords="577,208,683,235"/>
+<area shape="rect" href="classClient.html#a488bdfe038fb7b96ce82da0081213f87" title="Sends a PickUpItemMessage to the server." alt="" coords="559,259,701,285"/>
+<area shape="rect" href="classClient.html#a1bd5853aea615d870a314ef884d8d5a5" title="Send talk message to the server." alt="" coords="583,309,677,336"/>
+<area shape="rect" href="ItemReader_8cpp.html#a286ea81c3d4e57928c83bbdbb69b21ad" title="Reads items defined in the items.json file and returns them as a GameItems struct...." alt="" coords="584,575,676,601"/>
+<area shape="rect" href="ObjectReader_8cpp.html#ad6b3fd19ac4147a4760304254626b9fb" title="Reads objects defined in the objects.json file and returns them as a GameObjects struct." alt="" coords="578,651,682,677"/>
+<area shape="rect" href="SkillReader_8cpp.html#a91ba713ab4fead50c273429c4901350a" title="Fetches the skills from the skills.json file and returns them as a map." alt="" coords="585,701,675,728"/>
+<area shape="rect" href="classAssetCache.html#a48a445aae3950de86b925f1c560236cc" title="Loads the map area assets data." alt="" coords="515,809,745,836"/>
+<area shape="rect" href="classAssetCache.html#ad9b550b38f4ca4b4d1c5dadd54089ad9" title="Loads the character assets data." alt="" coords="531,874,729,915"/>
+<area shape="rect" href="TextureReader_8cpp.html#a22d2c1121be24c9a32b40cd08e13a1b2" title="Loads default texture into memory." alt="" coords="557,940,703,967"/>
+<area shape="rect" href="classAssetCache.html#acd699db149530b94fd54b52cc9047967" title="Loads the game object assets data." alt="" coords="523,1005,737,1046"/>
+<area shape="rect" href="classAssetCache.html#abda1d5aaa6bafdccb3fc7619c8096d88" title="Loads the item assets data." alt="" coords="515,1071,745,1097"/>
+<area shape="rect" href="CharacterReader_8cpp.html#a30723b62eb00af0495c7e19e633d9b5a" title="Reads the character data from JSON file." alt="" coords="557,512,703,539"/>
+<area shape="rect" href="structGameItems.html#aa28c24034d12b17b9f85d9c46d9cb9a1" title=" " alt="" coords="1085,607,1259,633"/>
+<area shape="rect" href="ObjectReader_8cpp.html#a6bc2060dc73242d4623b68ae3dd96205" title=" " alt="" coords="817,607,985,633"/>
+<area shape="rect" href="AnimationReader_8cpp.html#acf7a424ee8d40510f3a350fbfa9f282e" title="Reads animations described in JSON file." alt="" coords="839,657,964,684"/>
+<area shape="rect" href="TextureReader_8cpp.html#a71e8e76c67380577371c15e2a86506c9" title="Creates a blend map for one area. Blend map shows which texture is used on each tile." alt="" coords="822,809,981,836"/>
+<area shape="rect" href="TextureReader_8cpp.html#a7f962298cc265201d8af32486a80494a" title="Loads map texture positions. E.g. which tile contains which texture." alt="" coords="809,759,994,785"/>
+<area shape="rect" href="TextureReader_8cpp.html#a55f26d9ad46394d9d0dcaa236bf2c9d6" title="Reads all different the map texture files." alt="" coords="835,860,968,887"/>
+<area shape="rect" href="Assimp_8cpp.html#a6f1ebaee5863a79b370bbbeb6be919c5" title="Loads the object from the given path." alt="" coords="853,1063,949,1089"/>
+<area shape="rect" href="Assimp_8cpp.html#a7cbf60c3304e9dd0f4aa2171ec35c28f" title="Convert aiFace to RehtiGraphics Face." alt="" coords="1119,1063,1225,1089"/>
+<area shape="rect" href="Assimp_8cpp.html#af714162056ba854a84fa8ff6ee9ff516" title="Convert aiVector3D to glm::vec3." alt="" coords="1665,1113,1799,1140"/>
+<area shape="rect" href="TextureReader_8cpp.html#ae3be27d093f96a2f64474704500ae822" title="Reads all the character&#39;s textures into a map (key=filename, value=ImageData)" alt="" coords="817,961,985,988"/>
+<area shape="rect" href="Assimp_8cpp.html#a815da1a9fca11840a96af6ddd1fafafc" title="Loads the object from the given path." alt="" coords="850,911,953,937"/>
+<area shape="rect" href="Assimp_8cpp.html#aec04d4c1442d730b5dd16bce0b52a876" title="Convert aiMatrix4x4 to glm::mat4." alt="" coords="1388,759,1529,785"/>
+<area shape="rect" href="Assimp_8cpp.html#ac7d1323db3bfb183d6e70fab3f431ed6" title="Prints out faulty vertices." alt="" coords="1083,809,1261,836"/>
+<area shape="rect" href="Assimp_8cpp.html#a34a35189f1598429dc9003c820683963" title=" " alt="" coords="1139,860,1205,887"/>
+<area shape="rect" href="Assimp_8cpp.html#af47dad6267e81004b88347e762a705e6" title="Fills the given vectors with hierarchy and bone data." alt="" coords="1125,911,1219,937"/>
+<area shape="rect" href="Assimp_8cpp.html#acb65074d785be3958ddb16a3865228d3" title="Loads animations from the given scene." alt="" coords="1110,961,1234,988"/>
+<area shape="rect" href="Assimp_8cpp.html#a2053055d0e1b287a09d0bd479030df01" title=" " alt="" coords="1389,809,1528,836"/>
+<area shape="rect" href="Assimp_8cpp.html#a49f04ae968a1677ced2c91be115ea8dc" title=" " alt="" coords="1698,911,1766,937"/>
+<area shape="rect" href="BasicTypes_8hpp.html#abeaa9e402d6a6f63c932da7fa203c38c" title=" " alt="" coords="1402,860,1515,887"/>
+<area shape="rect" href="Assimp_8cpp.html#ab9ddfd5d96ddb6ab2180134628abcf3b" title=" " alt="" coords="1375,961,1542,988"/>
+<area shape="rect" href="Assimp_8cpp.html#ab1d32709e6bd0b18a804efcc942fea3c" title=" " alt="" coords="1370,1012,1547,1039"/>
+<area shape="rect" href="Assimp_8cpp.html#a82d60c84bd6e80bf366a651cd18fb805" title="Convert aiQuaternion to glm::quat." alt="" coords="1659,961,1805,988"/>
+<area shape="rect" href="Assimp_8cpp.html#a3cf31b63f2461c3970db4c1977c7d4bc" title=" " alt="" coords="1645,1063,1819,1089"/>
+<area shape="rect" href="Assimp_8cpp.html#a83b6795b8d851b9bee5e289c2759b108" title=" " alt="" coords="1665,1012,1799,1039"/>
+<area shape="rect" href="TextureReader_8cpp.html#adb1dab8a49890c1b2f5a9284ce96cf1e" title="Reads all the object&#39;s textures + character textures into a map (key=filename, value=ImageData)" alt="" coords="828,1113,975,1140"/>
+<area shape="rect" href="Assimp_8cpp.html#a647777c148522f88db2c6cbb4a398039" title="Loads a double sided tile object." alt="" coords="853,1012,950,1039"/>
+<area shape="rect" href="TextureReader_8cpp.html#aab95b589b7d0b99042485c8496696635" title="Reads all the item object textures and item icons into a map (key=filename, value=ImageData)" alt="" coords="834,1164,969,1191"/>
+<area shape="rect" href="MapReader_8cpp.html#a54309908b24ddb8124bb51147ed4ce35" title="Loads the access map from the given path." alt="" coords="830,455,973,481"/>
+<area shape="rect" href="CharacterReader_8cpp.html#a56581b803e4cb4205c729df269203a3f" title="Check if SpawnCoordinateBounds is valid. Throws error if not." alt="" coords="793,505,1009,532"/>
+<area shape="rect" href="classRehtiGraphics.html#a82d71e93dd76cde425cc34df93cf4723" title="Loops, polls events and draws frames." alt="" coords="537,1273,723,1300"/>
+<area shape="rect" href="classRehtiGraphics.html#ac049915f0d6b38117ece68d74eaec027" title="Draws a frame and records the previous frame time." alt="" coords="804,1383,999,1409"/>
+<area shape="rect" href="classTimerCallbackSystem.html#a887d675b42267d0775fa9ac6121191d6" title="Elapses time by the given delta time, meaning calling the callbacks with the given delta time." alt="" coords="819,1266,984,1307"/>
+<area shape="rect" href="classCamera.html#ae44d552243a7b430e94ed9e70adcf07b" title="Returns the forward direction of the camera." alt="" coords="824,1332,979,1359"/>
+<area shape="rect" href="classRehtiGraphics.html#a06f4b52d37e0e9b7adb86d8e724ba1f0" title="Returns the index of the next frame." alt="" coords="1065,1383,1279,1409"/>
+<area shape="rect" href="classRehtiGraphics.html#a6ce071a893e0edc43841a8d0c01700ed" title="Records the command buffer." alt="" coords="1057,1317,1287,1358"/>
+<area shape="rect" href="classRehtiGraphics.html#a203320e8973b2886132afadb3e2dd7f9" title="Recreates the swapchain." alt="" coords="1067,1441,1277,1482"/>
+<area shape="rect" href="BasicTypes_8hpp.html#ad436010e95d51ba6cac7b17355b1f26b" title=" " alt="" coords="1397,1265,1520,1292"/>
+<area shape="rect" href="classCamera.html#a1d263c318c088257b74934d93b9e3a78" title="Returns the world to screen matrix." alt="" coords="1360,1317,1557,1358"/>
+<area shape="rect" href="classCamera.html#a2f90e661a78172675ca06ea69667b531" title="Returns the view matrix of the camera, which is the inverse of the model matrix of the camera...." alt="" coords="1644,1295,1820,1321"/>
+<area shape="rect" href="Camera_8hpp.html#ab03bb87e5fba3bc2067ea684738a2748" title=" " alt="" coords="1903,1295,2037,1321"/>
+<area shape="rect" href="classRehtiGraphics.html#a1cd5f2629ff675d6c0596aef87192fab" title="Cleans up swapchain related resources. This function is used for easier recreation of the swap chain." alt="" coords="1355,1382,1562,1423"/>
+<area shape="rect" href="classRehtiGraphics.html#a7713292234071d8a2ce195f75fb04cd8" title="Creates the framebuffers." alt="" coords="1335,1448,1583,1475"/>
+<area shape="rect" href="classRehtiGraphics.html#a627450c10409454e21a1e5c7ce28130d" title="Creates the image views." alt="" coords="1357,1499,1560,1541"/>
+<area shape="rect" href="classRehtiGraphics.html#a2c18492cbece076acf3d35ddd1b5d7cb" title="Creates the swapchain." alt="" coords="1360,1565,1557,1606"/>
+<area shape="rect" href="classRehtiGraphics.html#a75ec64c97d7fe08381b9afc797a0e250" title="Chooses a swap extent based on the provided capabilities." alt="" coords="1631,1434,1833,1475"/>
+<area shape="rect" href="classRehtiGraphics.html#af2d71b2ee66f2987bed675ca104cf7e0" title="Chooses a present mode." alt="" coords="1631,1499,1833,1541"/>
+<area shape="rect" href="classRehtiGraphics.html#ac81329a7ed71287a2632b0a17667938c" title="Chooses a surface format." alt="" coords="1631,1565,1833,1606"/>
+<area shape="rect" href="classRehtiGraphics.html#a4153cb9e66212ea84f6e702fc1a331fc" title="Looks for queue families." alt="" coords="1639,1695,1825,1737"/>
+<area shape="rect" href="classRehtiGraphics.html#a24a0247a5de37828a58de2cc93f27fb0" title="Looks for swapchain support." alt="" coords="1635,1630,1829,1671"/>
+<area shape="rect" href="structQueueFamilyIndices.html#a9ea89d103d736bcfbfde0cb19d973e4a" title=" " alt="" coords="1881,1662,2059,1703"/>
+<area shape="rect" href="structQueueFamilyIndices.html#a652cdfabe4719ae21a701e77d57e7899" title=" " alt="" coords="1893,1727,2047,1769"/>
 </map>
 </div>
 <div class="dynheader">
@@ -905,6 +997,17 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classClient_a1bd5853aea615d870a314ef884d8d5a5_icgraph.png" border="0" usemap="#aclassClient_a1bd5853aea615d870a314ef884d8d5a5_icgraph" alt=""/></div>
+<map name="aclassClient_a1bd5853aea615d870a314ef884d8d5a5_icgraph" id="aclassClient_a1bd5853aea615d870a314ef884d8d5a5_icgraph">
+<area shape="rect" title="Send talk message to the server." alt="" coords="597,5,691,32"/>
+<area shape="rect" href="classClient.html#a52e1bc60eed13224e0711a1b067d4738" title="Handles a mouse click hit on the graphics window." alt="" coords="363,5,549,32"/>
+<area shape="rect" href="classClient.html#a7b7406bdc248547627fd669a92b86d6c" title="Starts the graphics library." alt="" coords="160,5,315,32"/>
+<area shape="rect" href="classClient.html#ad3e41ed92e71d5c3717db96e68b9541b" title=" " alt="" coords="5,5,112,32"/>
+</map>
+</div>
 
 </div>
 </div>

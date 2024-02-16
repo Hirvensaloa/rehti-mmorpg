@@ -85,7 +85,9 @@ var files_dup =
     [ "GraphicsTypes.cpp", "GraphicsTypes_8cpp.html", "GraphicsTypes_8cpp" ],
     [ "GraphicsTypes.hpp", "GraphicsTypes_8hpp.html", "GraphicsTypes_8hpp" ],
     [ "Inventory.cpp", "Inventory_8cpp.html", "Inventory_8cpp" ],
-    [ "Inventory.hpp", "Inventory_8hpp.html", "Inventory_8hpp" ],
+    [ "Inventory.hpp", "Inventory_8hpp.html", [
+      [ "Inventory", "classInventory.html", "classInventory" ]
+    ] ],
     [ "Item.cpp", "Item_8cpp.html", null ],
     [ "Item.hpp", "Item_8hpp.html", [
       [ "Item", "classItem.html", "classItem" ]
@@ -129,6 +131,10 @@ var files_dup =
     [ "PassiveNpc.cpp", "PassiveNpc_8cpp.html", null ],
     [ "PassiveNpc.hpp", "PassiveNpc_8hpp.html", [
       [ "PassiveNpc", "classPassiveNpc.html", "classPassiveNpc" ]
+    ] ],
+    [ "PickUpAction.cpp", "PickUpAction_8cpp.html", null ],
+    [ "PickUpAction.hpp", "PickUpAction_8hpp.html", [
+      [ "PickUpAction", "classPickUpAction.html", "classPickUpAction" ]
     ] ],
     [ "PlayerCharacter.cpp", "PlayerCharacter_8cpp.html", null ],
     [ "PlayerCharacter.hpp", "PlayerCharacter_8hpp.html", [

@@ -25,7 +25,7 @@ public:
      * @brief Movement functionality, which finds the shortest path to target location and performs the movement there.
      * Implementation of pure virtual method act() of the base class
      */
-    void act();
+    virtual void act();
 
     /**
      * @brief Get the Move Time object
@@ -41,7 +41,7 @@ public:
      */
     CurrentAction getActionInfo();
 
-private:
+protected:
     Coordinates targetM;
 
     std::vector<std::pair<int, int>> pathM;

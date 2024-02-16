@@ -1,4 +1,8 @@
 <map id="Client::handleMouseClick" name="Client::handleMouseClick">
-<area shape="rect" id="node1" title="Handles a mouse click hit on the graphics window." alt="" coords="5,5,192,32"/>
-<area shape="rect" id="node2" href="$classClient.html#a0dfd50dbe59821fc99489c425d80066b" title="Sends an object interaction message to the server." alt="" coords="240,5,431,32"/>
+<area shape="rect" id="node1" title="Handles a mouse click hit on the graphics window." alt="" coords="5,107,192,133"/>
+<area shape="rect" id="node2" href="$classClient.html#a4803a7c5331ade167dbea71c01dfe7fb" title="Sends an attack message to the server." alt="" coords="281,5,390,32"/>
+<area shape="rect" id="node3" href="$classClient.html#a0dfd50dbe59821fc99489c425d80066b" title="Sends an object interaction message to the server." alt="" coords="240,56,431,83"/>
+<area shape="rect" id="node4" href="$classClient.html#a68216a3e4b0cd1f2f72388f7bcd77bd7" title="Sends a move message to the server." alt="" coords="283,107,388,133"/>
+<area shape="rect" id="node5" href="$classClient.html#a488bdfe038fb7b96ce82da0081213f87" title="Sends a PickUpItemMessage to the server." alt="" coords="264,157,407,184"/>
+<area shape="rect" id="node6" href="$classClient.html#a1bd5853aea615d870a314ef884d8d5a5" title="Send talk message to the server." alt="" coords="289,208,382,235"/>
 </map>

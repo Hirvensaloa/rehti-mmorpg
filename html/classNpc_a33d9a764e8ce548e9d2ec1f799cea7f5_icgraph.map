@@ -1,0 +1,5 @@
+<map id="Npc::addRandomItemToInventory" name="Npc::addRandomItemToInventory">
+<area shape="rect" id="node1" title=" " alt="" coords="164,31,403,57"/>
+<area shape="rect" id="node2" href="$classNpc.html#acc6bbca4c1aac12599be12ffe7289ee4" title=" " alt="" coords="21,5,101,32"/>
+<area shape="rect" id="node3" href="$classNpc.html#afe61dddbd28da6f559a5a6c6b760c81d" title="Respawn the NPC." alt="" coords="5,56,116,83"/>
+</map>

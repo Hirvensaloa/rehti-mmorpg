@@ -1,5 +1,5 @@
 <map id="AggressiveNpc::findClosestPlayer" name="AggressiveNpc::findClosestPlayer">
 <area shape="rect" id="node1" title="Finds the closest player to the AggressiveNpc." alt="" coords="5,23,204,65"/>
-<area shape="rect" id="node2" href="$structCoordinates.html#afd7a34a1bae5f10f5abbde76839a891c" title="Calculate the euclidean distance between two Coordinates." alt="" coords="258,5,421,32"/>
+<area shape="rect" id="node2" href="$structCoordinates.html#aa7abe97b7be5415fa704e5af1b58677c" title="Calculate the euclidean distance between two Coordinates." alt="" coords="258,5,421,32"/>
 <area shape="rect" id="node3" href="$classGameWorld.html#acd967a70218090ebcb533b851375e5e1" title=" " alt="" coords="252,56,427,83"/>
 </map>

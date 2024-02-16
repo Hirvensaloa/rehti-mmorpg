@@ -1,0 +1,6 @@
+<map id="Entity::getLocation" name="Entity::getLocation">
+<area shape="rect" id="node1" title="Get the current location of this entity." alt="" coords="417,31,560,57"/>
+<area shape="rect" id="node2" href="$classEntity.html#aa9a8dc7cd62a7f088230051d677750c1" title="Drop an item." alt="" coords="243,31,369,57"/>
+<area shape="rect" id="node3" href="$classNpc.html#afe61dddbd28da6f559a5a6c6b760c81d" title="Respawn the NPC." alt="" coords="45,5,155,32"/>
+<area shape="rect" id="node4" href="$classPlayerCharacter.html#a5ab0ca121121136eb108cb2d5113aaab" title="Function that drops player&#39;s items and sets an active RespawnAction. Called when player dies." alt="" coords="5,56,195,83"/>
+</map>

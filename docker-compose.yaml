@@ -8,9 +8,10 @@ services:
       dockerfile: ./server/Dockerfile
     ports:
       # WARNING: Do not ever remove the 127.0.0.1 as on some systems Docker host ports are exposed outside the Firewall! https://docs.docker.com/network/
-      - '127.0.0.1:9999:9999'
+      - "127.0.0.1:9999:9999"
     environment:
       DB_HOST: mmorpg-database
+      DB_PORT: 5432
       POSTGRES_DB: mmorpg-database
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
@@ -24,7 +25,7 @@ services:
     restart: unless-stopped
     ports:
       # WARNING: Do not ever remove the 127.0.0.1 as on some systems Docker host ports are exposed outside the Firewall! https://docs.docker.com/network/
-      - '127.0.0.1:6543:5432'
+      - "127.0.0.1:6543:5432"
     environment:
       POSTGRES_DB: mmorpg-database
       POSTGRES_USER: myuser

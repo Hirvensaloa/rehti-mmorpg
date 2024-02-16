@@ -19,7 +19,7 @@ PlayerCharacter::PlayerCharacter(
              location)
 {
     respawnTimeM = std::chrono::milliseconds(2000);
-    moveSpeedM = std::chrono::milliseconds(500);
+    moveSpeedM = std::chrono::milliseconds(300);
 };
 
 void PlayerCharacter::update()
@@ -33,7 +33,18 @@ void PlayerCharacter::update()
 
 void PlayerCharacter::respawn()
 {
-    getInventory().removeAllItems(); // TODO: Drop the items on the ground, as well as equipment
+    for (auto item : getInventory().getItems())
+    {
+        dropItem(item->getInstanceId());
+    }
+    for (auto equipmentEntry : getEquipment().getSlotMap())
+    {
+        getEquipment().unequip(equipmentEntry.first);
+    }
+    for (auto item : getInventory().getItems())
+    {
+        dropItem(item->getInstanceId());
+    }
     setAction(std::make_shared<RespawnAction>(std::chrono::system_clock::now(), respawnTimeM, this->shared_from_this()));
 }
 

@@ -1,0 +1,6 @@
+<map id="Entity::pickUpItem" name="Entity::pickUpItem">
+<area shape="rect" id="node1" title="Pick up an item." alt="" coords="5,56,148,83"/>
+<area shape="rect" id="node2" href="$classInventory.html#a9e1fad5a5f8ef1d2aec5ba9d86531d0d" title="Adds item to the inventory." alt="" coords="217,5,362,32"/>
+<area shape="rect" id="node3" href="$classEntity.html#a1f1ef1b13908ffef9f2c4f2f455fdb71" title="Get the Inventory object of this entity." alt="" coords="214,56,365,83"/>
+<area shape="rect" id="node4" href="$classGameWorld.html#aef778666c55b652650a3e3167c1495ea" title="Remove item from the game world." alt="" coords="196,107,383,133"/>
+</map>

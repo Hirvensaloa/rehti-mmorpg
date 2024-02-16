@@ -73,6 +73,7 @@ var annotated_dup =
     [ "ObjectWithFileinfo", "structObjectWithFileinfo.html", "structObjectWithFileinfo" ],
     [ "PassiveNpc", "classPassiveNpc.html", "classPassiveNpc" ],
     [ "PhongMaterial", "structPhongMaterial.html", "structPhongMaterial" ],
+    [ "PickUpAction", "classPickUpAction.html", "classPickUpAction" ],
     [ "PlayerCharacter", "classPlayerCharacter.html", "classPlayerCharacter" ],
     [ "PlayerData", "structPlayerData.html", "structPlayerData" ],
     [ "PlayerTable", "structPlayerTable.html", "structPlayerTable" ],

@@ -138,6 +138,18 @@ public:
     virtual void attack(Entity& target);
 
     /**
+     * @brief Pick up an item
+     * @param itemId instance id of item to be picked up
+     */
+    void pickUpItem(int itemId, Coordinates itemLocation);
+
+    /**
+     * @brief Drop an item
+     * @param itemId instance id of item to be dropped
+     */
+    void dropItem(int itemId);
+
+    /**
      * @brief Get the SkillSet of this entity
      * @return SkillSet&
      */
@@ -194,7 +206,7 @@ protected:
 
     bool isDisconnectedM = false; // for players only, but defined for entity for polymorphism reaons
 
-    std::chrono::milliseconds respawnTimeM{10000};
+    std::chrono::milliseconds respawnTimeM{2000};
 
     std::chrono::milliseconds moveSpeedM{1000};
 };

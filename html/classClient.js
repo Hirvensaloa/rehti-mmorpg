@@ -8,6 +8,7 @@ var classClient =
     [ "interactWithObject", "classClient.html#a0dfd50dbe59821fc99489c425d80066b", null ],
     [ "login", "classClient.html#a53b6b98d3802205726318ffc6fda5bb0", null ],
     [ "move", "classClient.html#a68216a3e4b0cd1f2f72388f7bcd77bd7", null ],
+    [ "pickUpItem", "classClient.html#a488bdfe038fb7b96ce82da0081213f87", null ],
     [ "processMessages", "classClient.html#afebeedfe876105645a3937b4ee2058df", null ],
     [ "start", "classClient.html#a742373e08a80d993d2651b6fff76f5b9", null ],
     [ "startGraphics", "classClient.html#a7b7406bdc248547627fd669a92b86d6c", null ],

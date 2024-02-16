@@ -1,0 +1,16 @@
+digraph "Entity::dropItem"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Entity::dropItem",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Drop an item."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="GameWorld::addItem",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameWorld.html#a75842f451773ce94e3a08473d785eeae",tooltip="Add item to the game world."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Entity::getInventory",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html#a1f1ef1b13908ffef9f2c4f2f455fdb71",tooltip="Get the Inventory object of this entity."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Entity::getLocation",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEntity.html#a5564e4c637a1e2826e2f4c04aefef265",tooltip="Get the current location of this entity."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Inventory::removeItem",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classInventory.html#a3c71646f0161c3e0b96a73cbf804c8f6",tooltip="Removes item from the inventory."];
+}

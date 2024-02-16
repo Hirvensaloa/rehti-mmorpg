@@ -162,13 +162,11 @@ public:
     void forceGameObjectRotate(int objectID, float radians);
 
     /**
-     * @brief Moves the player to the given location in the given time.
-        Also automatically rotates the player to face the given location and sets the animation.
-        Player movement differs from character movement in a sense that the camera is moved as well.
+     * @brief Moves the player smoothly (without animation) to the given location in the given time.
      * @param playerID of the player to move.
      * @param location to move the player to.
      * @param timeInSeconds it takes for the player to move to that location.
-    */
+     */
     void movePlayer(int playerID, glm::vec3 location, float timeInSeconds);
 
     /**
@@ -186,7 +184,7 @@ public:
     void forcePlayerMove(int playerID, glm::vec3 location);
 
     /**
-     * @brief Moves character to the given location in the given time. Automatically sets the running animation and character rotation.
+     * @brief Moves character smoothly (without animation) to the given location in the given time.
      * @param characterID to move
      * @param location to move the character into
      * @param timeInSeconds that this action takes.
